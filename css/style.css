@@ -78,6 +78,20 @@ nav {
     gap: 1rem;
 }
 
+.nav-buttons--user {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: row;
+}
+
+@media (max-width: 400px) {
+    .nav-buttons--user {
+        flex-direction: column;
+        gap: 0.3rem;
+        align-items: stretch;
+    }
+}
+
 .btn {
     padding: 0.75rem 1.5rem;
     border-radius: 25px;
@@ -137,12 +151,24 @@ nav {
 
 /* Landing Page */
 .hero {
-    background: linear-gradient(135deg, var(--dark-purple) 0%, var(--purple) 100%);
+    background: rgba(101, 35, 207, 0.80);
     color: var(--white);
     padding: 6rem 0;
     text-align: center;
     position: relative;
     overflow: hidden;
+    max-width: 900px;
+    margin: 3rem auto 0 auto;
+    border-radius: 40px;
+    box-shadow: 0 8px 40px 0 rgba(100, 50, 207, 0.18), 0 2px 12px 0 rgba(255,0,128,0.10);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    transition: box-shadow 0.3s, background 0.3s;
+}
+.hero:hover {
+    box-shadow: 0 16px 64px 0 rgba(100, 50, 207, 0.28), 0 4px 24px 0 rgba(255,0,128,0.18);
+    background: rgba(101, 35, 207, 0.92);
 }
 
 .hero::before {
@@ -155,8 +181,6 @@ nav {
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ff0080" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ff0080" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="300" cy="700" r="120" fill="url(%23a)"/></svg>');
     animation: float 20s ease-in-out infinite;
 }
-
-
 
 @keyframes float {
     0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -353,9 +377,21 @@ nav {
     display: none;
 }
 
-.dashboard {
-    position: relative;
-    z-index: 1;
+.dashboard-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    border-radius: 32px;
+    box-shadow: 0 8px 40px 0 rgba(100, 50, 207, 0.18), 0 2px 12px 0 rgba(255,0,128,0.10);
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    padding: 2.5rem 2rem 2rem 2rem;
+    transition: box-shadow 0.3s, background 0.3s;
+}
+.dashboard-container:hover {
+    box-shadow: 0 16px 64px 0 rgba(100, 50, 207, 0.28), 0 4px 24px 0 rgba(255,0,128,0.18);
+    background: rgba(255,255,255,0.28);
 }
 
 .fancy-subjects-grid {
@@ -579,10 +615,9 @@ nav {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .logo-text {
+    /* .logo-text {
         font-size: 1.2rem;
-    }
-
+    } */
     .hero h1 {
         font-size: 2.5rem;
     }
@@ -646,4 +681,65 @@ nav {
     .dashboard-header {
         padding: 2rem 0 1.5rem 0;
     }
+}
+
+/* Dropdown menu styles */
+.dropdown-menu-container {
+  position: relative;
+  display: inline-block;
+  margin-left: 1rem;
+}
+.dropdown-toggle {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--magenta, #a020f0);
+  padding: 0.2em 0.5em;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.dropdown-toggle:hover, .dropdown-toggle:focus {
+  background: rgba(160,32,240,0.08);
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 110%;
+  min-width: 180px;
+  background: rgba(255,255,255,0.98);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  border-radius: 12px;
+  z-index: 1000;
+  padding: 0.5em 0;
+  animation: dropdown-fade-in 0.2s;
+}
+.dropdown-menu.show {
+  display: block;
+}
+.dropdown-menu a {
+  display: block;
+  padding: 0.7em 1.2em;
+  color: #222;
+  text-decoration: none;
+  font-size: 1.05rem;
+  border: none;
+  background: none;
+  transition: background 0.15s, color 0.15s;
+}
+.dropdown-menu a:hover {
+  background: var(--magenta, #a020f0);
+  color: #fff;
+}
+@keyframes dropdown-fade-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 600px) {
+  .dropdown-menu {
+    min-width: 120px;
+    right: 0;
+    left: auto;
+  }
 }
