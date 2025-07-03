@@ -21,8 +21,22 @@
                 <div class="nav-buttons">
                     <button class="btn btn-outline" onclick="showSection('login')" id="loginBtn">Zaloguj się</button>
                     <button class="btn btn-primary" onclick="showSection('register')" id="registerBtn">Zarejestruj się</button>
-                    <button class="btn btn-outline hidden" onclick="logout()" id="logoutBtn">Wyloguj się</button>
-                    <button class="btn btn-outline hidden" id="userProfileBtn">Profil</button>
+                    <span class="nav-buttons--user">
+                        <button class="btn btn-outline hidden" onclick="logout()" id="logoutBtn">Wyloguj się</button>
+                        <button class="btn btn-outline hidden" id="userProfileBtn">Profil</button>
+                    </span>
+                </div>
+                <div class="dropdown-menu-container">
+                    <button class="dropdown-toggle" id="dropdownMenuBtn" aria-label="Menu">☰</button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="#" onclick="showSection('landing')">Strona główna</a>
+                        <a href="#" onclick="showSection('dashboard')">Kurs</a>
+                        <a href="#" onclick="showSection('pricing')">Cennik</a>
+                        <a href="#" onclick="showSection('user')" id="dropdownProfileLink" class="hidden">Profil</a>
+                        <a href="#" onclick="showSection('login')" id="dropdownLoginLink">Zaloguj się</a>
+                        <a href="#" onclick="showSection('register')" id="dropdownRegisterLink">Zarejestruj się</a>
+                        <a href="#" onclick="logout()" id="dropdownLogoutLink" class="hidden">Wyloguj się</a>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -81,10 +95,57 @@
                     <div class="price">99 zł</div>
                     <p>Jednorazowa płatność</p>
                     <ul class="price-features">
-                        <li>Dostęp do wszystkich działów fizyki</li>
-                        <li>Filmy HD dla każdego tematu</li>
-                        <li>3 pliki PDF na dział</li>
-                        <li>Interaktywne quizy</li>
+                        <li>Dostęp do wszystkich działów fizyki:</li>
+                    </ul>
+                    <table class="pricing-materials-table">
+                        <thead>
+                            <tr>
+                                <th>Dział</th>
+                                <th>Materiały PDF</th>
+                                <th>Quiz</th>
+                                <th>Wideo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mechanika</td>
+                                <td>Teoria, Zadania, Wzory</td>
+                                <td>Tak</td>
+                                <td>Tak</td>
+                            </tr>
+                            <tr>
+                                <td>Termodynamika</td>
+                                <td>Teoria, Zadania, Wzory</td>
+                                <td>Tak</td>
+                                <td>Tak</td>
+                            </tr>
+                            <tr>
+                                <td>Elektromagnetyzm</td>
+                                <td>Teoria, Zadania, Wzory</td>
+                                <td>Tak</td>
+                                <td>Tak</td>
+                            </tr>
+                            <tr>
+                                <td>Optyka</td>
+                                <td>Teoria, Zadania, Wzory</td>
+                                <td>Tak</td>
+                                <td>Tak</td>
+                            </tr>
+                            <tr>
+                                <td>Fizyka Atomowa</td>
+                                <td>Teoria, Zadania, Wzory</td>
+                                <td>Tak</td>
+                                <td>Tak</td>
+                            </tr>
+                            <tr>
+                                <td>Fizyka Jądrowa</td>
+                                <td>Teoria, Zadania, Wzory</td>
+                                <td>Tak</td>
+                                <td>Tak</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul class="price-features">
                         <li>Dostęp na 12 miesięcy</li>
                         <li>Wsparcie techniczne</li>
                     </ul>
@@ -195,57 +256,58 @@
 
     <!-- Dashboard -->
     <div id="dashboard" class="page hidden">
-        <div class="dashboard-fancy-bg"></div>
-        <div class="container">
-            <div class="dashboard">
-                <div class="dashboard-header">
-                    <img src="images/bialy_statek.png" alt="Fizyka Statkiem" class="dashboard-logo ship-animation">
-                    <h1>Twoje Kursy Fizyki</h1>
-                    <p>Witaj w platformie edukacyjnej Fizyka Statkiem</p>
-                </div>
+        <div class="dashboard-container">
+            <div class="container">
+                <div class="dashboard">
+                    <div class="dashboard-header">
+                        <img src="images/bialy_statek.png" alt="Fizyka Statkiem" class="dashboard-logo ship-animation">
+                        <h1>Twoje Kursy Fizyki</h1>
+                        <p>Witaj w platformie edukacyjnej Fizyka Statkiem</p>
+                    </div>
 
-                <div class="subjects-grid fancy-subjects-grid">
-                    <div class="subject-card fancy-card">
-                        <div class="subject-icon">⚓️</div>
-                        <h3>Mechanika</h3>
-                        <div class="subject-progress"><div class="progress-bar" style="width: 60%"></div></div>
-                        <p>Poznaj podstawy ruchu, siły i energii</p>
-                        <button class="btn btn-gradient" onclick="showSubject('mechanika')">Otwórz dział</button>
-                    </div>
-                    <div class="subject-card fancy-card">
-                        <div class="subject-icon">🔥</div>
-                        <h3>Termodynamika</h3>
-                        <div class="subject-progress"><div class="progress-bar" style="width: 30%"></div></div>
-                        <p>Ciepło, temperatura i prawa termodynamiki</p>
-                        <button class="btn btn-gradient" onclick="showSubject('termodynamika')">Otwórz dział</button>
-                    </div>
-                    <div class="subject-card fancy-card">
-                        <div class="subject-icon">⚡️</div>
-                        <h3>Elektromagnetyzm</h3>
-                        <div class="subject-progress"><div class="progress-bar" style="width: 10%"></div></div>
-                        <p>Prąd elektryczny, pole magnetyczne i fale</p>
-                        <button class="btn btn-gradient" onclick="showSubject('elektromagnetyzm')">Otwórz dział</button>
-                    </div>
-                    <div class="subject-card fancy-card">
-                        <div class="subject-icon">🌈</div>
-                        <h3>Optyka</h3>
-                        <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
-                        <p>Światło, zwierciadła i soczewki</p>
-                        <button class="btn btn-gradient" onclick="showSubject('optyka')">Otwórz dział</button>
-                    </div>
-                    <div class="subject-card fancy-card">
-                        <div class="subject-icon">🧬</div>
-                        <h3>Fizyka Atomowa</h3>
-                        <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
-                        <p>Budowa atomu i zjawiska kwantowe</p>
-                        <button class="btn btn-gradient" onclick="showSubject('atomowa')">Otwórz dział</button>
-                    </div>
-                    <div class="subject-card fancy-card">
-                        <div class="subject-icon">☢️</div>
-                        <h3>Fizyka Jądrowa</h3>
-                        <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
-                        <p>Jądro atomowe i radioaktywność</p>
-                        <button class="btn btn-gradient" onclick="showSubject('jadrowa')">Otwórz dział</button>
+                    <div class="subjects-grid fancy-subjects-grid">
+                        <div class="subject-card fancy-card">
+                            <div class="subject-icon">⚓️</div>
+                            <h3>Mechanika</h3>
+                            <div class="subject-progress"><div class="progress-bar" style="width: 60%"></div></div>
+                            <p>Poznaj podstawy ruchu, siły i energii</p>
+                            <button class="btn btn-gradient" onclick="showSubject('mechanika')">Otwórz dział</button>
+                        </div>
+                        <div class="subject-card fancy-card">
+                            <div class="subject-icon">🔥</div>
+                            <h3>Termodynamika</h3>
+                            <div class="subject-progress"><div class="progress-bar" style="width: 30%"></div></div>
+                            <p>Ciepło, temperatura i prawa termodynamiki</p>
+                            <button class="btn btn-gradient" onclick="showSubject('termodynamika')">Otwórz dział</button>
+                        </div>
+                        <div class="subject-card fancy-card">
+                            <div class="subject-icon">⚡️</div>
+                            <h3>Elektromagnetyzm</h3>
+                            <div class="subject-progress"><div class="progress-bar" style="width: 10%"></div></div>
+                            <p>Prąd elektryczny, pole magnetyczne i fale</p>
+                            <button class="btn btn-gradient" onclick="showSubject('elektromagnetyzm')">Otwórz dział</button>
+                        </div>
+                        <div class="subject-card fancy-card">
+                            <div class="subject-icon">🌈</div>
+                            <h3>Optyka</h3>
+                            <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
+                            <p>Światło, zwierciadła i soczewki</p>
+                            <button class="btn btn-gradient" onclick="showSubject('optyka')">Otwórz dział</button>
+                        </div>
+                        <div class="subject-card fancy-card">
+                            <div class="subject-icon">🧬</div>
+                            <h3>Fizyka Atomowa</h3>
+                            <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
+                            <p>Budowa atomu i zjawiska kwantowe</p>
+                            <button class="btn btn-gradient" onclick="showSubject('atomowa')">Otwórz dział</button>
+                        </div>
+                        <div class="subject-card fancy-card">
+                            <div class="subject-icon">☢️</div>
+                            <h3>Fizyka Jądrowa</h3>
+                            <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
+                            <p>Jądro atomowe i radioaktywność</p>
+                            <button class="btn btn-gradient" onclick="showSubject('jadrowa')">Otwórz dział</button>
+                        </div>
                     </div>
                 </div>
             </div>
