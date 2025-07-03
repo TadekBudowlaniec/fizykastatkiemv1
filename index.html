@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fizyka Statkiem - Kursy Fizyki Online</title>
+    <link rel="icon" type="image/png" href="images/czarny_statek.png">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo" onclick="showSection('landing')">
+                    <img src="images/magenta_statek.png" alt="Fizyka Statkiem" height="40">
+                    <span class="logo-text">Fizyka Statkiem</span>
+                </a>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline" onclick="showSection('login')" id="loginBtn">Zaloguj się</button>
+                    <button class="btn btn-primary" onclick="showSection('register')" id="registerBtn">Zarejestruj się</button>
+                    <button class="btn btn-outline hidden" onclick="logout()" id="logoutBtn">Wyloguj się</button>
+                    <button class="btn btn-outline hidden" id="userProfileBtn">Profil</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Landing Page -->
+    <div id="landing" class="page">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <img src="images/bialy_statek.png" alt="Fizyka Statkiem" class="hero-logo ship-animation">
+                    <h1>Fizyka Statkiem</h1>
+                    <p>Kompleksowe kursy z fizyki prowadzone przez doświadczonych nauczycieli. Przygotuj się do matury i egzaminów w wygodny sposób!</p>
+                    <div class="hero-cta">
+                        <button class="btn btn-gradient" onclick="showSection('pricing')">Zobacz kursy</button>
+                        <button class="btn btn-outline" onclick="showSection('register')">Dołącz za darmo</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <img src="images/logo_czarne_przez.png" alt="Fizyka Statkiem" class="features-logo">
+                <h2 class="section-title">Dlaczego Fizyka Statkiem?</h2>
+                <p class="section-subtitle">Profesjonalne kursy dostosowane do Twoich potrzeb</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎥</div>
+                        <h3>Nagrania HD</h3>
+                        <p>Wysokiej jakości filmy edukacyjne wyjaśniające każdy temat krok po kroku</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>Materiały PDF</h3>
+                        <p>Szczegółowe notatki, wzory i przykłady do pobrania w formacie PDF</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧪</div>
+                        <h3>Interaktywne Quizy</h3>
+                        <p>Sprawdź swoją wiedzę dzięki quizom po każdym dziale</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing">
+            <div class="container">
+                <img src="images/logo_magenta_przez.png" alt="Fizyka Statkiem" class="pricing-logo">
+                <h2 class="section-title">Cennik</h2>
+                <p class="section-subtitle">Jeden pakiet - pełen dostęp</p>
+                
+                <div class="pricing-card">
+                    <h3>Pełny Dostęp</h3>
+                    <div class="price">99 zł</div>
+                    <p>Jednorazowa płatność</p>
+                    <ul class="price-features">
+                        <li>Dostęp do wszystkich działów fizyki</li>
+                        <li>Filmy HD dla każdego tematu</li>
+                        <li>3 pliki PDF na dział</li>
+                        <li>Interaktywne quizy</li>
+                        <li>Dostęp na 12 miesięcy</li>
+                        <li>Wsparcie techniczne</li>
+                    </ul>
+                    <button class="btn btn-gradient" onclick="buyAccess()">Kup teraz</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="landing-dashboard">
+            <div class="dashboard-fancy-bg"></div>
+            <div class="container">
+                <div class="dashboard-header">
+                    <img src="images/bialy_statek.png" alt="Fizyka Statkiem" class="dashboard-logo ship-animation">
+                    <h2>Działy kursu</h2>
+                    <p>Poznaj wszystkie działy dostępne w kursie Fizyka Statkiem</p>
+                </div>
+                <div class="subjects-grid fancy-subjects-grid">
+                    <div class="subject-card fancy-card">
+                        <div class="subject-icon">⚓️</div>
+                        <h3>Mechanika</h3>
+                        <div class="subject-progress"><div class="progress-bar" style="width: 60%"></div></div>
+                        <p>Poznaj podstawy ruchu, siły i energii</p>
+                    </div>
+                    <div class="subject-card fancy-card">
+                        <div class="subject-icon">🔥</div>
+                        <h3>Termodynamika</h3>
+                        <div class="subject-progress"><div class="progress-bar" style="width: 30%"></div></div>
+                        <p>Ciepło, temperatura i prawa termodynamiki</p>
+                    </div>
+                    <div class="subject-card fancy-card">
+                        <div class="subject-icon">⚡️</div>
+                        <h3>Elektromagnetyzm</h3>
+                        <div class="subject-progress"><div class="progress-bar" style="width: 10%"></div></div>
+                        <p>Prąd elektryczny, pole magnetyczne i fale</p>
+                    </div>
+                    <div class="subject-card fancy-card">
+                        <div class="subject-icon">🌈</div>
+                        <h3>Optyka</h3>
+                        <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
+                        <p>Światło, zwierciadła i soczewki</p>
+                    </div>
+                    <div class="subject-card fancy-card">
+                        <div class="subject-icon">🧬</div>
+                        <h3>Fizyka Atomowa</h3>
+                        <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
+                        <p>Budowa atomu i zjawiska kwantowe</p>
+                    </div>
+                    <div class="subject-card fancy-card">
+                        <div class="subject-icon">☢️</div>
+                        <h3>Fizyka Jądrowa</h3>
+                        <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
+                        <p>Jądro atomowe i radioaktywność</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login" class="page hidden">
+        <div class="container">
+            <div class="auth-container">
+                <h2 class="section-title">Zaloguj się</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Hasło</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-gradient" style="width: 100%;">Zaloguj się</button>
+                </form>
+                <p style="text-align: center; margin-top: 1rem;">
+                    Nie masz konta? <a href="#" onclick="showSection('register')" style="color: var(--magenta);">Zarejestruj się</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Page -->
+    <div id="register" class="page hidden">
+        <div class="container">
+            <div class="auth-container">
+                <h2 class="section-title">Zarejestruj się</h2>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Hasło</label>
+                        <input type="password" id="registerPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerName">Imię i nazwisko</label>
+                        <input type="text" id="registerName" required>
+                    </div>
+                    <button type="submit" class="btn btn-gradient" style="width: 100%;">Zarejestruj się</button>
+                </form>
+                <p style="text-align: center; margin-top: 1rem;">
+                    Masz już konto? <a href="#" onclick="showSection('login')" style="color: var(--magenta);">Zaloguj się</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="page hidden">
+        <div class="dashboard-fancy-bg"></div>
+        <div class="container">
+            <div class="dashboard">
+                <div class="dashboard-header">
+                    <img src="images/bialy_statek.png" alt="Fizyka Statkiem" class="dashboard-logo ship-animation">
+                    <h1>Twoje Kursy Fizyki</h1>
+                    <p>Witaj w platformie edukacyjnej Fizyka Statkiem</p>
+                </div>
+
+                <div class="subjects-grid fancy-subjects-grid">
+                    <div class="subject-card fancy-card">
+                        <div class="subject-icon">⚓️</div>
+                        <h3>Mechanika</h3>
+                        <div class="subject-progress"><div class="progress-bar" style="width: 60%"></div></div>
+                        <p>Poznaj podstawy ruchu, siły i energii</p>
+                        <button class="btn btn-gradient" onclick="showSubject('mechanika')">Otwórz dział</button>
+                    </div>
+                    <div class="subject-card fancy-card">
+                        <div class="subject-icon">🔥</div>
+                        <h3>Termodynamika</h3>
+                        <div class="subject-progress"><div class="progress-bar" style="width: 30%"></div></div>
+                        <p>Ciepło, temperatura i prawa termodynamiki</p>
+                        <button class="btn btn-gradient" onclick="showSubject('termodynamika')">Otwórz dział</button>
+                    </div>
+                    <div class="subject-card fancy-card">
+                        <div class="subject-icon">⚡️</div>
+                        <h3>Elektromagnetyzm</h3>
+                        <div class="subject-progress"><div class="progress-bar" style="width: 10%"></div></div>
+                        <p>Prąd elektryczny, pole magnetyczne i fale</p>
+                        <button class="btn btn-gradient" onclick="showSubject('elektromagnetyzm')">Otwórz dział</button>
+                    </div>
+                    <div class="subject-card fancy-card">
+                        <div class="subject-icon">🌈</div>
+                        <h3>Optyka</h3>
+                        <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
+                        <p>Światło, zwierciadła i soczewki</p>
+                        <button class="btn btn-gradient" onclick="showSubject('optyka')">Otwórz dział</button>
+                    </div>
+                    <div class="subject-card fancy-card">
+                        <div class="subject-icon">🧬</div>
+                        <h3>Fizyka Atomowa</h3>
+                        <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
+                        <p>Budowa atomu i zjawiska kwantowe</p>
+                        <button class="btn btn-gradient" onclick="showSubject('atomowa')">Otwórz dział</button>
+                    </div>
+                    <div class="subject-card fancy-card">
+                        <div class="subject-icon">☢️</div>
+                        <h3>Fizyka Jądrowa</h3>
+                        <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
+                        <p>Jądro atomowe i radioaktywność</p>
+                        <button class="btn btn-gradient" onclick="showSubject('jadrowa')">Otwórz dział</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Subject View -->
+    <div id="subject" class="page hidden">
+        <div class="container">
+            <div class="dashboard">
+                <div class="dashboard-header">
+                    <img src="images/bialy_statek.png" alt="Fizyka Statkiem" class="dashboard-logo ship-animation">
+                    <h1 id="subjectTitle">Mechanika</h1>
+                    <button class="btn btn-outline" onclick="showSection('dashboard')">← Powrót do kursu</button>
+                </div>
+
+                <div class="subject-content">
+                    <div class="video-section">
+                        <h3>Materiały Wideo</h3>
+                        <iframe id="subjectVideo" class="video-frame" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Kurs Fizyki"></iframe>
+                    </div>
+
+                    <div class="pdf-section">
+                        <h3>Materiały PDF</h3>
+                        <ul class="pdf-list">
+                            <li class="pdf-item">
+                                <span>📄 Podstawy Mechaniki - Teoria</span>
+                                <button class="btn btn-primary" onclick="downloadPDF('teoria')">Pobierz</button>
+                            </li>
+                            <li class="pdf-item">
+                                <span>📄 Przykłady i Zadania</span>
+                                <button class="btn btn-primary" onclick="downloadPDF('zadania')">Pobierz</button>
+                            </li>
+                            <li class="pdf-item">
+                                <span>📄 Wzory i Tablice</span>
+                                <button class="btn btn-primary" onclick="downloadPDF('wzory')">Pobierz</button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="quiz-section">
+                        <h3>Quiz - Sprawdź swoją wiedzę</h3>
+                        <div id="quizContainer">
+                            <div class="quiz-question">
+                                <h4>Pytanie 1: Jakie jest podstawowe prawo mechaniki Newtona?</h4>
+                                <div class="quiz-options">
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q1" value="a"> F = ma
+                                    </label>
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q1" value="b"> E = mc²
+                                    </label>
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q1" value="c"> P = mv
+                                    </label>
+                                </div>
+                            </div>
+                            <button class="btn btn-gradient" onclick="checkQuiz()">Sprawdź odpowiedzi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Page -->
+    <div id="user" class="page hidden">
+        <div class="container">
+            <div class="auth-container">
+                <h2 class="section-title">Twój profil</h2>
+                <div id="userProfile">
+                    <p><b>Email:</b> <span id="userEmail">(załaduj dane)</span></p>
+                    <p><b>Imię i nazwisko:</b> <span id="userName">(załaduj dane)</span></p>
+                    <button class="btn btn-outline2" onclick="showSection('dashboard')">← Powrót do kursu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/supabase-config.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/payments.js"></script>
+    <script src="js/pdf.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/init.js"></script>
+</body>
+</html>
