@@ -36,6 +36,7 @@
                         <a href="#" onclick="showSection('login')" id="dropdownLoginLink">Zaloguj się</a>
                         <a href="#" onclick="showSection('register')" id="dropdownRegisterLink">Zarejestruj się</a>
                         <a href="#" onclick="logout()" id="dropdownLogoutLink" class="hidden">Wyloguj się</a>
+                        <a href="#" onclick="showSection('korepetycje')">Korepetycje</a>
                     </div>
                 </div>
             </nav>
@@ -216,7 +217,10 @@
                     </div>
                     <div class="form-group">
                         <label for="loginPassword">Hasło</label>
-                        <input type="password" id="loginPassword" required>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="loginPassword" required>
+                            <button type="button" class="toggle-password" aria-label="Pokaż hasło" tabindex="-1" onclick="togglePassword('loginPassword', this)">👁️</button>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-gradient" style="width: 100%;">Zaloguj się</button>
                 </form>
@@ -239,7 +243,10 @@
                     </div>
                     <div class="form-group">
                         <label for="registerPassword">Hasło</label>
-                        <input type="password" id="registerPassword" required>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="registerPassword" required>
+                            <button type="button" class="toggle-password" aria-label="Pokaż hasło" tabindex="-1" onclick="togglePassword('registerPassword', this)">👁️</button>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="registerName">Imię i nazwisko</label>
@@ -382,6 +389,28 @@
                     <p><b>Email:</b> <span id="userEmail">(załaduj dane)</span></p>
                     <p><b>Imię i nazwisko:</b> <span id="userName">(załaduj dane)</span></p>
                     <button class="btn btn-outline2" onclick="showSection('dashboard')">← Powrót do kursu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Korepetycje Page -->
+    <div id="korepetycje" class="page hidden">
+        <div class="container">
+            <div class="korepetycje-block">
+                <div class="korepetycje-image">
+                    <img src="images/magenta_statek.png" alt="Korepetycje Fizyka Statkiem" style="width: 50%;object-fit:cover;border-radius:16px;">
+                </div>
+                <div class="korepetycje-text">
+                    <h2>Korepetycje z fizyki online</h2>
+                    <p>Oferujemy indywidualne korepetycje z fizyki prowadzone przez doświadczonych nauczycieli. Przygotowanie do matury, egzaminów, bieżąca pomoc w nauce i rozwiązywaniu zadań. Zajęcia online w dogodnych terminach, z naciskiem na zrozumienie materiału i praktyczne umiejętności.</p>
+                    <ul>
+                        <li>Indywidualne podejście</li>
+                        <li>Przygotowanie do matury i egzaminów</li>
+                        <li>Pomoc w bieżącej nauce</li>
+                        <li>Zajęcia online</li>
+                    </ul>
+                    <p>Skontaktuj się z nami, aby umówić się na pierwszą lekcję!</p>
                 </div>
             </div>
         </div>

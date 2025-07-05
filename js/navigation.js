@@ -7,7 +7,8 @@ const sectionToPath = {
     user: '/user',
     login: '/login',
     register: '/register',
-    pricing: '/pricing'
+    pricing: '/pricing',
+    korepetycje: '/korepetycje'
 };
 const pathToSection = {
     '/home': 'landing',
@@ -15,7 +16,8 @@ const pathToSection = {
     '/user': 'user',
     '/login': 'login',
     '/register': 'register',
-    '/pricing': 'pricing'
+    '/pricing': 'pricing',
+    '/korepetycje': 'korepetycje'
 };
 
 function showSection(sectionId, push = true) {

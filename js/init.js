@@ -132,4 +132,19 @@ window.addEventListener('DOMContentLoaded', () => {
     };
     // Obsługa powrotu po płatności Stripe
     handleStripeReturn();
-}); 
+});
+
+// Funkcja do podglądu hasła
+window.togglePassword = function(inputId, btn) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = '🙈';
+        btn.setAttribute('aria-label', 'Ukryj hasło');
+    } else {
+        input.type = 'password';
+        btn.textContent = '👁️';
+        btn.setAttribute('aria-label', 'Pokaż hasło');
+    }
+} 
