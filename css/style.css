@@ -743,3 +743,90 @@ nav {
     left: auto;
   }
 }
+
+/* Stylowanie podglądu hasła */
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.password-input-wrapper input[type="password"],
+.password-input-wrapper input[type="text"] {
+    width: 100%;
+    padding-right: 2.5em;
+}
+.toggle-password {
+    position: absolute;
+    right: 0.7em;
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    color: #888;
+    cursor: pointer;
+    padding: 0 0.3em;
+    z-index: 2;
+    transition: color 0.2s;
+}
+.toggle-password:hover, .toggle-password:focus {
+    color: var(--magenta);
+}
+
+/* Korepetycje page styles */
+.korepetycje-block {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1800px;
+  margin: 3rem auto;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  overflow: hidden;
+  aspect-ratio: 1.618 / 0.5;
+  height: auto;
+}
+.korepetycje-image {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f6e6f9;
+  position: relative;
+  overflow: hidden;
+}
+.korepetycje-text {
+  flex: 1.618;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.15rem;
+}
+@media (max-width: 900px) {
+  .korepetycje-block {
+    flex-direction: column;
+    aspect-ratio: unset;
+    height: auto;
+  }
+  .korepetycje-image, .korepetycje-text {
+    flex: unset;
+    width: 100%;
+    padding: 1.5rem 1rem;
+  }
+  .korepetycje-image {
+    min-height: 180px;
+  }
+}
+.korepetycje-image img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 16px;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
