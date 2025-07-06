@@ -99,4 +99,35 @@ async function checkUserAccess() {
 function hasAccessToCourse(courseId) {
     if (!userEnrollments || userEnrollments.length === 0) return false;
     return userEnrollments.some(e => e.course_id === courseId || e.course_id === 'full_access');
+}
+
+async function changePassword(currentPassword, newPassword, repeatNewPassword) {
+    if (newPassword !== repeatNewPassword) {
+        alert('Nowe hasła nie są takie same.');
+        return;
+    }
+    if (!currentUser || !currentUser.email) {
+        alert('Brak danych użytkownika.');
+        return;
+    }
+    try {
+        // Najpierw sprawdź aktualne hasło przez próbę zalogowania
+        const { error: loginError } = await supabase.auth.signInWithPassword({
+            email: currentUser.email,
+            password: currentPassword
+        });
+        if (loginError) {
+            alert('Aktualne hasło jest nieprawidłowe.');
+            return;
+        }
+        // Zmień hasło
+        const { error: updateError } = await supabase.auth.updateUser({ password: newPassword });
+        if (updateError) {
+            alert('Błąd zmiany hasła: ' + updateError.message);
+            return;
+        }
+        alert('Hasło zostało zmienione!');
+    } catch (error) {
+        alert('Błąd zmiany hasła: ' + error.message);
+    }
 } 
