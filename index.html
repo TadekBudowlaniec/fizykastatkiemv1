@@ -31,7 +31,6 @@
                     <div class="dropdown-menu" id="dropdownMenu">
                         <a href="#" onclick="showSection('landing')">Strona główna</a>
                         <a href="#" onclick="showSection('dashboard')">Kurs</a>
-                        <a href="#" onclick="showSection('pricing')">Cennik</a>
                         <a href="#" onclick="showSection('user')" id="dropdownProfileLink" class="hidden">Profil</a>
                         <a href="#" onclick="showSection('login')" id="dropdownLoginLink">Zaloguj się</a>
                         <a href="#" onclick="showSection('register')" id="dropdownRegisterLink">Zarejestruj się</a>
@@ -49,11 +48,37 @@
             <div class="container">
                 <div class="hero-content">
                     <img src="images/bialy_statek.png" alt="Fizyka Statkiem" class="hero-logo ship-animation">
+                    <div class="hero-svg-decor">
+                        <svg width="100%" height="40" viewBox="0 0 400 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 30 Q 200 60 400 30 L400 40 L0 40 Z" fill="rgba(255,0,128,0.12)"/>
+                        </svg>
+                    </div>
                     <h1>Fizyka Statkiem</h1>
-                    <p>Kompleksowe kursy z fizyki prowadzone przez doświadczonych nauczycieli. Przygotuj się do matury i egzaminów w wygodny sposób!</p>
+                    <h2 class="hero-subtitle">Nowoczesne kursy online z fizyki</h2>
+                    <p>Kompleksowe kursy prowadzone przez doświadczonych nauczycieli. Przygotuj się do matury i egzaminów w wygodny sposób!</p>
                     <div class="hero-cta">
                         <button class="btn btn-gradient" onclick="showSection('pricing')">Zobacz kursy</button>
                         <button class="btn btn-outline" onclick="showSection('register')">Dołącz za darmo</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="opinions">
+            <div class="container">
+                <h2 class="section-title">Opinie uczniów</h2>
+                <div class="opinions-grid">
+                    <div class="opinion-card">
+                        <span class="opinion-quote">„Dzięki Fizyka Statkiem w końcu zrozumiałem trudne tematy!”</span>
+                        <span class="opinion-author">— Michał, maturzysta</span>
+                    </div>
+                    <div class="opinion-card">
+                        <span class="opinion-quote">„Świetne materiały i bardzo przystępne wyjaśnienia!”</span>
+                        <span class="opinion-author">— Kasia, licealistka</span>
+                    </div>
+                    <div class="opinion-card">
+                        <span class="opinion-quote">„Polecam każdemu, kto chce dobrze zdać maturę z fizyki.”</span>
+                        <span class="opinion-author">— Tomek, absolwent</span>
                     </div>
                 </div>
             </div>
@@ -81,76 +106,6 @@
                         <h3>Interaktywne Quizy</h3>
                         <p>Sprawdź swoją wiedzę dzięki quizom po każdym dziale</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="pricing">
-            <div class="container">
-                <img src="images/logo_magenta_przez.png" alt="Fizyka Statkiem" class="pricing-logo">
-                <h2 class="section-title">Cennik</h2>
-                <p class="section-subtitle">Jeden pakiet - pełen dostęp</p>
-                
-                <div class="pricing-card">
-                    <h3>Pełny Dostęp</h3>
-                    <div class="price">99 zł</div>
-                    <p>Jednorazowa płatność</p>
-                    <ul class="price-features">
-                        <li>Dostęp do wszystkich działów fizyki:</li>
-                    </ul>
-                    <table class="pricing-materials-table">
-                        <thead>
-                            <tr>
-                                <th>Dział</th>
-                                <th>Materiały PDF</th>
-                                <th>Quiz</th>
-                                <th>Wideo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Mechanika</td>
-                                <td>Teoria, Zadania, Wzory</td>
-                                <td>Tak</td>
-                                <td>Tak</td>
-                            </tr>
-                            <tr>
-                                <td>Termodynamika</td>
-                                <td>Teoria, Zadania, Wzory</td>
-                                <td>Tak</td>
-                                <td>Tak</td>
-                            </tr>
-                            <tr>
-                                <td>Elektromagnetyzm</td>
-                                <td>Teoria, Zadania, Wzory</td>
-                                <td>Tak</td>
-                                <td>Tak</td>
-                            </tr>
-                            <tr>
-                                <td>Optyka</td>
-                                <td>Teoria, Zadania, Wzory</td>
-                                <td>Tak</td>
-                                <td>Tak</td>
-                            </tr>
-                            <tr>
-                                <td>Fizyka Atomowa</td>
-                                <td>Teoria, Zadania, Wzory</td>
-                                <td>Tak</td>
-                                <td>Tak</td>
-                            </tr>
-                            <tr>
-                                <td>Fizyka Jądrowa</td>
-                                <td>Teoria, Zadania, Wzory</td>
-                                <td>Tak</td>
-                                <td>Tak</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <ul class="price-features">
-                        <li>Dostęp na 12 miesięcy</li>
-                        <li>Wsparcie techniczne</li>
-                    </ul>
-                    <button class="btn btn-gradient" onclick="buyAccess()">Kup teraz</button>
                 </div>
             </div>
         </section>
@@ -239,13 +194,21 @@
                 <form id="registerForm">
                     <div class="form-group">
                         <label for="registerEmail">Email</label>
-                        <input type="email" id="registerEmail" required>
+                        <input type="email" id="registerEmail" required autocomplete="email" list="registerEmailSuggestions">
+                        <datalist id="registerEmailSuggestions"></datalist>
                     </div>
                     <div class="form-group">
                         <label for="registerPassword">Hasło</label>
                         <div class="password-input-wrapper">
                             <input type="password" id="registerPassword" required>
                             <button type="button" class="toggle-password" aria-label="Pokaż hasło" tabindex="-1" onclick="togglePassword('registerPassword', this)">👁️</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerRepeatPassword">Powtórz hasło</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="registerRepeatPassword" required>
+                            <button type="button" class="toggle-password" aria-label="Pokaż hasło" tabindex="-1" onclick="togglePassword('registerRepeatPassword', this)">👁️</button>
                         </div>
                     </div>
                     <div class="form-group">
@@ -388,6 +351,31 @@
                 <div id="userProfile">
                     <p><b>Email:</b> <span id="userEmail">(załaduj dane)</span></p>
                     <p><b>Imię i nazwisko:</b> <span id="userName">(załaduj dane)</span></p>
+                    <form id="changePasswordForm" class="change-password-form">
+                        <h3 class="section-title" style="font-size:1.3rem;margin-bottom:1rem;">Zmień hasło</h3>
+                        <div class="form-group">
+                            <label for="currentPassword">Aktualne hasło</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="currentPassword" required>
+                                <button type="button" class="toggle-password" aria-label="Pokaż hasło" tabindex="-1" onclick="togglePassword('currentPassword', this)">👁️</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Nowe hasło</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="newPassword" required>
+                                <button type="button" class="toggle-password" aria-label="Pokaż hasło" tabindex="-1" onclick="togglePassword('newPassword', this)">👁️</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="repeatNewPassword">Powtórz nowe hasło</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="repeatNewPassword" required>
+                                <button type="button" class="toggle-password" aria-label="Pokaż hasło" tabindex="-1" onclick="togglePassword('repeatNewPassword', this)">👁️</button>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-gradient" style="width:100%;margin-top:1rem;">Zmień hasło</button>
+                    </form>
                     <button class="btn btn-outline2" onclick="showSection('dashboard')">← Powrót do kursu</button>
                 </div>
             </div>

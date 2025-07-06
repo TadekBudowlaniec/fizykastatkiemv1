@@ -17,9 +17,10 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
     color: var(--black);
-    background: radial-gradient(circle at 80% 10%, #ff008055 0%, transparent 60%),
-                radial-gradient(circle at 20% 80%, #6523cf55 0%, transparent 70%),
-                linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
+    min-height: 100vh;
+    background: linear-gradient(90deg, #e0eaff 0%, #ffe0fa 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 .container {
@@ -253,6 +254,49 @@ nav {
     flex-wrap: wrap;
 }
 
+.hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    color: var(--white);
+    opacity: 0.92;
+    letter-spacing: 0.01em;
+}
+
+.hero-svg-decor {
+    width: 100%;
+    margin-bottom: -1.5rem;
+    margin-top: -1.5rem;
+    z-index: 1;
+    position: relative;
+}
+
+.hero-opinion {
+    margin-top: 2.5rem;
+    background: rgba(255,255,255,0.10);
+    border-radius: 18px;
+    padding: 1.1rem 1.5rem 1rem 1.5rem;
+    box-shadow: 0 2px 16px rgba(255,0,128,0.08);
+    display: inline-block;
+    max-width: 420px;
+}
+
+.hero-opinion-quote {
+    font-size: 1.08rem;
+    font-style: italic;
+    color: #fff;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.hero-opinion-author {
+    font-size: 0.98rem;
+    color: #ffe0fa;
+    opacity: 0.85;
+    display: block;
+    text-align: right;
+}
+
 /* Features */
 .features {
     padding: 6rem 0;
@@ -328,6 +372,13 @@ nav {
     margin: 0 auto 2rem;
     display: block;
     filter: drop-shadow(0 5px 15px rgba(255, 0, 128, 0.2));
+}
+
+.pricing-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .pricing-card {
@@ -660,6 +711,15 @@ nav {
     .subjects-grid {
         grid-template-columns: 1fr;
     }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .hero-opinion {
+        padding: 0.7rem 0.7rem 0.6rem 0.7rem;
+        font-size: 0.98rem;
+    }
 }
 
 @media (max-width: 900px) {
@@ -680,6 +740,22 @@ nav {
     }
     .dashboard-header {
         padding: 2rem 0 1.5rem 0;
+    }
+    .korepetycje-block {
+        margin: 1rem 0.2rem;
+        border-radius: 14px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .korepetycje-image, .korepetycje-text {
+        padding: 0.8rem 0.4rem;
+    }
+    .korepetycje-text {
+        font-size: 0.98rem;
+    }
+    .korepetycje-image img {
+        max-width: 100%;
+        min-width: 120px;
+        border-radius: 10px;
     }
 }
 
@@ -829,4 +905,108 @@ nav {
   left: 50%;
   transform: translate(-50%, -50%);
   margin: 0;
+}
+
+.opinions {
+    background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
+    padding: 4rem 0 4.5rem 0;
+    margin-top: 3rem;
+    border-radius: 32px;
+    box-shadow: 0 4px 32px 0 rgba(100, 50, 207, 0.08);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.opinions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+.opinion-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 2px 16px rgba(160,32,240,0.08);
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 140px;
+    border: 2px solid #f3e8ff;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+.opinion-card:hover {
+    box-shadow: 0 8px 32px rgba(255,0,128,0.13);
+    border-color: var(--magenta);
+}
+.opinion-quote {
+    font-size: 1.08rem;
+    font-style: italic;
+    color: var(--purple);
+    margin-bottom: 0.7rem;
+    display: block;
+}
+.opinion-author {
+    font-size: 0.98rem;
+    color: #a020f0;
+    opacity: 0.85;
+    display: block;
+    text-align: right;
+    width: 100%;
+}
+@media (max-width: 768px) {
+    .opinions {
+        padding: 2.2rem 0 2.5rem 0;
+        border-radius: 18px;
+    }
+    .opinion-card {
+        padding: 1.1rem 0.7rem 0.8rem 0.7rem;
+        min-height: 100px;
+    }
+}
+
+.change-password-form {
+    margin-top: 2.2rem;
+    margin-bottom: 1.5rem;
+    background: #f8f8ff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(160,32,240,0.06);
+    padding: 2rem 1.2rem 1.2rem 1.2rem;
+}
+@media (max-width: 600px) {
+    .change-password-form {
+        padding: 1.1rem 0.5rem 0.7rem 0.5rem;
+    }
+}
+
+.subject-card .btn-primary,
+.subject-card .btn-outline {
+    font-size: 1.13rem;
+    padding: 0.85em 2.1em;
+    border-radius: 12px;
+    margin: 0.2em 0.1em;
+    box-shadow: 0 2px 12px rgba(160,32,240,0.10);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.subject-card .btn-primary {
+    background: linear-gradient(135deg, var(--magenta), var(--purple));
+    color: #fff;
+    border: none;
+}
+.subject-card .btn-primary:hover {
+    background: linear-gradient(135deg, var(--purple), var(--magenta));
+    color: #fff;
+    box-shadow: 0 6px 24px rgba(160,32,240,0.18);
+}
+.subject-card .btn-outline {
+    background: #fff;
+    color: var(--magenta);
+    border: 2px solid var(--magenta);
+}
+.subject-card .btn-outline:hover {
+    background: var(--magenta);
+    color: #fff;
+    box-shadow: 0 6px 24px rgba(255,0,128,0.13);
 }
