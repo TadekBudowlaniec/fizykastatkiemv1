@@ -1010,3 +1010,30 @@ nav {
     color: #fff;
     box-shadow: 0 6px 24px rgba(255,0,128,0.13);
 }
+
+/* Desktop navigation visibility */
+@media (min-width: 769px) {
+  .nav-main-buttons {
+    display: flex !important;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .nav-auth-buttons {
+    display: flex !important;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .dropdown-menu-container {
+    display: none !important;
+  }
+}
+
+/* Mobile navigation visibility */
+@media (max-width: 844px) {
+  .nav-main-buttons {
+    display: none !important;
+  }
+  .dropdown-menu-container {
+    display: inline-block !important;
+  }
+}

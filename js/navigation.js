@@ -47,15 +47,16 @@ function updateNavigation() {
     const registerBtn = document.getElementById('registerBtn');
     const logoutBtn = document.getElementById('logoutBtn');
     const userProfileBtn = document.getElementById('userProfileBtn');
+    // Desktop
     if (currentUser) {
-        loginBtn.classList.add('hidden');
-        registerBtn.classList.add('hidden');
-        logoutBtn.classList.remove('hidden');
+        if (loginBtn) loginBtn.classList.add('hidden');
+        if (registerBtn) registerBtn.classList.add('hidden');
+        if (logoutBtn) logoutBtn.classList.remove('hidden');
         if (userProfileBtn) userProfileBtn.classList.remove('hidden');
     } else {
-        loginBtn.classList.remove('hidden');
-        registerBtn.classList.remove('hidden');
-        logoutBtn.classList.add('hidden');
+        if (loginBtn) loginBtn.classList.remove('hidden');
+        if (registerBtn) registerBtn.classList.remove('hidden');
+        if (logoutBtn) logoutBtn.classList.add('hidden');
         if (userProfileBtn) userProfileBtn.classList.add('hidden');
     }
 }

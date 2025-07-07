@@ -18,18 +18,19 @@
                     <img src="images/magenta_statek.png" alt="Fizyka Statkiem" height="40">
                     <span class="logo-text">Fizyka Statkiem</span>
                 </a>
-                <div class="nav-buttons">
-                    <button class="btn btn-outline" onclick="showSection('login')" id="loginBtn">Zaloguj się</button>
-                    <button class="btn btn-primary" onclick="showSection('register')" id="registerBtn">Zarejestruj się</button>
-                    <span class="nav-buttons--user">
+                <div class="nav-main-buttons">
+                    <button class="btn btn-outline" onclick="showSection('dashboard')">Kurs</button>
+                    <button class="btn btn-outline" onclick="showSection('korepetycje')">Korepetycje</button>
+                    <span class="nav-auth-buttons">
+                        <button class="btn btn-outline" onclick="showSection('login')" id="loginBtn">Zaloguj się</button>
+                        <button class="btn btn-primary" onclick="showSection('register')" id="registerBtn">Zarejestruj się</button>
                         <button class="btn btn-outline hidden" onclick="logout()" id="logoutBtn">Wyloguj się</button>
-                        <button class="btn btn-outline hidden" id="userProfileBtn">Profil</button>
+                        <button class="btn btn-outline hidden" id="userProfileBtn" onclick="showSection('user')">Profil</button>
                     </span>
                 </div>
                 <div class="dropdown-menu-container">
                     <button class="dropdown-toggle" id="dropdownMenuBtn" aria-label="Menu">☰</button>
                     <div class="dropdown-menu" id="dropdownMenu">
-                        <a href="#" onclick="showSection('landing')">Strona główna</a>
                         <a href="#" onclick="showSection('dashboard')">Kurs</a>
                         <a href="#" onclick="showSection('user')" id="dropdownProfileLink" class="hidden">Profil</a>
                         <a href="#" onclick="showSection('login')" id="dropdownLoginLink">Zaloguj się</a>
