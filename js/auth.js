@@ -44,6 +44,19 @@ async function login(email, password) {
         });
         if (error) throw error;
         currentUser = data.user;
+        // Add user to users table if not present
+        const userId = data.user.id;
+        const fullName = data.user.user_metadata?.full_name || data.user.email || '';
+        await addUserToDatabase(userId, fullName);
+        // Fetch is_admin from public.users
+        const { data: userRow } = await supabase
+            .from('users')
+            .select('is_admin')
+            .eq('id', userId)
+            .single();
+        currentUserIsAdmin = !!(userRow && userRow.is_admin);
+        console.log('userRow:', userRow);
+        console.log('currentUserIsAdmin:', currentUserIsAdmin);
         await checkUserAccess();
         showSection('dashboard');
         updateNavigation();
@@ -96,7 +109,10 @@ async function checkUserAccess() {
     }
 }
 
+let currentUserIsAdmin = false;
+
 function hasAccessToCourse(courseId) {
+    if (currentUserIsAdmin) return true;
     if (!userEnrollments || userEnrollments.length === 0) return false;
     return userEnrollments.some(e => e.course_id === courseId || e.course_id === 'full_access');
 }

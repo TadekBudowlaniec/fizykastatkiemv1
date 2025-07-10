@@ -27,6 +27,69 @@ CREATE POLICY "Users can insert their own enrollments" ON enrollments
   FOR INSERT WITH CHECK (auth.uid() = user_id);
 ```
 
+#### Tabela `tasks`
+```sql
+CREATE TABLE tasks (
+  id SERIAL PRIMARY KEY,
+  course_id INTEGER NOT NULL,
+  type TEXT NOT NULL CHECK (type IN ('open', 'closed')),
+  content TEXT NOT NULL,
+  options JSONB,
+  solution TEXT NOT NULL,
+  is_active BOOLEAN DEFAULT true,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- RLS
+ALTER TABLE tasks ENABLE ROW LEVEL SECURITY;
+
+-- Polityki RLS - wszyscy mogą czytać aktywne zadania
+CREATE POLICY "Anyone can view active tasks" ON tasks
+  FOR SELECT USING (is_active = true);
+```
+
+#### Tabela `task_images`
+```sql
+CREATE TABLE task_images (
+  id SERIAL PRIMARY KEY,
+  task_id INTEGER REFERENCES tasks(id) ON DELETE CASCADE,
+  image_url TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- RLS
+ALTER TABLE task_images ENABLE ROW LEVEL SECURITY;
+
+-- Polityki RLS - wszyscy mogą czytać obrazy zadań
+CREATE POLICY "Anyone can view task images" ON task_images
+  FOR SELECT USING (true);
+```
+
+#### Tabela `user_tasks`
+```sql
+CREATE TABLE user_tasks (
+  id SERIAL PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  task_id INTEGER REFERENCES tasks(id) ON DELETE CASCADE,
+  status TEXT NOT NULL CHECK (status IN ('good', 'bad', 'skip')),
+  completed_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  UNIQUE(user_id, task_id)
+);
+
+-- RLS
+ALTER TABLE user_tasks ENABLE ROW LEVEL SECURITY;
+
+-- Polityki RLS
+CREATE POLICY "Users can view their own task progress" ON user_tasks
+  FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can insert their own task progress" ON user_tasks
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update their own task progress" ON user_tasks
+  FOR UPDATE USING (auth.uid() = user_id);
+```
+
 #### Tabela `download_logs`
 ```sql
 CREATE TABLE download_logs (
