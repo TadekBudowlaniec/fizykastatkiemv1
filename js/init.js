@@ -192,4 +192,9 @@ window.togglePassword = function(inputId, btn) {
         btn.textContent = '👁️';
         btn.setAttribute('aria-label', 'Pokaż hasło');
     }
-} 
+}
+
+// Debug: sprawdź czy jesteś adminem
+window.isAdmin = function() {
+    return typeof currentUserIsAdmin !== 'undefined' ? currentUserIsAdmin : false;
+}; 

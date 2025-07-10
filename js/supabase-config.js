@@ -1,6 +1,6 @@
 // Supabase Configuration
-const supabaseUrl = 'https://wurtrfsdzcttmhxxqiqs.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind1cnRyZnNkemN0dG1oeHhxaXFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MDA2NjEsImV4cCI6MjA2NzA3NjY2MX0.yudWqtQJuajovtyKkttOzlbUqsY9_oniF2L9HbHTzPg';
+const supabaseUrl = 'https://kldekjrpottsqebueojg.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtsZGVranJwb3R0c3FlYnVlb2pnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNTc4NTcsImV4cCI6MjA2NzYzMzg1N30.aYCWfbhliWM3yQRyZUDL59IgMOWklwa0ZA4QOSdyLh0';
 const supabase = window.supabase?.createClient ? window.supabase.createClient(supabaseUrl, supabaseKey) : null;
 
 // Stripe Configuration
@@ -13,76 +13,20 @@ let userEnrollments = [];
 
 // Subject Data
 const subjects = {
-    mechanika: {
-        title: 'Mechanika',
-        videoId: 'dQw4w9WgXcQ',
-        pdfs: ['teoria', 'zadania', 'wzory'],
-        quiz: [
-            {
-                question: 'Jakie jest podstawowe prawo mechaniki Newtona?',
-                options: ['F = ma', 'E = mc²', 'P = mv'],
-                correct: 0
-            }
-        ]
-    },
-    termodynamika: {
-        title: 'Termodynamika',
-        videoId: 'dQw4w9WgXcQ',
-        pdfs: ['teoria', 'zadania', 'wzory'],
-        quiz: [
-            {
-                question: 'Które z poniższych jest prawem termodynamiki?',
-                options: ['Energia nie może być stworzona ani zniszczona', 'F = ma', 'E = mc²'],
-                correct: 0
-            }
-        ]
-    },
-    elektromagnetyzm: {
-        title: 'Elektromagnetyzm',
-        videoId: 'dQw4w9WgXcQ',
-        pdfs: ['teoria', 'zadania', 'wzory'],
-        quiz: [
-            {
-                question: 'Prawo Ohma opisuje zależność między:',
-                options: ['Napięciem, prądem i oporem', 'Masą i energią', 'Siłą i przyspieszeniem'],
-                correct: 0
-            }
-        ]
-    },
-    optyka: {
-        title: 'Optyka',
-        videoId: 'dQw4w9WgXcQ',
-        pdfs: ['teoria', 'zadania', 'wzory'],
-        quiz: [
-            {
-                question: 'Prędkość światła w próżni wynosi:',
-                options: ['300 000 km/s', '150 000 km/s', '600 000 km/s'],
-                correct: 0
-            }
-        ]
-    },
-    atomowa: {
-        title: 'Fizyka Atomowa',
-        videoId: 'dQw4w9WgXcQ',
-        pdfs: ['teoria', 'zadania', 'wzory'],
-        quiz: [
-            {
-                question: 'Model atomu Bohra wprowadził pojęcie:',
-                options: ['Orbit elektronowych', 'Fal elektromagnetycznych', 'Siły jądrowej'],
-                correct: 0
-            }
-        ]
-    },
-    jadrowa: {
-        title: 'Fizyka Jądrowa',
-        videoId: 'dQw4w9WgXcQ',
-        pdfs: ['teoria', 'zadania', 'wzory'],
-        quiz: [
-            {
-                question: 'Rozpad alfa polega na emisji:',
-                options: ['Jądra helu', 'Elektronu', 'Fotonu'],
-                correct: 0
-            }
-        ]
-    }
+    1: { title: 'Kinematyka', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Kinematyka...' },
+    2: { title: 'Dynamika', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Dynamika...' },
+    3: { title: 'Praca moc energia', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Praca moc energia...' },
+    4: { title: 'Bryła sztywna', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Bryła sztywna...' },
+    5: { title: 'Ruch drgający', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Ruch drgający...' },
+    6: { title: 'Fale mechaniczne', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Fale mechaniczne...' },
+    7: { title: 'Hydrostatyka', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Hydrostatyka...' },
+    8: { title: 'Termodynamika', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Termodynamika...' },
+    9: { title: 'Grawitacja i astronomia', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Grawitacja i astronomia...' },
+    10: { title: 'Elektrostatyka', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Elektrostatyka...' },
+    11: { title: 'Prąd elektryczny', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Prąd elektryczny...' },
+    12: { title: 'Magnetyzm', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Magnetyzm...' },
+    13: { title: 'Indukcja elektromagnetyczna', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Indukcja elektromagnetyczna...' },
+    14: { title: 'Fale elektromagnetyczne i optyka', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Fale elektromagnetyczne i optyka...' },
+    15: { title: 'Fizyka atomowa', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Fizyka atomowa...' },
+    16: { title: 'Fizyka jądrowa i relatywistyka', videoId: '', pdfs: [], quiz: [], instructions: 'Instrukcje do kursu Fizyka jądrowa i relatywistyka...' }
 }; 

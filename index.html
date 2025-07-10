@@ -49,11 +49,6 @@
             <div class="container">
                 <div class="hero-content">
                     <img src="images/bialy_statek.png" alt="Fizyka Statkiem" class="hero-logo ship-animation">
-                    <div class="hero-svg-decor">
-                        <svg width="100%" height="40" viewBox="0 0 400 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 30 Q 200 60 400 30 L400 40 L0 40 Z" fill="rgba(255,0,128,0.12)"/>
-                        </svg>
-                    </div>
                     <h1>Fizyka Statkiem</h1>
                     <h2 class="hero-subtitle">Nowoczesne kursy online z fizyki</h2>
                     <p>Kompleksowe kursy prowadzone przez doświadczonych nauczycieli. Przygotuj się do matury i egzaminów w wygodny sposób!</p>
@@ -227,61 +222,15 @@
 
     <!-- Dashboard -->
     <div id="dashboard" class="page hidden">
-        <div class="dashboard-container">
-            <div class="container">
-                <div class="dashboard">
-                    <div class="dashboard-header">
-                        <img src="images/bialy_statek.png" alt="Fizyka Statkiem" class="dashboard-logo ship-animation">
-                        <h1>Twoje Kursy Fizyki</h1>
-                        <p>Witaj w platformie edukacyjnej Fizyka Statkiem</p>
-                    </div>
-
-                    <div class="subjects-grid fancy-subjects-grid">
-                        <div class="subject-card fancy-card">
-                            <div class="subject-icon">⚓️</div>
-                            <h3>Mechanika</h3>
-                            <div class="subject-progress"><div class="progress-bar" style="width: 60%"></div></div>
-                            <p>Poznaj podstawy ruchu, siły i energii</p>
-                            <button class="btn btn-gradient" onclick="showSubject('mechanika')">Otwórz dział</button>
-                        </div>
-                        <div class="subject-card fancy-card">
-                            <div class="subject-icon">🔥</div>
-                            <h3>Termodynamika</h3>
-                            <div class="subject-progress"><div class="progress-bar" style="width: 30%"></div></div>
-                            <p>Ciepło, temperatura i prawa termodynamiki</p>
-                            <button class="btn btn-gradient" onclick="showSubject('termodynamika')">Otwórz dział</button>
-                        </div>
-                        <div class="subject-card fancy-card">
-                            <div class="subject-icon">⚡️</div>
-                            <h3>Elektromagnetyzm</h3>
-                            <div class="subject-progress"><div class="progress-bar" style="width: 10%"></div></div>
-                            <p>Prąd elektryczny, pole magnetyczne i fale</p>
-                            <button class="btn btn-gradient" onclick="showSubject('elektromagnetyzm')">Otwórz dział</button>
-                        </div>
-                        <div class="subject-card fancy-card">
-                            <div class="subject-icon">🌈</div>
-                            <h3>Optyka</h3>
-                            <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
-                            <p>Światło, zwierciadła i soczewki</p>
-                            <button class="btn btn-gradient" onclick="showSubject('optyka')">Otwórz dział</button>
-                        </div>
-                        <div class="subject-card fancy-card">
-                            <div class="subject-icon">🧬</div>
-                            <h3>Fizyka Atomowa</h3>
-                            <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
-                            <p>Budowa atomu i zjawiska kwantowe</p>
-                            <button class="btn btn-gradient" onclick="showSubject('atomowa')">Otwórz dział</button>
-                        </div>
-                        <div class="subject-card fancy-card">
-                            <div class="subject-icon">☢️</div>
-                            <h3>Fizyka Jądrowa</h3>
-                            <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
-                            <p>Jądro atomowe i radioaktywność</p>
-                            <button class="btn btn-gradient" onclick="showSubject('jadrowa')">Otwórz dział</button>
-                        </div>
-                    </div>
+        <div class="dashboard-panel-layout">
+            <aside class="dashboard-sidebar" id="dashboardSidebar">
+                <!-- Kursy będą tu renderowane przez JS -->
+            </aside>
+            <main class="dashboard-main" id="dashboardMain">
+                <div class="dashboard-preview-placeholder">
+                    <p>Wybierz kurs z listy po lewej, aby zobaczyć podgląd.</p>
                 </div>
-            </div>
+            </main>
         </div>
     </div>
 
@@ -318,7 +267,8 @@
                             </li>
                         </ul>
                     </div>
-
+                    <!-- TU: zadania z bazy -->
+                    <div id="taskArea"></div>
                     <div class="quiz-section">
                         <h3>Quiz - Sprawdź swoją wiedzę</h3>
                         <div id="quizContainer">
@@ -412,5 +362,7 @@
     <script src="js/pdf.js"></script>
     <script src="js/quiz.js"></script>
     <script src="js/init.js"></script>
+    <script src="js/tasks.js"></script>
+    <script src="check_database.js"></script>
 </body>
 </html>
