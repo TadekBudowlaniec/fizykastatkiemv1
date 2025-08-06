@@ -62,7 +62,6 @@ function updateNavigation() {
 }
 
 function showSubject(subjectKey) {
-    console.log('showSubject wywołane, subjectKey:', subjectKey);
     if (!userHasAccess) {
         alert('Musisz kupić dostęp do platformy, aby oglądać kursy!');
         showSection('pricing');
@@ -90,8 +89,9 @@ function showSubject(subjectKey) {
     showSection('subject');
     // Dodaj wyświetlanie zadania z bazy dla danego kursu
     if (window.showRandomTaskForCourse) {
-        console.log('Wywołuję showRandomTaskForCourse z subjectKey:', subjectKey);
-        showRandomTaskForCourse(subjectKey);
+        // Konwertuj subjectKey na course_id (subjectKey to string, ale course_id to numer)
+        const course_id = parseInt(subjectKey);
+        showRandomTaskForCourse(course_id);
     }
 }
 
@@ -259,8 +259,10 @@ function renderCourseFullView(subjectKey, main) {
     }
     // Dodaj wyświetlanie zadania z bazy dla danego kursu
     if (window.showRandomTaskForCourse) {
-        window.showRandomTaskForCourse(subjectKey);
-        }
+        // Konwertuj subjectKey na course_id (subjectKey to string, ale course_id to numer)
+        const course_id = parseInt(subjectKey);
+        showRandomTaskForCourse(course_id);
+    }
 }
 
 // Funkcja do wyświetlania przykładowego zadania w podglądzie (zablokowane)
@@ -373,6 +375,52 @@ async function showPreviewTask(course_id, taskArea) {
             });
         }
         
+        // Opcje odpowiedzi dla zadań typu 'closed' (w podglądzie - zablokowane)
+        if (task.type === 'closed' && task.options) {
+            const optionsContainer = document.createElement('div');
+            optionsContainer.className = 'task-options-container';
+            optionsContainer.style.opacity = '0.5';
+            optionsContainer.style.pointerEvents = 'none';
+            
+            const optionsTitle = document.createElement('h4');
+            optionsTitle.textContent = 'Wybierz odpowiedź:';
+            optionsTitle.style.marginBottom = '1rem';
+            optionsTitle.style.color = 'var(--black)';
+            optionsContainer.appendChild(optionsTitle);
+            
+            try {
+                const options = typeof task.options === 'string' ? JSON.parse(task.options) : task.options;
+                
+                if (Array.isArray(options)) {
+                    options.forEach((option, index) => {
+                        const optionDiv = document.createElement('div');
+                        optionDiv.className = 'task-option';
+                        optionDiv.style.cssText = `
+                            padding: 0.8rem 1rem;
+                            margin: 0.5rem 0;
+                            background: rgba(248, 250, 252, 0.8);
+                            border: 2px solid #e2e8f0;
+                            border-radius: 8px;
+                            font-size: 1rem;
+                            line-height: 1.5;
+                            opacity: 0.5;
+                        `;
+                        
+                        optionDiv.innerHTML = `<strong>${String.fromCharCode(65 + index)}.</strong> ${option}`;
+                        optionsContainer.appendChild(optionDiv);
+                    });
+                }
+            } catch (error) {
+                console.error('Błąd parsowania opcji w podglądzie:', error);
+                const errorDiv = document.createElement('div');
+                errorDiv.textContent = 'Błąd ładowania opcji odpowiedzi';
+                errorDiv.style.color = '#ef4444';
+                optionsContainer.appendChild(errorDiv);
+            }
+            
+            container.appendChild(optionsContainer);
+        }
+        
         // Przycisk pokaż odpowiedź (zablokowany)
         const showAnswerBtn = document.createElement('button');
         showAnswerBtn.textContent = '👁️ Pokaż odpowiedź';
@@ -384,7 +432,7 @@ async function showPreviewTask(course_id, taskArea) {
         const answerDiv = document.createElement('div');
         answerDiv.className = 'task-answer';
         answerDiv.style.display = 'none';
-        answerDiv.innerHTML = task.solution;
+        answerDiv.innerHTML = processSolutionText(task.solution);
         
         showAnswerBtn.onclick = () => {
             // Nie rób nic - przycisk jest zablokowany
@@ -443,6 +491,19 @@ async function showPreviewTask(course_id, taskArea) {
         console.error('Błąd podczas wyświetlania zadania podglądu:', error);
         taskArea.innerHTML = '<p style="color: #888; text-align: center;">Błąd ładowania zadania</p>';
     }
+}
+
+// Funkcja do sprawdzania czy tekst jest linkiem do obrazka i zamiany na tag img
+function processSolutionText(text) {
+    // Sprawdź czy tekst wygląda jak link do obrazka (rozszerzenia: jpg, jpeg, png, gif, webp)
+    const imageUrlRegex = /(https?:\/\/[^\s]+\.(jpg|jpeg|png|gif|webp))/gi;
+    
+    if (imageUrlRegex.test(text)) {
+        // Zamień link na tag img z wyśrodkowaniem i nową linią
+        return text.replace(imageUrlRegex, '<br><div style="text-align: center; margin: 15px 0;"><img src="$1" alt="Odpowiedź" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></div><br>');
+    }
+    
+    return text;
 }
 
 // Nadpisz renderDashboard, by używał nowego panelu
