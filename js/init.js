@@ -77,16 +77,40 @@ window.addEventListener('DOMContentLoaded', () => {
             downloadPDF(pdfType);
         });
     });
-    // Sprawdzenie statusu płatności po powrocie ze Stripe
-    checkPaymentStatus();
+    
+    // Obsługa powrotu po płatności Stripe
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
+    if (sessionId) {
+        // Sprawdź status płatności i odśwież dostęp użytkownika
+        setTimeout(async () => {
+            try {
+                const response = await fetch(`http://localhost:3001/api/check-payment-status?session_id=${sessionId}`);
+                const result = await response.json();
+                if (result.success) {
+                    // Odśwież dostęp użytkownika
+                    await checkUserAccess();
+                    // Przejdź do dashboardu
+                    showSection('dashboard');
+                    alert('Płatność zakończona pomyślnie! Masz teraz dostęp do kursu.');
+                }
+            } catch (error) {
+                console.error('Błąd sprawdzania statusu płatności:', error);
+            }
+        }, 1000); // Krótkie opóźnienie, aby webhook miał czas się wykonać
+    }
     // Sprawdzenie sesji użytkownika
     supabase.auth.getUser().then(({ data: { user } }) => {
         if (user) {
             currentUser = user;
+            // Najpierw sprawdź uprawnienia (w tym admina)
             checkUserAccess().then(() => {
                 showSection(initialSection);
                 updateNavigation();
                 updateDropdownMenu();
+                if (initialSection === 'dashboard') {
+                    renderDashboardPanel();
+                }
             });
         } else {
             showSection(initialSection);
@@ -94,6 +118,16 @@ window.addEventListener('DOMContentLoaded', () => {
             updateDropdownMenu();
         }
     });
+    // Dodaj obsługę kliknięcia w zakładkę kursy (dashboard)
+    const kursBtn = document.querySelector('[data-section="dashboard"], #dashboardBtn, .go-to-dashboard');
+    if (kursBtn) {
+        kursBtn.addEventListener('click', async () => {
+            console.log('Kliknięto przycisk Kurs');
+            await checkUserAccess();
+            console.log('Wywołuję renderDashboardPanel');
+            renderDashboardPanel();
+        });
+    }
     // Dodaj link do profilu użytkownika w nawigacji, jeśli zalogowany
     if (document.getElementById('userProfileBtn')) {
         document.getElementById('userProfileBtn').addEventListener('click', () => showSection('user'));
