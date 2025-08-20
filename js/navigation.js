@@ -20,6 +20,8 @@ const pathToSection = {
     '/korepetycje': 'korepetycje'
 };
 
+// Używam window.subjects zamiast lokalnej zmiennej
+
 function showSection(sectionId, push = true) {
     document.querySelectorAll('.page').forEach(page => {
         page.classList.add('hidden');
@@ -30,6 +32,9 @@ function showSection(sectionId, push = true) {
         window.history.pushState({ sectionId }, '', sectionToPath[sectionId]);
     }
 }
+
+// Dodaj showSection do window aby był dostępny globalnie
+window.showSection = showSection;
 
 window.addEventListener('popstate', (e) => {
     const path = window.location.pathname;
@@ -62,13 +67,14 @@ function updateNavigation() {
 }
 
 function showSubject(subjectKey) {
-    if (!userHasAccess) {
-        alert('Musisz kupić dostęp do platformy, aby oglądać kursy!');
+    const subject = window.subjects[subjectKey];
+    if (!subject) return;
+    const course_id = parseInt(subjectKey);
+    if (!hasAccessToCourse(course_id)) {
+        alert('Musisz kupić dostęp do tego kursu!');
         showSection('pricing');
         return;
     }
-    const subject = subjects[subjectKey];
-    if (!subject) return;
     document.getElementById('subjectTitle').textContent = subject.title;
     document.getElementById('subjectVideo').src = `https://www.youtube.com/embed/${subject.videoId}`;
     const quizContainer = document.getElementById('quizContainer');
@@ -87,16 +93,13 @@ function showSubject(subjectKey) {
         <button class="btn btn-gradient" onclick="checkQuiz('${subjectKey}')">Sprawdź odpowiedzi</button>
     `;
     showSection('subject');
-    // Dodaj wyświetlanie zadania z bazy dla danego kursu
     if (window.showRandomTaskForCourse) {
-        // Konwertuj subjectKey na course_id (subjectKey to string, ale course_id to numer)
-        const course_id = parseInt(subjectKey);
         showRandomTaskForCourse(course_id);
     }
 }
 
 function showSubjectPreview(subjectKey) {
-    const subject = subjects[subjectKey];
+    const subject = window.subjects[subjectKey];
     if (!subject) return;
     document.getElementById('subjectTitle').textContent = subject.title + ' (Podgląd)';
     // Zamiast wideo - szary placeholder
@@ -128,23 +131,31 @@ function showSubjectPreview(subjectKey) {
 function renderDashboardPanel() {
     const sidebar = document.getElementById('dashboardSidebar');
     const main = document.getElementById('dashboardMain');
-    if (!sidebar || !main) return;
+    if (!sidebar || !main) {
+        console.error('Nie znaleziono sidebar lub main');
+        return;
+    }
+    
+    console.log('renderDashboardPanel - subjects:', window.subjects);
+    console.log('renderDashboardPanel - Object.entries(subjects):', Object.entries(window.subjects));
+    
     sidebar.innerHTML = '';
     let firstKey = null;
-    Object.entries(subjects).forEach(([key, subject], idx) => {
+    Object.entries(window.subjects).forEach(([key, subject], idx) => {
         if (!firstKey) firstKey = key;
-        const hasAccess = hasAccessToCourse(key);
+        console.log('Tworzenie elementu dla kursu:', key, subject.title);
+        
         const item = document.createElement('button');
         item.className = 'course-list-item';
-        item.innerHTML = `<span>${subject.title}</span>` + (hasAccess ? '' : '<span class="lock" title="Brak dostępu">🔒</span>');
+        item.innerHTML = `<span>${subject.title}</span>` + (hasAccessToCourse(key) ? '' : '<span class="lock" title="Brak dostępu">🔒</span>');
         item.onclick = () => {
             // Remove active from all
             sidebar.querySelectorAll('.course-list-item').forEach(btn => btn.classList.remove('active'));
             item.classList.add('active');
             // Render preview or full view
-            if (hasAccess) {
+            if (hasAccessToCourse(key)) {
                 renderCourseFullView(key, main);
-        } else {
+            } else {
                 renderCoursePreview(key, main);
             }
         };
@@ -157,7 +168,7 @@ function renderDashboardPanel() {
 }
 
 function renderCoursePreview(subjectKey, main) {
-    const subject = subjects[subjectKey];
+    const subject = window.subjects[subjectKey];
     if (!subject) return;
     main.innerHTML = '';
     // Tytuł
@@ -209,7 +220,7 @@ function renderCoursePreview(subjectKey, main) {
 }
 
 function renderCourseFullView(subjectKey, main) {
-    const subject = subjects[subjectKey];
+    const subject = window.subjects[subjectKey];
     if (!subject) return;
     main.innerHTML = '';
     // Tytuł
@@ -244,6 +255,30 @@ function renderCourseFullView(subjectKey, main) {
     taskArea.style.borderRadius = '12px';
     taskArea.style.boxShadow = '0 2px 8px 0 rgba(0,0,0,0.04)';
     main.appendChild(taskArea);
+    // Przycisk kupna kursu (zawsze pokazuj na potrzeby testu)
+    const course_id = parseInt(subjectKey);
+    const btnGroup = document.createElement('div');
+    btnGroup.style.display = 'flex';
+    btnGroup.style.gap = '1rem';
+    btnGroup.style.margin = '2rem 0 1rem 0';
+    // Pojedynczy kurs
+    const buyBtn = document.createElement('a');
+    buyBtn.href = '#';
+    buyBtn.onclick = () => { buyAccess(course_id); return false; };
+    buyBtn.className = 'btn btn-gradient';
+    buyBtn.textContent = 'Kup ten kurs';
+    btnGroup.appendChild(buyBtn);
+    // Wszystkie materiały
+    const buyAllBtn = document.createElement('a');
+    buyAllBtn.href = '#';
+    buyAllBtn.onclick = () => { buyAccess('full_access'); return false; };
+    buyAllBtn.className = 'btn btn-outline';
+    buyAllBtn.textContent = 'Kup wszystkie materiały';
+    btnGroup.appendChild(buyAllBtn);
+    main.appendChild(btnGroup);
+    // Logi do testu
+    console.log('Link do kursu:', subject.paymentLink);
+    console.log('Link do wszystkich materiałów:', window.paymentLinkAllMaterials);
     // Quiz - pytanie i opcje, z możliwością zaznaczania i przyciskiem
     if (subject.quiz && subject.quiz.length > 0) {
         const quizSection = document.createElement('div');
@@ -259,8 +294,6 @@ function renderCourseFullView(subjectKey, main) {
     }
     // Dodaj wyświetlanie zadania z bazy dla danego kursu
     if (window.showRandomTaskForCourse) {
-        // Konwertuj subjectKey na course_id (subjectKey to string, ale course_id to numer)
-        const course_id = parseInt(subjectKey);
         showRandomTaskForCourse(course_id);
     }
 }
@@ -323,37 +356,24 @@ async function showPreviewTask(course_id, taskArea) {
             text-align: center;
             padding: 2rem;
         `;
-        // Mapowanie course_id na nazwy kursów dla linków Stripe
-        const courseNameMapping = {
-            1: 'mechanika', // Kinematyka -> mechanika
-            2: 'mechanika', // Dynamika -> mechanika
-            3: 'mechanika', // Praca moc energia -> mechanika
-            4: 'mechanika', // Bryła sztywna -> mechanika
-            5: 'mechanika', // Ruch drgający -> mechanika
-            6: 'mechanika', // Fale mechaniczne -> mechanika
-            7: 'mechanika', // Hydrostatyka -> mechanika
-            8: 'termodynamika',
-            9: 'mechanika', // Grawitacja -> mechanika
-            10: 'elektromagnetyzm', // Elektrostatyka -> elektromagnetyzm
-            11: 'elektromagnetyzm', // Prąd elektryczny -> elektromagnetyzm
-            12: 'elektromagnetyzm', // Magnetyzm -> elektromagnetyzm
-            13: 'elektromagnetyzm', // Indukcja -> elektromagnetyzm
-            14: 'optyka', // Fale elektromagnetyczne i optyka -> optyka
-            15: 'atomowa', // Fizyka atomowa -> atomowa
-            16: 'jadrowa' // Fizyka jądrowa -> jadrowa
-        };
-        
-        // Wybierz odpowiedni kurs dla linku płatności
-        const courseName = courseNameMapping[course_id] || 'termodynamika'; // domyślnie termodynamika
-        
+        // Przyciski zależne od zalogowania
+        let buyCourseBtn, buyAllBtn;
+        if (!currentUser) {
+            buyCourseBtn = `<a href="#" onclick="showSection('login');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Zaloguj się, aby kupić kurs</a>`;
+            buyAllBtn = `<a href="#" onclick="showSection('login');return false;" class="btn btn-outline" style="font-size: 1.1rem; min-width: 220px;">Zaloguj się, aby kupić wszystkie materiały</a>`;
+        } else {
+            buyCourseBtn = `<a href="#" onclick="buyAccess('${course_id}');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Kup ten kurs</a>`;
+            buyAllBtn = `<a href="#" onclick="buyAccess('full_access');return false;" class="btn btn-outline" style="font-size: 1.1rem; min-width: 220px;">Kup wszystkie materiały</a>`;
+        }
         overlay.innerHTML = `
             <div>
                 <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
                 <div>Zadania dostępne po zakupie kursu</div>
                 <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8;">To jest przykładowe zadanie z tego kursu</div>
-                <button class="btn btn-gradient" style="margin-top: 1.5rem; padding: 0.8rem 2rem; font-size: 1.1rem; border-radius: 30px; box-shadow: 0 4px 15px rgba(255, 0, 128, 0.3);" onclick="buyAccess('${courseName}')">
-                    💳 Kup teraz
-                </button>
+                <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; align-items: center;">
+                    ${buyCourseBtn}
+                    ${buyAllBtn}
+                </div>
             </div>
         `;
         container.appendChild(overlay);

@@ -83,29 +83,46 @@ async function checkUserAccess() {
     if (!supabase || !currentUser) {
         userHasAccess = false;
         userEnrollments = [];
+        currentUserIsAdmin = false;
         return;
     }
     try {
         const { data: { user } } = await supabase.auth.getUser();
         const userId = user.id;
+        console.log('Sprawdzanie dostępu dla użytkownika:', userId);
+        
+        // Pobierz is_admin z tabeli users
+        const { data: userRow } = await supabase
+            .from('users')
+            .select('is_admin')
+            .eq('id', userId)
+            .single();
+        currentUserIsAdmin = !!(userRow && userRow.is_admin);
+        console.log('Użytkownik jest adminem:', currentUserIsAdmin);
+        
+        // Pobierz enrollments
         const { data: enrollments, error } = await supabase
             .from('enrollments')
             .select('course_id, courses(name)')
             .eq('user_id', userId)
             .eq('access_granted', true);
+        
         if (error) {
-            console.error('Błąd pobierania zapisań:', error);
+            console.error('Błąd pobierania enrollments:', error);
             userHasAccess = false;
             userEnrollments = [];
             return;
         }
+        
         userEnrollments = enrollments || [];
         userHasAccess = userEnrollments.length > 0;
-        console.log('Użytkownik ma dostęp do kursów:', userEnrollments);
+        console.log('Pobrane enrollments:', userEnrollments);
+        console.log('Użytkownik ma dostęp:', userHasAccess);
     } catch (error) {
-        console.error('Błąd sprawdzania dostępu:', error);
+        console.error('Błąd w checkUserAccess:', error);
         userHasAccess = false;
         userEnrollments = [];
+        currentUserIsAdmin = false;
     }
 }
 
@@ -114,7 +131,7 @@ let currentUserIsAdmin = false;
 function hasAccessToCourse(courseId) {
     if (currentUserIsAdmin) return true;
     if (!userEnrollments || userEnrollments.length === 0) return false;
-    return userEnrollments.some(e => e.course_id === courseId || e.course_id === 'full_access');
+    return userEnrollments.some(e => e.course_id === courseId || e.course_id === 17); // 17 = full_access
 }
 
 async function changePassword(currentPassword, newPassword, repeatNewPassword) {
