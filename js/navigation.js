@@ -257,25 +257,28 @@ function renderCourseFullView(subjectKey, main) {
     main.appendChild(taskArea);
     // Przycisk kupna kursu (zawsze pokazuj na potrzeby testu)
     const course_id = parseInt(subjectKey);
-    const btnGroup = document.createElement('div');
-    btnGroup.style.display = 'flex';
-    btnGroup.style.gap = '1rem';
-    btnGroup.style.margin = '2rem 0 1rem 0';
-    // Pojedynczy kurs
-    const buyBtn = document.createElement('a');
-    buyBtn.href = '#';
-    buyBtn.onclick = () => { buyAccess(course_id); return false; };
-    buyBtn.className = 'btn btn-gradient';
-    buyBtn.textContent = 'Kup ten kurs';
-    btnGroup.appendChild(buyBtn);
-    // Wszystkie materiały
-    const buyAllBtn = document.createElement('a');
-    buyAllBtn.href = '#';
-    buyAllBtn.onclick = () => { buyAccess('full_access'); return false; };
-    buyAllBtn.className = 'btn btn-outline';
-    buyAllBtn.textContent = 'Kup wszystkie materiały';
-    btnGroup.appendChild(buyAllBtn);
-    main.appendChild(btnGroup);
+    // Pokazuj przyciski kupna tylko jeśli użytkownik nie ma dostępu do kursu
+    if (!hasAccessToCourse(course_id)) {
+        const btnGroup = document.createElement('div');
+        btnGroup.style.display = 'flex';
+        btnGroup.style.gap = '1rem';
+        btnGroup.style.margin = '2rem 0 1rem 0';
+        // Pojedynczy kurs
+        const buyBtn = document.createElement('a');
+        buyBtn.href = '#';
+        buyBtn.onclick = () => { buyAccess(course_id); return false; };
+        buyBtn.className = 'btn btn-gradient';
+        buyBtn.textContent = 'Kup ten kurs';
+        btnGroup.appendChild(buyBtn);
+        // Wszystkie materiały
+        const buyAllBtn = document.createElement('a');
+        buyAllBtn.href = '#';
+        buyAllBtn.onclick = () => { buyAccess('full_access'); return false; };
+        buyAllBtn.className = 'btn btn-outline';
+        buyAllBtn.textContent = 'Kup wszystkie materiały';
+        btnGroup.appendChild(buyAllBtn);
+        main.appendChild(btnGroup);
+    }
     // Logi do testu
     console.log('Link do kursu:', subject.paymentLink);
     console.log('Link do wszystkich materiałów:', window.paymentLinkAllMaterials);

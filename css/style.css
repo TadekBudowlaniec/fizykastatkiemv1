@@ -1178,7 +1178,8 @@ nav {
     height: auto;
     border-radius: 12px;
     margin: 1rem 0;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
+    display: block;
     transition: transform 0.3s ease;
 }
 
@@ -1446,6 +1447,7 @@ nav {
     cursor: pointer;
     transition: all 0.3s ease;
     margin: 1rem 0;
+    display: block;
     box-shadow: 0 4px 15px rgba(255, 0, 128, 0.3);
 }
 
