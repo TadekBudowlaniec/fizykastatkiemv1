@@ -134,15 +134,18 @@ async function showTaskWithControls(taskId, course_id) {
     content.innerHTML = task.content; // Używamy innerHTML zamiast textContent dla lepszego formatowania
     container.appendChild(content);
     
-    // Zdjęcia (jeśli są)
+    // Zdjęcia (jeśli są) — wyświetl w jednym rzędzie, jeśli jest miejsce (z zawijaniem)
     if (images && images.length > 0) {
+        const imagesContainer = document.createElement('div');
+        imagesContainer.className = 'task-images';
         images.forEach(img => {
             const image = document.createElement('img');
             image.src = img.image_url;
             image.className = 'task-image';
             image.alt = 'Ilustracja do zadania';
-            container.appendChild(image);
+            imagesContainer.appendChild(image);
         });
+        container.appendChild(imagesContainer);
     }
     
     // Opcje odpowiedzi dla zadań typu 'closed'

@@ -1187,6 +1187,23 @@ nav {
     transform: scale(1.02);
 }
 
+.task-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1rem 0;
+    align-items: flex-start;
+}
+
+.task-images .task-image {
+    margin: 0;
+    display: block;
+    height: auto;
+    max-height: 320px;
+    width: auto;
+    max-width: 100%;
+}
+
 .task-answer {
     background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
     border: 2px solid #0ea5e9;
