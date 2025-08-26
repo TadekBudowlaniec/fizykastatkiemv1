@@ -237,7 +237,18 @@ function renderCoursePreview(subjectKey, main) {
             // Dla pozostałych kursów
             if (currentUser && hasAccessToCourse(parseInt(subjectKey))) {
                 // Użytkownik ma dostęp - sprawdź który etap
-                if (stage.title === 'Etap 3') {
+                if (stage.title === 'Etap 1') {
+                    // Etap 1 - otwórz rzeczywisty PDF
+                    card.style.opacity = '1';
+                    card.style.cursor = 'pointer';
+                    card.onclick = () => {
+                        if (subject.pdfUrlEtap1) {
+                            window.open(subject.pdfUrlEtap1, '_blank');
+                        } else {
+                            alert('PDF niedostępny dla tego działu.');
+                        }
+                    };
+                } else if (stage.title === 'Etap 3') {
                     // Etap 3 - otwórz rzeczywisty PDF
                     card.style.opacity = '1';
                     card.style.cursor = 'pointer';
@@ -249,7 +260,7 @@ function renderCoursePreview(subjectKey, main) {
                         }
                     };
                 } else {
-                    // Etap 1 i 2 - informacja o tym, że linki będą dodane
+                    // Etap 2 - informacja o tym, że linki będą dodane
                     card.style.opacity = '0.6';
                     card.style.cursor = 'not-allowed';
                     card.onclick = () => alert(`Linki do ${stage.title} zostaną dodane wkrótce`);
@@ -402,7 +413,17 @@ function renderCourseFullView(subjectKey, main) {
             // Dla pozostałych kursów
             if (hasAccess) {
                 // Użytkownik ma dostęp - sprawdź który etap
-                if (stage.title === 'Etap 3') {
+                if (stage.title === 'Etap 1') {
+                    // Etap 1 - otwórz rzeczywisty PDF
+                    card.style.cursor = 'pointer';
+                    card.onclick = () => {
+                        if (subject.pdfUrlEtap1) {
+                            window.open(subject.pdfUrlEtap1, '_blank');
+                        } else {
+                            alert('PDF niedostępny dla tego działu.');
+                        }
+                    };
+                } else if (stage.title === 'Etap 3') {
                     // Etap 3 - otwórz rzeczywisty PDF
                     card.style.cursor = 'pointer';
                     card.onclick = () => {
@@ -413,7 +434,7 @@ function renderCourseFullView(subjectKey, main) {
                         }
                     };
                 } else {
-                    // Etap 1 i 2 - informacja o tym, że linki będą dodane
+                    // Etap 2 - informacja o tym, że linki będą dodane
                     card.style.opacity = '0.6';
                     card.style.cursor = 'not-allowed';
                     card.onclick = () => alert(`Linki do ${stage.title} zostaną dodane wkrótce`);
