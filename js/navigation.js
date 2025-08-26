@@ -147,13 +147,22 @@ function renderDashboardPanel() {
         
         const item = document.createElement('button');
         item.className = 'course-list-item';
-        item.innerHTML = `<span>${subject.title}</span>` + (hasAccessToCourse(key) ? '' : '<span class="lock" title="Brak dostępu">🔒</span>');
+        
+        // Dla wszystkich użytkowników (zalogowanych i niezalogowanych) pokazuj kursy w ten sam sposób
+        // Jeśli użytkownik ma dostęp - bez ikony, jeśli nie ma - z ikoną kłódki
+        if (currentUser && hasAccessToCourse(key)) {
+            item.innerHTML = `<span>${subject.title}</span>`;
+        } else {
+            item.innerHTML = `<span>${subject.title}</span><span class="lock" title="Brak dostępu">🔒</span>`;
+        }
+        
         item.onclick = () => {
             // Remove active from all
             sidebar.querySelectorAll('.course-list-item').forEach(btn => btn.classList.remove('active'));
             item.classList.add('active');
+            
             // Render preview or full view
-            if (hasAccessToCourse(key)) {
+            if (currentUser && hasAccessToCourse(key)) {
                 renderCourseFullView(key, main);
             } else {
                 renderCoursePreview(key, main);
@@ -161,6 +170,7 @@ function renderDashboardPanel() {
         };
         sidebar.appendChild(item);
     });
+    
     // Optional: select first course by default
     if (firstKey) {
         sidebar.querySelector('.course-list-item')?.click();
@@ -168,27 +178,94 @@ function renderDashboardPanel() {
 }
 
 function renderCoursePreview(subjectKey, main) {
+    // Usuń sprawdzenie logowania - pozwól niezalogowanym przeglądać kursy
     const subject = window.subjects[subjectKey];
     if (!subject) return;
     main.innerHTML = '';
+    
     // Tytuł
     const title = document.createElement('h2');
     title.textContent = subject.title + ' (Podgląd)';
     main.appendChild(title);
+    
     // Szary placeholder zamiast wideo
     const video = document.createElement('div');
     video.className = 'video-frame';
     video.style = 'background:#e5e5e5;display:flex;align-items:center;justify-content:center;color:#888;font-size:1.2rem;min-height:220px;margin-bottom:1.5rem;';
     video.textContent = 'Wideo dostępne po zakupie';
     main.appendChild(video);
-    // PDF - lista bez pobierania
+    
+    // PDF - 3 etapy w stylu feature-card (podobnie jak w full view)
     const pdfSection = document.createElement('div');
-    let html = '<h3>Materiały PDF</h3><ul class="pdf-list">';
-    subject.pdfs.forEach(pdf => {
-        html += `<li class="pdf-item"><span>📄 ${pdf.charAt(0).toUpperCase() + pdf.slice(1)}</span> <span style="color:#aaa;font-size:0.95em;">(dostęp po zakupie)</span></li>`;
+    const pdfHeader = document.createElement('h3');
+    pdfHeader.textContent = 'Materiały PDF';
+    pdfHeader.style.marginBottom = '1.5rem';
+    pdfSection.appendChild(pdfHeader);
+    
+    const pdfCardsContainer = document.createElement('div');
+    pdfCardsContainer.className = 'pdf-cards-grid';
+    
+    const stages = [
+        { title: 'Etap 1', icon: '📚', description: 'Podstawy i wprowadzenie' },
+        { title: 'Etap 2', icon: '🔬', description: 'Rozszerzone zagadnienia' },
+        { title: 'Etap 3', icon: '🚀', description: 'Zaawansowane tematy' }
+    ];
+    
+    stages.forEach((stage, index) => {
+        const card = document.createElement('div');
+        card.className = 'pdf-stage-card';
+        card.style.opacity = '0.6';
+        card.style.cursor = 'not-allowed';
+        
+        const icon = document.createElement('div');
+        icon.className = 'pdf-stage-icon';
+        icon.textContent = stage.icon;
+        card.appendChild(icon);
+        
+        const title = document.createElement('h4');
+        title.textContent = stage.title;
+        card.appendChild(title);
+        
+        const description = document.createElement('p');
+        description.textContent = stage.description;
+        card.appendChild(description);
+        
+        // Special handling for "Praca moc energia" (course 3)
+        if (parseInt(subjectKey) === 3) {
+            card.onclick = () => alert('zadania maturalne z tego działu są wplecione w inne działy fizyki');
+        } else {
+            // Dla pozostałych kursów
+            if (currentUser && hasAccessToCourse(parseInt(subjectKey))) {
+                // Użytkownik ma dostęp - sprawdź który etap
+                if (stage.title === 'Etap 3') {
+                    // Etap 3 - otwórz rzeczywisty PDF
+                    card.style.opacity = '1';
+                    card.style.cursor = 'pointer';
+                    card.onclick = () => {
+                        if (subject.pdfUrl) {
+                            window.open(subject.pdfUrl, '_blank');
+                        } else {
+                            alert('PDF niedostępny dla tego działu.');
+                        }
+                    };
+                } else {
+                    // Etap 1 i 2 - informacja o tym, że linki będą dodane
+                    card.style.opacity = '0.6';
+                    card.style.cursor = 'not-allowed';
+                    card.onclick = () => alert(`Linki do ${stage.title} zostaną dodane wkrótce`);
+                }
+            } else {
+                // Użytkownik nie ma dostępu - zablokuj wszystkie etapy
+                card.style.opacity = '0.6';
+                card.style.cursor = 'not-allowed';
+                card.onclick = () => alert('Dostęp do PDF po zakupie kursu');
+            }
+        }
+        
+        pdfCardsContainer.appendChild(card);
     });
-    html += '</ul>';
-    pdfSection.innerHTML = html;
+    
+    pdfSection.appendChild(pdfCardsContainer);
     main.appendChild(pdfSection);
     
     // Dodaj miejsce na przykładowe zadanie z bazy danych
@@ -217,6 +294,50 @@ function renderCoursePreview(subjectKey, main) {
         quizSection.innerHTML = quizHtml;
         main.appendChild(quizSection);
     }
+    
+    // Dodaj przyciski dla niezalogowanych użytkowników
+    if (!currentUser) {
+        const authSection = document.createElement('div');
+        authSection.style.textAlign = 'center';
+        authSection.style.marginTop = '2rem';
+        authSection.style.padding = '2rem';
+        authSection.style.background = 'linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%)';
+        authSection.style.borderRadius = '20px';
+        authSection.style.border = '2px solid #e0e7ff';
+        
+        const authTitle = document.createElement('h3');
+        authTitle.textContent = 'Chcesz uzyskać pełny dostęp do tego kursu?';
+        authTitle.style.marginBottom = '1rem';
+        authTitle.style.color = '#374151';
+        authSection.appendChild(authTitle);
+        
+        const authDescription = document.createElement('p');
+        authDescription.textContent = 'Zaloguj się lub zarejestruj, aby móc kupić dostęp i korzystać z pełnej zawartości kursu.';
+        authDescription.style.marginBottom = '1.5rem';
+        authDescription.style.color = '#6b7280';
+        authSection.appendChild(authDescription);
+        
+        const authButtons = document.createElement('div');
+        authButtons.style.display = 'flex';
+        authButtons.style.gap = '1rem';
+        authButtons.style.justifyContent = 'center';
+        authButtons.style.flexWrap = 'wrap';
+        
+        const loginBtn = document.createElement('button');
+        loginBtn.className = 'btn btn-primary';
+        loginBtn.textContent = 'Zaloguj się';
+        loginBtn.onclick = () => showSection('login');
+        authButtons.appendChild(loginBtn);
+        
+        const registerBtn = document.createElement('button');
+        registerBtn.className = 'btn btn-gradient';
+        registerBtn.textContent = 'Zarejestruj się';
+        registerBtn.onclick = () => showSection('register');
+        authButtons.appendChild(registerBtn);
+        
+        authSection.appendChild(authButtons);
+        main.appendChild(authSection);
+    }
 }
 
 function renderCourseFullView(subjectKey, main) {
@@ -236,14 +357,79 @@ function renderCourseFullView(subjectKey, main) {
     video.allowFullscreen = true;
     video.style = 'width:100%;min-height:220px;margin-bottom:1.5rem;';
     main.appendChild(video);
-    // PDF - lista z pobieraniem
+    // PDF - 3 etapy w stylu feature-card
     const pdfSection = document.createElement('div');
-    let html = '<h3>Materiały PDF</h3><ul class="pdf-list">';
-    subject.pdfs.forEach(pdf => {
-        html += `<li class="pdf-item"><span>📄 ${pdf.charAt(0).toUpperCase() + pdf.slice(1)}</span></li>`;
+    const pdfHeader = document.createElement('h3');
+    pdfHeader.textContent = 'Materiały PDF';
+    pdfHeader.style.marginBottom = '1.5rem';
+    pdfSection.appendChild(pdfHeader);
+    
+    const pdfCardsContainer = document.createElement('div');
+    pdfCardsContainer.className = 'pdf-cards-grid';
+    
+    const stages = [
+        { title: 'Etap 1', icon: '📚', description: 'Podstawy i wprowadzenie' },
+        { title: 'Etap 2', icon: '🔬', description: 'Rozszerzone zagadnienia' },
+        { title: 'Etap 3', icon: '🚀', description: 'Zaawansowane tematy' }
+    ];
+    
+    stages.forEach((stage, index) => {
+        const card = document.createElement('div');
+        card.className = 'pdf-stage-card';
+        
+        const icon = document.createElement('div');
+        icon.className = 'pdf-stage-icon';
+        icon.textContent = stage.icon;
+        card.appendChild(icon);
+        
+        const title = document.createElement('h4');
+        title.textContent = stage.title;
+        card.appendChild(title);
+        
+        const description = document.createElement('p');
+        description.textContent = stage.description;
+        card.appendChild(description);
+        
+        // Sprawdź czy użytkownik ma dostęp do kursu
+        const hasAccess = currentUser && hasAccessToCourse(parseInt(subjectKey));
+        
+        // Special handling for "Praca moc energia" (course 3)
+        if (parseInt(subjectKey) === 3) {
+            card.style.opacity = '0.6';
+            card.style.cursor = 'not-allowed';
+            card.onclick = () => alert('zadania maturalne z tego działu są wplecione w inne działy fizyki');
+        } else {
+            // Dla pozostałych kursów
+            if (hasAccess) {
+                // Użytkownik ma dostęp - sprawdź który etap
+                if (stage.title === 'Etap 3') {
+                    // Etap 3 - otwórz rzeczywisty PDF
+                    card.style.cursor = 'pointer';
+                    card.onclick = () => {
+                        if (subject.pdfUrl) {
+                            window.open(subject.pdfUrl, '_blank');
+                        } else {
+                            alert('PDF niedostępny dla tego działu.');
+                        }
+                    };
+                } else {
+                    // Etap 1 i 2 - informacja o tym, że linki będą dodane
+                    card.style.opacity = '0.6';
+                    card.style.cursor = 'not-allowed';
+                    card.onclick = () => alert(`Linki do ${stage.title} zostaną dodane wkrótce`);
+                }
+            } else {
+                // Użytkownik nie ma dostępu - zablokuj wszystkie etapy
+                card.style.opacity = '0.6';
+                card.style.cursor = 'not-allowed';
+                card.onclick = () => alert('Dostęp do PDF po zakupie kursu');
+            }
+        }
+        
+        pdfCardsContainer.appendChild(card);
     });
-    html += '</ul>';
-    pdfSection.innerHTML = html;
+    
+    pdfSection.appendChild(pdfCardsContainer);
     main.appendChild(pdfSection);
     // Dodaj miejsce na zadania z bazy
     const taskArea = document.createElement('div');
@@ -362,8 +548,8 @@ async function showPreviewTask(course_id, taskArea) {
         // Przyciski zależne od zalogowania
         let buyCourseBtn, buyAllBtn;
         if (!currentUser) {
-            buyCourseBtn = `<a href="#" onclick="showSection('login');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Zaloguj się, aby kupić kurs</a>`;
-            buyAllBtn = `<a href="#" onclick="showSection('login');return false;" class="btn btn-outline" style="font-size: 1.1rem; min-width: 220px;">Zaloguj się, aby kupić wszystkie materiały</a>`;
+            buyCourseBtn = `<a href="#" onclick="showSection('login');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Kup ten kurs</a>`;
+            buyAllBtn = `<a href="#" onclick="showSection('login');return false;" class="btn btn-outline" style="font-size: 1.1rem; min-width: 220px;">Kup wszystkie materiały</a>`;
         } else {
             buyCourseBtn = `<a href="#" onclick="buyAccess('${course_id}');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Kup ten kurs</a>`;
             buyAllBtn = `<a href="#" onclick="buyAccess('full_access');return false;" class="btn btn-outline" style="font-size: 1.1rem; min-width: 220px;">Kup wszystkie materiały</a>`;
