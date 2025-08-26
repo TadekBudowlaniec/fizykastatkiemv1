@@ -1213,6 +1213,7 @@ nav {
     color: #0c4a6e;
     font-weight: 500;
     position: relative;
+    white-space: pre-line;
 }
 
 .task-answer::before {
@@ -1522,5 +1523,72 @@ nav {
     .task-content {
         font-size: 1rem;
         padding: 0.8rem;
+    }
+}
+
+/* PDF Stage Cards - styled like feature-card */
+.pdf-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.pdf-stage-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.pdf-stage-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(255, 0, 128, 0.2);
+    border-color: var(--magenta);
+}
+
+.pdf-stage-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--magenta), var(--purple));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+}
+
+.pdf-stage-card h4 {
+    color: var(--black);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.pdf-stage-card p {
+    color: var(--black);
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+/* Responsive adjustments for PDF cards */
+@media (max-width: 768px) {
+    .pdf-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .pdf-stage-card {
+        padding: 2rem;
+    }
+    
+    .pdf-stage-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
     }
 }
