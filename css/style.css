@@ -152,7 +152,8 @@ nav {
 
 /* Landing Page */
 .hero {
-    background: rgba(101, 35, 207, 0.80);
+    background: linear-gradient(135deg, var(--black) 0%, var(--dark-purple) 100%);
+    (101, 35, 207, 0.80);
     color: var(--white);
     padding: 6rem 0;
     text-align: center;
@@ -169,7 +170,7 @@ nav {
 }
 .hero:hover {
     box-shadow: 0 16px 64px 0 rgba(100, 50, 207, 0.28), 0 4px 24px 0 rgba(255,0,128,0.18);
-    background: rgba(101, 35, 207, 0.92);
+    background: linear-gradient(135deg, var(--black) 0%, var(--dark-purple) 100%);
 }
 
 .hero::before {
