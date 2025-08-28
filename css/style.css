@@ -153,7 +153,6 @@ nav {
 /* Landing Page */
 .hero {
     background: linear-gradient(135deg, var(--black) 0%, var(--dark-purple) 100%);
-    (101, 35, 207, 0.80);
     color: var(--white);
     padding: 6rem 0;
     text-align: center;
@@ -849,18 +848,21 @@ nav {
 }
 
 /* Korepetycje page styles */
+#korepetycje .container {
+  max-width: 1400px;
+}
 .korepetycje-block {
   display: flex;
   flex-direction: row;
   width: 100%;
-  max-width: 1800px;
+  max-width: 3000px;
   margin: 3rem auto;
   background: #fff;
   border-radius: 24px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  overflow: hidden;
-  aspect-ratio: 1.618 / 0.5;
+  overflow: visible;
   height: auto;
+  gap: 0;
 }
 .korepetycje-image {
   flex: 1;
@@ -870,7 +872,7 @@ nav {
   justify-content: center;
   background: #f6e6f9;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 .korepetycje-text {
   flex: 1.618;
@@ -878,7 +880,62 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
+}
+.korepetycje-text .preserve {
+  white-space: pre-line;
+  line-height: 1.75;
+}
+.korepetycje-cta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.2rem;
+  flex-wrap: wrap;
+}
+.korepetycje-cta .btn {
+  border-radius: 14px;
+  padding: 0.9rem 1.6rem;
+}
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.social-links .social {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f3e8ff;
+  color: #6523cf;
+  text-decoration: none;
+  border: 2px solid #ececff;
+  box-shadow: 0 4px 16px rgba(100, 50, 207, 0.10);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+}
+.social-links .social svg {
+  width: 22px;
+  height: 22px;
+}
+.social-links .social:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, var(--magenta), var(--purple));
+  color: white;
+  box-shadow: 0 10px 24px rgba(255, 0, 128, 0.25);
+}
+.social-links .email-text {
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+}
+.social-links .email-text:hover {
+  color: var(--magenta);
+  text-decoration: underline;
 }
 @media (max-width: 900px) {
   .korepetycje-block {
@@ -889,23 +946,35 @@ nav {
   .korepetycje-image, .korepetycje-text {
     flex: unset;
     width: 100%;
-    padding: 1.5rem 1rem;
+    padding: 1.2rem 1rem;
   }
   .korepetycje-image {
-    min-height: 180px;
+    min-height: 0;
+  }
+  .korepetycje-image img {
+    width: 220px;
+    height: 220px;
+    max-width: none;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+  .korepetycje-text {
+    font-size: 1.05rem;
+    padding-top: 0.5rem;
   }
 }
 .korepetycje-image img {
-  max-width: 90%;
-  max-height: 90%;
+  width: 100%;
+  height: auto;
+  max-width: 640px;
+  max-height: none;
   object-fit: contain;
   border-radius: 16px;
   display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
+  position: static;
+  transform: none;
+  margin: 0 auto;
 }
 
 .opinions {
