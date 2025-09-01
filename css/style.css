@@ -93,73 +93,85 @@ nav {
     }
 }
 
+/* Poprawki kontrastu i czytelności przycisków CTA */
 .btn {
     padding: 0.75rem 1.5rem;
     border-radius: 25px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700; /* Zwiększam wagę czcionki */
     transition: all 0.3s ease;
     cursor: pointer;
     border: none;
     font-size: 1rem;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Dodaję cień tekstu */
+    letter-spacing: 0.02em; /* Lepsze rozstawienie liter */
 }
 
 .btn-outline {
     background: transparent;
     color: var(--white);
-    border: 2px solid var(--white);
+    border: 3px solid var(--white); /* Zwiększam grubość obramowania */
+    box-shadow: 0 2px 8px rgba(255,255,255,0.2); /* Dodaję cień */
 }
 
 .btn-outline:hover {
     background: var(--white);
     color: var(--magenta);
-    transform: translateY(-2px);
+    transform: translateY(-3px); /* Zwiększam efekt unoszenia */
+    box-shadow: 0 8px 25px rgba(255,255,255,0.3); /* Większy cień przy hover */
 }
 
 .btn-outline2 {
     background: var(--white);
     color: var(--magenta);
-    border: 2px solid var(--white);
+    border: 3px solid var(--white); /* Zwiększam grubość obramowania */
+    box-shadow: 0 4px 15px rgba(255,255,255,0.3); /* Dodaję cień */
 }
 
 .btn-outline2:hover {
     background: var(--magenta);
     color: var(--white);
-    transform: translateY(-2px);
+    transform: translateY(-3px); /* Zwiększam efekt unoszenia */
+    box-shadow: 0 8px 25px rgba(255,0,128,0.4); /* Większy cień przy hover */
 }
 
 .btn-primary {
     background: var(--white);
     color: var(--magenta);
+    box-shadow: 0 4px 15px rgba(255,255,255,0.3); /* Dodaję cień */
 }
 
 .btn-primary:hover {
     background: var(--gray);
-    transform: translateY(-2px);
+    transform: translateY(-3px); /* Zwiększam efekt unoszenia */
+    box-shadow: 0 8px 25px rgba(255,255,255,0.4); /* Większy cień przy hover */
 }
 
 .btn-gradient {
-    
     background: linear-gradient(135deg, var(--magenta), var(--purple));
     color: var(--white);
     border: none;
+    box-shadow: 0 6px 20px rgba(255, 0, 128, 0.4); /* Zwiększam cień */
+    font-weight: 700; /* Zwiększam wagę czcionki */
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Dodaję cień tekstu */
 }
 
 .btn-gradient:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(255, 0, 128, 0.3);
+    transform: translateY(-4px); /* Zwiększam efekt unoszenia */
+    box-shadow: 0 15px 40px rgba(255, 0, 128, 0.5); /* Większy cień przy hover */
+    background: linear-gradient(135deg, #e60073, #7c3aed); /* Ciemniejszy gradient przy hover */
 }
 
 /* Landing Page */
 .hero {
     background: linear-gradient(135deg, var(--black) 0%, var(--dark-purple) 100%);
     color: var(--white);
-    padding: 6rem 0;
+    padding: 8rem 0; /* Zwiększam padding */
     text-align: center;
     position: relative;
     overflow: hidden;
     max-width: 900px;
-    margin: 3rem auto 0 auto;
+    margin: 4rem auto 0 auto; /* Zwiększam margines */
     border-radius: 40px;
     box-shadow: 0 8px 40px 0 rgba(100, 50, 207, 0.18), 0 2px 12px 0 rgba(255,0,128,0.10);
     backdrop-filter: blur(12px) saturate(160%);
@@ -299,12 +311,22 @@ nav {
 
 /* Features */
 .features {
-    padding: 6rem 0;
-    background: var(--gray);
+    padding: 8rem 0; /* Zwiększam padding */
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8f4ff 100%); /* Zmieniam tło */
     max-width: 900px;
-    margin: 3rem auto;
-    border-radius: 24px;
-    box-shadow: 0 4px 32px 0 rgba(100, 50, 207, 0.08);
+    margin: 5rem auto; /* Zwiększam margines */
+    border-radius: 32px; /* Zwiększam zaokrąglenie */
+    box-shadow: 0 8px 40px 0 rgba(100, 50, 207, 0.12); /* Zwiększam cień */
+    border: 2px solid rgba(255,255,255,0.4); /* Dodaję subtelne obramowanie */
+}
+
+/* Sekcja "Dlaczego Fizyka Statkiem?" - inne tło */
+.landing-dashboard {
+    background: linear-gradient(135deg, #f8faff 0%, #f0f4ff 100%); /* Dodaję tło */
+    padding: 6rem 0; /* Dodaję padding */
+    margin: 5rem auto; /* Dodaję margines */
+    border-radius: 32px; /* Dodaję zaokrąglenie */
+    box-shadow: 0 8px 40px 0 rgba(100, 50, 207, 0.08); /* Dodaję cień */
 }
 
 .features-logo {
@@ -618,50 +640,105 @@ nav {
 
 /* Auth Forms */
 .auth-container {
-    max-width: 400px;
-    margin: 5rem auto;
-    padding: 3rem;
-    background: var(--white);
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    max-width: 450px; /* Zwiększam szerokość */
+    margin: 6rem auto; /* Zwiększam margines */
+    padding: 3.5rem; /* Zwiększam padding */
+    background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%); /* Dodaję gradient */
+    border-radius: 24px; /* Zwiększam zaokrąglenie */
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15); /* Zwiększam cień */
+    border: 2px solid rgba(255,255,255,0.3); /* Dodaję subtelne obramowanie */
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem; /* Zwiększam margines */
+    position: relative; /* Dodaję pozycjonowanie względne */
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem; /* Zwiększam margines */
     color: var(--black);
-    font-weight: 600;
+    font-weight: 700; /* Zwiększam wagę */
+    font-size: 1.05rem; /* Zwiększam rozmiar */
+    letter-spacing: 0.01em; /* Dodaję rozstawienie liter */
 }
 
 .form-group input {
     width: 100%;
-    padding: 1rem;
-    border: 2px solid var(--gray);
-    border-radius: 10px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
+    padding: 1.2rem; /* Zwiększam padding */
+    border: 3px solid #e1e5e9; /* Zwiększam grubość obramowania */
+    border-radius: 12px; /* Zwiększam zaokrąglenie */
+    font-size: 1.05rem; /* Zwiększam rozmiar */
+    transition: all 0.3s ease;
+    background: #f8f9fa; /* Dodaję tło */
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); /* Dodaję wewnętrzny cień */
 }
 
 .form-group input:focus {
     outline: none;
     border-color: var(--magenta);
+    background: #fff; /* Zmieniam tło przy focus */
+    box-shadow: 0 0 0 4px rgba(255,0,128,0.1), inset 0 2px 4px rgba(0,0,0,0.05); /* Dodaję focus ring */
+    transform: translateY(-1px); /* Subtelny efekt unoszenia */
 }
 
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    color: var(--black);
-    margin-bottom: 1rem;
+/* Walidacja pól w czasie rzeczywistym */
+.form-group input.valid {
+    border-color: #10b981; /* Zielone obramowanie dla poprawnych pól */
+    background: #f0fdf4; /* Zielone tło */
 }
 
-.section-subtitle {
-    text-align: center;
+.form-group input.invalid {
+    border-color: #ef4444; /* Czerwone obramowanie dla błędnych pól */
+    background: #fef2f2; /* Czerwone tło */
+}
+
+/* Komunikaty walidacji */
+.form-group .validation-message {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.form-group .validation-message.error {
+    color: #ef4444;
+}
+
+.form-group .validation-message.success {
+    color: #10b981;
+}
+
+/* Przyciski formularzy */
+.auth-container .btn-gradient {
+    width: 100%;
+    padding: 1.2rem; /* Zwiększam padding */
+    font-size: 1.1rem; /* Zwiększam rozmiar */
+    font-weight: 700; /* Zwiększam wagę */
+    border-radius: 16px; /* Zwiększam zaokrąglenie */
+    margin-top: 1rem; /* Dodaję margines */
+    box-shadow: 0 6px 20px rgba(255,0,128,0.3); /* Dodaję cień */
+}
+
+.auth-container .btn-gradient:hover {
+    transform: translateY(-3px); /* Zwiększam efekt unoszenia */
+    box-shadow: 0 12px 30px rgba(255,0,128,0.4); /* Większy cień przy hover */
+}
+
+/* Linki w formularzach */
+.auth-container a {
+    color: var(--magenta);
+    font-weight: 600; /* Zwiększam wagę */
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.auth-container a:hover {
     color: var(--purple);
-    margin-bottom: 3rem;
+    text-decoration: underline;
+    text-underline-offset: 2px; /* Dodaję odstęp podkreślenia */
 }
 
 /* Responsive */
@@ -720,6 +797,51 @@ nav {
         padding: 0.7rem 0.7rem 0.6rem 0.7rem;
         font-size: 0.98rem;
     }
+    
+    /* Responsywność dla lepszych odstępów na mobile */
+    .hero {
+        padding: 6rem 0; /* Zmniejszam padding na mobile */
+        margin: 2rem auto 0 auto; /* Zmniejszam margines na mobile */
+    }
+    
+    .buy-all-materials {
+        margin: 3rem auto 2rem auto; /* Zmniejszam marginesy na mobile */
+    }
+    
+    .opinions {
+        padding: 4rem 0 5rem 0; /* Zmniejszam padding na mobile */
+        margin-top: 3rem; /* Zmniejszam margines na mobile */
+    }
+    
+    .features {
+        padding: 6rem 0; /* Zmniejszam padding na mobile */
+        margin: 3rem auto; /* Zmniejszam margines na mobile */
+    }
+    
+    .landing-dashboard {
+        padding: 4rem 0; /* Zmniejszam padding na mobile */
+        margin: 3rem auto; /* Zmniejszam margines na mobile */
+    }
+    
+    .auth-container {
+        margin: 4rem auto; /* Zmniejszam margines na mobile */
+        padding: 2.5rem; /* Zmniejszam padding na mobile */
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem; /* Zmniejszam margines na mobile */
+    }
+    
+    .form-group input {
+        padding: 1rem; /* Zmniejszam padding na mobile */
+        font-size: 1rem; /* Zmniejszam rozmiar na mobile */
+    }
+    
+    /* Responsywność dla sekcji korepetycji */
+    #korepetycje {
+        padding: 2rem 0; /* Zmniejszam padding na mobile */
+        margin: 2rem auto; /* Zmniejszam margines na mobile */
+    }
 }
 
 @media (max-width: 900px) {
@@ -728,6 +850,55 @@ nav {
     }
     .dashboard-header h1 {
         font-size: 1.5rem;
+    }
+    
+    /* Responsywność dla sekcji hero na tabletach */
+    .hero {
+        padding: 6rem 0; /* Zmniejszam padding na tabletach */
+        margin: 3rem auto 0 auto; /* Zmniejszam margines na tabletach */
+    }
+    
+    .hero h1 {
+        font-size: 3.5rem; /* Zmniejszam rozmiar na tabletach */
+    }
+    
+    /* Responsywność dla sekcji buy-all-materials na tabletach */
+    .buy-all-materials {
+        margin: 4rem auto 3rem auto; /* Zmniejszam marginesy na tabletach */
+    }
+    
+    .buy-all-materials h2 {
+        font-size: 2.1rem; /* Zmniejszam rozmiar na tabletach */
+    }
+    
+    /* Responsywność dla sekcji opinii na tabletach */
+    .opinions {
+        padding: 5rem 0 6rem 0; /* Zmniejszam padding na tabletach */
+        margin-top: 4rem; /* Zmniejszam margines na tabletach */
+    }
+    
+    /* Responsywność dla sekcji features na tabletach */
+    .features {
+        padding: 6rem 0; /* Zmniejszam padding na tabletach */
+        margin: 4rem auto; /* Zmniejszam margines na tabletach */
+    }
+    
+    /* Responsywność dla sekcji landing-dashboard na tabletach */
+    .landing-dashboard {
+        padding: 5rem 0; /* Zmniejszam padding na tabletach */
+        margin: 4rem auto; /* Zmniejszam margines na tabletach */
+    }
+    
+    /* Responsywność dla sekcji korepetycji na tabletach */
+    #korepetycje {
+        padding: 3rem 0; /* Zmniejszam padding na tabletach */
+        margin: 2.5rem auto; /* Zmniejszam margines na tabletach */
+    }
+    
+    /* Responsywność dla sekcji auth-container na tabletach */
+    .auth-container {
+        margin: 5rem auto; /* Zmniejszam margines na tabletach */
+        padding: 3rem; /* Zmniejszam padding na tabletach */
     }
 }
 
@@ -741,6 +912,70 @@ nav {
     .dashboard-header {
         padding: 2rem 0 1.5rem 0;
     }
+    
+    /* Responsywność dla sekcji hero na małych ekranach */
+    .hero {
+        padding: 4rem 0; /* Zmniejszam padding na małych ekranach */
+        margin: 1.5rem auto 0 auto; /* Zmniejszam margines na małych ekranach */
+        border-radius: 24px; /* Zmniejszam zaokrąglenie na małych ekranach */
+    }
+    
+    .hero h1 {
+        font-size: 2rem; /* Zmniejszam rozmiar na małych ekranach */
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem; /* Zmniejszam rozmiar na małych ekranach */
+    }
+    
+    /* Responsywność dla sekcji opinii na małych ekranach */
+    .opinions {
+        padding: 2.5rem 0 3rem 0; /* Zmniejszam padding na małych ekranach */
+        margin-top: 2rem; /* Zmniejszam margines na małych ekranach */
+        border-radius: 20px; /* Zmniejszam zaokrąglenie na małych ekranach */
+    }
+    
+    /* Responsywność dla sekcji features na małych ekranach */
+    .features {
+        padding: 4rem 0; /* Zmniejszam padding na małych ekranach */
+        margin: 2rem auto; /* Zmniejszam margines na małych ekranach */
+        border-radius: 20px; /* Zmniejszam zaokrąglenie na małych ekranach */
+    }
+    
+    /* Responsywność dla sekcji buy-all-materials na małych ekranach */
+    .buy-all-materials {
+        margin: 2rem auto 1.5rem auto; /* Zmniejszam marginesy na małych ekranach */
+    }
+    
+    .buy-all-materials h2 {
+        font-size: 1.8rem; /* Zmniejszam rozmiar na małych ekranach */
+    }
+    
+    .buy-all-materials .btn-gradient {
+        font-size: 1.1rem; /* Zmniejszam rozmiar na małych ekranach */
+        padding: 1rem 2rem; /* Zmniejszam padding na małych ekranach */
+    }
+    
+    /* Responsywność dla sekcji landing-dashboard na małych ekranach */
+    .landing-dashboard {
+        padding: 3rem 0; /* Zmniejszam padding na małych ekranach */
+        margin: 2rem auto; /* Zmniejszam margines na małych ekranach */
+        border-radius: 20px; /* Zmniejszam zaokrąglenie na małych ekranach */
+    }
+    
+    /* Responsywność dla sekcji auth-container na małych ekranach */
+    .auth-container {
+        margin: 3rem auto; /* Zmniejszam margines na małych ekranach */
+        padding: 2rem; /* Zmniejszam padding na małych ekranach */
+    }
+    
+    /* Responsywność dla sekcji korepetycji na małych ekranach */
+    #korepetycje {
+        padding: 1.5rem 0; /* Zmniejszam padding na małych ekranach */
+        margin: 1.5rem auto; /* Zmniejszam margines na małych ekranach */
+        border-radius: 20px; /* Zmniejszam zaokrąglenie na małych ekranach */
+    }
+    
     .korepetycje-block {
         margin: 1rem 0.2rem;
         border-radius: 14px;
@@ -848,6 +1083,13 @@ nav {
 }
 
 /* Korepetycje page styles */
+#korepetycje {
+    background: linear-gradient(135deg, #fff5ff 0%, #f0f4ff 100%); /* Dodaję tło */
+    padding: 4rem 0; /* Dodaję padding */
+    margin: 3rem auto; /* Dodaję margines */
+    border-radius: 32px; /* Dodaję zaokrąglenie */
+}
+
 #korepetycje .container {
   max-width: 1400px;
 }
@@ -978,11 +1220,12 @@ nav {
 }
 
 .opinions {
-    background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
-    padding: 4rem 0 4.5rem 0;
-    margin-top: 3rem;
-    border-radius: 32px;
-    box-shadow: 0 4px 32px 0 rgba(100, 50, 207, 0.08);
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #f3e8ff 100%); /* Bardziej zróżnicowany gradient */
+    padding: 6rem 0 7rem 0; /* Zwiększam padding */
+    margin-top: 5rem; /* Zwiększam margines */
+    border-radius: 40px; /* Zwiększam zaokrąglenie */
+    box-shadow: 0 8px 40px 0 rgba(100, 50, 207, 0.12); /* Zwiększam cień */
+    border: 2px solid rgba(255,255,255,0.3); /* Dodaję subtelne obramowanie */
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
@@ -1026,8 +1269,9 @@ nav {
 }
 @media (max-width: 768px) {
     .opinions {
-        padding: 2.2rem 0 2.5rem 0;
-        border-radius: 18px;
+        padding: 4rem 0 5rem 0; /* Zmniejszam padding na mobile */
+        margin-top: 3rem; /* Zmniejszam margines na mobile */
+        border-radius: 24px; /* Zmniejszam zaokrąglenie na mobile */
     }
     .opinion-card {
         padding: 1.1rem 0.7rem 0.8rem 0.7rem;
@@ -1660,5 +1904,321 @@ nav {
         width: 60px;
         height: 60px;
         font-size: 1.5rem;
+    }
+}
+
+/* Lepsze odstępy i podziały między sekcjami */
+.buy-all-materials {
+    margin: 5rem auto 4rem auto; /* Zwiększam marginesy */
+}
+
+.buy-all-materials .container {
+    background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%); /* Dodaję gradient */
+    border: 3px solid var(--magenta); /* Dodaję obramowanie */
+    box-shadow: 0 8px 32px rgba(255,0,128,0.15); /* Zwiększam cień */
+}
+
+.buy-all-materials h2 {
+    color: var(--magenta);
+    font-size: 2.3rem; /* Zwiększam rozmiar */
+    font-weight: 800; /* Zwiększam wagę */
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 4px rgba(255,0,128,0.1); /* Dodaję cień */
+}
+
+.buy-all-materials .btn-gradient {
+    font-size: 1.3rem; /* Zwiększam rozmiar */
+    padding: 1.2rem 3rem; /* Zwiększam padding */
+    border-radius: 20px; /* Zwiększam zaokrąglenie */
+    box-shadow: 0 8px 25px rgba(255,0,128,0.3); /* Zwiększam cień */
+}
+
+/* Sekcja opinii - lepsze tło */
+.opinions {
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #f3e8ff 100%); /* Bardziej zróżnicowany gradient */
+    padding: 6rem 0 7rem 0; /* Zwiększam padding */
+    margin-top: 5rem; /* Zwiększam margines */
+    border-radius: 40px; /* Zwiększam zaokrąglenie */
+    box-shadow: 0 8px 40px 0 rgba(100, 50, 207, 0.12); /* Zwiększam cień */
+    border: 2px solid rgba(255,255,255,0.3); /* Dodaję subtelne obramowanie */
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Sekcja "Dlaczego Fizyka Statkiem?" - inne tło */
+.landing-dashboard {
+    background: linear-gradient(135deg, #f8faff 0%, #f0f4ff 100%); /* Dodaję tło */
+    padding: 6rem 0; /* Dodaję padding */
+    margin: 5rem auto; /* Dodaję margines */
+    border-radius: 32px; /* Dodaję zaokrąglenie */
+    box-shadow: 0 8px 40px 0 rgba(100, 50, 207, 0.08); /* Dodaję cień */
+}
+
+/* Animacje dla lepszego UX */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feature-card,
+.opinion-card,
+.pdf-stage-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.feature-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.feature-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+/* Hover effects dla lepszej interaktywności */
+.feature-card:hover,
+.opinion-card:hover,
+.pdf-stage-card:hover {
+    transform: translateY(-12px) scale(1.02); /* Zwiększam efekt hover */
+    box-shadow: 0 25px 70px rgba(255, 0, 128, 0.25); /* Większy cień przy hover */
+}
+
+/* Dodatkowe style dla lepszej dostępności */
+.btn:focus,
+.form-group input:focus {
+    outline: 2px solid var(--magenta);
+    outline-offset: 2px;
+}
+
+/* Style dla tytułów sekcji */
+.section-title {
+    text-align: center;
+    font-size: 2.8rem; /* Zwiększam rozmiar */
+    color: var(--black);
+    margin-bottom: 1.5rem; /* Zwiększam margines */
+    font-weight: 800; /* Zwiększam wagę */
+    letter-spacing: -0.02em; /* Dodaję ujemne rozstawienie liter */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Dodaję subtelny cień */
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--purple);
+    margin-bottom: 4rem; /* Zwiększam margines */
+    font-size: 1.2rem; /* Zwiększam rozmiar */
+    font-weight: 600; /* Zwiększam wagę */
+    letter-spacing: 0.01em; /* Dodaję rozstawienie liter */
+}
+
+/* Style dla stanów loading i disabled */
+.btn:disabled,
+.btn.loading {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn.loading::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 2rem;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+}
+
+.breadcrumb-item {
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.breadcrumb-item:hover {
+    color: var(--white);
+    background: rgba(255,255,255,0.1);
+}
+
+.breadcrumb-item.active {
+    color: var(--magenta);
+    background: rgba(255,0,128,0.2);
+    font-weight: 600;
+}
+
+.breadcrumb-separator {
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+}
+
+/* Dashboard breadcrumbs */
+.dashboard-breadcrumbs {
+    display: none; /* Domyślnie ukryte */
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0 2rem 0;
+    padding: 1rem 1.5rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    font-size: 0.95rem;
+}
+
+.dashboard-breadcrumbs .breadcrumb-item {
+    color: rgba(255,255,255,0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+}
+
+.dashboard-breadcrumbs .breadcrumb-item:hover {
+    color: var(--white);
+    background: rgba(255,255,255,0.15);
+}
+
+.dashboard-breadcrumbs .breadcrumb-item.active {
+    color: var(--magenta);
+    background: rgba(255,0,128,0.25);
+    font-weight: 600;
+}
+
+.dashboard-breadcrumbs .breadcrumb-separator {
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+}
+
+/* Nawigacja z ikonami */
+.nav-icon-btn {
+    font-size: 1.2rem !important;
+    padding: 0.6rem 0.8rem !important;
+    min-width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% !important;
+    transition: all 0.3s ease;
+}
+
+.nav-icon-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(255,255,255,0.3);
+}
+
+/* Szczegółowe tematy kursów */
+.subject-topics {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8faff 0%, #f0f4ff 100%);
+    border-radius: 16px;
+    border: 2px solid rgba(255,0,128,0.1);
+}
+
+.subject-topics h4 {
+    color: var(--magenta);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.subject-topics ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.subject-topics li {
+    padding: 0.5rem 0;
+    color: var(--black);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    border-bottom: 1px solid rgba(255,0,128,0.1);
+    transition: all 0.3s ease;
+}
+
+.subject-topics li:last-child {
+    border-bottom: none;
+}
+
+.subject-topics li:hover {
+    color: var(--magenta);
+    padding-left: 0.5rem;
+    background: rgba(255,0,128,0.05);
+    border-radius: 8px;
+}
+
+.subject-topics li::before {
+    content: '▶';
+    color: var(--magenta);
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    opacity: 0.7;
+}
+
+/* Responsywność dla breadcrumbs */
+@media (max-width: 768px) {
+    .breadcrumbs {
+        display: none; /* Ukrywamy breadcrumbs na mobile */
+    }
+    
+    .dashboard-breadcrumbs {
+        margin: 0.5rem 0 1.5rem 0;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .nav-icon-btn {
+        font-size: 1rem !important;
+        padding: 0.5rem 0.6rem !important;
+        min-width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard-breadcrumbs {
+        flex-direction: column;
+        gap: 0.3rem;
+        text-align: center;
+    }
+    
+    .subject-topics {
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .subject-topics h4 {
+        font-size: 1rem;
+    }
+    
+    .subject-topics li {
+        font-size: 0.9rem;
+        padding: 0.4rem 0;
     }
 }
