@@ -28,6 +28,7 @@ function showSection(sectionId, push = true) {
     });
     document.getElementById(sectionId).classList.remove('hidden');
     updateNavigation();
+    updateBreadcrumbs(sectionId); // Aktualizuj breadcrumbs
     if (push && sectionToPath[sectionId]) {
         window.history.pushState({ sectionId }, '', sectionToPath[sectionId]);
     }
@@ -45,6 +46,75 @@ window.addEventListener('popstate', (e) => {
 function navigateTo(path) {
     const sectionId = pathToSection[path] || 'landing';
     showSection(sectionId);
+}
+
+// Funkcja do aktualizacji breadcrumbs
+function updateBreadcrumbs(sectionId) {
+    const mainBreadcrumbs = document.getElementById('breadcrumbs');
+    const dashboardBreadcrumbs = document.querySelector('.dashboard-breadcrumbs');
+    
+    if (mainBreadcrumbs) {
+        // Aktualizuj główne breadcrumbs w header
+        let breadcrumbText = 'Strona główna';
+        let breadcrumbClass = 'active';
+        
+        switch (sectionId) {
+            case 'dashboard':
+                breadcrumbText = 'Kurs';
+                breadcrumbClass = 'active';
+                break;
+            case 'subject':
+                breadcrumbText = 'Kurs';
+                breadcrumbClass = 'active';
+                break;
+            case 'login':
+                breadcrumbText = 'Zaloguj się';
+                breadcrumbClass = 'active';
+                break;
+            case 'register':
+                breadcrumbText = 'Zarejestruj się';
+                breadcrumbClass = 'active';
+                break;
+            case 'pricing':
+                breadcrumbText = 'Cennik';
+                breadcrumbClass = 'active';
+                break;
+            case 'korepetycje':
+                breadcrumbText = 'Korepetycje';
+                breadcrumbClass = 'active';
+                break;
+            case 'user':
+                breadcrumbText = 'Profil użytkownika';
+                breadcrumbClass = 'active';
+                break;
+            default:
+                breadcrumbText = 'Strona główna';
+                breadcrumbClass = 'active';
+        }
+        
+        mainBreadcrumbs.innerHTML = `<span class="breadcrumb-item ${breadcrumbClass}">${breadcrumbText}</span>`;
+    }
+    
+    if (dashboardBreadcrumbs) {
+        // Aktualizuj breadcrumbs w dashboard
+        const currentSubjectElement = document.getElementById('currentSubject');
+        if (currentSubjectElement) {
+            // Jeśli jesteśmy w dashboard, pokaż breadcrumbs
+            if (sectionId === 'dashboard' || sectionId === 'subject') {
+                dashboardBreadcrumbs.style.display = 'flex';
+            } else {
+                dashboardBreadcrumbs.style.display = 'none';
+            }
+        }
+    }
+}
+
+// Funkcja do aktualizacji breadcrumbs w dashboard po wybraniu kursu
+function updateDashboardBreadcrumbs(subjectTitle) {
+    const currentSubjectElement = document.getElementById('currentSubject');
+    if (currentSubjectElement) {
+        currentSubjectElement.textContent = subjectTitle;
+    }
 }
 
 function updateNavigation() {
@@ -92,6 +162,10 @@ function showSubject(subjectKey) {
         </div>
         <button class="btn btn-gradient" onclick="checkQuiz('${subjectKey}')">Sprawdź odpowiedzi</button>
     `;
+    
+    // Aktualizuj breadcrumbs w dashboard
+    updateDashboardBreadcrumbs(subject.title);
+    
     showSection('subject');
     if (window.showRandomTaskForCourse) {
         showRandomTaskForCourse(course_id);
@@ -125,6 +199,10 @@ function showSubjectPreview(subjectKey) {
         html += '</div><div style="color:#aaa;font-size:0.95em;margin-top:0.7em;">Quiz dostępny po zakupie</div></div>';
         quizSection.innerHTML = html;
     }
+    
+    // Aktualizuj breadcrumbs w dashboard
+    updateDashboardBreadcrumbs(subject.title);
+    
     showSection('subject');
 }
 
@@ -160,6 +238,9 @@ function renderDashboardPanel() {
             // Remove active from all
             sidebar.querySelectorAll('.course-list-item').forEach(btn => btn.classList.remove('active'));
             item.classList.add('active');
+            
+            // Aktualizuj breadcrumbs w dashboard
+            updateDashboardBreadcrumbs(subject.title);
             
             // Render preview or full view
             if (currentUser && hasAccessToCourse(key)) {
@@ -739,6 +820,8 @@ function processSolutionText(text) {
 // Nadpisz renderDashboard, by używał nowego panelu
 function renderDashboard() {
     renderDashboardPanel();
+    // Aktualizuj breadcrumbs po załadowaniu dashboard
+    updateBreadcrumbs('dashboard');
 }
 
 function getSubjectIcon(key) {
@@ -763,4 +846,8 @@ function subjectDesc(key) {
         jadrowa: 'Jądro atomowe i radioaktywność'
     };
     return descs[key] || '';
-} 
+}
+
+// Dodaj funkcje breadcrumbs do globalnego scope
+window.updateBreadcrumbs = updateBreadcrumbs;
+window.updateDashboardBreadcrumbs = updateDashboardBreadcrumbs; 

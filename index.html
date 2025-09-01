@@ -3,11 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fizyka Statkiem - Kursy Fizyki Online</title>
+    <title>Fizyka Statkiem - Kursy Fizyki Online | Mechanika, Termodynamika, Elektromagnetyzm</title>
+    <meta name="description" content="Profesjonalne kursy fizyki online. Mechanika, termodynamika, elektromagnetyzm, optyka i fizyka kwantowa. Przygotowanie do matury i egzaminów.">
+    <meta name="keywords" content="fizyka, kursy online, matura, mechanika, termodynamika, elektromagnetyzm, optyka, fizyka kwantowa">
+    <meta name="author" content="Fizyka Statkiem">
+    <meta property="og:title" content="Fizyka Statkiem - Kursy Fizyki Online">
+    <meta property="og:description" content="Profesjonalne kursy fizyki online. Przygotowanie do matury i egzaminów.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fizykastatkiem.pl">
     <link rel="icon" type="image/png" href="images/czarny_statek.png">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": "Fizyka Statkiem - Kompletny Kurs Fizyki",
+        "description": "Profesjonalne kursy fizyki online obejmujące mechanikę, termodynamikę, elektromagnetyzm, optykę i fizykę kwantową",
+        "provider": {
+            "@type": "Organization",
+            "name": "Fizyka Statkiem",
+            "url": "https://fizykastatkiem.pl"
+        },
+        "courseMode": "online",
+        "educationalLevel": "secondary",
+        "inLanguage": "pl",
+        "hasCourseInstance": [
+            {
+                "@type": "CourseInstance",
+                "name": "Mechanika",
+                "description": "Podstawy ruchu, siły Newtona, praca i energia"
+            },
+            {
+                "@type": "CourseInstance", 
+                "name": "Termodynamika",
+                "description": "I i II zasada termodynamiki, cykle, przemiany gazowe"
+            },
+            {
+                "@type": "CourseInstance",
+                "name": "Elektromagnetyzm", 
+                "description": "Prąd elektryczny, pole magnetyczne, fale elektromagnetyczne"
+            },
+            {
+                "@type": "CourseInstance",
+                "name": "Optyka",
+                "description": "Światło, zwierciadła, soczewki, interferencja"
+            },
+            {
+                "@type": "CourseInstance",
+                "name": "Fizyka Kwantowa",
+                "description": "Budowa atomu, zjawiska kwantowe, fizyka jądrowa"
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -18,25 +70,43 @@
                     <img src="images/magenta_statek.png" alt="Fizyka Statkiem" height="40">
                     <span class="logo-text">Fizyka Statkiem</span>
                 </a>
+                
+                <!-- Breadcrumbs -->
+                <div class="breadcrumbs" id="breadcrumbs">
+                    <span class="breadcrumb-item active">Strona główna</span>
+                </div>
+                
                 <div class="nav-main-buttons">
-                    <button class="btn btn-outline" onclick="showSection('dashboard')">Kurs</button>
-                    <button class="btn btn-outline" onclick="showSection('korepetycje')">Korepetycje</button>
+                    <button class="btn btn-outline nav-icon-btn" onclick="showSection('dashboard')" title="Kurs">
+                        📚
+                    </button>
+                    <button class="btn btn-outline nav-icon-btn" onclick="showSection('korepetycje')" title="Korepetycje">
+                        👨‍🏫
+                    </button>
                     <span class="nav-auth-buttons">
-                        <button class="btn btn-outline" onclick="showSection('login')" id="loginBtn">Zaloguj się</button>
-                        <button class="btn btn-primary" onclick="showSection('register')" id="registerBtn">Zarejestruj się</button>
-                        <button class="btn btn-outline hidden" onclick="logout()" id="logoutBtn">Wyloguj się</button>
-                        <button class="btn btn-outline hidden" id="userProfileBtn" onclick="showSection('user')">Profil</button>
+                        <button class="btn btn-outline nav-icon-btn" onclick="showSection('login')" id="loginBtn" title="Zaloguj się">
+                            🔑
+                        </button>
+                        <button class="btn btn-primary nav-icon-btn" onclick="showSection('register')" id="registerBtn" title="Zarejestruj się">
+                            ✨
+                        </button>
+                        <button class="btn btn-outline nav-icon-btn hidden" onclick="logout()" id="logoutBtn" title="Wyloguj się">
+                            🚪
+                        </button>
+                        <button class="btn btn-outline nav-icon-btn hidden" id="userProfileBtn" onclick="showSection('user')" title="Profil">
+                            👤
+                        </button>
                     </span>
                 </div>
                 <div class="dropdown-menu-container">
                     <button class="dropdown-toggle" id="dropdownMenuBtn" aria-label="Menu">☰</button>
                     <div class="dropdown-menu" id="dropdownMenu">
-                        <a href="#" onclick="showSection('dashboard')">Kurs</a>
-                        <a href="#" onclick="showSection('user')" id="dropdownProfileLink" class="hidden">Profil</a>
-                        <a href="#" onclick="showSection('login')" id="dropdownLoginLink">Zaloguj się</a>
-                        <a href="#" onclick="showSection('register')" id="dropdownRegisterLink">Zarejestruj się</a>
-                        <a href="#" onclick="logout()" id="dropdownLogoutLink" class="hidden">Wyloguj się</a>
-                        <a href="#" onclick="showSection('korepetycje')">Korepetycje</a>
+                        <a href="#" onclick="showSection('dashboard')">📚 Kurs</a>
+                        <a href="#" onclick="showSection('user')" id="dropdownProfileLink" class="hidden">👤 Profil</a>
+                        <a href="#" onclick="showSection('login')" id="dropdownLoginLink">🔑 Zaloguj się</a>
+                        <a href="#" onclick="showSection('register')" id="dropdownRegisterLink">✨ Zarejestruj się</a>
+                        <a href="#" onclick="logout()" id="dropdownLogoutLink" class="hidden">🚪 Wyloguj się</a>
+                        <a href="#" onclick="showSection('korepetycje')">👨‍🏫 Korepetycje</a>
                     </div>
                 </div>
             </nav>
@@ -129,36 +199,96 @@
                         <h3>Mechanika</h3>
                         <div class="subject-progress"><div class="progress-bar" style="width: 60%"></div></div>
                         <p>Poznaj podstawy ruchu, siły i energii</p>
+                        <div class="subject-topics">
+                            <h4>Tematy:</h4>
+                            <ul>
+                                <li>Ruch jednostajny i zmienny</li>
+                                <li>II prawo Newtona (F = ma)</li>
+                                <li>Praca i energia mechaniczna</li>
+                                <li>Pęd i zasada zachowania pędu</li>
+                                <li>Ruch po okręgu i grawitacja</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="subject-card fancy-card">
                         <div class="subject-icon">🔥</div>
                         <h3>Termodynamika</h3>
                         <div class="subject-progress"><div class="progress-bar" style="width: 30%"></div></div>
                         <p>Ciepło, temperatura i prawa termodynamiki</p>
+                        <div class="subject-topics">
+                            <h4>Tematy:</h4>
+                            <ul>
+                                <li>I zasada termodynamiki</li>
+                                <li>II zasada termodynamiki</li>
+                                <li>Cykle termodynamiczne</li>
+                                <li>Przemiany gazowe (izobaryczna, izochoryczna)</li>
+                                <li>Silniki cieplne i sprawność</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="subject-card fancy-card">
                         <div class="subject-icon">⚡️</div>
                         <h3>Elektromagnetyzm</h3>
                         <div class="subject-progress"><div class="progress-bar" style="width: 10%"></div></div>
                         <p>Prąd elektryczny, pole magnetyczne i fale</p>
+                        <div class="subject-topics">
+                            <h4>Tematy:</h4>
+                            <ul>
+                                <li>Prąd elektryczny i obwody</li>
+                                <li>Pole magnetyczne i siła Lorentza</li>
+                                <li>Indukcja elektromagnetyczna</li>
+                                <li>Fale elektromagnetyczne</li>
+                                <li>Transformatory i prądnice</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="subject-card fancy-card">
                         <div class="subject-icon">🌈</div>
                         <h3>Optyka</h3>
                         <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
                         <p>Światło, zwierciadła i soczewki</p>
+                        <div class="subject-topics">
+                            <h4>Tematy:</h4>
+                            <ul>
+                                <li>Odbicie i załamanie światła</li>
+                                <li>Zwierciadła płaskie i sferyczne</li>
+                                <li>Soczewki i obrazy</li>
+                                <li>Interferencja i dyfrakcja</li>
+                                <li>Dyspersja światła</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="subject-card fancy-card">
                         <div class="subject-icon">🧬</div>
                         <h3>Fizyka Atomowa</h3>
                         <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
                         <p>Budowa atomu i zjawiska kwantowe</p>
+                        <div class="subject-topics">
+                            <h4>Tematy:</h4>
+                            <ul>
+                                <li>Model atomu Bohra</li>
+                                <li>Widma atomowe</li>
+                                <li>Efekt fotoelektryczny</li>
+                                <li>Dualizm korpuskularno-falowy</li>
+                                <li>Zasada nieoznaczoności Heisenberga</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="subject-card fancy-card">
                         <div class="subject-icon">☢️</div>
                         <h3>Fizyka Jądrowa</h3>
                         <div class="subject-progress"><div class="progress-bar" style="width: 0%"></div></div>
                         <p>Jądro atomowe i radioaktywność</p>
+                        <div class="subject-topics">
+                            <h4>Tematy:</h4>
+                            <ul>
+                                <li>Budowa jądra atomowego</li>
+                                <li>Rozpad promieniotwórczy</li>
+                                <li>Prawo rozpadu promieniotwórczego</li>
+                                <li>Reakcje jądrowe</li>
+                                <li>Fuzja i fision jądrowa</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -251,6 +381,13 @@
                     <img src="images/bialy_statek.png" alt="Fizyka Statkiem" class="dashboard-logo ship-animation">
                     <h1 id="subjectTitle">Mechanika</h1>
                     <button class="btn btn-outline" onclick="showSection('dashboard')">← Powrót do kursu</button>
+                </div>
+                
+                <!-- Breadcrumbs dla dashboard -->
+                <div class="dashboard-breadcrumbs">
+                    <span class="breadcrumb-item" onclick="showSection('dashboard')">Kurs</span>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-item active" id="currentSubject">Mechanika</span>
                 </div>
 
                 <div class="subject-content">

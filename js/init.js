@@ -209,6 +209,12 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         updateDropdownMenu();
     };
+    
+    // Inicjalizacja breadcrumbs
+    if (typeof updateBreadcrumbs === 'function') {
+        updateBreadcrumbs(initialSection);
+    }
+    
     // Obsługa powrotu po płatności Stripe
     handleStripeReturn();
 });
