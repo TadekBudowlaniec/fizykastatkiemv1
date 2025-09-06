@@ -225,6 +225,7 @@ function renderDashboardPanel() {
         
         const item = document.createElement('button');
         item.className = 'course-list-item';
+        item.dataset.key = key;
         
         // Dla wszystkich użytkowników (zalogowanych i niezalogowanych) pokazuj kursy w ten sam sposób
         // Jeśli użytkownik ma dostęp - bez ikony, jeśli nie ma - z ikoną kłódki
@@ -554,14 +555,14 @@ function renderCourseFullView(subjectKey, main) {
         // Pojedynczy kurs
         const buyBtn = document.createElement('a');
         buyBtn.href = '#';
-        buyBtn.onclick = () => { buyAccess(course_id); return false; };
+        buyBtn.onclick = () => { buyViaLink(course_id); return false; };
         buyBtn.className = 'btn btn-gradient';
         buyBtn.textContent = 'Kup ten kurs';
         btnGroup.appendChild(buyBtn);
         // Wszystkie materiały
         const buyAllBtn = document.createElement('a');
         buyAllBtn.href = '#';
-        buyAllBtn.onclick = () => { buyAccess('full_access'); return false; };
+        buyAllBtn.onclick = () => { buyViaLink('full_access'); return false; };
         buyAllBtn.className = 'btn btn-outline';
         buyAllBtn.textContent = 'Kup wszystkie materiały';
         btnGroup.appendChild(buyAllBtn);
@@ -653,8 +654,8 @@ async function showPreviewTask(course_id, taskArea) {
             buyCourseBtn = `<a href="#" onclick="showSection('login');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Kup ten kurs</a>`;
             buyAllBtn = `<a href="#" onclick="showSection('login');return false;" class="btn btn-outline" style="font-size: 1.1rem; min-width: 220px;">Kup wszystkie materiały</a>`;
         } else {
-            buyCourseBtn = `<a href="#" onclick="buyAccess('${course_id}');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Kup ten kurs</a>`;
-            buyAllBtn = `<a href="#" onclick="buyAccess('full_access');return false;" class="btn btn-outline" style="font-size: 1.1rem; min-width: 220px;">Kup wszystkie materiały</a>`;
+            buyCourseBtn = `<a href="#" onclick="buyViaLink('${course_id}');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Kup ten kurs</a>`;
+            buyAllBtn = `<a href="#" onclick="buyViaLink('full_access');return false;" class="btn btn-outline" style="font-size: 1.1rem; min-width: 220px;">Kup wszystkie materiały</a>`;
         }
         overlay.innerHTML = `
             <div>
