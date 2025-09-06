@@ -5,16 +5,17 @@
 }
 
 :root {
-    --magenta: #ff0080;
-    --purple: #9265fa;
-    --dark-purple: #6523cf;
-    --black: #0f0f0f;
+    --magenta: #f43f8f; /* primary accent */
+    --purple: #6b4df6;  /* brand primary */
+    --dark-purple: #5636ea;
+    --black: #111827;
     --white: #ffffff;
-    --gray: #f8fafc;
+    --gray: #f7f8fc;
+    --text-secondary: #4b5563;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
     color: var(--black);
     min-height: 100vh;
@@ -68,8 +69,9 @@ nav {
 }
 
 .logo-text {
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     font-size: 1.5rem;
-    font-weight: bold;
+    font-weight: 800;
     color: var(--white);
     white-space: nowrap;
 }
@@ -240,7 +242,8 @@ nav {
 }
 
 .hero h1 {
-    font-size: 4.5rem;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 4.2rem;
     font-weight: 900;
     margin-top: -2.5rem;
     margin-bottom: 1.5rem;
@@ -352,6 +355,76 @@ nav {
     box-shadow: 0 10px 40px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 2px solid transparent;
+}
+.feature-card details {
+    text-align: left;
+    margin: 0.6rem 0;
+    background: #f9fafb;
+    border: 1px solid #eef2f7;
+    border-radius: 12px;
+    padding: 0.6rem 0.8rem;
+}
+.feature-card details > summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: #374151;
+    outline: none;
+    position: relative;
+    padding-right: 1.1rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+.feature-card details > summary::-webkit-details-marker { display: none; }
+.feature-card details > summary::marker { content: ''; }
+.feature-card details > summary::after {
+    content: '▾';
+    position: absolute;
+    right: 0.25rem;
+    top: 0.1rem;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+}
+.feature-card details[open] > summary {
+    color: var(--magenta);
+}
+.feature-card details[open] > summary::after { transform: rotate(180deg); }
+.feature-card details ul {
+    margin: 0.4rem 0 0.2rem 1rem;
+}
+.feature-card .btn.btn-outline2 {
+    margin-top: 0.8rem;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+.feature-card .btn.btn-outline2:active { transform: translateY(0) scale(0.98); }
+.btn:active { transform: translateY(0) scale(0.98); }
+
+/* Ujednolicone wymiary przycisków w kafelkach: "Zobacz kurs" i "Kup teraz" */
+.card-actions {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 0.6rem;
+    width: 100%;
+}
+.card-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1rem !important;
+    height: 44px;
+    font-size: 0.95rem;
+    border-radius: 16px !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    flex: 1 1 0;
+    width: auto;
+}
+.card-actions .btn-gradient {
+    box-shadow: 0 3px 12px rgba(255, 0, 128, 0.25);
+    transform: translateY(0);
+}
+.card-actions .btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(255, 0, 128, 0.28);
 }
 
 .feature-card:hover {
@@ -1055,6 +1128,31 @@ nav {
     min-width: 120px;
     right: 0;
     left: auto;
+  }
+}
+
+/* Mobile polish: stronger contrast, softer corners, lighter shadows */
+@media (max-width: 600px) {
+  .hero,
+  .features,
+  .opinions,
+  .landing-dashboard,
+  .auth-container,
+  .feature-card,
+  .pricing-card,
+  .pdf-stage-card {
+    border-radius: 22px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08) !important;
+  }
+  .feature-card {
+    padding: 2rem;
+  }
+  .feature-card details {
+    background: #f3f6fb;
+    border-color: #e5eaf2;
+  }
+  body {
+    background: linear-gradient(90deg, #dde7ff 0%, #ffd6f2 100%);
   }
 }
 
@@ -2086,11 +2184,13 @@ nav {
 
 /* Style dla tytułów sekcji */
 .section-title {
+    margin-top: 2.6rem;
     text-align: center;
-    font-size: 2.8rem; /* Zwiększam rozmiar */
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 2.6rem;
     color: var(--black);
-    margin-bottom: 1.5rem; /* Zwiększam margines */
-    font-weight: 800; /* Zwiększam wagę */
+    margin-bottom: 1.2rem;
+    font-weight: 800;
     letter-spacing: -0.02em; /* Dodaję ujemne rozstawienie liter */
     text-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Dodaję subtelny cień */
 }
@@ -2098,9 +2198,9 @@ nav {
 .section-subtitle {
     text-align: center;
     color: var(--purple);
-    margin-bottom: 4rem; /* Zwiększam margines */
-    font-size: 1.2rem; /* Zwiększam rozmiar */
-    font-weight: 600; /* Zwiększam wagę */
+    margin-bottom: 2rem;
+    font-size: 1.06rem;
+    font-weight: 600;
     letter-spacing: 0.01em; /* Dodaję rozstawienie liter */
 }
 
