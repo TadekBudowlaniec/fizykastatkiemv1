@@ -12,6 +12,10 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fizykastatkiem.pl">
     <link rel="icon" type="image/png" href="images/czarny_statek.png">
+    <meta name="theme-color" content="#6b4df6">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
     <link rel="stylesheet" href="css/style.css">
@@ -102,11 +106,11 @@
                     <button class="dropdown-toggle" id="dropdownMenuBtn" aria-label="Menu">☰</button>
                     <div class="dropdown-menu" id="dropdownMenu">
                         <a href="#" onclick="showSection('dashboard')">📚 Kurs</a>
-                        <a href="#" onclick="showSection('user')" id="dropdownProfileLink" class="hidden">👤 Profil</a>
+                        <a href="#" onclick="showSection('korepetycje')">👨‍🏫 Korepetycje</a>
                         <a href="#" onclick="showSection('login')" id="dropdownLoginLink">🔑 Zaloguj się</a>
                         <a href="#" onclick="showSection('register')" id="dropdownRegisterLink">✨ Zarejestruj się</a>
+                        <a href="#" onclick="showSection('user')" id="dropdownProfileLink" class="hidden">👤 Profil</a>
                         <a href="#" onclick="logout()" id="dropdownLogoutLink" class="hidden">🚪 Wyloguj się</a>
-                        <a href="#" onclick="showSection('korepetycje')">👨‍🏫 Korepetycje</a>
                     </div>
                 </div>
             </nav>
@@ -123,8 +127,406 @@
                     <h2 class="hero-subtitle">Nowoczesne kursy online z fizyki</h2>
                     <p>Kompleksowe kursy prowadzone przez doświadczonych nauczycieli. Przygotuj się do matury i egzaminów w wygodny sposób!</p>
                     <div class="hero-cta">
-                        <button class="btn btn-gradient" onclick="showSection('pricing')">Zobacz kursy</button>
+                        <button class="btn btn-gradient" onclick="showSection('dashboard')">Zobacz kursy</button>
                         <button class="btn btn-outline" onclick="showSection('register')">Dołącz za darmo</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       
+
+        <section class="home-subjects">
+            <div class="container">
+                <h2 class="section-title">Działy fizyki</h2>
+                <p class="section-subtitle">Poznaj wszystkie obszary dostępne w kursie</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏁</div>
+                        <h3>Kinematyka</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>wielkości: droga, przemieszczenie, prędkość, przyspieszenie</li>
+                                <li>ruch prostoliniowy jednostajny i jednostajnie przyspieszony</li>
+                                <li>swobodne spadanie</li>
+                                <li>wykresy s(t), v(t)</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>ruch po okręgu (v, T, f, a<sub>d</sub>)</li>
+                                <li>ruchy złożone (rzut pionowy, poziomy, ukośny)</li>
+                                <li>analiza wektorowa prędkości i przyspieszenia</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('1')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛠️</div>
+                        <h3>Dynamika</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>trzy zasady Newtona</li>
+                                <li>siły: grawitacji, sprężystości, tarcia, oporu</li>
+                                <li>równowaga sił</li>
+                                <li>ciężar vs. masa</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>siła dośrodkowa, układy nieinercjalne</li>
+                                <li>zasada zachowania pędu, zderzenia</li>
+                                <li>moment siły, moment pędu</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('2')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚙️</div>
+                        <h3>Praca, moc, energia</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>praca mechaniczna, moc</li>
+                                <li>energia kinetyczna, potencjalna grawitacyjna, sprężystości</li>
+                                <li>zasada zachowania energii</li>
+                                <li>sprawność urządzeń</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>twierdzenie o pracy i energii kinetycznej</li>
+                                <li>energia potencjalna w polu sił</li>
+                                <li>drgania harmoniczne (energia)</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('3')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧱</div>
+                        <h3>Bryła sztywna</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>pojęcie momentu siły (intuicyjnie)</li>
+                                <li>równowaga dźwigni</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>moment bezwładności</li>
+                                <li>dynamika ruchu obrotowego</li>
+                                <li>energia kinetyczna obrotowa</li>
+                                <li>zasada zachowania momentu pędu</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('4')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔁</div>
+                        <h3>Ruch drgający</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>pojęcie drgań, okres, częstotliwość, amplituda</li>
+                                <li>ruch harmoniczny (opis jakościowy)</li>
+                                <li>przykłady: wahadło, sprężyna</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>równanie x(t) = A sin(ωt + φ)</li>
+                                <li>energia w ruchu harmonicznym</li>
+                                <li>rezonans mechaniczny</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('5')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🪐</div>
+                        <h3>Grawitacja i astronomia</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>prawo powszechnego ciążenia Newtona</li>
+                                <li>przyspieszenie grawitacyjne g</li>
+                                <li>III prawo Keplera (opisowo)</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>g = GM/R²</li>
+                                <li>energia potencjalna Ep = -GMm/r</li>
+                                <li>prędkości kosmiczne</li>
+                                <li>orbity satelitów</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('9')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💧</div>
+                        <h3>Hydrostatyka</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>ciśnienie hydrostatyczne p = ρgh</li>
+                                <li>prawo Pascala</li>
+                                <li>prawo Archimedesa (siła wyporu)</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>równania równowagi płynów</li>
+                                <li>równanie Bernoulliego</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('7')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔥</div>
+                        <h3>Termodynamika</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>ciepło właściwe, bilans cieplny</li>
+                                <li>ciepło topnienia, parowania</li>
+                                <li>rozszerzalność cieplna</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>równanie Clapeyrona pV = nRT</li>
+                                <li>I i II zasada termodynamiki</li>
+                                <li>przemiany: izoT, izoV, izoP, adiabatyczna</li>
+                                <li>silniki cieplne, sprawność</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('8')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">➕</div>
+                        <h3>Elektrostatyka</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>ładunki, przewodniki i izolatory</li>
+                                <li>prawo Coulomba</li>
+                                <li>natężenie pola</li>
+                                <li>praca sił pola</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>potencjał i różnica potencjałów</li>
+                                <li>kondensatory (pojemność, energia)</li>
+                                <li>linie pola, superpozycja</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('9')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔌</div>
+                        <h3>Prąd elektryczny</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>natężenie, napięcie, opór</li>
+                                <li>prawo Ohma</li>
+                                <li>praca i moc prądu</li>
+                                <li>opór zastępczy</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>prawa Kirchhoffa</li>
+                                <li>opór właściwy i zależność od temperatury</li>
+                                <li>przewodnictwo półprzewodników</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('10')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧲</div>
+                        <h3>Magnetyzm</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>magnesy trwałe, bieguny</li>
+                                <li>pole magnetyczne wokół przewodnika</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>wektor indukcji magnetycznej B</li>
+                                <li>siła Lorentza</li>
+                                <li>siła elektrodynamiczna</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('11')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌀</div>
+                        <h3>Indukcja elektromagnetyczna</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>zjawisko indukcji (Faraday)</li>
+                                <li>prawo Lenza (opisowo)</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>SEM indukcji, strumień magnetyczny</li>
+                                <li>prąd przemienny: wartość skuteczna, moc</li>
+                                <li>transformatory</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('12')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌊</div>
+                        <h3>Fale mechaniczne</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>fala podłużna i poprzeczna</li>
+                                <li>prędkość, długość fali, częstotliwość, okres</li>
+                                <li>dźwięk: wysokość, natężenie, głośność</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>równanie fali</li>
+                                <li>fale stojące (struna, rura)</li>
+                                <li>efekt Dopplera</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('13')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌈</div>
+                        <h3>Fale elektromagnetyczne i optyka</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>widmo fal EM (od radiowych po gamma)</li>
+                                <li>prędkość światła</li>
+                                <li>zastosowania fal EM</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>E = hf, λ = c/f</li>
+                                <li>interferencja, dyfrakcja światła</li>
+                                <li>polaryzacja</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('14')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧬</div>
+                        <h3>Fizyka atomowa</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>budowa atomu (jądro, elektrony)</li>
+                                <li>widma liniowe</li>
+                                <li>zjawisko fotoelektryczne (opisowo)</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>równanie Einsteina dla fotoefektu</li>
+                                <li>dualizm korpuskularno-falowy (λ = h/p)</li>
+                                <li>model Bohra atomu wodoru</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('15')">Kup teraz</button>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">☢️</div>
+                        <h3>Fizyka jądrowa i relatywistyczna</h3>
+                        <details>
+                            <summary>Podstawowy</summary>
+                            <ul>
+                                <li>promieniowanie jonizujące (α, β, γ)</li>
+                                <li>zastosowania promieniotwórczości</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Rozszerzony</summary>
+                            <ul>
+                                <li>prawo rozpadu promieniotwórczego</li>
+                                <li>rozszczepienie i synteza jądrowa</li>
+                                <li>STR: E=mc², dylatacja czasu, skrócenie długości</li>
+                            </ul>
+                        </details>
+                        <div class="card-actions" style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;">
+                            <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kurs</button>
+                            <button class="btn btn-gradient" onclick="buyViaLink('16')">Kup teraz</button>
+                        </div>
                     </div>
                 </div>
             </div>
