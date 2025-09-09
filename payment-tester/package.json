@@ -1,0 +1,42 @@
+{
+  "name": "payment-tester",
+  "version": "1.0.0",
+  "description": "Narzędzie do testowania płatności i manipulacji bazy danych dla systemu Stripe + Supabase",
+  "main": "test-backend.js",
+  "scripts": {
+    "start": "node test-backend.js",
+    "dev": "nodemon test-backend.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "npm install && echo 'Setup complete! Run npm start to start the test backend.'",
+    "frontend": "python3 -m http.server 8080 --directory .",
+    "full": "concurrently \"npm run start\" \"npm run frontend\"",
+    "lint": "eslint *.js",
+    "format": "prettier --write *.js *.html"
+  },
+  "keywords": [
+    "payment",
+    "testing",
+    "stripe",
+    "supabase",
+    "nodejs",
+    "express"
+  ],
+  "author": "Payment Tester",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.50.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "stripe": "^18.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

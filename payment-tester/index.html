@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Tester - Narzędzie testowe płatności</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+        
+        .section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+        
+        .status-display {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .log-container {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        
+        .log-success { background: rgba(46, 204, 113, 0.2); }
+        .log-error { background: rgba(231, 76, 60, 0.2); }
+        .log-info { background: rgba(52, 152, 219, 0.2); }
+        .log-warning { background: rgba(243, 156, 18, 0.2); }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .payment-scenarios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .scenario-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            border: 2px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .scenario-card:hover {
+            border-color: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .scenario-card.active {
+            border-color: #27ae60;
+            background: #f8fff8;
+        }
+        
+        .database-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .database-table th,
+        .database-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .database-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .database-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Payment Tester</h1>
+            <p>Narzędzie do testowania płatności i manipulacji bazy danych</p>
+        </div>
+        
+        <div class="main-content">
+            <!-- Sekcja testowania płatności -->
+            <div class="section">
+                <h2>🚀 Testowanie Płatności</h2>
+                
+                <div class="form-group">
+                    <label for="testUserId">ID Użytkownika:</label>
+                    <input type="text" id="testUserId" placeholder="np. test-user-123">
+                </div>
+                
+                <div class="form-group">
+                    <label for="testUserEmail">Email Użytkownika:</label>
+                    <input type="email" id="testUserEmail" placeholder="test@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="courseSelect">Wybierz Kurs:</label>
+                    <select id="courseSelect">
+                        <option value="full_access">Pełny Dostęp (wszystkie kursy)</option>
+                        <option value="1">Kinematyka</option>
+                        <option value="2">Dynamika</option>
+                        <option value="3">Praca moc energia</option>
+                        <option value="4">Bryła Sztywna</option>
+                        <option value="5">Ruch Drgający</option>
+                        <option value="6">Fale Mechaniczne</option>
+                        <option value="7">Hydrostatyka</option>
+                        <option value="8">Termodynamika</option>
+                        <option value="9">Grawitacja i Astronomia</option>
+                        <option value="10">Elektrostatyka</option>
+                        <option value="11">Prąd Elektryczny</option>
+                        <option value="12">Magnetyzm</option>
+                        <option value="13">Indukcja Elektromagnetyczna</option>
+                        <option value="14">Fale Elektromagnetyczne i Optyka</option>
+                        <option value="15">Fizyka Atomowa</option>
+                        <option value="16">Fizyka Jądrowa i Relatywistyka</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <button class="btn btn-success" onclick="simulateSuccessfulPayment()">✅ Symuluj Udaną Płatność</button>
+                    <button class="btn btn-danger" onclick="simulateFailedPayment()">❌ Symuluj Nieudaną Płatność</button>
+                    <button class="btn btn-warning" onclick="simulatePendingPayment()">⏳ Symuluj Oczekującą Płatność</button>
+                </div>
+                
+                <div id="paymentStatus" class="status-display" style="display: none;">
+                    <strong>Status płatności:</strong> <span id="paymentStatusText"></span>
+                </div>
+            </div>
+            
+            <!-- Sekcja manipulacji bazy danych -->
+            <div class="section">
+                <h2>🗄️ Manipulacja Bazy Danych</h2>
+                
+                <div class="form-group">
+                    <label for="dbUserId">ID Użytkownika:</label>
+                    <input type="text" id="dbUserId" placeholder="np. user-123">
+                </div>
+                
+                <div class="form-group">
+                    <label for="dbCourseId">ID Kursu:</label>
+                    <select id="dbCourseId">
+                        <option value="">-- Wybierz kurs --</option>
+                        <option value="1">Kinematyka</option>
+                        <option value="2">Dynamika</option>
+                        <option value="3">Praca moc energia</option>
+                        <option value="4">Bryła Sztywna</option>
+                        <option value="5">Ruch Drgający</option>
+                        <option value="6">Fale Mechaniczne</option>
+                        <option value="7">Hydrostatyka</option>
+                        <option value="8">Termodynamika</option>
+                        <option value="9">Grawitacja i Astronomia</option>
+                        <option value="10">Elektrostatyka</option>
+                        <option value="11">Prąd Elektryczny</option>
+                        <option value="12">Magnetyzm</option>
+                        <option value="13">Indukcja Elektromagnetyczna</option>
+                        <option value="14">Fale Elektromagnetyczne i Optyka</option>
+                        <option value="15">Fizyka Atomowa</option>
+                        <option value="16">Fizyka Jądrowa i Relatywistyka</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <button class="btn btn-success" onclick="grantAccess()">✅ Przyznaj Dostęp</button>
+                    <button class="btn btn-danger" onclick="revokeAccess()">❌ Odbierz Dostęp</button>
+                    <button class="btn" onclick="checkUserAccess()">🔍 Sprawdź Dostęp</button>
+                    <button class="btn btn-warning" onclick="clearAllAccess()">🧹 Wyczyść Wszystkie Dostępy</button>
+                </div>
+            </div>
+            
+            <!-- Sekcja scenariuszy testowych -->
+            <div class="section full-width">
+                <h2>📋 Gotowe Scenariusze Testowe</h2>
+                <div class="payment-scenarios">
+                    <div class="scenario-card" onclick="runScenario('new_user_full_access')">
+                        <h3>🆕 Nowy Użytkownik - Pełny Dostęp</h3>
+                        <p>Symuluje nowego użytkownika kupującego pełny dostęp do wszystkich kursów</p>
+                    </div>
+                    
+                    <div class="scenario-card" onclick="runScenario('existing_user_single_course')">
+                        <h3>👤 Istniejący Użytkownik - Pojedynczy Kurs</h3>
+                        <p>Symuluje użytkownika z dostępem kupującego dodatkowy kurs</p>
+                    </div>
+                    
+                    <div class="scenario-card" onclick="runScenario('payment_failure_retry')">
+                        <h3>💳 Nieudana Płatność - Ponowna Próba</h3>
+                        <p>Symuluje nieudaną płatność, a następnie udaną ponowną próbę</p>
+                    </div>
+                    
+                    <div class="scenario-card" onclick="runScenario('bulk_users_test')">
+                        <h3>👥 Test Masowy</h3>
+                        <p>Tworzy wielu testowych użytkowników z różnymi dostępami</p>
+                    </div>
+                    
+                    <div class="scenario-card" onclick="runScenario('access_expiry_test')">
+                        <h3>⏰ Test Wygasania Dostępu</h3>
+                        <p>Symuluje różne scenariusze wygasania dostępu</p>
+                    </div>
+                    
+                    <div class="scenario-card" onclick="runScenario('database_stress_test')">
+                        <h3>🔥 Test Obciążenia Bazy</h3>
+                        <p>Wykonuje wiele operacji jednocześnie</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sekcja przeglądu bazy danych -->
+            <div class="section full-width">
+                <h2>📊 Przegląd Bazy Danych</h2>
+                <button class="btn" onclick="refreshDatabaseView()">🔄 Odśwież Dane</button>
+                <button class="btn btn-warning" onclick="exportData()">📤 Eksportuj Dane</button>
+                <button class="btn btn-danger" onclick="clearTestData()">🗑️ Wyczyść Dane Testowe</button>
+                
+                <div id="databaseView">
+                    <p>Kliknij "Odśwież Dane" aby zobaczyć aktualny stan bazy danych.</p>
+                </div>
+            </div>
+            
+            <!-- Log konsoli -->
+            <div class="section full-width">
+                <h2>📝 Log Operacji</h2>
+                <button class="btn" onclick="clearLog()">🧹 Wyczyść Log</button>
+                <div id="logContainer" class="log-container">
+                    <div class="log-entry log-info">System gotowy do testowania płatności...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="payment-tester.js"></script>
+</body>
+</html>

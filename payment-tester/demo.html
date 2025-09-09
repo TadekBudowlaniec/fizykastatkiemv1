@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Tester - Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .hero {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .hero h1 {
+            color: #2c3e50;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .hero p {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-card li {
+            padding: 5px 0;
+            color: #555;
+        }
+        
+        .feature-card li:before {
+            content: '✅ ';
+            margin-right: 8px;
+        }
+        
+        .demo-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        
+        .demo-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+        
+        .screenshot {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin: 20px 0;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>🧪 Payment Tester</h1>
+        <p>Zaawansowane narzędzie do testowania płatności i manipulacji bazy danych</p>
+        <p><strong>Zintegrowane z Stripe + Supabase</strong></p>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <span class="stat-number">16</span>
+                <span class="stat-label">Kursów Fizyki</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">6</span>
+                <span class="stat-label">Scenariuszy Testowych</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">∞</span>
+                <span class="stat-label">Możliwości Testowania</span>
+            </div>
+        </div>
+        
+        <a href="index.html" class="btn btn-success">🚀 Uruchom Narzędzie</a>
+        <a href="api-examples.md" class="btn">📚 Dokumentacja API</a>
+    </div>
+    
+    <div class="features">
+        <div class="feature-card">
+            <h3>🔥 Testowanie Płatności</h3>
+            <ul>
+                <li>Symulacja udanych płatności</li>
+                <li>Symulacja nieudanych płatności</li>
+                <li>Symulacja oczekujących płatności</li>
+                <li>Automatyczne webhook'i</li>
+                <li>Integracja ze Stripe</li>
+            </ul>
+        </div>
+        
+        <div class="feature-card">
+            <h3>🗄️ Manipulacja Bazy Danych</h3>
+            <ul>
+                <li>Zarządzanie dostępami użytkowników</li>
+                <li>Operacje CRUD na enrollments</li>
+                <li>Przegląd danych w czasie rzeczywistym</li>
+                <li>Eksport danych testowych</li>
+                <li>Automatyczne czyszczenie</li>
+            </ul>
+        </div>
+        
+        <div class="feature-card">
+            <h3>🎯 Gotowe Scenariusze</h3>
+            <ul>
+                <li>Nowy użytkownik - pełny dostęp</li>
+                <li>Istniejący użytkownik - pojedynczy kurs</li>
+                <li>Test nieudanej płatności</li>
+                <li>Test masowy (wielu użytkowników)</li>
+                <li>Test obciążenia bazy danych</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="demo-section">
+        <h2>🚀 Szybki Start</h2>
+        
+        <p><strong>1. Uruchom narzędzie jedną komendą:</strong></p>
+        <div class="code-block">./start.sh</div>
+        
+        <p><strong>2. Lub uruchom ręcznie:</strong></p>
+        <div class="code-block">cd payment-tester
+npm install
+node test-backend.js &
+python3 -m http.server 8080</div>
+        
+        <p><strong>3. Otwórz w przeglądarce:</strong></p>
+        <div class="code-block">http://localhost:8080</div>
+    </div>
+    
+    <div class="demo-section">
+        <h2>🧪 Przykłady Użycia</h2>
+        
+        <h3>Symulacja Udanej Płatności</h3>
+        <div class="code-block">curl -X POST http://localhost:3002/api/test/create-payment-session \
+  -H "Content-Type: application/json" \
+  -d '{
+    "userId": "TEST_user_123",
+    "email": "test@example.com",
+    "courseId": "8",
+    "amount": 1990,
+    "simulateStatus": "success"
+  }'</div>
+        
+        <h3>Zarządzanie Dostępami</h3>
+        <div class="code-block">// Przyznaj dostęp
+curl -X POST http://localhost:3002/api/test/manage-access \
+  -H "Content-Type: application/json" \
+  -d '{"action": "grant", "userId": "TEST_user_123", "courseId": "8"}'
+
+// Sprawdź dostęp
+curl -X POST http://localhost:3002/api/test/manage-access \
+  -H "Content-Type: application/json" \
+  -d '{"action": "check", "userId": "TEST_user_123", "courseId": "8"}'</div>
+        
+        <h3>Generowanie Raportów</h3>
+        <div class="code-block">curl http://localhost:3002/api/test/reports | jq '.'</div>
+    </div>
+    
+    <div class="demo-section">
+        <h2>📊 Funkcje</h2>
+        
+        <h3>Interface Użytkownika</h3>
+        <ul>
+            <li><strong>Intuicyjny interfejs</strong> - Łatwy w użyciu interfejs webowy</li>
+            <li><strong>Real-time logi</strong> - Podgląd operacji w czasie rzeczywistym</li>
+            <li><strong>Przegląd bazy danych</strong> - Wyświetlanie danych z tabel</li>
+            <li><strong>Eksport danych</strong> - Pobieranie danych w formacie JSON</li>
+        </ul>
+        
+        <h3>Backend API</h3>
+        <ul>
+            <li><strong>RESTful API</strong> - Pełne API do automatyzacji testów</li>
+            <li><strong>Dokumentacja</strong> - Szczegółowa dokumentacja wszystkich endpointów</li>
+            <li><strong>Health checks</strong> - Monitorowanie stanu systemu</li>
+            <li><strong>Error handling</strong> - Profesjonalna obsługa błędów</li>
+        </ul>
+        
+        <h3>Integracja</h3>
+        <ul>
+            <li><strong>Supabase</strong> - Pełna integracja z bazą danych</li>
+            <li><strong>Stripe</strong> - Symulacja prawdziwych płatności</li>
+            <li><strong>Istniejący system</strong> - Kompatybilność z obecnym kodem</li>
+            <li><strong>Izolacja danych</strong> - Bezpieczne testowanie</li>
+        </ul>
+    </div>
+    
+    <div class="demo-section">
+        <h2>🎯 Mapowanie Kursów</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <div>
+                <h4>Mechanika Klasyczna</h4>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li>1. Kinematyka</li>
+                    <li>2. Dynamika</li>
+                    <li>3. Praca moc energia</li>
+                    <li>4. Bryła Sztywna</li>
+                    <li>5. Ruch Drgający</li>
+                    <li>6. Fale Mechaniczne</li>
+                    <li>7. Hydrostatyka</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4>Termodynamika</h4>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li>8. Termodynamika</li>
+                    <li>9. Grawitacja i Astronomia</li>
+                </ul>
+                
+                <h4>Elektryczność i Magnetyzm</h4>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li>10. Elektrostatyka</li>
+                    <li>11. Prąd Elektryczny</li>
+                    <li>12. Magnetyzm</li>
+                    <li>13. Indukcja Elektromagnetyczna</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4>Fizyka Współczesna</h4>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li>14. Fale Elektromagnetyczne i Optyka</li>
+                    <li>15. Fizyka Atomowa</li>
+                    <li>16. Fizyka Jądrowa i Relatywistyka</li>
+                </ul>
+                
+                <h4>Specjalne</h4>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li><strong>full_access</strong> - Wszystkie kursy</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="demo-section">
+        <h2>🔧 Wymagania Systemowe</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <div>
+                <h3>Minimalne</h3>
+                <ul>
+                    <li>Node.js >= 16.0.0</li>
+                    <li>npm >= 7.0.0</li>
+                    <li>Python 3.x (dla serwera HTTP)</li>
+                    <li>4 GB RAM</li>
+                    <li>Dostęp do internetu</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3>Zalecane</h3>
+                <ul>
+                    <li>Node.js >= 18.0.0</li>
+                    <li>npm >= 9.0.0</li>
+                    <li>8 GB RAM</li>
+                    <li>SSD</li>
+                    <li>Klucze API Stripe (do prawdziwych testów)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="demo-section" style="text-align: center;">
+        <h2>🎉 Gotowy do Testowania?</h2>
+        <p>Uruchom Payment Tester i rozpocznij testowanie płatności już teraz!</p>
+        
+        <a href="index.html" class="btn btn-success">🚀 Uruchom Narzędzie</a>
+        <a href="README.md" class="btn">📖 Pełna Dokumentacja</a>
+        
+        <div class="code-block" style="margin-top: 30px;">
+cd /workspace/payment-tester
+./start.sh
+        </div>
+        
+        <p style="margin-top: 20px; color: #7f8c8d;">
+            <small>Narzędzie stworzone do testowania systemu płatności opartego na Stripe + Supabase</small>
+        </p>
+    </div>
+</body>
+</html>
