@@ -5,7 +5,7 @@ const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// Inicjalizacja Supabase
+// Inicjalizacja Supabase - używamy ANON_KEY z odpowiednimi politykami RLS
 const supabase = createClient(
     process.env.SUPABASE_URL,
     process.env.SUPABASE_ANON_KEY
@@ -112,9 +112,15 @@ app.post('/api/webhook', async (req, res) => {
         }
         
         try {
-            // Sprawdź czy płatność była za konkretny kurs czy za pełny dostęp
-            const lineItems = session.line_items?.data || [];
+            // Pobierz line_items z Stripe API (webhooks nie zawierają ich automatycznie)
+            const sessionWithLineItems = await stripe.checkout.sessions.retrieve(session.id, {
+                expand: ['line_items']
+            });
+            
+            const lineItems = sessionWithLineItems.line_items?.data || [];
             let courseIds = [];
+            
+            console.log('Session line items:', JSON.stringify(lineItems, null, 2));
             
             if (lineItems.length > 0) {
                 const priceId = lineItems[0].price.id;
@@ -131,23 +137,64 @@ app.post('/api/webhook', async (req, res) => {
                     courseIds = [courseIdFromPrice];
                     console.log('Single course access - adding course:', courseIdFromPrice);
                 }
+            } else {
+                console.log('No line items found, checking metadata for fallback');
+                // Fallback - użyj courseId z metadata
+                const courseIdFromMetadata = session.metadata.courseId;
+                if (courseIdFromMetadata === 'full_access') {
+                    courseIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+                    console.log('Full access from metadata - adding all courses');
+                } else if (courseIdFromMetadata) {
+                    courseIds = [parseInt(courseIdFromMetadata)];
+                    console.log('Single course from metadata:', courseIdFromMetadata);
+                }
             }
 
             // Dodaj wpisy do tabeli enrollments
+            console.log('About to add enrollments for courses:', courseIds);
+            console.log('User ID:', session.metadata.userId);
+            
+            if (courseIds.length === 0) {
+                console.error('No courses to enroll user in!');
+                return res.status(400).json({ error: 'No courses identified for enrollment' });
+            }
+            
             for (const courseId of courseIds) {
-                const { error } = await supabase
-                    .from('enrollments')
-                    .upsert({
-                        user_id: session.metadata.userId,
-                        course_id: courseId,
-                        access_granted: true,
-                        enrolled_at: new Date().toISOString()
+                console.log(`Adding enrollment for user ${session.metadata.userId} to course ${courseId}`);
+                
+                // Użyj RPC call do dodania enrollment z uprawnieniami serwera
+                const { data, error } = await supabase
+                    .rpc('add_enrollment_for_payment', {
+                        p_user_id: session.metadata.userId,
+                        p_course_id: courseId
                     });
 
                 if (error) {
                     console.error('Error adding enrollment for course', courseId, ':', error);
+                    console.error('Full error object:', JSON.stringify(error, null, 2));
+                    
+                    // Fallback - spróbuj bezpośredni insert (może zadziałać jeśli polityki RLS pozwalają)
+                    const { data: fallbackData, error: fallbackError } = await supabase
+                        .from('enrollments')
+                        .upsert({
+                            user_id: session.metadata.userId,
+                            course_id: courseId,
+                            access_granted: true,
+                            enrolled_at: new Date().toISOString()
+                        }, {
+                            onConflict: 'user_id,course_id'
+                        })
+                        .select();
+                    
+                    if (fallbackError) {
+                        console.error('Fallback insert also failed:', fallbackError);
+                    } else {
+                        console.log(`Fallback success - Access granted for user ${session.metadata.userId} to course ${courseId}`);
+                        console.log('Enrollment data:', fallbackData);
+                    }
                 } else {
                     console.log(`Access granted for user ${session.metadata.userId} to course ${courseId}`);
+                    console.log('Enrollment data:', data);
                 }
             }
 
@@ -174,9 +221,10 @@ app.get('/api/check-payment-status', async (req, res) => {
         const session = await stripe.checkout.sessions.retrieve(session_id);
         
         if (session.payment_status === 'paid') {
-            // Płatność została zrealizowana, ale webhook mógł jeszcze nie zostać wywołany
-            // Sprawdź czy użytkownik już ma dostęp
+            // Płatność została zrealizowana, sprawdź czy użytkownik ma już dostęp
             const { userId, courseId } = session.metadata;
+            
+            console.log('Payment successful, checking access for user:', userId);
             
             if (userId) {
                 // Sprawdź czy użytkownik ma już dostęp do kursu
@@ -188,8 +236,70 @@ app.get('/api/check-payment-status', async (req, res) => {
 
                 if (error) {
                     console.error('Error checking enrollments:', error);
-                } else if (enrollments && enrollments.length > 0) {
-                    return res.json({ success: true, message: 'Access already granted' });
+                    console.error('Full error:', JSON.stringify(error, null, 2));
+                } else {
+                    console.log('Found enrollments:', enrollments);
+                    if (enrollments && enrollments.length > 0) {
+                        return res.json({ success: true, message: 'Access already granted' });
+                    }
+                }
+                
+                // Jeśli nie ma dostępu, spróbuj dodać enrollment (fallback)
+                console.log('No enrollments found, attempting to create enrollment as fallback');
+                
+                // Pobierz line_items aby określić jakie kursy kupił
+                const sessionWithLineItems = await stripe.checkout.sessions.retrieve(session.id, {
+                    expand: ['line_items']
+                });
+                
+                const lineItems = sessionWithLineItems.line_items?.data || [];
+                let courseIds = [];
+                
+                if (lineItems.length > 0) {
+                    const priceId = lineItems[0].price.id;
+                    const courseIdFromPrice = priceToCourseId[priceId];
+                    
+                    if (courseIdFromPrice === 17) {
+                        courseIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+                    } else if (courseIdFromPrice) {
+                        courseIds = [courseIdFromPrice];
+                    }
+                } else if (courseId === 'full_access') {
+                    courseIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+                } else if (courseId) {
+                    courseIds = [parseInt(courseId)];
+                }
+                
+                // Dodaj enrollments
+                for (const cId of courseIds) {
+                    // Użyj RPC call
+                    const { data, error } = await supabase
+                        .rpc('add_enrollment_for_payment', {
+                            p_user_id: userId,
+                            p_course_id: cId
+                        });
+                    
+                    if (error) {
+                        console.error('Error creating enrollment via RPC:', error);
+                        
+                        // Fallback - bezpośredni insert
+                        const { error: enrollError } = await supabase
+                            .from('enrollments')
+                            .upsert({
+                                user_id: userId,
+                                course_id: cId,
+                                access_granted: true,
+                                enrolled_at: new Date().toISOString()
+                            });
+                        
+                        if (enrollError) {
+                            console.error('Error creating enrollment via direct insert:', enrollError);
+                        } else {
+                            console.log('Created enrollment for course via direct insert:', cId);
+                        }
+                    } else {
+                        console.log('Created enrollment for course via RPC:', cId, data);
+                    }
                 }
             }
             
