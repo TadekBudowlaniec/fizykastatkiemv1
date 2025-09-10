@@ -173,18 +173,46 @@ app.post('/api/webhook', async (req, res) => {
                     console.error('Error adding enrollment for course', courseId, ':', error);
                     console.error('Full error object:', JSON.stringify(error, null, 2));
                     
-                    // Fallback - spróbuj bezpośredni insert (może zadziałać jeśli polityki RLS pozwalają)
-                    const { data: fallbackData, error: fallbackError } = await supabase
+                    // Fallback - spróbuj bezpośredni insert
+                    console.log('Trying fallback - checking if enrollment exists...');
+                    
+                    // Sprawdź czy enrollment już istnieje
+                    const { data: existingEnrollment } = await supabase
                         .from('enrollments')
-                        .upsert({
-                            user_id: session.metadata.userId,
-                            course_id: courseId,
-                            access_granted: true,
-                            enrolled_at: new Date().toISOString()
-                        }, {
-                            onConflict: 'user_id,course_id'
-                        })
-                        .select();
+                        .select('*')
+                        .eq('user_id', session.metadata.userId)
+                        .eq('course_id', courseId)
+                        .single();
+                    
+                    let fallbackData, fallbackError;
+                    
+                    if (existingEnrollment) {
+                        // Zaktualizuj istniejący
+                        const result = await supabase
+                            .from('enrollments')
+                            .update({
+                                access_granted: true,
+                                enrolled_at: new Date().toISOString()
+                            })
+                            .eq('user_id', session.metadata.userId)
+                            .eq('course_id', courseId)
+                            .select();
+                        fallbackData = result.data;
+                        fallbackError = result.error;
+                    } else {
+                        // Dodaj nowy
+                        const result = await supabase
+                            .from('enrollments')
+                            .insert({
+                                user_id: session.metadata.userId,
+                                course_id: courseId,
+                                access_granted: true,
+                                enrolled_at: new Date().toISOString()
+                            })
+                            .select();
+                        fallbackData = result.data;
+                        fallbackError = result.error;
+                    }
                     
                     if (fallbackError) {
                         console.error('Fallback insert also failed:', fallbackError);
@@ -282,15 +310,42 @@ app.get('/api/check-payment-status', async (req, res) => {
                     if (error) {
                         console.error('Error creating enrollment via RPC:', error);
                         
-                        // Fallback - bezpośredni insert
-                        const { error: enrollError } = await supabase
+                        // Fallback - bezpośredni insert/update
+                        console.log('Trying fallback for check-payment-status...');
+                        
+                        // Sprawdź czy enrollment już istnieje
+                        const { data: existingEnrollment } = await supabase
                             .from('enrollments')
-                            .upsert({
-                                user_id: userId,
-                                course_id: cId,
-                                access_granted: true,
-                                enrolled_at: new Date().toISOString()
-                            });
+                            .select('*')
+                            .eq('user_id', userId)
+                            .eq('course_id', cId)
+                            .single();
+                        
+                        let enrollError;
+                        
+                        if (existingEnrollment) {
+                            // Zaktualizuj istniejący
+                            const result = await supabase
+                                .from('enrollments')
+                                .update({
+                                    access_granted: true,
+                                    enrolled_at: new Date().toISOString()
+                                })
+                                .eq('user_id', userId)
+                                .eq('course_id', cId);
+                            enrollError = result.error;
+                        } else {
+                            // Dodaj nowy
+                            const result = await supabase
+                                .from('enrollments')
+                                .insert({
+                                    user_id: userId,
+                                    course_id: cId,
+                                    access_granted: true,
+                                    enrolled_at: new Date().toISOString()
+                                });
+                            enrollError = result.error;
+                        }
                         
                         if (enrollError) {
                             console.error('Error creating enrollment via direct insert:', enrollError);
@@ -348,15 +403,42 @@ app.post('/api/test-payment-success', async (req, res) => {
             if (error) {
                 console.error('TEST: Error creating enrollment via RPC:', error);
                 
-                // Fallback - bezpośredni insert
-                const { error: enrollError } = await supabase
+                // Fallback - bezpośredni insert/update
+                console.log('TEST: Trying fallback...');
+                
+                // Sprawdź czy enrollment już istnieje
+                const { data: existingEnrollment } = await supabase
                     .from('enrollments')
-                    .upsert({
-                        user_id: userId,
-                        course_id: cId,
-                        access_granted: true,
-                        enrolled_at: new Date().toISOString()
-                    });
+                    .select('*')
+                    .eq('user_id', userId)
+                    .eq('course_id', cId)
+                    .single();
+                
+                let enrollError;
+                
+                if (existingEnrollment) {
+                    // Zaktualizuj istniejący
+                    const result = await supabase
+                        .from('enrollments')
+                        .update({
+                            access_granted: true,
+                            enrolled_at: new Date().toISOString()
+                        })
+                        .eq('user_id', userId)
+                        .eq('course_id', cId);
+                    enrollError = result.error;
+                } else {
+                    // Dodaj nowy
+                    const result = await supabase
+                        .from('enrollments')
+                        .insert({
+                            user_id: userId,
+                            course_id: cId,
+                            access_granted: true,
+                            enrolled_at: new Date().toISOString()
+                        });
+                    enrollError = result.error;
+                }
                 
                 if (enrollError) {
                     console.error('TEST: Error creating enrollment via direct insert:', enrollError);
