@@ -49,6 +49,49 @@ function buyViaLink(courseId = 'full_access') {
 // Udostępnij globalnie
 window.buyViaLink = buyViaLink;
 
+// TESTOWA funkcja do symulacji udanej płatności (bez faktycznego płacenia)
+async function testPaymentSuccess(courseId = 'full_access') {
+    if (!currentUser) {
+        alert('Musisz się zalogować, aby przetestować płatność!');
+        showSection('login');
+        return;
+    }
+
+    try {
+        const { data: { user } } = await supabase.auth.getUser();
+        const userId = user.id;
+        
+        console.log('Testing payment success for user:', userId, 'course:', courseId);
+        
+        const response = await fetch('http://localhost:3001/api/test-payment-success', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userId: userId,
+                courseId: courseId
+            }),
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            await checkUserAccess(); // Odśwież dostępy użytkownika
+            showSection('dashboard');
+            alert(`TEST: Płatność pomyślna! Dodano dostęp do kursów: ${result.coursesAdded.join(', ')}`);
+        } else {
+            alert('TEST: Błąd podczas symulacji płatności: ' + result.error);
+        }
+    } catch (error) {
+        console.error('TEST: Błąd podczas testowania płatności:', error);
+        alert('TEST: Błąd podczas testowania płatności: ' + error.message);
+    }
+}
+
+// Udostępnij testową funkcję globalnie
+window.testPaymentSuccess = testPaymentSuccess;
+
 async function buyAccess(courseId = 'full_access') {
     if (!currentUser) {
         alert('Musisz się zalogować, aby kupić dostęp!');
@@ -59,6 +102,7 @@ async function buyAccess(courseId = 'full_access') {
     try {
         const { data: { user } } = await supabase.auth.getUser();
         const userId = user.id;
+        const userEmail = user.email;
         
         // Mapowanie courseId na priceId
         let priceId;
@@ -94,7 +138,7 @@ async function buyAccess(courseId = 'full_access') {
             },
             body: JSON.stringify({
                 userId: userId,
-                email: currentUser.email,
+                email: userEmail,
                 courseId: courseId,
                 priceId: priceId
             }),
