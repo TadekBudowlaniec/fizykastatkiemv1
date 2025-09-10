@@ -313,7 +313,75 @@ app.get('/api/check-payment-status', async (req, res) => {
     }
 });
 
+// TESTOWY endpoint do symulacji udanej płatności (tylko w trybie deweloperskim)
+app.post('/api/test-payment-success', async (req, res) => {
+    const { userId, courseId } = req.body;
+    
+    if (!userId || !courseId) {
+        return res.status(400).json({ error: 'Brak wymaganych danych (userId, courseId)' });
+    }
+    
+    console.log('TEST: Simulating successful payment for user:', userId, 'course:', courseId);
+    
+    try {
+        // Określ jakie kursy dodać
+        let courseIds = [];
+        if (courseId === 'full_access') {
+            courseIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+            console.log('TEST: Full access - adding all courses');
+        } else {
+            courseIds = [parseInt(courseId)];
+            console.log('TEST: Single course access - adding course:', courseId);
+        }
+        
+        // Dodaj enrollments
+        for (const cId of courseIds) {
+            console.log(`TEST: Adding enrollment for user ${userId} to course ${cId}`);
+            
+            // Użyj RPC call
+            const { data, error } = await supabase
+                .rpc('add_enrollment_for_payment', {
+                    p_user_id: userId,
+                    p_course_id: cId
+                });
+            
+            if (error) {
+                console.error('TEST: Error creating enrollment via RPC:', error);
+                
+                // Fallback - bezpośredni insert
+                const { error: enrollError } = await supabase
+                    .from('enrollments')
+                    .upsert({
+                        user_id: userId,
+                        course_id: cId,
+                        access_granted: true,
+                        enrolled_at: new Date().toISOString()
+                    });
+                
+                if (enrollError) {
+                    console.error('TEST: Error creating enrollment via direct insert:', enrollError);
+                } else {
+                    console.log('TEST: Created enrollment for course via direct insert:', cId);
+                }
+            } else {
+                console.log('TEST: Created enrollment for course via RPC:', cId, data);
+            }
+        }
+        
+        res.json({ 
+            success: true, 
+            message: 'Test payment successful - access granted',
+            coursesAdded: courseIds
+        });
+        
+    } catch (error) {
+        console.error('TEST: Error processing test payment:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Backend listening on port ${PORT}`);
+    console.log(`Test payment endpoint available at: POST /api/test-payment-success`);
 }); 

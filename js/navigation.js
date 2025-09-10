@@ -566,6 +566,46 @@ function renderCourseFullView(subjectKey, main) {
         buyAllBtn.className = 'btn btn-outline';
         buyAllBtn.textContent = 'Kup wszystkie materiały';
         btnGroup.appendChild(buyAllBtn);
+        
+        // Dodaj testowe przyciski (tylko dla zalogowanych użytkowników)
+        if (currentUser) {
+            const testSection = document.createElement('div');
+            testSection.style.marginTop = '1rem';
+            testSection.style.paddingTop = '1rem';
+            testSection.style.borderTop = '1px solid #333';
+            testSection.innerHTML = `
+                <p style="color: #888; font-size: 0.9rem; margin-bottom: 0.5rem;">🧪 Tryb testowy (bez płacenia):</p>
+            `;
+            
+            const testBtnGroup = document.createElement('div');
+            testBtnGroup.style.display = 'flex';
+            testBtnGroup.style.gap = '10px';
+            testBtnGroup.style.flexWrap = 'wrap';
+            
+            const testBtn = document.createElement('a');
+            testBtn.href = '#';
+            testBtn.onclick = () => { testPaymentSuccess(course_id); return false; };
+            testBtn.className = 'btn';
+            testBtn.style.background = '#28a745';
+            testBtn.style.color = 'white';
+            testBtn.style.fontSize = '0.9rem';
+            testBtn.textContent = 'TEST: Kup ten kurs';
+            testBtnGroup.appendChild(testBtn);
+            
+            const testAllBtn = document.createElement('a');
+            testAllBtn.href = '#';
+            testAllBtn.onclick = () => { testPaymentSuccess('full_access'); return false; };
+            testAllBtn.className = 'btn';
+            testAllBtn.style.background = '#17a2b8';
+            testAllBtn.style.color = 'white';
+            testAllBtn.style.fontSize = '0.9rem';
+            testAllBtn.textContent = 'TEST: Kup wszystkie';
+            testBtnGroup.appendChild(testAllBtn);
+            
+            testSection.appendChild(testBtnGroup);
+            main.appendChild(testSection);
+        }
+        
         main.appendChild(btnGroup);
     }
     // Logi do testu
@@ -657,6 +697,18 @@ async function showPreviewTask(course_id, taskArea) {
             buyCourseBtn = `<a href="#" onclick="buyViaLink('${course_id}');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Kup ten kurs</a>`;
             buyAllBtn = `<a href="#" onclick="buyViaLink('full_access');return false;" class="btn btn-outline" style="font-size: 1.1rem; min-width: 220px;">Kup wszystkie materiały</a>`;
         }
+        
+        // Dodaj przyciski testowe (tylko dla zalogowanych użytkowników)
+        let testButtons = '';
+        if (currentUser) {
+            testButtons = `
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #333;">
+                    <p style="color: #888; font-size: 0.9rem; margin-bottom: 0.5rem;">🧪 Tryb testowy (bez płacenia):</p>
+                    <a href="#" onclick="testPaymentSuccess('${course_id}');return false;" class="btn" style="background: #28a745; color: white; font-size: 0.9rem; margin-right: 10px;">TEST: Kup ten kurs</a>
+                    <a href="#" onclick="testPaymentSuccess('full_access');return false;" class="btn" style="background: #17a2b8; color: white; font-size: 0.9rem;">TEST: Kup wszystkie</a>
+                </div>
+            `;
+        }
         overlay.innerHTML = `
             <div>
                 <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
@@ -666,6 +718,7 @@ async function showPreviewTask(course_id, taskArea) {
                     ${buyCourseBtn}
                     ${buyAllBtn}
                 </div>
+                ${testButtons}
             </div>
         `;
         container.appendChild(overlay);
