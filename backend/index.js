@@ -4,18 +4,20 @@ const { createClient } = require('@supabase/supabase-js');
 
 require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// Osobny klient Stripe do trybu testowego (jeśli podany)
+const stripeTest = require('stripe')(process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY);
 
-// Inicjalizacja Supabase
+// Inicjalizacja Supabase (preferuj SERVICE_KEY na backendzie)
 const supabase = createClient(
     process.env.SUPABASE_URL,
-    process.env.SUPABASE_ANON_KEY
+    process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY
 );
 
 const app = express();
 app.use(cors());
 app.use(express.json({ verify: (req, res, buf) => { req.rawBody = buf; } }));
 
-// Mapowanie kursów na priceId Stripe (16 kursów + full_access)
+// Mapowanie kursów na priceId Stripe (16 kursów + full_access) - LIVE MODE
 const coursePriceIds = {
     1: 'price_1RtPFoJLuu6b086bmfvVO4G8', // Kinematyka
     2: 'price_1RtPGOJLuu6b086b1QN5l4DE', // Dynamika
@@ -64,7 +66,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
     }
     try {
         const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
+            payment_method_types: ['card', 'blik', 'klarna'],
             mode: 'payment',
             customer_email: email,
             line_items: [
@@ -86,6 +88,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
         res.status(500).json({ error: 'Błąd Stripe: ' + err.message });
     }
 });
+
 
 // Webhook Stripe do obsługi udanych płatności
 app.post('/api/webhook', async (req, res) => {
@@ -112,24 +115,65 @@ app.post('/api/webhook', async (req, res) => {
         }
         
         try {
-            // Sprawdź czy płatność była za konkretny kurs czy za pełny dostęp
-            const lineItems = session.line_items?.data || [];
+            // Pobierz szczegóły sesji z line_items
+            const sessionWithLineItems = await stripe.checkout.sessions.retrieve(session.id, {
+                expand: ['line_items', 'line_items.data.price']
+            });
+            const lineItems = sessionWithLineItems.line_items?.data || [];
+
             let courseIds = [];
-            
-            if (lineItems.length > 0) {
+
+            // Mapowanie po priceId
+            if (lineItems.length > 0 && lineItems[0]?.price?.id) {
                 const priceId = lineItems[0].price.id;
                 console.log('Price ID from session:', priceId);
+                
                 const courseIdFromPrice = priceToCourseId[priceId];
                 console.log('Mapped course ID:', courseIdFromPrice);
-                
+
                 if (courseIdFromPrice === 17) {
-                    // Pełny dostęp - dodaj wszystkie kursy
                     courseIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
                     console.log('Full access - adding all courses');
                 } else if (courseIdFromPrice) {
-                    // Konkretny kurs
                     courseIds = [courseIdFromPrice];
                     console.log('Single course access - adding course:', courseIdFromPrice);
+                }
+            }
+
+            // Fallback: jeśli brak dopasowania po priceId, użyj metadata.courseId
+            if (courseIds.length === 0 && session.metadata?.courseId) {
+                const metaCourseId = session.metadata.courseId;
+                console.log('Using metadata.courseId fallback:', metaCourseId);
+                if (metaCourseId === 'full_access') {
+                    courseIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+                } else if (!Number.isNaN(Number(metaCourseId))) {
+                    courseIds = [Number(metaCourseId)];
+                }
+            }
+
+            // Sprawdź czy użytkownik istnieje, jeśli nie - utwórz go
+            const { data: existingUser, error: userError } = await supabase
+                .from('users')
+                .select('id')
+                .eq('id', session.metadata.userId)
+                .single();
+
+            if (userError && userError.code !== 'PGRST116') {
+                console.error('Error checking user:', userError);
+            } else if (!existingUser) {
+                // Utwórz użytkownika
+                const { error: createUserError } = await supabase
+                    .from('users')
+                    .insert({
+                        id: session.metadata.userId,
+                        email: session.customer_email || session.customer_details?.email || 'unknown@example.com',
+                        created_at: new Date().toISOString()
+                    });
+
+                if (createUserError) {
+                    console.error('Error creating user:', createUserError);
+                } else {
+                    console.log('User created:', session.metadata.userId);
                 }
             }
 
@@ -147,7 +191,7 @@ app.post('/api/webhook', async (req, res) => {
                 if (error) {
                     console.error('Error adding enrollment for course', courseId, ':', error);
                 } else {
-                    console.log(`Access granted for user ${session.metadata.userId} to course ${courseId}`);
+                    console.log(`✅ Access granted for user ${session.metadata.userId} to course ${courseId}`);
                 }
             }
 
@@ -162,46 +206,14 @@ app.post('/api/webhook', async (req, res) => {
     }
 });
 
-// Endpoint do sprawdzania statusu płatności
-app.get('/api/check-payment-status', async (req, res) => {
-    const { session_id } = req.query;
-    
-    if (!session_id) {
-        return res.status(400).json({ success: false, error: 'Brak session_id' });
-    }
 
-    try {
-        const session = await stripe.checkout.sessions.retrieve(session_id);
-        
-        if (session.payment_status === 'paid') {
-            // Płatność została zrealizowana, ale webhook mógł jeszcze nie zostać wywołany
-            // Sprawdź czy użytkownik już ma dostęp
-            const { userId, courseId } = session.metadata;
-            
-            if (userId) {
-                // Sprawdź czy użytkownik ma już dostęp do kursu
-                const { data: enrollments, error } = await supabase
-                    .from('enrollments')
-                    .select('*')
-                    .eq('user_id', userId)
-                    .eq('access_granted', true);
-
-                if (error) {
-                    console.error('Error checking enrollments:', error);
-                } else if (enrollments && enrollments.length > 0) {
-                    return res.json({ success: true, message: 'Access already granted' });
-                }
-            }
-            
-            return res.json({ success: true, message: 'Payment successful' });
-        } else {
-            return res.json({ success: false, error: 'Payment not completed' });
-        }
-    } catch (error) {
-        console.error('Error checking payment status:', error);
-        return res.status(500).json({ success: false, error: 'Internal server error' });
-    }
-});
+// Sprawdź zmienne środowiskowe
+console.log('Environment check:');
+console.log('- SUPABASE_URL:', process.env.SUPABASE_URL ? '✓' : '✗ MISSING');
+console.log('- SUPABASE_SERVICE_KEY:', process.env.SUPABASE_SERVICE_KEY ? '✓' : '✗ MISSING (using ANON_KEY)');
+console.log('- STRIPE_SECRET_KEY:', process.env.STRIPE_SECRET_KEY ? '✓' : '✗ MISSING');
+console.log('- STRIPE_SECRET_KEY_TEST:', process.env.STRIPE_SECRET_KEY_TEST ? '✓' : '✗ MISSING (using live key)');
+console.log('- STRIPE_WEBHOOK_SECRET:', process.env.STRIPE_WEBHOOK_SECRET ? '✓' : '✗ MISSING');
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

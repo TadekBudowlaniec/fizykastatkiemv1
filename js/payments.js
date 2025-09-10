@@ -48,6 +48,7 @@ function buyViaLink(courseId = 'full_access') {
 }
 // Udostępnij globalnie
 window.buyViaLink = buyViaLink;
+window.buyAccess = buyAccess;
 
 async function buyAccess(courseId = 'full_access') {
     if (!currentUser) {
@@ -63,9 +64,8 @@ async function buyAccess(courseId = 'full_access') {
         // Mapowanie courseId na priceId
         let priceId;
         if (courseId === 'full_access') {
-            priceId = 'price_1RtPPaJLuu6b086bdmWNAsGI'; // Wszystkie materiały
+            priceId = 'price_1RtPPaJLuu6b086bdmWNAsGI';
         } else {
-            // Mapowanie course_id na priceId
             const coursePriceMapping = {
                 1: 'price_1RtPFoJLuu6b086bmfvVO4G8', // Kinematyka
                 2: 'price_1RtPGOJLuu6b086b1QN5l4DE', // Dynamika
@@ -84,30 +84,33 @@ async function buyAccess(courseId = 'full_access') {
                 15: 'price_1Rgt1lJLuu6b086bk3TJqFzM', // Fizyka Atomowa
                 16: 'price_1Rgt21JLuu6b086bTBuO2djx' // Fizyka Jądrowa i Relatywistyka
             };
-            priceId = coursePriceMapping[courseId] || 'price_1RtPPaJLuu6b086bdmWNAsGI'; // fallback na full_access
+            priceId = coursePriceMapping[courseId] || 'price_1RtPPaJLuu6b086bdmWNAsGI';
         }
+
+        console.log(`Creating checkout session for course ${courseId} with priceId ${priceId}`);
 
         const response = await fetch('http://localhost:3001/api/create-checkout-session', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                userId: userId,
-                email: currentUser.email,
-                courseId: courseId,
-                priceId: priceId
-            }),
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                userId, 
+                email: currentUser.email, 
+                courseId, 
+                priceId 
+            })
         });
         
         if (!response.ok) {
-            throw new Error('Błąd serwera podczas tworzenia sesji płatności');
+            const errorData = await response.json();
+            throw new Error(`Błąd serwera: ${errorData.error || response.statusText}`);
         }
         
         const session = await response.json();
-        const result = await window.stripe.redirectToCheckout({ sessionId: session.id });
+        console.log('Checkout session created:', session.id);
         
+        const result = await window.stripe.redirectToCheckout({ sessionId: session.id });
         if (result.error) {
+            console.error('Stripe redirect error:', result.error);
             alert('Błąd płatności: ' + result.error.message);
         }
     } catch (error) {
@@ -116,42 +119,25 @@ async function buyAccess(courseId = 'full_access') {
     }
 }
 
-async function checkPaymentStatus() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const sessionId = urlParams.get('session_id');
-    if (sessionId) {
-        try {
-            const response = await fetch(`http://localhost:3001/api/check-payment-status?session_id=${sessionId}`);
-            const result = await response.json();
-            if (result.success) {
-                await checkUserAccess();
-                showSection('dashboard');
-                alert('Płatność zakończona pomyślnie! Masz teraz dostęp do wszystkich kursów.');
-            } else {
-                alert('Błąd płatności: ' + result.error);
-            }
-        } catch (error) {
-            console.error('Błąd sprawdzania statusu płatności:', error);
-        }
-    }
-}
-
 // Funkcja do obsługi powrotu po płatności Stripe
 async function handleStripeReturn() {
     const urlParams = new URLSearchParams(window.location.search);
     const sessionId = urlParams.get('session_id');
     if (!sessionId) return;
+    
     try {
-        const response = await fetch(`http://localhost:3001/api/check-payment-status?session_id=${sessionId}`);
-        const result = await response.json();
-        if (result.success) {
-            await checkUserAccess();
-            showSection('dashboard');
-            alert('Płatność zakończona pomyślnie! Masz dostęp do kursu.');
-        } else {
-            alert('Błąd płatności: ' + (result.error || 'Nie udało się potwierdzić płatności.'));
-        }
+        // Sprawdź czy użytkownik ma dostęp (webhook powinien już dodać wpis do bazy)
+        await checkUserAccess();
+        
+        // Wyczyść URL z session_id
+        const url = new URL(window.location);
+        url.searchParams.delete('session_id');
+        window.history.replaceState({}, document.title, url);
+        
+        showSection('dashboard');
+        alert('Płatność zakończona pomyślnie! Sprawdź dostęp do kursów w panelu.');
     } catch (error) {
-        alert('Błąd podczas sprawdzania statusu płatności: ' + error.message);
+        console.error('Błąd podczas obsługi powrotu po płatności:', error);
+        alert('Płatność została zrealizowana. Sprawdź dostęp w panelu kursów.');
     }
 } 

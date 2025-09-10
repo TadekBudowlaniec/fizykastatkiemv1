@@ -555,14 +555,14 @@ function renderCourseFullView(subjectKey, main) {
         // Pojedynczy kurs
         const buyBtn = document.createElement('a');
         buyBtn.href = '#';
-        buyBtn.onclick = () => { buyViaLink(course_id); return false; };
+        buyBtn.onclick = () => { buyAccess(course_id); return false; };
         buyBtn.className = 'btn btn-gradient';
         buyBtn.textContent = 'Kup ten kurs';
         btnGroup.appendChild(buyBtn);
         // Wszystkie materiały
         const buyAllBtn = document.createElement('a');
         buyAllBtn.href = '#';
-        buyAllBtn.onclick = () => { buyViaLink('full_access'); return false; };
+        buyAllBtn.onclick = () => { buyAccess('full_access'); return false; };
         buyAllBtn.className = 'btn btn-outline';
         buyAllBtn.textContent = 'Kup wszystkie materiały';
         btnGroup.appendChild(buyAllBtn);
@@ -654,8 +654,8 @@ async function showPreviewTask(course_id, taskArea) {
             buyCourseBtn = `<a href="#" onclick="showSection('login');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Kup ten kurs</a>`;
             buyAllBtn = `<a href="#" onclick="showSection('login');return false;" class="btn btn-outline" style="font-size: 1.1rem; min-width: 220px;">Kup wszystkie materiały</a>`;
         } else {
-            buyCourseBtn = `<a href="#" onclick="buyViaLink('${course_id}');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Kup ten kurs</a>`;
-            buyAllBtn = `<a href="#" onclick="buyViaLink('full_access');return false;" class="btn btn-outline" style="font-size: 1.1rem; min-width: 220px;">Kup wszystkie materiały</a>`;
+            buyCourseBtn = `<a href="#" onclick="buyAccess('${course_id}');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Kup ten kurs</a>`;
+            buyAllBtn = `<a href="#" onclick="buyAccess('full_access');return false;" class="btn btn-outline" style="font-size: 1.1rem; min-width: 220px;">Kup wszystkie materiały</a>`;
         }
         overlay.innerHTML = `
             <div>

@@ -3,8 +3,18 @@ const supabaseUrl = 'https://kldekjrpottsqebueojg.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtsZGVranJwb3R0c3FlYnVlb2pnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNTc4NTcsImV4cCI6MjA2NzYzMzg1N30.aYCWfbhliWM3yQRyZUDL59IgMOWklwa0ZA4QOSdyLh0';
 const supabase = window.supabase?.createClient ? window.supabase.createClient(supabaseUrl, supabaseKey) : null;
 
-// Stripe Configuration
-const stripe = Stripe('pk_live_51RVvveJLuu6b086bkMWivsLTKUamDhivaYv3ObKeMpV2kHSjCKuYE3sijENdGWISCsVBz3RI40MgYX0P1jhL2ICz00B2VbJDF3');
+// Stripe Configuration (switch live/test by URL ?testPayments=1 or localStorage.TEST_CHECKOUT='1')
+function isTestCheckoutEnabled() {
+    try {
+        const url = new URL(window.location.href);
+        if (url.searchParams.get('testPayments') === '1') return true;
+    } catch (_) {}
+    try { return localStorage.getItem('TEST_CHECKOUT') === '1'; } catch (_) { return false; }
+}
+const STRIPE_PUBLISHABLE_KEY_LIVE = 'pk_live_51RVvveJLuu6b086bkMWivsLTKUamDhivaYv3ObKeMpV2kHSjCKuYE3sijENdGWISCsVBz3RI40MgYX0P1jhL2ICz00B2VbJDF3';
+// Provide your test publishable key at runtime by setting window.STRIPE_TEST_PK (e.g. in console) to avoid committing secrets
+const STRIPE_PUBLISHABLE_KEY_TEST = window.STRIPE_TEST_PK || STRIPE_PUBLISHABLE_KEY_LIVE;
+const stripe = Stripe(isTestCheckoutEnabled() ? STRIPE_PUBLISHABLE_KEY_TEST : STRIPE_PUBLISHABLE_KEY_LIVE);
 
 // Dodaj stripe do window aby był dostępny globalnie
 window.stripe = stripe;
