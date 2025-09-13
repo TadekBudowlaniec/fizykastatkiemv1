@@ -9,7 +9,7 @@ async function downloadPDF(pdfType) {
         const userId = user.id;
         const hasAccess = userEnrollments.some(enrollment => 
             enrollment.course_id === 'full_access' || 
-            enrollment.course_id === pdfType
+            enrollment.course_id === String(pdfType)
         );
         if (!hasAccess) {
             alert('Nie masz dostępu do tego materiału!');

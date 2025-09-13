@@ -121,7 +121,9 @@ let currentUserIsAdmin = false;
 function hasAccessToCourse(courseId) {
     if (currentUserIsAdmin) return true;
     if (!userEnrollments || userEnrollments.length === 0) return false;
-    return userEnrollments.some(e => e.course_id === courseId || e.course_id === 'full_access');
+    // Konwertuj courseId na string, bo w bazie danych course_id jest typu TEXT
+    const courseIdStr = String(courseId);
+    return userEnrollments.some(e => e.course_id === courseIdStr || e.course_id === 'full_access');
 }
 
 async function changePassword(currentPassword, newPassword, repeatNewPassword) {

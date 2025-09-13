@@ -140,7 +140,7 @@ function showSubject(subjectKey) {
     const subject = window.subjects[subjectKey];
     if (!subject) return;
     const course_id = parseInt(subjectKey);
-    if (!hasAccessToCourse(course_id)) {
+    if (!hasAccessToCourse(subjectKey)) {
         alert('Musisz kupić dostęp do tego kursu!');
         showSection('pricing');
         return;
@@ -316,8 +316,10 @@ function renderCoursePreview(subjectKey, main) {
         if (parseInt(subjectKey) === 3) {
             card.onclick = () => alert('zadania maturalne z tego działu są wplecione w inne działy fizyki');
         } else {
-            // Dla pozostałych kursów
-            if (currentUser && hasAccessToCourse(parseInt(subjectKey))) {
+            // Dla pozostałych kursów - sprawdź czy użytkownik ma dostęp
+            const hasAccess = currentUser && hasAccessToCourse(subjectKey);
+            
+            if (hasAccess) {
                 // Użytkownik ma dostęp - sprawdź który etap
                 if (stage.title === 'Etap 1') {
                     // Etap 1 - otwórz rzeczywisty PDF
@@ -484,7 +486,7 @@ function renderCourseFullView(subjectKey, main) {
         card.appendChild(description);
         
         // Sprawdź czy użytkownik ma dostęp do kursu
-        const hasAccess = currentUser && hasAccessToCourse(parseInt(subjectKey));
+        const hasAccess = currentUser && hasAccessToCourse(subjectKey);
         
         // Special handling for "Praca moc energia" (course 3)
         if (parseInt(subjectKey) === 3) {
@@ -547,7 +549,7 @@ function renderCourseFullView(subjectKey, main) {
     // Przycisk kupna kursu (zawsze pokazuj na potrzeby testu)
     const course_id = parseInt(subjectKey);
     // Pokazuj przyciski kupna tylko jeśli użytkownik nie ma dostępu do kursu
-    if (!hasAccessToCourse(course_id)) {
+    if (!hasAccessToCourse(subjectKey)) {
         const btnGroup = document.createElement('div');
         btnGroup.style.display = 'flex';
         btnGroup.style.gap = '1rem';

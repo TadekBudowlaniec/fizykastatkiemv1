@@ -89,7 +89,7 @@ async function buyAccess(courseId = 'full_access') {
 
         console.log(`Creating checkout session for course ${courseId} with priceId ${priceId}`);
 
-        const response = await fetch('http://localhost:3001/api/create-checkout-session', {
+        const response = await fetch('https://fizykastatkiemvbackend-production.up.railway.app/api/create-checkout-session', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
