@@ -23,8 +23,8 @@ app.get('/api/health', (req, res) => {
 
 // Mapowanie kursów na priceId Stripe (16 kursów + full_access) - LIVE MODE
 const coursePriceIds = {
-    1: 'price_1RtPFoJLuu6b086bmfvVO4G8', // Kinematyka
-    2: 'price_1RtPGOJLuu6b086b1QN5l4DE', // Dynamika
+    1: 'price_1S5qqfJLuu6b086bn5K6W4wN', // Kinematyka
+    2: 'price_1S5qqfJLuu6b086bn5K6W4wN', // Dynamika
     3: 'price_1Rgt0yJLuu6b086b115h7OXM', // Praca moc energia
     4: 'price_1RtPKTJLuu6b086b3wG0IiaV', // Bryła Sztywna
     5: 'price_1RtPKkJLuu6b086b2lfhBfDX', // Ruch Drgający
@@ -44,8 +44,8 @@ const coursePriceIds = {
 
 // Mapowanie priceId na course_id
 const priceToCourseId = {
-    'price_1RtPFoJLuu6b086bmfvVO4G8': 1, // Kinematyka
-    'price_1RtPGOJLuu6b086b1QN5l4DE': 2, // Dynamika
+    'price_1S5qqfJLuu6b086bn5K6W4wN': 1, // Kinematyka
+    'price_1S5qqfJLuu6b086bn5K6W4wN': 2, // Dynamika
     'price_1Rgt0yJLuu6b086b115h7OXM': 3, // Praca moc energia
     'price_1RtPKTJLuu6b086b3wG0IiaV': 4, // Bryła Sztywna
     'price_1RtPKkJLuu6b086b2lfhBfDX': 5, // Ruch Drgający
@@ -98,10 +98,6 @@ app.post('/api/create-checkout-session', async (req, res) => {
 app.post('/api/webhook', async (req, res) => {
     const sig = req.headers['stripe-signature'];
     let event;
-
-    console.log('=== WEBHOOK RECEIVED ===');
-    console.log('Headers:', req.headers);
-    console.log('Body length:', req.rawBody ? req.rawBody.length : 'no body');
 
     try {
         event = stripe.webhooks.constructEvent(req.rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
@@ -187,21 +183,14 @@ app.post('/api/webhook', async (req, res) => {
             }
 
             // Dodaj wpisy do tabeli enrollments
-            console.log('Adding enrollments for courses:', courseIds);
             for (const courseId of courseIds) {
-                const enrollmentData = {
-                    user_id: session.metadata.userId,
-                    course_id: courseId,
-                    access_granted: true,
-                    enrolled_at: new Date().toISOString()
-                };
-                console.log('Inserting enrollment:', enrollmentData);
-                
-                const { data, error } = await supabase
+                const { error } = await supabase
                     .from('enrollments')
-                    .upsert(enrollmentData, { 
-                        onConflict: 'user_id,course_id',
-                        ignoreDuplicates: false 
+                    .upsert({
+                        user_id: session.metadata.userId,
+                        course_id: courseId,
+                        access_granted: true,
+                        enrolled_at: new Date().toISOString()
                     });
 
                 if (error) {
