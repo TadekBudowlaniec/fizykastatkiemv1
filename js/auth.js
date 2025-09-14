@@ -137,14 +137,15 @@ function hasAccessToCourse(courseId) {
         return false;
     }
     
-    // Konwertuj courseId na string, bo w bazie danych course_id jest typu TEXT
+    // Konwertuj courseId na number, bo w bazie danych course_id jest typu number
+    const courseIdNum = Number(courseId);
     const courseIdStr = String(courseId);
-    console.log('Looking for courseIdStr:', courseIdStr);
+    console.log('Looking for courseIdNum:', courseIdNum, 'courseIdStr:', courseIdStr);
     
     const hasAccess = userEnrollments.some(e => {
         console.log('Checking enrollment:', e, 'course_id:', e.course_id, 'type:', typeof e.course_id);
         // Porównaj zarówno jako string jak i number
-        return e.course_id === courseIdStr || e.course_id === courseId || e.course_id === 'full_access';
+        return e.course_id === courseIdNum || e.course_id === courseIdStr || e.course_id === 'full_access';
     });
     
     console.log('hasAccess result:', hasAccess);
