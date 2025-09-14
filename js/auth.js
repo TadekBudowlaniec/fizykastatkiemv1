@@ -106,6 +106,7 @@ async function checkUserAccess() {
             
         console.log('Raw enrollments from database:', enrollments);
         console.log('Enrollments error:', error);
+        console.log('First enrollment details:', enrollments?.[0]);
         if (error) {
             userHasAccess = false;
             userEnrollments = [];
@@ -123,11 +124,30 @@ async function checkUserAccess() {
 let currentUserIsAdmin = false;
 
 function hasAccessToCourse(courseId) {
-    if (currentUserIsAdmin) return true;
-    if (!userEnrollments || userEnrollments.length === 0) return false;
+    console.log('hasAccessToCourse called with courseId:', courseId, 'type:', typeof courseId);
+    console.log('currentUserIsAdmin:', currentUserIsAdmin);
+    console.log('userEnrollments:', userEnrollments);
+    
+    if (currentUserIsAdmin) {
+        console.log('User is admin, granting access');
+        return true;
+    }
+    if (!userEnrollments || userEnrollments.length === 0) {
+        console.log('No enrollments found');
+        return false;
+    }
+    
     // Konwertuj courseId na string, bo w bazie danych course_id jest typu TEXT
     const courseIdStr = String(courseId);
-    return userEnrollments.some(e => e.course_id === courseIdStr || e.course_id === 'full_access');
+    console.log('Looking for courseIdStr:', courseIdStr);
+    
+    const hasAccess = userEnrollments.some(e => {
+        console.log('Checking enrollment:', e, 'course_id:', e.course_id, 'type:', typeof e.course_id);
+        return e.course_id === courseIdStr || e.course_id === 'full_access';
+    });
+    
+    console.log('hasAccess result:', hasAccess);
+    return hasAccess;
 }
 
 async function changePassword(currentPassword, newPassword, repeatNewPassword) {
