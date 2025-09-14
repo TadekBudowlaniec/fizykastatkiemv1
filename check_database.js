@@ -52,6 +52,24 @@ async function checkDatabaseTables() {
             console.log('✅ Tabela user_tasks istnieje');
         }
         
+        // Sprawdź czy tabela tasks istnieje i ma dane
+        const { data: tasksData, error: tasksError } = await supabase
+            .from('tasks')
+            .select('id')
+            .limit(1);
+            
+        if (tasksError) {
+            console.error('❌ Błąd tabeli tasks:', tasksError);
+            console.log('💡 Wskazówka: Tabela tasks nie istnieje lub nie ma dostępu');
+            return;
+        } else if (!tasksData || tasksData.length === 0) {
+            console.error('❌ Tabela tasks jest pusta');
+            console.log('💡 Wskazówka: Dodaj zadania do tabeli tasks');
+            return;
+        } else {
+            console.log('✅ Tabela tasks istnieje i ma dane:', tasksData.length, 'zadań');
+        }
+
         // Sprawdź czy użytkownik jest zalogowany
         if (currentUser) {
             console.log('✅ Użytkownik zalogowany:', currentUser.id);
@@ -59,7 +77,7 @@ async function checkDatabaseTables() {
             // Sprawdź czy można zapisać do user_tasks
             const testData = {
                 user_id: currentUser.id,
-                task_id: 1, // testowe ID zadania
+                task_id: tasksData[0].id, // użyj pierwszego dostępnego zadania
                 status: 'skip'
                 // Usuwamy completed_at na razie
             };

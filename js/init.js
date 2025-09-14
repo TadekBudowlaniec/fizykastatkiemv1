@@ -82,22 +82,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const sessionId = urlParams.get('session_id');
     if (sessionId) {
-        // Sprawdź status płatności i odśwież dostęp użytkownika
-        setTimeout(async () => {
-            try {
-                const response = await fetch(`http://localhost:3001/api/check-payment-status?session_id=${sessionId}`);
-                const result = await response.json();
-                if (result.success) {
-                    // Odśwież dostęp użytkownika
-                    await checkUserAccess();
-                    // Przejdź do dashboardu
-                    showSection('dashboard');
-                    alert('Płatność zakończona pomyślnie! Masz teraz dostęp do kursu.');
-                }
-            } catch (error) {
-                console.error('Błąd sprawdzania statusu płatności:', error);
-            }
-        }, 1000); // Krótkie opóźnienie, aby webhook miał czas się wykonać
+        // handleStripeReturn() w payments.js obsłuży to
+        console.log('Session ID detected, handleStripeReturn will process it');
     }
     // Sprawdzenie sesji użytkownika
     supabase.auth.getUser().then(({ data: { user } }) => {
