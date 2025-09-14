@@ -143,7 +143,8 @@ function hasAccessToCourse(courseId) {
     
     const hasAccess = userEnrollments.some(e => {
         console.log('Checking enrollment:', e, 'course_id:', e.course_id, 'type:', typeof e.course_id);
-        return e.course_id === courseIdStr || e.course_id === 'full_access';
+        // Porównaj zarówno jako string jak i number
+        return e.course_id === courseIdStr || e.course_id === courseId || e.course_id === 'full_access';
     });
     
     console.log('hasAccess result:', hasAccess);
