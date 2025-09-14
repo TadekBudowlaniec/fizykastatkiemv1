@@ -68,7 +68,7 @@ async function buyAccess(courseId = 'full_access') {
         } else {
             const coursePriceMapping = {
                 1: 'price_1S5qqfJLuu6b086bn5K6W4wN', // Kinematyka
-                2: 'price_1RtPGOJLuu6b086b1QN5l4DE', // Dynamika
+                2: 'price_1S5qqfJLuu6b086bn5K6W4wN', // Dynamika
                 3: 'price_1Rgt0yJLuu6b086b115h7OXM', // Praca moc energia
                 4: 'price_1RtPKTJLuu6b086b3wG0IiaV', // Bryła Sztywna
                 5: 'price_1RtPKkJLuu6b086b2lfhBfDX', // Ruch Drgający
