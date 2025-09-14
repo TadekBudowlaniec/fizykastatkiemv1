@@ -99,9 +99,11 @@ async function checkUserAccess() {
         // Pobierz enrollments
         const { data: enrollments, error } = await supabase
             .from('enrollments')
-            .select('course_id, courses(name)')
+            .select('course_id, access_granted, enrolled_at')
             .eq('user_id', userId)
             .eq('access_granted', true);
+            
+        console.log('Raw enrollments from database:', enrollments);
         if (error) {
             userHasAccess = false;
             userEnrollments = [];

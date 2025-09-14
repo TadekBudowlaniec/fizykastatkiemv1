@@ -57,6 +57,12 @@ async function buyAccess(courseId = 'full_access') {
         return;
     }
 
+    // Sprawdź czy użytkownik już ma dostęp do tego kursu
+    if (hasAccessToCourse(courseId)) {
+        alert('Masz już dostęp do tego kursu!');
+        return;
+    }
+
     try {
         const { data: { user } } = await supabase.auth.getUser();
         const userId = user.id;
@@ -126,8 +132,15 @@ async function handleStripeReturn() {
     if (!sessionId) return;
     
     try {
+        // Poczekaj chwilę na przetworzenie webhook
+        console.log('Waiting for webhook to process...');
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
         // Sprawdź czy użytkownik ma dostęp (webhook powinien już dodać wpis do bazy)
         await checkUserAccess();
+        
+        console.log('User enrollments after payment:', userEnrollments);
+        console.log('User has access:', userHasAccess);
         
         // Wyczyść URL z session_id
         const url = new URL(window.location);
