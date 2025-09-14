@@ -97,6 +97,7 @@ async function checkUserAccess() {
             .single();
         currentUserIsAdmin = !!(userRow && userRow.is_admin);
         // Pobierz enrollments
+        console.log('Fetching enrollments for user:', userId);
         const { data: enrollments, error } = await supabase
             .from('enrollments')
             .select('course_id, access_granted, enrolled_at')
@@ -104,6 +105,7 @@ async function checkUserAccess() {
             .eq('access_granted', true);
             
         console.log('Raw enrollments from database:', enrollments);
+        console.log('Enrollments error:', error);
         if (error) {
             userHasAccess = false;
             userEnrollments = [];

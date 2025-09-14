@@ -7,20 +7,8 @@ async function checkDatabaseTables() {
     console.log('Current user:', currentUser);
     
     try {
-        // Sprawdź tabelę tasks
+        // Sprawdź tabelę tasks - będzie sprawdzona później
         console.log('Sprawdzam tabelę tasks...');
-        const { data: tasksData, error: tasksError } = await supabase
-            .from('tasks')
-            .select('count')
-            .limit(1);
-        
-        console.log('Wynik tasks:', { data: tasksData, error: tasksError });
-        
-        if (tasksError) {
-            console.error('❌ Błąd tabeli tasks:', tasksError);
-        } else {
-            console.log('✅ Tabela tasks istnieje');
-        }
         
         // Sprawdź tabelę task_images
         console.log('Sprawdzam tabelę task_images...');

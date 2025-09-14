@@ -184,13 +184,16 @@ app.post('/api/webhook', async (req, res) => {
 
             // Dodaj wpisy do tabeli enrollments
             for (const courseId of courseIds) {
-                const { error } = await supabase
+                const { data, error } = await supabase
                     .from('enrollments')
                     .upsert({
                         user_id: session.metadata.userId,
                         course_id: courseId,
                         access_granted: true,
                         enrolled_at: new Date().toISOString()
+                    }, { 
+                        onConflict: 'user_id,course_id',
+                        ignoreDuplicates: false 
                     });
 
                 if (error) {
