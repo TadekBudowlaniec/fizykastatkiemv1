@@ -11,7 +11,7 @@ function isTestCheckoutEnabled() {
     } catch (_) {}
     try { return localStorage.getItem('TEST_CHECKOUT') === '1'; } catch (_) { return false; }
 }
-const STRIPE_PUBLISHABLE_KEY_LIVE = 'pk_test_51RVvveJLuu6b086bd72Q8cBAKYVPsr8A0HxXor1puwBWMsqan9LcBwBAHjeJ05iwSB8s96iksuzfipP5Cay2ihli00ynh8JVva';
+const STRIPE_PUBLISHABLE_KEY_LIVE = 'pk_live_51RVvveJLuu6b086bkMWivsLTKUamDhivaYv3ObKeMpV2kHSjCKuYE3sijENdGWISCsVBz3RI40MgYX0P1jhL2ICz00B2VbJDF3';
 // Provide your test publishable key at runtime by setting window.STRIPE_TEST_PK (e.g. in console) to avoid committing secrets
 const STRIPE_PUBLISHABLE_KEY_TEST = window.STRIPE_TEST_PK || STRIPE_PUBLISHABLE_KEY_LIVE;
 const stripe = Stripe(isTestCheckoutEnabled() ? STRIPE_PUBLISHABLE_KEY_TEST : STRIPE_PUBLISHABLE_KEY_LIVE);
