@@ -57,7 +57,7 @@ exports.handler = async (event) => {
         }
 
         const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['p24','card', 'blik', 'klarna', 'paynow', 'paypal'],
+            payment_method_types: ['p24','card', 'blik', 'klarna'],
             mode: 'payment',
             customer_email: email,
             line_items: [
