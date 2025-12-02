@@ -288,8 +288,9 @@ function renderCoursePreview(subjectKey, main) {
     videoContainer.style.gridTemplateColumns = '1fr 2fr';
     videoContainer.style.gap = '1.5rem';
     videoContainer.style.marginBottom = '1.5rem';
-    videoContainer.style.opacity = '0.6';
+    videoContainer.style.opacity = '0.4';
     videoContainer.style.pointerEvents = 'none';
+    videoContainer.style.filter = 'grayscale(20%) blur(0.3px)';
     
     // Lista filmów (lewa kolumna) - zablokowana
     const videoListContainer = document.createElement('div');
@@ -322,14 +323,15 @@ function renderCoursePreview(subjectKey, main) {
     videoPlaceholder.className = 'video-placeholder';
     videoPlaceholder.style.cssText = `
         width: 100%;
-        min-height: 400px;
-        background: #e5e5e5;
+        aspect-ratio: 16 / 9;
+        background: #1f2937;
         border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #888;
+        color: #f3f4f6;
         font-size: 1.2rem;
+        border: 2px dashed rgba(255,255,255,0.2);
     `;
     videoPlaceholder.textContent = 'Wideo dostępne po zakupie';
     videoPlayerContainer.appendChild(videoPlaceholder);
@@ -346,39 +348,37 @@ function renderCoursePreview(subjectKey, main) {
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(0, 0, 0, 0.7);
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 12px;
+        border-radius: 20px;
         z-index: 10;
-    `;
-    
-    const overlayContent = document.createElement('div');
-    overlayContent.style.cssText = `
+        color: white;
         text-align: center;
         padding: 2rem;
     `;
     
-    const lockIcon = document.createElement('div');
-    lockIcon.style.cssText = `
-        font-size: 3rem;
-        margin-bottom: 1rem;
-    `;
-    lockIcon.textContent = '🔒';
+    let buyCourseBtn, buyAllBtn;
+    if (!currentUser) {
+        buyCourseBtn = `<a href="#" onclick="showSection('login');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Kup ten kurs</a>`;
+        buyAllBtn = `<a href="#" onclick="showSection('login');return false;" class="btn btn-outline" style="font-size: 1.1rem; min-width: 220px;">Kup wszystkie materiały</a>`;
+    } else {
+        buyCourseBtn = `<a href="#" onclick="buyAccess('${subjectKey}');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Kup ten kurs</a>`;
+        buyAllBtn = `<a href="#" onclick="buyAccess('full_access');return false;" class="btn btn-outline" style="font-size: 1.1rem; min-width: 220px;">Kup wszystkie materiały</a>`;
+    }
     
-    const overlayText = document.createElement('div');
-    overlayText.style.cssText = `
-        font-size: 1.1rem;
-        color: var(--black);
-        font-weight: 600;
-        margin-bottom: 0.5rem;
+    overlay.innerHTML = `
+        <div>
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
+            <div>Filmy dostępne po zakupie kursu</div>
+            <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.85;">To jest podgląd lekcji z tego kursu</div>
+            <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; align-items: center;">
+                ${buyCourseBtn}
+                ${buyAllBtn}
+            </div>
+        </div>
     `;
-    overlayText.textContent = 'Filmy dostępne po zakupie kursu';
-    
-    overlayContent.appendChild(lockIcon);
-    overlayContent.appendChild(overlayText);
-    overlay.appendChild(overlayContent);
     videoSection.appendChild(overlay);
     
     main.appendChild(videoSection);
@@ -826,32 +826,47 @@ function renderCourseFullView(subjectKey, main) {
     }
 }
 
-// Funkcja do pobierania i wyświetlania filmów z bazy danych
+// Funkcja do pobierania i wyświetlania filmów/segmentów z bazy danych
 async function loadVideosForCourse(course_id, videoListElement, videoPlayerElement, videoPlaceholder) {
     try {
-        // Pobierz filmy z bazy danych dla danego kursu
-        const { data: videos, error } = await supabase
+        // 1) Pobierz główne wideo (yt_id_wideo) powiązane z danym kursem
+        const { data: videoRow, error: videoError } = await supabase
             .from('video')
-            .select('video_id, yt_id_wideo, tytul_lekcji')
+            .select('yt_id_wideo')
             .eq('course_id', course_id)
-            .order('video_id', { ascending: true });
+            .single();
+
+        if (videoError || !videoRow) {
+            console.error('Błąd pobierania wideo dla kursu:', videoError);
+            videoListElement.innerHTML = '<p style="color: #ef4444; padding: 1rem;">Brak wideo dla tego kursu</p>';
+            return;
+        }
+
+        const ytId = videoRow.yt_id_wideo;
         
-        if (error) {
-            console.error('Błąd pobierania filmów:', error);
-            videoListElement.innerHTML = '<p style="color: #ef4444; padding: 1rem;">Błąd ładowania filmów</p>';
+        // 2) Pobierz segmenty z tabeli video_segments dla danego kursu (kolumna video_id)
+        const { data: segments, error: segmentsError } = await supabase
+            .from('video_segments')
+            .select('segment_id, tytul_segmentu, start_s, end_s')
+            .eq('video_id', course_id)
+            .order('segment_id', { ascending: true });
+        
+        if (segmentsError) {
+            console.error('Błąd pobierania segmentów wideo:', segmentsError);
+            videoListElement.innerHTML = '<p style="color: #ef4444; padding: 1rem;">Błąd ładowania lekcji wideo</p>';
             return;
         }
         
-        if (!videos || videos.length === 0) {
-            videoListElement.innerHTML = '<p style="color: #888; padding: 1rem;">Brak filmów dla tego kursu</p>';
+        if (!segments || segments.length === 0) {
+            videoListElement.innerHTML = '<p style="color: #888; padding: 1rem;">Brak zdefiniowanych lekcji wideo dla tego kursu</p>';
             return;
         }
-        
+
         // Wyczyść listę
         videoListElement.innerHTML = '';
         
-        // Utwórz elementy listy filmów
-        videos.forEach((video, index) => {
+        // Utwórz elementy listy segmentów (lekcji)
+        segments.forEach((segment, index) => {
             const videoItem = document.createElement('div');
             videoItem.className = 'video-list-item';
             videoItem.style.cssText = `
@@ -894,7 +909,7 @@ async function loadVideosForCourse(course_id, videoListElement, videoPlayerEleme
                 color: var(--black);
                 font-size: 0.95rem;
             `;
-            videoTitle.textContent = video.tytul_lekcji || `Lekcja ${index + 1}`;
+            videoTitle.textContent = segment.tytul_segmentu || `Lekcja ${index + 1}`;
             
             videoItem.appendChild(videoNumber);
             videoItem.appendChild(videoTitle);
@@ -914,8 +929,18 @@ async function loadVideosForCourse(course_id, videoListElement, videoPlayerEleme
                 videoItem.style.borderColor = 'var(--magenta)';
                 
                 // Ustaw źródło iframe - prawidłowy format embed URL dla YouTube
-                // Parametry: rel=0 (wyłącza powiązane filmy - bardzo ważne!), showinfo=0 (ukrywa tytuł i kanał)
-                const youtubeUrl = `https://www.youtube.com/embed/${video.yt_id_wideo}?rel=0&modestbranding=1&showinfo=0`;
+                // Parametry:
+                //  - rel=0 (wyłącza powiązane filmy - bardzo ważne!)
+                //  - modestbranding=1 (mniej logo YouTube)
+                //  - showinfo=0 (ukrywa tytuł i kanał)
+                //  - start / end – czas trwania segmentu w sekundach
+                const start = Number(segment.start_s) || 0;
+                const end = Number(segment.end_s) || undefined;
+                const timeParams = end && end > start 
+                    ? `&start=${start}&end=${end}` 
+                    : (start > 0 ? `&start=${start}` : '');
+                
+                const youtubeUrl = `https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1&showinfo=0&autoplay=1${timeParams}`;
                 
                 // Zapisz dokładne wymiary placeholdera lub kontenera przed ukryciem
                 let targetWidth, targetHeight;
@@ -969,29 +994,29 @@ async function loadVideosForCourse(course_id, videoListElement, videoPlayerEleme
 // Funkcja do wyświetlania zablokowanej listy filmów w podglądzie
 async function loadVideosPreviewForCourse(course_id, videoListElement) {
     try {
-        // Pobierz filmy z bazy danych dla danego kursu
-        const { data: videos, error } = await supabase
-            .from('video')
-            .select('video_id, yt_id_wideo, tytul_lekcji')
-            .eq('course_id', course_id)
-            .order('video_id', { ascending: true });
+        // Pobierz segmenty wideo z bazy danych dla danego kursu (kolumna video_id)
+        const { data: segments, error } = await supabase
+            .from('video_segments')
+            .select('segment_id, tytul_segmentu, start_s, end_s')
+            .eq('video_id', course_id)
+            .order('segment_id', { ascending: true });
         
         if (error) {
-            console.error('Błąd pobierania filmów:', error);
-            videoListElement.innerHTML = '<p style="color: #888; padding: 1rem;">Brak filmów dla tego kursu</p>';
+            console.error('Błąd pobierania segmentów wideo:', error);
+            videoListElement.innerHTML = '<p style="color: #888; padding: 1rem;">Brak lekcji wideo dla tego kursu</p>';
             return;
         }
         
-        if (!videos || videos.length === 0) {
-            videoListElement.innerHTML = '<p style="color: #888; padding: 1rem;">Brak filmów dla tego kursu</p>';
+        if (!segments || segments.length === 0) {
+            videoListElement.innerHTML = '<p style="color: #888; padding: 1rem;">Brak lekcji wideo dla tego kursu</p>';
             return;
         }
         
         // Wyczyść listę
         videoListElement.innerHTML = '';
         
-        // Utwórz elementy listy filmów (zablokowane)
-        videos.forEach((video, index) => {
+        // Utwórz elementy listy segmentów (zablokowane)
+        segments.forEach((segment, index) => {
             const videoItem = document.createElement('div');
             videoItem.className = 'video-list-item';
             videoItem.style.cssText = `
@@ -1019,7 +1044,7 @@ async function loadVideosPreviewForCourse(course_id, videoListElement) {
                 color: var(--black);
                 font-size: 0.95rem;
             `;
-            videoTitle.textContent = video.tytul_lekcji || `Lekcja ${index + 1}`;
+            videoTitle.textContent = segment.tytul_segmentu || `Lekcja ${index + 1}`;
             
             videoItem.appendChild(videoNumber);
             videoItem.appendChild(videoTitle);
