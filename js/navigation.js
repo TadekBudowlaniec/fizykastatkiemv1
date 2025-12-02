@@ -270,12 +270,122 @@ function renderCoursePreview(subjectKey, main) {
     title.textContent = subject.title + ' (Podgląd)';
     main.appendChild(title);
     
-    // Szary placeholder zamiast wideo
-    const video = document.createElement('div');
-    video.className = 'video-frame';
-    video.style = 'background:#e5e5e5;display:flex;align-items:center;justify-content:center;color:#888;font-size:1.2rem;min-height:220px;margin-bottom:1.5rem;';
-    video.textContent = 'Wideo dostępne po zakupie';
-    main.appendChild(video);
+    // Sekcja z filmami (zablokowana dla użytkowników bez dostępu)
+    const videoSection = document.createElement('div');
+    videoSection.className = 'video-section';
+    videoSection.style.marginBottom = '2rem';
+    videoSection.style.position = 'relative';
+    
+    const videoHeader = document.createElement('h3');
+    videoHeader.textContent = 'Materiały Wideo';
+    videoHeader.style.marginBottom = '1.5rem';
+    videoSection.appendChild(videoHeader);
+    
+    // Kontener dla listy filmów i odtwarzacza
+    const videoContainer = document.createElement('div');
+    videoContainer.className = 'video-container';
+    videoContainer.style.display = 'grid';
+    videoContainer.style.gridTemplateColumns = '1fr 2fr';
+    videoContainer.style.gap = '1.5rem';
+    videoContainer.style.marginBottom = '1.5rem';
+    videoContainer.style.opacity = '0.6';
+    videoContainer.style.pointerEvents = 'none';
+    
+    // Lista filmów (lewa kolumna) - zablokowana
+    const videoListContainer = document.createElement('div');
+    videoListContainer.className = 'video-list-container';
+    videoListContainer.style.cssText = `
+        background: #fff;
+        border-radius: 12px;
+        padding: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        max-height: 600px;
+        overflow-y: auto;
+    `;
+    
+    const videoListTitle = document.createElement('h4');
+    videoListTitle.textContent = 'Lista lekcji';
+    videoListTitle.style.marginBottom = '1rem';
+    videoListTitle.style.color = 'var(--black)';
+    videoListContainer.appendChild(videoListTitle);
+    
+    const videoList = document.createElement('div');
+    videoList.className = 'video-list';
+    videoList.id = `videoList-preview-${subjectKey}`;
+    videoListContainer.appendChild(videoList);
+    
+    // Odtwarzacz wideo (prawa kolumna) - placeholder
+    const videoPlayerContainer = document.createElement('div');
+    videoPlayerContainer.className = 'video-player-container';
+    
+    const videoPlaceholder = document.createElement('div');
+    videoPlaceholder.className = 'video-placeholder';
+    videoPlaceholder.style.cssText = `
+        width: 100%;
+        min-height: 400px;
+        background: #e5e5e5;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #888;
+        font-size: 1.2rem;
+    `;
+    videoPlaceholder.textContent = 'Wideo dostępne po zakupie';
+    videoPlayerContainer.appendChild(videoPlaceholder);
+    
+    videoContainer.appendChild(videoListContainer);
+    videoContainer.appendChild(videoPlayerContainer);
+    videoSection.appendChild(videoContainer);
+    
+    // Overlay z informacją o braku dostępu
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        z-index: 10;
+    `;
+    
+    const overlayContent = document.createElement('div');
+    overlayContent.style.cssText = `
+        text-align: center;
+        padding: 2rem;
+    `;
+    
+    const lockIcon = document.createElement('div');
+    lockIcon.style.cssText = `
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    `;
+    lockIcon.textContent = '🔒';
+    
+    const overlayText = document.createElement('div');
+    overlayText.style.cssText = `
+        font-size: 1.1rem;
+        color: var(--black);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    `;
+    overlayText.textContent = 'Filmy dostępne po zakupie kursu';
+    
+    overlayContent.appendChild(lockIcon);
+    overlayContent.appendChild(overlayText);
+    overlay.appendChild(overlayContent);
+    videoSection.appendChild(overlay);
+    
+    main.appendChild(videoSection);
+    
+    // Załaduj filmy z bazy danych (tylko do podglądu listy)
+    const course_id = parseInt(subjectKey);
+    loadVideosPreviewForCourse(course_id, videoList);
     
     // PDF - 3 etapy w stylu feature-card (podobnie jak w full view)
     const pdfSection = document.createElement('div');
@@ -439,19 +549,143 @@ function renderCourseFullView(subjectKey, main) {
     const subject = window.subjects[subjectKey];
     if (!subject) return;
     main.innerHTML = '';
-    // Tytuł
+    // Tytuł - wyśrodkowany z gradientem
     const title = document.createElement('h2');
     title.textContent = subject.title;
+    title.style.cssText = `
+        text-align: center;
+        font-size: 2rem;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--magenta), var(--purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-top: -0.7rem;
+        margin-bottom: 1.3rem;
+    `;
     main.appendChild(title);
-    // Wideo
-    const video = document.createElement('iframe');
-    video.className = 'video-frame';
-    video.src = `https://www.youtube.com/embed/${subject.videoId}`;
-    video.title = 'Kurs Fizyki';
-    video.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-    video.allowFullscreen = true;
-    video.style = 'width:100%;min-height:220px;margin-bottom:1.5rem;';
-    main.appendChild(video);
+    
+    // Sekcja z filmami z bazy danych
+    const videoSection = document.createElement('div');
+    videoSection.className = 'video-section';
+    videoSection.style.marginBottom = '2rem';
+    
+    const videoHeader = document.createElement('h3');
+    videoHeader.textContent = 'Materiały Wideo';
+    videoHeader.style.marginBottom = '1.5rem';
+    videoSection.appendChild(videoHeader);
+    
+    // Kontener dla listy filmów i odtwarzacza
+    const videoContainer = document.createElement('div');
+    videoContainer.className = 'video-container';
+    videoContainer.style.display = 'grid';
+    videoContainer.style.gridTemplateColumns = '1fr 2fr';
+    videoContainer.style.gap = '1.5rem';
+    videoContainer.style.marginBottom = '1.5rem';
+    
+    // Lista filmów (lewa kolumna)
+    const videoListContainer = document.createElement('div');
+    videoListContainer.className = 'video-list-container';
+    videoListContainer.style.cssText = `
+        background: #fff;
+        border-radius: 12px;
+        padding: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        max-height: 600px;
+        overflow-y: auto;
+    `;
+    
+    const videoListTitle = document.createElement('h4');
+    videoListTitle.textContent = 'Lista lekcji';
+    videoListTitle.style.marginBottom = '1rem';
+    videoListTitle.style.color = 'var(--black)';
+    videoListContainer.appendChild(videoListTitle);
+    
+    const videoList = document.createElement('div');
+    videoList.className = 'video-list';
+    videoList.id = `videoList-${subjectKey}`;
+    videoListContainer.appendChild(videoList);
+    
+    // Odtwarzacz wideo (prawa kolumna)
+    const videoPlayerContainer = document.createElement('div');
+    videoPlayerContainer.className = 'video-player-container';
+    
+    const videoPlayer = document.createElement('iframe');
+    videoPlayer.id = `videoPlayer-${subjectKey}`;
+    videoPlayer.className = 'video-frame';
+    // Ustawiamy identyczne wymiary jak placeholder - aspect-ratio 16:9
+    videoPlayer.style.cssText = 'width:100%;aspect-ratio:16/9;border-radius:12px;border:none;';
+    videoPlayer.setAttribute('frameborder', '0');
+    videoPlayer.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+    videoPlayer.setAttribute('allowfullscreen', '');
+    videoPlayer.src = ''; // Zostanie ustawione po załadowaniu filmów
+    
+    // Placeholder gdy brak filmów
+    const videoPlaceholder = document.createElement('div');
+    videoPlaceholder.className = 'video-placeholder';
+    videoPlaceholder.style.cssText = `
+        width: 100%;
+        background: #f8fafc;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #888;
+        font-size: 1.1rem;
+        border: 2px dashed #e2e8f0;
+        aspect-ratio: 16 / 9;
+    `;
+    // Utwórz bardziej sugestywny placeholder
+    const placeholderContent = document.createElement('div');
+    placeholderContent.style.cssText = `
+        text-align: center;
+        padding: 2rem;
+    `;
+    
+    const placeholderIcon = document.createElement('div');
+    placeholderIcon.style.cssText = `
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    `;
+    placeholderIcon.textContent = '▶️';
+    
+    const placeholderText = document.createElement('div');
+    placeholderText.style.cssText = `
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--black);
+        margin-bottom: 0.5rem;
+    `;
+    placeholderText.textContent = 'Wybierz lekcję z listy';
+    
+    const placeholderSubtext = document.createElement('div');
+    placeholderSubtext.style.cssText = `
+        font-size: 0.95rem;
+        color: #888;
+    `;
+    placeholderSubtext.textContent = 'Kliknij na lekcję po lewej stronie, aby rozpocząć oglądanie';
+    
+    placeholderContent.appendChild(placeholderIcon);
+    placeholderContent.appendChild(placeholderText);
+    placeholderContent.appendChild(placeholderSubtext);
+    videoPlaceholder.appendChild(placeholderContent);
+    
+    // Dodaj iframe do kontenera (ukryty na początku)
+    videoPlayer.style.display = 'none';
+    videoPlayerContainer.appendChild(videoPlayer);
+    videoPlayerContainer.appendChild(videoPlaceholder);
+    
+    videoContainer.appendChild(videoListContainer);
+    videoContainer.appendChild(videoPlayerContainer);
+    videoSection.appendChild(videoContainer);
+    main.appendChild(videoSection);
+    
+    // Załaduj filmy z bazy danych
+    const course_id = parseInt(subjectKey);
+    loadVideosForCourse(course_id, videoList, videoPlayer, videoPlaceholder);
+    
     // PDF - 3 etapy w stylu feature-card
     const pdfSection = document.createElement('div');
     const pdfHeader = document.createElement('h3');
@@ -547,7 +781,7 @@ function renderCourseFullView(subjectKey, main) {
     taskArea.style.boxShadow = '0 2px 8px 0 rgba(0,0,0,0.04)';
     main.appendChild(taskArea);
     // Przycisk kupna kursu (zawsze pokazuj na potrzeby testu)
-    const course_id = parseInt(subjectKey);
+    // course_id już zadeklarowane wcześniej
     // Pokazuj przyciski kupna tylko jeśli użytkownik nie ma dostępu do kursu
     if (!hasAccessToCourse(subjectKey)) {
         const btnGroup = document.createElement('div');
@@ -589,6 +823,213 @@ function renderCourseFullView(subjectKey, main) {
     // Dodaj wyświetlanie zadania z bazy dla danego kursu
     if (window.showRandomTaskForCourse) {
         showRandomTaskForCourse(course_id);
+    }
+}
+
+// Funkcja do pobierania i wyświetlania filmów z bazy danych
+async function loadVideosForCourse(course_id, videoListElement, videoPlayerElement, videoPlaceholder) {
+    try {
+        // Pobierz filmy z bazy danych dla danego kursu
+        const { data: videos, error } = await supabase
+            .from('video')
+            .select('video_id, yt_id_wideo, tytul_lekcji')
+            .eq('course_id', course_id)
+            .order('video_id', { ascending: true });
+        
+        if (error) {
+            console.error('Błąd pobierania filmów:', error);
+            videoListElement.innerHTML = '<p style="color: #ef4444; padding: 1rem;">Błąd ładowania filmów</p>';
+            return;
+        }
+        
+        if (!videos || videos.length === 0) {
+            videoListElement.innerHTML = '<p style="color: #888; padding: 1rem;">Brak filmów dla tego kursu</p>';
+            return;
+        }
+        
+        // Wyczyść listę
+        videoListElement.innerHTML = '';
+        
+        // Utwórz elementy listy filmów
+        videos.forEach((video, index) => {
+            const videoItem = document.createElement('div');
+            videoItem.className = 'video-list-item';
+            videoItem.style.cssText = `
+                padding: 1rem;
+                margin-bottom: 0.5rem;
+                background: #f8fafc;
+                border: 2px solid #e2e8f0;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            `;
+            
+            // Dodaj hover effect
+            videoItem.addEventListener('mouseenter', () => {
+                if (!videoItem.classList.contains('active')) {
+                    videoItem.style.background = '#f1f5f9';
+                    videoItem.style.borderColor = 'var(--magenta)';
+                }
+            });
+            
+            videoItem.addEventListener('mouseleave', () => {
+                if (!videoItem.classList.contains('active')) {
+                    videoItem.style.background = '#f8fafc';
+                    videoItem.style.borderColor = '#e2e8f0';
+                }
+            });
+            
+            // Numer lekcji i tytuł
+            const videoNumber = document.createElement('div');
+            videoNumber.style.cssText = `
+                font-size: 0.85rem;
+                color: #666;
+                margin-bottom: 0.25rem;
+            `;
+            videoNumber.textContent = `Lekcja ${index + 1}`;
+            
+            const videoTitle = document.createElement('div');
+            videoTitle.style.cssText = `
+                font-weight: 600;
+                color: var(--black);
+                font-size: 0.95rem;
+            `;
+            videoTitle.textContent = video.tytul_lekcji || `Lekcja ${index + 1}`;
+            
+            videoItem.appendChild(videoNumber);
+            videoItem.appendChild(videoTitle);
+            
+            // Obsługa kliknięcia - odtwórz film
+            videoItem.addEventListener('click', () => {
+                // Usuń klasę active ze wszystkich elementów
+                videoListElement.querySelectorAll('.video-list-item').forEach(item => {
+                    item.classList.remove('active');
+                    item.style.background = '#f8fafc';
+                    item.style.borderColor = '#e2e8f0';
+                });
+                
+                // Dodaj klasę active do klikniętego elementu
+                videoItem.classList.add('active');
+                videoItem.style.background = 'rgba(255, 0, 128, 0.1)';
+                videoItem.style.borderColor = 'var(--magenta)';
+                
+                // Ustaw źródło iframe - prawidłowy format embed URL dla YouTube
+                // Parametry: rel=0 (wyłącza powiązane filmy - bardzo ważne!), showinfo=0 (ukrywa tytuł i kanał)
+                const youtubeUrl = `https://www.youtube.com/embed/${video.yt_id_wideo}?rel=0&modestbranding=1&showinfo=0`;
+                
+                // Zapisz dokładne wymiary placeholdera lub kontenera przed ukryciem
+                let targetWidth, targetHeight;
+                
+                if (videoPlaceholder && videoPlaceholder.style.display !== 'none') {
+                    // Placeholder jest widoczny - użyj jego wymiarów
+                    const placeholderRect = videoPlaceholder.getBoundingClientRect();
+                    targetWidth = placeholderRect.width;
+                    targetHeight = placeholderRect.height;
+                } else if (videoPlayerElement.style.display === 'block') {
+                    // Wideo jest już wyświetlone - użyj jego obecnych wymiarów
+                    const videoRect = videoPlayerElement.getBoundingClientRect();
+                    targetWidth = videoRect.width;
+                    targetHeight = videoRect.height;
+                } else {
+                    // Fallback - użyj kontenera
+                    const containerRect = videoPlayerElement.parentElement.getBoundingClientRect();
+                    targetWidth = containerRect.width;
+                    targetHeight = containerRect.width * (9 / 16); // 16:9 aspect ratio
+                }
+                
+                // Ustaw identyczne wymiary dla wideo
+                videoPlayerElement.style.width = `${targetWidth}px`;
+                videoPlayerElement.style.height = `${targetHeight}px`;
+                videoPlayerElement.style.aspectRatio = '16 / 9';
+                videoPlayerElement.style.borderRadius = '12px';
+                videoPlayerElement.style.border = 'none';
+                videoPlayerElement.style.display = 'block';
+                videoPlayerElement.style.maxWidth = '100%';
+                
+                // Ukryj placeholder jeśli jest widoczny
+                if (videoPlaceholder && videoPlaceholder.style.display !== 'none') {
+                    videoPlaceholder.style.display = 'none';
+                }
+                
+                // Ustaw źródło wideo (nawet jeśli już jest ustawione, aby odświeżyć)
+                videoPlayerElement.src = youtubeUrl;
+            });
+            
+            videoListElement.appendChild(videoItem);
+        });
+        
+        // Nie wybieramy automatycznie pierwszego filmu - użytkownik musi sam wybrać lekcję
+        
+    } catch (error) {
+        console.error('Błąd podczas ładowania filmów:', error);
+        videoListElement.innerHTML = '<p style="color: #ef4444; padding: 1rem;">Błąd ładowania filmów</p>';
+    }
+}
+
+// Funkcja do wyświetlania zablokowanej listy filmów w podglądzie
+async function loadVideosPreviewForCourse(course_id, videoListElement) {
+    try {
+        // Pobierz filmy z bazy danych dla danego kursu
+        const { data: videos, error } = await supabase
+            .from('video')
+            .select('video_id, yt_id_wideo, tytul_lekcji')
+            .eq('course_id', course_id)
+            .order('video_id', { ascending: true });
+        
+        if (error) {
+            console.error('Błąd pobierania filmów:', error);
+            videoListElement.innerHTML = '<p style="color: #888; padding: 1rem;">Brak filmów dla tego kursu</p>';
+            return;
+        }
+        
+        if (!videos || videos.length === 0) {
+            videoListElement.innerHTML = '<p style="color: #888; padding: 1rem;">Brak filmów dla tego kursu</p>';
+            return;
+        }
+        
+        // Wyczyść listę
+        videoListElement.innerHTML = '';
+        
+        // Utwórz elementy listy filmów (zablokowane)
+        videos.forEach((video, index) => {
+            const videoItem = document.createElement('div');
+            videoItem.className = 'video-list-item';
+            videoItem.style.cssText = `
+                padding: 1rem;
+                margin-bottom: 0.5rem;
+                background: #f8fafc;
+                border: 2px solid #e2e8f0;
+                border-radius: 8px;
+                opacity: 0.6;
+                cursor: not-allowed;
+            `;
+            
+            // Numer lekcji i tytuł
+            const videoNumber = document.createElement('div');
+            videoNumber.style.cssText = `
+                font-size: 0.85rem;
+                color: #666;
+                margin-bottom: 0.25rem;
+            `;
+            videoNumber.textContent = `Lekcja ${index + 1}`;
+            
+            const videoTitle = document.createElement('div');
+            videoTitle.style.cssText = `
+                font-weight: 600;
+                color: var(--black);
+                font-size: 0.95rem;
+            `;
+            videoTitle.textContent = video.tytul_lekcji || `Lekcja ${index + 1}`;
+            
+            videoItem.appendChild(videoNumber);
+            videoItem.appendChild(videoTitle);
+            
+            videoListElement.appendChild(videoItem);
+        });
+        
+    } catch (error) {
+        console.error('Błąd podczas ładowania filmów w podglądzie:', error);
+        videoListElement.innerHTML = '<p style="color: #888; padding: 1rem;">Brak filmów dla tego kursu</p>';
     }
 }
 
