@@ -265,9 +265,21 @@ function renderCoursePreview(subjectKey, main) {
     if (!subject) return;
     main.innerHTML = '';
     
-    // Tytuł
+    // Tytuł - wyśrodkowany z gradientem (tak samo jak dla osób z dostępem)
     const title = document.createElement('h2');
-    title.textContent = subject.title + ' (Podgląd)';
+    title.textContent = subject.title;
+    title.style.cssText = `
+        text-align: center;
+        font-size: 2rem;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--magenta), var(--purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-top: -0.7rem;
+        margin-bottom: 1.3rem;
+    `;
     main.appendChild(title);
     
     // Sekcja z filmami (zablokowana dla użytkowników bez dostępu)
@@ -422,17 +434,17 @@ function renderCoursePreview(subjectKey, main) {
         description.textContent = stage.description;
         card.appendChild(description);
         
-        // Special handling for "Praca moc energia" (course 3)
-        if (parseInt(subjectKey) === 3) {
+        const isPracaMocEnergia = parseInt(subjectKey) === 3;
+        const isEtap3 = stage.title === 'Etap 3';
+        
+        if (isPracaMocEnergia && isEtap3) {
             card.onclick = () => alert('zadania maturalne z tego działu są wplecione w inne działy fizyki');
         } else {
-            // Dla pozostałych kursów - sprawdź czy użytkownik ma dostęp
+            // Sprawdź czy użytkownik ma dostęp (także dla kursu 3, Etap 1 i 2)
             const hasAccess = currentUser && hasAccessToCourse(subjectKey);
             
             if (hasAccess) {
-                // Użytkownik ma dostęp - sprawdź który etap
                 if (stage.title === 'Etap 1') {
-                    // Etap 1 - otwórz rzeczywisty PDF
                     card.style.opacity = '1';
                     card.style.cursor = 'pointer';
                     card.onclick = () => {
@@ -442,8 +454,17 @@ function renderCoursePreview(subjectKey, main) {
                             alert('PDF niedostępny dla tego działu.');
                         }
                     };
+                } else if (stage.title === 'Etap 2') {
+                    if (subject.pdfUrlEtap2) {
+                        card.style.opacity = '1';
+                        card.style.cursor = 'pointer';
+                        card.onclick = () => window.open(subject.pdfUrlEtap2, '_blank');
+                    } else {
+                        card.style.opacity = '0.6';
+                        card.style.cursor = 'not-allowed';
+                        card.onclick = () => alert('PDF niedostępny dla tego działu.');
+                    }
                 } else if (stage.title === 'Etap 3') {
-                    // Etap 3 - otwórz rzeczywisty PDF
                     card.style.opacity = '1';
                     card.style.cursor = 'pointer';
                     card.onclick = () => {
@@ -453,14 +474,8 @@ function renderCoursePreview(subjectKey, main) {
                             alert('PDF niedostępny dla tego działu.');
                         }
                     };
-                } else {
-                    // Etap 2 - informacja o tym, że linki będą dodane
-                    card.style.opacity = '0.6';
-                    card.style.cursor = 'not-allowed';
-                    card.onclick = () => alert(`Linki do ${stage.title} zostaną dodane wkrótce`);
                 }
             } else {
-                // Użytkownik nie ma dostępu - zablokuj wszystkie etapy
                 card.style.opacity = '0.6';
                 card.style.cursor = 'not-allowed';
                 card.onclick = () => alert('Dostęp do PDF po zakupie kursu');
@@ -722,17 +737,16 @@ function renderCourseFullView(subjectKey, main) {
         // Sprawdź czy użytkownik ma dostęp do kursu
         const hasAccess = currentUser && hasAccessToCourse(subjectKey);
         
-        // Special handling for "Praca moc energia" (course 3)
-        if (parseInt(subjectKey) === 3) {
+        const isPracaMocEnergia = parseInt(subjectKey) === 3;
+        const isEtap3 = stage.title === 'Etap 3';
+        
+        if (isPracaMocEnergia && isEtap3) {
             card.style.opacity = '0.6';
             card.style.cursor = 'not-allowed';
             card.onclick = () => alert('zadania maturalne z tego działu są wplecione w inne działy fizyki');
         } else {
-            // Dla pozostałych kursów
             if (hasAccess) {
-                // Użytkownik ma dostęp - sprawdź który etap
                 if (stage.title === 'Etap 1') {
-                    // Etap 1 - otwórz rzeczywisty PDF
                     card.style.cursor = 'pointer';
                     card.onclick = () => {
                         if (subject.pdfUrlEtap1) {
@@ -741,8 +755,16 @@ function renderCourseFullView(subjectKey, main) {
                             alert('PDF niedostępny dla tego działu.');
                         }
                     };
+                } else if (stage.title === 'Etap 2') {
+                    if (subject.pdfUrlEtap2) {
+                        card.style.cursor = 'pointer';
+                        card.onclick = () => window.open(subject.pdfUrlEtap2, '_blank');
+                    } else {
+                        card.style.opacity = '0.6';
+                        card.style.cursor = 'not-allowed';
+                        card.onclick = () => alert('PDF niedostępny dla tego działu.');
+                    }
                 } else if (stage.title === 'Etap 3') {
-                    // Etap 3 - otwórz rzeczywisty PDF
                     card.style.cursor = 'pointer';
                     card.onclick = () => {
                         if (subject.pdfUrl) {
@@ -751,14 +773,8 @@ function renderCourseFullView(subjectKey, main) {
                             alert('PDF niedostępny dla tego działu.');
                         }
                     };
-                } else {
-                    // Etap 2 - informacja o tym, że linki będą dodane
-                    card.style.opacity = '0.6';
-                    card.style.cursor = 'not-allowed';
-                    card.onclick = () => alert(`Linki do ${stage.title} zostaną dodane wkrótce`);
                 }
             } else {
-                // Użytkownik nie ma dostępu - zablokuj wszystkie etapy
                 card.style.opacity = '0.6';
                 card.style.cursor = 'not-allowed';
                 card.onclick = () => alert('Dostęp do PDF po zakupie kursu');
