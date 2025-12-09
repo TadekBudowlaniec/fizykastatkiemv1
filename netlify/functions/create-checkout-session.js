@@ -4,8 +4,8 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY_TEST || process.e
 
 // Mapowanie kursów (możesz je przenieść do oddzielnego pliku helpers.js lub wkleić tutaj)
 const coursePriceIds = {
-    1: 'price_1S5qqfJLuu6b086bn5K6W4wN', // Kinematyka
-    2: 'price_1S5qqfJLuu6b086bn5K6W4wN', // Dynamika
+    1: 'price_1RtPFoJLuu6b086bmfvVO4G8', // Kinematyka
+    2: 'price_1RtPGOJLuu6b086b1QN5l4DE', // Dynamika
     3: 'price_1Rgt0yJLuu6b086b115h7OXM', // Praca moc energia
     4: 'price_1RtPKTJLuu6b086b3wG0IiaV', // Bryła Sztywna
     5: 'price_1RtPKkJLuu6b086b2lfhBfDX', // Ruch Drgający
@@ -25,8 +25,8 @@ const coursePriceIds = {
 
 // Mapowanie priceId na course_id
 const priceToCourseId = {
-    'price_1S5qqfJLuu6b086bn5K6W4wN': 1, // Kinematyka
-    'price_1S5qqfJLuu6b086bn5K6W4wN': 2, // Dynamika
+    'price_1RtPFoJLuu6b086bmfvVO4G8': 1, // Kinematyka
+    'price_1RtPGOJLuu6b086b1QN5l4DE': 2, // Dynamika
     'price_1Rgt0yJLuu6b086b115h7OXM': 3, // Praca moc energia
     'price_1RtPKTJLuu6b086b3wG0IiaV': 4, // Bryła Sztywna
     'price_1RtPKkJLuu6b086b2lfhBfDX': 5, // Ruch Drgający

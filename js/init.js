@@ -25,29 +25,39 @@ window.addEventListener('DOMContentLoaded', () => {
     // Formularz rejestracji
     document.getElementById('registerForm')?.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const email = document.getElementById('registerEmail').value;
-        const password = document.getElementById('registerPassword').value;
-        const repeatPassword = document.getElementById('registerRepeatPassword').value;
-        const name = document.getElementById('registerName').value;
-        if (password !== repeatPassword) {
-            alert('Hasła nie są takie same.');
+        const email = document.getElementById('registerEmail');
+        const password = document.getElementById('registerPassword');
+        const repeatPassword = document.getElementById('registerRepeatPassword');
+        const name = document.getElementById('registerName');
+        const passwordError = document.getElementById('registerPasswordError');
+        const repeatError = document.getElementById('registerRepeatPasswordError');
+
+        clearFieldError(password, passwordError);
+        clearFieldError(repeatPassword, repeatError);
+
+        const pwd = password.value;
+        const repeat = repeatPassword.value;
+
+        if (pwd.length < 8) {
+            setFieldError(password, passwordError, 'Hasło musi mieć co najmniej 8 znaków.');
             return;
         }
-        if (password.length < 8) {
-            alert('Hasło musi mieć co najmniej 8 znaków.');
+        if (!/[A-Z]/.test(pwd)) {
+            setFieldError(password, passwordError, 'Hasło musi zawierać co najmniej jedną wielką literę.');
             return;
         }
-        if (!/[A-Z]/.test(password)) {
-            alert('Hasło musi zawierać co najmniej jedną wielką literę.');
+        if (pwd !== repeat) {
+            setFieldError(repeatPassword, repeatError, 'Hasła nie są takie same.');
             return;
         }
+
         // Zapamiętaj e-mail w localStorage
         let emails = JSON.parse(localStorage.getItem('usedEmails') || '[]');
-        if (!emails.includes(email)) {
-            emails.push(email);
+        if (!emails.includes(email.value)) {
+            emails.push(email.value);
             localStorage.setItem('usedEmails', JSON.stringify(emails));
         }
-        await register(email, password, name);
+        await register(email.value, pwd, name.value);
     });
     // Podpowiedzi e-maili przy wejściu na formularz rejestracji
     const registerEmailInput = document.getElementById('registerEmail');
@@ -63,6 +73,33 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    // Podpowiedzi i walidacja hasła w locie
+    const registerPasswordInput = document.getElementById('registerPassword');
+    const registerRepeatPasswordInput = document.getElementById('registerRepeatPassword');
+    const passwordHints = document.getElementById('registerPasswordHints');
+    const passwordError = document.getElementById('registerPasswordError');
+    const repeatError = document.getElementById('registerRepeatPasswordError');
+
+    function updatePasswordHints(value) {
+        if (!passwordHints) return;
+        const lengthItem = passwordHints.querySelector('[data-req="length"]');
+        const uppercaseItem = passwordHints.querySelector('[data-req="uppercase"]');
+        if (lengthItem) {
+            lengthItem.classList.toggle('valid', value.length >= 8);
+        }
+        if (uppercaseItem) {
+            uppercaseItem.classList.toggle('valid', /[A-Z]/.test(value));
+        }
+    }
+
+    registerPasswordInput?.addEventListener('input', () => {
+        updatePasswordHints(registerPasswordInput.value);
+        clearFieldError(registerPasswordInput, passwordError);
+    });
+
+    registerRepeatPasswordInput?.addEventListener('input', () => {
+        clearFieldError(registerRepeatPasswordInput, repeatError);
+    });
     // Formularz logowania
     document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -204,6 +241,26 @@ window.addEventListener('DOMContentLoaded', () => {
     // Obsługa powrotu po płatności Stripe
     handleStripeReturn();
 });
+
+function setFieldError(inputEl, errorEl, message) {
+    if (inputEl) {
+        inputEl.classList.add('input-error');
+    }
+    if (errorEl) {
+        errorEl.textContent = message || '';
+        errorEl.classList.remove('hidden');
+    }
+}
+
+function clearFieldError(inputEl, errorEl) {
+    if (inputEl) {
+        inputEl.classList.remove('input-error');
+    }
+    if (errorEl) {
+        errorEl.textContent = '';
+        errorEl.classList.add('hidden');
+    }
+}
 
 // Funkcja do podglądu hasła
 window.togglePassword = function(inputId, btn) {

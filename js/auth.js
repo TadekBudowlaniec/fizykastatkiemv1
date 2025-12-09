@@ -29,7 +29,7 @@ async function register(email, password, name) {
         if (data && data.user && data.user.id) {
             await addUserToDatabase(data.user.id, name);
         }
-        alert('Rejestracja zakończona pomyślnie! Sprawdź swoją skrzynkę email.');
+        showEmailVerificationPopup();
         showSection('login');
     } catch (error) {
         alert('Błąd rejestracji: ' + error.message);
@@ -182,3 +182,23 @@ async function changePassword(currentPassword, newPassword, repeatNewPassword) {
         alert('Błąd zmiany hasła: ' + error.message);
     }
 } 
+
+function showEmailVerificationPopup() {
+    const popup = document.getElementById('registerConfirmPopup');
+    if (!popup) {
+        alert('Rejestracja zakończona pomyślnie! Sprawdź swoją skrzynkę email.');
+        return;
+    }
+    popup.classList.remove('hidden');
+    const primaryButton = popup.querySelector('[data-action="confirm-email-ok"]');
+    if (primaryButton) {
+        primaryButton.focus();
+    }
+}
+
+function hideEmailVerificationPopup() {
+    const popup = document.getElementById('registerConfirmPopup');
+    if (popup) {
+        popup.classList.add('hidden');
+    }
+}
