@@ -7,7 +7,9 @@ window.addEventListener('DOMContentLoaded', () => {
         '/user': 'user',
         '/login': 'login',
         '/register': 'register',
-        '/pricing': 'pricing'
+        '/pricing': 'pricing',
+        '/regulamin': 'regulamin',
+        '/polityka-prywatnosci': 'polityka'
     };
     const initialPath = window.location.pathname;
     let initialSection = pathToSection[initialPath] || 'landing';

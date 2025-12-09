@@ -8,7 +8,9 @@ const sectionToPath = {
     login: '/login',
     register: '/register',
     pricing: '/pricing',
-    korepetycje: '/korepetycje'
+    korepetycje: '/korepetycje',
+    regulamin: '/regulamin',
+    polityka: '/polityka-prywatnosci'
 };
 const pathToSection = {
     '/home': 'landing',
@@ -17,7 +19,9 @@ const pathToSection = {
     '/login': 'login',
     '/register': 'register',
     '/pricing': 'pricing',
-    '/korepetycje': 'korepetycje'
+    '/korepetycje': 'korepetycje',
+    '/regulamin': 'regulamin',
+    '/polityka-prywatnosci': 'polityka'
 };
 
 // Używam window.subjects zamiast lokalnej zmiennej
