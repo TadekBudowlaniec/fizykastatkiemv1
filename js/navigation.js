@@ -1313,6 +1313,9 @@ function renderDashboard() {
     updateBreadcrumbs('dashboard');
 }
 
+// Dodaj renderDashboard do window aby był dostępny globalnie
+window.renderDashboard = renderDashboard;
+
 function getSubjectIcon(key) {
     const icons = {
         mechanika: '⚓️',

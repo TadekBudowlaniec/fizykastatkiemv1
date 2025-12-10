@@ -227,7 +227,13 @@ window.addEventListener('DOMContentLoaded', () => {
     window.showSection = function(sectionId, push) {
         origShowSection(sectionId, push);
         if (sectionId === 'dashboard') {
-            renderDashboard();
+            if (typeof window.renderDashboard === 'function') {
+                window.renderDashboard();
+            } else if (typeof renderDashboard === 'function') {
+                renderDashboard();
+            } else {
+                console.error('renderDashboard is not available');
+            }
         }
         if (sectionId === 'user') {
             loadUserProfile();
