@@ -766,8 +766,18 @@ nav {
     }
 
     .hero-cta {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
+        flex-wrap: nowrap;
+    }
+    
+    .hero-cta .btn {
+        padding: 0.55rem 0.75rem !important;
+        height: 38px !important;
+        font-size: 0.85rem !important;
+        min-width: 110px;
+        max-width: 150px;
+        flex: 1 1 0;
     }
 
     .nav-buttons {
@@ -2545,17 +2555,21 @@ nav {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    padding: 0.55rem 0.9rem;
-    border-radius: 999px;
-    font-weight: 700;
+    border: none;
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px;
+    font-weight: 500;
     letter-spacing: 0.01em;
+    font-size: 0.9rem;
+    box-shadow: none;
+    cursor: default;
+    pointer-events: none;
 }
 
 .pill-ghost {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.05);
     color: #dfe6ff;
 }
 
@@ -2937,7 +2951,17 @@ nav {
         justify-content: center;
     }
     .hero-cta {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+    
+    .hero-cta .btn {
+        padding: 0.5rem 0.7rem !important;
+        height: 36px !important;
+        font-size: 0.8rem !important;
+        min-width: 100px;
+        max-width: 140px;
+        flex: 1 1 0;
     }
     .guarantee-card {
         grid-template-columns: 1fr;
