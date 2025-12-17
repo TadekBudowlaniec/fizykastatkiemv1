@@ -3018,3 +3018,33 @@ nav {
         justify-items: center;
     }
 }
+
+/* SimpleLightbox - Responsive image sizing */
+.sl-wrapper .sl-image img {
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+@media (min-width: 768px) {
+    .sl-wrapper .sl-image img {
+        max-width: 80vw;
+        max-height: 85vh;
+    }
+}
+
+@media (min-width: 1024px) {
+    .sl-wrapper .sl-image img {
+        max-width: 1200px;
+        max-height: 85vh;
+    }
+}
+
+@media (min-width: 1400px) {
+    .sl-wrapper .sl-image img {
+        max-width: 1400px;
+        max-height: 85vh;
+    }
+}
