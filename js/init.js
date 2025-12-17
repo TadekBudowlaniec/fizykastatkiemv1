@@ -230,7 +230,7 @@ window.addEventListener('DOMContentLoaded', () => {
             if (typeof window.renderDashboard === 'function') {
                 window.renderDashboard();
             } else if (typeof renderDashboard === 'function') {
-                renderDashboard();
+            renderDashboard();
             } else {
                 console.error('renderDashboard is not available');
             }

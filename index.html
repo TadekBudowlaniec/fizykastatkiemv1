@@ -19,6 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.css" />
     
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
@@ -151,25 +152,34 @@
         <section class="section social-proof">
             <div class="container narrow">
                 <div class="section-heading">
-                    <p class="eyebrow">Dowód społeczny</p>
+                    <p class="eyebrow">Owoce współpracy</p>
                     <h2>Uczniowie czują się pewnie na maturze</h2>
                     <p class="section-subtitle">Historie maturzystów, którzy przestali wkuwać, a zaczęli rozumieć.</p>
                 </div>
-                <div class="proof-grid">
+                <div class="proof-grid galeria">
                     <article class="proof-card">
-                        <div class="avatar-ring">AK</div>
-                        <p class="quote">„Wreszcie ogarnąłem zadania na logikę, a nie na pamięć. 84% na maturze!”</p>
-                        <span class="author">Alicja, 84% z rozszerzenia</span>
+                        <div class="proof-meta">🏆 WYNIK: 94% • MATURA ROZSZERZONA</div>
+                        <p class="proof-quote">„Hejj, super poszło, 94%! Mega dzięki za pomoc ❤️"</p>
+                        <div class="proof-author">
+                            <span>— Nadia, (Matura Rozszerzona - fizyka)</span>
+                            <a href="https://kldekjrpottsqebueojg.supabase.co/storage/v1/object/public/opinie/Nadia.png" class="proof-link" target="_blank" rel="noopener">📎 Zobacz oryginał</a>
+                        </div>
                     </article>
                     <article class="proof-card">
-                        <div class="avatar-ring">MB</div>
-                        <p class="quote">„Video + PDF + quiz po każdym dziale to złoto. Czuję, że prowadzisz mnie jak kapitan.”</p>
-                        <span class="author">Michał, maturzysta 2025</span>
+                        <div class="proof-meta">⏱️ 10 LAT PRZERWY • NIECAŁY MIESIĄC NAUKI</div>
+                        <p class="proof-quote">„Jak na tak krótki czas przygotowania, to wynik jest lepszy, niż się spodziewałem.(Niecały miesiąc nauki)"</p>
+                        <div class="proof-author">
+                            <span>— Filip, 28 lat (Matura Rozszerzona z fizyki)</span>
+                            <a href="https://kldekjrpottsqebueojg.supabase.co/storage/v1/object/public/opinie/Filip.jpg" class="proof-link" target="_blank" rel="noopener">📎 Zobacz oryginał</a>
+                        </div>
                     </article>
                     <article class="proof-card">
-                        <div class="avatar-ring">TK</div>
-                        <p class="quote">„Zero lania wody. Konkret, przykłady z matur i krótkie drogi dojścia do wyniku.”</p>
-                        <span class="author">Tomek, poprawa z 46% na 82%</span>
+                        <div class="proof-meta">📉 WYNIK: ~90% • PEWNOŚĆ I SPOKÓJ</div>
+                        <p class="proof-quote">„Córka wróciła zadowolona. Z tego co policzyła, powinna mieć 90%. Poszła na egzamin naprawdę spokojna, także bardzo dziękujemy."</p>
+                        <div class="proof-author">
+                            <span>— Mama Darii (Matura Podstawowa z matematyki)</span>
+                            <a href="https://kldekjrpottsqebueojg.supabase.co/storage/v1/object/public/opinie/Daria.jpg" class="proof-link" target="_blank" rel="noopener">📎 Zobacz oryginał</a>
+                        </div>
                     </article>
                 </div>
             </div>
@@ -1095,5 +1105,11 @@
             </div>
         </div>
     </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.js"></script>
+    <script>
+        // To uruchamia galerię
+        var lightbox = new SimpleLightbox('.galeria a', { /* opcje */ });
+    </script>
 </body>
 </html>
