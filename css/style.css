@@ -3048,3 +3048,412 @@ nav {
         max-height: 85vh;
     }
 }
+
+
+/* --- RESET I LAYOUT STRONY KOREPETYCJI --- */
+
+/* To naprawi "latające" elementy - wymusza normalny przepływ */
+#korepetycje {
+    position: relative !important; /* Kluczowe: element płynie z treścią */
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: hidden !important; /* Ucina wszystko co wystaje */
+    background-color: #f9fafb !important; /* Bardzo jasne szare tło */
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    z-index: 1; /* Poniżej menu */
+}
+
+/* 2. Wrapper treści */
+.kor-wrapper {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f9fafb; /* Spójne tło */
+}
+
+/* Własny kontener, żeby nie gryzł się z głównym .container strony */
+.kor-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- TYPOGRAFIA --- */
+.kor-highlight {
+    color: #7e22ce;
+    font-weight: 800;
+}
+
+.kor-eyebrow {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #7e22ce;
+    margin-bottom: 0.5rem;
+}
+
+.kor-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: #111;
+}
+
+.kor-section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #111;
+}
+
+/* --- BUTTONY --- */
+.kor-btn-primary {
+    display: inline-block;
+    background-color: #7e22ce;
+    color: white !important;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+    box-shadow: 0 4px 14px rgba(126, 34, 206, 0.3);
+    border: none;
+    cursor: pointer;
+}
+
+.kor-btn-primary:hover {
+    background-color: #6b21a8;
+    transform: translateY(-2px);
+}
+
+.kor-btn-large {
+    font-size: 1.1rem;
+    padding: 15px 30px;
+}
+
+/* --- SEKCJA HERO (Wersja Dark Mode) --- */
+/* --- NAPRAWA SEKCJI HERO (Dla Jasnego Tła) --- */
+
+/* ======================================================
+   SEKCJA HERO (WERSJA DARK MODE - PREFEROWANA)
+   ====================================================== */
+
+.kor-hero {
+    /* Zmieniamy przezroczystość na konkretny, kosmiczny gradient */
+    background: linear-gradient(135deg, var(--black) 0%, var(--dark-purple) 100%);
+    
+    padding: 80px 0;
+    border-radius: 0;
+    position: relative;
+    /* Opcjonalnie: Dodajemy delikatną linię na górze, żeby jeszcze mocniej odciąć menu */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.kor-hero-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* --- LEWA STRONA (TEKST NA BIAŁO) --- */
+.kor-hero-content {
+    flex: 1;
+    z-index: 2;
+}
+
+.kor-eyebrow {
+    color: #d8b4fe; /* Jasny lawendowy - dobrze widoczny na fiolecie */
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.kor-title {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    color: #ffffff !important; /* BIAŁY TEKST - KLUCZ DO SUKCESU */
+    font-weight: 900;
+}
+
+.kor-highlight {
+    color: #d8b4fe; /* Jasny fiolet wyróżnienia */
+    text-shadow: 0 0 20px rgba(216, 180, 254, 0.3); /* Lekka poświata */
+}
+
+.kor-desc {
+    font-size: 1.1rem;
+    color: #e5e7eb !important; /* Bardzo jasny szary - czytelny */
+    margin-bottom: 35px;
+    line-height: 1.6;
+    max-width: 550px;
+}
+
+/* --- KAFELKI (BIAŁE SĄ OK, ROBIĄ KONTRAST) --- */
+.kor-stats-bar {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.kor-stat-item {
+    background: #ffffff; /* Białe tło kafelków super wygląda na fiolecie */
+    padding: 15px 20px;
+    border-radius: 12px;
+    text-align: center;
+    /* Usuwamy ramkę, na ciemnym tle biały kafelek broni się sam */
+    border: none; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Cień dla głębi */
+    flex: 1;
+    min-width: 100px;
+}
+
+.kor-stat-val {
+    display: block;
+    font-weight: 800;
+    color: #7e22ce; /* Ciemny tekst wewnątrz białego kafelka */
+    font-size: 1.5rem;
+}
+
+.kor-stat-lbl {
+    font-size: 0.75rem;
+    color: #1f2937;
+    font-weight: 600;
+}
+
+/* --- PRZYCISK --- */
+.kor-btn-primary {
+    display: inline-block;
+    background-color: #ffffff; /* Biały przycisk */
+    color: #7e22ce !important; /* Fioletowy napis */
+    padding: 16px 36px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* Efekt świecenia */
+    transition: transform 0.2s;
+}
+
+.kor-btn-primary:hover {
+    background-color: #f3f4f6;
+    transform: scale(1.05);
+}
+
+.kor-urgency {
+    display: block;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #fca5a5; /* Jasny czerwony/różowy */
+    font-weight: 600;
+}
+
+/* --- PRAWA STRONA (STATEK BEZ TŁA) --- */
+.kor-hero-image-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 280px;
+    /* WAŻNE: Usuwamy tło, żeby nie było widać "kwadratu" wokół statku */
+    background: transparent !important; 
+    border: none !important;
+}
+
+.kor-profile-photo {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    /* Usuwamy szare tło zapasowe */
+    background-color: transparent !important; 
+    border-radius: 0;
+}
+
+/* --- MOBILE --- */
+@media (max-width: 768px) {
+    .kor-hero-layout {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding-top: 20px;
+    }
+    
+    .kor-title { font-size: 2.2rem; }
+    
+    .kor-stats-bar { justify-content: center; flex-wrap: wrap; }
+    
+    .kor-hero-image-wrapper {
+        display: none !important;
+    }
+}
+/* --- KARTY LOGISTYKI --- */
+.kor-section {
+    padding: 60px 0;
+    width: 100%;
+}
+
+.kor-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.kor-info-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f3f4f6;
+    transition: transform 0.2s;
+}
+
+.kor-info-card:hover {
+    transform: translateY(-5px);
+    border-color: #d8b4fe;
+}
+
+.kor-card-icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.kor-info-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #111;
+}
+
+/* --- SEKCJA OPINIE (CIEMNA) --- */
+.kor-testimonials {
+    background: #111827;
+    color: white;
+}
+
+.kor-heading-centered {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.kor-light-text {
+    color: white;
+    font-size: 2rem;
+    margin: 10px 0;
+}
+
+.kor-subtitle {
+    color: #9ca3af;
+}
+
+.kor-proof-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.kor-proof-card {
+    background: #1f2937;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #374151;
+    display: flex;
+    flex-direction: column;
+}
+
+.kor-proof-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.kor-proof-score { color: #4ade80; }
+.kor-proof-subject { color: #9ca3af; }
+
+.kor-proof-quote {
+    font-style: italic;
+    color: #e5e7eb;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.kor-proof-author {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #374151;
+    padding-top: 15px;
+}
+
+.kor-author-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+}
+
+.kor-author-info span {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+.kor-proof-link {
+    color: #d8b4fe;
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+
+/* --- SEKCJA KOŃCOWA --- */
+.kor-final-cta {
+    text-align: center;
+}
+
+.kor-cta-box {
+    background: white;
+    padding: 50px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    border: 1px solid #e5e7eb;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.kor-box-title {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #111;
+}
+
+.kor-box-text {
+    margin-bottom: 30px;
+    color: #4b5563;
+}
+
+.kor-social-row {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.kor-social-row a {
+    color: #6b7280;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.kor-social-row a:hover {
+    color: #7e22ce;
+}
+
+/* --- RESPANSYWNOŚĆ (MOBILE) --- */
