@@ -63,6 +63,7 @@ exports.handler = async (event) => {
             line_items: [
                 { price: priceId, quantity: 1 },
             ],
+            allow_promotion_codes: true, // <--- TO JEST KLUCZOWE
             metadata: {
                 userId,
                 courseId
