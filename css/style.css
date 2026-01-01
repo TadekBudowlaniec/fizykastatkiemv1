@@ -3054,16 +3054,10 @@ nav {
 
 /* To naprawi "latające" elementy - wymusza normalny przepływ */
 #korepetycje {
-    position: relative !important; /* Kluczowe: element płynie z treścią */
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;
-    overflow: hidden !important; /* Ucina wszystko co wystaje */
     background-color: #f9fafb !important; /* Bardzo jasne szare tło */
     padding: 0 !important;
     margin: 0 !important;
     border-radius: 0 !important;
-    z-index: 1; /* Poniżej menu */
 }
 
 /* 2. Wrapper treści */
