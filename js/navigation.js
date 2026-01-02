@@ -222,9 +222,18 @@ function renderDashboardPanel() {
     console.log('renderDashboardPanel - Object.entries(subjects):', Object.entries(window.subjects));
     
     sidebar.innerHTML = '';
-    let firstKey = null;
-    Object.entries(window.subjects).forEach(([key, subject], idx) => {
-        if (!firstKey) firstKey = key;
+    
+    // Sprawdź czy użytkownik ma dostęp do jakiegokolwiek kursu
+    const userHasAnyAccess = currentUser && userEnrollments && userEnrollments.length > 0;
+    
+    // Sortuj kursy tak, aby '0' (tutaj zacznij) był pierwszy
+    const sortedSubjects = Object.entries(window.subjects).sort(([keyA], [keyB]) => {
+        if (keyA === '0') return -1;
+        if (keyB === '0') return 1;
+        return Number(keyA) - Number(keyB);
+    });
+    
+    sortedSubjects.forEach(([key, subject], idx) => {
         console.log('Tworzenie elementu dla kursu:', key, subject.title);
         
         const item = document.createElement('button');
@@ -257,8 +266,24 @@ function renderDashboardPanel() {
         sidebar.appendChild(item);
     });
     
-    // Optional: select first course by default
-    if (firstKey) {
+    // Wybierz domyślny kurs:
+    // - Dla użytkowników bez dostępu: '1' (Kinematyka)
+    // - Dla użytkowników z dostępem: '0' (Tutaj zacznij)
+    let defaultKey = null;
+    if (userHasAnyAccess) {
+        // Użytkownik ma dostęp - wybierz "Tutaj zacznij"
+        defaultKey = '0';
+    } else {
+        // Użytkownik nie ma dostępu - wybierz "Kinematyka"
+        defaultKey = '1';
+    }
+    
+    // Znajdź i kliknij odpowiedni przycisk
+    const defaultButton = sidebar.querySelector(`[data-key="${defaultKey}"]`);
+    if (defaultButton) {
+        defaultButton.click();
+    } else {
+        // Fallback - kliknij pierwszy dostępny przycisk
         sidebar.querySelector('.course-list-item')?.click();
     }
 }
@@ -268,6 +293,12 @@ function renderCoursePreview(subjectKey, main) {
     const subject = window.subjects[subjectKey];
     if (!subject) return;
     main.innerHTML = '';
+    
+    // Specjalny widok dla kursu "tutaj zacznij" - pokazuj jako zablokowany
+    if (subjectKey === '0' || subjectKey === 0) {
+        renderTutajZacznijView(main, true);
+        return;
+    }
     
     // Tytuł - wyśrodkowany z gradientem (tak samo jak dla osób z dostępem)
     const title = document.createElement('h2');
@@ -568,6 +599,13 @@ function renderCourseFullView(subjectKey, main) {
     const subject = window.subjects[subjectKey];
     if (!subject) return;
     main.innerHTML = '';
+    
+    // Specjalny widok dla kursu "tutaj zacznij"
+    if (subjectKey === '0' || subjectKey === 0) {
+        renderTutajZacznijView(main);
+        return;
+    }
+    
     // Tytuł - wyśrodkowany z gradientem
     const title = document.createElement('h2');
     title.textContent = subject.title;
@@ -840,9 +878,176 @@ function renderCourseFullView(subjectKey, main) {
         quizSection.innerHTML = quizHtml;
         main.appendChild(quizSection);
     }
-    // Dodaj wyświetlanie zadania z bazy dla danego kursu
-    if (window.showRandomTaskForCourse) {
+    // Dodaj wyświetlanie zadania z bazy dla danego kursu (nie dla kursu "tutaj zacznij")
+    if (window.showRandomTaskForCourse && course_id !== 0 && course_id !== '0') {
         showRandomTaskForCourse(course_id);
+    }
+}
+
+// Specjalny widok dla kursu "tutaj zacznij"
+function renderTutajZacznijView(main, isLocked = false) {
+    // Tytuł
+    const title = document.createElement('h2');
+    title.textContent = 'Tutaj zacznij';
+    title.style.cssText = `
+        text-align: center;
+        font-size: 2rem;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--magenta), var(--purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-top: -0.7rem;
+        margin-bottom: 2rem;
+    `;
+    main.appendChild(title);
+    
+    // Tekst informacyjny nad lekcjami (tylko dla użytkowników z dostępem)
+    if (!isLocked) {
+        const infoText = document.createElement('p');
+        infoText.textContent = 'Wybierz lekcję, aby rozpocząć naukę';
+        infoText.style.cssText = `
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        `;
+        main.appendChild(infoText);
+    }
+    
+    // Kontener dla lekcji
+    const lessonsContainer = document.createElement('div');
+    lessonsContainer.style.cssText = `
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    `;
+    
+    // Trzy lekcje
+    const lessons = [
+        { title: 'Mindset', icon: '🧠', description: 'Poznaj właściwe nastawienie do nauki fizyki' },
+        { title: 'Przekształcanie wzorów', icon: '📐', description: 'Naucz się sprawnie przekształcać wzory fizyczne' },
+        { title: 'Jest późno - jak wymaksować swój wynik', icon: '⏰', description: 'Strategie na ostatnią chwilę przed egzaminem' }
+    ];
+    
+    lessons.forEach((lesson, index) => {
+        const lessonCard = document.createElement('div');
+        lessonCard.className = 'lesson-card';
+        lessonCard.style.cssText = `
+            background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+            border: 2px solid #e0e7ff;
+            border-radius: 16px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        `;
+        
+        // Hover effect
+        lessonCard.onmouseenter = () => {
+            lessonCard.style.transform = 'translateY(-4px)';
+            lessonCard.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.1)';
+            lessonCard.style.borderColor = 'var(--magenta)';
+        };
+        lessonCard.onmouseleave = () => {
+            lessonCard.style.transform = 'translateY(0)';
+            lessonCard.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.05)';
+            lessonCard.style.borderColor = '#e0e7ff';
+        };
+        
+        // Ikona
+        const icon = document.createElement('div');
+        icon.textContent = lesson.icon;
+        icon.style.cssText = `
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        `;
+        lessonCard.appendChild(icon);
+        
+        // Tytuł
+        const lessonTitle = document.createElement('h3');
+        lessonTitle.textContent = lesson.title;
+        lessonTitle.style.cssText = `
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+        `;
+        lessonCard.appendChild(lessonTitle);
+        
+        // Opis
+        const description = document.createElement('p');
+        description.textContent = lesson.description;
+        description.style.cssText = `
+            color: #6b7280;
+            text-align: center;
+            line-height: 1.6;
+            font-size: 1rem;
+        `;
+        lessonCard.appendChild(description);
+        
+        // Click handler - tutaj można dodać logikę otwierania lekcji
+        lessonCard.onclick = () => {
+            // TODO: Dodać logikę otwierania konkretnej lekcji
+            console.log('Otwieranie lekcji:', lesson.title);
+            // Można dodać modal, przekierowanie, lub wyświetlenie treści lekcji
+        };
+        
+        lessonsContainer.appendChild(lessonCard);
+    });
+    
+    // Dodaj kontener z lekcjami do main PRZED sprawdzaniem isLocked
+    main.appendChild(lessonsContainer);
+    
+    // Jeśli zablokowany, dodaj overlay i komunikat
+    if (isLocked) {
+        // Zmniejsz opacity kart
+        lessonsContainer.querySelectorAll('.lesson-card').forEach(card => {
+            card.style.opacity = '0.5';
+            card.style.pointerEvents = 'none';
+        });
+        
+        // Dodaj overlay na cały kontener
+        lessonsContainer.style.position = 'relative';
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 10;
+            min-height: 400px;
+        `;
+        
+        const lockIcon = document.createElement('div');
+        lockIcon.textContent = '🔒';
+        lockIcon.style.fontSize = '3rem';
+        overlay.appendChild(lockIcon);
+        
+        const lockText = document.createElement('p');
+        lockText.textContent = 'Kup dostęp do jakiegokolwiek kursu, aby zobaczyć lekcje';
+        lockText.style.cssText = `
+            font-size: 1.2rem;
+            color: #6b7280;
+            font-weight: 600;
+            text-align: center;
+            padding: 0 2rem;
+        `;
+        overlay.appendChild(lockText);
+        
+        lessonsContainer.appendChild(overlay);
     }
 }
 

@@ -8,8 +8,13 @@ async function showRandomTaskForCourse(course_id, forceReset = false) {
         return;
     }
     
-    if (!course_id) {
+    if (course_id === null || course_id === undefined || course_id === '') {
         alert('Błąd: Brak identyfikatora kursu.');
+        return;
+    }
+    
+    // Kurs "tutaj zacznij" (course_id = 0) nie ma zadań
+    if (course_id === 0 || course_id === '0') {
         return;
     }
     

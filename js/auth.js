@@ -132,6 +132,22 @@ function hasAccessToCourse(courseId) {
         console.log('User is admin, granting access');
         return true;
     }
+    
+    // Specjalna logika dla kursu "tutaj zacznij" (courseId === '0' lub 0)
+    // Użytkownik ma dostęp jeśli ma dostęp do jakiegokolwiek kursu lub do wszystkich materiałów
+    if (courseId === '0' || courseId === 0) {
+        if (!userEnrollments || userEnrollments.length === 0) {
+            console.log('No enrollments found for "tutaj zacznij"');
+            return false;
+        }
+        // Sprawdź czy użytkownik ma dostęp do jakiegokolwiek kursu lub full_access
+        const hasAnyAccess = userEnrollments.some(e => {
+            return e.course_id === 'full_access' || (typeof e.course_id === 'number' && e.course_id > 0);
+        });
+        console.log('hasAccess for "tutaj zacznij" result:', hasAnyAccess);
+        return hasAnyAccess;
+    }
+    
     if (!userEnrollments || userEnrollments.length === 0) {
         console.log('No enrollments found');
         return false;
