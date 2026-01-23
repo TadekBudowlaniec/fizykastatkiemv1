@@ -446,8 +446,8 @@ function renderCoursePreview(subjectKey, main) {
     
     const stages = [
         { title: 'Etap 1', icon: '📚', description: 'Podstawy i wprowadzenie' },
-        { title: 'Etap 2', icon: '🔬', description: 'Rozszerzone zagadnienia' },
-        { title: 'Etap 3', icon: '🚀', description: 'Zaawansowane tematy' }
+        { title: 'Etap 2', icon: '🔬', description: 'Zadania do przerobienia' },
+        { title: 'Etap 3', icon: '🚀', description: 'Zadania maturalne z tego działu' }
     ];
     
     stages.forEach((stage, index) => {
@@ -755,8 +755,8 @@ function renderCourseFullView(subjectKey, main) {
     
     const stages = [
         { title: 'Etap 1', icon: '📚', description: 'Podstawy i wprowadzenie' },
-        { title: 'Etap 2', icon: '🔬', description: 'Rozszerzone zagadnienia' },
-        { title: 'Etap 3', icon: '🚀', description: 'Zaawansowane tematy' }
+        { title: 'Etap 2', icon: '🔬', description: 'Zadania do przerobienia' },
+        { title: 'Etap 3', icon: '🚀', description: 'Zadania maturalne z tego działu' }
     ];
     
     stages.forEach((stage, index) => {
@@ -916,7 +916,7 @@ function renderTutajZacznijView(main, isLocked = false) {
         main.appendChild(infoText);
     }
     
-    // Kontener dla lekcji
+    // Kontener dla kafelków lekcji
     const lessonsContainer = document.createElement('div');
     lessonsContainer.style.cssText = `
         display: grid;
@@ -924,130 +924,344 @@ function renderTutajZacznijView(main, isLocked = false) {
         gap: 1.5rem;
     `;
     
-    // Trzy lekcje
-    const lessons = [
-        { title: 'Mindset', icon: '🧠', description: 'Poznaj właściwe nastawienie do nauki fizyki' },
-        { title: 'Przekształcanie wzorów', icon: '📐', description: 'Naucz się sprawnie przekształcać wzory fizyczne' },
-        { title: 'Jest późno - jak wymaksować swój wynik', icon: '⏰', description: 'Strategie na ostatnią chwilę przed egzaminem' }
-    ];
-    
-    lessons.forEach((lesson, index) => {
-        const lessonCard = document.createElement('div');
-        lessonCard.className = 'lesson-card';
-        lessonCard.style.cssText = `
-            background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
-            border: 2px solid #e0e7ff;
-            border-radius: 16px;
-            padding: 2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        `;
-        
-        // Hover effect
-        lessonCard.onmouseenter = () => {
-            lessonCard.style.transform = 'translateY(-4px)';
-            lessonCard.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.1)';
-            lessonCard.style.borderColor = 'var(--magenta)';
-        };
-        lessonCard.onmouseleave = () => {
-            lessonCard.style.transform = 'translateY(0)';
-            lessonCard.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.05)';
-            lessonCard.style.borderColor = '#e0e7ff';
-        };
-        
-        // Ikona
-        const icon = document.createElement('div');
-        icon.textContent = lesson.icon;
-        icon.style.cssText = `
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 1rem;
-        `;
-        lessonCard.appendChild(icon);
-        
-        // Tytuł
-        const lessonTitle = document.createElement('h3');
-        lessonTitle.textContent = lesson.title;
-        lessonTitle.style.cssText = `
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 0.75rem;
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-        `;
-        lessonCard.appendChild(lessonTitle);
-        
-        // Opis
-        const description = document.createElement('p');
-        description.textContent = lesson.description;
-        description.style.cssText = `
-            color: #6b7280;
-            text-align: center;
-            line-height: 1.6;
-            font-size: 1rem;
-        `;
-        lessonCard.appendChild(description);
-        
-        // Click handler - tutaj można dodać logikę otwierania lekcji
-        lessonCard.onclick = () => {
-            // TODO: Dodać logikę otwierania konkretnej lekcji
-            console.log('Otwieranie lekcji:', lesson.title);
-            // Można dodać modal, przekierowanie, lub wyświetlenie treści lekcji
-        };
-        
-        lessonsContainer.appendChild(lessonCard);
-    });
-    
-    // Dodaj kontener z lekcjami do main PRZED sprawdzaniem isLocked
+    // Dodaj kontener z kafelkami do main
     main.appendChild(lessonsContainer);
-    
-    // Jeśli zablokowany, dodaj overlay i komunikat
-    if (isLocked) {
-        // Zmniejsz opacity kart
-        lessonsContainer.querySelectorAll('.lesson-card').forEach(card => {
-            card.style.opacity = '0.5';
-            card.style.pointerEvents = 'none';
-        });
-        
-        // Dodaj overlay na cały kontener
-        lessonsContainer.style.position = 'relative';
-        const overlay = document.createElement('div');
-        overlay.style.cssText = `
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
+
+    // Pełnoekranowy overlay na treść lekcji (Markdown + LaTeX / wideo)
+    if (!document.getElementById('lessonOverlay')) {
+        const lessonOverlay = document.createElement('div');
+        lessonOverlay.id = 'lessonOverlay';
+        lessonOverlay.style.cssText = `
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.92);
+            display: none;
+            z-index: 1000;
             justify-content: center;
-            flex-direction: column;
-            gap: 1rem;
-            z-index: 10;
-            min-height: 400px;
+            align-items: flex-start;
+            padding: 3rem 1.5rem;
+            overflow-y: auto;
         `;
-        
-        const lockIcon = document.createElement('div');
-        lockIcon.textContent = '🔒';
-        lockIcon.style.fontSize = '3rem';
-        overlay.appendChild(lockIcon);
-        
-        const lockText = document.createElement('p');
-        lockText.textContent = 'Kup dostęp do jakiegokolwiek kursu, aby zobaczyć lekcje';
-        lockText.style.cssText = `
-            font-size: 1.2rem;
-            color: #6b7280;
-            font-weight: 600;
-            text-align: center;
-            padding: 0 2rem;
+
+        lessonOverlay.innerHTML = `
+            <div class="lesson-overlay-inner" style="max-width: 960px; margin: 0 auto; width: 100%; background: #0f172a; border-radius: 16px; padding: 1.5rem 1.5rem 2rem; color: #e5e7eb; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:1rem;">
+                    <button id="lessonBackButton" class="btn btn-outline2" style="white-space:nowrap;">← Wróć do listy lekcji</button>
+                    <h2 id="lessonTitle" class="lesson-title" style="font-size:1.6rem;margin:0;"></h2>
+                </div>
+                <div id="lessonVideoWrapper" class="lesson-video" style="margin-bottom: 1.5rem; display:none;">
+                    <iframe
+                        id="lessonVideoPlayer"
+                        class="video-frame"
+                        style="width:100%;aspect-ratio:16/9;border-radius:12px;border:none;"
+                        src=""
+                        title="Lekcja wideo"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div id="lessonTextWrapper" class="lesson-text" style="display:none;background:#020617;border-radius:12px;padding:1.25rem;max-height:none;overflow:auto;">
+                    <div id="lessonContent" class="prose" style="color:#e5e7eb;"></div>
+                </div>
+            </div>
         `;
-        overlay.appendChild(lockText);
-        
-        lessonsContainer.appendChild(overlay);
+
+        document.body.appendChild(lessonOverlay);
+
+        const backBtn = document.getElementById('lessonBackButton');
+        if (backBtn) {
+            backBtn.onclick = () => {
+                const overlay = document.getElementById('lessonOverlay');
+                const iframe = document.getElementById('lessonVideoPlayer');
+                if (overlay) overlay.style.display = 'none';
+                if (iframe) iframe.src = '';
+            };
+        }
+    }
+    
+    // Załaduj lekcje z bazy danych dla course_id = 0 i zbuduj kafelki
+    loadStartLessonsIntoContainer(lessonsContainer, isLocked);
+}
+
+/**
+ * @typedef {Object} Lesson
+ * @property {number} video_id
+ * @property {number} course_id
+ * @property {string} tytul_lekcji
+ * @property {string|null} yt_id_wideo
+ * @property {string|null} content
+ */
+
+/**
+ * Ładuje lekcje z tabeli "video" dla kursu "Tutaj zacznij" (course_id = 0)
+ * i renderuje je jako kafelki, które po kliknięciu wywołują loadLesson.
+ *
+ * @param {HTMLDivElement} lessonsContainer
+ * @param {boolean} isLocked
+ */
+async function loadStartLessonsIntoContainer(lessonsContainer, isLocked) {
+    try {
+        /** @type {{ data: Lesson[] | null, error: any }} */
+        const { data: lessons, error } = await supabase
+            .from('video')
+            .select('video_id, course_id, tytul_lekcji, yt_id_wideo, content')
+            .eq('course_id', 0)
+            .order('video_id', { ascending: true });
+
+        lessonsContainer.innerHTML = '';
+
+        if (error) {
+            console.error('Błąd pobierania lekcji dla "Tutaj zacznij":', error);
+            lessonsContainer.innerHTML = '<p style="color:#ef4444;">Nie udało się załadować lekcji startowych.</p>';
+            return;
+        }
+
+        if (!lessons || lessons.length === 0) {
+            lessonsContainer.innerHTML = '<p>Brak zdefiniowanych lekcji w sekcji "Tutaj zacznij".</p>';
+            return;
+        }
+
+        lessons.forEach((lesson) => {
+            const lessonCard = document.createElement('div');
+            lessonCard.className = 'lesson-card';
+            lessonCard.style.cssText = `
+                background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+                border: 2px solid #e0e7ff;
+                border-radius: 16px;
+                padding: 2rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            `;
+
+            // Hover effect
+            lessonCard.onmouseenter = () => {
+                lessonCard.style.transform = 'translateY(-4px)';
+                lessonCard.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.1)';
+                lessonCard.style.borderColor = 'var(--magenta)';
+            };
+            lessonCard.onmouseleave = () => {
+                lessonCard.style.transform = 'translateY(0)';
+                lessonCard.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.05)';
+                lessonCard.style.borderColor = '#e0e7ff';
+            };
+
+            // Ikona - dopasowana do tytułu lekcji (jak w poprzedniej, statycznej wersji)
+            const icon = document.createElement('div');
+            let iconChar = '📚';
+            const titleText = (lesson.tytul_lekcji || '').toLowerCase();
+            if (titleText.includes('wstęp') || titleText.includes('planer')) {
+                iconChar = '🧭';
+            } else if (titleText.includes('mindset')) {
+                iconChar = '🧠';
+            } else if (titleText.includes('wymaksować') || titleText.includes('jest późno')) {
+                iconChar = '⏰';
+            } else if (titleText.includes('przekształcanie wzorów') || titleText.includes('przekształcanie') || titleText.includes('wzory')) {
+                iconChar = '📐';
+            } else if (titleText.includes('wektory') || titleText.includes('trygonometria')) {
+                iconChar = '📐';
+            } else if (titleText.includes('słownik cke') || titleText.includes('słownik')) {
+                iconChar = '📖';
+            } else if (titleText.includes('których nie ma w karcie wzorów')) {
+                iconChar = '🧾';
+            }
+            icon.textContent = iconChar;
+            icon.style.cssText = `
+                font-size: 3rem;
+                text-align: center;
+                margin-bottom: 1rem;
+            `;
+            lessonCard.appendChild(icon);
+
+            // Tytuł lekcji
+            const lessonTitle = document.createElement('h3');
+            lessonTitle.textContent = lesson.tytul_lekcji;
+            lessonTitle.style.cssText = `
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: #1f2937;
+                margin-bottom: 0.75rem;
+                text-align: center;
+                font-family: 'Poppins', sans-serif;
+            `;
+            lessonCard.appendChild(lessonTitle);
+
+            // Krótki opis zależny od treści (czy ma wideo/tekst)
+            const description = document.createElement('p');
+            const hasVideo = !!lesson.yt_id_wideo;
+            const hasText = !!(lesson.content && lesson.content.trim().length > 0);
+            if (hasVideo && hasText) {
+                description.textContent = 'Wideo + notatki do lekcji';
+            } else if (hasVideo) {
+                description.textContent = 'Lekcja wideo';
+            } else if (hasText) {
+                description.textContent = 'Lekcja tekstowa';
+            } else {
+                description.textContent = 'Ta lekcja nie ma jeszcze treści';
+            }
+            description.style.cssText = `
+                color: #6b7280;
+                text-align: center;
+                line-height: 1.6;
+                font-size: 1rem;
+            `;
+            lessonCard.appendChild(description);
+
+            // Kliknięcie w kafelek -> załaduj treść lekcji
+            lessonCard.onclick = () => {
+                loadLesson(lesson.video_id);
+            };
+
+            lessonsContainer.appendChild(lessonCard);
+        });
+
+        // Jeśli kurs jest zablokowany, przyciemnij kafelki i dodaj overlay
+        if (isLocked) {
+            lessonsContainer.querySelectorAll('.lesson-card').forEach(card => {
+                card.style.opacity = '0.6';
+                card.style.pointerEvents = 'none';
+            });
+
+            lessonsContainer.style.position = 'relative';
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.7);
+                border-radius: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 1rem;
+                z-index: 10;
+                min-height: 400px;
+            `;
+
+            let buyAllBtnHtml;
+            if (!currentUser) {
+                buyAllBtnHtml = `<a href="#" onclick="showSection('login');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Kup wszystkie materiały</a>`;
+            } else {
+                buyAllBtnHtml = `<a href="#" onclick="buyAccess('full_access');return false;" class="btn btn-gradient" style="font-size: 1.1rem; min-width: 220px;">Kup wszystkie materiały</a>`;
+            }
+
+            overlay.innerHTML = `
+                <div style="text-align: center; color: #f9fafb; padding: 0 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
+                    <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem;">
+                        Odblokuj kurs "Tutaj zacznij" i resztę materiałów
+                    </div>
+                    <div style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 1.5rem;">
+                        Pod spodem widzisz plan startowy kursu. Pełen dostęp uzyskasz po zakupie materiałów.
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        ${buyAllBtnHtml}
+                    </div>
+                </div>
+            `;
+
+            lessonsContainer.appendChild(overlay);
+        }
+    } catch (e) {
+        console.error('Nieoczekiwany błąd podczas ładowania lekcji startowych:', e);
+        lessonsContainer.innerHTML = '<p style="color:#ef4444;">Wystąpił błąd podczas ładowania lekcji.</p>';
+    }
+}
+
+/**
+ * Ładuje i wyświetla lekcję na podstawie jej ID (video_id) z tabeli "video".
+ * Obsługuje 3 przypadki:
+ *  - tylko wideo
+ *  - tylko tekst (Markdown + LaTeX)
+ *  - wideo + tekst
+ *
+ * @param {number} lessonId
+ * @returns {Promise<void>}
+ */
+async function loadLesson(lessonId) {
+    const overlay = document.getElementById('lessonOverlay');
+    const titleEl = document.getElementById('lessonTitle');
+    const videoWrapper = document.getElementById('lessonVideoWrapper');
+    const videoIframe = document.getElementById('lessonVideoPlayer');
+    const textWrapper = document.getElementById('lessonTextWrapper');
+    const contentEl = document.getElementById('lessonContent');
+
+    if (!overlay || !titleEl || !videoWrapper || !videoIframe || !textWrapper || !contentEl) {
+        console.error('Brakuje elementów kontenera lekcji w DOM.');
+        return;
+    }
+
+    // Pokaż fullscreen overlay
+    overlay.style.display = 'flex';
+    overlay.scrollTop = 0;
+
+    // Reset widoku
+    titleEl.textContent = 'Ładowanie lekcji...';
+    videoWrapper.style.display = 'none';
+    videoIframe.src = '';
+    textWrapper.style.display = 'none';
+    contentEl.innerHTML = '';
+
+    /** @type {{ data: Lesson | null, error: any }} */
+    const { data: lesson, error } = await supabase
+        .from('video')
+        .select('video_id, course_id, tytul_lekcji, yt_id_wideo, content')
+        .eq('video_id', lessonId)
+        .single();
+
+    if (error || !lesson) {
+        console.error('Błąd pobierania lekcji:', error);
+        titleEl.textContent = 'Błąd ładowania lekcji';
+        contentEl.innerHTML = '<p style="color:#ef4444;">Nie udało się załadować lekcji.</p>';
+        textWrapper.style.display = 'block';
+        return;
+    }
+
+    titleEl.textContent = lesson.tytul_lekcji || 'Lekcja';
+
+    const hasVideo = !!lesson.yt_id_wideo;
+    const hasText = !!(lesson.content && lesson.content.trim().length > 0);
+
+    // Wideo
+    if (hasVideo) {
+        const ytId = lesson.yt_id_wideo;
+        const youtubeUrl = `https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1&showinfo=0`;
+        videoIframe.src = youtubeUrl;
+        videoWrapper.style.display = 'block';
+    } else {
+        videoWrapper.style.display = 'none';
+        videoIframe.src = '';
+    }
+
+    // Tekst (Markdown + LaTeX)
+    if (hasText) {
+        const rawMarkdown = lesson.content || '';
+        const html = window.marked ? window.marked.parse(rawMarkdown) : rawMarkdown;
+
+        contentEl.innerHTML = html;
+        textWrapper.style.display = 'block';
+
+        if (window.renderMathInElement) {
+            window.renderMathInElement(contentEl, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false }
+                ],
+                throwOnError: false
+            });
+        }
+    } else {
+        textWrapper.style.display = 'none';
+        contentEl.innerHTML = '';
+    }
+
+    if (!hasVideo && !hasText) {
+        textWrapper.style.display = 'block';
+        contentEl.innerHTML = '<p>Ta lekcja nie ma jeszcze treści.</p>';
     }
 }
 
