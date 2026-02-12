@@ -3450,4 +3450,70 @@ nav {
     color: #7e22ce;
 }
 
+/* --- Stylizacja treści lekcji (Markdown) w \"Tutaj zacznij\" --- */
+
+/* Główny kontener tekstu */
+#lessonContent {
+    font-family: inherit;      /* Spójna z resztą strony */
+    line-height: 1.8;          /* Większy odstęp między liniami */
+    font-size: 1rem;
+    color: #e2e8f0;            /* Jasnoszary tekst na ciemnym tle */
+}
+
+/* Odstępy między akapitami */
+#lessonContent p {
+    margin-bottom: 1.5rem;
+}
+
+/* Nagłówki (## Tytuł) */
+#lessonContent h2 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #334155;
+}
+
+#lessonContent h3 {
+    color: #f472b6;            /* Magenta/róż pasujący do brandu */
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Listy punktowane */
+#lessonContent ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#lessonContent li {
+    margin-bottom: 0.5rem;
+}
+
+/* Pogrubienia */
+#lessonContent strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Cytaty (> tekst) */
+#lessonContent blockquote {
+    border-left: 4px solid #db2777;
+    background-color: rgba(255, 255, 255, 0.05);
+    margin: 2rem 0;
+    padding: 1rem 1.5rem;
+    font-style: italic;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Linie oddzielające (---) */
+#lessonContent hr {
+    border: 0;
+    height: 1px;
+    background: #334155;
+    margin: 3rem 0;
+}
+
 /* --- RESPANSYWNOŚĆ (MOBILE) --- */

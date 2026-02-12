@@ -1051,19 +1051,25 @@ async function loadStartLessonsIntoContainer(lessonsContainer, isLocked) {
             const icon = document.createElement('div');
             let iconChar = '📚';
             const titleText = (lesson.tytul_lekcji || '').toLowerCase();
-            if (titleText.includes('wstęp') || titleText.includes('planer')) {
+            if (titleText.includes('wstęp')) {
+                // Wstęp – ogólne wprowadzenie
+                iconChar = '📘';
+            } else if (titleText.includes('planer')) {
+                // Planer maturalny
                 iconChar = '🧭';
             } else if (titleText.includes('mindset')) {
                 iconChar = '🧠';
             } else if (titleText.includes('wymaksować') || titleText.includes('jest późno')) {
                 iconChar = '⏰';
-            } else if (titleText.includes('przekształcanie wzorów') || titleText.includes('przekształcanie') || titleText.includes('wzory')) {
+            } else if (titleText.includes('przekształcanie wzorów') || titleText.includes('przekształcanie')) {
+                // Przekształcanie wzorów
                 iconChar = '📐';
             } else if (titleText.includes('wektory') || titleText.includes('trygonometria')) {
-                iconChar = '📐';
+                // Wektory i trygonometria
+                iconChar = '📊';
             } else if (titleText.includes('słownik cke') || titleText.includes('słownik')) {
                 iconChar = '📖';
-            } else if (titleText.includes('których nie ma w karcie wzorów')) {
+            } else if (titleText.includes('Wzory')) {
                 iconChar = '🧾';
             }
             icon.textContent = iconChar;
@@ -1222,6 +1228,18 @@ async function loadLesson(lessonId) {
     }
 
     titleEl.textContent = lesson.tytul_lekcji || 'Lekcja';
+
+    const lessonTitleLower = (lesson.tytul_lekcji || '').toLowerCase();
+
+    // Specjalny przypadek: lekcja „planer” – zamiast zwykłego tekstu
+    // pokazujemy konfigurator / plan nauki.
+    if (lessonTitleLower.includes('planer')) {
+        videoWrapper.style.display = 'none';
+        videoIframe.src = '';
+        await renderStudyPlanInLesson(contentEl);
+        textWrapper.style.display = 'block';
+        return;
+    }
 
     const hasVideo = !!lesson.yt_id_wideo;
     const hasText = !!(lesson.content && lesson.content.trim().length > 0);
@@ -1428,6 +1446,543 @@ async function loadVideosForCourse(course_id, videoListElement, videoPlayerEleme
         console.error('Błąd podczas ładowania filmów:', error);
         videoListElement.innerHTML = '<p style="color: #ef4444; padding: 1rem;">Błąd ładowania filmów</p>';
     }
+}
+
+// ---------- PLAN NAUKI / PLANER MENTALNY ----------
+
+const STUDY_TOPICS = [
+    'Kinematyka',
+    'Dynamika',
+    'Praca Moc Energia',
+    'Bryła Sztywna',
+    'Ruch Drgający',
+    'Fale Mechaniczne',
+    'Hydrostatyka',
+    'Termodynamika',
+    'Grawitacja',
+    'Elektrostatyka',
+    'Prąd Elektryczny',
+    'Magnetyzm',
+    'Indukcja',
+    'Fale E-M',
+    'Fizyka Atomowa',
+    'Fizyka Jądrowa'
+];
+
+/**
+ * Generuje i zapisuje indywidualny plan nauki do matury z fizyki.
+ *
+ * @param {string} userId
+ * @param {string[]} completedTopicsArray - nazwy działów już przerobionych (pomijane w planie)
+ */
+async function generateStudyPlan(userId, completedTopicsArray = []) {
+    // Stałe i pomocnicze funkcje dat
+    /** @param {Date} d */
+    const toYMD = (d) => d.toISOString().slice(0, 10);
+
+    /** @param {Date} d @param {number} days */
+    const addDays = (d, days) => {
+        const copy = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+        copy.setUTCDate(copy.getUTCDate() + days);
+        return copy;
+    };
+
+    /** dzisiejsza data w „wersji dziennej” (bez godziny) */
+    const now = new Date();
+    let today = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+
+    const currentYear = today.getUTCFullYear();
+    const examDate = new Date(Date.UTC(currentYear, 4, 19)); // 19 maja
+    const ARKUSZ_DAYS = 21;
+
+    // Wyczyść dotychczasowy plan użytkownika
+    await supabase.from('study_plans').delete().eq('user_id', userId);
+
+    /** @type {Array<{
+     *  user_id: string,
+     *  scheduled_date: string,
+     *  topic_name: string,
+     *  activity_type: string,
+     *  description: string,
+     *  is_completed: boolean
+     * }>} */
+    const planRows = [];
+
+    // Po maturze – nic nie planujemy
+    if (today > examDate) {
+        return { ok: true, reason: 'after_exam', inserted: 0 };
+    }
+
+    const isSunday = (d) => d.getUTCDay() === 0;
+
+    // Data startu okresu arkuszy
+    let arkuszStart = addDays(examDate, -ARKUSZ_DAYS);
+    if (arkuszStart < today) {
+        arkuszStart = today; // jeśli zostało mniej niż 21 dni, arkusze od dziś
+    }
+
+    // Wolne niedziele w całym okresie (dziś -> egzamin)
+    {
+        let d = today;
+        while (d <= examDate) {
+            if (isSunday(d)) {
+                planRows.push({
+                    user_id: userId,
+                    scheduled_date: toYMD(d),
+                    topic_name: 'Dzień wolny',
+                    activity_type: 'wolne',
+                    description: 'Niedziela – dzień wolny od nauki.',
+                    is_completed: false
+                });
+            }
+            d = addDays(d, 1);
+        }
+    }
+
+    // Jeśli do matury zostało mniej niż 3 tygodnie -> tylko arkusze + wolne już dodane
+    if (arkuszStart.getTime() === today.getTime()) {
+        let d = today;
+        while (d <= examDate) {
+            if (!isSunday(d)) {
+                planRows.push({
+                    user_id: userId,
+                    scheduled_date: toYMD(d),
+                    topic_name: 'Arkusze maturalne',
+                    activity_type: 'arkusz',
+                    description: 'Rozwiąż pełny arkusz maturalny z fizyki w warunkach zbliżonych do egzaminu.',
+                    is_completed: false
+                });
+            }
+            d = addDays(d, 1);
+        }
+
+        if (planRows.length > 0) {
+            const { error } = await supabase.from('study_plans').insert(planRows);
+            if (error) throw error;
+        }
+
+        return { ok: true, mode: 'only_arkusze', inserted: planRows.length };
+    }
+
+    const completedSet = new Set((completedTopicsArray || []).map((t) => t.toLowerCase()));
+    const remainingTopics = STUDY_TOPICS.filter(
+        (name) => !completedSet.has(name.toLowerCase())
+    );
+    const hasLearningPhase = remainingTopics.length > 0;
+
+    // Zakres nauki działów: [today, arkuszStart)
+    /** @type {Date[]} */
+    const learningDates = [];
+    {
+        let d = today;
+        while (d < arkuszStart) {
+            if (!isSunday(d)) learningDates.push(d);
+            d = addDays(d, 1);
+        }
+    }
+
+    // Arkusze: od arkuszStart do egzaminu (bez niedziel)
+    /** @type {Date[]} */
+    const arkuszDates = [];
+    {
+        let d = arkuszStart;
+        while (d <= examDate) {
+            if (!isSunday(d)) arkuszDates.push(d);
+            d = addDays(d, 1);
+        }
+    }
+
+    // Jeśli wszystkie działy są zrobione -> tylko arkusze
+    if (!hasLearningPhase) {
+        for (const d of arkuszDates) {
+            planRows.push({
+                user_id: userId,
+                scheduled_date: toYMD(d),
+                topic_name: 'Arkusze maturalne',
+                activity_type: 'arkusz',
+                description: 'Rozwiąż pełny arkusz maturalny z fizyki w warunkach zbliżonych do egzaminu.',
+                is_completed: false
+            });
+        }
+
+        if (planRows.length > 0) {
+            const { error } = await supabase.from('study_plans').insert(planRows);
+            if (error) throw error;
+        }
+
+        return { ok: true, mode: 'only_arkusze_topics_done', inserted: planRows.length };
+    }
+
+    const workingDaysForLearning = learningDates.length;
+    if (workingDaysForLearning <= 0) {
+        for (const d of arkuszDates) {
+            planRows.push({
+                user_id: userId,
+                scheduled_date: toYMD(d),
+                topic_name: 'Arkusze maturalne',
+                activity_type: 'arkusz',
+                description: 'Rozwiąż pełny arkusz maturalny z fizyki w warunkach zbliżonych do egzaminu.',
+                is_completed: false
+            });
+        }
+
+        if (planRows.length > 0) {
+            const { error } = await supabase.from('study_plans').insert(planRows);
+            if (error) throw error;
+        }
+        return { ok: true, mode: 'no_learning_days', inserted: planRows.length };
+    }
+
+    // Definicja kroków z wagami
+    const STEPS = [
+        { activity_type: 'video',  weight: 3, descPrefix: 'Obejrzyj lekcje wideo z działu ' },
+        { activity_type: 'etap_1', weight: 1, descPrefix: 'Przerób Etap 1 (podstawy) z działu ' },
+        { activity_type: 'etap_2', weight: 2, descPrefix: 'Przerób Etap 2 (zadania na średnim poziomie) z działu ' },
+        { activity_type: 'etap_3', weight: 2, descPrefix: 'Przerób Etap 3 (zadania trudniejsze/maturalne) z działu ' }
+    ];
+
+    const UNITS_PER_TOPIC = 8; // 3 + 1 + 2 + 2
+    const totalUnits = remainingTopics.length * UNITS_PER_TOPIC;
+
+    const tasks = [];
+    for (const topic of remainingTopics) {
+        for (const step of STEPS) {
+            tasks.push({
+                topic_name: topic,
+                activity_type: step.activity_type,
+                weight: step.weight,
+                description: step.descPrefix + topic
+            });
+        }
+    }
+
+    let cumulativeUnits = 0;
+    const learningDaysCount = learningDates.length;
+
+    for (const task of tasks) {
+        cumulativeUnits += task.weight;
+        let dayIndex = Math.floor((cumulativeUnits / totalUnits) * learningDaysCount) - 1;
+        if (dayIndex < 0) dayIndex = 0;
+        if (dayIndex >= learningDaysCount) dayIndex = learningDaysCount - 1;
+
+        const d = learningDates[dayIndex];
+
+        planRows.push({
+            user_id: userId,
+            scheduled_date: toYMD(d),
+            topic_name: task.topic_name,
+            activity_type: task.activity_type,
+            description: task.description,
+            is_completed: false
+        });
+    }
+
+    // Dodaj okres arkuszy
+    for (const d of arkuszDates) {
+        planRows.push({
+            user_id: userId,
+            scheduled_date: toYMD(d),
+            topic_name: 'Arkusze maturalne',
+            activity_type: 'arkusz',
+            description: 'Rozwiąż pełny arkusz maturalny z fizyki w warunkach zbliżonych do egzaminu.',
+            is_completed: false
+        });
+    }
+
+    if (planRows.length > 0) {
+        const { error } = await supabase.from('study_plans').insert(planRows);
+        if (error) throw error;
+    }
+
+    return { ok: true, mode: 'full_plan', inserted: planRows.length };
+}
+
+/**
+ * Główna funkcja widoku planu w lekcji „planer”.
+ * Jeśli plan nie istnieje -> wyświetla formularz konfiguracji.
+ * Jeśli istnieje -> renderuje tabelę planu + przycisk resetu.
+ *
+ * @param {HTMLElement} container
+ */
+async function renderStudyPlanInLesson(container) {
+    if (!currentUser) {
+        container.innerHTML = `
+            <p>Musisz być zalogowany, aby wygenerować swój plan nauki.</p>
+            <button class="btn btn-gradient" onclick="showSection('login')">Zaloguj się</button>
+        `;
+        return;
+    }
+
+    container.innerHTML = '<p>Ładuję Twój plan nauki...</p>';
+
+    const { data: rows, error } = await supabase
+        .from('study_plans')
+        .select('*')
+        .eq('user_id', currentUser.id)
+        .order('scheduled_date', { ascending: true });
+
+    if (error) {
+        console.error('Błąd pobierania planu nauki:', error);
+        container.innerHTML = '<p style="color:#ef4444;">Nie udało się pobrać planu nauki.</p>';
+        return;
+    }
+
+    if (!rows || rows.length === 0) {
+        renderConfigurationForm(container);
+    } else {
+        renderPlan(container, rows);
+    }
+}
+
+/**
+ * Formularz konfiguracji planu: lista checkboxów „Co już umiesz?”
+ * i przycisk „Generuj plan”.
+ *
+ * @param {HTMLElement} container
+ */
+function renderConfigurationForm(container) {
+    container.innerHTML = '';
+
+    const wrapper = document.createElement('div');
+    wrapper.style.maxWidth = '720px';
+    wrapper.style.margin = '0 auto';
+
+    const heading = document.createElement('h2');
+    heading.textContent = 'Skonfiguruj swój plan nauki';
+    heading.style.marginBottom = '0.75rem';
+    wrapper.appendChild(heading);
+
+    const sub = document.createElement('p');
+    sub.textContent = 'Zaznacz działy, które masz już ogarnięte. Resztę rozplanujemy za Ciebie aż do matury.';
+    sub.style.marginBottom = '1.5rem';
+    wrapper.appendChild(sub);
+
+    const form = document.createElement('form');
+    form.id = 'studyPlanConfigForm';
+
+    const grid = document.createElement('div');
+    grid.style.display = 'grid';
+    grid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(220px, 1fr))';
+    grid.style.gap = '0.75rem 1.5rem';
+
+    STUDY_TOPICS.forEach((topic, index) => {
+        const label = document.createElement('label');
+        label.style.display = 'flex';
+        label.style.alignItems = 'center';
+        label.style.gap = '0.6rem';
+        label.style.cursor = 'pointer';
+
+        const input = document.createElement('input');
+        input.type = 'checkbox';
+        input.name = 'completedTopics';
+        input.value = topic;
+        input.id = `topic-${index}`;
+
+        const span = document.createElement('span');
+        span.textContent = topic;
+
+        label.appendChild(input);
+        label.appendChild(span);
+        grid.appendChild(label);
+    });
+
+    form.appendChild(grid);
+
+    const actions = document.createElement('div');
+    actions.style.marginTop = '1.8rem';
+    actions.style.display = 'flex';
+    actions.style.gap = '1rem';
+    actions.style.flexWrap = 'wrap';
+
+    const submitBtn = document.createElement('button');
+    submitBtn.type = 'submit';
+    submitBtn.className = 'btn btn-gradient';
+    submitBtn.textContent = 'Generuj plan';
+
+    actions.appendChild(submitBtn);
+    form.appendChild(actions);
+    wrapper.appendChild(form);
+    container.appendChild(wrapper);
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!currentUser) {
+            alert('Musisz być zalogowany, aby wygenerować plan.');
+            return;
+        }
+
+        const checked = Array.from(
+            form.querySelectorAll('input[name="completedTopics"]:checked')
+        ).map((el) => el.value);
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Generuję plan...';
+
+        try {
+            await generateStudyPlan(currentUser.id, checked);
+            const { data: newRows } = await supabase
+                .from('study_plans')
+                .select('*')
+                .eq('user_id', currentUser.id)
+                .order('scheduled_date', { ascending: true });
+            renderPlan(container, newRows || []);
+        } catch (err) {
+            console.error('Błąd generowania planu:', err);
+            alert('Nie udało się wygenerować planu nauki.');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Generuj plan';
+        }
+    });
+}
+
+/**
+ * Renderuje istniejący plan nauki + przycisk „Zresetuj plan”.
+ *
+ * @param {HTMLElement} container
+ * @param {Array<any>} rows
+ */
+function renderPlan(container, rows) {
+    container.innerHTML = '';
+
+    const wrapper = document.createElement('div');
+    wrapper.style.maxWidth = '900px';
+    wrapper.style.margin = '0 auto';
+
+    const headerRow = document.createElement('div');
+    headerRow.style.display = 'flex';
+    headerRow.style.justifyContent = 'space-between';
+    headerRow.style.alignItems = 'center';
+    headerRow.style.marginBottom = '1rem';
+
+    const heading = document.createElement('h2');
+    heading.textContent = 'Twój plan nauki do matury';
+
+    const resetBtn = document.createElement('button');
+    resetBtn.className = 'btn btn-outline2';
+    resetBtn.textContent = 'Zresetuj plan';
+    resetBtn.onclick = async () => {
+        if (!currentUser) return;
+        const ok = window.confirm('Na pewno chcesz usunąć swój plan nauki i zacząć od nowa?');
+        if (!ok) return;
+        await supabase.from('study_plans').delete().eq('user_id', currentUser.id);
+        renderConfigurationForm(container);
+    };
+
+    headerRow.appendChild(heading);
+    headerRow.appendChild(resetBtn);
+    wrapper.appendChild(headerRow);
+
+    // Karty zamiast tabeli – lepsze na mobile + checkboxy
+    let html = '';
+    html += `<div class="planner-container" style="display: flex; flex-direction: column; gap: 10px; max-width: 800px; margin: 0 auto;">`;
+
+    const planData = rows || [];
+
+    planData.forEach((item) => {
+        const dateObj = new Date(item.scheduled_date);
+        const dateStr = dateObj.toLocaleDateString('pl-PL', { day: 'numeric', month: 'numeric' });
+        const dayName = dateObj.toLocaleDateString('pl-PL', { weekday: 'long' });
+
+        const opacity = item.is_completed ? '0.5' : '1';
+        const decoration = item.is_completed ? 'line-through' : 'none';
+        const checkState = item.is_completed ? 'checked' : '';
+
+        let typeColor = '#3b82f6';
+        if (item.activity_type === 'video') typeColor = '#ec4899';
+        if (item.activity_type === 'arkusz') typeColor = '#eab308';
+        if (item.activity_type === 'wolne') typeColor = '#10b981';
+
+        html += `
+        <div class="plan-card" style="
+            display: flex; 
+            align-items: flex-start; 
+            gap: 15px; 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 12px; 
+            padding: 16px; 
+            transition: all 0.2s ease;
+        ">
+            <div style="padding-top: 4px;">
+                <input type="checkbox" 
+                       class="task-checkbox" 
+                       data-id="${item.id}" 
+                       ${checkState}
+                       style="
+                           width: 24px; 
+                           height: 24px; 
+                           cursor: pointer; 
+                           accent-color: var(--magenta, #ec4899);
+                       ">
+            </div>
+
+            <div class="plan-card-content" style="flex-grow: 1; opacity: ${opacity}; text-decoration: ${decoration}; transition: opacity 0.3s;">
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 0.5rem; flex-wrap: wrap;">
+                    <span style="font-weight: 700; color: #fff; font-size: 1.05rem;">
+                        ${dateStr} <span style="font-weight: 400; color: #888; font-size: 0.9rem; text-transform: capitalize;">(${dayName})</span>
+                    </span>
+                    <span style="
+                        background: ${typeColor}20; 
+                        color: ${typeColor}; 
+                        border: 1px solid ${typeColor}40; 
+                        padding: 2px 8px; 
+                        border-radius: 6px; 
+                        font-size: 0.75rem; 
+                        font-weight: 600; 
+                        text-transform: uppercase;
+                    ">
+                        ${String(item.activity_type || '').replace('_', ' ')}
+                    </span>
+                </div>
+
+                <div style="font-size: 1.05rem; font-weight: 600; color: #e2e8f0; margin-bottom: 4px;">
+                    ${item.topic_name}
+                </div>
+
+                <div style="font-size: 0.9rem; color: #94a3b8; line-height: 1.4;">
+                    ${item.description}
+                </div>
+            </div>
+        </div>
+        `;
+    });
+
+    html += `</div>`;
+
+    const cardsContainer = document.createElement('div');
+    cardsContainer.innerHTML = html;
+    wrapper.appendChild(cardsContainer);
+    container.appendChild(wrapper);
+
+    // Obsługa kliknięć checkboxów (aktualizacja is_completed)
+    const checkboxes = container.querySelectorAll('.task-checkbox');
+    checkboxes.forEach((box) => {
+        box.addEventListener('change', async (e) => {
+            const target = /** @type {HTMLInputElement} */ (e.target);
+            const taskId = target.getAttribute('data-id');
+            const isDone = target.checked;
+
+            const card = target.closest('.plan-card');
+            const contentDiv = card ? card.querySelector('.plan-card-content') : null;
+            if (contentDiv) {
+                contentDiv.style.opacity = isDone ? '0.5' : '1';
+                contentDiv.style.textDecoration = isDone ? 'line-through' : 'none';
+            }
+
+            if (taskId) {
+                try {
+                    await supabase
+                        .from('study_plans')
+                        .update({ is_completed: isDone })
+                        .eq('id', taskId);
+                } catch (err) {
+                    console.error('Błąd aktualizacji statusu zadania w planie:', err);
+                }
+            }
+        });
+    });
 }
 
 // Funkcja do wyświetlania zablokowanej listy filmów w podglądzie
