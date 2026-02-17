@@ -309,6 +309,102 @@ nav {
     text-align: right;
 }
 
+/* Toolkit / Maturalny Niezbędnik */
+.toolkit-section {
+    background: radial-gradient(circle at top left, rgba(236,72,153,0.18), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(59,130,246,0.18), transparent 55%),
+                #020617;
+    color: #e5e7eb;
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+}
+
+.toolkit-section .section-heading h2 {
+    color: #f9fafb;
+}
+
+.toolkit-section .section-subtitle {
+    color: #cbd5f5;
+}
+
+.toolkit-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.toolkit-card {
+    background: rgba(15,23,42,0.9);
+    border-radius: 18px;
+    padding: 1.6rem 1.5rem;
+    border: 1px solid rgba(148,163,184,0.4);
+    box-shadow: 0 18px 45px rgba(15,23,42,0.55);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.toolkit-card-large {
+    grid-row: span 2;
+}
+
+.toolkit-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 30% 20%, rgba(248,250,252,0.8), transparent 45%),
+                linear-gradient(135deg, #ec4899, #6366f1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.toolkit-card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #f9fafb;
+    margin: 0.1rem 0 0.4rem;
+}
+
+.toolkit-card p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #cbd5f5;
+}
+
+.toolkit-badge {
+    margin-top: 0.6rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(250,204,21,0.08);
+    border: 1px solid rgba(250,204,21,0.45);
+    font-size: 0.8rem;
+    color: #fde68a;
+}
+
+.toolkit-cta {
+    margin-top: 2.3rem;
+    text-align: center;
+}
+
+.toolkit-cta .btn {
+    min-width: 260px;
+}
+
+@media (max-width: 900px) {
+    .toolkit-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .toolkit-card-large {
+        grid-row: auto;
+    }
+}
+
 /* Features */
 .features {
     padding: 8rem 0; /* Zwiększam padding */
