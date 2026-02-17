@@ -351,16 +351,16 @@ nav {
 }
 
 .toolkit-icon {
-    width: 56px;
-    height: 56px;
+    width: 68px;
+    height: 68px;
     border-radius: 999px;
     background: radial-gradient(circle at 30% 20%, rgba(248,250,252,0.8), transparent 45%),
                 linear-gradient(135deg, #ec4899, #6366f1);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+    font-size: 2.1rem;
+    margin-bottom: 0.75rem;
 }
 
 .toolkit-card h3 {
@@ -377,14 +377,33 @@ nav {
     color: #cbd5f5;
 }
 
-.toolkit-badge {
+/* odstęp między kolejnymi akapitami w kartach */
+.toolkit-card p + p {
     margin-top: 0.6rem;
-    padding: 0.4rem 0.7rem;
-    border-radius: 999px;
-    background: rgba(250,204,21,0.08);
-    border: 1px solid rgba(250,204,21,0.45);
+}
+
+.toolkit-warning {
+    margin-top: 0.9rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 14px;
+    background: rgba(250,204,21,0.12);
+    border: 1px solid rgba(250,204,21,0.75);
+}
+
+.toolkit-warning-title {
     font-size: 0.8rem;
-    color: #fde68a;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 800;
+    color: #facc15;
+    margin-bottom: 0.35rem;
+}
+
+.toolkit-warning-body {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #fef9c3;
+    margin: 0;
 }
 
 .toolkit-cta {
