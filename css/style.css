@@ -33,14 +33,14 @@ body {
     display: none !important;
 }
 
-/* Header */
-header {
+/* Główny pasek nawigacji (tylko pierwszy header w body – nie hero korepetycje) */
+body > header {
     background: linear-gradient(135deg, var(--black) 0%, var(--dark-purple) 100%);
     color: var(--white);
     padding: 1rem 0;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 500;
     box-shadow: 0 2px 20px rgba(0,0,0,0.1);
 }
 
@@ -3247,6 +3247,12 @@ nav {
 
 /* --- SEKCJA HERO (Wersja Dark Mode) --- */
 /* --- NAPRAWA SEKCJI HERO (Dla Jasnego Tła) --- */
+
+/* Hero korepetycji ma być przewijalny – nie sticky; nie zasłania głównego navbara */
+#korepetycje header.hero {
+    position: relative;
+    z-index: 0;
+}
 
 /* ======================================================
    SEKCJA HERO (WERSJA DARK MODE - PREFEROWANA)
