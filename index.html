@@ -91,8 +91,8 @@
                 </div>
                 
                 <div class="nav-main-buttons">
-                    <button class="btn btn-outline nav-icon-btn" onclick="showSection('dashboard')" title="Kurs">
-                        📚
+                    <button class="btn btn-outline nav-icon-btn nav-cta-btn nav-cta-kurs" onclick="showSection('dashboard')" title="Wybierz kurs">
+                        📚 Kurs
                     </button>
                     <button class="btn btn-outline nav-icon-btn" onclick="showSection('korepetycje')" title="Korepetycje">
                         👨‍🏫
@@ -832,7 +832,15 @@
                 <div class="subject-content">
                     <div class="video-section">
                         <h3>Materiały Wideo</h3>
-                        <iframe id="subjectVideo" class="video-frame" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Kurs Fizyki"></iframe>
+                        <div class="video-player-wrap" id="subjectVideoWrap">
+                            <div class="video-placeholder-block" id="subjectVideoPlaceholder">
+                                <span class="video-placeholder-icon" aria-hidden="true">▶</span>
+                                <p class="video-placeholder-text">Darmowa lekcja próbna – Wideo HD</p>
+                                <p class="video-placeholder-note">Podgląd materiału. Po wybraniu działu z listy kursów wideo załaduje się automatycznie.</p>
+                            </div>
+                            <div class="video-paywall-block" id="subjectVideoPaywall" aria-hidden="true">Wideo dostępne po zakupie</div>
+                            <iframe id="subjectVideo" class="video-frame" src="" title="Kurs Fizyki" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
                     </div>
 
                     <div class="pdf-section">

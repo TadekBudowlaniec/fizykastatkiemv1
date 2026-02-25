@@ -150,7 +150,19 @@ function showSubject(subjectKey) {
         return;
     }
     document.getElementById('subjectTitle').textContent = subject.title;
-    document.getElementById('subjectVideo').src = `https://www.youtube.com/embed/${subject.videoId}`;
+    const subjectVideoEl = document.getElementById('subjectVideo');
+    const subjectVideoWrap = document.getElementById('subjectVideoWrap');
+    const subjectVideoPaywall = document.getElementById('subjectVideoPaywall');
+    if (subjectVideoEl && subjectVideoWrap) {
+        subjectVideoEl.src = `https://www.youtube.com/embed/${subject.videoId}`;
+        subjectVideoWrap.classList.add('video-loaded');
+        if (subjectVideoPaywall) {
+            subjectVideoPaywall.style.display = 'none';
+            subjectVideoPaywall.setAttribute('aria-hidden', 'true');
+        }
+    } else if (subjectVideoEl) {
+        subjectVideoEl.src = `https://www.youtube.com/embed/${subject.videoId}`;
+    }
     const quizContainer = document.getElementById('quizContainer');
     const question = subject.quiz[0];
     quizContainer.innerHTML = `
@@ -180,8 +192,17 @@ function showSubjectPreview(subjectKey) {
     const subject = window.subjects[subjectKey];
     if (!subject) return;
     document.getElementById('subjectTitle').textContent = subject.title + ' (Podgląd)';
-    // Zamiast wideo - szary placeholder
-    document.getElementById('subjectVideo').outerHTML = '<div id="subjectVideo" class="video-frame" style="background:#e5e5e5;display:flex;align-items:center;justify-content:center;color:#888;font-size:1.2rem;">Wideo dostępne po zakupie</div>';
+    const wrap = document.getElementById('subjectVideoWrap');
+    const placeholder = document.getElementById('subjectVideoPlaceholder');
+    const paywall = document.getElementById('subjectVideoPaywall');
+    const videoEl = document.getElementById('subjectVideo');
+    if (wrap && placeholder && paywall && videoEl) {
+        wrap.classList.remove('video-loaded');
+        videoEl.src = '';
+        placeholder.style.display = 'none';
+        paywall.style.display = 'flex';
+        paywall.setAttribute('aria-hidden', 'false');
+    }
     // PDF - lista bez przycisków pobierania
     const pdfSection = document.querySelector('.pdf-section');
     if (pdfSection) {

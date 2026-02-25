@@ -2110,6 +2110,76 @@ nav {
     border-radius: 12px;
 }
 
+/* Opakowanie odtwarzacza: placeholder / paywall / iframe */
+.video-player-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--gray);
+}
+.video-player-wrap .video-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+.video-player-wrap.video-loaded .video-frame {
+    display: block;
+}
+.video-player-wrap.video-loaded .video-placeholder-block {
+    display: none !important;
+}
+.video-placeholder-block,
+.video-paywall-block {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    background: linear-gradient(145deg, rgba(30,30,40,0.97), rgba(20,20,28,0.98));
+    color: rgba(255,255,255,0.9);
+    border-radius: 12px;
+    text-align: center;
+}
+.video-placeholder-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--magenta), var(--purple));
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    padding-left: 4px;
+    box-shadow: 0 4px 20px rgba(180, 80, 180, 0.4);
+}
+.video-placeholder-text {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0;
+}
+.video-placeholder-note {
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.85;
+}
+.video-paywall-block {
+    display: none;
+    background: #e5e5e5;
+    color: #888;
+    font-size: 1.2rem;
+}
+.video-paywall-block[aria-hidden="false"] {
+    display: flex !important;
+}
+
 /* Video placeholder styles - responsywne z zachowaniem proporcji 16:9 */
 .video-placeholder {
     width: 100%;
@@ -2368,6 +2438,22 @@ nav {
     box-shadow: 0 4px 15px rgba(255,255,255,0.3);
 }
 
+/* Główny przycisk CTA w nawigacji – wygląd jak fizyczny przycisk */
+.nav-cta-btn {
+    background: linear-gradient(135deg, var(--magenta), var(--purple)) !important;
+    color: var(--white) !important;
+    border: none !important;
+    padding: 0.6rem 1.1rem !important;
+    min-width: auto !important;
+    border-radius: 9999px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 14px rgba(180, 80, 180, 0.45) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+.nav-cta-btn:hover {
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 6px 20px rgba(180, 80, 180, 0.55) !important;
+}
 /* Responsywność dla breadcrumbs */
 @media (max-width: 768px) {
     .breadcrumbs {
