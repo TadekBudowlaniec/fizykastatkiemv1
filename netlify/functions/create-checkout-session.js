@@ -30,7 +30,7 @@ const coursePriceIds = {
     17: 'price_1RtPPaJLuu6b086bdmWNAsGI' // Wszystkie materiały (full_access)
 };
 
-const ALLOWED_ORIGIN = process.env.FRONTEND_URL || 'https://remarkable-cascaron-72cefc.netlify.app';
+const ALLOWED_ORIGIN = process.env.FRONTEND_URL;
 
 exports.handler = async (event) => {
     if (event.httpMethod !== 'POST') {
