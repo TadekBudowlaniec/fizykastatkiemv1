@@ -123,22 +123,32 @@ exports.handler = async (event) => {
             return { statusCode: 400, body: JSON.stringify({ error: 'Nieprawidłowe parametry.' }) };
         }
 
-        // 2. Sprawdź enrollment (dostęp do kursu)
-        const { data: enrollment, error: enrollError } = await supabaseAdmin
-            .from('enrollments')
-            .select('course_id')
-            .eq('user_id', user.id)
-            .eq('course_id', courseIdNum)
-            .eq('access_granted', true)
-            .maybeSingle();
+        // 2. Sprawdź czy admin lub ma enrollment
+        const { data: userRow } = await supabaseAdmin
+            .from('users')
+            .select('is_admin')
+            .eq('id', user.id)
+            .single();
 
-        if (enrollError) {
-            console.error('Enrollment check error:', enrollError);
-            return { statusCode: 500, body: JSON.stringify({ error: 'Błąd sprawdzania dostępu.' }) };
-        }
+        const isAdmin = !!(userRow && userRow.is_admin);
 
-        if (!enrollment) {
-            return { statusCode: 403, body: JSON.stringify({ error: 'Brak dostępu do tego kursu.' }) };
+        if (!isAdmin) {
+            const { data: enrollment, error: enrollError } = await supabaseAdmin
+                .from('enrollments')
+                .select('course_id')
+                .eq('user_id', user.id)
+                .eq('course_id', courseIdNum)
+                .eq('access_granted', true)
+                .maybeSingle();
+
+            if (enrollError) {
+                console.error('Enrollment check error:', enrollError);
+                return { statusCode: 500, body: JSON.stringify({ error: 'Błąd sprawdzania dostępu.' }) };
+            }
+
+            if (!enrollment) {
+                return { statusCode: 403, body: JSON.stringify({ error: 'Brak dostępu do tego kursu.' }) };
+            }
         }
 
         // 3. Znajdź plik PDF
