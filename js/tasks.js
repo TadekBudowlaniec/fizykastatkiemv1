@@ -136,7 +136,7 @@ async function showTaskWithControls(taskId, course_id) {
     // Treść zadania
     const content = document.createElement('div');
     content.className = 'task-content';
-    content.innerHTML = task.content; // Używamy innerHTML zamiast textContent dla lepszego formatowania
+    content.innerHTML = DOMPurify.sanitize(task.content);
     container.appendChild(content);
     
     // Zdjęcia (jeśli są) — wyświetl w jednym rzędzie, jeśli jest miejsce (z zawijaniem)
@@ -183,7 +183,7 @@ async function showTaskWithControls(taskId, course_id) {
                         line-height: 1.5;
                     `;
                     
-                    optionDiv.innerHTML = `<strong>${String.fromCharCode(65 + index)}.</strong> ${option}`;
+                    optionDiv.innerHTML = DOMPurify.sanitize(`<strong>${String.fromCharCode(65 + index)}.</strong> ${option}`);
                     
                     optionDiv.addEventListener('mouseenter', () => {
                         if (!optionsContainer.classList.contains('answered')) {
@@ -302,7 +302,7 @@ async function showTaskWithControls(taskId, course_id) {
     const answerDiv = document.createElement('div');
     answerDiv.className = 'task-answer';
     answerDiv.style.display = 'none';
-        answerDiv.innerHTML = processSolutionText(task.solution);
+        answerDiv.innerHTML = DOMPurify.sanitize(processSolutionText(task.solution));
     
     showAnswerBtn.onclick = () => {
         answerDiv.style.display = 'block';

@@ -122,7 +122,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const sessionId = urlParams.get('session_id');
     if (sessionId) {
         // handleStripeReturn() w payments.js obsłuży to
-        console.log('Session ID detected, handleStripeReturn will process it');
+        // handleStripeReturn will process it
     }
     // Sprawdzenie sesji użytkownika
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -147,9 +147,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const kursBtn = document.querySelector('[data-section="dashboard"], #dashboardBtn, .go-to-dashboard');
     if (kursBtn) {
         kursBtn.addEventListener('click', async () => {
-            console.log('Kliknięto przycisk Kurs');
             await checkUserAccess();
-            console.log('Wywołuję renderDashboardPanel');
             renderDashboardPanel();
         });
     }
@@ -285,7 +283,4 @@ window.togglePassword = function(inputId, btn) {
     }
 }
 
-// Debug: sprawdź czy jesteś adminem
-window.isAdmin = function() {
-    return typeof currentUserIsAdmin !== 'undefined' ? currentUserIsAdmin : false;
-}; 
+ 

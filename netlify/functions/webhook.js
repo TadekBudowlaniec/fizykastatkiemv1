@@ -44,10 +44,13 @@ const priceToCourseId = {
     'price_1RtPPaJLuu6b086bdmWNAsGI': 17 // Wszystkie materiały (full_access)
 };
 
-// Użyj SERVICE_KEY, tak jak w oryginalnym kodzie, dla bezpiecznego dostępu do bazy
+// Wymagaj SERVICE_KEY — webhook musi mieć pełne uprawnienia do tworzenia enrollments
+if (!process.env.SUPABASE_SERVICE_KEY) {
+    console.error('FATAL: SUPABASE_SERVICE_KEY not configured');
+}
 const supabase = createClient(
     process.env.SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY
+    process.env.SUPABASE_SERVICE_KEY
 );
 
 

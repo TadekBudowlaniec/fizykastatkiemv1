@@ -1,8 +1,15 @@
 // netlify/functions/create-checkout-session.js
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY);
+const { createClient } = require('@supabase/supabase-js');
 
-// Mapowanie kursów (możesz je przenieść do oddzielnego pliku helpers.js lub wkleić tutaj)
+// Klient Supabase do weryfikacji JWT
+const supabaseAuth = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_ANON_KEY
+);
+
+// Mapowanie courseId -> Stripe priceId (serwer decyduje o cenie, NIE klient)
 const coursePriceIds = {
     1: 'price_1RtPFoJLuu6b086bmfvVO4G8', // Kinematyka
     2: 'price_1RtPGOJLuu6b086b1QN5l4DE', // Dynamika
@@ -23,26 +30,7 @@ const coursePriceIds = {
     17: 'price_1RtPPaJLuu6b086bdmWNAsGI' // Wszystkie materiały (full_access)
 };
 
-// Mapowanie priceId na course_id
-const priceToCourseId = {
-    'price_1RtPFoJLuu6b086bmfvVO4G8': 1, // Kinematyka
-    'price_1RtPGOJLuu6b086b1QN5l4DE': 2, // Dynamika
-    'price_1Rgt0yJLuu6b086b115h7OXM': 3, // Praca moc energia
-    'price_1RtPKTJLuu6b086b3wG0IiaV': 4, // Bryła Sztywna
-    'price_1RtPKkJLuu6b086b2lfhBfDX': 5, // Ruch Drgający
-    'price_1RtPL2JLuu6b086bLl03p2R9': 6, // Fale Mechaniczne
-    'price_1RtPLlJLuu6b086bbJxG1bqw': 7, // Hydrostatyka
-    'price_1RgqlFJLuu6b086bf2Wl2bUg': 8, // Termodynamika
-    'price_1RtPMCJLuu6b086bV3Zk0il6': 9, // Grawitacja i Astronomia
-    'price_1Rgt1HJLuu6b086bmNgENAIM': 10, // Elektrostatyka
-    'price_1RtPNJJLuu6b086bBejuPL2T': 11, // Prąd Elektryczny
-    'price_1RtPNdJLuu6b086bjn7p0Wsn': 12, // Magnetyzm
-    'price_1RtPORJLuu6b086b1yxr0voQ': 13, // Indukcja Elektromagnetyczna
-    'price_1Rgt1TJLuu6b086bNn14JbJa': 14, // Fale Elektromagnetyczne i Optyka
-    'price_1Rgt1lJLuu6b086bk3TJqFzM': 15, // Fizyka Atomowa
-    'price_1Rgt21JLuu6b086bTBuO2djx': 16, // Fizyka Jądrowa i Relatywistyka
-    'price_1RtPPaJLuu6b086bdmWNAsGI': 17 // Wszystkie materiały (full_access)
-};
+const ALLOWED_ORIGIN = process.env.FRONTEND_URL || 'https://remarkable-cascaron-72cefc.netlify.app';
 
 exports.handler = async (event) => {
     if (event.httpMethod !== 'POST') {
@@ -50,27 +38,47 @@ exports.handler = async (event) => {
     }
 
     try {
-        const { userId, email, courseId, priceId } = JSON.parse(event.body);
+        // 1. Weryfikacja JWT — jedyne źródło prawdy o userId i email
+        const authHeader = event.headers.authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return { statusCode: 401, body: JSON.stringify({ error: 'Brak autoryzacji.' }) };
+        }
 
-        if (!userId || !email || !courseId || !priceId) {
+        const token = authHeader.replace('Bearer ', '');
+        const { data: { user }, error: authError } = await supabaseAuth.auth.getUser(token);
+
+        if (authError || !user) {
+            return { statusCode: 401, body: JSON.stringify({ error: 'Nieprawidłowy token.' }) };
+        }
+
+        // 2. Parsuj request — przyjmujemy TYLKO courseId, resztę bierzemy z tokenu
+        const { courseId } = JSON.parse(event.body);
+
+        if (!courseId) {
             return { statusCode: 400, body: JSON.stringify({ error: 'Brak wymaganych danych.' }) };
         }
 
+        // 3. Serwer sam mapuje courseId na priceId — klient NIE może manipulować ceną
+        const priceId = coursePriceIds[courseId];
+        if (!priceId) {
+            return { statusCode: 400, body: JSON.stringify({ error: 'Nieprawidłowy kurs.' }) };
+        }
+
+        // 4. Tworzenie sesji Stripe z bezpiecznym origin
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card', 'blik', 'klarna'],
             mode: 'payment',
-            customer_email: email,
+            customer_email: user.email,
             line_items: [
                 { price: priceId, quantity: 1 },
             ],
-            allow_promotion_codes: true, // <--- TO JEST KLUCZOWE
+            allow_promotion_codes: true,
             metadata: {
-                userId,
-                courseId
+                userId: user.id,
+                courseId: String(courseId)
             },
-            // Zmień success_url i cancel_url z "localhost" na Twoją domenę Netlify
-            success_url: `${event.headers.origin}/?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${event.headers.origin}/kurs`,
+            success_url: `${ALLOWED_ORIGIN}/?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${ALLOWED_ORIGIN}/kurs`,
         });
 
         return {
@@ -81,7 +89,7 @@ exports.handler = async (event) => {
         console.error('Stripe error:', err);
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'Błąd Stripe: ' + err.message }),
+            body: JSON.stringify({ error: 'Wystąpił błąd podczas tworzenia płatności.' }),
         };
     }
 };

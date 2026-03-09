@@ -239,8 +239,6 @@ function renderDashboardPanel() {
         return;
     }
     
-    console.log('renderDashboardPanel - subjects:', window.subjects);
-    console.log('renderDashboardPanel - Object.entries(subjects):', Object.entries(window.subjects));
     
     sidebar.innerHTML = '';
     
@@ -255,7 +253,6 @@ function renderDashboardPanel() {
     });
     
     sortedSubjects.forEach(([key, subject], idx) => {
-        console.log('Tworzenie elementu dla kursu:', key, subject.title);
         
         const item = document.createElement('button');
         item.className = 'course-list-item';
@@ -500,37 +497,17 @@ function renderCoursePreview(subjectKey, main) {
             const hasAccess = currentUser && hasAccessToCourse(subjectKey);
             
             if (hasAccess) {
-                if (stage.title === 'Etap 1') {
+                const etapNumber = stage.title === 'Etap 1' ? 1 : stage.title === 'Etap 2' ? 2 : 3;
+                card.style.opacity = '1';
+                card.style.cursor = 'pointer';
+                card.onclick = async () => {
+                    card.style.opacity = '0.7';
+                    card.textContent = 'Ładowanie...';
+                    const url = await getSecurePdfUrl(subjectKey, etapNumber);
                     card.style.opacity = '1';
-                    card.style.cursor = 'pointer';
-                    card.onclick = () => {
-                        if (subject.pdfUrlEtap1) {
-                            window.open(subject.pdfUrlEtap1, '_blank');
-                        } else {
-                            alert('PDF niedostępny dla tego działu.');
-                        }
-                    };
-                } else if (stage.title === 'Etap 2') {
-                    if (subject.pdfUrlEtap2) {
-                        card.style.opacity = '1';
-                        card.style.cursor = 'pointer';
-                        card.onclick = () => window.open(subject.pdfUrlEtap2, '_blank');
-                    } else {
-                        card.style.opacity = '0.6';
-                        card.style.cursor = 'not-allowed';
-                        card.onclick = () => alert('PDF niedostępny dla tego działu.');
-                    }
-                } else if (stage.title === 'Etap 3') {
-                    card.style.opacity = '1';
-                    card.style.cursor = 'pointer';
-                    card.onclick = () => {
-                        if (subject.pdfUrl) {
-                            window.open(subject.pdfUrl, '_blank');
-                        } else {
-                            alert('PDF niedostępny dla tego działu.');
-                        }
-                    };
-                }
+                    card.textContent = stage.title;
+                    if (url) window.open(url, '_blank');
+                };
             } else {
                 card.style.opacity = '0.6';
                 card.style.cursor = 'not-allowed';
@@ -809,34 +786,17 @@ function renderCourseFullView(subjectKey, main) {
             card.onclick = () => alert('zadania maturalne z tego działu są wplecione w inne działy fizyki');
         } else {
             if (hasAccess) {
-                if (stage.title === 'Etap 1') {
-                    card.style.cursor = 'pointer';
-                    card.onclick = () => {
-                        if (subject.pdfUrlEtap1) {
-                            window.open(subject.pdfUrlEtap1, '_blank');
-                        } else {
-                            alert('PDF niedostępny dla tego działu.');
-                        }
-                    };
-                } else if (stage.title === 'Etap 2') {
-                    if (subject.pdfUrlEtap2) {
-                        card.style.cursor = 'pointer';
-                        card.onclick = () => window.open(subject.pdfUrlEtap2, '_blank');
-                    } else {
-                        card.style.opacity = '0.6';
-                        card.style.cursor = 'not-allowed';
-                        card.onclick = () => alert('PDF niedostępny dla tego działu.');
-                    }
-                } else if (stage.title === 'Etap 3') {
-                    card.style.cursor = 'pointer';
-                    card.onclick = () => {
-                        if (subject.pdfUrl) {
-                            window.open(subject.pdfUrl, '_blank');
-                        } else {
-                            alert('PDF niedostępny dla tego działu.');
-                        }
-                    };
-                }
+                const etapNumber = stage.title === 'Etap 1' ? 1 : stage.title === 'Etap 2' ? 2 : 3;
+                card.style.cursor = 'pointer';
+                card.onclick = async () => {
+                    card.style.opacity = '0.7';
+                    const origText = card.textContent;
+                    card.textContent = 'Ładowanie...';
+                    const url = await getSecurePdfUrl(subjectKey, etapNumber);
+                    card.style.opacity = '1';
+                    card.textContent = origText;
+                    if (url) window.open(url, '_blank');
+                };
             } else {
                 card.style.opacity = '0.6';
                 card.style.cursor = 'not-allowed';
@@ -884,8 +844,6 @@ function renderCourseFullView(subjectKey, main) {
         main.appendChild(btnGroup);
     }
     // Logi do testu
-    console.log('Link do kursu:', subject.paymentLink);
-    console.log('Link do wszystkich materiałów:', window.paymentLinkAllMaterials);
     // Quiz - pytanie i opcje, z możliwością zaznaczania i przyciskiem
     if (subject.quiz && subject.quiz.length > 0) {
         const quizSection = document.createElement('div');
@@ -2075,7 +2033,6 @@ async function loadVideosPreviewForCourse(course_id, videoListElement) {
 
 // Funkcja do wyświetlania przykładowego zadania w podglądzie (zablokowane)
 async function showPreviewTask(course_id, taskArea) {
-    console.log('showPreviewTask wywołane, course_id:', course_id);
     
     try {
         // Pobierz pierwsze zadanie z danego kursu (zawsze to samo)
@@ -2087,7 +2044,6 @@ async function showPreviewTask(course_id, taskArea) {
             .order('id', { ascending: true })
             .limit(1);
         
-        console.log('Pobrane zadanie do podglądu:', tasks, 'error:', error);
         if (error) {
             console.error('Błąd pobierania zadania do podglądu:', error);
             taskArea.innerHTML = '<p style="color: #888; text-align: center;">Błąd ładowania zadania</p>';
@@ -2156,7 +2112,7 @@ async function showPreviewTask(course_id, taskArea) {
         // Treść zadania (pod overlayem)
         const content = document.createElement('div');
         content.className = 'task-content';
-        content.innerHTML = task.content;
+        content.innerHTML = DOMPurify.sanitize(task.content);
         container.appendChild(content);
         
         // Zdjęcia (jeśli są)
@@ -2201,7 +2157,7 @@ async function showPreviewTask(course_id, taskArea) {
                             opacity: 0.5;
                         `;
                         
-                        optionDiv.innerHTML = `<strong>${String.fromCharCode(65 + index)}.</strong> ${option}`;
+                        optionDiv.innerHTML = DOMPurify.sanitize(`<strong>${String.fromCharCode(65 + index)}.</strong> ${option}`);
                         optionsContainer.appendChild(optionDiv);
                     });
                 }
@@ -2227,7 +2183,7 @@ async function showPreviewTask(course_id, taskArea) {
         const answerDiv = document.createElement('div');
         answerDiv.className = 'task-answer';
         answerDiv.style.display = 'none';
-        answerDiv.innerHTML = processSolutionText(task.solution);
+        answerDiv.innerHTML = DOMPurify.sanitize(processSolutionText(task.solution));
         
         showAnswerBtn.onclick = () => {
             // Nie rób nic - przycisk jest zablokowany

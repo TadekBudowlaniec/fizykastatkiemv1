@@ -1,6 +1,6 @@
 .env
+.env.local
 backend/.env
-.env.localbackend/.env
 
 # CSV files and folders
 csv/
