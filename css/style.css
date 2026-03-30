@@ -3776,8 +3776,8 @@ nav {
 .squeeze-note {
     margin-top: 0.5rem;
     font-size: 0.82rem;
-    color: var(--text-secondary);
-    opacity: 0.8;
+    color: #d1d5db;
+    opacity: 0.9;
 }
 @media (max-width: 600px) {
     .squeeze-form {
