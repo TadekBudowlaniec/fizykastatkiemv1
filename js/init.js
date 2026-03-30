@@ -262,8 +262,13 @@ window.addEventListener('DOMContentLoaded', () => {
             const email = emailInput.value.trim();
             if (!email) return;
 
+            if (!supabase) {
+                alert('Błąd połączenia z serwerem. Odśwież stronę i spróbuj ponownie.');
+                return;
+            }
+
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Wysylanie...';
+            submitBtn.textContent = 'Wysyłanie...';
 
             try {
                 const { error } = await supabase.auth.signInWithOtp({
@@ -276,10 +281,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 // Przekieruj na ofertę ratunkową (bez komunikatu sukcesu na stronie głównej)
                 showSection('oferta-ratunkowa');
             } catch (err) {
-                alert('Blad wysylania linku: ' + err.message);
+                alert('Błąd wysyłania linku: ' + err.message);
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'Wyslij mi Planer';
+                submitBtn.textContent = 'Wyślij mi Planer';
             }
         });
     }
