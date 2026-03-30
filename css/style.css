@@ -3184,7 +3184,8 @@ nav {
 .tier-badge {
     position: absolute;
     top: 0;
-    right: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
     background: linear-gradient(135deg, var(--magenta), var(--purple));
     color: #fff;
     font-size: 0.75rem;
