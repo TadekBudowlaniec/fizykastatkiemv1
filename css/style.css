@@ -3753,6 +3753,8 @@ nav {
     box-shadow: none;
     backdrop-filter: none;
     border-radius: 0;
+    position: relative;
+    z-index: 10;
 }
 .squeeze-form {
     display: flex;
