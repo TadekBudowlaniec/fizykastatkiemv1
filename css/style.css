@@ -2696,7 +2696,7 @@ nav {
 .hero-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    align-items: center;
+    align-items: start;
     gap: clamp(2rem, 4vw, 3.5rem);
     max-width: 1200px;
     margin: 0 auto;
@@ -2779,6 +2779,7 @@ nav {
     justify-content: center;
     align-items: center;
     position: relative;
+    padding-top: 3.5rem;
 }
 
 .hero-ship {
