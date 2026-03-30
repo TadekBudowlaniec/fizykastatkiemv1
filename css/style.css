@@ -3901,70 +3901,30 @@ nav {
 /* =============================================
    PLANER PAGE (/planer)
 ============================================= */
-.planer-progress-bar-wrap {
-    margin-bottom: 1.5rem;
-    text-align: center;
+.planer-page-wrap {
+    background: #0f172a;
+    min-height: 100vh;
+    padding: 3rem 1.5rem;
 }
-.planer-progress-bar {
-    width: 100%;
-    height: 12px;
-    background: #e5e7eb;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 0.4rem;
+.planer-page-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    background: #0f172a;
+    border-radius: 16px;
+    padding: 1.5rem 1.5rem 2rem;
+    color: #e5e7eb;
 }
-.planer-progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--purple), var(--magenta));
-    border-radius: 8px;
-    transition: width 0.4s ease;
+.planer-page-content h2 {
+    color: #fff;
 }
-.planer-progress-text {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    font-weight: 500;
+.planer-page-content p {
+    color: #cbd5e1;
 }
-.planer-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+.planer-page-content label {
+    color: #e2e8f0;
 }
-.planer-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #fff;
-    border-radius: 12px;
-    padding: 0.8rem 1.2rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    transition: box-shadow 0.2s;
-}
-.planer-item:hover {
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-}
-.planer-checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    cursor: pointer;
-    flex: 1;
-}
-.planer-checkbox {
-    width: 20px;
-    height: 20px;
-    accent-color: var(--purple);
-    cursor: pointer;
-}
-.planer-topic-title {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--black);
-}
-.planer-play-btn {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.9rem;
-    white-space: nowrap;
-    border-radius: 8px;
+.planer-page-content input[type="checkbox"] {
+    accent-color: var(--magenta);
 }
 
 /* =============================================
