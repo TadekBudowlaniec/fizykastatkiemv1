@@ -2779,7 +2779,7 @@ nav {
     justify-content: center;
     align-items: center;
     position: relative;
-    padding-top: 3.5rem;
+    margin-top: -3.5rem;
 }
 
 .hero-ship {
