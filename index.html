@@ -145,6 +145,15 @@
                         <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz kursy</button>
                         <button class="btn btn-gradient" onclick="showSection('register')">Dołącz za darmo</button>
                     </div>
+                    <!-- Squeeze: Magic Link formularz -->
+                    <div class="squeeze-form-wrap">
+                        <p class="squeeze-label">Odbierz darmowy Planer Maturalny na swój e-mail:</p>
+                        <form id="squeezeMagicLinkForm" class="squeeze-form" autocomplete="off">
+                            <input type="email" id="squeezeMagicEmail" placeholder="Twój e-mail" required>
+                            <button type="submit" class="btn btn-gradient squeeze-submit-btn">Wyślij mi Planer</button>
+                        </form>
+                        <p class="squeeze-note">Bez hasła. Wyślemy Ci magic link na e-mail.</p>
+                    </div>
                 </div>
                 <div class="hero-visual">
                     <div class="hero-ship">
@@ -1253,6 +1262,59 @@
         </div>
     </div>
 
+    <!-- Oferta Ratunkowa (VSL page) -->
+    <div id="oferta-ratunkowa" class="page hidden">
+        <div class="vsl-success-bar">
+            <span>&#10004; Sukces! Link do Twojego darmowego planera leci na maila (sprawdz skrzynke i folder SPAM).</span>
+        </div>
+        <div class="container narrow vsl-container">
+            <h1 class="vsl-title">Pakiet Ratunkowy na 7 tygodni przed matura</h1>
+            <p class="vsl-subtitle">Obejrzyj krotkie wideo i dowiedz sie, jak w ostatnich tygodniach uratowac wynik z fizyki.</p>
+
+            <!-- Placeholder na VSL (iframe z YouTube/Vimeo) -->
+            <div class="vsl-video-placeholder">
+                <div class="vsl-video-inner">
+                    <!-- Wstaw tutaj iframe z wideo sprzedazowym, np.: -->
+                    <!-- <iframe src="https://www.youtube.com/embed/TWOJ_VIDEO_ID" ...></iframe> -->
+                    <span class="vsl-play-icon">&#9654;</span>
+                    <p>Tutaj pojawi sie Twoje wideo sprzedazowe (VSL)</p>
+                </div>
+            </div>
+
+            <!-- Sekcja oferty -->
+            <div class="vsl-offer-section">
+                <h2 class="vsl-offer-title">Co dostajesz w Pakiecie Ratunkowym?</h2>
+                <ul class="vsl-offer-list">
+                    <li>Dostep do wszystkich 16 dzialow kursu wideo HD</li>
+                    <li>Gotowe PDF-y z teoria, zadaniami i wzorami</li>
+                    <li>Quizy sprawdzajace wiedze po kazdym dziale</li>
+                    <li>Spersonalizowany planer nauki do matury</li>
+                    <li>Gwarancja Zdanej Matury (100% zwrotu jesli nie zdasz)</li>
+                </ul>
+                <div class="vsl-price-box">
+                    <span class="vsl-price-old">Wartosc: 500 zl</span>
+                    <span class="vsl-price-now">Teraz: tylko <strong>199 zl</strong></span>
+                </div>
+                <a href="https://buy.stripe.com/00w00k7IFaZA9OG9Ht0ZW06" target="_blank" rel="noopener" class="btn btn-gradient vsl-buy-btn">
+                    WYKUP PELNY DOSTEP
+                </a>
+                <p class="vsl-guarantee-note">30-dniowa gwarancja zwrotu pieniedzy. Bez ryzyka.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Planer (strona po kliknieciu magic link) -->
+    <div id="planer" class="page hidden">
+        <div class="container narrow" style="padding-top:2rem;">
+            <h2 class="section-title" style="text-align:center;">Twoj Planer Maturalny</h2>
+            <p style="text-align:center;color:var(--text-secondary);margin-bottom:2rem;">Zaznaczaj tematy, zapisuj postep. Kliknij lekcje, aby ja obejrzec.</p>
+            <div id="planerContent">
+                <!-- Planer renderowany dynamicznie przez JS -->
+                <p style="text-align:center;color:#aaa;">Ladowanie planera...</p>
+            </div>
+        </div>
+    </div>
+
     <div id="registerConfirmPopup" class="popup-overlay hidden">
         <div class="popup-card" role="dialog" aria-modal="true" aria-labelledby="registerConfirmTitle">
             <button class="popup-close" aria-label="Zamknij" onclick="hideEmailVerificationPopup()">×</button>
@@ -1271,6 +1333,7 @@
     <script src="js/payments.js"></script>
     <script src="js/pdf.js"></script>
     <script src="js/quiz.js"></script>
+    <script src="js/planer.js"></script>
     <script src="js/init.js"></script>
     <script src="js/tasks.js"></script>
     <script src="check_database.js"></script>

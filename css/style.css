@@ -3723,4 +3723,305 @@ nav {
     margin: 3rem 0;
 }
 
+/* =============================================
+   SQUEEZE FORM (Magic Link na landing page)
+============================================= */
+.squeeze-form-wrap {
+    margin-top: 1.5rem;
+    padding: 1.2rem 1.5rem;
+    background: rgba(255,255,255,0.12);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(8px);
+}
+.squeeze-label {
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    font-size: 1rem;
+    color: var(--black);
+}
+.squeeze-form {
+    display: flex;
+    gap: 0.6rem;
+    align-items: stretch;
+}
+.squeeze-form input[type="email"] {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: 2px solid #e0e7ff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.squeeze-form input[type="email"]:focus {
+    border-color: var(--purple);
+}
+.squeeze-submit-btn {
+    white-space: nowrap;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+}
+.squeeze-note {
+    margin-top: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+@media (max-width: 600px) {
+    .squeeze-form {
+        flex-direction: column;
+    }
+}
+
+/* =============================================
+   VSL PAGE (/oferta-ratunkowa)
+============================================= */
+.vsl-success-bar {
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    color: #fff;
+    text-align: center;
+    padding: 0.9rem 1rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 0.01em;
+}
+.vsl-container {
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+}
+.vsl-title {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    background: linear-gradient(135deg, var(--magenta), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+.vsl-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+.vsl-video-placeholder {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto 2.5rem auto;
+    aspect-ratio: 16 / 9;
+    background: #1f2937;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+.vsl-video-inner {
+    text-align: center;
+    color: #9ca3af;
+}
+.vsl-play-icon {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
+}
+.vsl-offer-section {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+.vsl-offer-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+    color: var(--black);
+}
+.vsl-offer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    text-align: left;
+}
+.vsl-offer-list li {
+    padding: 0.5rem 0 0.5rem 1.8rem;
+    position: relative;
+    font-size: 1.05rem;
+    color: #374151;
+}
+.vsl-offer-list li::before {
+    content: '\2714';
+    position: absolute;
+    left: 0;
+    color: #22c55e;
+    font-weight: 700;
+}
+.vsl-price-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 1.2rem;
+}
+.vsl-price-old {
+    text-decoration: line-through;
+    color: #9ca3af;
+    font-size: 0.95rem;
+}
+.vsl-price-now {
+    font-size: 1.4rem;
+    color: var(--magenta);
+    font-weight: 700;
+}
+.vsl-buy-btn {
+    font-size: 1.2rem;
+    padding: 1rem 2.5rem;
+    display: inline-block;
+    margin-bottom: 0.8rem;
+}
+.vsl-guarantee-note {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* =============================================
+   PLANER PAGE (/planer)
+============================================= */
+.planer-progress-bar-wrap {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.planer-progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 0.4rem;
+}
+.planer-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple), var(--magenta));
+    border-radius: 8px;
+    transition: width 0.4s ease;
+}
+.planer-progress-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+.planer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.planer-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+}
+.planer-item:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.planer-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    cursor: pointer;
+    flex: 1;
+}
+.planer-checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--purple);
+    cursor: pointer;
+}
+.planer-topic-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--black);
+}
+.planer-play-btn {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.9rem;
+    white-space: nowrap;
+    border-radius: 8px;
+}
+
+/* =============================================
+   PAYWALL MODAL
+============================================= */
+.paywall-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 1rem;
+}
+.paywall-modal-overlay.hidden {
+    display: none;
+}
+.paywall-modal-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    max-width: 460px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+    animation: paywallFadeIn 0.25s ease;
+}
+@keyframes paywallFadeIn {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.paywall-modal-close {
+    position: absolute;
+    top: 0.7rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: #9ca3af;
+    line-height: 1;
+}
+.paywall-modal-close:hover {
+    color: var(--black);
+}
+.paywall-modal-icon {
+    font-size: 3rem;
+    margin-bottom: 0.6rem;
+}
+.paywall-modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.7rem;
+    color: var(--black);
+}
+.paywall-modal-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 1.3rem;
+}
+.paywall-modal-btn {
+    font-size: 1.1rem;
+    padding: 0.85rem 2rem;
+    display: inline-block;
+}
+
 /* --- RESPANSYWNOŚĆ (MOBILE) --- */

@@ -9,7 +9,9 @@ window.addEventListener('DOMContentLoaded', () => {
         '/register': 'register',
         '/pricing': 'pricing',
         '/regulamin': 'regulamin',
-        '/polityka-prywatnosci': 'polityka'
+        '/polityka-prywatnosci': 'polityka',
+        '/oferta-ratunkowa': 'oferta-ratunkowa',
+        '/planer': 'planer'
     };
     const initialPath = window.location.pathname;
     let initialSection = pathToSection[initialPath] || 'landing';
@@ -236,6 +238,9 @@ window.addEventListener('DOMContentLoaded', () => {
         if (sectionId === 'user') {
             loadUserProfile();
         }
+        if (sectionId === 'planer') {
+            renderPlaner();
+        }
         updateDropdownMenu();
     };
     
@@ -246,6 +251,59 @@ window.addEventListener('DOMContentLoaded', () => {
     
     // Obsługa powrotu po płatności Stripe
     handleStripeReturn();
+
+    // Squeeze form: Magic Link
+    const squeezeMagicForm = document.getElementById('squeezeMagicLinkForm');
+    if (squeezeMagicForm) {
+        squeezeMagicForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const emailInput = document.getElementById('squeezeMagicEmail');
+            const submitBtn = squeezeMagicForm.querySelector('.squeeze-submit-btn');
+            const email = emailInput.value.trim();
+            if (!email) return;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Wysylanie...';
+
+            try {
+                const { error } = await supabase.auth.signInWithOtp({
+                    email: email,
+                    options: {
+                        emailRedirectTo: window.location.origin + '/planer'
+                    }
+                });
+                if (error) throw error;
+                // Przekieruj na ofertę ratunkową (bez komunikatu sukcesu na stronie głównej)
+                showSection('oferta-ratunkowa');
+            } catch (err) {
+                alert('Blad wysylania linku: ' + err.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Wyslij mi Planer';
+            }
+        });
+    }
+
+    // Obsluga Magic Link callback na /planer
+    if (initialSection === 'planer') {
+        // Supabase automatycznie przetworzy token z URL przy getUser()
+        // Po zalogowaniu renderujemy planer
+        supabase.auth.getUser().then(({ data: { user } }) => {
+            if (user) {
+                currentUser = user;
+                checkUserAccess().then(() => {
+                    updateNavigation();
+                    renderPlaner();
+                });
+            } else {
+                // Jesli nie zalogowany, pokaz info
+                const planerContent = document.getElementById('planerContent');
+                if (planerContent) {
+                    planerContent.innerHTML = '<p style="text-align:center;">Sprawdz swoja skrzynke e-mail i kliknij magic link, aby uzyskac dostep do planera.</p>';
+                }
+            }
+        });
+    }
 });
 
 function setFieldError(inputEl, errorEl, message) {

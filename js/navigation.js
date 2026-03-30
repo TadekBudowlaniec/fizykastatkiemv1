@@ -10,7 +10,9 @@ const sectionToPath = {
     pricing: '/pricing',
     korepetycje: '/korepetycje',
     regulamin: '/regulamin',
-    polityka: '/polityka-prywatnosci'
+    polityka: '/polityka-prywatnosci',
+    'oferta-ratunkowa': '/oferta-ratunkowa',
+    planer: '/planer'
 };
 const pathToSection = {
     '/home': 'landing',
@@ -21,7 +23,9 @@ const pathToSection = {
     '/pricing': 'pricing',
     '/korepetycje': 'korepetycje',
     '/regulamin': 'regulamin',
-    '/polityka-prywatnosci': 'polityka'
+    '/polityka-prywatnosci': 'polityka',
+    '/oferta-ratunkowa': 'oferta-ratunkowa',
+    '/planer': 'planer'
 };
 
 // Używam window.subjects zamiast lokalnej zmiennej
@@ -89,6 +93,14 @@ function updateBreadcrumbs(sectionId) {
                 break;
             case 'user':
                 breadcrumbText = 'Profil użytkownika';
+                breadcrumbClass = 'active';
+                break;
+            case 'oferta-ratunkowa':
+                breadcrumbText = 'Oferta Ratunkowa';
+                breadcrumbClass = 'active';
+                break;
+            case 'planer':
+                breadcrumbText = 'Planer Maturalny';
                 breadcrumbClass = 'active';
                 break;
             default:
