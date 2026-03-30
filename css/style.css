@@ -3795,10 +3795,12 @@ nav {
 ============================================= */
 
 /* --- Background & floating orbs --- */
+#oferta-ratunkowa {
+    background: linear-gradient(165deg, #0a0a1a 0%, #0f0728 35%, #1a0a2e 60%, #0d1117 100%);
+}
 .vsl-bg {
     position: relative;
     min-height: 100vh;
-    background: linear-gradient(165deg, #0a0a1a 0%, #0f0728 35%, #1a0a2e 60%, #0d1117 100%);
     overflow: hidden;
 }
 .vsl-bg::before {
