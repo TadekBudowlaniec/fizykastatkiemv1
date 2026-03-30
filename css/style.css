@@ -3797,6 +3797,8 @@ nav {
 /* --- Background & floating orbs --- */
 #oferta-ratunkowa {
     background: linear-gradient(165deg, #0a0a1a 0%, #0f0728 35%, #1a0a2e 60%, #0d1117 100%);
+    padding-bottom: 2rem;
+    margin-bottom: -2rem;
 }
 .vsl-bg {
     position: relative;
