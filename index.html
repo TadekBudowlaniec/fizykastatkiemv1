@@ -1254,51 +1254,85 @@
 
     <!-- Oferta Ratunkowa (VSL page) -->
     <div id="oferta-ratunkowa" class="page hidden">
-        <div class="vsl-success-bar">
-            <span>&#10004; Sukces! Link do Twojego darmowego planera leci na maila (sprawdz skrzynke i folder SPAM).</span>
-        </div>
-        <div class="container narrow vsl-container">
-            <h1 class="vsl-title">Pakiet Ratunkowy na 7 tygodni przed matura</h1>
-            <p class="vsl-subtitle">Obejrzyj krotkie wideo i dowiedz sie, jak w ostatnich tygodniach uratowac wynik z fizyki.</p>
+        <div class="vsl-bg">
+            <!-- Animated floating orbs -->
+            <div class="vsl-orb vsl-orb--1"></div>
+            <div class="vsl-orb vsl-orb--2"></div>
+            <div class="vsl-orb vsl-orb--3"></div>
 
-            <!-- Placeholder na VSL (iframe z YouTube/Vimeo) -->
-            <div class="vsl-video-placeholder">
-                <div class="vsl-video-inner">
-                    <!-- Wstaw tutaj iframe z wideo sprzedazowym, np.: -->
-                    <!-- <iframe src="https://www.youtube.com/embed/TWOJ_VIDEO_ID" ...></iframe> -->
-                    <span class="vsl-play-icon">&#9654;</span>
-                    <p>Tutaj pojawi sie Twoje wideo sprzedazowe (VSL)</p>
-                </div>
+            <div class="vsl-success-bar">
+                <span>&#10004; Sukces! Link do Twojego darmowego planera leci na maila (sprawdz skrzynke i folder SPAM).</span>
             </div>
 
-            <!-- Sekcja oferty -->
-            <div class="vsl-offer-section">
-                <h2 class="vsl-offer-title">Co dostajesz w Pakiecie Ratunkowym?</h2>
-                <ul class="vsl-offer-list">
-                    <li>Dostęp do wszystkich 16 działów kursu wideo HD</li>
-                    <li>Gotowe PDF-y z teorią, zadaniami i wzorami</li>
-                    <li>Quizy sprawdzające wiedzę po każdym dziale</li>
-                    <li>Spersonalizowany planer nauki do matury</li>
-                    <li>Gwarancja Zdanej Matury (100% zwrotu jeśli nie zdasz)</li>
-                    <li>Wstęp</li>
-                    <li>Planer maturalny</li>
-                    <li>Mindset</li>
-                    <li>Wektory i trygonometria</li>
-                    <li>Przekształcanie wzorów</li>
-                    <li>Wzory, których nie ma w karcie</li>
-                    <li>Słownik CKE</li>
-                </ul>
-                <div id="vslPromoCountdown" class="vsl-countdown" style="display:none;">
-                    <span>Oferta wygasa za: </span><strong id="vslCountdownTimer">60:00</strong>
+            <div class="container narrow vsl-container">
+                <!-- Badge -->
+                <div class="vsl-badge">OSTATNIA SZANSA</div>
+
+                <h1 class="vsl-title">Pakiet Ratunkowy<br><span class="vsl-title-accent">na 7 tygodni przed maturą</span></h1>
+                <p class="vsl-subtitle">Obejrzyj krótkie wideo i dowiedz się, jak w ostatnich tygodniach uratować wynik z fizyki.</p>
+
+                <!-- Placeholder na VSL (iframe z YouTube/Vimeo) -->
+                <div class="vsl-video-placeholder">
+                    <div class="vsl-video-inner">
+                        <!-- Wstaw tutaj iframe z wideo sprzedazowym, np.: -->
+                        <!-- <iframe src="https://www.youtube.com/embed/TWOJ_VIDEO_ID" ...></iframe> -->
+                        <span class="vsl-play-icon">&#9654;</span>
+                        <p>Tutaj pojawi się Twoje wideo sprzedażowe (VSL)</p>
+                    </div>
                 </div>
-                <div class="vsl-price-box">
-                    <span class="vsl-price-old">Wartość: 1999 zł</span>
-                    <span id="vslPriceNow" class="vsl-price-now">Teraz: tylko <strong>599 zł</strong></span>
+
+                <!-- Sekcja oferty -->
+                <div class="vsl-offer-section">
+                    <h2 class="vsl-offer-title">Co dostajesz w Pakiecie Ratunkowym?</h2>
+
+                    <div class="vsl-features-grid">
+                        <div class="vsl-feature-card">
+                            <div class="vsl-feature-icon">&#127909;</div>
+                            <span>Dostęp do wszystkich 16 działów kursu wideo HD</span>
+                        </div>
+                        <div class="vsl-feature-card">
+                            <div class="vsl-feature-icon">&#128196;</div>
+                            <span>Gotowe PDF-y z teorią, zadaniami i wzorami</span>
+                        </div>
+                        <div class="vsl-feature-card">
+                            <div class="vsl-feature-icon">&#9989;</div>
+                            <span>Quizy sprawdzające wiedzę po każdym dziale</span>
+                        </div>
+                        <div class="vsl-feature-card">
+                            <div class="vsl-feature-icon">&#128197;</div>
+                            <span>Spersonalizowany planer nauki do matury</span>
+                        </div>
+                        <div class="vsl-feature-card">
+                            <div class="vsl-feature-icon">&#128170;</div>
+                            <span>Gwarancja Zdanej Matury (100% zwrotu jeśli nie zdasz)</span>
+                        </div>
+                    </div>
+
+                    <div class="vsl-bonus-box">
+                        <h3 class="vsl-bonus-title">BONUSY w pakiecie:</h3>
+                        <ul class="vsl-offer-list">
+                            <li>Wstęp</li>
+                            <li>Planer maturalny</li>
+                            <li>Mindset</li>
+                            <li>Wektory i trygonometria</li>
+                            <li>Przekształcanie wzorów</li>
+                            <li>Wzory, których nie ma w karcie</li>
+                            <li>Słownik CKE</li>
+                        </ul>
+                    </div>
+
+                    <div id="vslPromoCountdown" class="vsl-countdown" style="display:none;">
+                        <span>Oferta wygasa za: </span><strong id="vslCountdownTimer">60:00</strong>
+                    </div>
+                    <div class="vsl-price-box">
+                        <span class="vsl-price-old">Wartość: 1999 zł</span>
+                        <span id="vslPriceNow" class="vsl-price-now">Teraz: tylko <strong>599 zł</strong></span>
+                    </div>
+                    <button onclick="buyAccess('full_access');return false;" class="btn btn-gradient vsl-buy-btn">
+                        WYKUP PEŁNY DOSTĘP
+                    </button>
+                    <p class="vsl-guarantee-note">30-dniowa gwarancja zwrotu pieniędzy. Bez ryzyka.</p>
                 </div>
-                <button onclick="buyAccess('full_access');return false;" class="btn btn-gradient vsl-buy-btn">
-                    WYKUP PEŁNY DOSTĘP
-                </button>
-                <p class="vsl-guarantee-note">30-dniowa gwarancja zwrotu pieniędzy. Bez ryzyka.</p>
             </div>
         </div>
     </div>
