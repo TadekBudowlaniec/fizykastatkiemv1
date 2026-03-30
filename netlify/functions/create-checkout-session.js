@@ -37,7 +37,7 @@ const courseData = {
     17: { name: 'Wszystkie materiały (pełny dostęp)', regularPrice: 69900, promoPrice: 59900 },
 };
 
-const ALLOWED_ORIGIN = process.env.FRONTEND_URL;
+const CLIENT_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
 // Sprawdza czy promo jest aktywna na podstawie timestampa rozpoczęcia (per-user)
 function isPromoActive(promoStartedAt) {
@@ -129,8 +129,8 @@ exports.handler = async (event) => {
                 userId: user.id,
                 courseId: String(normalizedCourseId),
             },
-            success_url: `${ALLOWED_ORIGIN}/?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${ALLOWED_ORIGIN}/kurs`,
+            success_url: `${CLIENT_URL}/sukces?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${CLIENT_URL}/kurs`,
         };
 
         // 5. Zabezpieczenie: expires_at blokuje „trzymanie" starej ceny
