@@ -310,22 +310,97 @@
                     <p class="section-subtitle">Najpierw złap całość, potem wybierz dział do punktowej powtórki.</p>
                 </div>
 
-                <div class="package-highlight">
-                    <p class="package-eyebrow">Pakiet Maturalny</p>
-                    <div class="package-copy">
-                        <h3>Wszystkie kursy w jednym dostępie</h3>
-                        <p>Otrzymujesz komplet nagrań, PDF-ów i quizów do każdego działu – gotowy plan do 80%+.</p>
-                        <div class="package-perks">
-                            <span>⚡ Dostęp natychmiastowy</span>
-                            <span>📥 PDF + zestawy zadań</span>
-                            <span>🧭 Ścieżka nauki krok po kroku</span>
+                <div class="pricing-tiers">
+                    <!-- Pakiet 1: Standardowy -->
+                    <div class="tier-card">
+                        <div class="tier-header" onclick="toggleTier(this)">
+                            <div class="tier-header-left">
+                                <p class="tier-name">Kurs Samodzielny</p>
+                                <p class="tier-tagline">Komplet materiałów do nauki we własnym tempie</p>
+                            </div>
+                            <div class="tier-header-right">
+                                <span class="tier-price-old">1999 zł</span>
+                                <span class="tier-price">599 zł</span>
+                            </div>
+                            <span class="tier-toggle">+</span>
+                        </div>
+                        <div class="tier-body">
+                            <ul class="tier-features">
+                                <li>Dostęp do wszystkich 16 działów kursu wideo HD</li>
+                                <li>Gotowe PDF-y z teorią, zadaniami i wzorami</li>
+                                <li>Quizy sprawdzające wiedzę po każdym dziale</li>
+                                <li>Spersonalizowany planer nauki do matury</li>
+                                <li>Moduł „Tutaj zacznij": Wstęp, Planer maturalny, Mindset, Wektory i trygonometria, Przekształcanie wzorów, Wzory których nie ma w karcie, Słownik CKE</li>
+                                <li>Gwarancja Zdanej Matury (100% zwrotu jeśli nie zdasz)</li>
+                            </ul>
+                            <div class="tier-actions">
+                                <button class="btn btn-gradient" onclick="buyAccess('full_access');return false;">Wybieram ten pakiet</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="package-actions">
-                        <a href="https://buy.stripe.com/00w00k7IFaZA9OG9Ht0ZW06" target="_blank" rel="noopener" class="btn btn-gradient">Kup Pakiet Maturalny</a>
-                        <button class="btn btn-outline2" onclick="showSection('dashboard')">Zobacz program</button>
+
+                    <!-- Pakiet 2: Z Live'ami -->
+                    <div class="tier-card tier-card-popular">
+                        <div class="tier-badge">Najpopularniejszy</div>
+                        <div class="tier-header" onclick="toggleTier(this)">
+                            <div class="tier-header-left">
+                                <p class="tier-name">Kurs + Live</p>
+                                <p class="tier-tagline">Wszystko z kursu + spotkania live co 2 tygodnie</p>
+                            </div>
+                            <div class="tier-header-right">
+                                <span class="tier-price-old">2789 zł</span>
+                                <span class="tier-price">847 zł</span>
+                            </div>
+                            <span class="tier-toggle">+</span>
+                        </div>
+                        <div class="tier-body">
+                            <ul class="tier-features">
+                                <li>Wszystko z pakietu „Kurs Samodzielny"</li>
+                                <li>Live grupowy 2h co 2 tygodnie ze wszystkimi kursantami</li>
+                                <li>Możliwość zadawania pytań na żywo</li>
+                                <li>Nagrania z live'ów dostępne do odtworzenia</li>
+                            </ul>
+                            <div class="tier-actions">
+                                <button class="btn btn-gradient" onclick="buyAccess('full_access_live');return false;">Wybieram ten pakiet</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pakiet 3: VIP 1:1 -->
+                    <div class="tier-card">
+                        <div class="tier-header" onclick="toggleTier(this)">
+                            <div class="tier-header-left">
+                                <p class="tier-name">Kurs VIP 1:1</p>
+                                <p class="tier-tagline">Indywidualna nauka + live + pełny kurs</p>
+                            </div>
+                            <div class="tier-header-right">
+                                <span class="tier-price-old">3499 zł</span>
+                                <span class="tier-price">1897 zł</span>
+                            </div>
+                            <span class="tier-toggle">+</span>
+                        </div>
+                        <div class="tier-body">
+                            <ul class="tier-features">
+                                <li>Wszystko z pakietu „Kurs + Live"</li>
+                                <li>Zajęcia indywidualne 1:1 — 1 godzina tygodniowo</li>
+                                <li>Stały kontakt i wsparcie między zajęciami</li>
+                                <li>Spersonalizowany plan nauki dopasowany do Twoich braków</li>
+                            </ul>
+                            <div class="tier-actions">
+                                <button class="btn btn-gradient" onclick="buyAccess('vip');return false;">Wybieram ten pakiet</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <script>
+                function toggleTier(header) {
+                    var card = header.closest('.tier-card');
+                    card.classList.toggle('tier-open');
+                    var toggle = card.querySelector('.tier-toggle');
+                    toggle.textContent = card.classList.contains('tier-open') ? '−' : '+';
+                }
+                </script>
 
                 <div class="course-grid-heading">
                     <h3>Rozdziały kursu</h3>
@@ -1281,56 +1356,98 @@
                     </div>
                 </div>
 
-                <!-- Sekcja oferty -->
+                <!-- Sekcja oferty — 3 pakiety -->
                 <div class="vsl-offer-section">
-                    <h2 class="vsl-offer-title">Co dostajesz w Pakiecie Ratunkowym?</h2>
-
-                    <div class="vsl-features-grid">
-                        <div class="vsl-feature-card">
-                            <div class="vsl-feature-icon">&#127909;</div>
-                            <span>Dostęp do wszystkich 16 działów kursu wideo HD</span>
-                        </div>
-                        <div class="vsl-feature-card">
-                            <div class="vsl-feature-icon">&#128196;</div>
-                            <span>Gotowe PDF-y z teorią, zadaniami i wzorami</span>
-                        </div>
-                        <div class="vsl-feature-card">
-                            <div class="vsl-feature-icon">&#9989;</div>
-                            <span>Quizy sprawdzające wiedzę po każdym dziale</span>
-                        </div>
-                        <div class="vsl-feature-card">
-                            <div class="vsl-feature-icon">&#128197;</div>
-                            <span>Spersonalizowany planer nauki do matury</span>
-                        </div>
-                        <div class="vsl-feature-card">
-                            <div class="vsl-feature-icon">&#128170;</div>
-                            <span>Gwarancja Zdanej Matury (100% zwrotu jeśli nie zdasz)</span>
-                        </div>
-                    </div>
-
-                    <div class="vsl-bonus-box">
-                        <h3 class="vsl-bonus-title">BONUSY w pakiecie:</h3>
-                        <ul class="vsl-offer-list">
-                            <li>Wstęp</li>
-                            <li>Planer maturalny</li>
-                            <li>Mindset</li>
-                            <li>Wektory i trygonometria</li>
-                            <li>Przekształcanie wzorów</li>
-                            <li>Wzory, których nie ma w karcie</li>
-                            <li>Słownik CKE</li>
-                        </ul>
-                    </div>
+                    <h2 class="vsl-offer-title">Wybierz swój Pakiet Ratunkowy</h2>
 
                     <div id="vslPromoCountdown" class="vsl-countdown" style="display:none;">
                         <span>Oferta wygasa za: </span><strong id="vslCountdownTimer">60:00</strong>
                     </div>
-                    <div class="vsl-price-box">
-                        <span class="vsl-price-old">Wartość: 1999 zł</span>
-                        <span id="vslPriceNow" class="vsl-price-now">Teraz: tylko <strong>599 zł</strong></span>
+
+                    <div class="pricing-tiers pricing-tiers-vsl">
+                        <!-- Pakiet 1: Standardowy -->
+                        <div class="tier-card">
+                            <div class="tier-header" onclick="toggleTier(this)">
+                                <div class="tier-header-left">
+                                    <p class="tier-name">Kurs Samodzielny</p>
+                                    <p class="tier-tagline">Komplet materiałów do nauki we własnym tempie</p>
+                                </div>
+                                <div class="tier-header-right">
+                                    <span class="tier-price-old">1999 zł</span>
+                                    <span class="tier-price" id="vslPrice1">599 zł</span>
+                                </div>
+                                <span class="tier-toggle">+</span>
+                            </div>
+                            <div class="tier-body">
+                                <ul class="tier-features">
+                                    <li>Dostęp do wszystkich 16 działów kursu wideo HD</li>
+                                    <li>Gotowe PDF-y z teorią, zadaniami i wzorami</li>
+                                    <li>Quizy sprawdzające wiedzę po każdym dziale</li>
+                                    <li>Spersonalizowany planer nauki do matury</li>
+                                    <li>Moduł „Tutaj zacznij": Wstęp, Planer maturalny, Mindset, Wektory i trygonometria, Przekształcanie wzorów, Wzory których nie ma w karcie, Słownik CKE</li>
+                                    <li>Gwarancja Zdanej Matury (100% zwrotu jeśli nie zdasz)</li>
+                                </ul>
+                                <div class="tier-actions">
+                                    <button class="btn btn-gradient" onclick="buyAccess('full_access');return false;">Wybieram ten pakiet</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pakiet 2: Z Live'ami -->
+                        <div class="tier-card tier-card-popular">
+                            <div class="tier-badge">Najpopularniejszy</div>
+                            <div class="tier-header" onclick="toggleTier(this)">
+                                <div class="tier-header-left">
+                                    <p class="tier-name">Kurs + Live</p>
+                                    <p class="tier-tagline">Wszystko z kursu + spotkania live co 2 tygodnie</p>
+                                </div>
+                                <div class="tier-header-right">
+                                    <span class="tier-price-old">2789 zł</span>
+                                    <span class="tier-price" id="vslPrice2">847 zł</span>
+                                </div>
+                                <span class="tier-toggle">+</span>
+                            </div>
+                            <div class="tier-body">
+                                <ul class="tier-features">
+                                    <li>Wszystko z pakietu „Kurs Samodzielny"</li>
+                                    <li>Live grupowy 2h co 2 tygodnie ze wszystkimi kursantami</li>
+                                    <li>Możliwość zadawania pytań na żywo</li>
+                                    <li>Nagrania z live'ów dostępne do odtworzenia</li>
+                                </ul>
+                                <div class="tier-actions">
+                                    <button class="btn btn-gradient" onclick="buyAccess('full_access_live');return false;">Wybieram ten pakiet</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pakiet 3: VIP 1:1 -->
+                        <div class="tier-card">
+                            <div class="tier-header" onclick="toggleTier(this)">
+                                <div class="tier-header-left">
+                                    <p class="tier-name">Kurs VIP 1:1</p>
+                                    <p class="tier-tagline">Indywidualna nauka + live + pełny kurs</p>
+                                </div>
+                                <div class="tier-header-right">
+                                    <span class="tier-price-old">3499 zł</span>
+                                    <span class="tier-price" id="vslPrice3">1897 zł</span>
+                                </div>
+                                <span class="tier-toggle">+</span>
+                            </div>
+                            <div class="tier-body">
+                                <ul class="tier-features">
+                                    <li>Wszystko z pakietu „Kurs + Live"</li>
+                                    <li>Zajęcia indywidualne 1:1 — 1 godzina tygodniowo</li>
+                                    <li>Stały kontakt i wsparcie między zajęciami</li>
+                                    <li>Spersonalizowany plan nauki dopasowany do Twoich braków</li>
+                                </ul>
+                                <div class="tier-actions">
+                                    <button class="btn btn-gradient" onclick="buyAccess('vip');return false;">Wybieram ten pakiet</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <button onclick="buyAccess('full_access');return false;" class="btn btn-gradient vsl-buy-btn">
-                        WYKUP PEŁNY DOSTĘP
-                    </button>
+
+                    <p class="vsl-guarantee-note">30-dniowa gwarancja zwrotu pieniędzy. Bez ryzyka.</p>
                 </div>
             </div>
         </div>
@@ -1378,8 +1495,7 @@
         function initPromoCountdown() {
             var countdownEl = document.getElementById('vslPromoCountdown');
             var timerEl = document.getElementById('vslCountdownTimer');
-            var priceEl = document.getElementById('vslPriceNow');
-            if (!countdownEl || !timerEl || !priceEl) return;
+            if (!countdownEl || !timerEl) return;
 
             // Ustaw promoStartedAt przy pierwszym wejściu na oferta-ratunkowa
             if (!localStorage.getItem('promoStartedAt')) {
@@ -1393,7 +1509,13 @@
                 var remaining = endAt - Date.now();
                 if (remaining <= 0) {
                     countdownEl.style.display = 'none';
-                    priceEl.innerHTML = 'Teraz: tylko <strong>699 zł</strong>';
+                    // Zmień ceny na regularne po wygaśnięciu
+                    var p1 = document.getElementById('vslPrice1');
+                    var p2 = document.getElementById('vslPrice2');
+                    var p3 = document.getElementById('vslPrice3');
+                    if (p1) p1.textContent = '699 zł';
+                    if (p2) p2.textContent = '947 zł';
+                    if (p3) p3.textContent = '1997 zł';
                     return;
                 }
                 countdownEl.style.display = '';

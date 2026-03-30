@@ -34,7 +34,9 @@ const courseData = {
     14: { name: 'Fale elektromagnetyczne i optyka',  regularPrice: 4900, promoPrice: 4900 },
     15: { name: 'Fizyka atomowa',                    regularPrice: 4900, promoPrice: 4900 },
     16: { name: 'Fizyka jądrowa i relatywistyka',    regularPrice: 4900, promoPrice: 4900 },
-    17: { name: 'Wszystkie materiały (pełny dostęp)', regularPrice: 69900, promoPrice: 59900 },
+    17: { name: 'Kurs Samodzielny (pełny dostęp)',     regularPrice: 69900, promoPrice: 59900 },
+    18: { name: 'Kurs + Live (pełny dostęp + live)',  regularPrice: 94700, promoPrice: 84700 },
+    19: { name: 'Kurs VIP 1:1 (indywidualna nauka)',  regularPrice: 199700, promoPrice: 189700 },
 };
 
 const CLIENT_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
@@ -104,8 +106,9 @@ exports.handler = async (event) => {
             }
         }
 
-        // Normalizacja courseId — 'full_access' → 17
-        const normalizedCourseId = courseId === 'full_access' ? 17 : Number(courseId);
+        // Normalizacja courseId
+        const courseIdMap = { 'full_access': 17, 'full_access_live': 18, 'vip': 19 };
+        const normalizedCourseId = courseIdMap[courseId] || Number(courseId);
 
         const course = courseData[normalizedCourseId];
         if (!course) {

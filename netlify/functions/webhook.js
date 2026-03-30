@@ -165,7 +165,9 @@ exports.handler = async (event) => {
             // Fallback: metadata.courseId (zawsze obecne)
             if (courseIds.length === 0 && session.metadata?.courseId) {
                 const metaCourseId = session.metadata.courseId;
-                if (metaCourseId === 'full_access' || metaCourseId === '17') {
+                // 17 = Kurs Samodzielny, 18 = Kurs + Live, 19 = VIP 1:1 — wszystkie dają full access
+                const fullAccessIds = ['full_access', '17', '18', '19'];
+                if (fullAccessIds.includes(metaCourseId)) {
                     courseIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
                 } else if (!Number.isNaN(Number(metaCourseId))) {
                     courseIds = [Number(metaCourseId)];
