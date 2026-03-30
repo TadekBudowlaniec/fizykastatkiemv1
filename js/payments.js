@@ -32,12 +32,12 @@ function buyViaLink(courseId = 'full_access') {
 // Udostępnij globalnie
 window.buyViaLink = buyViaLink;
 window.buyAccess = buyAccess;
+window.buyAsGuest = buyAsGuest;
 
 async function buyAccess(courseId = 'full_access') {
+    // Jeśli niezalogowany — przełącz na guest checkout
     if (!currentUser) {
-        alert('Musisz się zalogować, aby kupić dostęp!');
-        showSection('login');
-        return;
+        return buyAsGuest(courseId);
     }
 
     if (hasAccessToCourse(courseId)) {
@@ -46,7 +46,6 @@ async function buyAccess(courseId = 'full_access') {
     }
 
     try {
-        // Pobierz token JWT do autoryzacji
         const token = await getAuthToken();
         if (!token) {
             alert('Sesja wygasła. Zaloguj się ponownie.');
@@ -54,7 +53,6 @@ async function buyAccess(courseId = 'full_access') {
             return;
         }
 
-        // Wysyłamy courseId + promoStartedAt — serwer sam mapuje cenę i weryfikuje użytkownika z tokenu
         const promoStartedAt = localStorage.getItem('promoStartedAt') || null;
         const response = await fetch('/.netlify/functions/create-checkout-session', {
             method: 'POST',
@@ -63,6 +61,35 @@ async function buyAccess(courseId = 'full_access') {
                 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ courseId, promoStartedAt })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || response.statusText);
+        }
+
+        const session = await response.json();
+
+        const result = await window.stripe.redirectToCheckout({ sessionId: session.id });
+        if (result.error) {
+            alert('Błąd płatności: ' + result.error.message);
+        }
+    } catch (error) {
+        alert('Błąd podczas przetwarzania płatności: ' + error.message);
+    }
+}
+
+// Guest Checkout — bez logowania, email opcjonalny (Stripe zbierze)
+async function buyAsGuest(courseId = 'full_access') {
+    try {
+        // Spróbuj pobrać email z squeeze forma (localStorage)
+        const guestEmail = localStorage.getItem('squeezeMagicEmail') || null;
+        const promoStartedAt = localStorage.getItem('promoStartedAt') || null;
+
+        const response = await fetch('/.netlify/functions/create-checkout-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ courseId, promoStartedAt, guestEmail })
         });
 
         if (!response.ok) {

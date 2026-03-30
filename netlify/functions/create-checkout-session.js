@@ -3,7 +3,7 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY);
 const { createClient } = require('@supabase/supabase-js');
 
-// Klient Supabase do weryfikacji JWT
+// Klient Supabase do weryfikacji JWT (anon key)
 const supabaseAuth = createClient(
     process.env.SUPABASE_URL,
     process.env.SUPABASE_ANON_KEY
@@ -44,7 +44,6 @@ function isPromoActive(promoStartedAt) {
     if (!promoStartedAt) return false;
     const startMs = Number(promoStartedAt);
     if (isNaN(startMs)) return false;
-    // Timestamp musi być z przeszłości (nie z przyszłości) i w ramach 1h
     const now = Date.now();
     return startMs <= now && (now - startMs) < PROMO_DURATION_MS;
 }
@@ -77,27 +76,35 @@ exports.handler = async (event) => {
     }
 
     try {
-        // 1. Weryfikacja JWT
-        const authHeader = event.headers.authorization;
-        if (!authHeader || !authHeader.startsWith('Bearer ')) {
-            return { statusCode: 401, body: JSON.stringify({ error: 'Brak autoryzacji.' }) };
-        }
-
-        const token = authHeader.replace('Bearer ', '');
-        const { data: { user }, error: authError } = await supabaseAuth.auth.getUser(token);
-
-        if (authError || !user) {
-            return { statusCode: 401, body: JSON.stringify({ error: 'Nieprawidłowy token.' }) };
-        }
-
-        // 2. Parsuj request
-        const { courseId, promoStartedAt } = JSON.parse(event.body);
+        const { courseId, promoStartedAt, guestEmail } = JSON.parse(event.body);
 
         if (!courseId) {
             return { statusCode: 400, body: JSON.stringify({ error: 'Brak wymaganych danych.' }) };
         }
 
-        // 3. Normalizacja courseId — 'full_access' → 17
+        // --- Rozpoznaj tryb: zalogowany (JWT) vs gość (guestEmail) ---
+        let userId = null;
+        let customerEmail = null;
+
+        const authHeader = event.headers.authorization;
+        if (authHeader && authHeader.startsWith('Bearer ')) {
+            // Tryb zalogowany — weryfikacja JWT
+            const token = authHeader.replace('Bearer ', '');
+            const { data: { user }, error: authError } = await supabaseAuth.auth.getUser(token);
+
+            if (authError || !user) {
+                return { statusCode: 401, body: JSON.stringify({ error: 'Nieprawidłowy token.' }) };
+            }
+            userId = user.id;
+            customerEmail = user.email;
+        } else {
+            // Tryb gość — email opcjonalny (Stripe zbierze jeśli brak)
+            if (guestEmail) {
+                customerEmail = guestEmail;
+            }
+        }
+
+        // Normalizacja courseId — 'full_access' → 17
         const normalizedCourseId = courseId === 'full_access' ? 17 : Number(courseId);
 
         const course = courseData[normalizedCourseId];
@@ -107,11 +114,10 @@ exports.handler = async (event) => {
 
         const unitAmount = getPrice(course, promoStartedAt);
 
-        // 4. Tworzenie sesji Stripe z price_data
+        // Tworzenie sesji Stripe
         const sessionParams = {
             payment_method_types: ['card', 'blik', 'klarna'],
             mode: 'payment',
-            customer_email: user.email,
             line_items: [
                 {
                     price_data: {
@@ -126,14 +132,24 @@ exports.handler = async (event) => {
             ],
             allow_promotion_codes: true,
             metadata: {
-                userId: user.id,
                 courseId: String(normalizedCourseId),
+                checkoutMode: userId ? 'authenticated' : 'guest',
             },
             success_url: `${CLIENT_URL}/sukces?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${CLIENT_URL}/kurs`,
         };
 
-        // 5. Zabezpieczenie: expires_at blokuje „trzymanie" starej ceny
+        // Jeśli zalogowany — przekaż userId w metadata
+        if (userId) {
+            sessionParams.metadata.userId = userId;
+        }
+
+        // Email: jeśli mamy — prefill, jeśli nie — Stripe zbierze sam
+        if (customerEmail) {
+            sessionParams.customer_email = customerEmail;
+        }
+
+        // Zabezpieczenie: expires_at blokuje „trzymanie" starej ceny
         const expiresAt = getExpiresAt(promoStartedAt);
         if (expiresAt) {
             sessionParams.expires_at = expiresAt;

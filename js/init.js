@@ -262,6 +262,9 @@ window.addEventListener('DOMContentLoaded', () => {
             const email = emailInput.value.trim();
             if (!email) return;
 
+            // Zapisz email do localStorage — guest checkout użyje go jako prefill
+            localStorage.setItem('squeezeMagicEmail', email);
+
             if (!supabase) {
                 alert('Błąd połączenia z serwerem. Odśwież stronę i spróbuj ponownie.');
                 return;
