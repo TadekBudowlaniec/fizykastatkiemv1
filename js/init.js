@@ -294,23 +294,52 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Obsluga Magic Link callback na /planer
     if (initialSection === 'planer') {
-        // Supabase automatycznie przetworzy token z URL przy getUser()
-        // Po zalogowaniu renderujemy planer
-        supabase.auth.getUser().then(({ data: { user } }) => {
-            if (user) {
-                currentUser = user;
-                checkUserAccess().then(() => {
-                    updateNavigation();
-                    renderPlaner();
-                });
-            } else {
-                // Jesli nie zalogowany, pokaz info
-                const planerContent = document.getElementById('planerContent');
-                if (planerContent) {
-                    planerContent.innerHTML = '<p style="text-align:center;">Sprawdz swoja skrzynke e-mail i kliknij magic link, aby uzyskac dostep do planera.</p>';
+        // Supabase potrzebuje chwili na przetworzenie tokena z URL hash.
+        // Uzywamy onAuthStateChange zeby poczekac na sesje.
+        const hash = window.location.hash;
+        const hasToken = hash && (hash.includes('access_token') || hash.includes('type='));
+
+        if (hasToken) {
+            // Magic link callback — czekamy na event SIGNED_IN
+            const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+                if (event === 'SIGNED_IN' && session?.user) {
+                    subscription.unsubscribe();
+                    currentUser = session.user;
+                    // Usun hash z URL zeby nie przeszkadzal
+                    history.replaceState(null, '', window.location.pathname);
+                    checkUserAccess().then(() => {
+                        updateNavigation();
+                        showSection('planer');
+                    });
                 }
-            }
-        });
+            });
+            // Timeout — jesli po 10s nie ma sesji, pokaz komunikat
+            setTimeout(() => {
+                subscription.unsubscribe();
+                if (!currentUser) {
+                    const planerContent = document.getElementById('planerContent');
+                    if (planerContent) {
+                        planerContent.innerHTML = '<p style="text-align:center;color:#ef4444;">Link wygasł lub jest nieprawidłowy. Spróbuj ponownie.</p>';
+                    }
+                }
+            }, 10000);
+        } else {
+            // Bezposrednie wejscie na /planer (bez tokena) — sprawdz istniejaca sesje
+            supabase.auth.getUser().then(({ data: { user } }) => {
+                if (user) {
+                    currentUser = user;
+                    checkUserAccess().then(() => {
+                        updateNavigation();
+                        renderPlaner();
+                    });
+                } else {
+                    const planerContent = document.getElementById('planerContent');
+                    if (planerContent) {
+                        planerContent.innerHTML = '<p style="text-align:center;">Sprawdz swoja skrzynke e-mail i kliknij magic link, aby uzyskac dostep do planera.</p>';
+                    }
+                }
+            });
+        }
     }
 });
 
