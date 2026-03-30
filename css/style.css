@@ -3724,6 +3724,16 @@ nav {
 }
 
 /* =============================================
+   EYEBROW URGENT (hero pilnosc)
+============================================= */
+.eyebrow-urgent {
+    color: #ef4444 !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* =============================================
    SQUEEZE FORM (Magic Link na landing page)
 ============================================= */
 .squeeze-form-wrap {
@@ -3734,11 +3744,12 @@ nav {
     border: 1px solid rgba(255,255,255,0.18);
     backdrop-filter: blur(8px);
 }
-.squeeze-label {
-    font-weight: 600;
-    margin-bottom: 0.6rem;
-    font-size: 1rem;
-    color: var(--black);
+.squeeze-form-hero {
+    margin-top: 1.8rem;
+    padding: 1.4rem 1.6rem;
+    background: rgba(255,255,255,0.18);
+    border: 2px solid rgba(107,77,246,0.25);
+    box-shadow: 0 4px 24px rgba(107,77,246,0.10);
 }
 .squeeze-form {
     display: flex;
