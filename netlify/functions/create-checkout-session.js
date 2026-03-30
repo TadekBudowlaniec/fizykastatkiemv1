@@ -9,28 +9,67 @@ const supabaseAuth = createClient(
     process.env.SUPABASE_ANON_KEY
 );
 
-// Mapowanie courseId -> Stripe priceId (serwer decyduje o cenie, NIE klient)
-const coursePriceIds = {
-    1: 'price_1RtPFoJLuu6b086bmfvVO4G8', // Kinematyka
-    2: 'price_1RtPGOJLuu6b086b1QN5l4DE', // Dynamika
-    3: 'price_1Rgt0yJLuu6b086b115h7OXM', // Praca moc energia
-    4: 'price_1RtPKTJLuu6b086b3wG0IiaV', // Bryła Sztywna
-    5: 'price_1RtPKkJLuu6b086b2lfhBfDX', // Ruch Drgający
-    6: 'price_1RtPL2JLuu6b086bLl03p2R9', // Fale Mechaniczne
-    7: 'price_1RtPLlJLuu6b086bbJxG1bqw', // Hydrostatyka
-    8: 'price_1RgqlFJLuu6b086bf2Wl2bUg', // Termodynamika
-    9: 'price_1RtPMCJLuu6b086bV3Zk0il6', // Grawitacja i Astronomia
-    10: 'price_1Rgt1HJLuu6b086bmNgENAIM', // Elektrostatyka
-    11: 'price_1RtPNJJLuu6b086bBejuPL2T', // Prąd Elektryczny
-    12: 'price_1RtPNdJLuu6b086bjn7p0Wsn', // Magnetyzm
-    13: 'price_1RtPORJLuu6b086b1yxr0voQ', // Indukcja Elektromagnetyczna
-    14: 'price_1Rgt1TJLuu6b086bNn14JbJa', // Fale Elektromagnetyczne i Optyka
-    15: 'price_1Rgt1lJLuu6b086bk3TJqFzM', // Fizyka Atomowa
-    16: 'price_1Rgt21JLuu6b086bTBuO2djx', // Fizyka Jądrowa i Relatywistyka
-    17: 'price_1RtPPaJLuu6b086bdmWNAsGI' // Wszystkie materiały (full_access)
+// =============================================
+//  PROMOCJA — 1h od wejścia użytkownika
+// =============================================
+const PROMO_DURATION_MS = 60 * 60 * 1000; // 1 godzina
+const STRIPE_MIN_EXPIRES = 30 * 60;       // 30 min w sekundach
+const STRIPE_MAX_EXPIRES = 24 * 60 * 60;  // 24h w sekundach
+
+// Mapowanie courseId -> { name, regularPrice, promoPrice } (kwoty w GROSZACH)
+const courseData = {
+    1:  { name: 'Kinematyka',                        regularPrice: 4900, promoPrice: 4900 },
+    2:  { name: 'Dynamika',                          regularPrice: 4900, promoPrice: 4900 },
+    3:  { name: 'Praca, moc, energia',               regularPrice: 4900, promoPrice: 4900 },
+    4:  { name: 'Bryła sztywna',                     regularPrice: 4900, promoPrice: 4900 },
+    5:  { name: 'Ruch drgający',                     regularPrice: 4900, promoPrice: 4900 },
+    6:  { name: 'Fale mechaniczne',                  regularPrice: 4900, promoPrice: 4900 },
+    7:  { name: 'Hydrostatyka',                      regularPrice: 4900, promoPrice: 4900 },
+    8:  { name: 'Termodynamika',                     regularPrice: 4900, promoPrice: 4900 },
+    9:  { name: 'Grawitacja i astronomia',            regularPrice: 4900, promoPrice: 4900 },
+    10: { name: 'Elektrostatyka',                    regularPrice: 4900, promoPrice: 4900 },
+    11: { name: 'Prąd elektryczny',                  regularPrice: 4900, promoPrice: 4900 },
+    12: { name: 'Magnetyzm',                         regularPrice: 4900, promoPrice: 4900 },
+    13: { name: 'Indukcja elektromagnetyczna',       regularPrice: 4900, promoPrice: 4900 },
+    14: { name: 'Fale elektromagnetyczne i optyka',  regularPrice: 4900, promoPrice: 4900 },
+    15: { name: 'Fizyka atomowa',                    regularPrice: 4900, promoPrice: 4900 },
+    16: { name: 'Fizyka jądrowa i relatywistyka',    regularPrice: 4900, promoPrice: 4900 },
+    17: { name: 'Wszystkie materiały (pełny dostęp)', regularPrice: 69900, promoPrice: 59900 },
 };
 
 const ALLOWED_ORIGIN = process.env.FRONTEND_URL;
+
+// Sprawdza czy promo jest aktywna na podstawie timestampa rozpoczęcia (per-user)
+function isPromoActive(promoStartedAt) {
+    if (!promoStartedAt) return false;
+    const startMs = Number(promoStartedAt);
+    if (isNaN(startMs)) return false;
+    // Timestamp musi być z przeszłości (nie z przyszłości) i w ramach 1h
+    const now = Date.now();
+    return startMs <= now && (now - startMs) < PROMO_DURATION_MS;
+}
+
+function getPromoEndMs(promoStartedAt) {
+    return Number(promoStartedAt) + PROMO_DURATION_MS;
+}
+
+function getPrice(course, promoStartedAt) {
+    return isPromoActive(promoStartedAt) ? course.promoPrice : course.regularPrice;
+}
+
+// Oblicza expires_at — sesja wygasa gdy kończy się promo użytkownika
+function getExpiresAt(promoStartedAt) {
+    if (!isPromoActive(promoStartedAt)) return undefined;
+
+    const nowSec = Math.floor(Date.now() / 1000);
+    const promoEndSec = Math.floor(getPromoEndMs(promoStartedAt) / 1000);
+    const diffSec = promoEndSec - nowSec;
+
+    if (diffSec >= STRIPE_MIN_EXPIRES && diffSec <= STRIPE_MAX_EXPIRES) {
+        return promoEndSec;
+    }
+    return undefined;
+}
 
 exports.handler = async (event) => {
     if (event.httpMethod !== 'POST') {
@@ -38,7 +77,7 @@ exports.handler = async (event) => {
     }
 
     try {
-        // 1. Weryfikacja JWT — jedyne źródło prawdy o userId i email
+        // 1. Weryfikacja JWT
         const authHeader = event.headers.authorization;
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
             return { statusCode: 401, body: JSON.stringify({ error: 'Brak autoryzacji.' }) };
@@ -51,35 +90,56 @@ exports.handler = async (event) => {
             return { statusCode: 401, body: JSON.stringify({ error: 'Nieprawidłowy token.' }) };
         }
 
-        // 2. Parsuj request — przyjmujemy TYLKO courseId, resztę bierzemy z tokenu
-        const { courseId } = JSON.parse(event.body);
+        // 2. Parsuj request
+        const { courseId, promoStartedAt } = JSON.parse(event.body);
 
         if (!courseId) {
             return { statusCode: 400, body: JSON.stringify({ error: 'Brak wymaganych danych.' }) };
         }
 
-        // 3. Serwer sam mapuje courseId na priceId — klient NIE może manipulować ceną
-        const priceId = coursePriceIds[courseId];
-        if (!priceId) {
+        // 3. Normalizacja courseId — 'full_access' → 17
+        const normalizedCourseId = courseId === 'full_access' ? 17 : Number(courseId);
+
+        const course = courseData[normalizedCourseId];
+        if (!course) {
             return { statusCode: 400, body: JSON.stringify({ error: 'Nieprawidłowy kurs.' }) };
         }
 
-        // 4. Tworzenie sesji Stripe z bezpiecznym origin
-        const session = await stripe.checkout.sessions.create({
+        const unitAmount = getPrice(course, promoStartedAt);
+
+        // 4. Tworzenie sesji Stripe z price_data
+        const sessionParams = {
             payment_method_types: ['card', 'blik', 'klarna'],
             mode: 'payment',
             customer_email: user.email,
             line_items: [
-                { price: priceId, quantity: 1 },
+                {
+                    price_data: {
+                        currency: 'pln',
+                        product_data: {
+                            name: course.name,
+                        },
+                        unit_amount: unitAmount,
+                    },
+                    quantity: 1,
+                },
             ],
             allow_promotion_codes: true,
             metadata: {
                 userId: user.id,
-                courseId: String(courseId)
+                courseId: String(normalizedCourseId),
             },
             success_url: `${ALLOWED_ORIGIN}/?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${ALLOWED_ORIGIN}/kurs`,
-        });
+        };
+
+        // 5. Zabezpieczenie: expires_at blokuje „trzymanie" starej ceny
+        const expiresAt = getExpiresAt(promoStartedAt);
+        if (expiresAt) {
+            sessionParams.expires_at = expiresAt;
+        }
+
+        const session = await stripe.checkout.sessions.create(sessionParams);
 
         return {
             statusCode: 200,

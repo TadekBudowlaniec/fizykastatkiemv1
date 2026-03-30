@@ -110,7 +110,7 @@ exports.handler = async (event) => {
             // Fallback: jeśli brak dopasowania po priceId, użyj metadata.courseId
             if (courseIds.length === 0 && session.metadata?.courseId) {
                 const metaCourseId = session.metadata.courseId;
-                if (metaCourseId === 'full_access') {
+                if (metaCourseId === 'full_access' || metaCourseId === '17') {
                     courseIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
                 } else if (!Number.isNaN(Number(metaCourseId))) {
                     courseIds = [Number(metaCourseId)];

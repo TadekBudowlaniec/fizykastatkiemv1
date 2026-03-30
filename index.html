@@ -1288,14 +1288,17 @@
                     <li>Wzory, których nie ma w karcie</li>
                     <li>Słownik CKE</li>
                 </ul>
+                <div id="vslPromoCountdown" class="vsl-countdown" style="display:none;">
+                    <span>Oferta wygasa za: </span><strong id="vslCountdownTimer">60:00</strong>
+                </div>
                 <div class="vsl-price-box">
                     <span class="vsl-price-old">Wartość: 1999 zł</span>
-                    <span class="vsl-price-now">Teraz: tylko <strong>699 zł</strong></span>
+                    <span id="vslPriceNow" class="vsl-price-now">Teraz: tylko <strong>599 zł</strong></span>
                 </div>
-                <a href="https://buy.stripe.com/00w00k7IFaZA9OG9Ht0ZW06" target="_blank" rel="noopener" class="btn btn-gradient vsl-buy-btn">
-                    WYKUP PELNY DOSTEP
-                </a>
-                <p class="vsl-guarantee-note">30-dniowa gwarancja zwrotu pieniedzy. Bez ryzyka.</p>
+                <button onclick="buyAccess('full_access');return false;" class="btn btn-gradient vsl-buy-btn">
+                    WYKUP PEŁNY DOSTĘP
+                </button>
+                <p class="vsl-guarantee-note">30-dniowa gwarancja zwrotu pieniędzy. Bez ryzyka.</p>
             </div>
         </div>
     </div>
@@ -1333,6 +1336,55 @@
     <script src="js/init.js"></script>
     <script src="js/tasks.js"></script>
     <script src="check_database.js"></script>
+
+    <!-- Promocja: 1h countdown na oferta-ratunkowa -->
+    <script>
+    (function() {
+        const PROMO_DURATION = 60 * 60 * 1000; // 1 godzina w ms
+
+        function initPromoCountdown() {
+            var countdownEl = document.getElementById('vslPromoCountdown');
+            var timerEl = document.getElementById('vslCountdownTimer');
+            var priceEl = document.getElementById('vslPriceNow');
+            if (!countdownEl || !timerEl || !priceEl) return;
+
+            // Ustaw promoStartedAt przy pierwszym wejściu na oferta-ratunkowa
+            if (!localStorage.getItem('promoStartedAt')) {
+                localStorage.setItem('promoStartedAt', String(Date.now()));
+            }
+
+            var startedAt = Number(localStorage.getItem('promoStartedAt'));
+            var endAt = startedAt + PROMO_DURATION;
+
+            function update() {
+                var remaining = endAt - Date.now();
+                if (remaining <= 0) {
+                    countdownEl.style.display = 'none';
+                    priceEl.innerHTML = 'Teraz: tylko <strong>699 zł</strong>';
+                    return;
+                }
+                countdownEl.style.display = '';
+                var min = Math.floor(remaining / 60000);
+                var sec = Math.floor((remaining % 60000) / 1000);
+                timerEl.textContent = min + ':' + (sec < 10 ? '0' : '') + sec;
+                requestAnimationFrame(update);
+            }
+            update();
+        }
+
+        // Uruchom countdown gdy strona się załaduje
+        document.addEventListener('DOMContentLoaded', initPromoCountdown);
+
+        // Uruchom też po każdym showSection (SPA — nawigacja bez przeładowania)
+        var origShowSection = window.showSection;
+        if (origShowSection) {
+            window.showSection = function(sectionId, push) {
+                origShowSection(sectionId, push);
+                if (sectionId === 'oferta-ratunkowa') initPromoCountdown();
+            };
+        }
+    })();
+    </script>
 
     <footer class="site-footer">
         <div class="container footer-content">

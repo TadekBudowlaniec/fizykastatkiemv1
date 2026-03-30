@@ -54,14 +54,15 @@ async function buyAccess(courseId = 'full_access') {
             return;
         }
 
-        // Wysyłamy TYLKO courseId — serwer sam mapuje cenę i weryfikuje użytkownika z tokenu
+        // Wysyłamy courseId + promoStartedAt — serwer sam mapuje cenę i weryfikuje użytkownika z tokenu
+        const promoStartedAt = localStorage.getItem('promoStartedAt') || null;
         const response = await fetch('/.netlify/functions/create-checkout-session', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ courseId })
+            body: JSON.stringify({ courseId, promoStartedAt })
         });
 
         if (!response.ok) {
