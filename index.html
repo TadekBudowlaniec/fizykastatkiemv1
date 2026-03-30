@@ -310,97 +310,67 @@
                     <p class="section-subtitle">Najpierw złap całość, potem wybierz dział do punktowej powtórki.</p>
                 </div>
 
-                <div class="pricing-tiers">
-                    <!-- Pakiet 1: Standardowy -->
-                    <div class="tier-card">
-                        <div class="tier-header" onclick="toggleTier(this)">
-                            <div class="tier-header-left">
-                                <p class="tier-name">Kurs Samodzielny</p>
-                                <p class="tier-tagline">Komplet materiałów do nauki we własnym tempie</p>
-                            </div>
-                            <div class="tier-header-right">
-                                <span class="tier-price-old">1999 zł</span>
-                                <span class="tier-price">599 zł</span>
-                            </div>
-                            <span class="tier-toggle">+</span>
+                <div class="pricing-columns">
+                    <!-- Silver -->
+                    <div class="tier-col">
+                        <div class="tier-col-header tier-silver">
+                            <p class="tier-col-name">Silver</p>
+                            <p class="tier-col-sub">Kurs Samodzielny</p>
+                            <span class="tier-col-price-old">1999 zł</span>
+                            <span class="tier-col-price">599 zł</span>
                         </div>
-                        <div class="tier-body">
-                            <ul class="tier-features">
-                                <li>Dostęp do wszystkich 16 działów kursu wideo HD</li>
-                                <li>Gotowe PDF-y z teorią, zadaniami i wzorami</li>
-                                <li>Quizy sprawdzające wiedzę po każdym dziale</li>
-                                <li>Spersonalizowany planer nauki do matury</li>
-                                <li>Moduł „Tutaj zacznij": Wstęp, Planer maturalny, Mindset, Wektory i trygonometria, Przekształcanie wzorów, Wzory których nie ma w karcie, Słownik CKE</li>
-                                <li>Gwarancja Zdanej Matury (100% zwrotu jeśli nie zdasz)</li>
-                            </ul>
-                            <div class="tier-actions">
-                                <button class="btn btn-gradient" onclick="buyAccess('full_access');return false;">Wybieram ten pakiet</button>
-                            </div>
+                        <ul class="tier-col-features">
+                            <li>Dostęp do wszystkich 16 działów kursu wideo HD</li>
+                            <li>Gotowe PDF-y z teorią, zadaniami i wzorami</li>
+                            <li>Quizy sprawdzające wiedzę po każdym dziale</li>
+                            <li>Spersonalizowany planer nauki do matury</li>
+                            <li>Moduł „Tutaj zacznij"</li>
+                            <li>Gwarancja Zdanej Matury</li>
+                        </ul>
+                        <div class="tier-col-actions">
+                            <button class="btn btn-gradient" onclick="buyAccess('full_access');return false;">Wybieram Silver</button>
                         </div>
                     </div>
 
-                    <!-- Pakiet 2: Z Live'ami -->
-                    <div class="tier-card tier-card-popular">
-                        <div class="tier-badge">Najpopularniejszy</div>
-                        <div class="tier-header" onclick="toggleTier(this)">
-                            <div class="tier-header-left">
-                                <p class="tier-name">Kurs + Live</p>
-                                <p class="tier-tagline">Wszystko z kursu + spotkania live co 2 tygodnie</p>
-                            </div>
-                            <div class="tier-header-right">
-                                <span class="tier-price-old">2789 zł</span>
-                                <span class="tier-price">847 zł</span>
-                            </div>
-                            <span class="tier-toggle">+</span>
+                    <!-- Gold -->
+                    <div class="tier-col tier-col-featured">
+                        <div class="tier-col-badge">Najpopularniejszy</div>
+                        <div class="tier-col-header tier-gold">
+                            <p class="tier-col-name">Gold</p>
+                            <p class="tier-col-sub">Kurs + Live</p>
+                            <span class="tier-col-price-old">2789 zł</span>
+                            <span class="tier-col-price">847 zł</span>
                         </div>
-                        <div class="tier-body">
-                            <ul class="tier-features">
-                                <li>Wszystko z pakietu „Kurs Samodzielny"</li>
-                                <li>Live grupowy 2h co 2 tygodnie ze wszystkimi kursantami</li>
-                                <li>Możliwość zadawania pytań na żywo</li>
-                                <li>Nagrania z live'ów dostępne do odtworzenia</li>
-                            </ul>
-                            <div class="tier-actions">
-                                <button class="btn btn-gradient" onclick="buyAccess('full_access_live');return false;">Wybieram ten pakiet</button>
-                            </div>
+                        <ul class="tier-col-features">
+                            <li>Wszystko z pakietu Silver</li>
+                            <li>Live grupowy 2h co 2 tygodnie</li>
+                            <li>Zadawanie pytań na żywo</li>
+                            <li>Nagrania z live'ów do odtworzenia</li>
+                        </ul>
+                        <div class="tier-col-actions">
+                            <button class="btn btn-gradient" onclick="buyAccess('full_access_live');return false;">Wybieram Gold</button>
                         </div>
                     </div>
 
-                    <!-- Pakiet 3: VIP 1:1 -->
-                    <div class="tier-card">
-                        <div class="tier-header" onclick="toggleTier(this)">
-                            <div class="tier-header-left">
-                                <p class="tier-name">Kurs VIP 1:1</p>
-                                <p class="tier-tagline">Indywidualna nauka + live + pełny kurs</p>
-                            </div>
-                            <div class="tier-header-right">
-                                <span class="tier-price-old">3499 zł</span>
-                                <span class="tier-price">1897 zł</span>
-                            </div>
-                            <span class="tier-toggle">+</span>
+                    <!-- Diamond -->
+                    <div class="tier-col">
+                        <div class="tier-col-header tier-diamond">
+                            <p class="tier-col-name">Diamond</p>
+                            <p class="tier-col-sub">Kurs VIP 1:1</p>
+                            <span class="tier-col-price-old">3499 zł</span>
+                            <span class="tier-col-price">1897 zł</span>
                         </div>
-                        <div class="tier-body">
-                            <ul class="tier-features">
-                                <li>Wszystko z pakietu „Kurs + Live"</li>
-                                <li>Zajęcia indywidualne 1:1 — 1 godzina tygodniowo</li>
-                                <li>Stały kontakt i wsparcie między zajęciami</li>
-                                <li>Spersonalizowany plan nauki dopasowany do Twoich braków</li>
-                            </ul>
-                            <div class="tier-actions">
-                                <button class="btn btn-gradient" onclick="buyAccess('vip');return false;">Wybieram ten pakiet</button>
-                            </div>
+                        <ul class="tier-col-features">
+                            <li>Wszystko z pakietu Gold</li>
+                            <li>Zajęcia indywidualne 1:1 — 1h tygodniowo</li>
+                            <li>Stały kontakt i wsparcie</li>
+                            <li>Plan nauki dopasowany do Twoich braków</li>
+                        </ul>
+                        <div class="tier-col-actions">
+                            <button class="btn btn-gradient" onclick="buyAccess('vip');return false;">Wybieram Diamond</button>
                         </div>
                     </div>
                 </div>
-
-                <script>
-                function toggleTier(header) {
-                    var card = header.closest('.tier-card');
-                    card.classList.toggle('tier-open');
-                    var toggle = card.querySelector('.tier-toggle');
-                    toggle.textContent = card.classList.contains('tier-open') ? '−' : '+';
-                }
-                </script>
 
                 <div class="course-grid-heading">
                     <h3>Rozdziały kursu</h3>
@@ -1364,85 +1334,64 @@
                         <span>Oferta wygasa za: </span><strong id="vslCountdownTimer">60:00</strong>
                     </div>
 
-                    <div class="pricing-tiers pricing-tiers-vsl">
-                        <!-- Pakiet 1: Standardowy -->
-                        <div class="tier-card">
-                            <div class="tier-header" onclick="toggleTier(this)">
-                                <div class="tier-header-left">
-                                    <p class="tier-name">Kurs Samodzielny</p>
-                                    <p class="tier-tagline">Komplet materiałów do nauki we własnym tempie</p>
-                                </div>
-                                <div class="tier-header-right">
-                                    <span class="tier-price-old">1999 zł</span>
-                                    <span class="tier-price" id="vslPrice1">599 zł</span>
-                                </div>
-                                <span class="tier-toggle">+</span>
+                    <div class="pricing-columns">
+                        <!-- Silver -->
+                        <div class="tier-col">
+                            <div class="tier-col-header tier-silver">
+                                <p class="tier-col-name">Silver</p>
+                                <p class="tier-col-sub">Kurs Samodzielny</p>
+                                <span class="tier-col-price-old">1999 zł</span>
+                                <span class="tier-col-price" id="vslPrice1">599 zł</span>
                             </div>
-                            <div class="tier-body">
-                                <ul class="tier-features">
-                                    <li>Dostęp do wszystkich 16 działów kursu wideo HD</li>
-                                    <li>Gotowe PDF-y z teorią, zadaniami i wzorami</li>
-                                    <li>Quizy sprawdzające wiedzę po każdym dziale</li>
-                                    <li>Spersonalizowany planer nauki do matury</li>
-                                    <li>Moduł „Tutaj zacznij": Wstęp, Planer maturalny, Mindset, Wektory i trygonometria, Przekształcanie wzorów, Wzory których nie ma w karcie, Słownik CKE</li>
-                                    <li>Gwarancja Zdanej Matury (100% zwrotu jeśli nie zdasz)</li>
-                                </ul>
-                                <div class="tier-actions">
-                                    <button class="btn btn-gradient" onclick="buyAccess('full_access');return false;">Wybieram ten pakiet</button>
-                                </div>
+                            <ul class="tier-col-features">
+                                <li>Dostęp do wszystkich 16 działów kursu wideo HD</li>
+                                <li>Gotowe PDF-y z teorią, zadaniami i wzorami</li>
+                                <li>Quizy sprawdzające wiedzę po każdym dziale</li>
+                                <li>Spersonalizowany planer nauki do matury</li>
+                                <li>Moduł „Tutaj zacznij"</li>
+                                <li>Gwarancja Zdanej Matury</li>
+                            </ul>
+                            <div class="tier-col-actions">
+                                <button class="btn btn-gradient" onclick="buyAccess('full_access');return false;">Wybieram Silver</button>
                             </div>
                         </div>
 
-                        <!-- Pakiet 2: Z Live'ami -->
-                        <div class="tier-card tier-card-popular">
-                            <div class="tier-badge">Najpopularniejszy</div>
-                            <div class="tier-header" onclick="toggleTier(this)">
-                                <div class="tier-header-left">
-                                    <p class="tier-name">Kurs + Live</p>
-                                    <p class="tier-tagline">Wszystko z kursu + spotkania live co 2 tygodnie</p>
-                                </div>
-                                <div class="tier-header-right">
-                                    <span class="tier-price-old">2789 zł</span>
-                                    <span class="tier-price" id="vslPrice2">847 zł</span>
-                                </div>
-                                <span class="tier-toggle">+</span>
+                        <!-- Gold -->
+                        <div class="tier-col tier-col-featured">
+                            <div class="tier-col-badge">Najpopularniejszy</div>
+                            <div class="tier-col-header tier-gold">
+                                <p class="tier-col-name">Gold</p>
+                                <p class="tier-col-sub">Kurs + Live</p>
+                                <span class="tier-col-price-old">2789 zł</span>
+                                <span class="tier-col-price" id="vslPrice2">847 zł</span>
                             </div>
-                            <div class="tier-body">
-                                <ul class="tier-features">
-                                    <li>Wszystko z pakietu „Kurs Samodzielny"</li>
-                                    <li>Live grupowy 2h co 2 tygodnie ze wszystkimi kursantami</li>
-                                    <li>Możliwość zadawania pytań na żywo</li>
-                                    <li>Nagrania z live'ów dostępne do odtworzenia</li>
-                                </ul>
-                                <div class="tier-actions">
-                                    <button class="btn btn-gradient" onclick="buyAccess('full_access_live');return false;">Wybieram ten pakiet</button>
-                                </div>
+                            <ul class="tier-col-features">
+                                <li>Wszystko z pakietu Silver</li>
+                                <li>Live grupowy 2h co 2 tygodnie</li>
+                                <li>Zadawanie pytań na żywo</li>
+                                <li>Nagrania z live'ów do odtworzenia</li>
+                            </ul>
+                            <div class="tier-col-actions">
+                                <button class="btn btn-gradient" onclick="buyAccess('full_access_live');return false;">Wybieram Gold</button>
                             </div>
                         </div>
 
-                        <!-- Pakiet 3: VIP 1:1 -->
-                        <div class="tier-card">
-                            <div class="tier-header" onclick="toggleTier(this)">
-                                <div class="tier-header-left">
-                                    <p class="tier-name">Kurs VIP 1:1</p>
-                                    <p class="tier-tagline">Indywidualna nauka + live + pełny kurs</p>
-                                </div>
-                                <div class="tier-header-right">
-                                    <span class="tier-price-old">3499 zł</span>
-                                    <span class="tier-price" id="vslPrice3">1897 zł</span>
-                                </div>
-                                <span class="tier-toggle">+</span>
+                        <!-- Diamond -->
+                        <div class="tier-col">
+                            <div class="tier-col-header tier-diamond">
+                                <p class="tier-col-name">Diamond</p>
+                                <p class="tier-col-sub">Kurs VIP 1:1</p>
+                                <span class="tier-col-price-old">3499 zł</span>
+                                <span class="tier-col-price" id="vslPrice3">1897 zł</span>
                             </div>
-                            <div class="tier-body">
-                                <ul class="tier-features">
-                                    <li>Wszystko z pakietu „Kurs + Live"</li>
-                                    <li>Zajęcia indywidualne 1:1 — 1 godzina tygodniowo</li>
-                                    <li>Stały kontakt i wsparcie między zajęciami</li>
-                                    <li>Spersonalizowany plan nauki dopasowany do Twoich braków</li>
-                                </ul>
-                                <div class="tier-actions">
-                                    <button class="btn btn-gradient" onclick="buyAccess('vip');return false;">Wybieram ten pakiet</button>
-                                </div>
+                            <ul class="tier-col-features">
+                                <li>Wszystko z pakietu Gold</li>
+                                <li>Zajęcia indywidualne 1:1 — 1h tygodniowo</li>
+                                <li>Stały kontakt i wsparcie</li>
+                                <li>Plan nauki dopasowany do Twoich braków</li>
+                            </ul>
+                            <div class="tier-col-actions">
+                                <button class="btn btn-gradient" onclick="buyAccess('vip');return false;">Wybieram Diamond</button>
                             </div>
                         </div>
                     </div>
