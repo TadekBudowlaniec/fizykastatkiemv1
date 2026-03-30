@@ -3746,10 +3746,12 @@ nav {
 }
 .squeeze-form-hero {
     margin-top: 1.8rem;
-    padding: 1.4rem 1.6rem;
-    background: rgba(255,255,255,0.18);
-    border: 2px solid rgba(107,77,246,0.25);
-    box-shadow: 0 4px 24px rgba(107,77,246,0.10);
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    border-radius: 0;
 }
 .squeeze-form {
     display: flex;
