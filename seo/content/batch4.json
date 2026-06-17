@@ -1,0 +1,832 @@
+[
+  {
+    "slug": "prad-elektryczny",
+    "name": "Prąd elektryczny",
+    "dopelniacz": "prądu elektrycznego",
+    "metaTeoria": "Prąd elektryczny – teoria do matury: prawo Ohma, opór, praca i moc prądu, prawa Kirchhoffa, łączenie oporników. Wzory, definicje i przykłady.",
+    "metaMatura": "Prąd elektryczny na maturze z fizyki (CKE): zadania z prawa Ohma, mocy, oporu i obwodów. Sprawdzone strategie, schematy i pełne rozwiązania.",
+    "intro": "Prąd elektryczny to uporządkowany ruch ładunków elektrycznych. Ten dział obejmuje natężenie prądu, prawo Ohma, opór elektryczny, pracę i moc prądu oraz prawa Kirchhoffa. To jeden z najczęściej sprawdzanych obszarów na maturze z fizyki – zarówno na poziomie podstawowym, jak i rozszerzonym.",
+    "theory": [
+      {
+        "heading": "Natężenie prądu i ładunek",
+        "html": "<p>Prąd elektryczny to uporządkowany ruch nośników ładunku (w metalach – elektronów swobodnych). Miarą prądu jest <strong>natężenie</strong>, czyli ładunek przepływający przez przekrój przewodnika w jednostce czasu: \\( I = \\frac{q}{t} \\). Jednostką natężenia jest amper (A), a 1 A = 1 C/s.</p><ul><li>Umowny kierunek prądu jest zgodny z ruchem ładunków dodatnich, czyli przeciwny do ruchu elektronów.</li><li>Prąd stały (DC) ma stały kierunek i wartość, prąd zmienny (AC) okresowo zmienia kierunek.</li><li>Warunkiem przepływu prądu jest zamknięty obwód oraz różnica potencjałów (napięcie).</li></ul>"
+      },
+      {
+        "heading": "Prawo Ohma i opór elektryczny",
+        "html": "<p>Dla wielu przewodników natężenie prądu jest proporcjonalne do napięcia. To <strong>prawo Ohma</strong>: \\( U = R \\cdot I \\). Współczynnik proporcjonalności \\( R \\) to opór elektryczny mierzony w omach (Ω).</p><ul><li>Opór przewodnika zależy od materiału, długości i przekroju: \\( R = \\rho \\frac{l}{S} \\), gdzie \\( \\rho \\) to opór właściwy.</li><li>Opór metali rośnie ze wzrostem temperatury, opór półprzewodników maleje.</li><li>Elementy spełniające prawo Ohma (R = const) nazywamy omowymi; żarówka czy dioda są nieomowe.</li></ul>"
+      },
+      {
+        "heading": "Praca i moc prądu elektrycznego",
+        "html": "<p>Przepływający prąd wykonuje pracę kosztem energii pola elektrycznego: \\( W = U \\cdot I \\cdot t \\). Szybkość wykonywania pracy to <strong>moc</strong>: \\( P = U \\cdot I \\). Korzystając z prawa Ohma otrzymujemy też \\( P = I^2 R = \\frac{U^2}{R} \\).</p><ul><li>Jednostką pracy jest dżul (J), a często używamy kilowatogodziny: 1 kWh = 3,6 MJ.</li><li>Ciepło wydzielone na oporniku opisuje prawo Joule'a–Lenza: \\( Q = I^2 R t \\).</li><li>Sprawność urządzenia to stosunek mocy użytecznej do pobranej: \\( \\eta = \\frac{P_{uż}}{P_{pob}} \\).</li></ul>"
+      },
+      {
+        "heading": "Łączenie oporników",
+        "html": "<p>W <strong>połączeniu szeregowym</strong> przez każdy opornik płynie ten sam prąd, a napięcia się sumują, więc opór zastępczy: \\( R_s = R_1 + R_2 + \\dots \\). W <strong>połączeniu równoległym</strong> na każdym oporniku jest to samo napięcie, a prądy się sumują: \\( \\frac{1}{R_r} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\dots \\).</p><ul><li>Opór zastępczy szeregowy jest zawsze większy od największego z oporników.</li><li>Opór zastępczy równoległy jest zawsze mniejszy od najmniejszego z oporników.</li><li>Dla dwóch oporników równolegle: \\( R_r = \\frac{R_1 R_2}{R_1 + R_2} \\).</li></ul>"
+      },
+      {
+        "heading": "Siła elektromotoryczna i prawa Kirchhoffa",
+        "html": "<p>Źródło prądu charakteryzuje <strong>siła elektromotoryczna</strong> (SEM) \\( \\varepsilon \\) oraz opór wewnętrzny \\( r \\). Napięcie na zaciskach: \\( U = \\varepsilon - I r \\). W obwodzie zamkniętym \\( I = \\frac{\\varepsilon}{R + r} \\}.</p><ul><li><strong>I prawo Kirchhoffa</strong> (węzłów): suma prądów wpływających równa się sumie wypływających.</li><li><strong>II prawo Kirchhoffa</strong> (oczek): w zamkniętym oczku suma SEM równa się sumie spadków napięć \\( IR \\).</li><li>Maksymalną moc na odbiorniku uzyskujemy, gdy \\( R = r \\) (dopasowanie oporów).</li></ul>"
+      }
+    ],
+    "formulas": [
+      { "name": "Natężenie prądu", "latex": "I = \\frac{q}{t}", "desc": "Stosunek przepływającego ładunku do czasu." },
+      { "name": "Prawo Ohma", "latex": "U = R \\cdot I", "desc": "Napięcie jest iloczynem oporu i natężenia." },
+      { "name": "Opór przewodnika", "latex": "R = \\rho \\frac{l}{S}", "desc": "Zależność oporu od materiału, długości i przekroju." },
+      { "name": "Moc prądu", "latex": "P = U \\cdot I = I^2 R = \\frac{U^2}{R}", "desc": "Trzy równoważne postacie wzoru na moc." },
+      { "name": "Praca prądu", "latex": "W = U \\cdot I \\cdot t", "desc": "Energia przekazana przez prąd w czasie t." },
+      { "name": "Prawo Joule'a–Lenza", "latex": "Q = I^2 R t", "desc": "Ciepło wydzielone na oporniku." },
+      { "name": "Opór szeregowy", "latex": "R_s = R_1 + R_2 + \\dots", "desc": "Opory dodają się w połączeniu szeregowym." },
+      { "name": "Opór równoległy", "latex": "\\frac{1}{R_r} = \\frac{1}{R_1} + \\frac{1}{R_2}", "desc": "Odwrotności oporów dodają się równolegle." },
+      { "name": "Prawo Ohma dla obwodu", "latex": "I = \\frac{\\varepsilon}{R + r}", "desc": "Natężenie z SEM i oporem wewnętrznym." },
+      { "name": "Napięcie na zaciskach", "latex": "U = \\varepsilon - I r", "desc": "Napięcie źródła pomniejszone o spadek na oporze wewnętrznym." }
+    ],
+    "definitions": [
+      { "term": "Natężenie prądu", "def": "Wielkość fizyczna równa ładunkowi przepływającemu przez przekrój przewodnika w jednostce czasu, mierzona w amperach." },
+      { "term": "Opór elektryczny", "def": "Miara przeciwstawiania się przewodnika przepływowi prądu; stosunek napięcia do natężenia, jednostka – om." },
+      { "term": "Opór właściwy", "def": "Stała materiałowa charakteryzująca zdolność substancji do przewodzenia prądu, oznaczana ρ, w jednostkach Ω·m." },
+      { "term": "Siła elektromotoryczna", "def": "Praca wykonana przez źródło przy przeniesieniu jednostkowego ładunku w całym obwodzie; napięcie źródła bez obciążenia." },
+      { "term": "Opór wewnętrzny", "def": "Opór samego źródła prądu, powodujący spadek napięcia na zaciskach pod obciążeniem." },
+      { "term": "Moc prądu", "def": "Energia przekazywana przez prąd w jednostce czasu, równa iloczynowi napięcia i natężenia." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Prawo Ohma, opór i jego zależności, praca i moc prądu, prawo Joule'a-Lenza, łączenie oporników, SEM i opór wewnętrzny, prawa Kirchhoffa, charakterystyki prądowo-napięciowe.",
+      "html": "<p>Prąd elektryczny pojawia się na maturze niemal co roku. Na poziomie podstawowym dominują zadania na prawo Ohma, moc i koszt energii. Na poziomie rozszerzonym dochodzą obwody z SEM i oporem wewnętrznym, prawa Kirchhoffa oraz analiza wykresów I(U). Kluczowa jest sprawność rachunkowa i umiejętność upraszczania obwodów.</p>",
+      "typoweZadania": [
+        "Obliczanie oporu zastępczego mieszanego układu oporników.",
+        "Wyznaczanie mocy i kosztu energii elektrycznej urządzenia.",
+        "Wyznaczanie SEM i oporu wewnętrznego ogniwa z dwóch pomiarów.",
+        "Odczyt oporu z wykresu charakterystyki prądowo-napięciowej."
+      ],
+      "strategia": [
+        "Zawsze najpierw narysuj i uprość schemat obwodu, redukując opory szeregowe i równoległe do zastępczego.",
+        "Pilnuj jednostek SI – zamieniaj mΩ, kΩ, mA na podstawowe przed podstawieniem.",
+        "Przy obwodach z SEM pamiętaj o oporze wewnętrznym i wzorze U = ε - I·r."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Czym różni się napięcie od natężenia prądu?", "a": "Napięcie to różnica potencjałów napędzająca prąd (przyczyna), a natężenie to ilość ładunku przepływającego w czasie (skutek). Łączy je prawo Ohma U = R·I." },
+      { "q": "Dlaczego opór metalu rośnie z temperaturą?", "a": "Wzrost temperatury zwiększa drgania jonów sieci krystalicznej, które częściej zderzają się z elektronami, utrudniając ich przepływ i zwiększając opór." },
+      { "q": "Co to jest opór właściwy?", "a": "To stała charakterystyczna dla materiału, mówiąca jak silnie dany materiał przeciwstawia się prądowi. Miedź ma mały opór właściwy, dlatego używa się jej na przewody." },
+      { "q": "Kiedy element jest omowy?", "a": "Gdy spełnia prawo Ohma, czyli jego opór jest stały, a wykres I(U) jest linią prostą. Żarówki i diody są nieomowe." }
+    ],
+    "faqMatura": [
+      { "q": "Jak liczyć opór zastępczy obwodu mieszanego?", "a": "Rozkładaj obwód na fragmenty czysto szeregowe i czysto równoległe, licz je osobno, a potem łącz wyniki, idąc od najgłębiej zagnieżdżonych elementów ku zaciskom." },
+      { "q": "Jak wyznaczyć SEM i opór wewnętrzny na maturze?", "a": "Zapisz U = ε - I·r dla dwóch różnych prądów i rozwiąż układ dwóch równań. Z wykresu U(I) ε to punkt przecięcia z osią, a r to nachylenie prostej." },
+      { "q": "Jak obliczyć koszt zużytej energii?", "a": "Oblicz energię w kWh (W = P·t z mocą w kW i czasem w h), a następnie pomnóż przez cenę za kWh. Uważaj na zamianę watów na kilowaty." },
+      { "q": "Czy mogę używać P = U²/R zawsze?", "a": "Tak, jeśli opór jest stały. Wszystkie trzy postacie wzoru na moc są równoważne dla elementu omowego – wybierz tę, w której masz dane wielkości." }
+    ],
+    "subtopics": [
+      {
+        "slug": "prawo-ohma",
+        "name": "Prawo Ohma",
+        "intro": "Prawo Ohma wiąże napięcie, natężenie i opór. To podstawa rozwiązywania zadań z obwodów prądu stałego.",
+        "problems": [
+          {
+            "title": "Opór z napięcia i prądu",
+            "tresc": "Przez opornik przy napięciu 12 V płynie prąd o natężeniu 0,5 A. Oblicz opór opornika oraz wydzielaną na nim moc.",
+            "steps": [
+              "Z prawa Ohma wyznaczamy opór: \\( R = \\frac{U}{I} = \\frac{12}{0,5} \\).",
+              "Otrzymujemy \\( R = 24\\ \\Omega \\).",
+              "Moc liczymy ze wzoru \\( P = U \\cdot I = 12 \\cdot 0,5 \\).",
+              "Otrzymujemy \\( P = 6\\ \\text{W} \\)."
+            ],
+            "answer": "Opór wynosi 24 Ω, a moc 6 W."
+          },
+          {
+            "title": "Opór drutu",
+            "tresc": "Drut miedziany o długości 50 m i przekroju 1 mm² ma opór właściwy ρ = 1,7·10⁻⁸ Ω·m. Oblicz opór drutu.",
+            "steps": [
+              "Zamieniamy przekrój na SI: \\( S = 1\\ \\text{mm}^2 = 1 \\cdot 10^{-6}\\ \\text{m}^2 \\).",
+              "Stosujemy wzór \\( R = \\rho \\frac{l}{S} = 1{,}7 \\cdot 10^{-8} \\cdot \\frac{50}{1 \\cdot 10^{-6}} \\).",
+              "Liczymy ułamek: \\( \\frac{50}{10^{-6}} = 5 \\cdot 10^{7} \\).",
+              "Wynik: \\( R = 1{,}7 \\cdot 10^{-8} \\cdot 5 \\cdot 10^{7} = 0{,}85\\ \\Omega \\)."
+            ],
+            "answer": "Opór drutu wynosi około 0,85 Ω."
+          }
+        ],
+        "faq": [
+          { "q": "Co zrobić, gdy nie znam jednej z trzech wielkości?", "a": "Przekształć wzór U = R·I, by wyznaczyć szukaną: R = U/I lub I = U/R, a potem podstaw dane w jednostkach SI." }
+        ]
+      },
+      {
+        "slug": "moc-i-praca-pradu",
+        "name": "Moc i praca prądu",
+        "intro": "Moc i praca prądu opisują przekazywanie energii w obwodzie. Te zadania często dotyczą kosztu energii i ciepła.",
+        "problems": [
+          {
+            "title": "Koszt pracy grzałki",
+            "tresc": "Grzałka o mocy 2000 W pracuje codziennie przez 1,5 godziny. Oblicz koszt pracy w ciągu 30 dni, jeśli 1 kWh kosztuje 0,80 zł.",
+            "steps": [
+              "Moc w kilowatach: \\( P = 2000\\ \\text{W} = 2\\ \\text{kW} \\).",
+              "Czas pracy miesięcznie: \\( t = 1{,}5 \\cdot 30 = 45\\ \\text{h} \\).",
+              "Energia: \\( W = P \\cdot t = 2 \\cdot 45 = 90\\ \\text{kWh} \\).",
+              "Koszt: \\( 90 \\cdot 0{,}80 = 72\\ \\text{zł} \\)."
+            ],
+            "answer": "Miesięczny koszt pracy grzałki to 72 zł."
+          },
+          {
+            "title": "Ciepło na oporniku",
+            "tresc": "Przez opornik o oporze 10 Ω płynie prąd 2 A przez 5 minut. Oblicz ciepło wydzielone na oporniku.",
+            "steps": [
+              "Zamieniamy czas: \\( t = 5\\ \\text{min} = 300\\ \\text{s} \\).",
+              "Stosujemy prawo Joule'a–Lenza: \\( Q = I^2 R t = 2^2 \\cdot 10 \\cdot 300 \\).",
+              "Liczymy: \\( 4 \\cdot 10 \\cdot 300 = 12000\\ \\text{J} \\).",
+              "Czyli \\( Q = 12\\ \\text{kJ} \\)."
+            ],
+            "answer": "Wydzielone ciepło wynosi 12 000 J (12 kJ)."
+          }
+        ],
+        "faq": [
+          { "q": "Czym różni się 1 kWh od 1 J?", "a": "Kilowatogodzina to jednostka energii równa 3 600 000 J. Jest wygodniejsza w rachunkach z urządzeniami domowymi o dużej mocy." }
+        ]
+      },
+      {
+        "slug": "laczenie-opornikow",
+        "name": "Łączenie oporników",
+        "intro": "Oporniki można łączyć szeregowo i równolegle. Umiejętność liczenia oporu zastępczego jest kluczowa w obwodach.",
+        "problems": [
+          {
+            "title": "Opór zastępczy układu mieszanego",
+            "tresc": "Oporniki R₁ = 6 Ω i R₂ = 3 Ω połączono równolegle, a do tego układu szeregowo dołączono R₃ = 4 Ω. Oblicz opór zastępczy.",
+            "steps": [
+              "Liczymy opór równoległy: \\( R_r = \\frac{R_1 R_2}{R_1 + R_2} = \\frac{6 \\cdot 3}{6 + 3} \\).",
+              "Otrzymujemy \\( R_r = \\frac{18}{9} = 2\\ \\Omega \\).",
+              "Dodajemy szeregowo R₃: \\( R_z = R_r + R_3 = 2 + 4 \\).",
+              "Wynik: \\( R_z = 6\\ \\Omega \\)."
+            ],
+            "answer": "Opór zastępczy układu wynosi 6 Ω."
+          },
+          {
+            "title": "Prąd w gałęziach",
+            "tresc": "Do napięcia 12 V podłączono równolegle dwa oporniki 4 Ω i 12 Ω. Oblicz natężenie prądu w każdym z nich.",
+            "steps": [
+              "W połączeniu równoległym na obu opornikach jest to samo napięcie U = 12 V.",
+              "Prąd przez pierwszy: \\( I_1 = \\frac{U}{R_1} = \\frac{12}{4} = 3\\ \\text{A} \\).",
+              "Prąd przez drugi: \\( I_2 = \\frac{U}{R_2} = \\frac{12}{12} = 1\\ \\text{A} \\).",
+              "Prąd całkowity: \\( I = I_1 + I_2 = 4\\ \\text{A} \\)."
+            ],
+            "answer": "Przez oporniki płyną prądy 3 A i 1 A, a całkowity prąd to 4 A."
+          }
+        ],
+        "faq": [
+          { "q": "Który układ ma mniejszy opór?", "a": "Połączenie równoległe zawsze ma opór mniejszy od najmniejszego z oporników, bo prąd ma więcej dróg przepływu." }
+        ]
+      },
+      {
+        "slug": "obwody-z-sem",
+        "name": "Obwody z SEM",
+        "intro": "Rzeczywiste źródła mają opór wewnętrzny. Te zadania uczą uwzględniać SEM i spadek napięcia w źródle.",
+        "problems": [
+          {
+            "title": "Natężenie w obwodzie zamkniętym",
+            "tresc": "Ogniwo o SEM 4,5 V i oporze wewnętrznym 0,5 Ω podłączono do opornika 4 Ω. Oblicz natężenie prądu i napięcie na zaciskach.",
+            "steps": [
+              "Stosujemy prawo Ohma dla obwodu: \\( I = \\frac{\\varepsilon}{R + r} = \\frac{4,5}{4 + 0,5} \\).",
+              "Otrzymujemy \\( I = \\frac{4,5}{4,5} = 1\\ \\text{A} \\).",
+              "Napięcie na zaciskach: \\( U = \\varepsilon - I r = 4,5 - 1 \\cdot 0,5 \\).",
+              "Wynik: \\( U = 4\\ \\text{V} \\)."
+            ],
+            "answer": "Natężenie prądu wynosi 1 A, a napięcie na zaciskach 4 V."
+          },
+          {
+            "title": "Wyznaczanie oporu wewnętrznego",
+            "tresc": "Bez obciążenia woltomierz wskazuje 6 V (SEM). Po podłączeniu opornika 5,5 Ω napięcie na zaciskach spada do 5,5 V. Oblicz opór wewnętrzny ogniwa.",
+            "steps": [
+              "Natężenie prądu: \\( I = \\frac{U}{R} = \\frac{5,5}{5,5} = 1\\ \\text{A} \\).",
+              "Spadek na oporze wewnętrznym: \\( \\varepsilon - U = 6 - 5,5 = 0,5\\ \\text{V} \\).",
+              "Z zależności \\( \\varepsilon - U = I r \\) wyznaczamy: \\( r = \\frac{0,5}{1} \\).",
+              "Wynik: \\( r = 0,5\\ \\Omega \\)."
+            ],
+            "answer": "Opór wewnętrzny ogniwa wynosi 0,5 Ω."
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego napięcie na zaciskach spada pod obciążeniem?", "a": "Bo część SEM jest tracona na oporze wewnętrznym źródła w postaci spadku napięcia I·r, który rośnie wraz z prądem." }
+        ]
+      }
+    ],
+    "related": ["elektrostatyka", "magnetyzm", "indukcja-elektromagnetyczna"]
+  },
+  {
+    "slug": "magnetyzm",
+    "name": "Magnetyzm",
+    "dopelniacz": "magnetyzmu",
+    "metaTeoria": "Magnetyzm – teoria do matury: pole magnetyczne, siła Lorentza, siła elektrodynamiczna, pole przewodnika i solenoidu. Wzory, definicje, przykłady.",
+    "metaMatura": "Magnetyzm na maturze z fizyki (CKE): zadania z siły Lorentza, siły na przewodnik i ruchu cząstki w polu. Strategie i pełne rozwiązania krok po kroku.",
+    "intro": "Magnetyzm opisuje pole magnetyczne oraz jego oddziaływanie z prądem i poruszającymi się ładunkami. W tym dziale poznasz indukcję magnetyczną, siłę Lorentza, siłę elektrodynamiczną oraz pole magnetyczne przewodników i solenoidów. To kluczowy temat maturalny na poziomie rozszerzonym.",
+    "theory": [
+      {
+        "heading": "Pole magnetyczne i indukcja",
+        "html": "<p>Pole magnetyczne wytwarzają magnesy oraz poruszające się ładunki (prądy). Wielkością wektorową opisującą pole jest <strong>indukcja magnetyczna</strong> \\( \\vec{B} \\), mierzona w teslach (T). Linie pola wychodzą z bieguna północnego, a wchodzą do południowego.</p><ul><li>Bieguny magnetyczne zawsze występują parami – nie istnieje pojedynczy monopol magnetyczny.</li><li>Pole jednorodne ma w każdym punkcie te same wartość i kierunek.</li><li>Indukcja \\( \\vec{B} \\) jest analogiem natężenia pola elektrycznego, ale działa na prąd i ruchome ładunki.</li></ul>"
+      },
+      {
+        "heading": "Siła Lorentza",
+        "html": "<p>Na ładunek \\( q \\) poruszający się z prędkością \\( v \\) w polu magnetycznym działa <strong>siła Lorentza</strong>: \\( F = q v B \\sin\\alpha \\), gdzie \\( \\alpha \\) to kąt między prędkością a wektorem indukcji. Siła jest prostopadła do prędkości i do pola.</p><ul><li>Kierunek siły wyznaczamy regułą lewej dłoni lub reguły śruby prawoskrętnej.</li><li>Siła Lorentza nie wykonuje pracy – zmienia tylko kierunek prędkości, nie jej wartość.</li><li>Gdy prędkość jest równoległa do pola (\\( \\alpha = 0 \\)), siła wynosi zero.</li></ul>"
+      },
+      {
+        "heading": "Ruch cząstki w polu magnetycznym",
+        "html": "<p>Cząstka wlatująca prostopadle do jednorodnego pola porusza się po okręgu, bo siła Lorentza pełni rolę siły dośrodkowej: \\( q v B = \\frac{m v^2}{r} \\). Stąd promień toru: \\( r = \\frac{m v}{q B} \\).</p><ul><li>Okres obiegu nie zależy od prędkości: \\( T = \\frac{2 \\pi m}{q B} \\).</li><li>Przy prędkości pod kątem do pola tor jest linią śrubową (spiralą).</li><li>Zjawisko to wykorzystuje się w cyklotronach i spektrometrach mas.</li></ul>"
+      },
+      {
+        "heading": "Siła elektrodynamiczna",
+        "html": "<p>Na przewodnik o długości \\( l \\), przez który płynie prąd \\( I \\), w polu o indukcji \\( B \\) działa <strong>siła elektrodynamiczna</strong>: \\( F = B I l \\sin\\alpha \\). Dla przewodnika prostopadłego do pola \\( F = B I l \\).</p><ul><li>Kierunek siły określa reguła lewej dłoni Fleminga.</li><li>To zjawisko jest podstawą działania silnika elektrycznego.</li><li>Dwa równoległe przewodniki z prądem przyciągają się (prądy zgodne) lub odpychają (prądy przeciwne).</li></ul>"
+      },
+      {
+        "heading": "Pole magnetyczne przewodników",
+        "html": "<p>Prąd wytwarza wokół siebie pole magnetyczne. Dla prostoliniowego przewodnika \\( B = \\frac{\\mu_0 I}{2 \\pi r} \\), gdzie \\( r \\) to odległość od przewodnika, a \\( \\mu_0 \\) to przenikalność magnetyczna próżni.</p><ul><li>W środku zwojnicy (solenoidu) pole jest jednorodne: \\( B = \\mu_0 \\frac{N}{l} I \\).</li><li>Kierunek pola wskazuje reguła prawej dłoni (śruby prawoskrętnej).</li><li>Solenoid z prądem zachowuje się jak magnes sztabkowy.</li></ul>"
+      }
+    ],
+    "formulas": [
+      { "name": "Siła Lorentza", "latex": "F = q v B \\sin\\alpha", "desc": "Siła na ruchomy ładunek w polu magnetycznym." },
+      { "name": "Siła elektrodynamiczna", "latex": "F = B I l \\sin\\alpha", "desc": "Siła na przewodnik z prądem w polu magnetycznym." },
+      { "name": "Promień toru", "latex": "r = \\frac{m v}{q B}", "desc": "Promień okręgu cząstki w jednorodnym polu." },
+      { "name": "Okres obiegu", "latex": "T = \\frac{2 \\pi m}{q B}", "desc": "Okres ruchu po okręgu, niezależny od prędkości." },
+      { "name": "Pole przewodnika prostego", "latex": "B = \\frac{\\mu_0 I}{2 \\pi r}", "desc": "Indukcja w odległości r od przewodnika." },
+      { "name": "Pole solenoidu", "latex": "B = \\mu_0 \\frac{N}{l} I", "desc": "Indukcja wewnątrz zwojnicy o N zwojach." },
+      { "name": "Warunek ruchu po okręgu", "latex": "q v B = \\frac{m v^2}{r}", "desc": "Siła Lorentza jako siła dośrodkowa." },
+      { "name": "Strumień magnetyczny", "latex": "\\Phi = B S \\cos\\alpha", "desc": "Strumień indukcji przez powierzchnię S." }
+    ],
+    "definitions": [
+      { "term": "Indukcja magnetyczna", "def": "Wektorowa wielkość charakteryzująca pole magnetyczne, mierzona w teslach (T); decyduje o sile działającej na prąd i ładunki." },
+      { "term": "Siła Lorentza", "def": "Siła działająca na ładunek poruszający się w polu magnetycznym, prostopadła do prędkości i do wektora indukcji." },
+      { "term": "Siła elektrodynamiczna", "def": "Siła z jaką pole magnetyczne działa na przewodnik, przez który płynie prąd elektryczny." },
+      { "term": "Strumień magnetyczny", "def": "Iloczyn indukcji magnetycznej i pola powierzchni prostopadłej do linii pola, mierzony w weberach (Wb)." },
+      { "term": "Przenikalność magnetyczna", "def": "Stała μ₀ opisująca zdolność próżni do przenoszenia pola magnetycznego, równa 4π·10⁻⁷ T·m/A." },
+      { "term": "Solenoid", "def": "Cewka utworzona z wielu zwojów przewodnika, wytwarzająca wewnątrz jednorodne pole magnetyczne." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Pole magnetyczne i jego linie, siła Lorentza, ruch cząstki naładowanej w polu, siła elektrodynamiczna na przewodnik, pole przewodnika i solenoidu, reguły wyznaczania kierunku siły.",
+      "html": "<p>Magnetyzm jest tematem głównie poziomu rozszerzonego. Zadania wymagają sprawnego stosowania reguł kierunkowych oraz łączenia magnetyzmu z dynamiką (siła dośrodkowa) i energią. Częste są zadania z ruchu cząstki po okręgu oraz z siły na przewodnik. Uważaj na kąt α we wzorach z sinusem.</p>",
+      "typoweZadania": [
+        "Obliczanie promienia toru cząstki w polu magnetycznym.",
+        "Wyznaczanie siły działającej na przewodnik z prądem.",
+        "Określanie kierunku siły regułą lewej dłoni.",
+        "Porównywanie ruchu protonu i elektronu w tym samym polu."
+      ],
+      "strategia": [
+        "Zacznij od ustalenia kierunków – narysuj wektory v, B i wyznacz F regułą lewej dłoni.",
+        "W ruchu po okręgu przyrównaj siłę Lorentza do siły dośrodkowej m·v²/r.",
+        "Pilnuj kąta α – siła jest maksymalna przy 90° i zerowa przy ruchu równoległym do pola."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Dlaczego siła Lorentza nie wykonuje pracy?", "a": "Bo jest zawsze prostopadła do prędkości. Praca to F·s·cos(kąta), a przy kącie 90° cosinus wynosi zero, więc energia kinetyczna cząstki się nie zmienia." },
+      { "q": "Czy istnieje pojedynczy biegun magnetyczny?", "a": "Nie, bieguny zawsze występują parami. Przełamanie magnesu daje dwa mniejsze magnesy, każdy z biegunem N i S." },
+      { "q": "Jak wyznaczyć kierunek siły na przewodnik?", "a": "Regułą lewej dłoni: linie pola wchodzą w dłoń, palce wskazują kierunek prądu, a odchylony kciuk pokazuje zwrot siły." },
+      { "q": "Od czego zależy pole solenoidu?", "a": "Od natężenia prądu, liczby zwojów na jednostkę długości oraz od rdzenia. Im więcej zwojów i większy prąd, tym silniejsze pole." }
+    ],
+    "faqMatura": [
+      { "q": "Jak porównać promienie torów dwóch cząstek?", "a": "Skorzystaj z r = mv/(qB). Przy tej samej prędkości i polu promień jest proporcjonalny do stosunku masy do ładunku m/q." },
+      { "q": "Kiedy stosować sin α we wzorze na siłę?", "a": "Zawsze, gdy wektor prędkości lub prąd nie są prostopadłe do pola. Dla prostopadłego ułożenia sin 90° = 1 i wzór się upraszcza." },
+      { "q": "Jak liczyć energię cząstki przyspieszanej napięciem?", "a": "Praca pola elektrycznego qU zamienia się w energię kinetyczną: qU = mv²/2, stąd wyznaczasz prędkość przed wejściem w pole magnetyczne." },
+      { "q": "Dlaczego okres obiegu nie zależy od prędkości?", "a": "Bo szybsza cząstka zatacza większy okrąg, ale proporcjonalnie szybciej, więc czas pełnego obiegu T = 2πm/(qB) pozostaje stały." }
+    ],
+    "subtopics": [
+      {
+        "slug": "sila-lorentza",
+        "name": "Siła Lorentza",
+        "intro": "Siła Lorentza działa na ładunki poruszające się w polu magnetycznym. Te zadania ćwiczą obliczanie jej wartości.",
+        "problems": [
+          {
+            "title": "Siła na elektron",
+            "tresc": "Elektron o ładunku 1,6·10⁻¹⁹ C porusza się z prędkością 2·10⁶ m/s prostopadle do pola o indukcji 0,5 T. Oblicz siłę Lorentza.",
+            "steps": [
+              "Ruch jest prostopadły, więc sin α = 1 i wzór upraszcza się do \\( F = q v B \\).",
+              "Podstawiamy: \\( F = 1{,}6 \\cdot 10^{-19} \\cdot 2 \\cdot 10^{6} \\cdot 0{,}5 \\).",
+              "Mnożymy: \\( 1{,}6 \\cdot 2 \\cdot 0{,}5 = 1{,}6 \\), a wykładniki dają \\( 10^{-13} \\).",
+              "Wynik: \\( F = 1{,}6 \\cdot 10^{-13}\\ \\text{N} \\)."
+            ],
+            "answer": "Siła Lorentza wynosi 1,6·10⁻¹³ N."
+          },
+          {
+            "title": "Siła pod kątem",
+            "tresc": "Proton wlatuje w pole 0,2 T z prędkością 10⁵ m/s pod kątem 30° do linii pola. Ładunek protonu to 1,6·10⁻¹⁹ C. Oblicz siłę Lorentza.",
+            "steps": [
+              "Stosujemy pełny wzór \\( F = q v B \\sin\\alpha \\), gdzie sin 30° = 0,5.",
+              "Podstawiamy: \\( F = 1{,}6 \\cdot 10^{-19} \\cdot 10^{5} \\cdot 0{,}2 \\cdot 0{,}5 \\).",
+              "Mnożymy czynniki liczbowe: \\( 1{,}6 \\cdot 0{,}2 \\cdot 0{,}5 = 0{,}16 \\).",
+              "Z wykładnikami: \\( F = 0{,}16 \\cdot 10^{-14} = 1{,}6 \\cdot 10^{-15}\\ \\text{N} \\)."
+            ],
+            "answer": "Siła Lorentza wynosi 1,6·10⁻¹⁵ N."
+          }
+        ],
+        "faq": [
+          { "q": "Czy siła Lorentza działa na nieruchomy ładunek?", "a": "Nie. Ładunek musi się poruszać względem pola, bo siła zależy od prędkości. Dla v = 0 siła wynosi zero." }
+        ]
+      },
+      {
+        "slug": "ruch-czastki-w-polu",
+        "name": "Ruch cząstki w polu",
+        "intro": "Cząstka w jednorodnym polu magnetycznym porusza się po okręgu. Te zadania łączą magnetyzm z ruchem po okręgu.",
+        "problems": [
+          {
+            "title": "Promień toru protonu",
+            "tresc": "Proton o masie 1,67·10⁻²⁷ kg i ładunku 1,6·10⁻¹⁹ C wlatuje prostopadle do pola 0,5 T z prędkością 3·10⁶ m/s. Oblicz promień toru.",
+            "steps": [
+              "Stosujemy wzór na promień: \\( r = \\frac{m v}{q B} \\).",
+              "Podstawiamy: \\( r = \\frac{1{,}67 \\cdot 10^{-27} \\cdot 3 \\cdot 10^{6}}{1{,}6 \\cdot 10^{-19} \\cdot 0{,}5} \\).",
+              "Licznik: \\( 5{,}01 \\cdot 10^{-21} \\); mianownik: \\( 0{,}8 \\cdot 10^{-19} = 8 \\cdot 10^{-20} \\).",
+              "Wynik: \\( r = \\frac{5{,}01 \\cdot 10^{-21}}{8 \\cdot 10^{-20}} \\approx 0{,}063\\ \\text{m} \\)."
+            ],
+            "answer": "Promień toru protonu wynosi około 6,3 cm."
+          },
+          {
+            "title": "Okres obiegu",
+            "tresc": "Oblicz okres obiegu elektronu (m = 9,1·10⁻³¹ kg, q = 1,6·10⁻¹⁹ C) w polu o indukcji 0,01 T.",
+            "steps": [
+              "Stosujemy wzór \\( T = \\frac{2 \\pi m}{q B} \\).",
+              "Podstawiamy: \\( T = \\frac{2 \\pi \\cdot 9{,}1 \\cdot 10^{-31}}{1{,}6 \\cdot 10^{-19} \\cdot 0{,}01} \\).",
+              "Licznik: \\( 2\\pi \\cdot 9{,}1 \\cdot 10^{-31} \\approx 5{,}72 \\cdot 10^{-30} \\); mianownik: \\( 1{,}6 \\cdot 10^{-21} \\).",
+              "Wynik: \\( T \\approx 3{,}6 \\cdot 10^{-9}\\ \\text{s} \\)."
+            ],
+            "answer": "Okres obiegu elektronu wynosi około 3,6 ns."
+          }
+        ],
+        "faq": [
+          { "q": "Co się dzieje, gdy cząstka wlatuje pod kątem do pola?", "a": "Składowa prędkości równoległa do pola pozostaje stała, a prostopadła daje ruch po okręgu. Łącznie powstaje tor w kształcie linii śrubowej." }
+        ]
+      },
+      {
+        "slug": "sila-elektrodynamiczna",
+        "name": "Siła elektrodynamiczna",
+        "intro": "Pole magnetyczne działa na przewodniki z prądem. To podstawa działania silników elektrycznych.",
+        "problems": [
+          {
+            "title": "Siła na przewodnik",
+            "tresc": "Przewodnik o długości 0,4 m, przez który płynie prąd 5 A, umieszczono prostopadle w polu o indukcji 0,8 T. Oblicz siłę elektrodynamiczną.",
+            "steps": [
+              "Przewodnik jest prostopadły, więc sin α = 1: \\( F = B I l \\).",
+              "Podstawiamy: \\( F = 0{,}8 \\cdot 5 \\cdot 0{,}4 \\).",
+              "Mnożymy: \\( 0{,}8 \\cdot 5 = 4 \\), a następnie \\( 4 \\cdot 0{,}4 = 1{,}6 \\).",
+              "Wynik: \\( F = 1{,}6\\ \\text{N} \\)."
+            ],
+            "answer": "Siła elektrodynamiczna wynosi 1,6 N."
+          },
+          {
+            "title": "Indukcja z siły",
+            "tresc": "Na przewodnik o długości 0,5 m z prądem 2 A działa siła 0,3 N, gdy jest ustawiony prostopadle do pola. Oblicz indukcję magnetyczną.",
+            "steps": [
+              "Z wzoru \\( F = B I l \\) wyznaczamy indukcję: \\( B = \\frac{F}{I l} \\).",
+              "Podstawiamy: \\( B = \\frac{0{,}3}{2 \\cdot 0{,}5} \\).",
+              "Mianownik: \\( 2 \\cdot 0{,}5 = 1 \\).",
+              "Wynik: \\( B = 0{,}3\\ \\text{T} \\)."
+            ],
+            "answer": "Indukcja magnetyczna wynosi 0,3 T."
+          }
+        ],
+        "faq": [
+          { "q": "Jak ustawić przewodnik, by siła była największa?", "a": "Prostopadle do linii pola. Wtedy sin α = 1 i siła osiąga wartość maksymalną F = B·I·l. Ustawienie równoległe daje siłę zerową." }
+        ]
+      },
+      {
+        "slug": "pole-przewodnika",
+        "name": "Pole magnetyczne przewodnika",
+        "intro": "Prąd wytwarza wokół siebie pole magnetyczne. Te zadania dotyczą pola przewodnika i solenoidu.",
+        "problems": [
+          {
+            "title": "Pole wokół przewodnika",
+            "tresc": "Oblicz indukcję pola magnetycznego w odległości 0,1 m od długiego prostego przewodnika, przez który płynie prąd 10 A. Przyjmij μ₀ = 4π·10⁻⁷ T·m/A.",
+            "steps": [
+              "Stosujemy wzór \\( B = \\frac{\\mu_0 I}{2 \\pi r} \\).",
+              "Podstawiamy: \\( B = \\frac{4\\pi \\cdot 10^{-7} \\cdot 10}{2 \\pi \\cdot 0{,}1} \\).",
+              "Skracamy π i upraszczamy: \\( B = \\frac{4 \\cdot 10^{-7} \\cdot 10}{2 \\cdot 0{,}1} = \\frac{4 \\cdot 10^{-6}}{0{,}2} \\).",
+              "Wynik: \\( B = 2 \\cdot 10^{-5}\\ \\text{T} \\)."
+            ],
+            "answer": "Indukcja pola wynosi 2·10⁻⁵ T."
+          },
+          {
+            "title": "Pole w solenoidzie",
+            "tresc": "Solenoid o długości 0,2 m ma 500 zwojów. Oblicz indukcję pola w środku, gdy płynie prąd 2 A (μ₀ = 4π·10⁻⁷ T·m/A).",
+            "steps": [
+              "Stosujemy wzór \\( B = \\mu_0 \\frac{N}{l} I \\).",
+              "Liczymy gęstość zwojów: \\( \\frac{N}{l} = \\frac{500}{0{,}2} = 2500\\ \\text{1/m} \\).",
+              "Podstawiamy: \\( B = 4\\pi \\cdot 10^{-7} \\cdot 2500 \\cdot 2 \\).",
+              "Wynik: \\( B \\approx 1{,}26 \\cdot 10^{-7} \\cdot 5000 \\approx 6{,}3 \\cdot 10^{-3}\\ \\text{T} \\)."
+            ],
+            "answer": "Indukcja w solenoidzie wynosi około 6,3·10⁻³ T."
+          }
+        ],
+        "faq": [
+          { "q": "Jak skierowane jest pole wokół przewodnika?", "a": "Linie pola tworzą koncentryczne okręgi wokół przewodnika. Ich zwrot wskazuje reguła prawej dłoni – kciuk wzdłuż prądu, palce wzdłuż pola." }
+        ]
+      }
+    ],
+    "related": ["prad-elektryczny", "indukcja-elektromagnetyczna", "elektrostatyka"]
+  },
+  {
+    "slug": "indukcja-elektromagnetyczna",
+    "name": "Indukcja elektromagnetyczna",
+    "dopelniacz": "indukcji elektromagnetycznej",
+    "metaTeoria": "Indukcja elektromagnetyczna – teoria do matury: prawo Faradaya, reguła Lenza, strumień magnetyczny, SEM indukcji, samoindukcja. Wzory i przykłady.",
+    "metaMatura": "Indukcja elektromagnetyczna na maturze (CKE): zadania z prawa Faradaya, SEM indukcji i prądnicy. Strategie i pełne rozwiązania krok po kroku.",
+    "intro": "Indukcja elektromagnetyczna to zjawisko powstawania siły elektromotorycznej przy zmianie strumienia magnetycznego. W tym dziale poznasz prawo Faradaya, regułę Lenza, samoindukcję oraz zasadę działania prądnicy i transformatora. To fundament współczesnej elektroenergetyki i ważny temat maturalny.",
+    "theory": [
+      {
+        "heading": "Strumień magnetyczny",
+        "html": "<p>Podstawą indukcji jest <strong>strumień magnetyczny</strong> – miara liczby linii pola przechodzących przez powierzchnię: \\( \\Phi = B S \\cos\\alpha \\), gdzie \\( \\alpha \\) to kąt między wektorem indukcji a normalną do powierzchni. Jednostką jest weber (Wb).</p><ul><li>Strumień jest największy, gdy powierzchnia jest prostopadła do linii pola (\\( \\alpha = 0 \\)).</li><li>Strumień maleje do zera, gdy powierzchnia jest równoległa do linii pola.</li><li>Zmiana strumienia może wynikać ze zmiany B, S lub kąta α.</li></ul>"
+      },
+      {
+        "heading": "Prawo Faradaya",
+        "html": "<p><strong>Prawo indukcji Faradaya</strong> mówi, że siła elektromotoryczna indukcji jest równa szybkości zmiany strumienia magnetycznego: \\( \\varepsilon = -\\frac{\\Delta \\Phi}{\\Delta t} \\). Dla cewki o N zwojach: \\( \\varepsilon = -N \\frac{\\Delta \\Phi}{\\Delta t} \\).</p><ul><li>Im szybciej zmienia się strumień, tym większa indukowana SEM.</li><li>SEM powstaje tylko przy zmianie strumienia – pole stałe nie indukuje napięcia.</li><li>Znak minus wynika z reguły Lenza i opisuje kierunek prądu indukcyjnego.</li></ul>"
+      },
+      {
+        "heading": "Reguła Lenza",
+        "html": "<p><strong>Reguła Lenza</strong> określa kierunek prądu indukcyjnego: prąd płynie tak, by przeciwdziałać przyczynie, która go wywołała. Jest to konsekwencja zasady zachowania energii.</p><ul><li>Gdy strumień rośnie, prąd indukcyjny wytwarza pole przeciwne do narastającego.</li><li>Gdy strumień maleje, prąd podtrzymuje zanikające pole.</li><li>Dzięki regule Lenza nie można uzyskać energii za darmo – trzeba wykonać pracę przeciw siłom hamującym.</li></ul>"
+      },
+      {
+        "heading": "SEM indukcji w przewodniku",
+        "html": "<p>Prosty przewodnik o długości \\( l \\) poruszający się z prędkością \\( v \\) prostopadle do pola \\( B \\) indukuje SEM: \\( \\varepsilon = B l v \\). Jest to mikroskopowo efekt działania siły Lorentza na elektrony w przewodniku.</p><ul><li>SEM rośnie z prędkością ruchu i z długością przewodnika.</li><li>Jeśli przewodnik jest częścią obwodu, popłynie prąd \\( I = \\frac{\\varepsilon}{R} \\).</li><li>Na przewodnik z prądem zaczyna działać siła hamująca (reguła Lenza).</li></ul>"
+      },
+      {
+        "heading": "Samoindukcja i transformator",
+        "html": "<p>Zmiana prądu w cewce indukuje w niej samej SEM <strong>samoindukcji</strong>: \\( \\varepsilon = -L \\frac{\\Delta I}{\\Delta t} \\), gdzie \\( L \\) to indukcyjność w henrach (H). Energia pola cewki: \\( E = \\frac{1}{2} L I^2 \\).</p><ul><li>Transformator zmienia napięcie zgodnie z przekładnią: \\( \\frac{U_1}{U_2} = \\frac{N_1}{N_2} \\).</li><li>Dla transformatora idealnego moc się zachowuje: \\( U_1 I_1 = U_2 I_2 \\).</li><li>Transformatory działają tylko na prąd zmienny, bo wymagają zmiany strumienia.</li></ul>"
+      }
+    ],
+    "formulas": [
+      { "name": "Strumień magnetyczny", "latex": "\\Phi = B S \\cos\\alpha", "desc": "Iloczyn indukcji i powierzchni prostopadłej do pola." },
+      { "name": "Prawo Faradaya", "latex": "\\varepsilon = -N \\frac{\\Delta \\Phi}{\\Delta t}", "desc": "SEM indukcji jako szybkość zmiany strumienia." },
+      { "name": "SEM ruchu przewodnika", "latex": "\\varepsilon = B l v", "desc": "SEM przewodnika poruszającego się w polu." },
+      { "name": "Prąd indukcyjny", "latex": "I = \\frac{\\varepsilon}{R}", "desc": "Natężenie prądu z SEM indukcji i oporu obwodu." },
+      { "name": "Samoindukcja", "latex": "\\varepsilon = -L \\frac{\\Delta I}{\\Delta t}", "desc": "SEM samoindukcji przy zmianie prądu w cewce." },
+      { "name": "Energia cewki", "latex": "E = \\frac{1}{2} L I^2", "desc": "Energia zgromadzona w polu magnetycznym cewki." },
+      { "name": "Przekładnia transformatora", "latex": "\\frac{U_1}{U_2} = \\frac{N_1}{N_2}", "desc": "Stosunek napięć równy stosunkowi liczby zwojów." },
+      { "name": "Zachowanie mocy", "latex": "U_1 I_1 = U_2 I_2", "desc": "Bilans mocy w transformatorze idealnym." }
+    ],
+    "definitions": [
+      { "term": "Strumień magnetyczny", "def": "Wielkość opisująca liczbę linii pola przechodzących przez powierzchnię, mierzona w weberach (Wb)." },
+      { "term": "Siła elektromotoryczna indukcji", "def": "Napięcie powstające w obwodzie wskutek zmiany strumienia magnetycznego, opisane prawem Faradaya." },
+      { "term": "Reguła Lenza", "def": "Zasada mówiąca, że prąd indukcyjny przeciwdziała zmianie strumienia, która go wywołała; wynika z zasady zachowania energii." },
+      { "term": "Samoindukcja", "def": "Zjawisko indukowania SEM w cewce wskutek zmiany płynącego przez nią prądu." },
+      { "term": "Indukcyjność", "def": "Wielkość L charakteryzująca cewkę, określająca SEM samoindukcji przy danej szybkości zmiany prądu; jednostka – henr." },
+      { "term": "Transformator", "def": "Urządzenie zmieniające napięcie prądu zmiennego dzięki indukcji wzajemnej dwóch cewek o różnej liczbie zwojów." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Strumień magnetyczny, prawo Faradaya, reguła Lenza, SEM ruchu przewodnika, samoindukcja, prądnica, transformator, prąd przemienny.",
+      "html": "<p>Indukcja elektromagnetyczna to temat głównie poziomu rozszerzonego, choć transformator i prądnica pojawiają się też na podstawowym. Zadania wymagają rozumienia zmiany strumienia i poprawnego stosowania reguły Lenza. Często trzeba połączyć indukcję z prawem Ohma i bilansem energii. Uważaj na jednostki czasu i powierzchni.</p>",
+      "typoweZadania": [
+        "Obliczanie SEM indukcji z szybkości zmiany strumienia.",
+        "Wyznaczanie napięcia wyjściowego transformatora z przekładni.",
+        "Określanie kierunku prądu indukcyjnego regułą Lenza.",
+        "Obliczanie SEM przewodnika poruszającego się w polu."
+      ],
+      "strategia": [
+        "Najpierw ustal, co zmienia strumień: indukcja B, powierzchnia S czy kąt α, i policz ΔΦ.",
+        "Stosuj prawo Faradaya z liczbą zwojów N i poprawną jednostką czasu w sekundach.",
+        "Do kierunku prądu używaj reguły Lenza – prąd zawsze przeciwdziała zmianie."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Kiedy powstaje SEM indukcji?", "a": "Tylko gdy zmienia się strumień magnetyczny przez obwód. Może to być zmiana indukcji, pola powierzchni lub kąta między nimi. Stałe pole nie indukuje napięcia." },
+      { "q": "Co mówi reguła Lenza?", "a": "Prąd indukcyjny ma taki kierunek, by przeciwdziałać zmianie strumienia, która go wywołała. To bezpośrednia konsekwencja zasady zachowania energii." },
+      { "q": "Dlaczego transformator nie działa na prąd stały?", "a": "Bo prąd stały daje stały strumień, który się nie zmienia, więc nie indukuje się SEM w uzwojeniu wtórnym. Potrzebny jest prąd zmienny." },
+      { "q": "Czym jest samoindukcja?", "a": "To indukowanie SEM w cewce przez zmianę jej własnego prądu. Cewka 'opiera się' zmianom prądu, co opisuje indukcyjność L." }
+    ],
+    "faqMatura": [
+      { "q": "Jak liczyć SEM, gdy zmienia się powierzchnia ramki?", "a": "Policz ΔΦ = B·ΔS (przy stałym B i prostopadłym polu), a potem podziel przez Δt i pomnóż przez liczbę zwojów N." },
+      { "q": "Jak wyznaczyć prąd w uzwojeniu transformatora?", "a": "Z zachowania mocy U₁I₁ = U₂I₂ dla transformatora idealnego. Znając napięcia i jeden z prądów, wyliczysz drugi prąd." },
+      { "q": "Jak rozpoznać kierunek prądu w zadaniu?", "a": "Ustal czy strumień rośnie czy maleje, a następnie zastosuj regułę Lenza – prąd wytwarza pole przeciwne do wzrostu lub podtrzymujące spadek." },
+      { "q": "Czy SEM przewodnika zależy od oporu?", "a": "Nie, SEM = B·l·v zależy tylko od pola, długości i prędkości. Opór wpływa dopiero na natężenie prądu I = ε/R." }
+    ],
+    "subtopics": [
+      {
+        "slug": "prawo-faradaya",
+        "name": "Prawo Faradaya",
+        "intro": "Prawo Faradaya wiąże SEM indukcji ze zmianą strumienia. To podstawa wszystkich zadań z indukcji.",
+        "problems": [
+          {
+            "title": "SEM ze zmiany pola",
+            "tresc": "Przez cewkę o 200 zwojach strumień maleje od 0,06 Wb do 0,02 Wb w czasie 0,1 s. Oblicz SEM indukcji.",
+            "steps": [
+              "Zmiana strumienia: \\( \\Delta \\Phi = 0{,}02 - 0{,}06 = -0{,}04\\ \\text{Wb} \\).",
+              "Stosujemy prawo Faradaya (bierzemy wartość): \\( \\varepsilon = N \\frac{|\\Delta \\Phi|}{\\Delta t} \\).",
+              "Podstawiamy: \\( \\varepsilon = 200 \\cdot \\frac{0{,}04}{0{,}1} \\).",
+              "Wynik: \\( \\varepsilon = 200 \\cdot 0{,}4 = 80\\ \\text{V} \\)."
+            ],
+            "answer": "SEM indukcji wynosi 80 V."
+          },
+          {
+            "title": "SEM ze zmiany powierzchni",
+            "tresc": "Ramka o jednym zwoju w polu 0,5 T zmienia powierzchnię od 0,2 m² do 0,1 m² w czasie 0,5 s, pozostając prostopadła do pola. Oblicz SEM.",
+            "steps": [
+              "Strumień początkowy: \\( \\Phi_1 = B S_1 = 0{,}5 \\cdot 0{,}2 = 0{,}1\\ \\text{Wb} \\).",
+              "Strumień końcowy: \\( \\Phi_2 = 0{,}5 \\cdot 0{,}1 = 0{,}05\\ \\text{Wb} \\).",
+              "Zmiana: \\( |\\Delta \\Phi| = 0{,}05\\ \\text{Wb} \\).",
+              "SEM: \\( \\varepsilon = \\frac{0{,}05}{0{,}5} = 0{,}1\\ \\text{V} \\)."
+            ],
+            "answer": "SEM indukcji wynosi 0,1 V."
+          }
+        ],
+        "faq": [
+          { "q": "Czy znak minus ma znaczenie w obliczeniach?", "a": "Do wartości SEM bierzemy moduł zmiany strumienia. Znak minus informuje jedynie o kierunku prądu (reguła Lenza)." }
+        ]
+      },
+      {
+        "slug": "sem-indukcji-przewodnika",
+        "name": "SEM przewodnika w ruchu",
+        "intro": "Przewodnik poruszający się w polu magnetycznym indukuje napięcie. Te zadania ćwiczą wzór ε = B·l·v.",
+        "problems": [
+          {
+            "title": "SEM pręta",
+            "tresc": "Metalowy pręt o długości 0,5 m porusza się z prędkością 4 m/s prostopadle do pola o indukcji 0,3 T. Oblicz indukowaną SEM.",
+            "steps": [
+              "Stosujemy wzór \\( \\varepsilon = B l v \\).",
+              "Podstawiamy: \\( \\varepsilon = 0{,}3 \\cdot 0{,}5 \\cdot 4 \\).",
+              "Mnożymy: \\( 0{,}3 \\cdot 0{,}5 = 0{,}15 \\), a \\( 0{,}15 \\cdot 4 = 0{,}6 \\).",
+              "Wynik: \\( \\varepsilon = 0{,}6\\ \\text{V} \\)."
+            ],
+            "answer": "Indukowana SEM wynosi 0,6 V."
+          },
+          {
+            "title": "Prąd w obwodzie pręta",
+            "tresc": "Pręt z poprzedniego zadania (ε = 0,6 V) zamyka obwód o całkowitym oporze 0,2 Ω. Oblicz natężenie prądu indukcyjnego.",
+            "steps": [
+              "Stosujemy prawo Ohma: \\( I = \\frac{\\varepsilon}{R} \\).",
+              "Podstawiamy: \\( I = \\frac{0{,}6}{0{,}2} \\).",
+              "Dzielimy: \\( 0{,}6 / 0{,}2 = 3 \\).",
+              "Wynik: \\( I = 3\\ \\text{A} \\)."
+            ],
+            "answer": "Natężenie prądu indukcyjnego wynosi 3 A."
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego pręt jest hamowany?", "a": "Bo płynący prąd indukcyjny w polu magnetycznym powoduje siłę elektrodynamiczną przeciwną do ruchu (reguła Lenza), którą trzeba pokonać." }
+        ]
+      },
+      {
+        "slug": "transformator",
+        "name": "Transformator",
+        "intro": "Transformator zmienia napięcie prądu zmiennego dzięki indukcji. Te zadania dotyczą przekładni i bilansu mocy.",
+        "problems": [
+          {
+            "title": "Napięcie wtórne",
+            "tresc": "Transformator ma 1000 zwojów w uzwojeniu pierwotnym i 50 w wtórnym. Na wejściu podano 230 V. Oblicz napięcie wyjściowe.",
+            "steps": [
+              "Stosujemy przekładnię: \\( \\frac{U_1}{U_2} = \\frac{N_1}{N_2} \\).",
+              "Wyznaczamy U₂: \\( U_2 = U_1 \\frac{N_2}{N_1} = 230 \\cdot \\frac{50}{1000} \\).",
+              "Liczymy ułamek: \\( \\frac{50}{1000} = 0{,}05 \\).",
+              "Wynik: \\( U_2 = 230 \\cdot 0{,}05 = 11{,}5\\ \\text{V} \\)."
+            ],
+            "answer": "Napięcie wyjściowe wynosi 11,5 V."
+          },
+          {
+            "title": "Prąd w obwodzie wtórnym",
+            "tresc": "Transformator idealny ma napięcia 230 V i 23 V. Prąd w obwodzie pierwotnym to 0,5 A. Oblicz prąd w obwodzie wtórnym.",
+            "steps": [
+              "Korzystamy z zachowania mocy: \\( U_1 I_1 = U_2 I_2 \\).",
+              "Wyznaczamy I₂: \\( I_2 = \\frac{U_1 I_1}{U_2} = \\frac{230 \\cdot 0{,}5}{23} \\).",
+              "Licznik: \\( 230 \\cdot 0{,}5 = 115 \\).",
+              "Wynik: \\( I_2 = \\frac{115}{23} = 5\\ \\text{A} \\)."
+            ],
+            "answer": "Prąd w obwodzie wtórnym wynosi 5 A."
+          }
+        ],
+        "faq": [
+          { "q": "Co to jest transformator podwyższający?", "a": "To transformator, w którym uzwojenie wtórne ma więcej zwojów niż pierwotne, dzięki czemu podnosi napięcie kosztem zmniejszenia natężenia." }
+        ]
+      },
+      {
+        "slug": "samoindukcja",
+        "name": "Samoindukcja",
+        "intro": "Samoindukcja to indukowanie SEM przez własny zmienny prąd cewki. Te zadania dotyczą indukcyjności i energii.",
+        "problems": [
+          {
+            "title": "SEM samoindukcji",
+            "tresc": "W cewce o indukcyjności 0,2 H prąd zmienia się od 0 do 4 A w czasie 0,1 s. Oblicz SEM samoindukcji.",
+            "steps": [
+              "Zmiana prądu: \\( \\Delta I = 4 - 0 = 4\\ \\text{A} \\).",
+              "Stosujemy wzór (wartość): \\( \\varepsilon = L \\frac{\\Delta I}{\\Delta t} \\).",
+              "Podstawiamy: \\( \\varepsilon = 0{,}2 \\cdot \\frac{4}{0{,}1} \\).",
+              "Wynik: \\( \\varepsilon = 0{,}2 \\cdot 40 = 8\\ \\text{V} \\)."
+            ],
+            "answer": "SEM samoindukcji wynosi 8 V."
+          },
+          {
+            "title": "Energia cewki",
+            "tresc": "Oblicz energię zgromadzoną w cewce o indukcyjności 0,5 H, gdy płynie przez nią prąd 3 A.",
+            "steps": [
+              "Stosujemy wzór \\( E = \\frac{1}{2} L I^2 \\).",
+              "Podstawiamy: \\( E = \\frac{1}{2} \\cdot 0{,}5 \\cdot 3^2 \\).",
+              "Liczymy: \\( 3^2 = 9 \\), więc \\( E = 0{,}25 \\cdot 9 \\).",
+              "Wynik: \\( E = 2{,}25\\ \\text{J} \\)."
+            ],
+            "answer": "Energia cewki wynosi 2,25 J."
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego cewka iskrzy przy rozłączaniu?", "a": "Bo gwałtowny spadek prądu daje bardzo dużą SEM samoindukcji (duże ΔI/Δt), która może wywołać przeskok iskry między stykami." }
+        ]
+      }
+    ],
+    "related": ["magnetyzm", "prad-elektryczny", "drgania-harmoniczne"]
+  },
+  {
+    "slug": "optyka-geometryczna",
+    "name": "Optyka geometryczna",
+    "dopelniacz": "optyki geometrycznej",
+    "metaTeoria": "Optyka geometryczna – teoria do matury: prawo odbicia i załamania, soczewki, zwierciadła, równanie soczewki, powiększenie. Wzory i przykłady.",
+    "metaMatura": "Optyka geometryczna na maturze (CKE): zadania z soczewek, zwierciadeł, załamania i całkowitego wewnętrznego odbicia. Strategie i pełne rozwiązania.",
+    "intro": "Optyka geometryczna opisuje rozchodzenie się światła za pomocą promieni. W tym dziale poznasz prawo odbicia i załamania, działanie soczewek i zwierciadeł, równanie soczewki, powiększenie oraz całkowite wewnętrzne odbicie. To wdzięczny i często sprawdzany temat maturalny.",
+    "theory": [
+      {
+        "heading": "Prawo odbicia i załamania",
+        "html": "<p>Światło odbijając się od powierzchni spełnia <strong>prawo odbicia</strong>: kąt padania równa się kątowi odbicia. Przy przejściu między ośrodkami zachodzi <strong>załamanie</strong> opisane prawem Snella: \\( n_1 \\sin\\alpha = n_2 \\sin\\beta \\).</p><ul><li>Kąty mierzymy zawsze od normalnej do powierzchni.</li><li>Przy przejściu do ośrodka gęstszego optycznie promień zbliża się do normalnej.</li><li>Współczynnik załamania ośrodka: \\( n = \\frac{c}{v} \\), gdzie v to prędkość światła w ośrodku.</li></ul>"
+      },
+      {
+        "heading": "Całkowite wewnętrzne odbicie",
+        "html": "<p>Przy przejściu z ośrodka gęstszego do rzadszego optycznie, powyżej pewnego <strong>kąta granicznego</strong>, światło ulega całkowitemu wewnętrznemu odbiciu. Kąt graniczny wyznacza się z warunku \\( \\sin\\alpha_{gr} = \\frac{n_2}{n_1} \\) (dla \\( n_1 > n_2 \\)).</p><ul><li>Zjawisko to działa tylko przy przejściu do ośrodka rzadszego optycznie.</li><li>Wykorzystuje się je w światłowodach i pryzmatach.</li><li>Dla kąta padania większego od granicznego światło w ogóle nie przechodzi do drugiego ośrodka.</li></ul>"
+      },
+      {
+        "heading": "Soczewki",
+        "html": "<p>Soczewka skupiająca (wypukła) zbiega promienie w ognisku, a rozpraszająca (wklęsła) je rozprasza. <strong>Zdolność skupiająca</strong>: \\( Z = \\frac{1}{f} \\), mierzona w dioptriach (D). Związek odległości opisuje równanie soczewki: \\( \\frac{1}{f} = \\frac{1}{x} + \\frac{1}{y} \\).</p><ul><li>Dla soczewki skupiającej ogniskowa f jest dodatnia, dla rozpraszającej ujemna.</li><li>x to odległość przedmiotu, y to odległość obrazu od soczewki.</li><li>Obraz może być rzeczywisty (y > 0) lub pozorny (y < 0).</li></ul>"
+      },
+      {
+        "heading": "Powiększenie i rodzaje obrazów",
+        "html": "<p><strong>Powiększenie</strong> obrazu to stosunek wysokości obrazu do wysokości przedmiotu, równy też stosunkowi odległości: \\( p = \\frac{h_{obr}}{h_{prz}} = \\frac{y}{x} \\). Charakter obrazu zależy od położenia przedmiotu względem ogniska.</p><ul><li>Przedmiot dalej niż 2f: obraz rzeczywisty, odwrócony, pomniejszony.</li><li>Przedmiot między f a 2f: obraz rzeczywisty, odwrócony, powiększony.</li><li>Przedmiot bliżej niż f: obraz pozorny, prosty, powiększony (jak w lupie).</li></ul>"
+      },
+      {
+        "heading": "Zwierciadła",
+        "html": "<p>Zwierciadło płaskie tworzy obraz pozorny, prosty, tej samej wielkości. Zwierciadła sferyczne opisuje równanie analogiczne do soczewki: \\( \\frac{1}{f} = \\frac{1}{x} + \\frac{1}{y} \\), gdzie ogniskowa to połowa promienia krzywizny: \\( f = \\frac{R}{2} \\).</p><ul><li>Zwierciadło wklęsłe (skupiające) ma ogniskową dodatnią i może dawać obrazy rzeczywiste.</li><li>Zwierciadło wypukłe (rozpraszające) daje zawsze obraz pozorny, prosty, pomniejszony.</li><li>Zwierciadła wklęsłe stosuje się w teleskopach i reflektorach.</li></ul>"
+      }
+    ],
+    "formulas": [
+      { "name": "Prawo Snella", "latex": "n_1 \\sin\\alpha = n_2 \\sin\\beta", "desc": "Zależność kątów padania i załamania." },
+      { "name": "Współczynnik załamania", "latex": "n = \\frac{c}{v}", "desc": "Stosunek prędkości światła w próżni do prędkości w ośrodku." },
+      { "name": "Kąt graniczny", "latex": "\\sin\\alpha_{gr} = \\frac{n_2}{n_1}", "desc": "Warunek całkowitego wewnętrznego odbicia." },
+      { "name": "Równanie soczewki", "latex": "\\frac{1}{f} = \\frac{1}{x} + \\frac{1}{y}", "desc": "Związek ogniskowej oraz odległości przedmiotu i obrazu." },
+      { "name": "Zdolność skupiająca", "latex": "Z = \\frac{1}{f}", "desc": "Odwrotność ogniskowej, mierzona w dioptriach." },
+      { "name": "Powiększenie", "latex": "p = \\frac{y}{x} = \\frac{h_{obr}}{h_{prz}}", "desc": "Stosunek odległości obrazu i przedmiotu." },
+      { "name": "Ogniskowa zwierciadła", "latex": "f = \\frac{R}{2}", "desc": "Ogniskowa zwierciadła sferycznego jako połowa promienia." },
+      { "name": "Prawo odbicia", "latex": "\\alpha = \\alpha'", "desc": "Kąt padania równy kątowi odbicia." }
+    ],
+    "definitions": [
+      { "term": "Współczynnik załamania", "def": "Wielkość określająca jak bardzo ośrodek spowalnia światło; stosunek prędkości światła w próżni do prędkości w ośrodku." },
+      { "term": "Ogniskowa", "def": "Odległość ogniska od soczewki lub zwierciadła; odwrotność zdolności skupiającej." },
+      { "term": "Kąt graniczny", "def": "Najmniejszy kąt padania, przy którym zachodzi całkowite wewnętrzne odbicie przy przejściu do ośrodka rzadszego optycznie." },
+      { "term": "Obraz rzeczywisty", "def": "Obraz powstający w miejscu rzeczywistego przecięcia promieni, który można rzutować na ekran." },
+      { "term": "Obraz pozorny", "def": "Obraz powstający na przedłużeniu promieni, którego nie można rzutować na ekran (np. w lustrze płaskim)." },
+      { "term": "Zdolność skupiająca", "def": "Odwrotność ogniskowej soczewki, mierzona w dioptriach (D); im większa, tym silniej soczewka skupia światło." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Prawo odbicia i załamania, prawo Snella, współczynnik załamania, całkowite wewnętrzne odbicie, soczewki i zwierciadła, równanie soczewki, powiększenie, konstrukcje obrazów.",
+      "html": "<p>Optyka geometryczna pojawia się na obu poziomach matury. Zadania obejmują obliczenia z prawa Snella, równania soczewki oraz analizę charakteru obrazu. Często trzeba wykonać konstrukcję graficzną obrazu lub policzyć kąt graniczny. Kluczowa jest konwencja znaków: ogniskowa rozpraszająca i obraz pozorny mają wartości ujemne.</p>",
+      "typoweZadania": [
+        "Obliczanie kąta załamania z prawa Snella.",
+        "Wyznaczanie położenia i powiększenia obrazu z równania soczewki.",
+        "Obliczanie kąta granicznego całkowitego wewnętrznego odbicia.",
+        "Konstrukcja graficzna obrazu w soczewce skupiającej."
+      ],
+      "strategia": [
+        "Pamiętaj o konwencji znaków: f < 0 dla soczewki rozpraszającej, y < 0 dla obrazu pozornego.",
+        "W zadaniach z soczewką najpierw wyznacz 1/y z równania, a potem odwróć, by uzyskać y.",
+        "Przy prawie Snella mierz kąty od normalnej i ustal, który ośrodek jest gęstszy optycznie."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Dlaczego słomka w szklance wody wydaje się złamana?", "a": "Z powodu załamania światła na granicy wody i powietrza. Promienie zmieniają kierunek, więc widzimy zanurzoną część w innym miejscu niż jest naprawdę." },
+      { "q": "Kiedy zachodzi całkowite wewnętrzne odbicie?", "a": "Przy przejściu światła z ośrodka gęstszego do rzadszego optycznie, gdy kąt padania przekroczy kąt graniczny. Całe światło odbija się wtedy z powrotem." },
+      { "q": "Czym różni się obraz rzeczywisty od pozornego?", "a": "Rzeczywisty powstaje z przecięcia promieni i można go rzutować na ekran. Pozorny powstaje na przedłużeniu promieni i widzimy go tylko patrząc w układ optyczny." },
+      { "q": "Co to jest dioptria?", "a": "To jednostka zdolności skupiającej, równa odwrotności metra. Soczewka o ogniskowej 0,5 m ma zdolność skupiającą 2 dioptrie." }
+    ],
+    "faqMatura": [
+      { "q": "Jak rozpoznać charakter obrazu w soczewce?", "a": "Porównaj odległość przedmiotu z ogniskową. Dalej niż 2f daje obraz pomniejszony, między f a 2f powiększony rzeczywisty, a bliżej niż f powiększony pozorny." },
+      { "q": "Jak stosować konwencję znaków na maturze?", "a": "Ogniskowa soczewki skupiającej jest dodatnia, rozpraszającej ujemna. Obraz rzeczywisty ma y dodatnie, pozorny ujemne. Ujemne powiększenie oznacza obraz odwrócony." },
+      { "q": "Jak obliczyć ogniskową z dwóch pomiarów?", "a": "Podstaw znane x i y do równania soczewki 1/f = 1/x + 1/y i wylicz f. Pamiętaj o znakach odległości obrazu." },
+      { "q": "Jak liczyć prędkość światła w ośrodku?", "a": "Z definicji współczynnika załamania v = c/n. Dla szkła o n = 1,5 prędkość światła to dwie trzecie prędkości w próżni." }
+    ],
+    "subtopics": [
+      {
+        "slug": "prawo-zalamania",
+        "name": "Prawo załamania",
+        "intro": "Prawo Snella opisuje załamanie światła na granicy ośrodków. To podstawa zadań z optyki geometrycznej.",
+        "problems": [
+          {
+            "title": "Kąt załamania w wodzie",
+            "tresc": "Światło pada z powietrza (n₁ = 1) na powierzchnię wody (n₂ = 1,33) pod kątem 45°. Oblicz sinus kąta załamania.",
+            "steps": [
+              "Stosujemy prawo Snella: \\( n_1 \\sin\\alpha = n_2 \\sin\\beta \\).",
+              "Wyznaczamy sin β: \\( \\sin\\beta = \\frac{n_1 \\sin\\alpha}{n_2} = \\frac{1 \\cdot \\sin 45^\\circ}{1{,}33} \\).",
+              "Wartość sin 45° ≈ 0,707, więc \\( \\sin\\beta = \\frac{0{,}707}{1{,}33} \\).",
+              "Wynik: \\( \\sin\\beta \\approx 0{,}53 \\), czyli β ≈ 32°."
+            ],
+            "answer": "Sinus kąta załamania wynosi około 0,53, czyli kąt około 32°."
+          },
+          {
+            "title": "Prędkość światła w szkle",
+            "tresc": "Współczynnik załamania szkła wynosi 1,5. Oblicz prędkość światła w tym szkle (c = 3·10⁸ m/s).",
+            "steps": [
+              "Z definicji współczynnika załamania: \\( n = \\frac{c}{v} \\), stąd \\( v = \\frac{c}{n} \\).",
+              "Podstawiamy: \\( v = \\frac{3 \\cdot 10^{8}}{1{,}5} \\).",
+              "Dzielimy: \\( 3 / 1{,}5 = 2 \\).",
+              "Wynik: \\( v = 2 \\cdot 10^{8}\\ \\text{m/s} \\)."
+            ],
+            "answer": "Prędkość światła w szkle wynosi 2·10⁸ m/s."
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego kąt mierzymy od normalnej?", "a": "Bo prawo Snella jest sformułowane względem prostej prostopadłej do powierzchni. Mierzenie od powierzchni dałoby błędne wyniki." }
+        ]
+      },
+      {
+        "slug": "calkowite-wewnetrzne-odbicie",
+        "name": "Całkowite wewnętrzne odbicie",
+        "intro": "Powyżej kąta granicznego światło całkowicie odbija się wewnątrz ośrodka. To zasada działania światłowodów.",
+        "problems": [
+          {
+            "title": "Kąt graniczny dla wody",
+            "tresc": "Oblicz kąt graniczny dla przejścia światła z wody (n₁ = 1,33) do powietrza (n₂ = 1).",
+            "steps": [
+              "Stosujemy warunek: \\( \\sin\\alpha_{gr} = \\frac{n_2}{n_1} \\).",
+              "Podstawiamy: \\( \\sin\\alpha_{gr} = \\frac{1}{1{,}33} \\).",
+              "Liczymy: \\( \\sin\\alpha_{gr} \\approx 0{,}752 \\).",
+              "Z tablic: \\( \\alpha_{gr} \\approx 48{,}8^\\circ \\)."
+            ],
+            "answer": "Kąt graniczny dla wody wynosi około 48,8°."
+          },
+          {
+            "title": "Kąt graniczny dla szkła",
+            "tresc": "Współczynnik załamania szkła wynosi 1,5. Oblicz sinus kąta granicznego dla przejścia z tego szkła do powietrza.",
+            "steps": [
+              "Warunek kąta granicznego: \\( \\sin\\alpha_{gr} = \\frac{n_{powietrze}}{n_{szkło}} \\).",
+              "Podstawiamy: \\( \\sin\\alpha_{gr} = \\frac{1}{1{,}5} \\).",
+              "Liczymy: \\( \\sin\\alpha_{gr} \\approx 0{,}667 \\).",
+              "Stąd kąt graniczny \\( \\alpha_{gr} \\approx 41{,}8^\\circ \\)."
+            ],
+            "answer": "Sinus kąta granicznego wynosi około 0,667, czyli kąt około 41,8°."
+          }
+        ],
+        "faq": [
+          { "q": "Czy całkowite odbicie zachodzi przy przejściu do ośrodka gęstszego?", "a": "Nie, tylko przy przejściu do ośrodka rzadszego optycznie (mniejsze n). W odwrotnym kierunku światło zawsze przechodzi do drugiego ośrodka." }
+        ]
+      },
+      {
+        "slug": "soczewki",
+        "name": "Soczewki",
+        "intro": "Soczewki tworzą obrazy zgodnie z równaniem soczewki. Te zadania ćwiczą wyznaczanie położenia i wielkości obrazu.",
+        "problems": [
+          {
+            "title": "Położenie obrazu",
+            "tresc": "Przedmiot ustawiono w odległości 30 cm od soczewki skupiającej o ogniskowej 10 cm. Oblicz odległość obrazu i powiększenie.",
+            "steps": [
+              "Z równania soczewki: \\( \\frac{1}{y} = \\frac{1}{f} - \\frac{1}{x} = \\frac{1}{10} - \\frac{1}{30} \\).",
+              "Wspólny mianownik: \\( \\frac{3}{30} - \\frac{1}{30} = \\frac{2}{30} = \\frac{1}{15} \\).",
+              "Stąd \\( y = 15\\ \\text{cm} \\) (obraz rzeczywisty).",
+              "Powiększenie: \\( p = \\frac{y}{x} = \\frac{15}{30} = 0{,}5 \\)."
+            ],
+            "answer": "Obraz powstaje w odległości 15 cm, jest rzeczywisty, odwrócony i pomniejszony (p = 0,5)."
+          },
+          {
+            "title": "Zdolność skupiająca",
+            "tresc": "Soczewka ma ogniskową 25 cm. Oblicz jej zdolność skupiającą w dioptriach.",
+            "steps": [
+              "Zamieniamy ogniskową na metry: \\( f = 25\\ \\text{cm} = 0{,}25\\ \\text{m} \\).",
+              "Stosujemy wzór \\( Z = \\frac{1}{f} \\).",
+              "Podstawiamy: \\( Z = \\frac{1}{0{,}25} \\).",
+              "Wynik: \\( Z = 4\\ \\text{D} \\)."
+            ],
+            "answer": "Zdolność skupiająca soczewki wynosi 4 dioptrie."
+          }
+        ],
+        "faq": [
+          { "q": "Co oznacza ujemna odległość obrazu?", "a": "Że obraz jest pozorny i powstaje po tej samej stronie soczewki co przedmiot. Takiego obrazu nie da się rzutować na ekran." }
+        ]
+      },
+      {
+        "slug": "zwierciadla",
+        "name": "Zwierciadła",
+        "intro": "Zwierciadła sferyczne tworzą obrazy zgodnie z równaniem analogicznym do soczewki. Te zadania to klasyka matury.",
+        "problems": [
+          {
+            "title": "Ogniskowa zwierciadła",
+            "tresc": "Zwierciadło wklęsłe ma promień krzywizny 40 cm. Oblicz jego ogniskową.",
+            "steps": [
+              "Stosujemy wzór \\( f = \\frac{R}{2} \\).",
+              "Podstawiamy: \\( f = \\frac{40}{2} \\).",
+              "Dzielimy: \\( 40 / 2 = 20 \\).",
+              "Wynik: \\( f = 20\\ \\text{cm} \\)."
+            ],
+            "answer": "Ogniskowa zwierciadła wynosi 20 cm."
+          },
+          {
+            "title": "Obraz w zwierciadle wklęsłym",
+            "tresc": "Przedmiot ustawiono 60 cm przed zwierciadłem wklęsłym o ogniskowej 20 cm. Oblicz odległość obrazu.",
+            "steps": [
+              "Z równania zwierciadła: \\( \\frac{1}{y} = \\frac{1}{f} - \\frac{1}{x} = \\frac{1}{20} - \\frac{1}{60} \\).",
+              "Wspólny mianownik: \\( \\frac{3}{60} - \\frac{1}{60} = \\frac{2}{60} = \\frac{1}{30} \\).",
+              "Stąd \\( y = 30\\ \\text{cm} \\).",
+              "Obraz jest rzeczywisty i powstaje 30 cm przed zwierciadłem."
+            ],
+            "answer": "Obraz powstaje w odległości 30 cm przed zwierciadłem (rzeczywisty)."
+          }
+        ],
+        "faq": [
+          { "q": "Jaki obraz daje zwierciadło wypukłe?", "a": "Zawsze pozorny, prosty i pomniejszony, niezależnie od położenia przedmiotu. Dlatego stosuje się je jako lusterka samochodowe poszerzające pole widzenia." }
+        ]
+      }
+    ],
+    "related": ["optyka-falowa", "fale-mechaniczne", "fizyka-atomowa"]
+  }
+]

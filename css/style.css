@@ -2668,6 +2668,33 @@ nav {
     color: rgba(255,255,255,0.85);
 }
 
+/* Footer SEO – linki do bazy wiedzy / korepetycji (indeksowalne) */
+.footer-seo {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    text-align: left;
+    padding: 0.5rem 0 1.25rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.footer-seo-col h4 {
+    margin: 0 0 0.6rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--magenta);
+}
+.footer-seo-col a {
+    display: block;
+    color: rgba(255,255,255,0.82);
+    text-decoration: none;
+    font-size: 0.92rem;
+    padding: 3px 0;
+}
+.footer-seo-col a:hover { color: #fff; }
+
 /* Landing long-flow redesign */
 :root {
     --deep-navy: #0b1224;

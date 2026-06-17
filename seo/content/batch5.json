@@ -1,0 +1,819 @@
+[
+  {
+    "slug": "optyka-falowa",
+    "name": "Optyka falowa",
+    "dopelniacz": "optyki falowej",
+    "metaTeoria": "Optyka falowa: interferencja, dyfrakcja, polaryzacja i siatka dyfrakcyjna. Pełna teoria z wzorami, definicjami i przykładami dla liceum i matury.",
+    "metaMatura": "Optyka falowa na maturze z fizyki: zadania z siatki dyfrakcyjnej, doświadczenia Younga i polaryzacji. Wzory, strategie i rozwiązania krok po kroku.",
+    "intro": "Optyka falowa opisuje światło jako falę elektromagnetyczną i wyjaśnia zjawiska, których nie tłumaczy optyka geometryczna: interferencję, dyfrakcję i polaryzację. Kluczowymi narzędziami są doświadczenie Younga oraz siatka dyfrakcyjna, które pozwalają wyznaczyć długość fali świetlnej. Znajomość warunków wzmocnienia i wygaszenia fal jest podstawą zadań maturalnych z tego działu.",
+    "theory": [
+      {
+        "heading": "Światło jako fala elektromagnetyczna",
+        "html": "<p>W optyce falowej traktujemy światło jako falę elektromagnetyczną, w której prostopadle do siebie i do kierunku rozchodzenia drgają wektory pola elektrycznego i magnetycznego. Długość fali światła widzialnego mieści się w zakresie ok. 380-780 nm. Prędkość światła w próżni wynosi \\( c = 3\\cdot 10^8 \\, \\mathrm{m/s} \\), a w ośrodku o współczynniku załamania \\( n \\) maleje do \\( v = c/n \\).</p><ul><li>częstotliwość fali nie zmienia się przy przejściu do innego ośrodka,</li><li>długość fali maleje \\( n \\)-krotnie: \\( \\lambda_n = \\lambda / n \\),</li><li>związek podstawowy: \\( c = \\lambda \\cdot f \\).</li></ul>"
+      },
+      {
+        "heading": "Interferencja i doświadczenie Younga",
+        "html": "<p>Interferencja to nakładanie się fal spójnych, prowadzące do trwałego wzmocnienia lub wygaszenia. W doświadczeniu Younga światło przechodzi przez dwie wąskie szczeliny odległe o \\( d \\), tworząc na ekranie naprzemienne jasne i ciemne prążki. Warunkiem wzmocnienia jest różnica dróg równa całkowitej wielokrotności długości fali.</p><ul><li>wzmocnienie (jasny prążek): \\( \\Delta r = m\\lambda \\),</li><li>wygaszenie (ciemny prążek): \\( \\Delta r = (m+\\tfrac{1}{2})\\lambda \\),</li><li>położenie prążków na ekranie: $$ x_m = \\frac{m \\lambda L}{d} $$ gdzie \\( L \\) to odległość ekranu od szczelin.</li></ul>"
+      },
+      {
+        "heading": "Dyfrakcja i siatka dyfrakcyjna",
+        "html": "<p>Dyfrakcja to uginanie fali na przeszkodzie lub szczelinie porównywalnej z długością fali. Siatka dyfrakcyjna to układ bardzo wielu równoległych, równo odległych szczelin opisanych stałą siatki \\( d \\) (odległością między sąsiednimi szczelinami). Daje ona ostre, jasne maksima w ściśle określonych kierunkach.</p><ul><li>równanie siatki: $$ d \\sin\\theta = m\\lambda $$</li><li>\\( m \\) to rząd widma (0, 1, 2, ...),</li><li>stała siatki: \\( d = 1/N \\), gdzie \\( N \\) to liczba rys na jednostkę długości,</li><li>im mniejsza stała siatki, tym większe kąty ugięcia.</li></ul>"
+      },
+      {
+        "heading": "Polaryzacja światła",
+        "html": "<p>Polaryzacja to porządkowanie drgań wektora pola elektrycznego do jednej płaszczyzny. Światło naturalne jest niespolaryzowane, ale po przejściu przez polaryzator drga już tylko w jednym kierunku. Polaryzacja potwierdza poprzeczny charakter fali świetlnej.</p><ul><li>natężenie po przejściu przez dwa polaryzatory (prawo Malusa): \\( I = I_0 \\cos^2\\alpha \\),</li><li>światło można spolaryzować przez odbicie pod kątem Brewstera: \\( \\tan\\alpha_B = n \\),</li><li>fale podłużne (np. dźwięk) nie ulegają polaryzacji.</li></ul>"
+      },
+      {
+        "heading": "Rozszczepienie i widma",
+        "html": "<p>Współczynnik załamania ośrodka zależy od długości fali (dyspersja), dlatego światło białe rozszczepia się w pryzmacie i siatce na barwy składowe. Najsilniej załamuje się światło fioletowe, najsłabiej czerwone. Siatka dyfrakcyjna tworzy widmo, w którym dla danego rzędu \\( m \\) większy kąt ugięcia ma światło o większej długości fali.</p><ul><li>widmo ciągłe - ciała stałe i ciecze rozgrzane do żaru,</li><li>widmo liniowe emisyjne - rozrzedzone gazy,</li><li>widmo absorpcyjne - linie ciemne na tle widma ciągłego.</li></ul>"
+      }
+    ],
+    "formulas": [
+      { "name": "Związek długości fali i częstotliwości", "latex": "c = \\lambda \\cdot f", "desc": "Prędkość światła jako iloczyn długości fali i częstotliwości." },
+      { "name": "Równanie siatki dyfrakcyjnej", "latex": "d\\sin\\theta = m\\lambda", "desc": "Warunek powstania maksimum rzędu m dla siatki o stałej d." },
+      { "name": "Stała siatki", "latex": "d = \\frac{1}{N}", "desc": "Odległość między szczelinami przy N rysach na jednostkę długości." },
+      { "name": "Warunek wzmocnienia (Young)", "latex": "\\Delta r = m\\lambda", "desc": "Różnica dróg dla jasnego prążka interferencyjnego." },
+      { "name": "Warunek wygaszenia", "latex": "\\Delta r = \\left(m+\\tfrac{1}{2}\\right)\\lambda", "desc": "Różnica dróg dla ciemnego prążka." },
+      { "name": "Położenie prążków Younga", "latex": "x_m = \\frac{m\\lambda L}{d}", "desc": "Odległość m-tego jasnego prążka od środka ekranu." },
+      { "name": "Prawo Malusa", "latex": "I = I_0\\cos^2\\alpha", "desc": "Natężenie światła za drugim polaryzatorem obróconym o kąt alfa." },
+      { "name": "Kąt Brewstera", "latex": "\\tan\\alpha_B = n", "desc": "Kąt padania, przy którym światło odbite jest całkowicie spolaryzowane." },
+      { "name": "Długość fali w ośrodku", "latex": "\\lambda_n = \\frac{\\lambda}{n}", "desc": "Skrócenie długości fali w ośrodku o współczynniku załamania n." }
+    ],
+    "definitions": [
+      { "term": "Interferencja", "def": "Nakładanie się fal spójnych prowadzące do trwałego wzmocnienia lub wygaszenia w określonych punktach przestrzeni." },
+      { "term": "Dyfrakcja", "def": "Uginanie się fali na przeszkodzie lub otworze o rozmiarach porównywalnych z długością fali." },
+      { "term": "Spójność (koherencja)", "def": "Stałość różnicy faz między falami w czasie, konieczna do obserwacji trwałego obrazu interferencyjnego." },
+      { "term": "Siatka dyfrakcyjna", "def": "Układ wielu równoległych, równo odległych szczelin dający ostre maksima opisane równaniem d sin θ = mλ." },
+      { "term": "Polaryzacja", "def": "Uporządkowanie drgań wektora pola elektrycznego fali świetlnej do jednej płaszczyzny." },
+      { "term": "Rząd widma", "def": "Liczba całkowita m określająca kolejne maksimum interferencyjne lub dyfrakcyjne." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Interferencja, dyfrakcja, siatka dyfrakcyjna, polaryzacja, rozszczepienie światła, wyznaczanie długości fali.",
+      "html": "<p>Optyka falowa pojawia się głównie na poziomie rozszerzonym. Najczęściej spotkasz zadania z siatki dyfrakcyjnej (równanie \\( d\\sin\\theta = m\\lambda \\)) oraz doświadczenia Younga. Wymagane jest rozumienie warunków wzmocnienia i wygaszenia oraz umiejętność wyznaczenia długości fali z danych eksperymentalnych. Polaryzacja i prawo Malusa pojawiają się w zadaniach jakościowych i prostych rachunkowych.</p>",
+      "typoweZadania": [
+        "Wyznaczanie długości fali światła z równania siatki dyfrakcyjnej.",
+        "Obliczanie liczby maksimów widocznych dla danej siatki.",
+        "Wyznaczanie odległości prążków w doświadczeniu Younga.",
+        "Zastosowanie prawa Malusa do natężenia za polaryzatorami."
+      ],
+      "strategia": [
+        "Zamień stałą siatki z liczby rys na metr na metry (d = 1/N) zanim podstawisz do wzoru.",
+        "Pamiętaj, że sinus kąta nie może przekraczać 1 - to ogranicza maksymalny rząd widma.",
+        "Sprawdzaj jednostki: długości fali w nm zamieniaj na metry (1 nm = 10⁻⁹ m)."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Czym różni się interferencja od dyfrakcji?", "a": "Interferencja to nakładanie się fal spójnych (np. z dwóch szczelin), a dyfrakcja to uginanie fali na przeszkodzie. W praktyce w siatce dyfrakcyjnej oba zjawiska występują jednocześnie." },
+      { "q": "Dlaczego dźwięk nie ulega polaryzacji, a światło tak?", "a": "Polaryzacja jest możliwa tylko dla fal poprzecznych. Światło jest falą poprzeczną, a dźwięk falą podłużną, w której nie można wyróżnić kierunku drgań prostopadłego do kierunku ruchu." },
+      { "q": "Co to jest stała siatki dyfrakcyjnej?", "a": "To odległość między sąsiednimi szczelinami siatki. Oblicza się ją jako odwrotność liczby rys przypadających na jednostkę długości: d = 1/N." },
+      { "q": "Dlaczego światło białe rozszczepia się na barwy?", "a": "Bo współczynnik załamania zależy od długości fali (dyspersja). Każda barwa załamuje się pod nieco innym kątem, dlatego powstaje widmo." }
+    ],
+    "faqMatura": [
+      { "q": "Jaki wzór jest kluczowy w zadaniach z siatki dyfrakcyjnej?", "a": "Równanie siatki d sin θ = mλ. Z niego wyznaczasz długość fali, kąt ugięcia lub rząd widma, w zależności od tego, co jest dane." },
+      { "q": "Jak obliczyć maksymalny rząd widma?", "a": "Z warunku sin θ ≤ 1 wynika m ≤ d/λ. Maksymalny rząd to największa liczba całkowita spełniająca tę nierówność." },
+      { "q": "Czy optyka falowa jest na poziomie podstawowym?", "a": "W ograniczonym zakresie - głównie jakościowe rozumienie interferencji i dyfrakcji. Zadania rachunkowe z siatki dominują na poziomie rozszerzonym." }
+    ],
+    "subtopics": [
+      {
+        "slug": "siatka-dyfrakcyjna",
+        "name": "Siatka dyfrakcyjna",
+        "intro": "Siatka dyfrakcyjna pozwala precyzyjnie wyznaczyć długość fali światła dzięki równaniu d sin θ = mλ. To najczęstszy typ zadań maturalnych z optyki falowej.",
+        "problems": [
+          {
+            "title": "Wyznaczanie długości fali",
+            "tresc": "Siatka dyfrakcyjna ma 500 rys na milimetr. Dla pierwszego rzędu widma maksimum obserwuje się pod kątem 17,5°. Wyznacz długość fali padającego światła.",
+            "steps": [
+              "Obliczam stałą siatki: \\( d = \\frac{1}{N} = \\frac{1 \\, \\mathrm{mm}}{500} = 2\\cdot 10^{-6} \\, \\mathrm{m} \\).",
+              "Stosuję równanie siatki: \\( d\\sin\\theta = m\\lambda \\), gdzie \\( m=1 \\).",
+              "Wyznaczam długość fali: \\( \\lambda = \\frac{d\\sin\\theta}{m} = \\frac{2\\cdot10^{-6}\\cdot \\sin 17{,}5^\\circ}{1} \\).",
+              "Podstawiam \\( \\sin 17{,}5^\\circ \\approx 0{,}30 \\): \\( \\lambda = 2\\cdot10^{-6}\\cdot 0{,}30 = 6\\cdot10^{-7} \\, \\mathrm{m} \\)."
+            ],
+            "answer": "λ ≈ 600 nm (światło pomarańczowe)"
+          },
+          {
+            "title": "Maksymalny rząd widma",
+            "tresc": "Na siatkę o stałej d = 2 µm pada światło o długości fali λ = 500 nm. Ile maksimów (rzędów) widma można maksymalnie zaobserwować po jednej stronie?",
+            "steps": [
+              "Korzystam z warunku, że \\( \\sin\\theta \\le 1 \\), więc \\( m \\le \\frac{d}{\\lambda} \\).",
+              "Podstawiam: \\( m \\le \\frac{2\\cdot10^{-6}}{5\\cdot10^{-7}} = 4 \\).",
+              "Maksymalny rząd to \\( m = 4 \\) (sin θ = 1 oznaczałoby θ = 90°, więc praktycznie obserwuje się rzędy do 4).",
+              "Po jednej stronie widać więc rzędy 1, 2, 3 i 4."
+            ],
+            "answer": "Maksymalnie 4 rzędy widma po jednej stronie"
+          }
+        ],
+        "faq": [
+          { "q": "Co oznacza rząd widma m = 0?", "a": "To maksimum centralne (zerowe), które powstaje dla θ = 0 i jest wspólne dla wszystkich długości fali - dlatego światło białe daje tam biały prążek." }
+        ]
+      },
+      {
+        "slug": "doswiadczenie-younga",
+        "name": "Doświadczenie Younga",
+        "intro": "Doświadczenie Younga z dwiema szczelinami to klasyczny dowód falowej natury światła i sposób na pomiar długości fali z odległości prążków.",
+        "problems": [
+          {
+            "title": "Odległość prążków",
+            "tresc": "W doświadczeniu Younga szczeliny są odległe o d = 0,2 mm, ekran znajduje się w odległości L = 2 m, a światło ma długość fali λ = 600 nm. Oblicz odległość między sąsiednimi jasnymi prążkami.",
+            "steps": [
+              "Odległość prążków: \\( \\Delta x = \\frac{\\lambda L}{d} \\).",
+              "Podstawiam dane: \\( \\Delta x = \\frac{6\\cdot10^{-7}\\cdot 2}{2\\cdot10^{-4}} \\).",
+              "Obliczam licznik: \\( 6\\cdot10^{-7}\\cdot 2 = 1{,}2\\cdot10^{-6} \\).",
+              "Dzielę: \\( \\Delta x = \\frac{1{,}2\\cdot10^{-6}}{2\\cdot10^{-4}} = 6\\cdot10^{-3} \\, \\mathrm{m} \\)."
+            ],
+            "answer": "Δx = 6 mm"
+          },
+          {
+            "title": "Wyznaczanie długości fali z prążków",
+            "tresc": "W doświadczeniu Younga przy d = 0,5 mm i L = 1,5 m czwarty jasny prążek znajduje się 7,2 mm od środka ekranu. Wyznacz długość fali światła.",
+            "steps": [
+              "Położenie m-tego prążka: \\( x_m = \\frac{m\\lambda L}{d} \\), tu \\( m=4 \\).",
+              "Wyznaczam \\( \\lambda = \\frac{x_m \\cdot d}{m\\cdot L} \\).",
+              "Podstawiam: \\( \\lambda = \\frac{7{,}2\\cdot10^{-3}\\cdot 5\\cdot10^{-4}}{4\\cdot 1{,}5} \\).",
+              "Obliczam: licznik \\( = 3{,}6\\cdot10^{-6} \\), mianownik \\( = 6 \\), więc \\( \\lambda = 6\\cdot10^{-7} \\, \\mathrm{m} \\)."
+            ],
+            "answer": "λ = 600 nm"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego szczeliny muszą być bardzo blisko siebie?", "a": "Bo odległość prążków jest odwrotnie proporcjonalna do d. Gdyby szczeliny były daleko, prążki byłyby tak gęste, że nie dałoby się ich rozróżnić." }
+        ]
+      },
+      {
+        "slug": "polaryzacja-swiatla",
+        "name": "Polaryzacja światła",
+        "intro": "Polaryzacja dowodzi poprzecznego charakteru światła. W zadaniach stosuje się prawo Malusa i kąt Brewstera.",
+        "problems": [
+          {
+            "title": "Prawo Malusa",
+            "tresc": "Światło spolaryzowane o natężeniu I₀ pada na polaryzator, którego oś tworzy kąt 60° z kierunkiem polaryzacji. Jaka część natężenia przejdzie przez polaryzator?",
+            "steps": [
+              "Stosuję prawo Malusa: \\( I = I_0\\cos^2\\alpha \\).",
+              "Podstawiam \\( \\alpha = 60^\\circ \\), \\( \\cos 60^\\circ = 0{,}5 \\).",
+              "Obliczam: \\( I = I_0\\cdot (0{,}5)^2 = 0{,}25\\, I_0 \\)."
+            ],
+            "answer": "Przejdzie 25% natężenia (I = 0,25 I₀)"
+          },
+          {
+            "title": "Kąt Brewstera",
+            "tresc": "Pod jakim kątem padania światło odbite od szkła o współczynniku załamania n = 1,5 będzie całkowicie spolaryzowane?",
+            "steps": [
+              "Korzystam z warunku Brewstera: \\( \\tan\\alpha_B = n \\).",
+              "Podstawiam: \\( \\tan\\alpha_B = 1{,}5 \\).",
+              "Wyznaczam kąt: \\( \\alpha_B = \\arctan 1{,}5 \\approx 56{,}3^\\circ \\)."
+            ],
+            "answer": "α_B ≈ 56,3°"
+          }
+        ],
+        "faq": [
+          { "q": "Co dzieje się ze światłem między dwoma skrzyżowanymi polaryzatorami?", "a": "Gdy osie polaryzatorów są prostopadłe (α = 90°), cos²90° = 0, więc światło zostaje całkowicie wygaszone - przez układ nic nie przechodzi." }
+        ]
+      },
+      {
+        "slug": "interferencja-cienkich-warstw",
+        "name": "Interferencja w cienkich warstwach",
+        "intro": "Barwne plamy oleju na wodzie i mieniące się bańki mydlane to efekt interferencji światła odbitego od dwóch powierzchni cienkiej warstwy.",
+        "problems": [
+          {
+            "title": "Warunek wzmocnienia w błonie",
+            "tresc": "Cienka błona mydlana o współczynniku załamania n = 1,33 oświetlona jest prostopadle światłem o długości fali λ = 532 nm. Jaka jest najmniejsza grubość błony dająca wzmocnienie światła odbitego? (uwzględnij zmianę fazy o π przy odbiciu od ośrodka gęstszego)",
+            "steps": [
+              "Z powodu skoku fazy przy odbiciu warunek wzmocnienia ma postać: \\( 2nd = (m+\\tfrac{1}{2})\\lambda \\).",
+              "Dla najmniejszej grubości przyjmuję \\( m=0 \\): \\( 2nd = \\tfrac{1}{2}\\lambda \\).",
+              "Wyznaczam grubość: \\( d = \\frac{\\lambda}{4n} \\).",
+              "Podstawiam: \\( d = \\frac{532\\cdot10^{-9}}{4\\cdot1{,}33} = 100\\cdot10^{-9} \\, \\mathrm{m} \\)."
+            ],
+            "answer": "d = 100 nm"
+          },
+          {
+            "title": "Powłoka antyrefleksyjna",
+            "tresc": "Na soczewce stosuje się powłokę o grubości dającej minimalne odbicie dla λ = 550 nm. Współczynnik załamania powłoki n = 1,38. Oblicz minimalną grubość powłoki (warunek wygaszenia odbicia).",
+            "steps": [
+              "Dla wygaszenia odbicia (oba odbicia ze skokiem fazy) warunek: \\( 2nd = (m+\\tfrac{1}{2})\\lambda \\), minimalnie \\( m=0 \\).",
+              "Stąd \\( d = \\frac{\\lambda}{4n} \\).",
+              "Podstawiam: \\( d = \\frac{550\\cdot10^{-9}}{4\\cdot1{,}38} \\).",
+              "Obliczam: \\( d = \\frac{5{,}5\\cdot10^{-7}}{5{,}52} \\approx 9{,}96\\cdot10^{-8} \\, \\mathrm{m} \\)."
+            ],
+            "answer": "d ≈ 99,6 nm (około 100 nm)"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego bańka mydlana mieni się różnymi kolorami?", "a": "Bo grubość błony jest różna w różnych miejscach, więc warunek wzmocnienia spełniają różne długości fali - oko widzi różne barwy w zależności od lokalnej grubości." }
+        ]
+      }
+    ],
+    "related": ["optyka-geometryczna", "fale-mechaniczne", "fizyka-atomowa"]
+  },
+  {
+    "slug": "fizyka-atomowa",
+    "name": "Fizyka atomowa i kwantowa",
+    "dopelniacz": "fizyki atomowej i kwantowej",
+    "metaTeoria": "Fizyka atomowa i kwantowa: model Bohra, efekt fotoelektryczny, fotony i widma. Pełna teoria z wzorami i przykładami dla liceum i matury.",
+    "metaMatura": "Fizyka atomowa na maturze: zadania z efektu fotoelektrycznego, modelu Bohra i energii fotonu. Wzory, strategie i rozwiązania krok po kroku.",
+    "intro": "Fizyka atomowa i kwantowa opisuje budowę atomu oraz zjawiska, w których energia i materia przejawiają naturę ziarnistą. Kluczowe pojęcia to foton, kwant energii, model Bohra atomu wodoru oraz efekt fotoelektryczny. Dział ten wyjaśnia powstawanie widm liniowych i dualizm korpuskularno-falowy światła.",
+    "theory": [
+      {
+        "heading": "Kwant energii i foton",
+        "html": "<p>Max Planck wykazał, że energia jest pochłaniana i emitowana porcjami zwanymi kwantami. Einstein rozszerzył tę ideę, wprowadzając foton - cząstkę światła niosącą energię proporcjonalną do częstotliwości. Foton nie ma masy spoczynkowej, ale ma pęd.</p><ul><li>energia fotonu: \\( E = h\\cdot f \\),</li><li>związek z długością fali: \\( E = \\frac{hc}{\\lambda} \\),</li><li>pęd fotonu: \\( p = \\frac{h}{\\lambda} \\),</li><li>stała Plancka: \\( h = 6{,}63\\cdot10^{-34} \\, \\mathrm{J\\cdot s} \\).</li></ul>"
+      },
+      {
+        "heading": "Efekt fotoelektryczny",
+        "html": "<p>Efekt fotoelektryczny to wybijanie elektronów z powierzchni metalu przez padające światło. Zjawisko zachodzi tylko wtedy, gdy energia fotonu przekracza pracę wyjścia \\( W \\). Nadwyżka energii staje się energią kinetyczną elektronu - to potwierdza ziarnistą naturę światła.</p><ul><li>równanie Einsteina: $$ h f = W + E_{k,\\max} $$</li><li>częstotliwość graniczna: \\( f_g = \\frac{W}{h} \\),</li><li>natężenie światła wpływa na liczbę wybitych elektronów, a nie na ich energię,</li><li>energia kinetyczna zależy liniowo od częstotliwości.</li></ul>"
+      },
+      {
+        "heading": "Model Bohra atomu wodoru",
+        "html": "<p>W modelu Bohra elektron krąży wokół jądra tylko po dozwolonych orbitach o skwantowanym momencie pędu. Każdej orbicie odpowiada określona energia. Energia jest emitowana lub pochłaniana wyłącznie podczas przeskoku elektronu między poziomami.</p><ul><li>energia poziomu n: $$ E_n = -\\frac{13{,}6}{n^2} \\, \\mathrm{eV} $$</li><li>warunek emisji/absorpcji: \\( hf = E_k - E_j \\),</li><li>stan podstawowy: \\( n=1 \\), \\( E_1 = -13{,}6 \\, \\mathrm{eV} \\),</li><li>energia jonizacji wodoru ze stanu podstawowego: \\( 13{,}6 \\, \\mathrm{eV} \\).</li></ul>"
+      },
+      {
+        "heading": "Widma atomowe",
+        "html": "<p>Przeskoki elektronów między poziomami dają charakterystyczne linie widmowe, unikalne dla każdego pierwiastka. W atomie wodoru linie grupują się w serie. Seria Balmera (przeskoki na poziom \\( n=2 \\)) leży częściowo w zakresie widzialnym.</p><ul><li>widmo emisyjne - jasne linie na ciemnym tle (przeskok w dół),</li><li>widmo absorpcyjne - ciemne linie na tle ciągłym (przeskok w górę),</li><li>długość fali emitowanej: \\( \\lambda = \\frac{hc}{\\Delta E} \\),</li><li>każdy pierwiastek ma unikalny zestaw linii - to podstawa analizy spektralnej.</li></ul>"
+      },
+      {
+        "heading": "Dualizm korpuskularno-falowy",
+        "html": "<p>Światło i materia wykazują zarówno cechy falowe (interferencja, dyfrakcja), jak i korpuskularne (efekt fotoelektryczny, efekt Comptona). De Broglie zaproponował, że każdej poruszającej się cząstce odpowiada fala materii.</p><ul><li>długość fali de Broglie'a: \\( \\lambda = \\frac{h}{p} = \\frac{h}{mv} \\),</li><li>dla makroobiektów długość fali jest niewykrywalnie mała,</li><li>falowy charakter elektronów potwierdza ich dyfrakcja,</li><li>zasada nieoznaczoności Heisenberga: \\( \\Delta x \\cdot \\Delta p \\ge \\frac{h}{4\\pi} \\).</li></ul>"
+      }
+    ],
+    "formulas": [
+      { "name": "Energia fotonu", "latex": "E = h\\cdot f", "desc": "Energia kwantu światła zależna od częstotliwości." },
+      { "name": "Energia fotonu (z długości fali)", "latex": "E = \\frac{hc}{\\lambda}", "desc": "Energia fotonu wyrażona przez długość fali." },
+      { "name": "Pęd fotonu", "latex": "p = \\frac{h}{\\lambda}", "desc": "Pęd fotonu o danej długości fali." },
+      { "name": "Równanie Einsteina dla fotoefektu", "latex": "hf = W + E_{k,\\max}", "desc": "Bilans energii w efekcie fotoelektrycznym." },
+      { "name": "Częstotliwość graniczna", "latex": "f_g = \\frac{W}{h}", "desc": "Najmniejsza częstotliwość wywołująca efekt fotoelektryczny." },
+      { "name": "Poziomy energii wodoru", "latex": "E_n = -\\frac{13{,}6}{n^2}\\,\\mathrm{eV}", "desc": "Energia n-tego poziomu w atomie wodoru." },
+      { "name": "Energia przeskoku", "latex": "hf = E_k - E_j", "desc": "Energia fotonu emitowanego lub pochłoniętego przy zmianie poziomu." },
+      { "name": "Fala de Broglie'a", "latex": "\\lambda = \\frac{h}{mv}", "desc": "Długość fali materii związanej z poruszającą się cząstką." },
+      { "name": "Zasada nieoznaczoności", "latex": "\\Delta x\\cdot\\Delta p \\ge \\frac{h}{4\\pi}", "desc": "Ograniczenie jednoczesnej dokładności pomiaru położenia i pędu." }
+    ],
+    "definitions": [
+      { "term": "Foton", "def": "Kwant promieniowania elektromagnetycznego niosący energię E = hf i pęd p = h/λ, bez masy spoczynkowej." },
+      { "term": "Praca wyjścia", "def": "Minimalna energia potrzebna do wyrwania elektronu z powierzchni danego metalu." },
+      { "term": "Efekt fotoelektryczny", "def": "Emisja elektronów z powierzchni metalu pod wpływem padającego promieniowania o dostatecznie dużej częstotliwości." },
+      { "term": "Stan podstawowy", "def": "Najniższy możliwy poziom energetyczny atomu, w którym elektron pozostaje, gdy atom nie jest wzbudzony." },
+      { "term": "Energia jonizacji", "def": "Energia potrzebna do całkowitego oderwania elektronu od atomu (przeniesienia go do n → ∞)." },
+      { "term": "Dualizm korpuskularno-falowy", "def": "Właściwość materii i promieniowania przejawiania zarówno cech falowych, jak i cząsteczkowych." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Foton, efekt fotoelektryczny, model Bohra, poziomy energetyczne, widma, fala de Broglie'a, dualizm.",
+      "html": "<p>Fizyka kwantowa to częsty temat zadań maturalnych, zwłaszcza efekt fotoelektryczny i model Bohra. Trzeba sprawnie zamieniać elektronowolty na dżule (\\( 1\\,\\mathrm{eV} = 1{,}6\\cdot10^{-19}\\,\\mathrm{J} \\)) i korzystać z równania Einsteina. W zadaniach z widm wodoru obliczasz energię przeskoku i długość emitowanej fali.</p>",
+      "typoweZadania": [
+        "Obliczanie energii fotonu o danej długości fali lub częstotliwości.",
+        "Wyznaczanie pracy wyjścia lub maksymalnej energii kinetycznej elektronu z fotoefektu.",
+        "Obliczanie energii i długości fali fotonu emitowanego przy przeskoku w atomie wodoru.",
+        "Wyznaczanie częstotliwości granicznej i napięcia hamującego."
+      ],
+      "strategia": [
+        "Zawsze sprawdź jednostki energii - zamieniaj eV na J przed łączeniem z wzorami w jednostkach SI.",
+        "W fotoefekcie pamiętaj: jeśli hf < W, elektrony nie są wybijane niezależnie od natężenia światła.",
+        "Przy przeskokach w atomie wodoru emisja zachodzi z poziomu wyższego na niższy, a ΔE bierz jako wartość dodatnią."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Dlaczego efekt fotoelektryczny dowodzi ziarnistości światła?", "a": "Bo elektrony są wybijane tylko gdy częstotliwość przekracza wartość graniczną, niezależnie od natężenia. Falowa teoria przewidywałaby, że wystarczy dostatecznie jasne światło - tak się jednak nie dzieje." },
+      { "q": "Co oznacza ujemny znak energii w modelu Bohra?", "a": "Oznacza, że elektron jest związany z jądrem. Energia zerowa odpowiada elektronowi swobodnemu (n → ∞); im niżej (mniejsze n), tym energia bardziej ujemna i elektron silniej związany." },
+      { "q": "Czy foton ma masę?", "a": "Foton nie ma masy spoczynkowej, ale ma energię i pęd. Porusza się zawsze z prędkością światła i nie może być w spoczynku." },
+      { "q": "Co to jest fala de Broglie'a?", "a": "To fala materii przypisana każdej poruszającej się cząstce o długości λ = h/(mv). Dla obiektów makroskopowych jest tak mała, że niewykrywalna, ale dla elektronów daje obserwowalną dyfrakcję." }
+    ],
+    "faqMatura": [
+      { "q": "Jak zamienić elektronowolty na dżule?", "a": "Mnożysz wartość w eV przez 1,6·10⁻¹⁹. Na przykład 13,6 eV to 13,6 · 1,6·10⁻¹⁹ ≈ 2,18·10⁻¹⁸ J." },
+      { "q": "Jak obliczyć energię przeskoku w atomie wodoru?", "a": "Liczysz różnicę poziomów ΔE = E_k − E_j ze wzoru E_n = −13,6/n² eV. Wartość bezwzględna tej różnicy to energia emitowanego lub pochłanianego fotonu." },
+      { "q": "Co to jest napięcie hamujące?", "a": "To napięcie, które zatrzymuje najszybsze fotoelektrony: eU_h = E_k,max. Pozwala doświadczalnie zmierzyć maksymalną energię kinetyczną wybitych elektronów." }
+    ],
+    "subtopics": [
+      {
+        "slug": "efekt-fotoelektryczny",
+        "name": "Efekt fotoelektryczny",
+        "intro": "Efekt fotoelektryczny opisany równaniem Einsteina hf = W + E_k,max to fundament fizyki kwantowej i częsty temat maturalny.",
+        "problems": [
+          {
+            "title": "Maksymalna energia kinetyczna elektronu",
+            "tresc": "Na metal o pracy wyjścia W = 2,0 eV pada światło o długości fali λ = 400 nm. Oblicz maksymalną energię kinetyczną wybitych elektronów. Przyjmij h = 6,63·10⁻³⁴ J·s, c = 3·10⁸ m/s.",
+            "steps": [
+              "Obliczam energię fotonu: \\( E = \\frac{hc}{\\lambda} = \\frac{6{,}63\\cdot10^{-34}\\cdot 3\\cdot10^8}{4\\cdot10^{-7}} \\).",
+              "Licznik: \\( 1{,}989\\cdot10^{-25} \\), więc \\( E = 4{,}97\\cdot10^{-19} \\, \\mathrm{J} \\approx 3{,}1 \\, \\mathrm{eV} \\).",
+              "Zamieniam pracę wyjścia: \\( W = 2{,}0 \\, \\mathrm{eV} \\).",
+              "Z równania Einsteina: \\( E_{k,\\max} = E - W = 3{,}1 - 2{,}0 = 1{,}1 \\, \\mathrm{eV} \\)."
+            ],
+            "answer": "E_k,max ≈ 1,1 eV (≈ 1,8·10⁻¹⁹ J)"
+          },
+          {
+            "title": "Częstotliwość graniczna",
+            "tresc": "Praca wyjścia dla cezu wynosi W = 1,9 eV. Wyznacz częstotliwość graniczną oraz odpowiadającą jej długość fali.",
+            "steps": [
+              "Zamieniam pracę wyjścia: \\( W = 1{,}9 \\cdot 1{,}6\\cdot10^{-19} = 3{,}04\\cdot10^{-19} \\, \\mathrm{J} \\).",
+              "Częstotliwość graniczna: \\( f_g = \\frac{W}{h} = \\frac{3{,}04\\cdot10^{-19}}{6{,}63\\cdot10^{-34}} \\approx 4{,}6\\cdot10^{14} \\, \\mathrm{Hz} \\).",
+              "Długość fali: \\( \\lambda_g = \\frac{c}{f_g} = \\frac{3\\cdot10^8}{4{,}6\\cdot10^{14}} \\).",
+              "Obliczam: \\( \\lambda_g \\approx 6{,}5\\cdot10^{-7} \\, \\mathrm{m} = 650 \\, \\mathrm{nm} \\)."
+            ],
+            "answer": "f_g ≈ 4,6·10¹⁴ Hz, λ_g ≈ 650 nm"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego zwiększanie natężenia światła nie zwiększa energii elektronów?", "a": "Bo energia pojedynczego elektronu zależy tylko od energii fotonu (częstotliwości). Większe natężenie to więcej fotonów, czyli więcej wybitych elektronów, ale każdy ma tę samą maksymalną energię." }
+        ]
+      },
+      {
+        "slug": "model-bohra",
+        "name": "Model Bohra",
+        "intro": "Model Bohra atomu wodoru wprowadza skwantowane poziomy energii i tłumaczy powstawanie widma liniowego dzięki przeskokom elektronu.",
+        "problems": [
+          {
+            "title": "Energia przeskoku",
+            "tresc": "Elektron w atomie wodoru przechodzi z poziomu n = 3 na n = 2. Oblicz energię emitowanego fotonu oraz długość emitowanej fali.",
+            "steps": [
+              "Energie poziomów: \\( E_3 = -\\frac{13{,}6}{9} = -1{,}51 \\, \\mathrm{eV} \\), \\( E_2 = -\\frac{13{,}6}{4} = -3{,}40 \\, \\mathrm{eV} \\).",
+              "Energia fotonu: \\( \\Delta E = E_3 - E_2 = -1{,}51 - (-3{,}40) = 1{,}89 \\, \\mathrm{eV} \\).",
+              "Zamieniam na dżule: \\( \\Delta E = 1{,}89\\cdot1{,}6\\cdot10^{-19} = 3{,}02\\cdot10^{-19} \\, \\mathrm{J} \\).",
+              "Długość fali: \\( \\lambda = \\frac{hc}{\\Delta E} = \\frac{6{,}63\\cdot10^{-34}\\cdot3\\cdot10^8}{3{,}02\\cdot10^{-19}} \\approx 6{,}6\\cdot10^{-7} \\, \\mathrm{m} \\)."
+            ],
+            "answer": "ΔE ≈ 1,89 eV, λ ≈ 656 nm (czerwona linia serii Balmera)"
+          },
+          {
+            "title": "Energia jonizacji ze stanu wzbudzonego",
+            "tresc": "Ile energii potrzeba, aby zjonizować atom wodoru znajdujący się w stanie wzbudzonym n = 2?",
+            "steps": [
+              "Energia jonizacji to energia potrzebna do przeniesienia elektronu na poziom n → ∞, gdzie \\( E_\\infty = 0 \\).",
+              "Energia poziomu n = 2: \\( E_2 = -\\frac{13{,}6}{4} = -3{,}40 \\, \\mathrm{eV} \\).",
+              "Potrzebna energia: \\( E = E_\\infty - E_2 = 0 - (-3{,}40) = 3{,}40 \\, \\mathrm{eV} \\)."
+            ],
+            "answer": "E = 3,4 eV"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego widmo wodoru jest liniowe, a nie ciągłe?", "a": "Bo elektron może mieć tylko określone, skwantowane energie. Przeskoki między nimi dają fotony o ściśle określonych energiach, a więc o określonych długościach fal - stąd dyskretne linie." }
+        ]
+      },
+      {
+        "slug": "energia-i-ped-fotonu",
+        "name": "Energia i pęd fotonu",
+        "intro": "Foton niesie energię E = hf i pęd p = h/λ. Te wielkości łączą falowy i korpuskularny opis światła.",
+        "problems": [
+          {
+            "title": "Energia fotonu światła zielonego",
+            "tresc": "Oblicz energię fotonu światła zielonego o długości fali λ = 550 nm. Podaj wynik w dżulach i elektronowoltach.",
+            "steps": [
+              "Energia fotonu: \\( E = \\frac{hc}{\\lambda} = \\frac{6{,}63\\cdot10^{-34}\\cdot3\\cdot10^8}{5{,}5\\cdot10^{-7}} \\).",
+              "Licznik: \\( 1{,}989\\cdot10^{-25} \\), więc \\( E = 3{,}6\\cdot10^{-19} \\, \\mathrm{J} \\).",
+              "Zamieniam na eV: \\( E = \\frac{3{,}6\\cdot10^{-19}}{1{,}6\\cdot10^{-19}} = 2{,}26 \\, \\mathrm{eV} \\)."
+            ],
+            "answer": "E ≈ 3,6·10⁻¹⁹ J ≈ 2,26 eV"
+          },
+          {
+            "title": "Pęd fotonu",
+            "tresc": "Oblicz pęd fotonu promieniowania rentgenowskiego o długości fali λ = 0,1 nm.",
+            "steps": [
+              "Pęd fotonu: \\( p = \\frac{h}{\\lambda} \\).",
+              "Podstawiam: \\( p = \\frac{6{,}63\\cdot10^{-34}}{1\\cdot10^{-10}} \\).",
+              "Obliczam: \\( p = 6{,}63\\cdot10^{-24} \\, \\mathrm{kg\\cdot m/s} \\)."
+            ],
+            "answer": "p ≈ 6,63·10⁻²⁴ kg·m/s"
+          }
+        ],
+        "faq": [
+          { "q": "Czy foton mimo braku masy może mieć pęd?", "a": "Tak. Pęd fotonu wynika z jego energii i wynosi p = E/c = h/λ. Potwierdza to m.in. ciśnienie światła i efekt Comptona." }
+        ]
+      },
+      {
+        "slug": "fala-de-brogliea",
+        "name": "Fala de Broglie'a",
+        "intro": "Hipoteza de Broglie'a przypisuje każdej poruszającej się cząstce falę materii o długości λ = h/(mv), co potwierdza dualizm materii.",
+        "problems": [
+          {
+            "title": "Długość fali elektronu",
+            "tresc": "Oblicz długość fali de Broglie'a elektronu poruszającego się z prędkością v = 1·10⁶ m/s. Masa elektronu m = 9,1·10⁻³¹ kg.",
+            "steps": [
+              "Długość fali de Broglie'a: \\( \\lambda = \\frac{h}{mv} \\).",
+              "Podstawiam: \\( \\lambda = \\frac{6{,}63\\cdot10^{-34}}{9{,}1\\cdot10^{-31}\\cdot 1\\cdot10^6} \\).",
+              "Mianownik: \\( 9{,}1\\cdot10^{-25} \\), więc \\( \\lambda = 7{,}3\\cdot10^{-10} \\, \\mathrm{m} \\)."
+            ],
+            "answer": "λ ≈ 7,3·10⁻¹⁰ m (rzędu rozmiarów atomowych)"
+          },
+          {
+            "title": "Fala de Broglie'a piłki",
+            "tresc": "Piłka o masie m = 0,2 kg leci z prędkością v = 30 m/s. Oblicz długość jej fali de Broglie'a i skomentuj wynik.",
+            "steps": [
+              "Stosuję wzór \\( \\lambda = \\frac{h}{mv} \\).",
+              "Podstawiam: \\( \\lambda = \\frac{6{,}63\\cdot10^{-34}}{0{,}2\\cdot 30} = \\frac{6{,}63\\cdot10^{-34}}{6} \\).",
+              "Obliczam: \\( \\lambda \\approx 1{,}1\\cdot10^{-34} \\, \\mathrm{m} \\).",
+              "Wynik jest nieporównywalnie mniejszy od rozmiarów atomu, więc falowe własności piłki są niewykrywalne."
+            ],
+            "answer": "λ ≈ 1,1·10⁻³⁴ m - praktycznie niemierzalna"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego nie obserwujemy falowych własności przedmiotów codziennego użytku?", "a": "Bo ich masa jest ogromna w porównaniu z elektronem, więc długość fali de Broglie'a jest niewyobrażalnie mała (rzędu 10⁻³⁴ m) - nie da się zaobserwować dla niej dyfrakcji ani interferencji." }
+        ]
+      }
+    ],
+    "related": ["optyka-falowa", "fizyka-jadrowa", "elektrostatyka"]
+  },
+  {
+    "slug": "fizyka-jadrowa",
+    "name": "Fizyka jądrowa",
+    "dopelniacz": "fizyki jądrowej",
+    "metaTeoria": "Fizyka jądrowa: budowa jądra, rozpady promieniotwórcze, czas połowicznego rozpadu i energia wiązania. Teoria z wzorami i przykładami dla matury.",
+    "metaMatura": "Fizyka jądrowa na maturze: zadania z prawa rozpadu, czasu połowicznego zaniku i deficytu masy. Wzory, strategie i rozwiązania krok po kroku.",
+    "intro": "Fizyka jądrowa zajmuje się budową jądra atomowego, jego przemianami oraz energią uwalnianą w reakcjach jądrowych. Kluczowe zagadnienia to rozpady promieniotwórcze (alfa, beta, gamma), prawo rozpadu i czas połowicznego zaniku oraz energia wiązania związana z deficytem masy. Dział wyjaśnia działanie reaktorów i datowanie izotopowe.",
+    "theory": [
+      {
+        "heading": "Budowa jądra atomowego",
+        "html": "<p>Jądro atomowe składa się z protonów i neutronów, wspólnie zwanych nukleonami. Liczba protonów (liczba atomowa \\( Z \\)) określa pierwiastek, a suma protonów i neutronów to liczba masowa \\( A \\). Atomy tego samego pierwiastka o różnej liczbie neutronów to izotopy.</p><ul><li>oznaczenie jądra: \\( ^{A}_{Z}X \\),</li><li>liczba neutronów: \\( N = A - Z \\),</li><li>nukleony są wiązane silnym oddziaływaniem jądrowym o krótkim zasięgu,</li><li>jednostka masy atomowej: \\( 1\\,\\mathrm{u} = 1{,}66\\cdot10^{-27}\\,\\mathrm{kg} \\).</li></ul>"
+      },
+      {
+        "heading": "Rozpady promieniotwórcze",
+        "html": "<p>Niestabilne jądra ulegają samorzutnym przemianom, emitując promieniowanie. Wyróżniamy trzy podstawowe rozpady, różniące się rodzajem emitowanej cząstki oraz zmianą liczb \\( A \\) i \\( Z \\).</p><ul><li>rozpad alfa: emisja jądra helu, \\( A \\) maleje o 4, \\( Z \\) o 2,</li><li>rozpad beta minus: neutron zmienia się w proton, \\( Z \\) rośnie o 1, \\( A \\) bez zmian,</li><li>rozpad gamma: emisja fotonu, \\( A \\) i \\( Z \\) bez zmian (zmienia się tylko energia jądra),</li><li>w reakcjach zachowane są liczba ładunkowa i masowa.</li></ul>"
+      },
+      {
+        "heading": "Prawo rozpadu promieniotwórczego",
+        "html": "<p>Rozpad jest procesem losowym, ale dla dużej liczby jąder podlega prawu wykładniczemu. Czas połowicznego rozpadu \\( T_{1/2} \\) to czas, po którym rozpada się połowa początkowej liczby jąder.</p><ul><li>prawo rozpadu: $$ N = N_0 \\cdot \\left(\\tfrac{1}{2}\\right)^{t/T_{1/2}} $$</li><li>postać wykładnicza: \\( N = N_0 e^{-\\lambda t} \\),</li><li>stała rozpadu: \\( \\lambda = \\frac{\\ln 2}{T_{1/2}} \\),</li><li>aktywność: \\( A = \\lambda N \\) (jednostka: bekerel, Bq).</li></ul>"
+      },
+      {
+        "heading": "Energia wiązania i deficyt masy",
+        "html": "<p>Masa jądra jest mniejsza niż suma mas wchodzących w jego skład nukleonów. Różnica ta, zwana deficytem masy, odpowiada energii wiązania uwolnionej przy formowaniu jądra. Wynika to z równoważności masy i energii Einsteina.</p><ul><li>deficyt masy: \\( \\Delta m = Z m_p + N m_n - m_{j} \\),</li><li>energia wiązania: $$ E_w = \\Delta m \\cdot c^2 $$</li><li>energia wiązania na nukleon decyduje o trwałości jądra,</li><li>najtrwalsze są jądra w okolicy żelaza (\\( A \\approx 56 \\)).</li></ul>"
+      },
+      {
+        "heading": "Reakcje jądrowe: rozszczepienie i synteza",
+        "html": "<p>W reakcjach jądrowych uwalniana jest ogromna energia, gdy produkty mają większą energię wiązania na nukleon niż substraty. Rozszczepienie ciężkich jąder zachodzi w reaktorach i bombach atomowych, a synteza lekkich jąder zasila gwiazdy.</p><ul><li>rozszczepienie - ciężkie jądro (np. uran-235) dzieli się po pochłonięciu neutronu,</li><li>reakcja łańcuchowa - emitowane neutrony wywołują kolejne rozszczepienia,</li><li>synteza jądrowa - łączenie lekkich jąder (np. wodoru) w cięższe,</li><li>uwolniona energia: \\( E = \\Delta m \\cdot c^2 \\).</li></ul>"
+      }
+    ],
+    "formulas": [
+      { "name": "Prawo rozpadu", "latex": "N = N_0\\left(\\tfrac{1}{2}\\right)^{t/T_{1/2}}", "desc": "Liczba jąder pozostałych po czasie t." },
+      { "name": "Postać wykładnicza rozpadu", "latex": "N = N_0 e^{-\\lambda t}", "desc": "Wykładnicza zależność liczby jąder od czasu." },
+      { "name": "Stała rozpadu", "latex": "\\lambda = \\frac{\\ln 2}{T_{1/2}}", "desc": "Związek stałej rozpadu z czasem połowicznego zaniku." },
+      { "name": "Aktywność", "latex": "A = \\lambda N", "desc": "Liczba rozpadów na sekundę (w bekerelach)." },
+      { "name": "Deficyt masy", "latex": "\\Delta m = Z m_p + N m_n - m_j", "desc": "Różnica między sumą mas nukleonów a masą jądra." },
+      { "name": "Energia wiązania", "latex": "E_w = \\Delta m\\cdot c^2", "desc": "Energia odpowiadająca deficytowi masy." },
+      { "name": "Liczba neutronów", "latex": "N = A - Z", "desc": "Liczba neutronów w jądrze." },
+      { "name": "Energia reakcji", "latex": "E = \\Delta m\\cdot c^2", "desc": "Energia uwolniona przy ubytku masy w reakcji jądrowej." },
+      { "name": "Liczba okresów połowicznych", "latex": "n = \\frac{t}{T_{1/2}}", "desc": "Liczba czasów połowicznego zaniku w czasie t." }
+    ],
+    "definitions": [
+      { "term": "Nukleon", "def": "Wspólna nazwa protonu i neutronu - składników jądra atomowego." },
+      { "term": "Izotopy", "def": "Atomy tego samego pierwiastka (to samo Z) różniące się liczbą neutronów (różne A)." },
+      { "term": "Czas połowicznego rozpadu", "def": "Czas, po którym rozpada się połowa początkowej liczby jąder promieniotwórczych." },
+      { "term": "Deficyt masy", "def": "Różnica między sumą mas swobodnych nukleonów a masą jądra, odpowiadająca energii wiązania." },
+      { "term": "Energia wiązania", "def": "Energia potrzebna do rozłożenia jądra na pojedyncze nukleony lub uwolniona przy jego powstaniu." },
+      { "term": "Aktywność", "def": "Liczba rozpadów promieniotwórczych zachodzących w próbce w jednostce czasu, mierzona w bekerelach." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Budowa jądra, rozpady alfa/beta/gamma, prawo rozpadu, czas połowiczny, deficyt masy, energia wiązania, reakcje jądrowe.",
+      "html": "<p>Fizyka jądrowa to wdzięczny dział maturalny - zadania są schematyczne i policzalne. Najczęściej obliczasz, ile substancji pozostało po danym czasie (prawo rozpadu) albo bilansujesz reakcję jądrową (zachowanie A i Z). W zadaniach o energii wiązania liczysz deficyt masy i mnożysz przez \\( c^2 \\).</p>",
+      "typoweZadania": [
+        "Obliczanie liczby (lub masy) jąder pozostałych po danej liczbie okresów połowicznych.",
+        "Uzupełnianie równania reakcji jądrowej z zachowaniem A i Z.",
+        "Obliczanie energii wiązania jądra z deficytu masy.",
+        "Wyznaczanie czasu połowicznego rozpadu z danych pomiarowych."
+      ],
+      "strategia": [
+        "Sprawdzaj, czy czas t jest wielokrotnością T₁/₂ - wtedy wystarczy kolejno dzielić przez 2.",
+        "W reakcjach jądrowych zawsze bilansuj osobno sumę liczb masowych i sumę liczb atomowych po obu stronach.",
+        "Energię wiązania możesz liczyć szybciej, korzystając z faktu, że 1 u odpowiada 931,5 MeV."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Czym różni się rozpad alfa od beta?", "a": "W rozpadzie alfa jądro emituje jądro helu (A maleje o 4, Z o 2), a w rozpadzie beta minus neutron zamienia się w proton i emitowany jest elektron (Z rośnie o 1, A bez zmian)." },
+      { "q": "Dlaczego masa jądra jest mniejsza od sumy mas nukleonów?", "a": "Bo część masy zamienia się w energię wiązania utrzymującą nukleony razem. Ten deficyt masy odpowiada energii uwolnionej przy powstawaniu jądra, zgodnie z E = mc²." },
+      { "q": "Czy można przewidzieć, kiedy rozpadnie się dane jądro?", "a": "Nie - rozpad pojedynczego jądra jest całkowicie losowy. Można jedynie podać prawdopodobieństwo i przewidzieć zachowanie dużej liczby jąder przez prawo rozpadu." },
+      { "q": "Które jądra są najtrwalsze?", "a": "Te o największej energii wiązania na nukleon, czyli jądra w okolicach żelaza (A ≈ 56). To dlatego energię uwalnia zarówno rozszczepienie ciężkich, jak i synteza lekkich jąder." }
+    ],
+    "faqMatura": [
+      { "q": "Jak szybko obliczyć, ile substancji zostało po kilku okresach połowicznych?", "a": "Dziel masę początkową przez 2 tyle razy, ile okresów minęło. Po n okresach zostaje (1/2)ⁿ początkowej ilości." },
+      { "q": "Jak bilansować reakcję jądrową?", "a": "Suma liczb masowych A musi być równa po obu stronach, podobnie suma liczb atomowych Z. Z tych dwóch warunków wyznaczasz nieznaną cząstkę." },
+      { "q": "Ile MeV odpowiada 1 u deficytu masy?", "a": "1 u odpowiada energii około 931,5 MeV. Ta wartość znacznie przyspiesza obliczanie energii wiązania w zadaniach maturalnych." }
+    ],
+    "subtopics": [
+      {
+        "slug": "prawo-rozpadu",
+        "name": "Prawo rozpadu promieniotwórczego",
+        "intro": "Prawo rozpadu opisuje wykładnicze zmniejszanie się liczby jąder promieniotwórczych w czasie. Czas połowicznego zaniku T₁/₂ to klucz do tych zadań.",
+        "problems": [
+          {
+            "title": "Masa po kilku okresach",
+            "tresc": "Próbka izotopu ma masę początkową 80 g, a czas połowicznego rozpadu wynosi 5 lat. Jaka masa izotopu pozostanie po 20 latach?",
+            "steps": [
+              "Liczba okresów: \\( n = \\frac{t}{T_{1/2}} = \\frac{20}{5} = 4 \\).",
+              "Stosuję prawo rozpadu: \\( m = m_0\\left(\\tfrac{1}{2}\\right)^n = 80\\cdot\\left(\\tfrac{1}{2}\\right)^4 \\).",
+              "Obliczam: \\( \\left(\\tfrac{1}{2}\\right)^4 = \\frac{1}{16} \\).",
+              "Stąd \\( m = \\frac{80}{16} = 5 \\, \\mathrm{g} \\)."
+            ],
+            "answer": "Pozostanie 5 g izotopu"
+          },
+          {
+            "title": "Wyznaczanie czasu połowicznego",
+            "tresc": "Po 12 godzinach aktywność próbki spadła do 1/8 wartości początkowej. Wyznacz czas połowicznego rozpadu tego izotopu.",
+            "steps": [
+              "Spadek do 1/8 oznacza, że \\( \\left(\\tfrac{1}{2}\\right)^n = \\tfrac{1}{8} \\), więc \\( n = 3 \\) okresy.",
+              "Czas to suma 3 okresów: \\( t = n\\cdot T_{1/2} \\).",
+              "Wyznaczam: \\( T_{1/2} = \\frac{t}{n} = \\frac{12}{3} \\).",
+              "Otrzymuję \\( T_{1/2} = 4 \\, \\mathrm{godziny} \\)."
+            ],
+            "answer": "T₁/₂ = 4 godziny"
+          }
+        ],
+        "faq": [
+          { "q": "Czy po dwóch czasach połowicznych substancja zniknie całkowicie?", "a": "Nie. Po jednym okresie zostaje 1/2, po dwóch 1/4, po trzech 1/8 itd. Liczba jąder maleje wykładniczo, ale teoretycznie nigdy nie spada dokładnie do zera." }
+        ]
+      },
+      {
+        "slug": "rozpady-alfa-beta-gamma",
+        "name": "Rozpady alfa, beta, gamma",
+        "intro": "Trzy podstawowe rozpady różnią się rodzajem emitowanej cząstki i wpływem na liczby A i Z jądra. W zadaniach bilansuje się reakcje jądrowe.",
+        "problems": [
+          {
+            "title": "Bilans rozpadu alfa",
+            "tresc": "Jądro uranu ²³⁸₉₂U ulega rozpadowi alfa. Podaj liczbę masową i atomową powstałego jądra.",
+            "steps": [
+              "W rozpadzie alfa emitowane jest jądro helu \\( ^{4}_{2}\\mathrm{He} \\).",
+              "Liczba masowa maleje o 4: \\( A = 238 - 4 = 234 \\).",
+              "Liczba atomowa maleje o 2: \\( Z = 92 - 2 = 90 \\).",
+              "Pierwiastek o \\( Z=90 \\) to tor: powstaje \\( ^{234}_{90}\\mathrm{Th} \\)."
+            ],
+            "answer": "Powstaje tor ²³⁴₉₀Th"
+          },
+          {
+            "title": "Bilans rozpadu beta minus",
+            "tresc": "Jądro węgla ¹⁴₆C ulega rozpadowi beta minus. Wyznacz powstałe jądro.",
+            "steps": [
+              "W rozpadzie beta minus neutron zamienia się w proton, emitowany jest elektron \\( ^{0}_{-1}e \\).",
+              "Liczba masowa się nie zmienia: \\( A = 14 \\).",
+              "Liczba atomowa rośnie o 1: \\( Z = 6 + 1 = 7 \\).",
+              "Pierwiastek o \\( Z=7 \\) to azot: powstaje \\( ^{14}_{7}\\mathrm{N} \\)."
+            ],
+            "answer": "Powstaje azot ¹⁴₇N"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego w rozpadzie gamma nie zmienia się A ani Z?", "a": "Bo emitowany jest tylko foton (kwant energii). Jądro pozbywa się nadmiaru energii, przechodząc do stanu o niższej energii, ale liczba protonów i neutronów pozostaje taka sama." }
+        ]
+      },
+      {
+        "slug": "energia-wiazania",
+        "name": "Energia wiązania jądra",
+        "intro": "Energia wiązania, związana z deficytem masy przez E = Δm·c², decyduje o trwałości jądra i ilości energii uwalnianej w reakcjach.",
+        "problems": [
+          {
+            "title": "Energia wiązania jądra helu",
+            "tresc": "Jądro helu ⁴₂He ma masę 4,0015 u. Masa protonu 1,00728 u, neutronu 1,00867 u. Oblicz energię wiązania jądra (1 u odpowiada 931,5 MeV).",
+            "steps": [
+              "Suma mas nukleonów: \\( 2\\cdot1{,}00728 + 2\\cdot1{,}00867 = 4{,}0319 \\, \\mathrm{u} \\).",
+              "Deficyt masy: \\( \\Delta m = 4{,}0319 - 4{,}0015 = 0{,}0304 \\, \\mathrm{u} \\).",
+              "Energia wiązania: \\( E_w = \\Delta m \\cdot 931{,}5 \\, \\mathrm{MeV} \\).",
+              "Obliczam: \\( E_w = 0{,}0304\\cdot931{,}5 \\approx 28{,}3 \\, \\mathrm{MeV} \\)."
+            ],
+            "answer": "E_w ≈ 28,3 MeV"
+          },
+          {
+            "title": "Energia wiązania na nukleon",
+            "tresc": "Korzystając z poprzedniego wyniku, oblicz energię wiązania przypadającą na jeden nukleon w jądrze helu.",
+            "steps": [
+              "Jądro helu ma \\( A = 4 \\) nukleony.",
+              "Energia wiązania na nukleon: \\( \\frac{E_w}{A} = \\frac{28{,}3}{4} \\).",
+              "Obliczam: \\( \\frac{E_w}{A} \\approx 7{,}1 \\, \\mathrm{MeV/nukleon} \\)."
+            ],
+            "answer": "≈ 7,1 MeV na nukleon"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego energia wiązania na nukleon jest ważniejsza niż całkowita?", "a": "Bo to ona określa trwałość jądra i kierunek reakcji. Energia uwalnia się, gdy produkty mają wyższą energię wiązania na nukleon niż substraty - stąd zarówno rozszczepienie, jak i synteza mogą dawać energię." }
+        ]
+      },
+      {
+        "slug": "datowanie-izotopowe",
+        "name": "Datowanie izotopowe",
+        "intro": "Datowanie radiowęglowe wykorzystuje znany czas połowiczny izotopu węgla ¹⁴C do określenia wieku znalezisk organicznych.",
+        "problems": [
+          {
+            "title": "Wiek próbki organicznej",
+            "tresc": "W próbce drewna aktywność izotopu ¹⁴C wynosi 1/4 aktywności w żywym organizmie. Czas połowicznego rozpadu ¹⁴C to 5730 lat. Oszacuj wiek próbki.",
+            "steps": [
+              "Spadek do 1/4 oznacza \\( \\left(\\tfrac{1}{2}\\right)^n = \\tfrac{1}{4} \\), więc \\( n = 2 \\) okresy.",
+              "Wiek to \\( t = n\\cdot T_{1/2} \\).",
+              "Podstawiam: \\( t = 2\\cdot 5730 \\).",
+              "Otrzymuję \\( t = 11460 \\, \\mathrm{lat} \\)."
+            ],
+            "answer": "Próbka ma około 11 460 lat"
+          },
+          {
+            "title": "Pozostała część izotopu",
+            "tresc": "Jaka część początkowej ilości ¹⁴C pozostanie w próbce po upływie 17 190 lat (T₁/₂ = 5730 lat)?",
+            "steps": [
+              "Liczba okresów: \\( n = \\frac{17190}{5730} = 3 \\).",
+              "Pozostała część: \\( \\left(\\tfrac{1}{2}\\right)^n = \\left(\\tfrac{1}{2}\\right)^3 \\).",
+              "Obliczam: \\( \\left(\\tfrac{1}{2}\\right)^3 = \\frac{1}{8} = 0{,}125 \\)."
+            ],
+            "answer": "Pozostanie 1/8 (12,5%) początkowej ilości ¹⁴C"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego datowanie radiowęglowe ma ograniczony zasięg czasowy?", "a": "Bo po wielu okresach połowicznych aktywność ¹⁴C staje się zbyt mała, by ją dokładnie zmierzyć. Praktyczna granica metody to około 50-60 tysięcy lat." }
+        ]
+      }
+    ],
+    "related": ["fizyka-atomowa", "teoria-wzglednosci", "praca-moc-energia"]
+  },
+  {
+    "slug": "teoria-wzglednosci",
+    "name": "Szczególna teoria względności",
+    "dopelniacz": "teorii względności",
+    "metaTeoria": "Szczególna teoria względności: dylatacja czasu, skrócenie długości, E=mc². Pełna teoria z postulatami Einsteina, wzorami i przykładami dla matury.",
+    "metaMatura": "Teoria względności na maturze: zadania z dylatacji czasu, skrócenia długości i równoważności masy i energii. Wzory, strategie i rozwiązania krok po kroku.",
+    "intro": "Szczególna teoria względności Einsteina opisuje zjawiska zachodzące przy prędkościach bliskich prędkości światła. Wynika z niej dylatacja czasu, skrócenie długości oraz słynna równoważność masy i energii E = mc². Teoria opiera się na dwóch postulatach i radykalnie zmienia rozumienie czasu i przestrzeni.",
+    "theory": [
+      {
+        "heading": "Postulaty Einsteina",
+        "html": "<p>Szczególna teoria względności opiera się na dwóch postulatach, które prowadzą do zaskakujących wniosków o naturze czasu i przestrzeni. Obowiązuje w układach inercjalnych, czyli poruszających się względem siebie ze stałą prędkością.</p><ul><li>zasada względności - prawa fizyki są jednakowe we wszystkich układach inercjalnych,</li><li>stałość prędkości światła - prędkość światła w próżni \\( c \\) jest taka sama dla każdego obserwatora, niezależnie od ruchu źródła,</li><li>nie istnieje wyróżniony, absolutny układ odniesienia,</li><li>żadne ciało o masie nie może osiągnąć prędkości światła.</li></ul>"
+      },
+      {
+        "heading": "Dylatacja czasu",
+        "html": "<p>Czas w poruszającym się układzie płynie wolniej z punktu widzenia nieruchomego obserwatora. Im bliżej prędkości światła, tym efekt silniejszy. Czas własny \\( t_0 \\) to czas mierzony w układzie, w którym zdarzenia zachodzą w tym samym miejscu.</p><ul><li>wzór dylatacji: $$ t = \\frac{t_0}{\\sqrt{1 - \\frac{v^2}{c^2}}} $$</li><li>czynnik Lorentza: \\( \\gamma = \\frac{1}{\\sqrt{1 - v^2/c^2}} \\),</li><li>czas obserwowany jest zawsze dłuższy: \\( t = \\gamma t_0 \\),</li><li>efekt potwierdzono m.in. dla mionów z promieniowania kosmicznego.</li></ul>"
+      },
+      {
+        "heading": "Skrócenie długości",
+        "html": "<p>Obiekt poruszający się z dużą prędkością wydaje się krótszy w kierunku ruchu niż w spoczynku. Długość spoczynkowa \\( L_0 \\) to długość mierzona w układzie, względem którego ciało spoczywa.</p><ul><li>wzór skrócenia: $$ L = L_0\\sqrt{1 - \\frac{v^2}{c^2}} $$</li><li>skrócenie zachodzi tylko w kierunku ruchu,</li><li>długość obserwowana jest zawsze mniejsza: \\( L = L_0/\\gamma \\),</li><li>wymiary prostopadłe do ruchu pozostają bez zmian.</li></ul>"
+      },
+      {
+        "heading": "Równoważność masy i energii",
+        "html": "<p>Najsłynniejszy wynik teorii względności to równoważność masy i energii. Masa jest formą energii, a energia ma masę. Każde ciało o masie spoczynkowej \\( m \\) ma energię spoczynkową \\( E_0 = mc^2 \\).</p><ul><li>energia spoczynkowa: \\( E_0 = mc^2 \\),</li><li>energia całkowita ciała w ruchu: $$ E = \\gamma mc^2 $$</li><li>energia kinetyczna relatywistyczna: \\( E_k = (\\gamma - 1)mc^2 \\),</li><li>w reakcjach jądrowych ubytek masy zamienia się w energię.</li></ul>"
+      },
+      {
+        "heading": "Pęd relatywistyczny i prędkość graniczna",
+        "html": "<p>Przy prędkościach bliskich \\( c \\) klasyczne wzory na pęd przestają obowiązywać. Pęd rośnie szybciej niż liniowo, dążąc do nieskończoności, gdy prędkość zbliża się do prędkości światła - dlatego masa nie może jej osiągnąć.</p><ul><li>pęd relatywistyczny: \\( p = \\gamma mv \\),</li><li>dla \\( v \\ll c \\) wzory relatywistyczne przechodzą w klasyczne,</li><li>związek energii i pędu: \\( E^2 = (pc)^2 + (mc^2)^2 \\),</li><li>prędkość światła jest prędkością graniczną dla każdego sygnału i ciała.</li></ul>"
+      }
+    ],
+    "formulas": [
+      { "name": "Czynnik Lorentza", "latex": "\\gamma = \\frac{1}{\\sqrt{1 - \\frac{v^2}{c^2}}}", "desc": "Współczynnik opisujący efekty relatywistyczne." },
+      { "name": "Dylatacja czasu", "latex": "t = \\frac{t_0}{\\sqrt{1 - \\frac{v^2}{c^2}}}", "desc": "Wydłużenie czasu obserwowanego względem czasu własnego." },
+      { "name": "Skrócenie długości", "latex": "L = L_0\\sqrt{1 - \\frac{v^2}{c^2}}", "desc": "Skrócenie długości w kierunku ruchu." },
+      { "name": "Energia spoczynkowa", "latex": "E_0 = mc^2", "desc": "Energia związana z masą spoczynkową ciała." },
+      { "name": "Energia całkowita", "latex": "E = \\gamma mc^2", "desc": "Całkowita energia relatywistyczna ciała w ruchu." },
+      { "name": "Energia kinetyczna relatywistyczna", "latex": "E_k = (\\gamma - 1)mc^2", "desc": "Energia kinetyczna przy prędkościach bliskich c." },
+      { "name": "Pęd relatywistyczny", "latex": "p = \\gamma mv", "desc": "Pęd ciała poruszającego się z dużą prędkością." },
+      { "name": "Związek energii i pędu", "latex": "E^2 = (pc)^2 + (mc^2)^2", "desc": "Relatywistyczna relacja między energią a pędem." }
+    ],
+    "definitions": [
+      { "term": "Układ inercjalny", "def": "Układ odniesienia poruszający się ze stałą prędkością, w którym obowiązuje pierwsza zasada dynamiki." },
+      { "term": "Dylatacja czasu", "def": "Wydłużenie czasu trwania zjawiska obserwowanego w układzie poruszającym się względem obserwatora." },
+      { "term": "Skrócenie długości", "def": "Zmniejszenie obserwowanej długości ciała w kierunku jego ruchu przy dużych prędkościach." },
+      { "term": "Czas własny", "def": "Czas mierzony w układzie, w którym dane zdarzenia zachodzą w tym samym miejscu (najkrótszy z możliwych)." },
+      { "term": "Energia spoczynkowa", "def": "Energia E₀ = mc² związana z samą masą ciała, niezależnie od jego ruchu." },
+      { "term": "Czynnik Lorentza", "def": "Współczynnik γ, który rośnie wraz z prędkością i opisuje siłę efektów relatywistycznych." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Postulaty Einsteina, dylatacja czasu, skrócenie długości, E=mc², energia i pęd relatywistyczny.",
+      "html": "<p>Teoria względności pojawia się głównie na poziomie rozszerzonym, choć jej idee i wzór \\( E = mc^2 \\) bywają też na podstawowym. W zadaniach najczęściej obliczasz czynnik Lorentza, a potem dylatację czasu lub skrócenie długości. Druga grupa zadań dotyczy energii: spoczynkowej, całkowitej i kinetycznej.</p>",
+      "typoweZadania": [
+        "Obliczanie dylatacji czasu dla obiektu poruszającego się z prędkością bliską c.",
+        "Wyznaczanie skróconej długości obiektu w ruchu relatywistycznym.",
+        "Obliczanie energii spoczynkowej i energii całkowitej cząstki.",
+        "Wyznaczanie czynnika Lorentza dla danej prędkości."
+      ],
+      "strategia": [
+        "Wyrażaj prędkość jako ułamek prędkości światła (np. v = 0,8c) - to upraszcza liczenie v²/c².",
+        "Najpierw policz czynnik Lorentza γ, a potem podstaw go do wzoru na czas, długość lub energię.",
+        "Pamiętaj kierunek efektu: czas się wydłuża (t > t₀), a długość skraca (L < L₀)."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Dlaczego nic nie może poruszać się szybciej niż światło?", "a": "Bo przy zbliżaniu do prędkości światła czynnik Lorentza, a wraz z nim energia i pęd ciała, dążą do nieskończoności. Rozpędzenie masy do c wymagałoby nieskończonej energii." },
+      { "q": "Czy dylatacja czasu to tylko teoria?", "a": "Nie, to potwierdzony eksperymentalnie fakt. Miony powstające w atmosferze docierają do powierzchni Ziemi tylko dlatego, że ich czas życia ulega dylatacji. Potwierdzają to też precyzyjne zegary atomowe." },
+      { "q": "Co to znaczy, że masa jest formą energii?", "a": "Oznacza, że masa i energia są równoważne - można je przeliczać przez E = mc². W reakcjach jądrowych niewielki ubytek masy zamienia się w ogromną energię." },
+      { "q": "Czy efekty relatywistyczne dotyczą codziennego życia?", "a": "Przy zwykłych prędkościach są niezauważalnie małe. Mają jednak praktyczne znaczenie np. w systemie GPS, gdzie korekty relatywistyczne czasu są niezbędne do dokładnej nawigacji." }
+    ],
+    "faqMatura": [
+      { "q": "Od czego zacząć zadanie z teorii względności?", "a": "Niemal zawsze od obliczenia czynnika Lorentza γ. Mając γ, łatwo podstawić go do wzoru na dylatację czasu, skrócenie długości lub energię." },
+      { "q": "Jak liczyć v²/c², gdy prędkość podana jest jako 0,6c?", "a": "Po prostu podnosisz ułamek do kwadratu: (0,6c)²/c² = 0,36. Wtedy 1 − 0,36 = 0,64, a pierwiastek z tego to 0,8 - bardzo wygodne wartości." },
+      { "q": "Czym różni się energia spoczynkowa od całkowitej?", "a": "Energia spoczynkowa E₀ = mc² dotyczy ciała w spoczynku. Energia całkowita E = γmc² uwzględnia też ruch; ich różnica to relatywistyczna energia kinetyczna." }
+    ],
+    "subtopics": [
+      {
+        "slug": "dylatacja-czasu",
+        "name": "Dylatacja czasu",
+        "intro": "Dylatacja czasu to wydłużenie czasu obserwowanego dla poruszających się zegarów. Opisuje ją wzór z czynnikiem Lorentza.",
+        "problems": [
+          {
+            "title": "Czas w rakiecie",
+            "tresc": "Rakieta porusza się z prędkością v = 0,8c. Astronauta mierzy upływ czasu t₀ = 3 lata. Jaki czas upłynie według obserwatora na Ziemi?",
+            "steps": [
+              "Obliczam czynnik Lorentza: \\( \\gamma = \\frac{1}{\\sqrt{1 - 0{,}8^2}} = \\frac{1}{\\sqrt{1 - 0{,}64}} \\).",
+              "Pod pierwiastkiem: \\( 1 - 0{,}64 = 0{,}36 \\), więc \\( \\gamma = \\frac{1}{0{,}6} \\approx 1{,}667 \\).",
+              "Czas na Ziemi: \\( t = \\gamma t_0 = 1{,}667\\cdot 3 \\).",
+              "Obliczam: \\( t = 5 \\, \\mathrm{lat} \\)."
+            ],
+            "answer": "Na Ziemi upłynie 5 lat"
+          },
+          {
+            "title": "Czas życia mionu",
+            "tresc": "Mion w spoczynku żyje średnio t₀ = 2,2 µs. Jak długo żyje mion poruszający się z prędkością v = 0,6c według nieruchomego obserwatora?",
+            "steps": [
+              "Czynnik Lorentza: \\( \\gamma = \\frac{1}{\\sqrt{1 - 0{,}6^2}} = \\frac{1}{\\sqrt{0{,}64}} = \\frac{1}{0{,}8} = 1{,}25 \\).",
+              "Czas obserwowany: \\( t = \\gamma t_0 = 1{,}25\\cdot 2{,}2 \\, \\mathrm{\\mu s} \\).",
+              "Obliczam: \\( t = 2{,}75 \\, \\mathrm{\\mu s} \\)."
+            ],
+            "answer": "t ≈ 2,75 µs"
+          }
+        ],
+        "faq": [
+          { "q": "Który zegar pokazuje krótszy czas?", "a": "Zegar poruszający się względem obserwatora (mierzący czas własny) odmierza najkrótszy czas. Dla nieruchomego obserwatora poruszający się zegar 'chodzi wolniej', więc upływa na nim mniej czasu." }
+        ]
+      },
+      {
+        "slug": "skrocenie-dlugosci",
+        "name": "Skrócenie długości",
+        "intro": "Skrócenie długości (kontrakcja Lorentza) to zmniejszenie obserwowanej długości ciała w kierunku ruchu przy prędkościach bliskich c.",
+        "problems": [
+          {
+            "title": "Długość rakiety w ruchu",
+            "tresc": "Rakieta o długości spoczynkowej L₀ = 100 m porusza się z prędkością v = 0,6c. Jaką długość ma rakieta według nieruchomego obserwatora?",
+            "steps": [
+              "Stosuję wzór skrócenia: \\( L = L_0\\sqrt{1 - \\frac{v^2}{c^2}} \\).",
+              "Obliczam pierwiastek: \\( \\sqrt{1 - 0{,}6^2} = \\sqrt{0{,}64} = 0{,}8 \\).",
+              "Podstawiam: \\( L = 100\\cdot 0{,}8 \\).",
+              "Otrzymuję \\( L = 80 \\, \\mathrm{m} \\)."
+            ],
+            "answer": "L = 80 m"
+          },
+          {
+            "title": "Prędkość z danego skrócenia",
+            "tresc": "Pręt obserwowany jest jako skrócony do 60% swojej długości spoczynkowej. Z jaką prędkością się porusza?",
+            "steps": [
+              "Z definicji: \\( \\frac{L}{L_0} = \\sqrt{1 - \\frac{v^2}{c^2}} = 0{,}6 \\).",
+              "Podnoszę do kwadratu: \\( 1 - \\frac{v^2}{c^2} = 0{,}36 \\).",
+              "Stąd \\( \\frac{v^2}{c^2} = 0{,}64 \\), więc \\( \\frac{v}{c} = 0{,}8 \\).",
+              "Prędkość: \\( v = 0{,}8c = 2{,}4\\cdot10^8 \\, \\mathrm{m/s} \\)."
+            ],
+            "answer": "v = 0,8c ≈ 2,4·10⁸ m/s"
+          }
+        ],
+        "faq": [
+          { "q": "Czy skróceniu ulegają wszystkie wymiary ciała?", "a": "Nie. Skraca się tylko wymiar w kierunku ruchu. Wymiary prostopadłe do kierunku ruchu pozostają niezmienione." }
+        ]
+      },
+      {
+        "slug": "rownowaznosc-masy-energii",
+        "name": "Równoważność masy i energii",
+        "intro": "Wzór E = mc² wiąże masę z energią. Pozwala obliczyć energię spoczynkową ciała i energię uwalnianą przy ubytku masy.",
+        "problems": [
+          {
+            "title": "Energia spoczynkowa elektronu",
+            "tresc": "Oblicz energię spoczynkową elektronu o masie m = 9,1·10⁻³¹ kg. Przyjmij c = 3·10⁸ m/s.",
+            "steps": [
+              "Energia spoczynkowa: \\( E_0 = mc^2 \\).",
+              "Podstawiam: \\( E_0 = 9{,}1\\cdot10^{-31}\\cdot (3\\cdot10^8)^2 \\).",
+              "Obliczam \\( c^2 = 9\\cdot10^{16} \\), więc \\( E_0 = 9{,}1\\cdot10^{-31}\\cdot 9\\cdot10^{16} \\).",
+              "Wynik: \\( E_0 = 8{,}19\\cdot10^{-14} \\, \\mathrm{J} \\approx 0{,}51 \\, \\mathrm{MeV} \\)."
+            ],
+            "answer": "E₀ ≈ 8,2·10⁻¹⁴ J ≈ 0,51 MeV"
+          },
+          {
+            "title": "Energia z ubytku masy",
+            "tresc": "W pewnej reakcji jądrowej ubytek masy wynosi Δm = 2·10⁻²⁹ kg. Ile energii zostanie uwolnione?",
+            "steps": [
+              "Energia: \\( E = \\Delta m\\cdot c^2 \\).",
+              "Podstawiam: \\( E = 2\\cdot10^{-29}\\cdot 9\\cdot10^{16} \\).",
+              "Obliczam: \\( E = 1{,}8\\cdot10^{-12} \\, \\mathrm{J} \\)."
+            ],
+            "answer": "E = 1,8·10⁻¹² J (≈ 11,25 MeV)"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego mały ubytek masy daje tak dużą energię?", "a": "Bo masę mnożymy przez c², czyli liczbę rzędu 10¹⁷. Nawet znikomy ubytek masy zamienia się więc w olbrzymią energię - to podstawa działania elektrowni jądrowych i Słońca." }
+        ]
+      },
+      {
+        "slug": "czynnik-lorentza",
+        "name": "Czynnik Lorentza",
+        "intro": "Czynnik Lorentza γ to centralna wielkość teorii względności - określa, jak silne są efekty dylatacji czasu, skrócenia długości i wzrostu energii.",
+        "problems": [
+          {
+            "title": "Obliczanie czynnika Lorentza",
+            "tresc": "Oblicz czynnik Lorentza dla cząstki poruszającej się z prędkością v = 0,9c.",
+            "steps": [
+              "Wzór: \\( \\gamma = \\frac{1}{\\sqrt{1 - \\frac{v^2}{c^2}}} \\).",
+              "Obliczam \\( \\frac{v^2}{c^2} = 0{,}9^2 = 0{,}81 \\).",
+              "Pod pierwiastkiem: \\( 1 - 0{,}81 = 0{,}19 \\), \\( \\sqrt{0{,}19} \\approx 0{,}436 \\).",
+              "Stąd \\( \\gamma = \\frac{1}{0{,}436} \\approx 2{,}29 \\)."
+            ],
+            "answer": "γ ≈ 2,29"
+          },
+          {
+            "title": "Energia kinetyczna relatywistyczna",
+            "tresc": "Proton o masie m porusza się z prędkością v = 0,9c (γ ≈ 2,29). Energia spoczynkowa protonu to 938 MeV. Oblicz jego relatywistyczną energię kinetyczną.",
+            "steps": [
+              "Energia kinetyczna: \\( E_k = (\\gamma - 1)mc^2 \\).",
+              "Podstawiam \\( \\gamma = 2{,}29 \\), \\( mc^2 = 938 \\, \\mathrm{MeV} \\).",
+              "Obliczam: \\( E_k = (2{,}29 - 1)\\cdot 938 = 1{,}29\\cdot 938 \\).",
+              "Wynik: \\( E_k \\approx 1210 \\, \\mathrm{MeV} \\)."
+            ],
+            "answer": "E_k ≈ 1210 MeV (≈ 1,21 GeV)"
+          }
+        ],
+        "faq": [
+          { "q": "Ile wynosi czynnik Lorentza dla małych prędkości?", "a": "Dla v dużo mniejszych od c czynnik γ jest bliski 1, więc efekty relatywistyczne są pomijalne. Dopiero przy prędkościach bliskich c wartość γ szybko rośnie." }
+        ]
+      }
+    ],
+    "related": ["fizyka-jadrowa", "praca-moc-energia", "fizyka-atomowa"]
+  }
+]

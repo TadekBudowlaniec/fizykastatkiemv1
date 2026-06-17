@@ -1,0 +1,846 @@
+[
+  {
+    "slug": "hydrostatyka",
+    "name": "Hydrostatyka i aerostatyka",
+    "dopelniacz": "hydrostatyki",
+    "metaTeoria": "Hydrostatyka i aerostatyka - ciśnienie hydrostatyczne, prawo Pascala i prawo Archimedesa. Wzory, definicje i wyjaśnienia krok po kroku do matury.",
+    "metaMatura": "Zadania maturalne z hydrostatyki: ciśnienie, siła wyporu, prawo Archimedesa i Pascala. Rozwiązania krok po kroku, typowe zadania CKE i strategia.",
+    "intro": "Hydrostatyka i aerostatyka opisują ciecze i gazy w spoczynku. Poznasz tu ciśnienie hydrostatyczne, prawo Pascala oraz prawo Archimedesa i siłę wyporu. Te zagadnienia są stałym elementem matury z fizyki na poziomie podstawowym i rozszerzonym.",
+    "theory": [
+      {
+        "heading": "Ciśnienie i jego jednostki",
+        "html": "<p>Ciśnienie to stosunek wartości siły nacisku działającej prostopadle do powierzchni do pola tej powierzchni: \\( p=\\frac{F}{S} \\). Jednostką ciśnienia w układzie SI jest paskal: \\( 1\\,\\text{Pa}=1\\,\\frac{\\text{N}}{\\text{m}^2} \\).</p><ul><li>Ciśnienie jest wielkością skalarną.</li><li>Im mniejsza powierzchnia przy tej samej sile, tym większe ciśnienie (np. ostrze noża).</li><li>Często używa się hektopaskali (hPa) i atmosfer: \\( 1\\,\\text{atm}\\approx 1013\\,\\text{hPa} \\).</li></ul><p>Ciśnienie tłumaczy, dlaczego buty narciarskie z szerokimi nartami nie zapadają się w śnieg - rozkładają siłę ciężkości na większą powierzchnię.</p>"
+      },
+      {
+        "heading": "Ciśnienie hydrostatyczne",
+        "html": "<p>Ciecz wywiera na dno i ścianki naczynia ciśnienie wynikające z ciężaru słupa cieczy. Ciśnienie hydrostatyczne na głębokości \\( h \\) wynosi: $$ p=\\rho g h $$ gdzie \\( \\rho \\) to gęstość cieczy, \\( g \\) - przyspieszenie ziemskie.</p><ul><li>Ciśnienie hydrostatyczne nie zależy od kształtu naczynia ani od ilości cieczy, tylko od głębokości i gęstości.</li><li>To wyjaśnia paradoks hydrostatyczny - w naczyniach o różnych kształtach, ale tej samej wysokości słupa cieczy, ciśnienie na dnie jest takie samo.</li></ul><p>Całkowite ciśnienie na głębokości \\( h \\) w otwartym zbiorniku to suma ciśnienia atmosferycznego i hydrostatycznego: \\( p_c=p_0+\\rho g h \\).</p>"
+      },
+      {
+        "heading": "Prawo Pascala",
+        "html": "<p>Prawo Pascala mówi, że ciśnienie wywierane na zamkniętą ciecz (lub gaz) rozchodzi się jednakowo we wszystkich kierunkach i jest przekazywane bez zmian na ścianki naczynia.</p><ul><li>Na tej zasadzie działa prasa hydrauliczna i hamulce hydrauliczne.</li><li>W prasie hydraulicznej zachodzi: \\( \\frac{F_1}{S_1}=\\frac{F_2}{S_2} \\).</li></ul><p>Dzięki temu mała siła przyłożona do małego tłoka pozwala uzyskać dużą siłę na dużym tłoku. Zysk na sile odbywa się kosztem drogi (zasada zachowania energii - praca jest zachowana).</p>"
+      },
+      {
+        "heading": "Prawo Archimedesa i siła wyporu",
+        "html": "<p>Na ciało zanurzone w cieczy lub gazie działa siła wyporu skierowana pionowo do góry, równa co do wartości ciężarowi wypartego płynu: $$ F_w=\\rho_c g V_z $$ gdzie \\( \\rho_c \\) to gęstość płynu, a \\( V_z \\) - objętość zanurzonej części ciała.</p><ul><li>Jeśli \\( F_w>Q \\) - ciało wypływa na powierzchnię.</li><li>Jeśli \\( F_w=Q \\) - ciało pływa zanurzone (równowaga).</li><li>Jeśli \\( F_w<Q \\) - ciało tonie.</li></ul><p>Warunek pływania ciała: gęstość ciała musi być mniejsza lub równa gęstości cieczy.</p>"
+      },
+      {
+        "heading": "Pływanie ciał i warunki równowagi",
+        "html": "<p>Dla ciała pływającego po powierzchni siła wyporu równoważy ciężar: \\( \\rho_c g V_z=\\rho_b g V \\), skąd otrzymujemy stosunek zanurzenia: \\( \\frac{V_z}{V}=\\frac{\\rho_b}{\\rho_c} \\).</p><ul><li>Lód o gęstości około \\( 917\\,\\frac{\\text{kg}}{\\text{m}^3} \\) zanurza się w wodzie morskiej w około 90 procentach (stąd góra lodowa).</li><li>Statki pływają dzięki dużej objętości wypartej wody, mimo że są z metalu.</li></ul><p>Zmieniając gęstość średnią (np. balastem), można sterować zanurzeniem - tak działa łódź podwodna i pęcherz pławny ryb.</p>"
+      },
+      {
+        "heading": "Aerostatyka i ciśnienie atmosferyczne",
+        "html": "<p>Aerostatyka bada gazy w spoczynku. Powietrze atmosferyczne wywiera ciśnienie, które przy powierzchni Ziemi wynosi około \\( p_0\\approx 1013\\,\\text{hPa} \\). Ciśnienie atmosferyczne maleje z wysokością, bo maleje słup powietrza nad danym punktem.</p><ul><li>Doświadczenie Torricellego pozwoliło zmierzyć ciśnienie atmosferyczne za pomocą słupa rtęci o wysokości około 760 mm.</li><li>Prawo Archimedesa działa też w powietrzu - balony wypełnione helem lub gorącym powietrzem unoszą się dzięki sile wyporu.</li></ul><p>Balon unosi się, gdy ciężar wypartego powietrza przewyższa ciężar balonu wraz z gazem.</p>"
+      }
+    ],
+    "formulas": [
+      { "name": "Ciśnienie", "latex": "p=\\frac{F}{S}", "desc": "Stosunek siły nacisku prostopadłej do powierzchni do pola powierzchni." },
+      { "name": "Ciśnienie hydrostatyczne", "latex": "p=\\rho g h", "desc": "Ciśnienie wywierane przez słup cieczy na głębokości h." },
+      { "name": "Ciśnienie całkowite", "latex": "p_c=p_0+\\rho g h", "desc": "Suma ciśnienia atmosferycznego i hydrostatycznego." },
+      { "name": "Prawo Pascala (prasa)", "latex": "\\frac{F_1}{S_1}=\\frac{F_2}{S_2}", "desc": "Przekazywanie ciśnienia w cieczy w prasie hydraulicznej." },
+      { "name": "Siła wyporu", "latex": "F_w=\\rho_c g V_z", "desc": "Prawo Archimedesa - ciężar wypartego płynu." },
+      { "name": "Warunek pływania", "latex": "\\frac{V_z}{V}=\\frac{\\rho_b}{\\rho_c}", "desc": "Stosunek objętości zanurzonej do całkowitej." },
+      { "name": "Ciężar ciała", "latex": "Q=mg=\\rho_b g V", "desc": "Siła grawitacji działająca na ciało." },
+      { "name": "Gęstość", "latex": "\\rho=\\frac{m}{V}", "desc": "Stosunek masy ciała do jego objętości." }
+    ],
+    "definitions": [
+      { "term": "Ciśnienie hydrostatyczne", "def": "Ciśnienie wywierane przez ciecz w spoczynku wskutek jej ciężaru, zależne od głębokości i gęstości cieczy." },
+      { "term": "Prawo Pascala", "def": "Ciśnienie wywierane na zamknięty płyn rozchodzi się jednakowo we wszystkich kierunkach." },
+      { "term": "Siła wyporu", "def": "Pionowa siła skierowana do góry, działająca na ciało zanurzone w płynie, równa ciężarowi wypartego płynu." },
+      { "term": "Prawo Archimedesa", "def": "Na ciało zanurzone w płynie działa siła wyporu równa co do wartości ciężarowi wypartego płynu." },
+      { "term": "Paradoks hydrostatyczny", "def": "Ciśnienie cieczy na dno zależy tylko od wysokości słupa cieczy, a nie od kształtu naczynia." },
+      { "term": "Ciśnienie atmosferyczne", "def": "Ciśnienie wywierane przez słup powietrza atmosferycznego, przy powierzchni Ziemi około 1013 hPa." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Ciśnienie, ciśnienie hydrostatyczne, prawo Pascala, prawo Archimedesa, siła wyporu, warunki pływania ciał, ciśnienie atmosferyczne.",
+      "html": "<p>Hydrostatyka pojawia się na maturze zarówno samodzielnie, jak i w połączeniu z dynamiką (równowaga sił) oraz energią. Zadania zwykle wymagają obliczenia ciśnienia, siły wyporu lub ustalenia, czy ciało pływa, czy tonie. Na poziomie rozszerzonym częste są zadania z prasą hydrauliczną i analiza równowagi ciał częściowo zanurzonych.</p>",
+      "typoweZadania": [
+        "Obliczenie ciśnienia hydrostatycznego na danej głębokości w wodzie lub innej cieczy.",
+        "Wyznaczenie siły wyporu działającej na zanurzone ciało i porównanie jej z ciężarem.",
+        "Obliczenie, jaka część ciała wystaje ponad powierzchnię cieczy podczas pływania.",
+        "Zadania z prasą hydrauliczną - obliczanie siły lub przesunięcia tłoka."
+      ],
+      "strategia": [
+        "Zawsze wypisz dane i zamień jednostki na układ SI przed liczeniem.",
+        "Przy pływaniu ciał porównaj siłę wyporu z ciężarem lub gęstości ciała i cieczy.",
+        "W zadaniach z siłą wyporu pamiętaj, że liczy się tylko objętość części zanurzonej.",
+        "Naszkicuj sytuację i zaznacz wszystkie siły działające na ciało."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Od czego zależy ciśnienie hydrostatyczne?", "a": "Zależy wyłącznie od gęstości cieczy, przyspieszenia ziemskiego i głębokości (wysokości słupa cieczy). Nie zależy od kształtu naczynia ani od jego objętości." },
+      { "q": "Dlaczego ciężkie statki nie toną?", "a": "Bo wypierają bardzo dużą objętość wody. Siła wyporu równa ciężarowi wypartej wody równoważy ciężar statku, gdy jego gęstość średnia jest mniejsza niż gęstość wody." },
+      { "q": "Czym różni się hydrostatyka od aerostatyki?", "a": "Hydrostatyka bada ciecze w spoczynku, a aerostatyka gazy w spoczynku. Prawa Pascala i Archimedesa działają w obu przypadkach, ale gazy są ściśliwe." },
+      { "q": "Czy siła wyporu zależy od głębokości zanurzenia?", "a": "Nie - dla ciała w całości zanurzonego siła wyporu jest stała i zależy tylko od objętości ciała i gęstości cieczy, a nie od głębokości." }
+    ],
+    "faqMatura": [
+      { "q": "Jak rozpoznać, czy ciało utonie, czy będzie pływać?", "a": "Porównaj gęstość ciała z gęstością cieczy. Jeśli gęstość ciała jest mniejsza, ciało pływa; jeśli większa - tonie; jeśli równa - pozostaje zanurzone w dowolnym miejscu." },
+      { "q": "Jakie jednostki najczęściej trzeba zamieniać w zadaniach?", "a": "Najczęściej głębokość z cm na m, gęstość z g/cm3 na kg/m3 (mnożąc przez 1000) oraz ciśnienie z hPa na Pa." },
+      { "q": "Jakie wartości g i gęstości wody przyjąć na maturze?", "a": "Standardowo g = 9,81 m/s2 (często upraszcza się do 10 m/s2), a gęstość wody to 1000 kg/m3. Zawsze sprawdź dane w treści zadania." }
+    ],
+    "subtopics": [
+      {
+        "slug": "cisnienie-hydrostatyczne",
+        "name": "Ciśnienie hydrostatyczne",
+        "intro": "Obliczanie ciśnienia wywieranego przez ciecz na różnych głębokościach z wykorzystaniem wzoru p = rho g h.",
+        "problems": [
+          {
+            "title": "Ciśnienie na dnie jeziora",
+            "tresc": "Oblicz ciśnienie hydrostatyczne na dnie jeziora o głębokości 8 m. Gęstość wody wynosi 1000 kg/m3, g = 10 m/s2.",
+            "steps": [
+              "Wypisujemy dane: \\( h=8\\,\\text{m} \\), \\( \\rho=1000\\,\\frac{\\text{kg}}{\\text{m}^3} \\), \\( g=10\\,\\frac{\\text{m}}{\\text{s}^2} \\).",
+              "Stosujemy wzór na ciśnienie hydrostatyczne: \\( p=\\rho g h \\).",
+              "Podstawiamy: \\( p=1000\\cdot 10\\cdot 8 \\).",
+              "Obliczamy: \\( p=80000\\,\\text{Pa}=80\\,\\text{kPa} \\)."
+            ],
+            "answer": "p = 80 000 Pa = 80 kPa"
+          },
+          {
+            "title": "Całkowite ciśnienie pod wodą",
+            "tresc": "Nurek znajduje się na głębokości 20 m w morzu. Gęstość wody morskiej to 1025 kg/m3, ciśnienie atmosferyczne 1000 hPa, g = 10 m/s2. Oblicz całkowite ciśnienie działające na nurka.",
+            "steps": [
+              "Dane: \\( h=20\\,\\text{m} \\), \\( \\rho=1025\\,\\frac{\\text{kg}}{\\text{m}^3} \\), \\( p_0=1000\\,\\text{hPa}=100000\\,\\text{Pa} \\).",
+              "Obliczamy ciśnienie hydrostatyczne: \\( p_h=\\rho g h=1025\\cdot 10\\cdot 20=205000\\,\\text{Pa} \\).",
+              "Sumujemy z ciśnieniem atmosferycznym: \\( p_c=p_0+p_h \\).",
+              "Obliczamy: \\( p_c=100000+205000=305000\\,\\text{Pa}\\approx 305\\,\\text{kPa} \\)."
+            ],
+            "answer": "p_c = 305 000 Pa = 305 kPa"
+          }
+        ],
+        "faq": [
+          { "q": "Czy ciśnienie atmosferyczne dolicza się zawsze?", "a": "Tylko gdy pytamy o ciśnienie całkowite (absolutne). Samo ciśnienie hydrostatyczne to nadwyżka wynikająca z ciężaru cieczy, bez atmosfery." }
+        ]
+      },
+      {
+        "slug": "sila-wyporu",
+        "name": "Siła wyporu",
+        "intro": "Wyznaczanie siły wyporu działającej na ciała zanurzone w cieczach z wykorzystaniem prawa Archimedesa.",
+        "problems": [
+          {
+            "title": "Siła wyporu na zanurzony sześcian",
+            "tresc": "Stalowy sześcian o krawędzi 0,1 m zanurzono całkowicie w wodzie. Oblicz siłę wyporu działającą na sześcian. Gęstość wody 1000 kg/m3, g = 10 m/s2.",
+            "steps": [
+              "Obliczamy objętość sześcianu: \\( V=a^3=(0{,}1)^3=0{,}001\\,\\text{m}^3 \\).",
+              "Ponieważ sześcian jest cały zanurzony, \\( V_z=V=0{,}001\\,\\text{m}^3 \\).",
+              "Stosujemy prawo Archimedesa: \\( F_w=\\rho_c g V_z \\).",
+              "Podstawiamy: \\( F_w=1000\\cdot 10\\cdot 0{,}001=10\\,\\text{N} \\)."
+            ],
+            "answer": "F_w = 10 N"
+          },
+          {
+            "title": "Ciężar pozorny ciała w wodzie",
+            "tresc": "Ciało o masie 2 kg i objętości 0,0005 m3 zawieszono na sile dynamometru i zanurzono w wodzie. Jaki ciężar pozorny pokaże dynamometr? Gęstość wody 1000 kg/m3, g = 10 m/s2.",
+            "steps": [
+              "Obliczamy ciężar ciała w powietrzu: \\( Q=mg=2\\cdot 10=20\\,\\text{N} \\).",
+              "Obliczamy siłę wyporu: \\( F_w=\\rho_c g V=1000\\cdot 10\\cdot 0{,}0005=5\\,\\text{N} \\).",
+              "Ciężar pozorny to różnica: \\( Q_p=Q-F_w \\).",
+              "Obliczamy: \\( Q_p=20-5=15\\,\\text{N} \\)."
+            ],
+            "answer": "Q_p = 15 N"
+          }
+        ],
+        "faq": [
+          { "q": "Co to jest ciężar pozorny?", "a": "To ciężar ciała zmniejszony o siłę wyporu, czyli siła, jaką ciało napina linkę dynamometru po zanurzeniu w cieczy." }
+        ]
+      },
+      {
+        "slug": "prawo-pascala",
+        "name": "Prawo Pascala i prasa hydrauliczna",
+        "intro": "Zastosowanie prawa Pascala do obliczeń w prasie hydraulicznej i układach z tłokami.",
+        "problems": [
+          {
+            "title": "Siła na dużym tłoku prasy",
+            "tresc": "W prasie hydraulicznej mały tłok ma pole 0,002 m2, a duży 0,05 m2. Na mały tłok działa siła 100 N. Oblicz siłę na dużym tłoku.",
+            "steps": [
+              "Stosujemy prawo Pascala: \\( \\frac{F_1}{S_1}=\\frac{F_2}{S_2} \\).",
+              "Wyznaczamy \\( F_2 \\): \\( F_2=F_1\\cdot\\frac{S_2}{S_1} \\).",
+              "Podstawiamy: \\( F_2=100\\cdot\\frac{0{,}05}{0{,}002} \\).",
+              "Obliczamy: \\( F_2=100\\cdot 25=2500\\,\\text{N} \\)."
+            ],
+            "answer": "F_2 = 2500 N"
+          },
+          {
+            "title": "Przesunięcie tłoków",
+            "tresc": "W tej samej prasie mały tłok przesunięto o 0,3 m. O ile przesunie się duży tłok? Pole małego tłoka 0,002 m2, dużego 0,05 m2.",
+            "steps": [
+              "Objętość przetłoczonej cieczy jest stała: \\( S_1 h_1=S_2 h_2 \\).",
+              "Wyznaczamy \\( h_2 \\): \\( h_2=h_1\\cdot\\frac{S_1}{S_2} \\).",
+              "Podstawiamy: \\( h_2=0{,}3\\cdot\\frac{0{,}002}{0{,}05} \\).",
+              "Obliczamy: \\( h_2=0{,}3\\cdot 0{,}04=0{,}012\\,\\text{m}=1{,}2\\,\\text{cm} \\)."
+            ],
+            "answer": "h_2 = 0,012 m = 1,2 cm"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego prasa hydrauliczna nie łamie zasady zachowania energii?", "a": "Bo zysk na sile równoważy strata na drodze. Duży tłok przesuwa się o tyle mniej, ile razy działa na niego większa siła - praca jest taka sama." }
+        ]
+      },
+      {
+        "slug": "plywanie-cial",
+        "name": "Pływanie ciał",
+        "intro": "Analiza warunków pływania, tonięcia i zanurzenia ciał na podstawie porównania gęstości i sił.",
+        "problems": [
+          {
+            "title": "Zanurzenie pływającego klocka",
+            "tresc": "Drewniany klocek o gęstości 600 kg/m3 pływa w wodzie o gęstości 1000 kg/m3. Jaka część objętości klocka jest zanurzona?",
+            "steps": [
+              "Warunek pływania: \\( \\frac{V_z}{V}=\\frac{\\rho_b}{\\rho_c} \\).",
+              "Podstawiamy gęstości: \\( \\frac{V_z}{V}=\\frac{600}{1000} \\).",
+              "Obliczamy: \\( \\frac{V_z}{V}=0{,}6 \\).",
+              "Zatem zanurzone jest 60 procent objętości, a 40 procent wystaje nad wodę."
+            ],
+            "answer": "Zanurzone jest 60% objętości klocka."
+          },
+          {
+            "title": "Czy ciało utonie?",
+            "tresc": "Kula ma masę 0,8 kg i objętość 0,001 m3. Sprawdź, czy będzie pływać w wodzie o gęstości 1000 kg/m3.",
+            "steps": [
+              "Obliczamy gęstość kuli: \\( \\rho_b=\\frac{m}{V}=\\frac{0{,}8}{0{,}001}=800\\,\\frac{\\text{kg}}{\\text{m}^3} \\).",
+              "Porównujemy z gęstością wody: \\( 800<1000 \\).",
+              "Ponieważ gęstość kuli jest mniejsza niż wody, kula będzie pływać.",
+              "Zanurzona część: \\( \\frac{V_z}{V}=\\frac{800}{1000}=0{,}8 \\), czyli 80 procent."
+            ],
+            "answer": "Kula pływa, zanurzona w 80%."
+          }
+        ],
+        "faq": [
+          { "q": "Co decyduje o tym, czy ciało pływa?", "a": "Stosunek gęstości ciała do gęstości cieczy. Gdy gęstość ciała jest mniejsza, ciało pływa, częściowo wystając ponad powierzchnię." }
+        ]
+      }
+    ],
+    "related": ["dynamika", "termodynamika", "gazy-przemiany"]
+  },
+  {
+    "slug": "termodynamika",
+    "name": "Termodynamika i ciepło",
+    "dopelniacz": "termodynamiki",
+    "metaTeoria": "Termodynamika i ciepło - temperatura, ciepło właściwe, bilans cieplny i zasady termodynamiki. Wzory, definicje i wyjaśnienia krok po kroku do matury.",
+    "metaMatura": "Zadania maturalne z termodynamiki: bilans cieplny, ciepło właściwe, przemiany fazowe i I zasada termodynamiki. Rozwiązania krok po kroku i strategia CKE.",
+    "intro": "Termodynamika opisuje energię cieplną, temperaturę i przemiany energii. Poznasz tu ciepło właściwe, bilans cieplny, przemiany fazowe oraz zasady termodynamiki. To kluczowy dział na maturze z fizyki na poziomie podstawowym i rozszerzonym.",
+    "theory": [
+      {
+        "heading": "Temperatura i energia wewnętrzna",
+        "html": "<p>Temperatura jest miarą średniej energii kinetycznej cząsteczek substancji. W układzie SI mierzymy ją w kelwinach (K). Zależność między skalą Celsjusza a Kelvina: \\( T=t+273{,}15 \\).</p><ul><li>Zero bezwzględne (0 K) to najniższa możliwa temperatura, w której ustaje ruch cieplny cząsteczek.</li><li>Energia wewnętrzna \\( U \\) to suma energii kinetycznej i potencjalnej wszystkich cząsteczek ciała.</li></ul><p>Energię wewnętrzną można zmieniać na dwa sposoby: przez wykonanie pracy lub przez wymianę ciepła z otoczeniem.</p>"
+      },
+      {
+        "heading": "Ciepło i ciepło właściwe",
+        "html": "<p>Ciepło to energia przekazywana między ciałami o różnych temperaturach. Ilość ciepła potrzebna do ogrzania ciała o masie \\( m \\) o temperaturę \\( \\Delta T \\) wynosi: $$ Q=mc\\Delta T $$ gdzie \\( c \\) to ciepło właściwe substancji.</p><ul><li>Ciepło właściwe to ilość ciepła potrzebna do ogrzania 1 kg substancji o 1 K.</li><li>Ciepło właściwe wody jest duże: \\( c_w\\approx 4200\\,\\frac{\\text{J}}{\\text{kg}\\cdot\\text{K}} \\), dlatego woda wolno się nagrzewa i stygnie.</li></ul><p>Dzięki dużemu ciepłu właściwemu woda jest świetnym chłodziwem i stabilizuje klimat obszarów nadmorskich.</p>"
+      },
+      {
+        "heading": "Bilans cieplny",
+        "html": "<p>Gdy zetkniemy ciała o różnych temperaturach w izolowanym układzie, ciepło przepływa od ciała cieplejszego do chłodniejszego aż do wyrównania temperatur. Zgodnie z zasadą zachowania energii: $$ Q_{oddane}=Q_{pobrane} $$</p><ul><li>Ciało cieplejsze oddaje tyle ciepła, ile pobiera chłodniejsze.</li><li>Bilans cieplny pozwala wyznaczyć temperaturę końcową lub nieznane ciepło właściwe.</li></ul><p>To podstawowe narzędzie kalorymetrii - dziedziny zajmującej się pomiarem ilości ciepła.</p>"
+      },
+      {
+        "heading": "Przemiany fazowe i ciepło przemiany",
+        "html": "<p>Podczas zmiany stanu skupienia (topnienia, wrzenia) temperatura ciała nie zmienia się, mimo dostarczania ciepła. Energia idzie na zerwanie wiązań między cząsteczkami. Ciepło topnienia: \\( Q=m L_t \\), ciepło parowania: \\( Q=m L_p \\).</p><ul><li>\\( L_t \\) to ciepło topnienia, \\( L_p \\) to ciepło parowania (utajone).</li><li>Dla wody: \\( L_t\\approx 334\\,\\frac{\\text{kJ}}{\\text{kg}} \\), \\( L_p\\approx 2260\\,\\frac{\\text{kJ}}{\\text{kg}} \\).</li></ul><p>W zadaniach z lodem i wodą trzeba rozdzielić etapy: ogrzewanie, topnienie i dalsze ogrzewanie.</p>"
+      },
+      {
+        "heading": "Pierwsza zasada termodynamiki",
+        "html": "<p>Pierwsza zasada termodynamiki to zasada zachowania energii dla układów termodynamicznych: $$ \\Delta U=Q+W $$ gdzie \\( \\Delta U \\) to zmiana energii wewnętrznej, \\( Q \\) - ciepło dostarczone, \\( W \\) - praca wykonana nad gazem.</p><ul><li>Gdy gaz pobiera ciepło, jego energia wewnętrzna rośnie lub wykonuje on pracę.</li><li>Konwencja znaków: ciepło pobrane jest dodatnie, praca wykonana nad gazem dodatnia.</li></ul><p>Pierwsza zasada wyklucza istnienie perpetuum mobile pierwszego rodzaju - maszyny produkującej energię z niczego.</p>"
+      },
+      {
+        "heading": "Druga zasada termodynamiki i silniki cieplne",
+        "html": "<p>Druga zasada termodynamiki mówi, że ciepło samorzutnie przepływa od ciała cieplejszego do chłodniejszego, a nie odwrotnie. Określa też kierunek procesów i wprowadza pojęcie entropii.</p><ul><li>Sprawność silnika cieplnego: \\( \\eta=\\frac{W}{Q_p}=1-\\frac{Q_o}{Q_p} \\).</li><li>Maksymalna sprawność (cykl Carnota): \\( \\eta_{max}=1-\\frac{T_{ch}}{T_g} \\).</li></ul><p>Żaden silnik nie może mieć sprawności 100 procent - zawsze część energii jest oddawana do chłodnicy.</p>"
+      }
+    ],
+    "formulas": [
+      { "name": "Ciepło ogrzewania", "latex": "Q=mc\\Delta T", "desc": "Ciepło potrzebne do zmiany temperatury ciała." },
+      { "name": "Bilans cieplny", "latex": "Q_{oddane}=Q_{pobrane}", "desc": "Zasada zachowania energii dla wymiany ciepła." },
+      { "name": "Ciepło topnienia", "latex": "Q=mL_t", "desc": "Ciepło potrzebne do stopienia ciała w stałej temperaturze." },
+      { "name": "Ciepło parowania", "latex": "Q=mL_p", "desc": "Ciepło potrzebne do odparowania cieczy." },
+      { "name": "I zasada termodynamiki", "latex": "\\Delta U=Q+W", "desc": "Zmiana energii wewnętrznej równa sumie ciepła i pracy." },
+      { "name": "Skala Kelvina", "latex": "T=t+273{,}15", "desc": "Przeliczenie temperatury z Celsjusza na Kelviny." },
+      { "name": "Sprawność silnika", "latex": "\\eta=1-\\frac{Q_o}{Q_p}", "desc": "Stosunek pracy do ciepła pobranego." },
+      { "name": "Sprawność Carnota", "latex": "\\eta_{max}=1-\\frac{T_{ch}}{T_g}", "desc": "Maksymalna sprawność silnika cieplnego." }
+    ],
+    "definitions": [
+      { "term": "Temperatura", "def": "Wielkość fizyczna będąca miarą średniej energii kinetycznej ruchu cieplnego cząsteczek." },
+      { "term": "Ciepło właściwe", "def": "Ilość ciepła potrzebna do ogrzania 1 kg substancji o 1 K." },
+      { "term": "Energia wewnętrzna", "def": "Suma energii kinetycznej i potencjalnej wszystkich cząsteczek tworzących ciało." },
+      { "term": "Bilans cieplny", "def": "Równość ciepła oddanego przez ciała cieplejsze i pobranego przez chłodniejsze w izolowanym układzie." },
+      { "term": "Ciepło topnienia", "def": "Ilość ciepła potrzebna do stopienia 1 kg substancji w stałej temperaturze topnienia." },
+      { "term": "Entropia", "def": "Wielkość termodynamiczna będąca miarą nieuporządkowania układu; w układzie izolowanym nie maleje." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Temperatura, ciepło właściwe, bilans cieplny, przemiany fazowe, I i II zasada termodynamiki, sprawność silników cieplnych.",
+      "html": "<p>Termodynamika jest jednym z najczęściej sprawdzanych działów. Na poziomie podstawowym dominują zadania z bilansu cieplnego i ciepła właściwego. Na rozszerzonym dochodzą zasady termodynamiki, sprawność silników oraz analiza wykresów przemian. Często łączy się je z gazami doskonałymi.</p>",
+      "typoweZadania": [
+        "Obliczenie ciepła potrzebnego do ogrzania substancji o określoną temperaturę.",
+        "Wyznaczenie temperatury końcowej mieszaniny z bilansu cieplnego.",
+        "Obliczenie ciepła potrzebnego do stopienia lodu i ogrzania wody (etapy).",
+        "Wyznaczenie sprawności silnika cieplnego lub maksymalnej sprawności Carnota."
+      ],
+      "strategia": [
+        "Zamieniaj temperaturę na kelwiny, gdy korzystasz ze wzorów na sprawność Carnota.",
+        "W zadaniach z przemianami fazowymi rozbij proces na osobne etapy i policz ciepło dla każdego.",
+        "W bilansie cieplnym ustaw równanie Q oddane = Q pobrane i rozwiąż względem szukanej wielkości.",
+        "Sprawdzaj jednostki ciepła właściwego i upewnij się, że masa jest w kilogramach."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Czym różni się ciepło od temperatury?", "a": "Temperatura to miara średniej energii cząsteczek, a ciepło to energia przekazywana między ciałami o różnych temperaturach. Ciepło jest formą przekazu energii, a nie stanem ciała." },
+      { "q": "Dlaczego podczas topnienia temperatura się nie zmienia?", "a": "Bo dostarczane ciepło jest zużywane na zerwanie wiązań między cząsteczkami (zmianę stanu skupienia), a nie na zwiększenie ich energii kinetycznej." },
+      { "q": "Co mówi pierwsza zasada termodynamiki?", "a": "Zmiana energii wewnętrznej układu równa się sumie dostarczonego ciepła i pracy wykonanej nad układem. To zasada zachowania energii dla zjawisk cieplnych." },
+      { "q": "Dlaczego woda tak długo się nagrzewa?", "a": "Bo ma bardzo wysokie ciepło właściwe (około 4200 J/(kg K)). Do ogrzania wody trzeba dostarczyć dużo energii w porównaniu z innymi substancjami." }
+    ],
+    "faqMatura": [
+      { "q": "Kiedy temperaturę trzeba przeliczać na kelwiny?", "a": "Zawsze przy wzorach na sprawność Carnota i w zadaniach z gazami. W bilansie cieplnym można liczyć różnice w stopniach Celsjusza, bo różnica temperatur jest taka sama." },
+      { "q": "Jak rozwiązać zadanie z lodem i ciepłą wodą?", "a": "Rozbij na etapy: ogrzanie lodu do 0 stopni, stopienie lodu, ogrzanie powstałej wody. Następnie ułóż bilans z ciepłem oddanym przez ciepłą wodę." },
+      { "q": "Jaki błąd najczęściej popełniają maturzyści?", "a": "Pomijają etap przemiany fazowej (ciepło topnienia lub parowania) i liczą tylko zmianę temperatury, co daje błędny wynik." }
+    ],
+    "subtopics": [
+      {
+        "slug": "cieplo-wlasciwe",
+        "name": "Ciepło właściwe",
+        "intro": "Obliczanie ilości ciepła potrzebnej do zmiany temperatury substancji za pomocą wzoru Q = m c dT.",
+        "problems": [
+          {
+            "title": "Ogrzewanie wody",
+            "tresc": "Ile ciepła potrzeba, aby ogrzać 2 kg wody od 20 stopni C do 80 stopni C? Ciepło właściwe wody 4200 J/(kg K).",
+            "steps": [
+              "Dane: \\( m=2\\,\\text{kg} \\), \\( \\Delta T=80-20=60\\,\\text{K} \\), \\( c=4200\\,\\frac{\\text{J}}{\\text{kg K}} \\).",
+              "Stosujemy wzór: \\( Q=mc\\Delta T \\).",
+              "Podstawiamy: \\( Q=2\\cdot 4200\\cdot 60 \\).",
+              "Obliczamy: \\( Q=504000\\,\\text{J}=504\\,\\text{kJ} \\)."
+            ],
+            "answer": "Q = 504 000 J = 504 kJ"
+          },
+          {
+            "title": "Wyznaczanie ciepła właściwego",
+            "tresc": "Dostarczenie 9000 J ciepła ogrzało 0,5 kg metalu o 40 K. Oblicz ciepło właściwe tego metalu.",
+            "steps": [
+              "Dane: \\( Q=9000\\,\\text{J} \\), \\( m=0{,}5\\,\\text{kg} \\), \\( \\Delta T=40\\,\\text{K} \\).",
+              "Przekształcamy wzór: \\( c=\\frac{Q}{m\\Delta T} \\).",
+              "Podstawiamy: \\( c=\\frac{9000}{0{,}5\\cdot 40} \\).",
+              "Obliczamy: \\( c=\\frac{9000}{20}=450\\,\\frac{\\text{J}}{\\text{kg K}} \\)."
+            ],
+            "answer": "c = 450 J/(kg K)"
+          }
+        ],
+        "faq": [
+          { "q": "Czy różnicę temperatur można brać w stopniach Celsjusza?", "a": "Tak, bo różnica temperatur w stopniach Celsjusza i w kelwinach jest liczbowo identyczna - skale różnią się tylko punktem zerowym." }
+        ]
+      },
+      {
+        "slug": "bilans-cieplny",
+        "name": "Bilans cieplny",
+        "intro": "Wyznaczanie temperatury końcowej mieszanin i nieznanych wielkości z zasady zachowania energii cieplnej.",
+        "problems": [
+          {
+            "title": "Mieszanie wody",
+            "tresc": "Zmieszano 1 kg wody o temperaturze 80 stopni C z 3 kg wody o temperaturze 20 stopni C. Oblicz temperaturę końcową mieszaniny.",
+            "steps": [
+              "Bilans cieplny: \\( m_1 c (T_1-T)=m_2 c (T-T_2) \\), ciepło właściwe się skraca.",
+              "Podstawiamy: \\( 1\\cdot(80-T)=3\\cdot(T-20) \\).",
+              "Rozwiązujemy: \\( 80-T=3T-60 \\), stąd \\( 140=4T \\).",
+              "Obliczamy: \\( T=35\\,\\text{stopni C} \\)."
+            ],
+            "answer": "T = 35 stopni C"
+          },
+          {
+            "title": "Wrzucenie metalu do wody",
+            "tresc": "Do 0,5 kg wody o temperaturze 20 stopni C wrzucono 0,2 kg miedzi o temperaturze 100 stopni C. Ciepło właściwe wody 4200, miedzi 380 J/(kg K). Oblicz temperaturę końcową.",
+            "steps": [
+              "Bilans: \\( m_{Cu} c_{Cu}(100-T)=m_w c_w(T-20) \\).",
+              "Podstawiamy: \\( 0{,}2\\cdot 380\\cdot(100-T)=0{,}5\\cdot 4200\\cdot(T-20) \\).",
+              "Upraszczamy: \\( 76(100-T)=2100(T-20) \\), czyli \\( 7600-76T=2100T-42000 \\).",
+              "Rozwiązujemy: \\( 49600=2176T \\), stąd \\( T\\approx 22{,}8\\,\\text{stopni C} \\)."
+            ],
+            "answer": "T = 22,8 stopni C (w przybliżeniu)"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego ciepło właściwe wody skraca się przy mieszaniu wody z wodą?", "a": "Bo ta sama substancja po obu stronach równania ma to samo c, które można skrócić. Upraszcza to obliczenia do samych mas i temperatur." }
+        ]
+      },
+      {
+        "slug": "przemiany-fazowe",
+        "name": "Przemiany fazowe",
+        "intro": "Obliczanie ciepła związanego z topnieniem, krzepnięciem i parowaniem podczas zmian stanu skupienia.",
+        "problems": [
+          {
+            "title": "Topnienie lodu",
+            "tresc": "Ile ciepła potrzeba, aby stopić 0,5 kg lodu o temperaturze 0 stopni C? Ciepło topnienia lodu 334 000 J/kg.",
+            "steps": [
+              "Dane: \\( m=0{,}5\\,\\text{kg} \\), \\( L_t=334000\\,\\frac{\\text{J}}{\\text{kg}} \\).",
+              "Stosujemy wzór: \\( Q=mL_t \\).",
+              "Podstawiamy: \\( Q=0{,}5\\cdot 334000 \\).",
+              "Obliczamy: \\( Q=167000\\,\\text{J}=167\\,\\text{kJ} \\)."
+            ],
+            "answer": "Q = 167 000 J = 167 kJ"
+          },
+          {
+            "title": "Lód do ciepłej wody",
+            "tresc": "Ile ciepła potrzeba, aby z 0,2 kg lodu o temperaturze 0 stopni C otrzymać wodę o temperaturze 20 stopni C? Ciepło topnienia 334 000 J/kg, ciepło właściwe wody 4200 J/(kg K).",
+            "steps": [
+              "Etap 1 - topnienie lodu: \\( Q_1=mL_t=0{,}2\\cdot 334000=66800\\,\\text{J} \\).",
+              "Etap 2 - ogrzanie wody: \\( Q_2=mc\\Delta T=0{,}2\\cdot 4200\\cdot 20=16800\\,\\text{J} \\).",
+              "Sumujemy ciepła: \\( Q=Q_1+Q_2 \\).",
+              "Obliczamy: \\( Q=66800+16800=83600\\,\\text{J}\\approx 83{,}6\\,\\text{kJ} \\)."
+            ],
+            "answer": "Q = 83 600 J = 83,6 kJ"
+          }
+        ],
+        "faq": [
+          { "q": "Czemu trzeba liczyć topnienie i ogrzewanie osobno?", "a": "Bo to dwa różne procesy: topnienie zachodzi w stałej temperaturze i wymaga ciepła topnienia, a ogrzewanie zmienia temperaturę i wymaga ciepła właściwego." }
+        ]
+      },
+      {
+        "slug": "zasady-termodynamiki",
+        "name": "Zasady termodynamiki",
+        "intro": "Zastosowanie I i II zasady termodynamiki oraz obliczanie sprawności silników cieplnych.",
+        "problems": [
+          {
+            "title": "Zmiana energii wewnętrznej",
+            "tresc": "Gazowi dostarczono 500 J ciepła, a gaz wykonał pracę 200 J. Oblicz zmianę energii wewnętrznej gazu.",
+            "steps": [
+              "I zasada termodynamiki: \\( \\Delta U=Q+W \\), gdzie praca wykonana PRZEZ gaz jest ujemna dla układu.",
+              "Gaz pobiera ciepło: \\( Q=+500\\,\\text{J} \\), wykonuje pracę: \\( W=-200\\,\\text{J} \\).",
+              "Podstawiamy: \\( \\Delta U=500+(-200) \\).",
+              "Obliczamy: \\( \\Delta U=300\\,\\text{J} \\)."
+            ],
+            "answer": "dU = 300 J"
+          },
+          {
+            "title": "Sprawność silnika Carnota",
+            "tresc": "Silnik cieplny pracuje między grzejnicą o temperaturze 600 K a chłodnicą o temperaturze 300 K. Oblicz maksymalną sprawność tego silnika.",
+            "steps": [
+              "Stosujemy wzór na sprawność Carnota: \\( \\eta_{max}=1-\\frac{T_{ch}}{T_g} \\).",
+              "Podstawiamy: \\( \\eta_{max}=1-\\frac{300}{600} \\).",
+              "Obliczamy: \\( \\eta_{max}=1-0{,}5=0{,}5 \\).",
+              "Wynik wyrażamy w procentach: \\( \\eta_{max}=50\\% \\)."
+            ],
+            "answer": "eta_max = 0,5 = 50%"
+          }
+        ],
+        "faq": [
+          { "q": "Czy silnik może mieć sprawność 100 procent?", "a": "Nie. Druga zasada termodynamiki zabrania - zawsze część ciepła trzeba oddać do chłodnicy. Sprawność Carnota jest górnym, nieosiągalnym w praktyce limitem." }
+        ]
+      }
+    ],
+    "related": ["gazy-przemiany", "praca-moc-energia", "hydrostatyka"]
+  },
+  {
+    "slug": "gazy-przemiany",
+    "name": "Gazy doskonałe i przemiany gazowe",
+    "dopelniacz": "gazów i przemian gazowych",
+    "metaTeoria": "Gazy doskonałe i przemiany gazowe - równanie Clapeyrona, przemiana izotermiczna, izobaryczna i izochoryczna. Wzory i wyjaśnienia krok po kroku do matury.",
+    "metaMatura": "Zadania maturalne z gazów doskonałych: równanie Clapeyrona, przemiany gazowe i praca gazu. Rozwiązania krok po kroku, typowe zadania CKE i strategia.",
+    "intro": "Model gazu doskonałego pozwala opisać zachowanie gazów za pomocą równania Clapeyrona. Poznasz tu przemiany gazowe: izotermiczną, izobaryczną i izochoryczną, a także pracę gazu. To częsty i punktowany dział matury z fizyki na poziomie rozszerzonym.",
+    "theory": [
+      {
+        "heading": "Model gazu doskonałego",
+        "html": "<p>Gaz doskonały to model, w którym cząsteczki traktujemy jako punkty materialne nieoddziałujące na siebie poza zderzeniami sprężystymi. Mimo uproszczeń dobrze opisuje gazy rozrzedzone w warunkach normalnych.</p><ul><li>Cząsteczki mają pomijalnie małą objętość własną.</li><li>Zderzenia są doskonale sprężyste i bardzo krótkie.</li><li>Między zderzeniami nie działają siły międzycząsteczkowe.</li></ul><p>Stan gazu opisują trzy parametry: ciśnienie \\( p \\), objętość \\( V \\) i temperatura \\( T \\) (w kelwinach).</p>"
+      },
+      {
+        "heading": "Równanie Clapeyrona",
+        "html": "<p>Równanie stanu gazu doskonałego (Clapeyrona) wiąże wszystkie parametry stanu: $$ pV=nRT $$ gdzie \\( n \\) to liczba moli, \\( R\\approx 8{,}31\\,\\frac{\\text{J}}{\\text{mol K}} \\) to uniwersalna stała gazowa.</p><ul><li>Liczba moli: \\( n=\\frac{m}{M} \\), gdzie \\( M \\) to masa molowa.</li><li>Dla ustalonej masy gazu zachodzi: \\( \\frac{pV}{T}=\\text{const} \\).</li></ul><p>Z równania Clapeyrona można wyprowadzić wszystkie szczególne przemiany gazowe.</p>"
+      },
+      {
+        "heading": "Przemiana izotermiczna",
+        "html": "<p>Przemiana izotermiczna zachodzi w stałej temperaturze (\\( T=\\text{const} \\)). Z równania Clapeyrona wynika prawo Boyle'a i Mariotte'a: $$ pV=\\text{const} $$ czyli \\( p_1 V_1=p_2 V_2 \\).</p><ul><li>Gdy ciśnienie rośnie, objętość maleje (i odwrotnie).</li><li>Na wykresie p-V przemiana to hiperbola (izoterma).</li></ul><p>Ponieważ temperatura jest stała, energia wewnętrzna gazu doskonałego się nie zmienia, a całe dostarczone ciepło zamienia się w pracę.</p>"
+      },
+      {
+        "heading": "Przemiana izobaryczna",
+        "html": "<p>Przemiana izobaryczna zachodzi przy stałym ciśnieniu (\\( p=\\text{const} \\)). Obowiązuje prawo Gay-Lussaca: $$ \\frac{V}{T}=\\text{const} $$ czyli \\( \\frac{V_1}{T_1}=\\frac{V_2}{T_2} \\).</p><ul><li>Objętość rośnie proporcjonalnie do temperatury bezwzględnej.</li><li>Praca gazu przy stałym ciśnieniu: \\( W=p\\Delta V \\).</li></ul><p>Na wykresie p-V przemiana izobaryczna to odcinek poziomy, a pole pod nim to praca gazu.</p>"
+      },
+      {
+        "heading": "Przemiana izochoryczna",
+        "html": "<p>Przemiana izochoryczna zachodzi przy stałej objętości (\\( V=\\text{const} \\)). Obowiązuje prawo Charlesa: $$ \\frac{p}{T}=\\text{const} $$ czyli \\( \\frac{p_1}{T_1}=\\frac{p_2}{T_2} \\).</p><ul><li>Ciśnienie rośnie proporcjonalnie do temperatury bezwzględnej.</li><li>Ponieważ objętość się nie zmienia, gaz nie wykonuje pracy: \\( W=0 \\).</li></ul><p>Całe dostarczone ciepło zamienia się w przyrost energii wewnętrznej gazu.</p>"
+      },
+      {
+        "heading": "Praca gazu i energia wewnętrzna",
+        "html": "<p>Praca wykonana przez gaz odpowiada polu pod wykresem w układzie p-V. Dla przemiany izobarycznej: \\( W=p\\Delta V \\). Energia wewnętrzna gazu doskonałego zależy tylko od temperatury.</p><ul><li>Dla gazu jednoatomowego: \\( U=\\frac{3}{2}nRT \\).</li><li>Zmiana energii wewnętrznej: \\( \\Delta U=\\frac{3}{2}nR\\Delta T \\).</li></ul><p>Łącząc to z pierwszą zasadą termodynamiki \\( \\Delta U=Q+W \\), można w pełni analizować dowolne przemiany gazowe.</p>"
+      }
+    ],
+    "formulas": [
+      { "name": "Równanie Clapeyrona", "latex": "pV=nRT", "desc": "Równanie stanu gazu doskonałego." },
+      { "name": "Równanie ogólne", "latex": "\\frac{p_1 V_1}{T_1}=\\frac{p_2 V_2}{T_2}", "desc": "Zależność parametrów stanu dla stałej masy gazu." },
+      { "name": "Przemiana izotermiczna", "latex": "p_1 V_1=p_2 V_2", "desc": "Prawo Boyle'a i Mariotte'a (T = const)." },
+      { "name": "Przemiana izobaryczna", "latex": "\\frac{V_1}{T_1}=\\frac{V_2}{T_2}", "desc": "Prawo Gay-Lussaca (p = const)." },
+      { "name": "Przemiana izochoryczna", "latex": "\\frac{p_1}{T_1}=\\frac{p_2}{T_2}", "desc": "Prawo Charlesa (V = const)." },
+      { "name": "Praca izobaryczna", "latex": "W=p\\Delta V", "desc": "Praca gazu przy stałym ciśnieniu." },
+      { "name": "Liczba moli", "latex": "n=\\frac{m}{M}", "desc": "Stosunek masy gazu do masy molowej." },
+      { "name": "Energia wewnętrzna gazu jednoatomowego", "latex": "U=\\frac{3}{2}nRT", "desc": "Energia wewnętrzna gazu doskonałego zależna od temperatury." }
+    ],
+    "definitions": [
+      { "term": "Gaz doskonały", "def": "Model gazu, w którym cząsteczki nie mają objętości i nie oddziałują na siebie poza sprężystymi zderzeniami." },
+      { "term": "Równanie Clapeyrona", "def": "Równanie stanu gazu doskonałego pV = nRT wiążące ciśnienie, objętość i temperaturę." },
+      { "term": "Przemiana izotermiczna", "def": "Przemiana gazowa zachodząca w stałej temperaturze, w której pV pozostaje stałe." },
+      { "term": "Przemiana izobaryczna", "def": "Przemiana gazowa zachodząca przy stałym ciśnieniu, w której V/T jest stałe." },
+      { "term": "Przemiana izochoryczna", "def": "Przemiana gazowa przy stałej objętości, w której p/T jest stałe, a gaz nie wykonuje pracy." },
+      { "term": "Stała gazowa", "def": "Uniwersalna stała R równa około 8,31 J/(mol K), występująca w równaniu Clapeyrona." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Model gazu doskonałego, równanie Clapeyrona, przemiany izotermiczna, izobaryczna i izochoryczna, praca gazu, energia wewnętrzna.",
+      "html": "<p>Gazy doskonałe są mocno reprezentowane na poziomie rozszerzonym. Typowe zadania wymagają zastosowania równania Clapeyrona lub odpowiedniej przemiany, a także interpretacji wykresów p-V i p-T. Często łączy się je z pierwszą zasadą termodynamiki i obliczaniem pracy oraz ciepła.</p>",
+      "typoweZadania": [
+        "Obliczenie objętości lub ciśnienia gazu z równania Clapeyrona.",
+        "Zastosowanie prawa przemiany do wyznaczenia parametru po zmianie stanu.",
+        "Obliczenie pracy wykonanej przez gaz w przemianie izobarycznej.",
+        "Analiza wykresu cyklu przemian gazowych i obliczenie pracy w cyklu."
+      ],
+      "strategia": [
+        "Zawsze przeliczaj temperaturę na kelwiny przed podstawieniem do wzorów.",
+        "Rozpoznaj typ przemiany po stałym parametrze (T, p lub V) i dobierz właściwe prawo.",
+        "Pamiętaj, że w przemianie izochorycznej praca gazu jest równa zero.",
+        "W zadaniach z pracą gazu interpretuj pole pod wykresem w układzie p-V."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Czym jest gaz doskonały?", "a": "To uproszczony model gazu, w którym cząsteczki nie mają objętości i nie oddziałują na siebie poza sprężystymi zderzeniami. Dobrze opisuje rzeczywiste gazy w warunkach niskiego ciśnienia." },
+      { "q": "Dlaczego w równaniu gazów używamy kelwinów?", "a": "Bo prawa gazowe wymagają temperatury bezwzględnej. Stosunki typu V/T mają sens fizyczny tylko dla skali Kelvina, gdzie zero oznacza brak ruchu cieplnego." },
+      { "q": "Co się dzieje z energią wewnętrzną gazu w przemianie izotermicznej?", "a": "Nie zmienia się, bo energia wewnętrzna gazu doskonałego zależy tylko od temperatury. Całe dostarczone ciepło zamienia się wtedy w pracę gazu." },
+      { "q": "Kiedy gaz nie wykonuje pracy?", "a": "W przemianie izochorycznej, gdy objętość jest stała. Praca gazu jest równa polu pod wykresem p-V, a przy braku zmiany objętości pole to wynosi zero." }
+    ],
+    "faqMatura": [
+      { "q": "Jak rozpoznać typ przemiany w zadaniu?", "a": "Szukaj wielkości, która się nie zmienia. Stała temperatura to izoterma, stałe ciśnienie to izobara, stała objętość to izochora. Wybierz odpowiednie prawo." },
+      { "q": "Jak obliczyć pracę gazu z wykresu?", "a": "Praca odpowiada polu pod wykresem w układzie p-V. Dla izobary to prostokąt p razy dV, dla cyklu zamkniętego pole obejmuje obszar wewnątrz krzywej." },
+      { "q": "Jaką wartość stałej R przyjąć?", "a": "Uniwersalna stała gazowa R wynosi około 8,31 J/(mol K). Ta wartość jest podana w karcie wzorów na maturze." }
+    ],
+    "subtopics": [
+      {
+        "slug": "rownanie-clapeyrona",
+        "name": "Równanie Clapeyrona",
+        "intro": "Obliczanie parametrów gazu doskonałego z równania stanu pV = nRT.",
+        "problems": [
+          {
+            "title": "Objętość gazu",
+            "tresc": "Oblicz objętość 2 moli gazu doskonałego o temperaturze 300 K pod ciśnieniem 100 000 Pa. Stała gazowa R = 8,31 J/(mol K).",
+            "steps": [
+              "Dane: \\( n=2\\,\\text{mol} \\), \\( T=300\\,\\text{K} \\), \\( p=100000\\,\\text{Pa} \\).",
+              "Z równania Clapeyrona wyznaczamy V: \\( V=\\frac{nRT}{p} \\).",
+              "Podstawiamy: \\( V=\\frac{2\\cdot 8{,}31\\cdot 300}{100000} \\).",
+              "Obliczamy: \\( V=\\frac{4986}{100000}\\approx 0{,}0499\\,\\text{m}^3\\approx 49{,}9\\,\\text{dm}^3 \\)."
+            ],
+            "answer": "V = 0,0499 m3 = 49,9 dm3 (w przybliżeniu)"
+          },
+          {
+            "title": "Liczba moli gazu",
+            "tresc": "Gaz o objętości 0,01 m3 ma ciśnienie 200 000 Pa i temperaturę 250 K. Oblicz liczbę moli gazu. R = 8,31 J/(mol K).",
+            "steps": [
+              "Z równania Clapeyrona: \\( n=\\frac{pV}{RT} \\).",
+              "Podstawiamy: \\( n=\\frac{200000\\cdot 0{,}01}{8{,}31\\cdot 250} \\).",
+              "Liczymy licznik i mianownik: \\( n=\\frac{2000}{2077{,}5} \\).",
+              "Obliczamy: \\( n\\approx 0{,}96\\,\\text{mol} \\)."
+            ],
+            "answer": "n = 0,96 mol (w przybliżeniu)"
+          }
+        ],
+        "faq": [
+          { "q": "Czy ciśnienie trzeba zamieniać na paskale?", "a": "Tak, jeśli używamy R w J/(mol K). Wtedy ciśnienie musi być w paskalach, objętość w metrach sześciennych, a temperatura w kelwinach." }
+        ]
+      },
+      {
+        "slug": "przemiana-izotermiczna",
+        "name": "Przemiana izotermiczna",
+        "intro": "Zastosowanie prawa Boyle'a i Mariotte'a do gazów w stałej temperaturze.",
+        "problems": [
+          {
+            "title": "Sprężanie gazu",
+            "tresc": "Gaz o objętości 4 dm3 i ciśnieniu 100 kPa sprężono izotermicznie do objętości 1 dm3. Oblicz nowe ciśnienie.",
+            "steps": [
+              "Prawo Boyle'a-Mariotte'a: \\( p_1 V_1=p_2 V_2 \\).",
+              "Wyznaczamy \\( p_2 \\): \\( p_2=\\frac{p_1 V_1}{V_2} \\).",
+              "Podstawiamy: \\( p_2=\\frac{100\\cdot 4}{1} \\).",
+              "Obliczamy: \\( p_2=400\\,\\text{kPa} \\)."
+            ],
+            "answer": "p_2 = 400 kPa"
+          },
+          {
+            "title": "Rozprężanie gazu",
+            "tresc": "Gaz pod ciśnieniem 300 kPa zajmuje 2 dm3. Po izotermicznym rozprężeniu ciśnienie spadło do 120 kPa. Oblicz nową objętość.",
+            "steps": [
+              "Prawo Boyle'a-Mariotte'a: \\( p_1 V_1=p_2 V_2 \\).",
+              "Wyznaczamy \\( V_2 \\): \\( V_2=\\frac{p_1 V_1}{p_2} \\).",
+              "Podstawiamy: \\( V_2=\\frac{300\\cdot 2}{120} \\).",
+              "Obliczamy: \\( V_2=\\frac{600}{120}=5\\,\\text{dm}^3 \\)."
+            ],
+            "answer": "V_2 = 5 dm3"
+          }
+        ],
+        "faq": [
+          { "q": "Czy w przemianie izotermicznej trzeba zamieniać jednostki objętości?", "a": "Nie trzeba, jeśli po obu stronach równania są te same jednostki. Ważne tylko, by p1 i p2 oraz V1 i V2 miały zgodne jednostki." }
+        ]
+      },
+      {
+        "slug": "przemiana-izobaryczna",
+        "name": "Przemiana izobaryczna",
+        "intro": "Obliczenia dla gazów przy stałym ciśnieniu z wykorzystaniem prawa Gay-Lussaca i pracy gazu.",
+        "problems": [
+          {
+            "title": "Ogrzewanie przy stałym ciśnieniu",
+            "tresc": "Gaz o objętości 3 dm3 i temperaturze 300 K ogrzano izobarycznie do 400 K. Oblicz nową objętość.",
+            "steps": [
+              "Prawo Gay-Lussaca: \\( \\frac{V_1}{T_1}=\\frac{V_2}{T_2} \\).",
+              "Wyznaczamy \\( V_2 \\): \\( V_2=V_1\\cdot\\frac{T_2}{T_1} \\).",
+              "Podstawiamy: \\( V_2=3\\cdot\\frac{400}{300} \\).",
+              "Obliczamy: \\( V_2=3\\cdot\\frac{4}{3}=4\\,\\text{dm}^3 \\)."
+            ],
+            "answer": "V_2 = 4 dm3"
+          },
+          {
+            "title": "Praca gazu w izobarze",
+            "tresc": "Gaz przy stałym ciśnieniu 200 000 Pa rozszerzył się od 0,002 m3 do 0,005 m3. Oblicz pracę wykonaną przez gaz.",
+            "steps": [
+              "Stosujemy wzór: \\( W=p\\Delta V \\).",
+              "Obliczamy zmianę objętości: \\( \\Delta V=0{,}005-0{,}002=0{,}003\\,\\text{m}^3 \\).",
+              "Podstawiamy: \\( W=200000\\cdot 0{,}003 \\).",
+              "Obliczamy: \\( W=600\\,\\text{J} \\)."
+            ],
+            "answer": "W = 600 J"
+          }
+        ],
+        "faq": [
+          { "q": "Czy temperaturę w prawie Gay-Lussaca trzeba podawać w kelwinach?", "a": "Tak, koniecznie. Stosunek V/T ma sens tylko dla temperatury bezwzględnej. Użycie stopni Celsjusza da błędny wynik." }
+        ]
+      },
+      {
+        "slug": "przemiana-izochoryczna",
+        "name": "Przemiana izochoryczna",
+        "intro": "Obliczenia dla gazów przy stałej objętości z wykorzystaniem prawa Charlesa.",
+        "problems": [
+          {
+            "title": "Wzrost ciśnienia przy ogrzewaniu",
+            "tresc": "Gaz w zamkniętym zbiorniku o stałej objętości ma ciśnienie 150 kPa i temperaturę 300 K. Ogrzano go do 360 K. Oblicz nowe ciśnienie.",
+            "steps": [
+              "Prawo Charlesa: \\( \\frac{p_1}{T_1}=\\frac{p_2}{T_2} \\).",
+              "Wyznaczamy \\( p_2 \\): \\( p_2=p_1\\cdot\\frac{T_2}{T_1} \\).",
+              "Podstawiamy: \\( p_2=150\\cdot\\frac{360}{300} \\).",
+              "Obliczamy: \\( p_2=150\\cdot 1{,}2=180\\,\\text{kPa} \\)."
+            ],
+            "answer": "p_2 = 180 kPa"
+          },
+          {
+            "title": "Temperatura po wzroście ciśnienia",
+            "tresc": "Gaz przy stałej objętości miał ciśnienie 100 kPa w temperaturze 280 K. Ciśnienie wzrosło do 125 kPa. Oblicz nową temperaturę.",
+            "steps": [
+              "Prawo Charlesa: \\( \\frac{p_1}{T_1}=\\frac{p_2}{T_2} \\).",
+              "Wyznaczamy \\( T_2 \\): \\( T_2=T_1\\cdot\\frac{p_2}{p_1} \\).",
+              "Podstawiamy: \\( T_2=280\\cdot\\frac{125}{100} \\).",
+              "Obliczamy: \\( T_2=280\\cdot 1{,}25=350\\,\\text{K} \\)."
+            ],
+            "answer": "T_2 = 350 K"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego w przemianie izochorycznej gaz nie wykonuje pracy?", "a": "Bo praca gazu wynika ze zmiany objętości (W = p dV). Przy stałej objętości dV = 0, więc praca również jest równa zero." }
+        ]
+      }
+    ],
+    "related": ["termodynamika", "praca-moc-energia", "hydrostatyka"]
+  },
+  {
+    "slug": "elektrostatyka",
+    "name": "Elektrostatyka",
+    "dopelniacz": "elektrostatyki",
+    "metaTeoria": "Elektrostatyka - prawo Coulomba, natężenie i potencjał pola elektrycznego oraz pojemność kondensatora. Wzory i wyjaśnienia krok po kroku do matury.",
+    "metaMatura": "Zadania maturalne z elektrostatyki: prawo Coulomba, pole elektryczne, potencjał i kondensatory. Rozwiązania krok po kroku, typowe zadania CKE i strategia.",
+    "intro": "Elektrostatyka bada ładunki elektryczne w spoczynku i ich oddziaływania. Poznasz tu prawo Coulomba, natężenie i potencjał pola elektrycznego oraz pojemność kondensatora. To istotny dział matury z fizyki na poziomie podstawowym i rozszerzonym.",
+    "theory": [
+      {
+        "heading": "Ładunek elektryczny",
+        "html": "<p>Ładunek elektryczny jest podstawową wielkością elektrostatyki. Istnieją dwa rodzaje ładunków: dodatni i ujemny. Ładunki jednoimienne się odpychają, różnoimienne przyciągają. Jednostką ładunku jest kulomb (C).</p><ul><li>Ładunek jest skwantowany - jest wielokrotnością ładunku elementarnego \\( e\\approx 1{,}6\\cdot 10^{-19}\\,\\text{C} \\).</li><li>Obowiązuje zasada zachowania ładunku - całkowity ładunek w układzie izolowanym jest stały.</li></ul><p>Ciało elektryzujemy przez tarcie, dotyk lub indukcję, przenosząc elektrony między ciałami.</p>"
+      },
+      {
+        "heading": "Prawo Coulomba",
+        "html": "<p>Prawo Coulomba opisuje siłę oddziaływania między dwoma ładunkami punktowymi: $$ F=k\\frac{|q_1 q_2|}{r^2} $$ gdzie \\( k\\approx 9\\cdot 10^9\\,\\frac{\\text{N m}^2}{\\text{C}^2} \\) to stała elektrostatyczna, a \\( r \\) - odległość między ładunkami.</p><ul><li>Siła maleje z kwadratem odległości - podwojenie odległości zmniejsza siłę czterokrotnie.</li><li>Stała \\( k=\\frac{1}{4\\pi\\varepsilon_0} \\), gdzie \\( \\varepsilon_0 \\) to przenikalność elektryczna próżni.</li></ul><p>Siła Coulomba ma podobną postać matematyczną jak prawo grawitacji, ale może być przyciągająca lub odpychająca.</p>"
+      },
+      {
+        "heading": "Natężenie pola elektrycznego",
+        "html": "<p>Pole elektryczne to obszar, w którym na ładunek działa siła elektryczna. Natężenie pola to siła działająca na jednostkowy ładunek próbny: $$ E=\\frac{F}{q} $$ Jednostką natężenia jest \\( \\frac{\\text{N}}{\\text{C}}=\\frac{\\text{V}}{\\text{m}} \\).</p><ul><li>Natężenie pola ładunku punktowego: \\( E=k\\frac{|q|}{r^2} \\).</li><li>Natężenie jest wektorem - kierunek zgodny z siłą działającą na ładunek dodatni.</li></ul><p>Pole przedstawiamy graficznie liniami pola, które wychodzą z ładunków dodatnich i wchodzą do ujemnych.</p>"
+      },
+      {
+        "heading": "Potencjał i napięcie",
+        "html": "<p>Potencjał elektryczny w danym punkcie to energia potencjalna jednostkowego ładunku: \\( V=\\frac{E_p}{q} \\). Napięcie (różnica potencjałów) między dwoma punktami: \\( U=V_1-V_2 \\). Jednostką jest wolt (V).</p><ul><li>Potencjał ładunku punktowego: \\( V=k\\frac{q}{r} \\).</li><li>Praca przy przeniesieniu ładunku: \\( W=qU \\).</li></ul><p>W jednorodnym polu elektrycznym między płytami zachodzi związek: \\( E=\\frac{U}{d} \\), gdzie \\( d \\) to odległość między płytami.</p>"
+      },
+      {
+        "heading": "Kondensator i jego pojemność",
+        "html": "<p>Kondensator to układ dwóch przewodników gromadzących ładunek. Pojemność to stosunek zgromadzonego ładunku do napięcia: $$ C=\\frac{Q}{U} $$ Jednostką pojemności jest farad (F).</p><ul><li>Pojemność kondensatora płaskiego: \\( C=\\frac{\\varepsilon_0 \\varepsilon_r S}{d} \\).</li><li>Wprowadzenie dielektryka zwiększa pojemność (\\( \\varepsilon_r>1 \\)).</li></ul><p>Energia zgromadzona w kondensatorze wynosi \\( E_k=\\frac{1}{2}CU^2 \\) i jest wykorzystywana m.in. w lampach błyskowych.</p>"
+      },
+      {
+        "heading": "Energia i praca w polu elektrycznym",
+        "html": "<p>Pole elektryczne wykonuje pracę przy przemieszczaniu ładunków. Praca pola przy przeniesieniu ładunku przez napięcie \\( U \\) wynosi \\( W=qU \\). Energia potencjalna ładunku w polu zależy od jego położenia.</p><ul><li>W polu jednorodnym praca nie zależy od drogi, a tylko od różnicy potencjałów.</li><li>Energia kinetyczna ładunku rozpędzonego w polu: \\( E_k=qU \\) (z zasady zachowania energii).</li></ul><p>Na tej zasadzie działają akceleratory cząstek i lampy obrazowe, gdzie ładunki rozpędza się napięciem.</p>"
+      }
+    ],
+    "formulas": [
+      { "name": "Prawo Coulomba", "latex": "F=k\\frac{|q_1 q_2|}{r^2}", "desc": "Siła oddziaływania między dwoma ładunkami punktowymi." },
+      { "name": "Natężenie pola", "latex": "E=\\frac{F}{q}", "desc": "Siła działająca na jednostkowy ładunek próbny." },
+      { "name": "Natężenie pola ładunku punktowego", "latex": "E=k\\frac{|q|}{r^2}", "desc": "Natężenie pola wytworzonego przez ładunek punktowy." },
+      { "name": "Potencjał ładunku punktowego", "latex": "V=k\\frac{q}{r}", "desc": "Potencjał pola w odległości r od ładunku." },
+      { "name": "Praca pola", "latex": "W=qU", "desc": "Praca przy przeniesieniu ładunku przez napięcie U." },
+      { "name": "Pole między płytami", "latex": "E=\\frac{U}{d}", "desc": "Natężenie jednorodnego pola między okładkami kondensatora." },
+      { "name": "Pojemność kondensatora", "latex": "C=\\frac{Q}{U}", "desc": "Stosunek ładunku do napięcia na kondensatorze." },
+      { "name": "Energia kondensatora", "latex": "E_k=\\frac{1}{2}CU^2", "desc": "Energia zgromadzona w naładowanym kondensatorze." }
+    ],
+    "definitions": [
+      { "term": "Ładunek elementarny", "def": "Najmniejsza porcja ładunku elektrycznego, równa około 1,6 razy 10 do -19 C, jest to ładunek protonu (dodatni) lub elektronu (ujemny)." },
+      { "term": "Prawo Coulomba", "def": "Siła między dwoma ładunkami punktowymi jest proporcjonalna do iloczynu ich wartości i odwrotnie proporcjonalna do kwadratu odległości." },
+      { "term": "Natężenie pola elektrycznego", "def": "Wektorowa wielkość równa sile działającej na jednostkowy dodatni ładunek próbny umieszczony w danym punkcie pola." },
+      { "term": "Potencjał elektryczny", "def": "Energia potencjalna jednostkowego dodatniego ładunku w danym punkcie pola elektrycznego." },
+      { "term": "Pojemność elektryczna", "def": "Stosunek ładunku zgromadzonego na przewodniku do napięcia na nim, mierzona w faradach." },
+      { "term": "Kondensator", "def": "Układ dwóch przewodników rozdzielonych dielektrykiem, służący do gromadzenia ładunku i energii pola elektrycznego." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Ładunek elektryczny, prawo Coulomba, natężenie i potencjał pola elektrycznego, napięcie, kondensatory, energia pola.",
+      "html": "<p>Elektrostatyka pojawia się na maturze regularnie, często jako wstęp do zagadnień prądu elektrycznego. Na poziomie podstawowym dominują zadania z prawem Coulomba i natężeniem pola. Na rozszerzonym dochodzą kondensatory, energia pola oraz ruch ładunków w polu elektrycznym połączony z dynamiką.</p>",
+      "typoweZadania": [
+        "Obliczenie siły Coulomba między dwoma ładunkami punktowymi.",
+        "Wyznaczenie natężenia pola elektrycznego w danym punkcie.",
+        "Obliczenie pojemności kondensatora lub zgromadzonego ładunku.",
+        "Wyznaczenie energii kinetycznej cząstki rozpędzonej w polu elektrycznym."
+      ],
+      "strategia": [
+        "Zamieniaj ładunki na kulomby (mikro i nano kulomby na C) przed liczeniem.",
+        "Pamiętaj o znakach ładunków - decydują o przyciąganiu lub odpychaniu.",
+        "Przy kilku ładunkach dodawaj siły wektorowo, uwzględniając kierunki.",
+        "W zadaniach z polem między płytami korzystaj ze związku E = U/d."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Czym różni się natężenie pola od potencjału?", "a": "Natężenie pola to wielkość wektorowa opisująca siłę na ładunek, a potencjał to wielkość skalarna opisująca energię potencjalną jednostkowego ładunku. Są ze sobą powiązane, ale mają różny charakter." },
+      { "q": "Dlaczego siła Coulomba przypomina prawo grawitacji?", "a": "Obie siły maleją z kwadratem odległości i zależą od iloczynu wielkości źródeł. Różnica jest taka, że siła Coulomba może być przyciągająca lub odpychająca, a grawitacja tylko przyciągająca." },
+      { "q": "Co to jest pole jednorodne?", "a": "To pole, w którym natężenie ma stałą wartość i kierunek w każdym punkcie. Występuje między równoległymi okładkami naładowanego kondensatora płaskiego." },
+      { "q": "Po co stosuje się dielektryk w kondensatorze?", "a": "Dielektryk zwiększa pojemność kondensatora (współczynnik przenikalności względnej jest większy od jedności) oraz pozwala na wyższe napięcia bez przebicia." }
+    ],
+    "faqMatura": [
+      { "q": "Jakie wartości stałych przyjąć w zadaniach?", "a": "Stała Coulomba k wynosi około 9 razy 10 do 9 N m2/C2, a ładunek elementarny e to około 1,6 razy 10 do -19 C. Wartości te są podane w karcie wzorów." },
+      { "q": "Jak liczyć siłę przy trzech ładunkach?", "a": "Oblicz osobno siłę od każdego ładunku na dany ładunek, a następnie dodaj wektory, uwzględniając ich kierunki i zwroty (np. metodą równoległoboku)." },
+      { "q": "Jak obliczyć prędkość elektronu rozpędzonego napięciem?", "a": "Skorzystaj z zasady zachowania energii: praca pola qU zamienia się w energię kinetyczną. Z równania qU = mv2/2 wyznacz prędkość v." }
+    ],
+    "subtopics": [
+      {
+        "slug": "prawo-coulomba",
+        "name": "Prawo Coulomba",
+        "intro": "Obliczanie siły oddziaływania elektrostatycznego między ładunkami punktowymi.",
+        "problems": [
+          {
+            "title": "Siła między ładunkami",
+            "tresc": "Oblicz siłę oddziaływania między dwoma ładunkami 2 mikrokulomby i 3 mikrokulomby oddalonymi o 0,1 m. Stała k = 9 razy 10 do 9 N m2/C2.",
+            "steps": [
+              "Zamieniamy jednostki: \\( q_1=2\\cdot 10^{-6}\\,\\text{C} \\), \\( q_2=3\\cdot 10^{-6}\\,\\text{C} \\), \\( r=0{,}1\\,\\text{m} \\).",
+              "Stosujemy prawo Coulomba: \\( F=k\\frac{|q_1 q_2|}{r^2} \\).",
+              "Podstawiamy: \\( F=9\\cdot 10^9\\cdot\\frac{2\\cdot 10^{-6}\\cdot 3\\cdot 10^{-6}}{(0{,}1)^2} \\).",
+              "Obliczamy: \\( F=9\\cdot 10^9\\cdot\\frac{6\\cdot 10^{-12}}{0{,}01}=9\\cdot 10^9\\cdot 6\\cdot 10^{-10}=5{,}4\\,\\text{N} \\)."
+            ],
+            "answer": "F = 5,4 N"
+          },
+          {
+            "title": "Odległość ładunków",
+            "tresc": "Dwa ładunki po 1 mikrokulomb oddziałują siłą 0,9 N. Oblicz odległość między nimi. k = 9 razy 10 do 9 N m2/C2.",
+            "steps": [
+              "Z prawa Coulomba wyznaczamy r: \\( r=\\sqrt{\\frac{k|q_1 q_2|}{F}} \\).",
+              "Podstawiamy dane: \\( r=\\sqrt{\\frac{9\\cdot 10^9\\cdot 1\\cdot 10^{-6}\\cdot 1\\cdot 10^{-6}}{0{,}9}} \\).",
+              "Liczymy pod pierwiastkiem: \\( r=\\sqrt{\\frac{9\\cdot 10^{-3}}{0{,}9}}=\\sqrt{0{,}01} \\).",
+              "Obliczamy: \\( r=0{,}1\\,\\text{m}=10\\,\\text{cm} \\)."
+            ],
+            "answer": "r = 0,1 m = 10 cm"
+          }
+        ],
+        "faq": [
+          { "q": "Czy znak ładunku wpływa na wzór na siłę?", "a": "We wzorze bierzemy wartości bezwzględne ładunków. Znaki decydują tylko o tym, czy siła jest przyciągająca (ładunki różnoimienne), czy odpychająca (jednoimienne)." }
+        ]
+      },
+      {
+        "slug": "natezenie-pola",
+        "name": "Natężenie pola elektrycznego",
+        "intro": "Wyznaczanie natężenia pola elektrycznego wytwarzanego przez ładunki i działającego na ładunki próbne.",
+        "problems": [
+          {
+            "title": "Natężenie pola ładunku punktowego",
+            "tresc": "Oblicz natężenie pola elektrycznego w odległości 0,2 m od ładunku 4 mikrokulomby. k = 9 razy 10 do 9 N m2/C2.",
+            "steps": [
+              "Dane: \\( q=4\\cdot 10^{-6}\\,\\text{C} \\), \\( r=0{,}2\\,\\text{m} \\).",
+              "Stosujemy wzór: \\( E=k\\frac{|q|}{r^2} \\).",
+              "Podstawiamy: \\( E=9\\cdot 10^9\\cdot\\frac{4\\cdot 10^{-6}}{(0{,}2)^2} \\).",
+              "Obliczamy: \\( E=9\\cdot 10^9\\cdot\\frac{4\\cdot 10^{-6}}{0{,}04}=9\\cdot 10^5\\,\\frac{\\text{N}}{\\text{C}} \\)."
+            ],
+            "answer": "E = 9 razy 10 do 5 N/C = 900 000 N/C"
+          },
+          {
+            "title": "Siła na ładunek w polu",
+            "tresc": "W polu o natężeniu 5000 N/C umieszczono ładunek 3 mikrokulomby. Oblicz siłę działającą na ten ładunek.",
+            "steps": [
+              "Z definicji natężenia pola: \\( F=qE \\).",
+              "Zamieniamy ładunek: \\( q=3\\cdot 10^{-6}\\,\\text{C} \\).",
+              "Podstawiamy: \\( F=3\\cdot 10^{-6}\\cdot 5000 \\).",
+              "Obliczamy: \\( F=0{,}015\\,\\text{N}=15\\,\\text{mN} \\)."
+            ],
+            "answer": "F = 0,015 N = 15 mN"
+          }
+        ],
+        "faq": [
+          { "q": "Czy natężenie pola zależy od ładunku próbnego?", "a": "Nie. Natężenie pola jest cechą samego pola w danym punkcie. Ładunek próbny służy tylko do jego pomiaru, a wynik E = F/q jest od niego niezależny." }
+        ]
+      },
+      {
+        "slug": "kondensatory",
+        "name": "Kondensatory",
+        "intro": "Obliczanie pojemności, ładunku i energii zgromadzonej w kondensatorach.",
+        "problems": [
+          {
+            "title": "Ładunek na kondensatorze",
+            "tresc": "Kondensator o pojemności 100 mikrofaradów podłączono do napięcia 12 V. Oblicz zgromadzony ładunek.",
+            "steps": [
+              "Z definicji pojemności: \\( Q=CU \\).",
+              "Zamieniamy pojemność: \\( C=100\\cdot 10^{-6}\\,\\text{F}=10^{-4}\\,\\text{F} \\).",
+              "Podstawiamy: \\( Q=10^{-4}\\cdot 12 \\).",
+              "Obliczamy: \\( Q=1{,}2\\cdot 10^{-3}\\,\\text{C}=1{,}2\\,\\text{mC} \\)."
+            ],
+            "answer": "Q = 1,2 razy 10 do -3 C = 1,2 mC"
+          },
+          {
+            "title": "Energia kondensatora",
+            "tresc": "Oblicz energię zgromadzoną w kondensatorze o pojemności 200 mikrofaradów naładowanym do napięcia 50 V.",
+            "steps": [
+              "Stosujemy wzór: \\( E_k=\\frac{1}{2}CU^2 \\).",
+              "Zamieniamy pojemność: \\( C=200\\cdot 10^{-6}\\,\\text{F}=2\\cdot 10^{-4}\\,\\text{F} \\).",
+              "Podstawiamy: \\( E_k=\\frac{1}{2}\\cdot 2\\cdot 10^{-4}\\cdot 50^2 \\).",
+              "Obliczamy: \\( E_k=\\frac{1}{2}\\cdot 2\\cdot 10^{-4}\\cdot 2500=0{,}25\\,\\text{J} \\)."
+            ],
+            "answer": "E_k = 0,25 J"
+          }
+        ],
+        "faq": [
+          { "q": "Co się dzieje z ładunkiem po odłączeniu kondensatora od źródła?", "a": "Naładowany kondensator zachowuje zgromadzony ładunek i energię (jeśli nie ma drogi rozładowania). Dlatego niektóre kondensatory mogą być niebezpieczne nawet po wyłączeniu zasilania." }
+        ]
+      },
+      {
+        "slug": "pole-jednorodne",
+        "name": "Pole jednorodne i ruch ładunków",
+        "intro": "Analiza jednorodnego pola między płytami oraz ruchu ładunków rozpędzanych napięciem.",
+        "problems": [
+          {
+            "title": "Natężenie pola między płytami",
+            "tresc": "Między dwiema płytami oddalonymi o 0,02 m panuje napięcie 200 V. Oblicz natężenie pola elektrycznego.",
+            "steps": [
+              "Dla pola jednorodnego: \\( E=\\frac{U}{d} \\).",
+              "Dane: \\( U=200\\,\\text{V} \\), \\( d=0{,}02\\,\\text{m} \\).",
+              "Podstawiamy: \\( E=\\frac{200}{0{,}02} \\).",
+              "Obliczamy: \\( E=10000\\,\\frac{\\text{V}}{\\text{m}} \\)."
+            ],
+            "answer": "E = 10 000 V/m"
+          },
+          {
+            "title": "Prędkość rozpędzonego elektronu",
+            "tresc": "Elektron rozpędzono napięciem 100 V. Oblicz jego prędkość końcową. Masa elektronu 9,1 razy 10 do -31 kg, ładunek 1,6 razy 10 do -19 C.",
+            "steps": [
+              "Zasada zachowania energii: praca pola zamienia się w energię kinetyczną: \\( qU=\\frac{1}{2}mv^2 \\).",
+              "Wyznaczamy prędkość: \\( v=\\sqrt{\\frac{2qU}{m}} \\).",
+              "Podstawiamy: \\( v=\\sqrt{\\frac{2\\cdot 1{,}6\\cdot 10^{-19}\\cdot 100}{9{,}1\\cdot 10^{-31}}} \\).",
+              "Obliczamy: \\( v=\\sqrt{3{,}52\\cdot 10^{13}}\\approx 5{,}9\\cdot 10^6\\,\\frac{\\text{m}}{\\text{s}} \\)."
+            ],
+            "answer": "v = 5,9 razy 10 do 6 m/s (w przybliżeniu)"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego praca pola nie zależy od drogi?", "a": "Bo pole elektrostatyczne jest zachowawcze. Praca zależy tylko od różnicy potencjałów między punktem początkowym a końcowym, a nie od kształtu toru ładunku." }
+        ]
+      }
+    ],
+    "related": ["prad-elektryczny", "magnetyzm", "grawitacja"]
+  }
+]

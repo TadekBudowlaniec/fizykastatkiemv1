@@ -1,0 +1,810 @@
+[
+  {
+    "slug": "ruch-obrotowy",
+    "name": "Ruch obrotowy i bryła sztywna",
+    "dopelniacz": "ruchu obrotowego",
+    "metaTeoria": "Ruch obrotowy bryły sztywnej - teoria: moment siły, moment bezwładności, moment pędu, energia kinetyczna obrotu i wzory z przykładami.",
+    "metaMatura": "Ruch obrotowy na maturze z fizyki CKE: zadania o momencie bezwładności, momencie pędu i toczeniu. Wzory, strategie i rozwiązania krok po kroku.",
+    "intro": "Ruch obrotowy opisuje obracanie się bryły sztywnej wokół osi. Kluczowe pojęcia to moment siły, moment bezwładności oraz moment pędu, a zasada zachowania momentu pędu jest analogiczna do zasady zachowania pędu w ruchu postępowym. Dział łączy kinematykę i dynamikę ruchu obrotowego.",
+    "theory": [
+      {
+        "heading": "Kinematyka ruchu obrotowego",
+        "html": "<p>W ruchu obrotowym położenie bryły opisujemy kątem obrotu \\( \\varphi \\) wyrażonym w radianach. Wielkości kątowe są analogiczne do liniowych:</p><ul><li>prędkość kątowa \\( \\omega = \\frac{\\Delta \\varphi}{\\Delta t} \\) [rad/s],</li><li>przyspieszenie kątowe \\( \\varepsilon = \\frac{\\Delta \\omega}{\\Delta t} \\) [rad/s²].</li></ul><p>Wielkości liniowe punktu w odległości \\( r \\) od osi to \\( v = \\omega r \\) oraz \\( a_{styczne} = \\varepsilon r \\). Dodatkowo każdy punkt ma przyspieszenie dośrodkowe \\( a_d = \\omega^2 r \\). Dla ruchu jednostajnie zmiennego obowiązują wzory analogiczne do kinematyki: \\( \\varphi = \\omega_0 t + \\tfrac{1}{2}\\varepsilon t^2 \\).</p>"
+      },
+      {
+        "heading": "Moment siły i druga zasada dynamiki dla obrotu",
+        "html": "<p>Moment siły (moment obrotowy) to miara zdolności siły do wprawiania ciała w ruch obrotowy. Dla siły działającej prostopadle do ramienia: \\( M = F \\cdot r \\), a ogólnie \\( M = F r \\sin\\alpha \\), gdzie \\( \\alpha \\) to kąt między siłą a ramieniem.</p><ul><li>Im większe ramię, tym większy moment siły przy tej samej sile.</li><li>Druga zasada dynamiki dla ruchu obrotowego: \\( M = I\\varepsilon \\), gdzie \\( I \\) to moment bezwładności.</li></ul><p>Jest to analogia do \\( F = ma \\): moment siły odpowiada sile, moment bezwładności masie, a przyspieszenie kątowe przyspieszeniu liniowemu.</p>"
+      },
+      {
+        "heading": "Moment bezwładności",
+        "html": "<p>Moment bezwładności \\( I \\) określa, jak trudno zmienić stan ruchu obrotowego ciała. Zależy nie tylko od masy, lecz także od jej rozmieszczenia względem osi obrotu: \\( I = \\sum m_i r_i^2 \\).</p><ul><li>punkt materialny: \\( I = mr^2 \\),</li><li>obręcz/walec cienkościenny: \\( I = mr^2 \\),</li><li>walec pełny/krążek: \\( I = \\tfrac{1}{2}mr^2 \\),</li><li>kula pełna: \\( I = \\tfrac{2}{5}mr^2 \\).</li></ul><p>Im dalej masa jest rozmieszczona od osi, tym większy moment bezwładności. Dlatego łyżwiarz przyciąga ręce, by zmniejszyć \\( I \\) i przyspieszyć obrót.</p>"
+      },
+      {
+        "heading": "Moment pędu i jego zasada zachowania",
+        "html": "<p>Moment pędu bryły sztywnej to \\( L = I\\omega \\), a dla punktu materialnego \\( L = mvr \\). Jest to wektorowa wielkość fizyczna analogiczna do pędu \\( p = mv \\).</p><ul><li>Zasada zachowania momentu pędu: jeśli wypadkowy moment sił zewnętrznych jest zerowy, to \\( L = const \\).</li><li>Oznacza to \\( I_1 \\omega_1 = I_2 \\omega_2 \\) - zmniejszenie momentu bezwładności powoduje wzrost prędkości kątowej.</li></ul><p>Zasada ta tłumaczy zachowanie wirujących łyżwiarzy, ruch planet (II prawo Keplera) oraz stabilność żyroskopów i kół rowerowych.</p>"
+      },
+      {
+        "heading": "Energia kinetyczna ruchu obrotowego i toczenie",
+        "html": "<p>Obracająca się bryła ma energię kinetyczną \\( E_{k,obr} = \\tfrac{1}{2}I\\omega^2 \\). Przy toczeniu bez poślizgu ciało wykonuje jednocześnie ruch postępowy i obrotowy, więc:</p>$$ E_k = \\frac{1}{2}mv^2 + \\frac{1}{2}I\\omega^2 $$<p>Warunek toczenia bez poślizgu to \\( v = \\omega r \\). Z tego powodu walec pełny stacza się po równi szybciej niż obręcz - mniejszy moment bezwładności oznacza, że mniejsza część energii potencjalnej zamienia się na energię obrotu, a większa na energię ruchu postępowego.</p>"
+      }
+    ],
+    "formulas": [
+      { "name": "Prędkość kątowa", "latex": "\\omega = \\frac{\\Delta \\varphi}{\\Delta t}", "desc": "Stosunek zmiany kąta obrotu do czasu; jednostka rad/s." },
+      { "name": "Związek prędkości liniowej i kątowej", "latex": "v = \\omega r", "desc": "Prędkość liniowa punktu w odległości r od osi obrotu." },
+      { "name": "Przyspieszenie kątowe", "latex": "\\varepsilon = \\frac{\\Delta \\omega}{\\Delta t}", "desc": "Tempo zmian prędkości kątowej; jednostka rad/s²." },
+      { "name": "Moment siły", "latex": "M = F r \\sin\\alpha", "desc": "Iloczyn siły i ramienia; decyduje o zmianie ruchu obrotowego." },
+      { "name": "II zasada dynamiki dla obrotu", "latex": "M = I\\varepsilon", "desc": "Wypadkowy moment siły równy iloczynowi momentu bezwładności i przyspieszenia kątowego." },
+      { "name": "Moment bezwładności punktu", "latex": "I = m r^2", "desc": "Miara bezwładności obrotowej zależna od masy i kwadratu odległości od osi." },
+      { "name": "Moment pędu bryły", "latex": "L = I\\omega", "desc": "Wielkość zachowywana przy zerowym momencie sił zewnętrznych." },
+      { "name": "Energia kinetyczna obrotu", "latex": "E_{k} = \\frac{1}{2}I\\omega^2", "desc": "Energia związana z ruchem obrotowym bryły." },
+      { "name": "Energia przy toczeniu", "latex": "E_k = \\frac{1}{2}mv^2 + \\frac{1}{2}I\\omega^2", "desc": "Suma energii ruchu postępowego i obrotowego ciała toczącego się bez poślizgu." }
+    ],
+    "definitions": [
+      { "term": "Bryła sztywna", "def": "Ciało, którego punkty nie zmieniają wzajemnych odległości - nie ulega deformacji podczas ruchu." },
+      { "term": "Moment siły", "def": "Wielkość wektorowa równa iloczynowi siły i ramienia, opisująca zdolność siły do wywoływania obrotu." },
+      { "term": "Moment bezwładności", "def": "Miara bezwładności ciała w ruchu obrotowym, zależna od masy i jej rozkładu względem osi." },
+      { "term": "Moment pędu", "def": "Iloczyn momentu bezwładności i prędkości kątowej; wielkość zachowywana przy braku zewnętrznego momentu sił." },
+      { "term": "Toczenie bez poślizgu", "def": "Ruch, w którym punkt styku ciała z podłożem ma chwilowo zerową prędkość, co daje warunek v = ωr." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Ruch obrotowy w pełnym zakresie pojawia się głównie na poziomie rozszerzonym: moment siły, moment bezwładności, moment pędu i jego zasada zachowania, energia obrotu oraz toczenie po równi.",
+      "html": "<p>Na maturze rozszerzonej z fizyki zadania z ruchu obrotowego często łączą zasadę zachowania energii z zasadą zachowania momentu pędu. Typowo trzeba porównać staczanie się różnych brył po równi, obliczyć przyspieszenie kątowe z momentu siły lub wykorzystać \\( I_1\\omega_1 = I_2\\omega_2 \\). Wartości momentów bezwładności brył podawane są zwykle w treści zadania lub w karcie wzorów.</p>",
+      "typoweZadania": [
+        "Obliczanie momentu siły działającego na dźwignię lub koło.",
+        "Staczanie się walca, kuli lub obręczy po równi pochyłej i porównanie prędkości u podstawy.",
+        "Zastosowanie zasady zachowania momentu pędu (łyżwiarz, platforma obrotowa).",
+        "Wyznaczanie energii kinetycznej toczącej się bryły."
+      ],
+      "strategia": [
+        "Sprawdź, czy działa zewnętrzny moment sił - jeśli nie, stosuj zasadę zachowania momentu pędu.",
+        "Przy toczeniu zawsze korzystaj z warunku v = ωr, by połączyć ruch postępowy z obrotowym.",
+        "W bilansie energii pamiętaj o dodaniu członu energii obrotowej, inaczej wynik będzie zawyżony."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Czym różni się moment siły od momentu pędu?", "a": "Moment siły opisuje przyczynę zmiany ruchu obrotowego (działanie siły na ramieniu), natomiast moment pędu to wielkość charakteryzująca sam stan obrotu bryły (I·ω). Moment siły jest analogiczny do siły, a moment pędu do pędu." },
+      { "q": "Dlaczego łyżwiarz kręci się szybciej, gdy przyciąga ręce?", "a": "Przyciągając ręce, zmniejsza swój moment bezwładności I. Ponieważ moment pędu L = I·ω jest zachowany (brak zewnętrznego momentu sił), zmniejszenie I powoduje wzrost prędkości kątowej ω." },
+      { "q": "Od czego zależy moment bezwładności?", "a": "Od masy ciała oraz, co kluczowe, od jej rozkładu względem osi obrotu - im dalej masa jest od osi, tym większy moment bezwładności, bo wchodzi on z kwadratem odległości (mr²)." },
+      { "q": "Która bryła stacza się najszybciej po równi?", "a": "Im mniejszy współczynnik przy mr², tym szybciej. Najszybciej stacza się kula pełna (2/5), potem walec pełny (1/2), a najwolniej obręcz (1), niezależnie od masy i promienia." }
+    ],
+    "faqMatura": [
+      { "q": "Czy wzory na momenty bezwładności trzeba znać na pamięć?", "a": "Podstawowe (kula, walec, obręcz) warto pamiętać, ale na maturze często podawane są w treści zadania lub w karcie wzorów. Kluczowe jest umiejętne ich zastosowanie." },
+      { "q": "Na jakim poziomie matury pojawia się ruch obrotowy?", "a": "Głównie na poziomie rozszerzonym. Na podstawowym pojawiają się co najwyżej proste zagadnienia momentu siły i równowagi dźwigni." },
+      { "q": "Jak rozpoznać, że w zadaniu stosuję zasadę zachowania momentu pędu?", "a": "Gdy zmienia się moment bezwładności układu bez udziału zewnętrznego momentu sił (np. zmiana ułożenia ciała, połączenie obracających się tarcz). Wtedy L = const." }
+    ],
+    "subtopics": [
+      {
+        "slug": "moment-sily-i-rownowaga",
+        "name": "Moment siły i równowaga",
+        "intro": "Moment siły decyduje o obracaniu ciała. Warunkiem równowagi bryły jest zerowanie się sumy momentów sił.",
+        "problems": [
+          {
+            "title": "Równowaga dźwigni",
+            "tresc": "Na końcach nieważkiej belki o długości 2 m podparto ją w środku. Po lewej stronie, 0,8 m od podpory, wisi ciężarek o masie 5 kg. W jakiej odległości od podpory po prawej stronie należy zawiesić ciężarek o masie 4 kg, aby belka była w równowadze? Przyjmij g = 10 m/s².",
+            "steps": [
+              "Warunek równowagi momentów: moment siły z lewej = moment siły z prawej, czyli \\( m_1 g \\cdot r_1 = m_2 g \\cdot r_2 \\).",
+              "Przyspieszenie ziemskie się skraca: \\( m_1 r_1 = m_2 r_2 \\).",
+              "Podstawiamy: \\( 5 \\cdot 0{,}8 = 4 \\cdot r_2 \\), czyli \\( 4 = 4 r_2 \\).",
+              "Stąd \\( r_2 = 1 \\) m."
+            ],
+            "answer": "r₂ = 1 m"
+          },
+          {
+            "title": "Przyspieszenie kątowe koła",
+            "tresc": "Na obwód koła o momencie bezwładności I = 0,5 kg·m² i promieniu 0,2 m działa stycznie siła F = 10 N. Oblicz przyspieszenie kątowe koła.",
+            "steps": [
+              "Obliczamy moment siły: \\( M = F \\cdot r = 10 \\cdot 0{,}2 = 2 \\) N·m.",
+              "Stosujemy II zasadę dynamiki dla obrotu: \\( M = I\\varepsilon \\).",
+              "Wyznaczamy przyspieszenie kątowe: \\( \\varepsilon = \\frac{M}{I} = \\frac{2}{0{,}5} \\).",
+              "Otrzymujemy \\( \\varepsilon = 4 \\) rad/s²."
+            ],
+            "answer": "ε = 4 rad/s²"
+          }
+        ],
+        "faq": [
+          { "q": "Czym jest ramię siły?", "a": "To najkrótsza (prostopadła) odległość od osi obrotu do linii działania siły. Im dłuższe ramię, tym większy moment siły przy tej samej sile." }
+        ]
+      },
+      {
+        "slug": "moment-bezwladnosci",
+        "name": "Moment bezwładności",
+        "intro": "Moment bezwładności określa opór ciała przeciw zmianie ruchu obrotowego i zależy od rozkładu masy.",
+        "problems": [
+          {
+            "title": "Moment bezwładności układu mas punktowych",
+            "tresc": "Dwie kulki o masach 2 kg każda zamocowano na nieważkim pręcie w odległości 0,3 m od osi obrotu przechodzącej przez środek. Oblicz moment bezwładności układu.",
+            "steps": [
+              "Dla pojedynczej kulki: \\( I_1 = m r^2 = 2 \\cdot 0{,}3^2 = 2 \\cdot 0{,}09 = 0{,}18 \\) kg·m².",
+              "Układ ma dwie identyczne kulki: \\( I = 2 I_1 \\).",
+              "Obliczamy: \\( I = 2 \\cdot 0{,}18 = 0{,}36 \\) kg·m²."
+            ],
+            "answer": "I = 0,36 kg·m²"
+          },
+          {
+            "title": "Energia kinetyczna wirującego krążka",
+            "tresc": "Krążek (walec pełny) o masie 4 kg i promieniu 0,1 m wiruje z prędkością kątową 10 rad/s. Oblicz jego energię kinetyczną.",
+            "steps": [
+              "Moment bezwładności walca pełnego: \\( I = \\tfrac{1}{2}mr^2 = \\tfrac{1}{2}\\cdot 4 \\cdot 0{,}1^2 = 0{,}02 \\) kg·m².",
+              "Energia kinetyczna obrotu: \\( E_k = \\tfrac{1}{2}I\\omega^2 \\).",
+              "Podstawiamy: \\( E_k = \\tfrac{1}{2}\\cdot 0{,}02 \\cdot 10^2 = \\tfrac{1}{2}\\cdot 0{,}02 \\cdot 100 \\).",
+              "Otrzymujemy \\( E_k = 1 \\) J."
+            ],
+            "answer": "Eₖ = 1 J"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego moment bezwładności zależy od kwadratu odległości?", "a": "Bo prędkość liniowa punktu rośnie liniowo z r (v = ωr), a energia kinetyczna z kwadratem v, więc wkład masy do bezwładności obrotowej skaluje się jak r²." }
+        ]
+      },
+      {
+        "slug": "moment-pedu",
+        "name": "Moment pędu i jego zachowanie",
+        "intro": "Moment pędu L = I·ω jest zachowany, gdy na układ nie działa zewnętrzny moment sił.",
+        "problems": [
+          {
+            "title": "Łyżwiarz przyciąga ręce",
+            "tresc": "Łyżwiarz wiruje z prędkością kątową 2 rad/s, mając moment bezwładności 6 kg·m². Po przyciągnięciu rąk jego moment bezwładności maleje do 2 kg·m². Oblicz nową prędkość kątową.",
+            "steps": [
+              "Zasada zachowania momentu pędu: \\( I_1\\omega_1 = I_2\\omega_2 \\).",
+              "Wyznaczamy: \\( \\omega_2 = \\frac{I_1\\omega_1}{I_2} = \\frac{6 \\cdot 2}{2} \\).",
+              "Obliczamy: \\( \\omega_2 = \\frac{12}{2} = 6 \\) rad/s."
+            ],
+            "answer": "ω₂ = 6 rad/s"
+          },
+          {
+            "title": "Połączenie dwóch tarcz",
+            "tresc": "Tarcza o I = 0,4 kg·m² wirująca z ω = 10 rad/s zostaje sczepiona z nieruchomą tarczą o I = 0,1 kg·m² na tej samej osi. Oblicz wspólną prędkość kątową.",
+            "steps": [
+              "Moment pędu przed: \\( L = I_1\\omega_1 = 0{,}4 \\cdot 10 = 4 \\) kg·m²/s.",
+              "Po sczepieniu moment bezwładności: \\( I = I_1 + I_2 = 0{,}4 + 0{,}1 = 0{,}5 \\) kg·m².",
+              "Z zachowania momentu pędu: \\( \\omega = \\frac{L}{I} = \\frac{4}{0{,}5} \\).",
+              "Otrzymujemy \\( \\omega = 8 \\) rad/s."
+            ],
+            "answer": "ω = 8 rad/s"
+          }
+        ],
+        "faq": [
+          { "q": "Czy energia kinetyczna jest zachowana przy sczepianiu tarcz?", "a": "Nie. Moment pędu jest zachowany, ale część energii kinetycznej zamienia się w ciepło wskutek tarcia podczas zazębiania - to zderzenie nieelastyczne obrotowe." }
+        ]
+      },
+      {
+        "slug": "toczenie-po-rowni",
+        "name": "Toczenie po równi pochyłej",
+        "intro": "Przy staczaniu energia potencjalna zamienia się na energię ruchu postępowego i obrotowego.",
+        "problems": [
+          {
+            "title": "Prędkość staczającego się walca",
+            "tresc": "Walec pełny stacza się bez poślizgu z równi o wysokości 0,3 m. Oblicz prędkość jego środka u podstawy równi. Przyjmij g = 10 m/s².",
+            "steps": [
+              "Bilans energii: \\( mgh = \\tfrac{1}{2}mv^2 + \\tfrac{1}{2}I\\omega^2 \\), gdzie \\( I = \\tfrac{1}{2}mr^2 \\) i \\( \\omega = \\frac{v}{r} \\).",
+              "Po podstawieniu: \\( mgh = \\tfrac{1}{2}mv^2 + \\tfrac{1}{2}\\cdot\\tfrac{1}{2}mr^2 \\cdot \\frac{v^2}{r^2} = \\tfrac{3}{4}mv^2 \\).",
+              "Masa się skraca: \\( gh = \\tfrac{3}{4}v^2 \\), stąd \\( v = \\sqrt{\\tfrac{4gh}{3}} \\).",
+              "Podstawiamy: \\( v = \\sqrt{\\tfrac{4 \\cdot 10 \\cdot 0{,}3}{3}} = \\sqrt{4} = 2 \\) m/s."
+            ],
+            "answer": "v = 2 m/s"
+          },
+          {
+            "title": "Porównanie kuli i obręczy",
+            "tresc": "Z tej samej wysokości staczają się bez poślizgu kula pełna i obręcz. Która ma większą prędkość u podstawy i dlaczego? Wyznacz stosunek kwadratów ich prędkości.",
+            "steps": [
+              "Dla kuli (\\( I=\\tfrac{2}{5}mr^2 \\)): \\( gh = \\tfrac{1}{2}v^2(1+\\tfrac{2}{5}) = \\tfrac{7}{10}v_k^2 \\), więc \\( v_k^2 = \\tfrac{10gh}{7} \\).",
+              "Dla obręczy (\\( I=mr^2 \\)): \\( gh = \\tfrac{1}{2}v^2(1+1) = v_o^2 \\), więc \\( v_o^2 = gh \\).",
+              "Stosunek: \\( \\frac{v_k^2}{v_o^2} = \\frac{10gh/7}{gh} = \\frac{10}{7} \\approx 1{,}43 \\).",
+              "Kula ma większą prędkość, bo mniejsza część energii idzie na ruch obrotowy."
+            ],
+            "answer": "Kula jest szybsza; vₖ²/v₀² = 10/7 ≈ 1,43"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego prędkość staczania nie zależy od masy i promienia?", "a": "Bo masa i promień skracają się w bilansie energii. Liczy się tylko współczynnik przy mr² w momencie bezwładności, czyli kształt bryły." }
+        ]
+      }
+    ],
+    "related": ["dynamika", "ped-i-zasada-zachowania", "praca-moc-energia"]
+  },
+  {
+    "slug": "grawitacja",
+    "name": "Grawitacja",
+    "dopelniacz": "grawitacji",
+    "metaTeoria": "Grawitacja - teoria: prawo powszechnego ciążenia Newtona, prawa Keplera, pole grawitacyjne, pierwsza i druga prędkość kosmiczna ze wzorami.",
+    "metaMatura": "Grawitacja na maturze z fizyki: zadania o prawie ciążenia, ruchu satelitów, prędkościach kosmicznych i prawach Keplera z rozwiązaniami krok po kroku.",
+    "intro": "Grawitacja to powszechne oddziaływanie między wszystkimi ciałami posiadającymi masę, opisane prawem powszechnego ciążenia Newtona. Dział obejmuje pole grawitacyjne, ruch satelitów, prawa Keplera oraz prędkości kosmiczne. To podstawa zrozumienia ruchu planet i ciał niebieskich.",
+    "theory": [
+      {
+        "heading": "Prawo powszechnego ciążenia",
+        "html": "<p>Każde dwa ciała o masach \\( m_1 \\) i \\( m_2 \\) przyciągają się siłą skierowaną wzdłuż łączącej je prostej:</p>$$ F = G\\frac{m_1 m_2}{r^2} $$<p>gdzie \\( G = 6{,}67 \\cdot 10^{-11} \\) N·m²/kg² to stała grawitacji, a \\( r \\) to odległość między środkami ciał.</p><ul><li>Siła rośnie z iloczynem mas i maleje z kwadratem odległości.</li><li>Jest to oddziaływanie wzajemne (III zasada dynamiki) - obie masy działają na siebie z jednakową co do wartości siłą.</li></ul><p>Prawo wyjaśnia zarówno spadanie ciał na Ziemię, jak i ruch planet wokół Słońca.</p>"
+      },
+      {
+        "heading": "Pole grawitacyjne i natężenie",
+        "html": "<p>Pole grawitacyjne to obszar, w którym na masy działa siła grawitacji. Charakteryzuje je natężenie pola:</p>$$ \\gamma = \\frac{F}{m} = G\\frac{M}{r^2} $$<p>Natężenie pola jest liczbowo równe przyspieszeniu grawitacyjnemu w danym punkcie.</p><ul><li>Przy powierzchni Ziemi \\( \\gamma = g \\approx 9{,}81 \\) m/s².</li><li>Natężenie maleje z kwadratem odległości od środka ciała.</li></ul><p>Na wysokości h nad powierzchnią planety przyspieszenie wynosi \\( g_h = G\\frac{M}{(R+h)^2} \\), więc rośnie wraz z oddalaniem się jego spadek.</p>"
+      },
+      {
+        "heading": "Energia potencjalna grawitacji",
+        "html": "<p>W skali kosmicznej energii potencjalnej nie liczymy wzorem \\( mgh \\) (ważnym tylko blisko powierzchni), lecz ogólnym:</p>$$ E_p = -G\\frac{Mm}{r} $$<p>Znak minus oznacza, że energia rośnie (dąży do zera) w miarę oddalania ciał. Poziomem zerowym jest nieskończona odległość.</p><ul><li>Aby oddalić ciało od planety, trzeba wykonać pracę dodatnią.</li><li>Całkowita energia satelity na orbicie kołowej to \\( E = -G\\frac{Mm}{2r} \\).</li></ul><p>Z tego wzoru wyprowadza się druga prędkość kosmiczną - warunek ucieczki z pola grawitacyjnego.</p>"
+      },
+      {
+        "heading": "Ruch satelitów i prędkości kosmiczne",
+        "html": "<p>Satelita na orbicie kołowej porusza się dzięki temu, że siła grawitacji pełni rolę siły dośrodkowej: \\( G\\frac{Mm}{r^2} = \\frac{mv^2}{r} \\). Stąd prędkość orbitalna \\( v = \\sqrt{\\frac{GM}{r}} \\).</p><ul><li>Pierwsza prędkość kosmiczna (orbitalna przy powierzchni): \\( v_I = \\sqrt{\\frac{GM}{R}} \\approx 7{,}9 \\) km/s.</li><li>Druga prędkość kosmiczna (ucieczki): \\( v_{II} = \\sqrt{\\frac{2GM}{R}} \\approx 11{,}2 \\) km/s.</li></ul><p>Zachodzi prosta zależność \\( v_{II} = \\sqrt{2}\\, v_I \\). Pierwsza prędkość pozwala krążyć po orbicie, druga - opuścić pole grawitacyjne planety.</p>"
+      },
+      {
+        "heading": "Prawa Keplera",
+        "html": "<p>Ruch planet i satelitów opisują trzy prawa Keplera:</p><ul><li><strong>I prawo:</strong> planety krążą po elipsach, w których ognisku znajduje się Słońce.</li><li><strong>II prawo:</strong> promień wodzący planety zakreśla w równych odstępach czasu równe pola - planeta porusza się szybciej w peryhelium (wynika z zasady zachowania momentu pędu).</li><li><strong>III prawo:</strong> \\( \\frac{T^2}{a^3} = const \\) dla wszystkich ciał krążących wokół tego samego centrum.</li></ul><p>Trzecie prawo dla orbit kołowych przyjmuje postać \\( \\frac{T^2}{r^3} = \\frac{4\\pi^2}{GM} \\) i pozwala wyznaczać masy ciał niebieskich.</p>"
+      }
+    ],
+    "formulas": [
+      { "name": "Prawo powszechnego ciążenia", "latex": "F = G\\frac{m_1 m_2}{r^2}", "desc": "Siła grawitacji między dwiema masami zależna odwrotnie od kwadratu odległości." },
+      { "name": "Natężenie pola grawitacyjnego", "latex": "\\gamma = G\\frac{M}{r^2}", "desc": "Siła działająca na jednostkową masę; równa przyspieszeniu grawitacyjnemu." },
+      { "name": "Przyspieszenie na wysokości h", "latex": "g_h = G\\frac{M}{(R+h)^2}", "desc": "Przyspieszenie grawitacyjne maleje z kwadratem odległości od środka planety." },
+      { "name": "Energia potencjalna grawitacji", "latex": "E_p = -G\\frac{Mm}{r}", "desc": "Energia potencjalna w polu grawitacyjnym z poziomem zerowym w nieskończoności." },
+      { "name": "Prędkość orbitalna", "latex": "v = \\sqrt{\\frac{GM}{r}}", "desc": "Prędkość satelity na orbicie kołowej o promieniu r." },
+      { "name": "Pierwsza prędkość kosmiczna", "latex": "v_I = \\sqrt{\\frac{GM}{R}}", "desc": "Minimalna prędkość do krążenia po orbicie przy powierzchni; ok. 7,9 km/s." },
+      { "name": "Druga prędkość kosmiczna", "latex": "v_{II} = \\sqrt{\\frac{2GM}{R}}", "desc": "Prędkość ucieczki z pola grawitacyjnego; ok. 11,2 km/s." },
+      { "name": "III prawo Keplera", "latex": "\\frac{T^2}{r^3} = \\frac{4\\pi^2}{GM}", "desc": "Związek między okresem obiegu a promieniem orbity kołowej." }
+    ],
+    "definitions": [
+      { "term": "Stała grawitacji", "def": "Uniwersalna stała G = 6,67·10⁻¹¹ N·m²/kg² występująca w prawie powszechnego ciążenia." },
+      { "term": "Pole grawitacyjne", "def": "Obszar przestrzeni, w którym na masy działają siły grawitacyjne." },
+      { "term": "Pierwsza prędkość kosmiczna", "def": "Minimalna prędkość, jaką musi mieć ciało, by krążyć po orbicie kołowej tuż nad powierzchnią planety." },
+      { "term": "Druga prędkość kosmiczna", "def": "Minimalna prędkość pozwalająca ciału opuścić pole grawitacyjne planety (prędkość ucieczki)." },
+      { "term": "Orbita geostacjonarna", "def": "Orbita, na której okres obiegu satelity równa się okresowi obrotu Ziemi, więc satelita pozostaje nad tym samym punktem." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Grawitacja to częsty temat na obu poziomach: prawo ciążenia, przyspieszenie grawitacyjne, ruch satelitów, prędkości kosmiczne oraz prawa Keplera (rozszerzony pełniej obejmuje energię w polu i wyprowadzenia).",
+      "html": "<p>Zadania maturalne z grawitacji najczęściej wykorzystują przyrównanie siły grawitacji do siły dośrodkowej dla satelitów oraz III prawo Keplera do porównywania orbit. Trzeba sprawnie operować potęgami 10 i przeliczać jednostki. Często wymagane jest wyznaczenie masy planety z parametrów orbity jej księżyca lub porównanie przyspieszeń na różnych planetach.</p>",
+      "typoweZadania": [
+        "Obliczanie siły grawitacji między ciałami niebieskimi.",
+        "Wyznaczanie prędkości i okresu obiegu satelity na orbicie.",
+        "Obliczanie pierwszej i drugiej prędkości kosmicznej dla danej planety.",
+        "Zastosowanie III prawa Keplera do porównania okresów lub promieni orbit."
+      ],
+      "strategia": [
+        "Dla satelity zawsze przyrównaj siłę grawitacji do siły dośrodkowej - to klucz do większości zadań.",
+        "Uważaj na odległość: w prawie ciążenia liczy się odległość od środka planety (R + h), a nie od powierzchni.",
+        "Przy działaniach na potęgach 10 grupuj liczby i wykładniki osobno, by uniknąć błędów rzędu wielkości."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Dlaczego w polu grawitacyjnym energia potencjalna jest ujemna?", "a": "Bo poziom zerowy przyjmujemy w nieskończoności. W miarę zbliżania ciał energia maleje (staje się coraz bardziej ujemna), bo grawitacja jest siłą przyciągającą - układ jest związany." },
+      { "q": "Czemu astronauci na ISS są w stanie nieważkości, skoro grawitacja tam działa?", "a": "Grawitacja na orbicie jest tylko nieco mniejsza niż przy powierzchni. Stan nieważkości wynika z ciągłego swobodnego spadania stacji i astronautów z tym samym przyspieszeniem - krążą oni wokół Ziemi." },
+      { "q": "Czy druga prędkość kosmiczna zależy od masy ciała wystrzeliwanego?", "a": "Nie. Prędkość ucieczki zależy tylko od masy i promienia planety (M i R), a nie od masy ciała, które ją opuszcza - masa skraca się w bilansie energii." },
+      { "q": "Co mówi II prawo Keplera?", "a": "Promień wodzący planety zakreśla w równych czasach równe pola. Oznacza to, że planeta porusza się szybciej, gdy jest bliżej Słońca (peryhelium), a wolniej w aphelium." }
+    ],
+    "faqMatura": [
+      { "q": "Czy trzeba znać wartość stałej grawitacji G?", "a": "Nie trzeba jej pamiętać - znajduje się w karcie wzorów. Trzeba jednak umieć poprawnie ją zastosować, łącznie z jednostkami." },
+      { "q": "Jak wyznaczyć masę planety na maturze?", "a": "Najczęściej z III prawa Keplera lub z przyrównania siły grawitacji do siły dośrodkowej satelity: znając promień orbity i okres obiegu, wyznaczamy M." },
+      { "q": "Jaki jest związek między pierwszą a drugą prędkością kosmiczną?", "a": "Druga prędkość kosmiczna jest √2 razy większa od pierwszej: v_II = √2 · v_I. To wynik często sprawdzany na maturze." }
+    ],
+    "subtopics": [
+      {
+        "slug": "prawo-powszechnego-ciazenia",
+        "name": "Prawo powszechnego ciążenia",
+        "intro": "Siła grawitacji między masami zależy od ich iloczynu i odwrotnie od kwadratu odległości.",
+        "problems": [
+          {
+            "title": "Siła grawitacji między ciałami",
+            "tresc": "Oblicz siłę grawitacji między dwiema kulami o masach 1000 kg każda, których środki są oddalone o 2 m. Przyjmij G = 6,67·10⁻¹¹ N·m²/kg².",
+            "steps": [
+              "Stosujemy wzór: \\( F = G\\frac{m_1 m_2}{r^2} \\).",
+              "Podstawiamy: \\( F = 6{,}67\\cdot10^{-11} \\cdot \\frac{1000 \\cdot 1000}{2^2} \\).",
+              "Liczymy licznik: \\( 6{,}67\\cdot10^{-11} \\cdot 10^6 = 6{,}67\\cdot10^{-5} \\), dzielimy przez 4.",
+              "Otrzymujemy \\( F \\approx 1{,}67\\cdot10^{-5} \\) N."
+            ],
+            "answer": "F ≈ 1,67·10⁻⁵ N"
+          },
+          {
+            "title": "Przyspieszenie na innej planecie",
+            "tresc": "Planeta ma masę 2 razy większą i promień 2 razy większy od Ziemi. Ile wynosi przyspieszenie grawitacyjne na jej powierzchni? Przyjmij g = 10 m/s² dla Ziemi.",
+            "steps": [
+              "Wzór: \\( g = G\\frac{M}{R^2} \\).",
+              "Dla nowej planety: \\( g' = G\\frac{2M}{(2R)^2} = G\\frac{2M}{4R^2} = \\tfrac{1}{2}G\\frac{M}{R^2} \\).",
+              "Czyli \\( g' = \\tfrac{1}{2}g = \\tfrac{1}{2}\\cdot 10 \\).",
+              "Otrzymujemy \\( g' = 5 \\) m/s²."
+            ],
+            "answer": "g' = 5 m/s²"
+          }
+        ],
+        "faq": [
+          { "q": "Czy siła grawitacji działa tylko między bardzo dużymi ciałami?", "a": "Nie, działa między wszystkimi ciałami posiadającymi masę. Jest jednak zauważalna dopiero przy ogromnych masach (planety, gwiazdy), bo stała G jest bardzo mała." }
+        ]
+      },
+      {
+        "slug": "ruch-satelitow",
+        "name": "Ruch satelitów",
+        "intro": "Siła grawitacji pełni rolę siły dośrodkowej, utrzymując satelitę na orbicie.",
+        "problems": [
+          {
+            "title": "Prędkość satelity na orbicie",
+            "tresc": "Oblicz prędkość satelity krążącego po orbicie kołowej o promieniu 8·10⁶ m wokół Ziemi. Masa Ziemi M = 6·10²⁴ kg, G = 6,67·10⁻¹¹ N·m²/kg².",
+            "steps": [
+              "Siła grawitacji jest dośrodkowa: \\( G\\frac{Mm}{r^2} = \\frac{mv^2}{r} \\), stąd \\( v = \\sqrt{\\frac{GM}{r}} \\).",
+              "Liczymy licznik: \\( GM = 6{,}67\\cdot10^{-11} \\cdot 6\\cdot10^{24} \\approx 4{,}0\\cdot10^{14} \\).",
+              "Dzielimy przez r: \\( \\frac{4{,}0\\cdot10^{14}}{8\\cdot10^{6}} = 5\\cdot10^{7} \\).",
+              "Pierwiastkujemy: \\( v = \\sqrt{5\\cdot10^7} \\approx 7{,}1\\cdot10^3 \\) m/s = 7,1 km/s."
+            ],
+            "answer": "v ≈ 7,1 km/s"
+          },
+          {
+            "title": "Okres obiegu satelity",
+            "tresc": "Satelita porusza się po orbicie o promieniu 8·10⁶ m z prędkością 7,1 km/s. Oblicz jego okres obiegu.",
+            "steps": [
+              "Okres to czas przebycia obwodu orbity: \\( T = \\frac{2\\pi r}{v} \\).",
+              "Podstawiamy: \\( T = \\frac{2\\pi \\cdot 8\\cdot10^6}{7{,}1\\cdot10^3} \\).",
+              "Licznik: \\( 2\\pi \\cdot 8\\cdot10^6 \\approx 5{,}03\\cdot10^7 \\).",
+              "Dzielimy: \\( T \\approx \\frac{5{,}03\\cdot10^7}{7{,}1\\cdot10^3} \\approx 7080 \\) s ≈ 1 h 58 min."
+            ],
+            "answer": "T ≈ 7080 s (ok. 118 min)"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego satelita nie spada na Ziemię?", "a": "Spada, ale dzięki dużej prędkości stycznej jego tor zakrzywia się dokładnie tak jak powierzchnia Ziemi. Krąży więc w stanie ciągłego swobodnego spadania." }
+        ]
+      },
+      {
+        "slug": "predkosci-kosmiczne",
+        "name": "Prędkości kosmiczne",
+        "intro": "Pierwsza prędkość pozwala krążyć po orbicie, druga - opuścić pole grawitacyjne planety.",
+        "problems": [
+          {
+            "title": "Pierwsza prędkość kosmiczna",
+            "tresc": "Oblicz pierwszą prędkość kosmiczną dla Ziemi. M = 6·10²⁴ kg, R = 6,4·10⁶ m, G = 6,67·10⁻¹¹ N·m²/kg².",
+            "steps": [
+              "Wzór: \\( v_I = \\sqrt{\\frac{GM}{R}} \\).",
+              "Licznik: \\( GM \\approx 4{,}0\\cdot10^{14} \\).",
+              "Dzielimy: \\( \\frac{4{,}0\\cdot10^{14}}{6{,}4\\cdot10^{6}} = 6{,}25\\cdot10^{7} \\).",
+              "Pierwiastkujemy: \\( v_I = \\sqrt{6{,}25\\cdot10^7} \\approx 7{,}9\\cdot10^3 \\) m/s = 7,9 km/s."
+            ],
+            "answer": "v_I ≈ 7,9 km/s"
+          },
+          {
+            "title": "Druga prędkość kosmiczna",
+            "tresc": "Wiedząc, że pierwsza prędkość kosmiczna dla Ziemi wynosi 7,9 km/s, oblicz drugą prędkość kosmiczną.",
+            "steps": [
+              "Zależność między prędkościami: \\( v_{II} = \\sqrt{2}\\,v_I \\).",
+              "Podstawiamy: \\( v_{II} = \\sqrt{2}\\cdot 7{,}9 \\) km/s.",
+              "Liczymy: \\( v_{II} \\approx 1{,}41 \\cdot 7{,}9 \\approx 11{,}2 \\) km/s."
+            ],
+            "answer": "v_II ≈ 11,2 km/s"
+          }
+        ],
+        "faq": [
+          { "q": "Co się stanie, gdy ciało osiągnie prędkość większą niż druga kosmiczna?", "a": "Opuści pole grawitacyjne planety po torze hiperbolicznym i nie wróci - ma wtedy dodatnią energię całkowitą." }
+        ]
+      },
+      {
+        "slug": "prawa-keplera",
+        "name": "Prawa Keplera",
+        "intro": "Prawa Keplera opisują kształt orbit, zmienność prędkości i związek okresu z promieniem orbity.",
+        "problems": [
+          {
+            "title": "Zastosowanie III prawa Keplera",
+            "tresc": "Planeta A krąży wokół gwiazdy w czasie 1 roku na orbicie o promieniu r. Planeta B ma promień orbity 4r. Oblicz okres obiegu planety B.",
+            "steps": [
+              "III prawo Keplera: \\( \\frac{T_A^2}{r_A^3} = \\frac{T_B^2}{r_B^3} \\).",
+              "Stąd \\( T_B^2 = T_A^2 \\cdot \\frac{r_B^3}{r_A^3} = 1^2 \\cdot \\frac{(4r)^3}{r^3} = 64 \\).",
+              "Pierwiastkujemy: \\( T_B = \\sqrt{64} = 8 \\) lat."
+            ],
+            "answer": "T_B = 8 lat"
+          },
+          {
+            "title": "Wyznaczanie masy gwiazdy",
+            "tresc": "Planeta krąży po orbicie kołowej o promieniu 1,5·10¹¹ m z okresem 3,15·10⁷ s. Oblicz masę gwiazdy. G = 6,67·10⁻¹¹ N·m²/kg².",
+            "steps": [
+              "Z III prawa Keplera: \\( M = \\frac{4\\pi^2 r^3}{G T^2} \\).",
+              "Licznik: \\( 4\\pi^2 \\cdot (1{,}5\\cdot10^{11})^3 \\approx 39{,}5 \\cdot 3{,}375\\cdot10^{33} \\approx 1{,}33\\cdot10^{35} \\).",
+              "Mianownik: \\( G T^2 = 6{,}67\\cdot10^{-11} \\cdot (3{,}15\\cdot10^7)^2 \\approx 6{,}67\\cdot10^{-11} \\cdot 9{,}9\\cdot10^{14} \\approx 6{,}6\\cdot10^{4} \\).",
+              "Dzielimy: \\( M \\approx \\frac{1{,}33\\cdot10^{35}}{6{,}6\\cdot10^{4}} \\approx 2\\cdot10^{30} \\) kg."
+            ],
+            "answer": "M ≈ 2·10³⁰ kg (rząd masy Słońca)"
+          }
+        ],
+        "faq": [
+          { "q": "Czy prawa Keplera dotyczą tylko planet?", "a": "Nie. Obowiązują dla każdego ciała krążącego w polu grawitacyjnym innego ciała - planet, księżyców, satelitów, a nawet gwiazd podwójnych." }
+        ]
+      }
+    ],
+    "related": ["dynamika", "kinematyka", "praca-moc-energia"]
+  },
+  {
+    "slug": "drgania-harmoniczne",
+    "name": "Drgania i ruch harmoniczny",
+    "dopelniacz": "drgań i ruchu harmonicznego",
+    "metaTeoria": "Drgania i ruch harmoniczny - teoria: równanie ruchu, okres wahadła i sprężyny, energia drgań, rezonans. Wzory i przykłady krok po kroku.",
+    "metaMatura": "Ruch harmoniczny na maturze z fizyki: zadania o wahadle matematycznym, drganiach sprężyny i energii oscylatora. Wzory i rozwiązania krok po kroku.",
+    "intro": "Ruch harmoniczny to najprostszy rodzaj drgań, w którym siła zwracająca jest proporcjonalna do wychylenia. Opisuje go funkcja sinusoidalna z określonym okresem, amplitudą i fazą. Dział obejmuje wahadło matematyczne, drgania sprężyny, energię oscylatora oraz zjawisko rezonansu.",
+    "theory": [
+      {
+        "heading": "Czym jest ruch harmoniczny",
+        "html": "<p>Ruch harmoniczny prosty to ruch drgający, w którym siła działająca na ciało jest proporcjonalna do wychylenia z położenia równowagi i skierowana do niego: \\( F = -kx \\). Znak minus oznacza, że siła zawsze przeciwdziała wychyleniu (siła zwracająca).</p><ul><li>Wychylenie zmienia się sinusoidalnie: \\( x(t) = A\\sin(\\omega t + \\varphi_0) \\).</li><li>\\( A \\) to amplituda, \\( \\omega \\) - częstość kołowa, \\( \\varphi_0 \\) - faza początkowa.</li></ul><p>Przykładami są drgania ciężarka na sprężynie i (dla małych wychyleń) wahadło matematyczne.</p>"
+      },
+      {
+        "heading": "Wielkości opisujące drgania",
+        "html": "<p>Drgania charakteryzują podstawowe wielkości:</p><ul><li>amplituda \\( A \\) - maksymalne wychylenie z położenia równowagi,</li><li>okres \\( T \\) - czas jednego pełnego drgania,</li><li>częstotliwość \\( f = \\frac{1}{T} \\) - liczba drgań na sekundę [Hz],</li><li>częstość kołowa \\( \\omega = 2\\pi f = \\frac{2\\pi}{T} \\).</li></ul><p>Prędkość i przyspieszenie również zmieniają się okresowo: \\( v(t) = A\\omega\\cos(\\omega t) \\), \\( a(t) = -A\\omega^2\\sin(\\omega t) = -\\omega^2 x \\). Przyspieszenie jest największe na krańcach (maksymalne wychylenie), a prędkość - w położeniu równowagi.</p>"
+      },
+      {
+        "heading": "Okres drgań wahadła i sprężyny",
+        "html": "<p>Dwa najważniejsze oscylatory mają charakterystyczne okresy:</p><ul><li>wahadło matematyczne (małe wychylenia): \\( T = 2\\pi\\sqrt{\\frac{l}{g}} \\) - zależy tylko od długości i przyspieszenia ziemskiego, nie od masy,</li><li>ciężarek na sprężynie: \\( T = 2\\pi\\sqrt{\\frac{m}{k}} \\) - zależy od masy i stałej sprężystości.</li></ul><p>Co ważne, okres wahadła nie zależy od amplitudy (dla małych kątów) - to izochronizm wahadła. Wahadło może służyć do wyznaczania przyspieszenia ziemskiego g.</p>"
+      },
+      {
+        "heading": "Energia w ruchu harmonicznym",
+        "html": "<p>W ruchu harmonicznym energia mechaniczna jest stała i przechodzi okresowo między energią potencjalną a kinetyczną:</p>$$ E_c = \\frac{1}{2}kA^2 = \\frac{1}{2}mv_{max}^2 $$<ul><li>W położeniu równowagi cała energia to energia kinetyczna (prędkość maksymalna).</li><li>W punkcie maksymalnego wychylenia cała energia to energia potencjalna sprężystości.</li></ul><p>Energia całkowita jest proporcjonalna do kwadratu amplitudy. Maksymalna prędkość wynosi \\( v_{max} = A\\omega \\), a maksymalne przyspieszenie \\( a_{max} = A\\omega^2 \\).</p>"
+      },
+      {
+        "heading": "Drgania tłumione i rezonans",
+        "html": "<p>W rzeczywistości drgania zanikają wskutek oporów (tarcie, opór powietrza) - to drgania tłumione, których amplituda maleje z czasem. Aby je podtrzymać, stosuje się drgania wymuszone siłą zewnętrzną o pewnej częstotliwości.</p><ul><li>Rezonans zachodzi, gdy częstotliwość siły wymuszającej jest równa częstotliwości własnej układu.</li><li>Wtedy amplituda drgań gwałtownie rośnie.</li></ul><p>Rezonans bywa pożyteczny (instrumenty muzyczne, odbiorniki radiowe), ale i groźny - może prowadzić do zniszczenia konstrukcji (mostów, budynków podczas trzęsień ziemi).</p>"
+      }
+    ],
+    "formulas": [
+      { "name": "Równanie ruchu harmonicznego", "latex": "x(t) = A\\sin(\\omega t + \\varphi_0)", "desc": "Sinusoidalna zależność wychylenia od czasu w ruchu harmonicznym." },
+      { "name": "Siła zwracająca", "latex": "F = -kx", "desc": "Siła proporcjonalna do wychylenia i skierowana do położenia równowagi." },
+      { "name": "Częstość kołowa", "latex": "\\omega = \\frac{2\\pi}{T} = 2\\pi f", "desc": "Związek częstości kołowej z okresem i częstotliwością." },
+      { "name": "Okres wahadła matematycznego", "latex": "T = 2\\pi\\sqrt{\\frac{l}{g}}", "desc": "Okres wahadła zależny od długości i przyspieszenia ziemskiego, niezależny od masy." },
+      { "name": "Okres drgań sprężyny", "latex": "T = 2\\pi\\sqrt{\\frac{m}{k}}", "desc": "Okres oscylatora sprężynowego zależny od masy i stałej sprężystości." },
+      { "name": "Maksymalna prędkość", "latex": "v_{max} = A\\omega", "desc": "Największa prędkość drgającego ciała, osiągana w położeniu równowagi." },
+      { "name": "Maksymalne przyspieszenie", "latex": "a_{max} = A\\omega^2", "desc": "Największe przyspieszenie, osiągane w punktach maksymalnego wychylenia." },
+      { "name": "Energia całkowita oscylatora", "latex": "E_c = \\frac{1}{2}kA^2", "desc": "Stała energia mechaniczna, proporcjonalna do kwadratu amplitudy." }
+    ],
+    "definitions": [
+      { "term": "Ruch harmoniczny", "def": "Ruch drgający, w którym siła zwracająca jest proporcjonalna do wychylenia z położenia równowagi." },
+      { "term": "Amplituda", "def": "Maksymalne wychylenie ciała z położenia równowagi w ruchu drgającym." },
+      { "term": "Okres drgań", "def": "Czas, w którym ciało wykonuje jedno pełne drganie." },
+      { "term": "Częstotliwość", "def": "Liczba pełnych drgań wykonanych w jednostce czasu, wyrażana w hercach (Hz)." },
+      { "term": "Rezonans", "def": "Gwałtowny wzrost amplitudy drgań, gdy częstotliwość wymuszająca równa się częstotliwości własnej układu." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Ruch harmoniczny obejmuje wzory na okres wahadła i sprężyny, energię drgań oraz zależności wychylenia, prędkości i przyspieszenia od czasu. Poziom rozszerzony wymaga analizy równań ruchu i wykresów.",
+      "html": "<p>Na maturze zadania z drgań często wymagają odczytu wielkości z równania ruchu \\( x(t) = A\\sin(\\omega t) \\) lub z wykresu - amplitudy, okresu, częstotliwości. Częste są też zadania na okres wahadła i sprężyny oraz bilans energii (przeliczanie energii potencjalnej na kinetyczną). Warto pamiętać, że okres wahadła nie zależy od masy ani amplitudy.</p>",
+      "typoweZadania": [
+        "Wyznaczanie okresu, częstotliwości i amplitudy z równania ruchu lub wykresu.",
+        "Obliczanie okresu wahadła matematycznego lub przyspieszenia ziemskiego.",
+        "Obliczanie okresu drgań ciężarka na sprężynie i stałej sprężystości.",
+        "Bilans energii oscylatora i wyznaczanie prędkości maksymalnej."
+      ],
+      "strategia": [
+        "Najpierw odczytaj z równania lub wykresu ω i A, a okres policz jako T = 2π/ω.",
+        "Pamiętaj, że okres wahadła nie zależy od masy, a sprężyny - od amplitudy.",
+        "W zadaniach energetycznych korzystaj z zachowania energii: w równowadze całość to Eₖ, na krańcu - Eₚ."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Dlaczego okres wahadła nie zależy od masy?", "a": "Bo siła zwracająca (składowa grawitacji) jest proporcjonalna do masy, ale bezwładność ciała również. W równaniu ruchu masa się skraca, więc okres zależy tylko od długości i g." },
+      { "q": "Gdzie prędkość, a gdzie przyspieszenie jest największe w ruchu harmonicznym?", "a": "Prędkość jest maksymalna w położeniu równowagi (x = 0), a przyspieszenie - w punktach maksymalnego wychylenia (x = ±A), bo a = -ω²x." },
+      { "q": "Czy ruch harmoniczny jest ruchem jednostajnym?", "a": "Nie. Prędkość i przyspieszenie ciągle się zmieniają sinusoidalnie. Stałe są tylko okres, amplituda i energia całkowita (przy braku tłumienia)." },
+      { "q": "Co to jest rezonans i kiedy występuje?", "a": "To gwałtowny wzrost amplitudy drgań, gdy częstotliwość siły wymuszającej zrówna się z częstotliwością własną układu. Przykłady: huśtawka, rozkołysany most, struna instrumentu." }
+    ],
+    "faqMatura": [
+      { "q": "Jak odczytać częstotliwość z równania x(t) = A·sin(ωt)?", "a": "Najpierw odczytujemy ω (współczynnik przy t), potem liczymy f = ω/(2π) oraz okres T = 2π/ω." },
+      { "q": "Czy w zadaniach trzeba uwzględniać tłumienie drgań?", "a": "Zazwyczaj nie - większość zadań maturalnych dotyczy ruchu harmonicznego idealnego (bez tłumienia), gdzie energia jest zachowana. Tłumienie pojawia się głównie w pytaniach jakościowych." },
+      { "q": "Jak wyznaczyć g za pomocą wahadła?", "a": "Mierzymy okres T i długość l wahadła, a następnie z wzoru T = 2π√(l/g) wyliczamy g = 4π²l/T². To klasyczne zadanie doświadczalne." }
+    ],
+    "subtopics": [
+      {
+        "slug": "wahadlo-matematyczne",
+        "name": "Wahadło matematyczne",
+        "intro": "Okres wahadła zależy tylko od jego długości i przyspieszenia ziemskiego, nie od masy.",
+        "problems": [
+          {
+            "title": "Okres wahadła",
+            "tresc": "Oblicz okres drgań wahadła matematycznego o długości 1 m. Przyjmij g = 9,8 m/s² oraz π² ≈ 9,8.",
+            "steps": [
+              "Wzór: \\( T = 2\\pi\\sqrt{\\frac{l}{g}} \\).",
+              "Podstawiamy: \\( T = 2\\pi\\sqrt{\\frac{1}{9{,}8}} \\).",
+              "Liczymy: \\( \\sqrt{\\frac{1}{9{,}8}} \\approx 0{,}319 \\), więc \\( T = 2\\pi \\cdot 0{,}319 \\).",
+              "Otrzymujemy \\( T \\approx 2{,}0 \\) s."
+            ],
+            "answer": "T ≈ 2,0 s"
+          },
+          {
+            "title": "Wyznaczanie przyspieszenia ziemskiego",
+            "tresc": "Wahadło o długości 0,5 m wykonuje 30 pełnych drgań w czasie 42,4 s. Oblicz przyspieszenie ziemskie.",
+            "steps": [
+              "Okres jednego drgania: \\( T = \\frac{42{,}4}{30} \\approx 1{,}413 \\) s.",
+              "Z wzoru \\( T = 2\\pi\\sqrt{\\frac{l}{g}} \\) wyznaczamy \\( g = \\frac{4\\pi^2 l}{T^2} \\).",
+              "Podstawiamy: \\( g = \\frac{4\\pi^2 \\cdot 0{,}5}{1{,}413^2} = \\frac{19{,}74}{1{,}997} \\).",
+              "Otrzymujemy \\( g \\approx 9{,}9 \\) m/s²."
+            ],
+            "answer": "g ≈ 9,9 m/s²"
+          }
+        ],
+        "faq": [
+          { "q": "Czy okres wahadła zmieni się na Księżycu?", "a": "Tak. Na Księżycu g jest około 6 razy mniejsze, więc okres wzrośnie √6 ≈ 2,45 raza - wahadło będzie wahać się wolniej." }
+        ]
+      },
+      {
+        "slug": "drgania-sprezyny",
+        "name": "Drgania sprężyny",
+        "intro": "Okres ciężarka na sprężynie zależy od masy i stałej sprężystości, nie od amplitudy.",
+        "problems": [
+          {
+            "title": "Okres drgań ciężarka",
+            "tresc": "Do sprężyny o stałej k = 200 N/m zawieszono ciężarek o masie 0,5 kg. Oblicz okres jego drgań.",
+            "steps": [
+              "Wzór: \\( T = 2\\pi\\sqrt{\\frac{m}{k}} \\).",
+              "Podstawiamy: \\( T = 2\\pi\\sqrt{\\frac{0{,}5}{200}} = 2\\pi\\sqrt{0{,}0025} \\).",
+              "Liczymy: \\( \\sqrt{0{,}0025} = 0{,}05 \\), więc \\( T = 2\\pi \\cdot 0{,}05 \\).",
+              "Otrzymujemy \\( T \\approx 0{,}31 \\) s."
+            ],
+            "answer": "T ≈ 0,31 s"
+          },
+          {
+            "title": "Wyznaczanie stałej sprężystości",
+            "tresc": "Ciężarek o masie 0,2 kg drga na sprężynie z częstotliwością 5 Hz. Oblicz stałą sprężystości sprężyny.",
+            "steps": [
+              "Z wzoru \\( T = 2\\pi\\sqrt{\\frac{m}{k}} \\) i \\( T = \\frac{1}{f} \\) wynika \\( k = 4\\pi^2 f^2 m \\).",
+              "Podstawiamy: \\( k = 4\\pi^2 \\cdot 5^2 \\cdot 0{,}2 \\).",
+              "Liczymy: \\( k = 4 \\cdot 9{,}87 \\cdot 25 \\cdot 0{,}2 \\approx 197 \\).",
+              "Otrzymujemy \\( k \\approx 197 \\) N/m."
+            ],
+            "answer": "k ≈ 197 N/m"
+          }
+        ],
+        "faq": [
+          { "q": "Czy okres drgań sprężyny zależy od amplitudy?", "a": "Nie. Dla idealnej sprężyny okres zależy tylko od masy i stałej sprężystości. Zwiększenie amplitudy zwiększa prędkość maksymalną i energię, ale nie okres." }
+        ]
+      },
+      {
+        "slug": "energia-drgan",
+        "name": "Energia w ruchu harmonicznym",
+        "intro": "Energia oscylatora przechodzi okresowo między postacią potencjalną a kinetyczną przy stałej sumie.",
+        "problems": [
+          {
+            "title": "Prędkość maksymalna oscylatora",
+            "tresc": "Ciężarek na sprężynie drga z amplitudą 0,1 m i częstością kołową 10 rad/s. Oblicz jego maksymalną prędkość.",
+            "steps": [
+              "Maksymalna prędkość: \\( v_{max} = A\\omega \\).",
+              "Podstawiamy: \\( v_{max} = 0{,}1 \\cdot 10 \\).",
+              "Otrzymujemy \\( v_{max} = 1 \\) m/s."
+            ],
+            "answer": "v_max = 1 m/s"
+          },
+          {
+            "title": "Energia całkowita drgań",
+            "tresc": "Oscylator sprężynowy o stałej k = 50 N/m drga z amplitudą 0,2 m. Oblicz jego energię całkowitą oraz prędkość maksymalną, jeśli masa ciężarka to 0,5 kg.",
+            "steps": [
+              "Energia całkowita: \\( E_c = \\tfrac{1}{2}kA^2 = \\tfrac{1}{2}\\cdot 50 \\cdot 0{,}2^2 = \\tfrac{1}{2}\\cdot 50 \\cdot 0{,}04 = 1 \\) J.",
+              "W położeniu równowagi cała energia jest kinetyczna: \\( \\tfrac{1}{2}mv_{max}^2 = E_c \\).",
+              "Stąd \\( v_{max} = \\sqrt{\\frac{2E_c}{m}} = \\sqrt{\\frac{2 \\cdot 1}{0{,}5}} = \\sqrt{4} \\).",
+              "Otrzymujemy \\( v_{max} = 2 \\) m/s."
+            ],
+            "answer": "E_c = 1 J, v_max = 2 m/s"
+          }
+        ],
+        "faq": [
+          { "q": "Gdzie energia kinetyczna jest największa?", "a": "W położeniu równowagi (x = 0), gdzie prędkość jest maksymalna. Tam energia potencjalna jest zerowa, a cała energia ma postać kinetyczną." }
+        ]
+      },
+      {
+        "slug": "rezonans",
+        "name": "Rezonans i drgania wymuszone",
+        "intro": "Rezonans to gwałtowny wzrost amplitudy, gdy częstotliwość wymuszająca równa się częstotliwości własnej.",
+        "problems": [
+          {
+            "title": "Częstotliwość rezonansowa wahadła",
+            "tresc": "Wahadło ma częstotliwość własną wynikającą z długości 0,25 m. Z jaką częstotliwością należy je wymuszać, by wystąpił rezonans? Przyjmij g = 10 m/s², π² ≈ 10.",
+            "steps": [
+              "Okres własny: \\( T = 2\\pi\\sqrt{\\frac{l}{g}} = 2\\pi\\sqrt{\\frac{0{,}25}{10}} = 2\\pi\\sqrt{0{,}025} \\).",
+              "Liczymy: \\( \\sqrt{0{,}025} \\approx 0{,}158 \\), więc \\( T \\approx 0{,}993 \\approx 1 \\) s.",
+              "Rezonans zachodzi przy częstotliwości własnej: \\( f = \\frac{1}{T} \\approx 1 \\) Hz."
+            ],
+            "answer": "f ≈ 1 Hz"
+          },
+          {
+            "title": "Dobór częstotliwości wymuszenia",
+            "tresc": "Oscylator sprężynowy o masie 0,1 kg i stałej k = 40 N/m ma być wprawiony w rezonans. Oblicz częstotliwość siły wymuszającej.",
+            "steps": [
+              "Częstość własna: \\( \\omega_0 = \\sqrt{\\frac{k}{m}} = \\sqrt{\\frac{40}{0{,}1}} = \\sqrt{400} = 20 \\) rad/s.",
+              "Częstotliwość: \\( f = \\frac{\\omega_0}{2\\pi} = \\frac{20}{2\\pi} \\).",
+              "Liczymy: \\( f \\approx \\frac{20}{6{,}28} \\approx 3{,}2 \\) Hz."
+            ],
+            "answer": "f ≈ 3,2 Hz"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego rezonans bywa niebezpieczny?", "a": "Przy rezonansie amplituda drgań rośnie do bardzo dużych wartości, co może doprowadzić do zniszczenia konstrukcji, np. mostów czy budynków podczas trzęsienia ziemi." }
+        ]
+      }
+    ],
+    "related": ["fale-mechaniczne", "praca-moc-energia", "dynamika"]
+  },
+  {
+    "slug": "fale-mechaniczne",
+    "name": "Fale mechaniczne i dźwięk",
+    "dopelniacz": "fal mechanicznych i dźwięku",
+    "metaTeoria": "Fale mechaniczne i dźwięk - teoria: równanie fali, długość fali, interferencja, efekt Dopplera, fale stojące i akustyka. Wzory z przykładami.",
+    "metaMatura": "Fale mechaniczne i dźwięk na maturze: zadania o długości i prędkości fali, efekcie Dopplera, falach stojących i dudnieniach z rozwiązaniami krok po kroku.",
+    "intro": "Fala mechaniczna to rozchodzące się w ośrodku zaburzenie przenoszące energię bez transportu materii. Dźwięk jest falą podłużną rozchodzącą się w powietrzu. Dział obejmuje równanie fali, interferencję, fale stojące, efekt Dopplera oraz podstawy akustyki.",
+    "theory": [
+      {
+        "heading": "Czym jest fala mechaniczna",
+        "html": "<p>Fala mechaniczna to rozchodzące się w sprężystym ośrodku zaburzenie, które przenosi energię i pęd, ale nie przenosi materii - cząsteczki ośrodka drgają wokół swoich położeń równowagi.</p><ul><li>Fale poprzeczne: cząsteczki drgają prostopadle do kierunku rozchodzenia się fali (np. fala na sznurze).</li><li>Fale podłużne: cząsteczki drgają wzdłuż kierunku rozchodzenia (np. dźwięk w powietrzu).</li></ul><p>Fala mechaniczna potrzebuje ośrodka - w próżni się nie rozchodzi. To odróżnia ją od fal elektromagnetycznych.</p>"
+      },
+      {
+        "heading": "Podstawowe równanie fali",
+        "html": "<p>Falę opisują: długość fali \\( \\lambda \\) (odległość między dwoma kolejnymi punktami w tej samej fazie), okres \\( T \\), częstotliwość \\( f \\) oraz prędkość \\( v \\). Łączy je podstawowy związek:</p>$$ v = \\lambda f = \\frac{\\lambda}{T} $$<ul><li>Prędkość fali zależy od własności ośrodka, a nie od częstotliwości źródła.</li><li>Gdy fala przechodzi do innego ośrodka, zmienia się jej prędkość i długość, ale częstotliwość pozostaje stała.</li></ul><p>Równanie fali biegnącej można zapisać jako \\( y(x,t) = A\\sin\\left(\\omega t - \\frac{2\\pi}{\\lambda}x\\right) \\).</p>"
+      },
+      {
+        "heading": "Interferencja i fale stojące",
+        "html": "<p>Gdy spotykają się dwie fale, ich wychylenia się dodają (zasada superpozycji). Prowadzi to do interferencji:</p><ul><li>wzmocnienie (konstruktywna) - gdy różnica dróg to całkowita wielokrotność długości fali: \\( \\Delta r = k\\lambda \\),</li><li>wygaszenie (destruktywna) - gdy różnica dróg to nieparzysta wielokrotność połowy fali: \\( \\Delta r = (2k+1)\\frac{\\lambda}{2} \\).</li></ul><p>Nałożenie się dwóch fal biegnących w przeciwne strony tworzy falę stojącą z nieruchomymi węzłami i drgającymi strzałkami. Na takich falach opiera się działanie instrumentów strunowych i dętych.</p>"
+      },
+      {
+        "heading": "Dźwięk i jego cechy",
+        "html": "<p>Dźwięk to fala podłużna rozchodząca się w gazach, cieczach i ciałach stałych. Człowiek słyszy fale o częstotliwości 16 Hz - 20 kHz. Cechy dźwięku:</p><ul><li>wysokość - zależy od częstotliwości (większa częstotliwość = wyższy dźwięk),</li><li>głośność - zależy od amplitudy (natężenia),</li><li>barwa - zależy od składu harmonicznego.</li></ul><p>Prędkość dźwięku w powietrzu wynosi ok. 340 m/s i rośnie z temperaturą. W wodzie i ciałach stałych dźwięk rozchodzi się szybciej niż w powietrzu, bo są one mniej ściśliwe.</p>"
+      },
+      {
+        "heading": "Efekt Dopplera i dudnienia",
+        "html": "<p>Efekt Dopplera to zmiana obserwowanej częstotliwości fali wskutek ruchu źródła lub obserwatora względem ośrodka.</p><ul><li>Gdy źródło zbliża się - słyszymy wyższy dźwięk (krótsza fala).</li><li>Gdy źródło oddala się - słyszymy niższy dźwięk (dłuższa fala).</li></ul><p>To dlatego dźwięk syreny karetki zmienia się w chwili mijania nas. Dudnienia natomiast powstają przy nałożeniu dwóch fal o nieco różnych częstotliwościach - słyszymy okresowe wzmocnienia i osłabienia dźwięku o częstotliwości \\( f_d = |f_1 - f_2| \\).</p>"
+      }
+    ],
+    "formulas": [
+      { "name": "Związek prędkości, długości i częstotliwości", "latex": "v = \\lambda f", "desc": "Podstawowe równanie fali łączące jej prędkość, długość i częstotliwość." },
+      { "name": "Długość fali a okres", "latex": "\\lambda = vT", "desc": "Długość fali równa drodze przebytej w czasie jednego okresu." },
+      { "name": "Częstotliwość", "latex": "f = \\frac{1}{T}", "desc": "Liczba drgań na sekundę; odwrotność okresu." },
+      { "name": "Warunek wzmocnienia interferencyjnego", "latex": "\\Delta r = k\\lambda", "desc": "Różnica dróg równa wielokrotności długości fali daje wzmocnienie." },
+      { "name": "Warunek wygaszenia", "latex": "\\Delta r = (2k+1)\\frac{\\lambda}{2}", "desc": "Różnica dróg równa nieparzystej liczbie połówek fali daje wygaszenie." },
+      { "name": "Efekt Dopplera (źródło zbliża się)", "latex": "f' = f\\frac{v}{v - v_z}", "desc": "Obserwowana częstotliwość rośnie, gdy źródło o prędkości v_z zbliża się." },
+      { "name": "Efekt Dopplera (źródło oddala się)", "latex": "f' = f\\frac{v}{v + v_z}", "desc": "Obserwowana częstotliwość maleje, gdy źródło oddala się." },
+      { "name": "Częstotliwość dudnień", "latex": "f_d = |f_1 - f_2|", "desc": "Częstotliwość dudnień równa różnicy częstotliwości nakładających się fal." }
+    ],
+    "definitions": [
+      { "term": "Fala mechaniczna", "def": "Rozchodzące się w sprężystym ośrodku zaburzenie przenoszące energię bez transportu materii." },
+      { "term": "Długość fali", "def": "Odległość między dwoma najbliższymi punktami fali drgającymi w zgodnej fazie." },
+      { "term": "Interferencja", "def": "Nakładanie się fal prowadzące do ich wzmocnienia lub wygaszenia w zależności od różnicy faz." },
+      { "term": "Fala stojąca", "def": "Fala powstała z nałożenia dwóch fal biegnących przeciwnie, z nieruchomymi węzłami i drgającymi strzałkami." },
+      { "term": "Efekt Dopplera", "def": "Zmiana obserwowanej częstotliwości fali spowodowana ruchem źródła lub obserwatora." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Fale mechaniczne obejmują równanie fali, długość i prędkość, interferencję, fale stojące, akustykę oraz efekt Dopplera. Poziom rozszerzony wymaga analizy interferencji i wzorów Dopplera.",
+      "html": "<p>Na maturze najczęstsze są zadania na podstawowy związek \\( v = \\lambda f \\) oraz na fale stojące w strunach i słupach powietrza. Pojawia się też efekt Dopplera (głównie jakościowo i ilościowo na rozszerzeniu) oraz dudnienia. Trzeba uważać na jednostki częstotliwości (Hz, kHz) i prawidłowo identyfikować fale poprzeczne i podłużne.</p>",
+      "typoweZadania": [
+        "Obliczanie długości fali, prędkości lub częstotliwości z równania v = λf.",
+        "Wyznaczanie długości fali stojącej w strunie lub piszczałce.",
+        "Obliczanie zmiany częstotliwości w efekcie Dopplera.",
+        "Wyznaczanie częstotliwości dudnień z dwóch bliskich częstotliwości."
+      ],
+      "strategia": [
+        "Zacznij od związku v = λf - pozwala wyznaczyć trzecią wielkość, gdy znasz dwie.",
+        "Przy falach stojących narysuj węzły i strzałki, by powiązać długość struny z długością fali.",
+        "W efekcie Dopplera ustal najpierw, czy źródło się zbliża (dźwięk wyższy), czy oddala (niższy), zanim podstawisz do wzoru."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Czym różni się fala poprzeczna od podłużnej?", "a": "W fali poprzecznej cząsteczki drgają prostopadle do kierunku rozchodzenia się (np. fala na sznurze), a w podłużnej - równolegle (np. dźwięk). Dźwięk w powietrzu jest zawsze falą podłużną." },
+      { "q": "Czy fala przenosi materię?", "a": "Nie. Fala przenosi energię i pęd, ale cząsteczki ośrodka tylko drgają wokół swoich położeń równowagi - nie wędrują razem z falą." },
+      { "q": "Dlaczego dźwięk nie rozchodzi się w próżni?", "a": "Bo fala mechaniczna potrzebuje sprężystego ośrodka (gazu, cieczy, ciała stałego), w którym mogą drgać cząsteczki. W próżni nie ma cząsteczek, więc dźwięk nie ma się czym rozchodzić." },
+      { "q": "Co decyduje o wysokości dźwięku?", "a": "Częstotliwość fali. Im wyższa częstotliwość, tym wyższy (bardziej piskliwy) dźwięk. Amplituda decyduje natomiast o głośności." }
+    ],
+    "faqMatura": [
+      { "q": "Co zmienia się, gdy fala przechodzi do innego ośrodka?", "a": "Zmienia się prędkość i długość fali, natomiast częstotliwość pozostaje stała (jest narzucona przez źródło). To częsta pułapka w zadaniach." },
+      { "q": "Jak rozwiązywać zadania z efektu Dopplera?", "a": "Najpierw ustal kierunek ruchu źródła/obserwatora i jakościowo, czy częstotliwość rośnie czy maleje. Potem dobierz odpowiedni wzór (znak w mianowniku) i podstaw dane." },
+      { "q": "Jak powstają dudnienia i jak liczyć ich częstotliwość?", "a": "Dudnienia powstają z nałożenia dwóch fal o bliskich częstotliwościach. Częstotliwość dudnień to wartość bezwzględna różnicy: f_d = |f₁ - f₂|." }
+    ],
+    "subtopics": [
+      {
+        "slug": "rownanie-fali",
+        "name": "Równanie fali",
+        "intro": "Podstawowy związek v = λf pozwala wyznaczyć dowolną z wielkości opisujących falę.",
+        "problems": [
+          {
+            "title": "Długość fali dźwiękowej",
+            "tresc": "Oblicz długość fali dźwiękowej o częstotliwości 680 Hz rozchodzącej się w powietrzu, gdzie prędkość dźwięku wynosi 340 m/s.",
+            "steps": [
+              "Z związku \\( v = \\lambda f \\) wyznaczamy \\( \\lambda = \\frac{v}{f} \\).",
+              "Podstawiamy: \\( \\lambda = \\frac{340}{680} \\).",
+              "Otrzymujemy \\( \\lambda = 0{,}5 \\) m."
+            ],
+            "answer": "λ = 0,5 m"
+          },
+          {
+            "title": "Prędkość fali na sznurze",
+            "tresc": "Fala na sznurze ma długość 0,4 m i okres 0,02 s. Oblicz prędkość rozchodzenia się fali.",
+            "steps": [
+              "Wzór: \\( v = \\frac{\\lambda}{T} \\).",
+              "Podstawiamy: \\( v = \\frac{0{,}4}{0{,}02} \\).",
+              "Otrzymujemy \\( v = 20 \\) m/s."
+            ],
+            "answer": "v = 20 m/s"
+          }
+        ],
+        "faq": [
+          { "q": "Co dzieje się z długością fali przy wzroście częstotliwości?", "a": "Przy stałej prędkości fali (ten sam ośrodek) wzrost częstotliwości oznacza zmniejszenie długości fali, bo λ = v/f." }
+        ]
+      },
+      {
+        "slug": "fale-stojace",
+        "name": "Fale stojące",
+        "intro": "Fala stojąca powstaje z nałożenia fal biegnących przeciwnie i ma stałe węzły oraz strzałki.",
+        "problems": [
+          {
+            "title": "Długość fali w strunie",
+            "tresc": "Struna o długości 0,6 m drga w tonie podstawowym (z węzłami na obu końcach i jedną strzałką w środku). Oblicz długość fali drgań struny.",
+            "steps": [
+              "W tonie podstawowym na długości struny mieści się połowa fali: \\( L = \\frac{\\lambda}{2} \\).",
+              "Stąd \\( \\lambda = 2L \\).",
+              "Podstawiamy: \\( \\lambda = 2 \\cdot 0{,}6 = 1{,}2 \\) m."
+            ],
+            "answer": "λ = 1,2 m"
+          },
+          {
+            "title": "Częstotliwość drgań struny",
+            "tresc": "Struna z poprzedniego zadania (λ = 1,2 m) ma prędkość fali równą 120 m/s. Oblicz częstotliwość tonu podstawowego.",
+            "steps": [
+              "Z związku \\( v = \\lambda f \\) wyznaczamy \\( f = \\frac{v}{\\lambda} \\).",
+              "Podstawiamy: \\( f = \\frac{120}{1{,}2} \\).",
+              "Otrzymujemy \\( f = 100 \\) Hz."
+            ],
+            "answer": "f = 100 Hz"
+          }
+        ],
+        "faq": [
+          { "q": "Czym są węzły i strzałki fali stojącej?", "a": "Węzły to punkty, które się nie poruszają (zerowe wychylenie), a strzałki to punkty o maksymalnej amplitudzie drgań. Odległość między sąsiednimi węzłami to pół długości fali." }
+        ]
+      },
+      {
+        "slug": "efekt-dopplera",
+        "name": "Efekt Dopplera",
+        "intro": "Ruch źródła względem obserwatora zmienia obserwowaną częstotliwość dźwięku.",
+        "problems": [
+          {
+            "title": "Zbliżające się źródło dźwięku",
+            "tresc": "Karetka jadąca z prędkością 34 m/s emituje sygnał o częstotliwości 600 Hz i zbliża się do nieruchomego obserwatora. Jaką częstotliwość słyszy obserwator? Prędkość dźwięku v = 340 m/s.",
+            "steps": [
+              "Wzór dla zbliżającego się źródła: \\( f' = f\\frac{v}{v - v_z} \\).",
+              "Podstawiamy: \\( f' = 600 \\cdot \\frac{340}{340 - 34} = 600 \\cdot \\frac{340}{306} \\).",
+              "Liczymy ułamek: \\( \\frac{340}{306} \\approx 1{,}111 \\).",
+              "Otrzymujemy \\( f' \\approx 667 \\) Hz."
+            ],
+            "answer": "f' ≈ 667 Hz"
+          },
+          {
+            "title": "Oddalające się źródło dźwięku",
+            "tresc": "Ta sama karetka (f = 600 Hz, v_z = 34 m/s) po minięciu obserwatora oddala się od niego. Jaką częstotliwość teraz słyszy obserwator? v = 340 m/s.",
+            "steps": [
+              "Wzór dla oddalającego się źródła: \\( f' = f\\frac{v}{v + v_z} \\).",
+              "Podstawiamy: \\( f' = 600 \\cdot \\frac{340}{340 + 34} = 600 \\cdot \\frac{340}{374} \\).",
+              "Liczymy ułamek: \\( \\frac{340}{374} \\approx 0{,}909 \\).",
+              "Otrzymujemy \\( f' \\approx 545 \\) Hz."
+            ],
+            "answer": "f' ≈ 545 Hz"
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego dźwięk karetki zmienia się przy mijaniu?", "a": "Gdy karetka się zbliża, fale są ściśnięte (wyższa częstotliwość, wyższy dźwięk), a gdy się oddala - rozciągnięte (niższa częstotliwość). To właśnie efekt Dopplera." }
+        ]
+      },
+      {
+        "slug": "dudnienia",
+        "name": "Dudnienia i akustyka",
+        "intro": "Nałożenie dwóch fal o bliskich częstotliwościach daje okresowe wahania głośności - dudnienia.",
+        "problems": [
+          {
+            "title": "Częstotliwość dudnień",
+            "tresc": "Dwa kamertony drgają z częstotliwościami 440 Hz i 444 Hz. Oblicz częstotliwość dudnień, jakie usłyszymy.",
+            "steps": [
+              "Wzór: \\( f_d = |f_1 - f_2| \\).",
+              "Podstawiamy: \\( f_d = |440 - 444| \\).",
+              "Otrzymujemy \\( f_d = 4 \\) Hz (cztery wzmocnienia na sekundę)."
+            ],
+            "answer": "f_d = 4 Hz"
+          },
+          {
+            "title": "Strojenie instrumentu",
+            "tresc": "Strojąc gitarę, słyszymy dudnienia o częstotliwości 3 Hz między struną a wzorcem 440 Hz. Jakie mogą być częstotliwości struny?",
+            "steps": [
+              "Z wzoru \\( f_d = |f_{struny} - 440| = 3 \\) Hz.",
+              "Rozwiązujemy dwa przypadki: \\( f_{struny} = 440 + 3 = 443 \\) Hz lub \\( f_{struny} = 440 - 3 = 437 \\) Hz.",
+              "Gdy dudnienia zwalniają przy dostrajaniu, zbliżamy się do 440 Hz."
+            ],
+            "answer": "437 Hz lub 443 Hz"
+          }
+        ],
+        "faq": [
+          { "q": "Do czego wykorzystuje się dudnienia w praktyce?", "a": "Do strojenia instrumentów muzycznych. Gdy częstotliwości się zrównują, dudnienia zanikają - to znak, że instrument jest dostrojony do wzorca." }
+        ]
+      }
+    ],
+    "related": ["drgania-harmoniczne", "optyka-falowa", "dynamika"]
+  }
+]

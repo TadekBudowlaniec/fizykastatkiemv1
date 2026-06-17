@@ -1,0 +1,816 @@
+[
+  {
+    "slug": "kinematyka",
+    "name": "Kinematyka",
+    "dopelniacz": "kinematyki",
+    "metaTeoria": "Kinematyka - teoria, wzory i definicje. Ruch jednostajny, jednostajnie przyspieszony, rzuty. Prędkość, przyspieszenie i droga krok po kroku.",
+    "metaMatura": "Kinematyka na maturze z fizyki - typowe zadania, wykresy ruchu, rzuty i strategia rozwiązywania. Poziom podstawowy i rozszerzony CKE.",
+    "intro": "Kinematyka to dział mechaniki opisujący ruch ciał bez wnikania w jego przyczyny. Poznasz tu pojęcia toru, drogi, przemieszczenia, prędkości i przyspieszenia oraz najważniejsze rodzaje ruchu: jednostajny prostoliniowy, jednostajnie przyspieszony i rzuty. To fundament całej mechaniki i podstawa wielu zadań maturalnych.",
+    "theory": [
+      {
+        "heading": "Układ odniesienia, tor, droga i przemieszczenie",
+        "html": "<p>Ruch jest zawsze względny, dlatego opisujemy go względem wybranego <strong>układu odniesienia</strong>. Linia, po której porusza się ciało, to <strong>tor</strong>. Długość toru przebyta w danym czasie to <strong>droga</strong> \\( s \\) - wielkość skalarna, zawsze dodatnia. <strong>Przemieszczenie</strong> \\( \\vec{r} \\) to wektor łączący położenie początkowe z końcowym.</p><ul><li>Droga zależy od kształtu toru, przemieszczenie tylko od punktów krańcowych.</li><li>W ruchu prostoliniowym w jedną stronę droga równa jest wartości przemieszczenia.</li><li>Punkt materialny to model ciała, którego rozmiary pomijamy.</li></ul>"
+      },
+      {
+        "heading": "Prędkość średnia i chwilowa",
+        "html": "<p><strong>Prędkość średnia</strong> to iloraz przemieszczenia i czasu: \\( \\vec{v}_{sr} = \\frac{\\Delta \\vec{r}}{\\Delta t} \\). W mowie potocznej mówimy o szybkości średniej jako ilorazie drogi i czasu. <strong>Prędkość chwilowa</strong> to granica prędkości średniej dla bardzo krótkiego przedziału czasu - na wykresie \\( s(t) \\) odpowiada nachyleniu stycznej.</p><ul><li>Jednostka prędkości: \\( \\mathrm{\\frac{m}{s}} \\); zamiana: \\( 1\\,\\mathrm{\\frac{km}{h}} = \\frac{1}{3{,}6}\\,\\mathrm{\\frac{m}{s}} \\).</li><li>Prędkość to wektor - ma wartość, kierunek i zwrot.</li></ul>"
+      },
+      {
+        "heading": "Ruch jednostajny prostoliniowy",
+        "html": "<p>W ruchu jednostajnym prostoliniowym prędkość jest stała, a ciało w równych odstępach czasu przebywa równe drogi. Droga rośnie liniowo z czasem:</p>$$ s = v \\cdot t $$<p>Na wykresie \\( v(t) \\) prędkość jest linią poziomą, a pole pod nią równa się przebytej drodze. Na wykresie \\( s(t) \\) otrzymujemy linię prostą, której nachylenie to prędkość.</p>"
+      },
+      {
+        "heading": "Ruch jednostajnie przyspieszony i opóźniony",
+        "html": "<p><strong>Przyspieszenie</strong> \\( a \\) to tempo zmiany prędkości: \\( a = \\frac{\\Delta v}{\\Delta t} \\), jednostka \\( \\mathrm{\\frac{m}{s^2}} \\). W ruchu jednostajnie przyspieszonym prostoliniowym prędkość i droga wynoszą:</p>$$ v = v_0 + a\\,t \\qquad s = v_0 t + \\frac{a t^2}{2} $$<p>Gdy ruch jest opóźniony, przyspieszenie ma zwrot przeciwny do prędkości (\\( a < 0 \\)). Przydatny jest też wzór bez czasu: \\( v^2 = v_0^2 + 2 a s \\).</p>"
+      },
+      {
+        "heading": "Spadek swobodny i rzuty",
+        "html": "<p>Spadek swobodny to ruch jednostajnie przyspieszony z przyspieszeniem ziemskim \\( g \\approx 9{,}81\\,\\mathrm{\\frac{m}{s^2}} \\) (do obliczeń często \\( 10\\,\\mathrm{\\frac{m}{s^2}} \\)). <strong>Rzut poziomy</strong> to złożenie ruchu jednostajnego w poziomie i spadku swobodnego w pionie. <strong>Rzut ukośny</strong> rozkładamy na składowe \\( v_x = v_0 \\cos\\alpha \\) oraz \\( v_y = v_0 \\sin\\alpha \\).</p><ul><li>Ruchy w osiach x i y są niezależne.</li><li>Czas lotu zależy tylko od składowej pionowej prędkości.</li></ul>"
+      },
+      {
+        "heading": "Wykresy ruchu i ich interpretacja",
+        "html": "<p>Wykresy są kluczowe na maturze. Z wykresu \\( v(t) \\) odczytujemy: <strong>nachylenie</strong> równa się przyspieszeniu, a <strong>pole pod wykresem</strong> równa się drodze. Z wykresu \\( s(t) \\) nachylenie stycznej daje prędkość chwilową. Z wykresu \\( a(t) \\) pole pod wykresem to przyrost prędkości.</p><ul><li>Linia pozioma na \\( v(t) \\) - ruch jednostajny.</li><li>Linia ukośna na \\( v(t) \\) - ruch jednostajnie zmienny.</li></ul>"
+      }
+    ],
+    "formulas": [
+      { "name": "Prędkość w ruchu jednostajnym", "latex": "v = \\frac{s}{t}", "desc": "Iloraz przebytej drogi i czasu." },
+      { "name": "Droga w ruchu jednostajnym", "latex": "s = v \\cdot t", "desc": "Droga rośnie liniowo z czasem." },
+      { "name": "Przyspieszenie", "latex": "a = \\frac{\\Delta v}{\\Delta t}", "desc": "Tempo zmiany prędkości w czasie." },
+      { "name": "Prędkość w ruchu jednostajnie przyspieszonym", "latex": "v = v_0 + a\\,t", "desc": "Prędkość rośnie liniowo z czasem." },
+      { "name": "Droga w ruchu jednostajnie przyspieszonym", "latex": "s = v_0 t + \\frac{a t^2}{2}", "desc": "Droga przy stałym przyspieszeniu." },
+      { "name": "Wzór bez czasu", "latex": "v^2 = v_0^2 + 2 a s", "desc": "Łączy prędkość, przyspieszenie i drogę." },
+      { "name": "Spadek swobodny - prędkość", "latex": "v = g\\,t", "desc": "Prędkość ciała spadającego z gravitacją g." },
+      { "name": "Spadek swobodny - droga", "latex": "h = \\frac{g t^2}{2}", "desc": "Wysokość spadku w czasie t." },
+      { "name": "Zasięg rzutu poziomego", "latex": "z = v_0 \\sqrt{\\frac{2h}{g}}", "desc": "Odległość pozioma w rzucie poziomym." },
+      { "name": "Zasięg rzutu ukośnego", "latex": "z = \\frac{v_0^2 \\sin(2\\alpha)}{g}", "desc": "Maksymalny dla kąta 45 stopni." }
+    ],
+    "definitions": [
+      { "term": "Układ odniesienia", "def": "Ciało lub zbiór ciał, względem którego opisujemy położenie i ruch innych ciał." },
+      { "term": "Tor", "def": "Linia, po której porusza się punkt materialny." },
+      { "term": "Droga", "def": "Skalarna długość toru przebyta przez ciało w danym czasie." },
+      { "term": "Przemieszczenie", "def": "Wektor łączący położenie początkowe z końcowym ciała." },
+      { "term": "Prędkość", "def": "Wektorowa wielkość określająca szybkość i kierunek zmiany położenia." },
+      { "term": "Przyspieszenie", "def": "Wektorowa wielkość określająca tempo zmiany prędkości w czasie." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Ruch jednostajny i jednostajnie zmienny, wykresy ruchu, spadek swobodny, rzut poziomy i ukośny, względność ruchu.",
+      "html": "<p>Kinematyka pojawia się niemal na każdej maturze z fizyki. Na poziomie podstawowym dominują zadania z odczytem wykresów oraz proste obliczenia drogi, prędkości i przyspieszenia. Na poziomie rozszerzonym częste są rzuty, składanie prędkości i analiza ruchu względnego. Kluczowe jest sprawne przeliczanie jednostek oraz rozumienie, że pole pod wykresem \\( v(t) \\) to droga.</p>",
+      "typoweZadania": [
+        "Odczyt drogi i przyspieszenia z wykresu prędkości od czasu.",
+        "Obliczenie czasu lotu i zasięgu w rzucie poziomym z wysokości h.",
+        "Wyznaczenie prędkości spotkania dwóch ciał poruszających się ku sobie.",
+        "Analiza rzutu ukośnego: maksymalna wysokość i zasięg."
+      ],
+      "strategia": [
+        "Zawsze zacznij od wypisania danych i przeliczenia jednostek do układu SI.",
+        "W rzutach rozdziel ruch na składową poziomą i pionową - analizuj je osobno.",
+        "Przy wykresach pamiętaj: nachylenie to pochodna, pole pod wykresem to całka (droga lub prędkość)."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Czym różni się droga od przemieszczenia?", "a": "Droga to skalar - całkowita długość toru, zawsze dodatnia. Przemieszczenie to wektor łączący punkt początkowy z końcowym. Po torze zamkniętym przemieszczenie wynosi zero, a droga nie." },
+      { "q": "Co oznacza pole pod wykresem prędkości od czasu?", "a": "Pole pod wykresem v(t) jest liczbowo równe drodze przebytej przez ciało w danym przedziale czasu, niezależnie od rodzaju ruchu." },
+      { "q": "Czy przyspieszenie może być ujemne, gdy ciało przyspiesza?", "a": "Znak przyspieszenia zależy od przyjętego zwrotu osi. Jeśli prędkość rośnie co do wartości, ale ma zwrot ujemny względem osi, przyspieszenie też jest ujemne, choć ruch jest przyspieszony." },
+      { "q": "Jak zamienić km/h na m/s?", "a": "Dzielimy wartość w km/h przez 3,6. Na przykład 72 km/h to 20 m/s. W drugą stronę mnożymy przez 3,6." }
+    ],
+    "faqMatura": [
+      { "q": "Jak rozpoznać rodzaj ruchu z wykresu?", "a": "Linia pozioma na wykresie v(t) oznacza ruch jednostajny, linia ukośna - jednostajnie zmienny. Na wykresie s(t) prosta to ruch jednostajny, a parabola - jednostajnie przyspieszony." },
+      { "q": "Jakiej wartości g używać na maturze?", "a": "Jeśli zadanie nie podaje inaczej, korzystaj z tablic CKE, gdzie g = 9,81 m/s². Dla uproszczenia obliczeń można przyjąć 10 m/s², gdy zadanie na to pozwala." },
+      { "q": "Dla jakiego kąta zasięg rzutu ukośnego jest największy?", "a": "Dla kąta 45 stopni, ponieważ zasięg zależy od sin(2α), który osiąga maksimum gdy 2α = 90 stopni." },
+      { "q": "Czy w rzucie poziomym czas lotu zależy od prędkości początkowej?", "a": "Nie. Czas lotu zależy wyłącznie od wysokości początkowej h, bo o czasie decyduje ruch pionowy (spadek swobodny). Prędkość pozioma wpływa tylko na zasięg." }
+    ],
+    "subtopics": [
+      {
+        "slug": "ruch-jednostajny-prostoliniowy",
+        "name": "Ruch jednostajny prostoliniowy",
+        "intro": "Najprostszy rodzaj ruchu, w którym prędkość jest stała, a droga rośnie liniowo z czasem.",
+        "problems": [
+          {
+            "title": "Spotkanie dwóch samochodów",
+            "tresc": "Dwa miasta dzieli 240 km. Z miasta A wyjeżdża samochód z prędkością 80 km/h, a w tej samej chwili z miasta B naprzeciw niemu drugi z prędkością 100 km/h. Po jakim czasie i w jakiej odległości od A się spotkają?",
+            "steps": [
+              "Prędkość zbliżania to suma prędkości: \\( v = 80 + 100 = 180\\,\\mathrm{\\frac{km}{h}} \\).",
+              "Czas spotkania: \\( t = \\frac{s}{v} = \\frac{240}{180} = \\frac{4}{3}\\,\\mathrm{h} \\approx 1{,}33\\,\\mathrm{h} \\).",
+              "Odległość od A: \\( s_A = v_A \\cdot t = 80 \\cdot \\frac{4}{3} \\approx 106{,}7\\,\\mathrm{km} \\)."
+            ],
+            "answer": "Spotkają się po około 1 h 20 min, w odległości około 106,7 km od miasta A."
+          },
+          {
+            "title": "Średnia szybkość na trasie",
+            "tresc": "Rowerzysta przejechał pierwsze 30 km z prędkością 15 km/h, a kolejne 30 km z prędkością 10 km/h. Oblicz średnią szybkość na całej trasie.",
+            "steps": [
+              "Czas pierwszego odcinka: \\( t_1 = \\frac{30}{15} = 2\\,\\mathrm{h} \\).",
+              "Czas drugiego odcinka: \\( t_2 = \\frac{30}{10} = 3\\,\\mathrm{h} \\).",
+              "Całkowita droga \\( s = 60\\,\\mathrm{km} \\), całkowity czas \\( t = 5\\,\\mathrm{h} \\).",
+              "Średnia szybkość: \\( v_{sr} = \\frac{60}{5} = 12\\,\\mathrm{\\frac{km}{h}} \\)."
+            ],
+            "answer": "Średnia szybkość wynosi 12 km/h (nie 12,5 km/h - to nie średnia arytmetyczna prędkości)."
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego średnia szybkość to nie średnia arytmetyczna prędkości?", "a": "Bo ciało spędza różny czas na różnych odcinkach. Średnią szybkość liczymy zawsze jako całkowitą drogę przez całkowity czas." }
+        ]
+      },
+      {
+        "slug": "ruch-jednostajnie-przyspieszony",
+        "name": "Ruch jednostajnie przyspieszony",
+        "intro": "Ruch ze stałym przyspieszeniem, w którym prędkość zmienia się liniowo, a droga kwadratowo z czasem.",
+        "problems": [
+          {
+            "title": "Rozpędzanie samochodu",
+            "tresc": "Samochód rusza z miejsca i osiąga prędkość 108 km/h w czasie 10 s. Oblicz przyspieszenie i przebytą drogę.",
+            "steps": [
+              "Zamiana jednostek: \\( v = 108\\,\\mathrm{\\frac{km}{h}} = 30\\,\\mathrm{\\frac{m}{s}} \\), \\( v_0 = 0 \\).",
+              "Przyspieszenie: \\( a = \\frac{v - v_0}{t} = \\frac{30}{10} = 3\\,\\mathrm{\\frac{m}{s^2}} \\).",
+              "Droga: \\( s = \\frac{a t^2}{2} = \\frac{3 \\cdot 10^2}{2} = 150\\,\\mathrm{m} \\)."
+            ],
+            "answer": "Przyspieszenie wynosi 3 m/s², a przebyta droga 150 m."
+          },
+          {
+            "title": "Droga hamowania",
+            "tresc": "Samochód jadący z prędkością 20 m/s hamuje z opóźnieniem 5 m/s². Jaką drogę przebędzie do zatrzymania?",
+            "steps": [
+              "Korzystamy ze wzoru bez czasu: \\( v^2 = v_0^2 + 2 a s \\).",
+              "Przy zatrzymaniu \\( v = 0 \\), a opóźnienie \\( a = -5\\,\\mathrm{\\frac{m}{s^2}} \\).",
+              "\\( 0 = 20^2 + 2 \\cdot (-5) \\cdot s \\Rightarrow s = \\frac{400}{10} = 40\\,\\mathrm{m} \\)."
+            ],
+            "answer": "Droga hamowania wynosi 40 m."
+          }
+        ],
+        "faq": [
+          { "q": "Kiedy używać wzoru v² = v₀² + 2as?", "a": "Gdy w zadaniu nie występuje czas, a znane są prędkości, przyspieszenie i droga. To najszybsza droga do wyniku w zadaniach z hamowaniem." }
+        ]
+      },
+      {
+        "slug": "spadek-swobodny",
+        "name": "Spadek swobodny",
+        "intro": "Ruch jednostajnie przyspieszony pod wpływem grawitacji, bez oporu powietrza.",
+        "problems": [
+          {
+            "title": "Czas i prędkość spadku",
+            "tresc": "Z wysokości 45 m spada swobodnie kamień. Przyjmij g = 10 m/s². Oblicz czas spadku i prędkość tuż przed upadkiem.",
+            "steps": [
+              "Z wzoru \\( h = \\frac{g t^2}{2} \\) wyznaczamy czas: \\( t = \\sqrt{\\frac{2h}{g}} = \\sqrt{\\frac{2 \\cdot 45}{10}} = 3\\,\\mathrm{s} \\).",
+              "Prędkość końcowa: \\( v = g t = 10 \\cdot 3 = 30\\,\\mathrm{\\frac{m}{s}} \\)."
+            ],
+            "answer": "Czas spadku to 3 s, a prędkość przed upadkiem 30 m/s."
+          },
+          {
+            "title": "Wysokość rzutu pionowego",
+            "tresc": "Piłkę rzucono pionowo w górę z prędkością 20 m/s. Na jaką maksymalną wysokość się wzniesie? Przyjmij g = 10 m/s².",
+            "steps": [
+              "W najwyższym punkcie prędkość \\( v = 0 \\).",
+              "Stosujemy \\( v^2 = v_0^2 - 2 g h \\): \\( 0 = 20^2 - 2 \\cdot 10 \\cdot h \\).",
+              "\\( h = \\frac{400}{20} = 20\\,\\mathrm{m} \\)."
+            ],
+            "answer": "Piłka wzniesie się na maksymalną wysokość 20 m."
+          }
+        ],
+        "faq": [
+          { "q": "Czy ciężar ciała wpływa na czas spadku?", "a": "Nie, w próżni wszystkie ciała spadają jednakowo, bo przyspieszenie g nie zależy od masy. Różnice na Ziemi wynikają z oporu powietrza." }
+        ]
+      },
+      {
+        "slug": "rzut-poziomy",
+        "name": "Rzut poziomy",
+        "intro": "Złożenie ruchu jednostajnego w poziomie i spadku swobodnego w pionie.",
+        "problems": [
+          {
+            "title": "Zasięg rzutu poziomego",
+            "tresc": "Z wysokości 20 m wyrzucono poziomo kamień z prędkością 15 m/s. Oblicz czas lotu i zasięg. Przyjmij g = 10 m/s².",
+            "steps": [
+              "Czas lotu z ruchu pionowego: \\( t = \\sqrt{\\frac{2h}{g}} = \\sqrt{\\frac{2 \\cdot 20}{10}} = 2\\,\\mathrm{s} \\).",
+              "Zasięg z ruchu poziomego: \\( z = v_0 \\cdot t = 15 \\cdot 2 = 30\\,\\mathrm{m} \\)."
+            ],
+            "answer": "Czas lotu to 2 s, a zasięg rzutu 30 m."
+          },
+          {
+            "title": "Prędkość przy upadku",
+            "tresc": "Dla rzutu z poprzedniego zadania (v₀ = 15 m/s, t = 2 s) oblicz wartość prędkości w chwili upadku. Przyjmij g = 10 m/s².",
+            "steps": [
+              "Składowa pozioma stała: \\( v_x = 15\\,\\mathrm{\\frac{m}{s}} \\).",
+              "Składowa pionowa: \\( v_y = g t = 10 \\cdot 2 = 20\\,\\mathrm{\\frac{m}{s}} \\).",
+              "Wartość prędkości: \\( v = \\sqrt{v_x^2 + v_y^2} = \\sqrt{15^2 + 20^2} = 25\\,\\mathrm{\\frac{m}{s}} \\)."
+            ],
+            "answer": "Prędkość w chwili upadku wynosi 25 m/s."
+          }
+        ],
+        "faq": [
+          { "q": "Czy w rzucie poziomym prędkość pozioma się zmienia?", "a": "Nie, jeśli pomijamy opór powietrza. Składowa pozioma jest stała, bo nie działa na nią żadna siła w kierunku poziomym. Zmienia się tylko składowa pionowa." }
+        ]
+      }
+    ],
+    "related": ["dynamika", "praca-moc-energia", "grawitacja"]
+  },
+  {
+    "slug": "dynamika",
+    "name": "Dynamika - zasady Newtona",
+    "dopelniacz": "dynamiki",
+    "metaTeoria": "Dynamika i zasady dynamiki Newtona - teoria, wzory, definicje. Siła, masa, tarcie, siła dośrodkowa. Trzy zasady Newtona krok po kroku.",
+    "metaMatura": "Dynamika na maturze z fizyki - zasady Newtona, tarcie, równia, ruch po okręgu. Typowe zadania i strategia CKE, poziom podstawowy i rozszerzony.",
+    "intro": "Dynamika bada przyczyny ruchu ciał, czyli siły. Fundamentem działu są trzy zasady dynamiki Newtona, które wiążą siłę, masę i przyspieszenie. Poznasz tu pojęcie siły wypadkowej, tarcia, siły dośrodkowej oraz nauczysz się analizować ruch na równi pochyłej. To kluczowy dział na maturze z fizyki.",
+    "theory": [
+      {
+        "heading": "Siła i jej cechy",
+        "html": "<p><strong>Siła</strong> \\( \\vec{F} \\) to wektorowa miara oddziaływań między ciałami, jednostka to niuton (\\( 1\\,\\mathrm{N} = 1\\,\\mathrm{\\frac{kg \\cdot m}{s^2}} \\)). Siła ma wartość, kierunek, zwrot i punkt przyłożenia. Gdy na ciało działa kilka sił, ich skutek opisuje <strong>siła wypadkowa</strong> będąca sumą wektorową:</p>$$ \\vec{F}_w = \\vec{F}_1 + \\vec{F}_2 + \\dots + \\vec{F}_n $$<p>Jeśli siła wypadkowa jest zerowa, ciało jest w równowadze.</p>"
+      },
+      {
+        "heading": "Pierwsza zasada dynamiki - bezwładność",
+        "html": "<p><strong>Pierwsza zasada dynamiki</strong> (zasada bezwładności) mówi, że jeśli na ciało nie działa żadna siła lub siły się równoważą (\\( \\vec{F}_w = 0 \\)), to ciało pozostaje w spoczynku albo porusza się ruchem jednostajnym prostoliniowym.</p><ul><li><strong>Bezwładność</strong> to tendencja ciała do zachowania stanu ruchu; jej miarą jest masa.</li><li>Układy, w których obowiązuje ta zasada, nazywamy inercjalnymi.</li></ul>"
+      },
+      {
+        "heading": "Druga zasada dynamiki",
+        "html": "<p><strong>Druga zasada dynamiki</strong> wiąże siłę wypadkową z przyspieszeniem: przyspieszenie jest wprost proporcjonalne do siły wypadkowej i odwrotnie proporcjonalne do masy.</p>$$ \\vec{F}_w = m \\vec{a} \\qquad \\Rightarrow \\qquad \\vec{a} = \\frac{\\vec{F}_w}{m} $$<p>Przyspieszenie ma zawsze kierunek i zwrot siły wypadkowej. To podstawowe równanie ruchu w mechanice klasycznej.</p>"
+      },
+      {
+        "heading": "Trzecia zasada dynamiki - akcja i reakcja",
+        "html": "<p><strong>Trzecia zasada dynamiki</strong> głosi, że oddziaływania są wzajemne: jeśli ciało A działa na ciało B siłą \\( \\vec{F}_{AB} \\), to ciało B działa na A siłą \\( \\vec{F}_{BA} = -\\vec{F}_{AB} \\).</p><ul><li>Siły akcji i reakcji są równe co do wartości, przeciwne co do zwrotu.</li><li>Działają na <strong>różne ciała</strong>, więc się nie równoważą.</li><li>Mają tę samą naturę (np. obie grawitacyjne).</li></ul>"
+      },
+      {
+        "heading": "Tarcie",
+        "html": "<p><strong>Siła tarcia</strong> przeciwdziała ruchowi i jest proporcjonalna do siły nacisku: \\( T = \\mu N \\), gdzie \\( \\mu \\) to współczynnik tarcia. Rozróżniamy tarcie statyczne (do momentu ruszenia) i kinetyczne (podczas ruchu).</p><ul><li>Tarcie statyczne maksymalne jest zwykle większe od kinetycznego.</li><li>Tarcie nie zależy (w uproszczeniu) od pola powierzchni styku.</li><li>Na poziomej powierzchni \\( N = m g \\), więc \\( T = \\mu m g \\).</li></ul>"
+      },
+      {
+        "heading": "Siła dośrodkowa i ruch po okręgu",
+        "html": "<p>W ruchu po okręgu z prędkością o stałej wartości ciało ma <strong>przyspieszenie dośrodkowe</strong> \\( a_d = \\frac{v^2}{r} \\) skierowane do środka. Wymaga ono <strong>siły dośrodkowej</strong>:</p>$$ F_d = \\frac{m v^2}{r} = m \\omega^2 r $$<p>Siłą dośrodkową może być tarcie, naciąg liny, grawitacja lub siła sprężystości - to nie nowy rodzaj siły, lecz wypadkowa skierowana do środka okręgu.</p>"
+      }
+    ],
+    "formulas": [
+      { "name": "Druga zasada dynamiki", "latex": "\\vec{F}_w = m \\vec{a}", "desc": "Siła wypadkowa równa iloczynowi masy i przyspieszenia." },
+      { "name": "Przyspieszenie", "latex": "a = \\frac{F_w}{m}", "desc": "Przyspieszenie wprost proporcjonalne do siły." },
+      { "name": "Ciężar ciała", "latex": "Q = m g", "desc": "Siła grawitacji działająca na ciało." },
+      { "name": "Siła tarcia", "latex": "T = \\mu N", "desc": "Proporcjonalna do siły nacisku N." },
+      { "name": "Trzecia zasada dynamiki", "latex": "\\vec{F}_{AB} = -\\vec{F}_{BA}", "desc": "Siły akcji i reakcji są przeciwne." },
+      { "name": "Siła dośrodkowa", "latex": "F_d = \\frac{m v^2}{r}", "desc": "Utrzymuje ciało na torze kołowym." },
+      { "name": "Przyspieszenie dośrodkowe", "latex": "a_d = \\frac{v^2}{r}", "desc": "Skierowane do środka okręgu." },
+      { "name": "Siła na równi (składowa zsuwająca)", "latex": "F_x = m g \\sin\\alpha", "desc": "Składowa ciężaru wzdłuż równi." },
+      { "name": "Siła nacisku na równi", "latex": "N = m g \\cos\\alpha", "desc": "Składowa ciężaru prostopadła do równi." },
+      { "name": "Popęd siły", "latex": "\\vec{J} = \\vec{F} \\Delta t", "desc": "Iloczyn siły i czasu jej działania." }
+    ],
+    "definitions": [
+      { "term": "Siła", "def": "Wektorowa miara wzajemnego oddziaływania ciał, mierzona w niutonach." },
+      { "term": "Masa bezwładna", "def": "Miara bezwładności ciała, czyli oporu wobec zmiany stanu ruchu." },
+      { "term": "Siła wypadkowa", "def": "Suma wektorowa wszystkich sił działających na ciało." },
+      { "term": "Bezwładność", "def": "Właściwość ciała polegająca na zachowywaniu stanu ruchu przy braku sił." },
+      { "term": "Współczynnik tarcia", "def": "Bezwymiarowa wielkość określająca stosunek siły tarcia do siły nacisku." },
+      { "term": "Siła dośrodkowa", "def": "Wypadkowa siła skierowana do środka okręgu, utrzymująca ciało na torze kołowym." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Trzy zasady dynamiki, siła wypadkowa, tarcie, równia pochyła, ruch po okręgu, siła dośrodkowa, układy ciał połączonych.",
+      "html": "<p>Dynamika to jeden z najważniejszych działów maturalnych. Zadania wymagają rozrysowania wszystkich sił działających na ciało i zapisania drugiej zasady dynamiki dla każdej osi. Na poziomie rozszerzonym pojawiają się układy ciał połączonych nicią, ruch po równi z tarciem oraz ruch po okręgu. Kluczowa jest umiejętność rozkładania sił na składowe.</p>",
+      "typoweZadania": [
+        "Obliczenie przyspieszenia układu dwóch ciał połączonych nicią przez bloczek.",
+        "Wyznaczenie przyspieszenia ciała zsuwającego się po równi z tarciem.",
+        "Obliczenie minimalnej prędkości w pętli lub maksymalnej na zakręcie.",
+        "Analiza sił w windzie (pozorny ciężar przy ruszaniu i hamowaniu)."
+      ],
+      "strategia": [
+        "Narysuj wszystkie siły działające na każde ciało osobno (diagram sił).",
+        "Wybierz osie układu współrzędnych - na równi wzdłuż i prostopadle do powierzchni.",
+        "Zapisz drugą zasadę dynamiki osobno dla każdej osi i rozwiąż układ równań."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Dlaczego siły akcji i reakcji się nie równoważą?", "a": "Bo działają na dwa różne ciała. Równoważyć mogą się tylko siły przyłożone do tego samego ciała. Akcja działa na jedno ciało, reakcja na drugie." },
+      { "q": "Czym różni się masa od ciężaru?", "a": "Masa to skalarna miara bezwładności (w kg), stała w każdym miejscu. Ciężar to siła grawitacji (w N), zależna od g - na Księżycu ciężar jest mniejszy, masa ta sama." },
+      { "q": "Czy siła dośrodkowa to osobny rodzaj siły?", "a": "Nie. To nazwa funkcji, jaką pełni wypadkowa skierowana do środka okręgu. Może nią być tarcie, naciąg liny, grawitacja lub siła sprężystości." },
+      { "q": "Od czego zależy siła tarcia?", "a": "Od współczynnika tarcia (rodzaj powierzchni) i siły nacisku. W uproszczeniu nie zależy od pola powierzchni styku ani od prędkości." }
+    ],
+    "faqMatura": [
+      { "q": "Jak rozwiązywać zadania z układem ciał połączonych nicią?", "a": "Traktuj cały układ jako jedno ciało, by znaleźć przyspieszenie z sumy sił napędzających i masy całkowitej. Następnie analizuj pojedyncze ciało, by wyznaczyć naciąg nici." },
+      { "q": "Jak liczyć ruch na równi z tarciem?", "a": "Rozłóż ciężar na składową zsuwającą mg·sinα i nacisk mg·cosα. Siła tarcia to μ·mg·cosα. Wypadkowa wzdłuż równi daje przyspieszenie z drugiej zasady dynamiki." },
+      { "q": "Dlaczego w windzie czujemy się ciężsi przy ruszaniu w górę?", "a": "Bo do utrzymania ciała winda działa siłą równą mg plus ma (przyspieszenie w górę). Pozorny ciężar rośnie. Przy hamowaniu lub jeździe w dół maleje." },
+      { "q": "Jak obliczyć minimalną prędkość w najwyższym punkcie pętli?", "a": "W tym punkcie siła dośrodkowa to grawitacja: mg = mv²/r. Minimalna prędkość to v = √(g·r), gdy siła nacisku toru spada do zera." }
+    ],
+    "subtopics": [
+      {
+        "slug": "druga-zasada-dynamiki",
+        "name": "Druga zasada dynamiki",
+        "intro": "Podstawowe równanie ruchu wiążące siłę wypadkową, masę i przyspieszenie.",
+        "problems": [
+          {
+            "title": "Przyspieszenie od siły",
+            "tresc": "Na ciało o masie 4 kg działa pozioma siła 12 N. Współczynnik tarcia o podłoże wynosi 0,1. Oblicz przyspieszenie ciała. Przyjmij g = 10 m/s².",
+            "steps": [
+              "Siła tarcia: \\( T = \\mu m g = 0{,}1 \\cdot 4 \\cdot 10 = 4\\,\\mathrm{N} \\).",
+              "Siła wypadkowa: \\( F_w = F - T = 12 - 4 = 8\\,\\mathrm{N} \\).",
+              "Przyspieszenie: \\( a = \\frac{F_w}{m} = \\frac{8}{4} = 2\\,\\mathrm{\\frac{m}{s^2}} \\)."
+            ],
+            "answer": "Ciało porusza się z przyspieszeniem 2 m/s²."
+          },
+          {
+            "title": "Siła potrzebna do rozpędzenia",
+            "tresc": "Jaką siłę poziomą trzeba przyłożyć do wózka o masie 200 kg, by w ciągu 5 s rozpędzić go od zera do 10 m/s? Tarcie pomijamy.",
+            "steps": [
+              "Przyspieszenie: \\( a = \\frac{\\Delta v}{\\Delta t} = \\frac{10}{5} = 2\\,\\mathrm{\\frac{m}{s^2}} \\).",
+              "Siła: \\( F = m a = 200 \\cdot 2 = 400\\,\\mathrm{N} \\)."
+            ],
+            "answer": "Potrzebna siła wynosi 400 N."
+          }
+        ],
+        "faq": [
+          { "q": "Czy w drugiej zasadzie używamy siły wypadkowej, czy jednej siły?", "a": "Zawsze siły wypadkowej, czyli sumy wektorowej wszystkich sił działających na ciało. To ona decyduje o przyspieszeniu." }
+        ]
+      },
+      {
+        "slug": "rownia-pochyla",
+        "name": "Równia pochyła",
+        "intro": "Analiza ruchu ciała na równi wymaga rozłożenia ciężaru na składowe.",
+        "problems": [
+          {
+            "title": "Zsuwanie bez tarcia",
+            "tresc": "Klocek zsuwa się z równi o kącie nachylenia 30 stopni bez tarcia. Oblicz przyspieszenie. Przyjmij g = 10 m/s².",
+            "steps": [
+              "Siła zsuwająca: \\( F_x = m g \\sin\\alpha \\).",
+              "Z drugiej zasady: \\( m a = m g \\sin\\alpha \\Rightarrow a = g \\sin\\alpha \\).",
+              "\\( a = 10 \\cdot \\sin 30^\\circ = 10 \\cdot 0{,}5 = 5\\,\\mathrm{\\frac{m}{s^2}} \\)."
+            ],
+            "answer": "Przyspieszenie zsuwania wynosi 5 m/s² i nie zależy od masy."
+          },
+          {
+            "title": "Zsuwanie z tarciem",
+            "tresc": "Klocek o masie 2 kg zsuwa się z równi o kącie 30 stopni przy współczynniku tarcia 0,2. Oblicz przyspieszenie. Przyjmij g = 10 m/s².",
+            "steps": [
+              "Siła zsuwająca: \\( F_x = m g \\sin\\alpha = 2 \\cdot 10 \\cdot 0{,}5 = 10\\,\\mathrm{N} \\).",
+              "Nacisk: \\( N = m g \\cos\\alpha = 2 \\cdot 10 \\cdot \\frac{\\sqrt{3}}{2} \\approx 17{,}3\\,\\mathrm{N} \\).",
+              "Tarcie: \\( T = \\mu N = 0{,}2 \\cdot 17{,}3 \\approx 3{,}46\\,\\mathrm{N} \\).",
+              "Przyspieszenie: \\( a = \\frac{F_x - T}{m} = \\frac{10 - 3{,}46}{2} \\approx 3{,}27\\,\\mathrm{\\frac{m}{s^2}} \\)."
+            ],
+            "answer": "Przyspieszenie wynosi około 3,27 m/s²."
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego na równi rozkładamy ciężar na dwie składowe?", "a": "Bo ruch odbywa się wzdłuż równi, a nacisk działa prostopadle. Składowa mg·sinα napędza ruch, a mg·cosα decyduje o sile tarcia." }
+        ]
+      },
+      {
+        "slug": "tarcie",
+        "name": "Tarcie",
+        "intro": "Siła przeciwdziałająca ruchowi, proporcjonalna do siły nacisku.",
+        "problems": [
+          {
+            "title": "Droga hamowania z tarciem",
+            "tresc": "Klocek poruszający się z prędkością 6 m/s po poziomej powierzchni zatrzymuje się dzięki tarciu o współczynniku 0,3. Jaką drogę przebędzie? Przyjmij g = 10 m/s².",
+            "steps": [
+              "Opóźnienie od tarcia: \\( a = \\mu g = 0{,}3 \\cdot 10 = 3\\,\\mathrm{\\frac{m}{s^2}} \\).",
+              "Wzór bez czasu: \\( 0 = v_0^2 - 2 a s \\Rightarrow s = \\frac{v_0^2}{2a} \\).",
+              "\\( s = \\frac{6^2}{2 \\cdot 3} = \\frac{36}{6} = 6\\,\\mathrm{m} \\)."
+            ],
+            "answer": "Klocek przebędzie 6 m przed zatrzymaniem."
+          },
+          {
+            "title": "Warunek ruszenia z miejsca",
+            "tresc": "Skrzynia o masie 50 kg stoi na podłodze. Współczynnik tarcia statycznego wynosi 0,4. Jaką minimalną siłę poziomą trzeba przyłożyć, by ruszyła? Przyjmij g = 10 m/s².",
+            "steps": [
+              "Maksymalna siła tarcia statycznego: \\( T_{max} = \\mu N = \\mu m g \\).",
+              "\\( T_{max} = 0{,}4 \\cdot 50 \\cdot 10 = 200\\,\\mathrm{N} \\).",
+              "Aby ruszyć skrzynię, siła musi przekroczyć tę wartość."
+            ],
+            "answer": "Minimalna siła to nieco ponad 200 N."
+          }
+        ],
+        "faq": [
+          { "q": "Czemu trudniej ruszyć ciało niż utrzymać je w ruchu?", "a": "Bo maksymalne tarcie statyczne jest zwykle większe niż tarcie kinetyczne. Po ruszeniu siła oporu maleje." }
+        ]
+      },
+      {
+        "slug": "sila-dosrodkowa",
+        "name": "Siła dośrodkowa",
+        "intro": "Wypadkowa siła skierowana do środka okręgu, niezbędna w ruchu po torze kołowym.",
+        "problems": [
+          {
+            "title": "Samochód na zakręcie",
+            "tresc": "Samochód o masie 1000 kg pokonuje zakręt o promieniu 50 m z prędkością 15 m/s. Jaka siła dośrodkowa jest potrzebna i czy zapewni ją tarcie o współczynniku 0,5? Przyjmij g = 10 m/s².",
+            "steps": [
+              "Siła dośrodkowa: \\( F_d = \\frac{m v^2}{r} = \\frac{1000 \\cdot 15^2}{50} = 4500\\,\\mathrm{N} \\).",
+              "Maksymalne tarcie: \\( T_{max} = \\mu m g = 0{,}5 \\cdot 1000 \\cdot 10 = 5000\\,\\mathrm{N} \\).",
+              "Skoro \\( T_{max} > F_d \\), tarcie utrzyma samochód na zakręcie."
+            ],
+            "answer": "Potrzebne 4500 N, a tarcie zapewnia do 5000 N - samochód nie wypadnie z zakrętu."
+          },
+          {
+            "title": "Kamień na sznurku",
+            "tresc": "Kamień o masie 0,2 kg krąży po okręgu o promieniu 0,5 m z prędkością 4 m/s. Oblicz siłę naciągu sznurka (ruch w płaszczyźnie poziomej).",
+            "steps": [
+              "Naciąg pełni rolę siły dośrodkowej: \\( F = \\frac{m v^2}{r} \\).",
+              "\\( F = \\frac{0{,}2 \\cdot 4^2}{0{,}5} = \\frac{3{,}2}{0{,}5} = 6{,}4\\,\\mathrm{N} \\)."
+            ],
+            "answer": "Naciąg sznurka wynosi 6,4 N."
+          }
+        ],
+        "faq": [
+          { "q": "Co się stanie, gdy zabraknie siły dośrodkowej?", "a": "Ciało zacznie poruszać się po stycznej do okręgu zgodnie z pierwszą zasadą dynamiki - np. samochód wpadnie w poślizg na zewnątrz zakrętu." }
+        ]
+      }
+    ],
+    "related": ["kinematyka", "praca-moc-energia", "ped-i-zasada-zachowania"]
+  },
+  {
+    "slug": "praca-moc-energia",
+    "name": "Praca, moc, energia",
+    "dopelniacz": "pracy, mocy i energii",
+    "metaTeoria": "Praca, moc i energia - teoria, wzory i definicje. Energia kinetyczna i potencjalna, zasada zachowania energii, sprawność. Wszystko krok po kroku.",
+    "metaMatura": "Praca, moc i energia na maturze z fizyki - zasada zachowania energii, sprawność, typowe zadania i strategia CKE. Poziom podstawowy i rozszerzony.",
+    "intro": "Praca, moc i energia to dział łączący opis ruchu z bilansem energetycznym. Poznasz definicję pracy mechanicznej, mocy oraz różne formy energii: kinetyczną i potencjalną. Kluczowa jest zasada zachowania energii mechanicznej, która znacznie upraszcza rozwiązywanie zadań maturalnych.",
+    "theory": [
+      {
+        "heading": "Praca mechaniczna",
+        "html": "<p><strong>Praca</strong> \\( W \\) jest wykonywana, gdy siła powoduje przemieszczenie ciała. Dla siły stałej tworzącej kąt \\( \\alpha \\) z kierunkiem ruchu:</p>$$ W = F s \\cos\\alpha $$<p>Jednostką pracy jest dżul (\\( 1\\,\\mathrm{J} = 1\\,\\mathrm{N \\cdot m} \\)).</p><ul><li>Gdy siła jest równoległa do ruchu (\\( \\alpha = 0 \\)): \\( W = F s \\).</li><li>Gdy siła jest prostopadła do ruchu: praca jest zerowa.</li><li>Praca może być ujemna, gdy siła ma zwrot przeciwny do ruchu (np. tarcie).</li></ul>"
+      },
+      {
+        "heading": "Moc",
+        "html": "<p><strong>Moc</strong> \\( P \\) to szybkość wykonywania pracy, czyli praca w jednostce czasu:</p>$$ P = \\frac{W}{t} $$<p>Jednostką jest wat (\\( 1\\,\\mathrm{W} = 1\\,\\mathrm{\\frac{J}{s}} \\)). Dla ruchu ze stałą prędkością moc można zapisać jako \\( P = F v \\). Im większa moc, tym szybciej urządzenie wykonuje pracę.</p>"
+      },
+      {
+        "heading": "Energia kinetyczna",
+        "html": "<p><strong>Energia kinetyczna</strong> to energia ruchu ciała:</p>$$ E_k = \\frac{m v^2}{2} $$<p>Zgodnie z <strong>twierdzeniem o pracy i energii</strong>, praca siły wypadkowej równa się zmianie energii kinetycznej: \\( W = \\Delta E_k = E_{k2} - E_{k1} \\). Energia kinetyczna zależy od kwadratu prędkości, więc dwukrotny wzrost prędkości daje czterokrotny wzrost energii.</p>"
+      },
+      {
+        "heading": "Energia potencjalna",
+        "html": "<p><strong>Energia potencjalna grawitacji</strong> zależy od wysokości ciała nad poziomem odniesienia:</p>$$ E_p = m g h $$<p>Energia potencjalna sprężystości (np. w sprężynie) to \\( E_p = \\frac{k x^2}{2} \\), gdzie \\( k \\) to współczynnik sprężystości, a \\( x \\) wydłużenie. Energia potencjalna jest energią zmagazynowaną, gotową do zamiany na inne formy.</p>"
+      },
+      {
+        "heading": "Zasada zachowania energii mechanicznej",
+        "html": "<p>W układzie izolowanym, gdzie działają tylko siły zachowawcze (grawitacja, sprężystość), <strong>całkowita energia mechaniczna</strong> jest stała:</p>$$ E_k + E_p = \\mathrm{const} $$<p>Oznacza to, że energia kinetyczna może zamieniać się w potencjalną i odwrotnie, ale ich suma się nie zmienia. Ta zasada pozwala rozwiązywać wiele zadań bez analizy sił.</p>"
+      },
+      {
+        "heading": "Sprawność",
+        "html": "<p><strong>Sprawność</strong> \\( \\eta \\) urządzenia to stosunek energii (pracy) użytecznej do energii dostarczonej:</p>$$ \\eta = \\frac{W_u}{W_d} \\cdot 100\\% $$<p>Sprawność jest zawsze mniejsza od 100%, bo część energii rozprasza się jako ciepło (tarcie, opory). To ważne pojęcie w zadaniach o silnikach i maszynach.</p>"
+      }
+    ],
+    "formulas": [
+      { "name": "Praca", "latex": "W = F s \\cos\\alpha", "desc": "Iloczyn siły, drogi i kosinusa kąta między nimi." },
+      { "name": "Moc", "latex": "P = \\frac{W}{t}", "desc": "Praca wykonana w jednostce czasu." },
+      { "name": "Moc a prędkość", "latex": "P = F v", "desc": "Dla ruchu ze stałą prędkością." },
+      { "name": "Energia kinetyczna", "latex": "E_k = \\frac{m v^2}{2}", "desc": "Energia związana z ruchem ciała." },
+      { "name": "Energia potencjalna grawitacji", "latex": "E_p = m g h", "desc": "Energia związana z wysokością ciała." },
+      { "name": "Energia potencjalna sprężystości", "latex": "E_p = \\frac{k x^2}{2}", "desc": "Energia zmagazynowana w sprężynie." },
+      { "name": "Twierdzenie o pracy i energii", "latex": "W = \\Delta E_k", "desc": "Praca siły wypadkowej równa zmianie energii kinetycznej." },
+      { "name": "Zasada zachowania energii", "latex": "E_k + E_p = \\mathrm{const}", "desc": "Suma energii mechanicznej jest stała." },
+      { "name": "Sprawność", "latex": "\\eta = \\frac{W_u}{W_d} \\cdot 100\\%", "desc": "Stosunek pracy użytecznej do dostarczonej." }
+    ],
+    "definitions": [
+      { "term": "Praca mechaniczna", "def": "Iloczyn siły i przemieszczenia w kierunku działania siły; miara przekazanej energii." },
+      { "term": "Moc", "def": "Wielkość określająca szybkość wykonywania pracy, mierzona w watach." },
+      { "term": "Energia kinetyczna", "def": "Energia ciała wynikająca z jego ruchu, zależna od masy i kwadratu prędkości." },
+      { "term": "Energia potencjalna", "def": "Energia ciała wynikająca z jego położenia w polu sił lub stanu odkształcenia." },
+      { "term": "Energia mechaniczna", "def": "Suma energii kinetycznej i potencjalnej ciała." },
+      { "term": "Sprawność", "def": "Stosunek energii użytecznej do energii dostarczonej, wyrażony w procentach." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Praca, moc, energia kinetyczna i potencjalna, zasada zachowania energii mechanicznej, sprawność, twierdzenie o pracy i energii.",
+      "html": "<p>Zadania energetyczne często można rozwiązać szybciej niż dynamiczne, korzystając z zasady zachowania energii. Na maturze typowe są zadania o ciele spadającym, zjeżdżającym z równi czy wahadle. Trzeba uważać na tarcie - wtedy energia mechaniczna nie jest zachowana, a różnica zamienia się w ciepło. Sprawność pojawia się w zadaniach o silnikach i dźwigach.</p>",
+      "typoweZadania": [
+        "Obliczenie prędkości ciała u podstawy równi z zasady zachowania energii.",
+        "Wyznaczenie wysokości, na jaką wzniesie się ciało wyrzucone w górę.",
+        "Obliczenie pracy traconej na tarcie z bilansu energii.",
+        "Wyznaczenie sprawności silnika lub dźwigu z danych mocy."
+      ],
+      "strategia": [
+        "Zawsze zapisz bilans energii: stan początkowy = stan końcowy plus straty.",
+        "Wybierz poziom zerowy energii potencjalnej (zwykle najniższy punkt).",
+        "Gdy występuje tarcie, dodaj pracę sił tarcia jako stratę energii mechanicznej."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Czy siła zawsze wykonuje pracę?", "a": "Nie. Jeśli ciało się nie przemieszcza lub siła jest prostopadła do ruchu (np. siła dośrodkowa), praca wynosi zero, mimo że siła działa." },
+      { "q": "Dlaczego energia kinetyczna zależy od kwadratu prędkości?", "a": "Wynika to z twierdzenia o pracy i energii oraz wzorów kinematyki. Przy podwojeniu prędkości energia rośnie czterokrotnie, dlatego droga hamowania rośnie tak szybko." },
+      { "q": "Co to znaczy, że siła jest zachowawcza?", "a": "To siła, której praca nie zależy od drogi, tylko od położeń początkowego i końcowego, np. grawitacja. Dla takich sił obowiązuje zasada zachowania energii mechanicznej." },
+      { "q": "Czy moc i energia to to samo?", "a": "Nie. Energia (i praca) to ilość, a moc to szybkość jej przekazywania. Silnik o większej mocy wykona tę samą pracę szybciej." }
+    ],
+    "faqMatura": [
+      { "q": "Kiedy stosować zasadę zachowania energii zamiast zasad dynamiki?", "a": "Gdy interesuje nas związek prędkości i wysokości, a nie czas. Zasada zachowania energii jest szybsza, gdy nie ma tarcia lub gdy znamy pracę sił niezachowawczych." },
+      { "q": "Jak uwzględnić tarcie w bilansie energii?", "a": "Energia mechaniczna początkowa równa się końcowej plus praca tarcia: E_początkowa = E_końcowa + T·s. Praca tarcia zamienia się w ciepło i zmniejsza energię mechaniczną." },
+      { "q": "Jak liczyć sprawność dźwigu podnoszącego ciężar?", "a": "Praca użyteczna to mgh (energia potencjalna ładunku). Praca dostarczona to energia z silnika. Sprawność to ich stosuek razy 100%." },
+      { "q": "Czy energia potencjalna może być ujemna?", "a": "Tak, zależy od wyboru poziomu zerowego. Jeśli przyjmiemy poziom odniesienia powyżej ciała, jego energia potencjalna jest ujemna. Ważne są tylko różnice energii." }
+    ],
+    "subtopics": [
+      {
+        "slug": "praca-mechaniczna",
+        "name": "Praca mechaniczna",
+        "intro": "Miara energii przekazanej ciału przez działającą siłę na drodze przemieszczenia.",
+        "problems": [
+          {
+            "title": "Praca siły pod kątem",
+            "tresc": "Skrzynię ciągnięto po poziomej podłodze siłą 100 N skierowaną pod kątem 60 stopni do poziomu na drodze 8 m. Oblicz wykonaną pracę.",
+            "steps": [
+              "Wzór na pracę: \\( W = F s \\cos\\alpha \\).",
+              "\\( W = 100 \\cdot 8 \\cdot \\cos 60^\\circ = 100 \\cdot 8 \\cdot 0{,}5 \\).",
+              "\\( W = 400\\,\\mathrm{J} \\)."
+            ],
+            "answer": "Wykonana praca wynosi 400 J."
+          },
+          {
+            "title": "Praca przy podnoszeniu",
+            "tresc": "Robotnik podnosi worek o masie 25 kg na wysokość 3 m ze stałą prędkością. Oblicz wykonaną pracę. Przyjmij g = 10 m/s².",
+            "steps": [
+              "Siła równa ciężarowi: \\( F = m g = 25 \\cdot 10 = 250\\,\\mathrm{N} \\).",
+              "Siła pionowa zgodna z ruchem (\\( \\alpha = 0 \\)): \\( W = F s \\).",
+              "\\( W = 250 \\cdot 3 = 750\\,\\mathrm{J} \\)."
+            ],
+            "answer": "Praca wynosi 750 J (równa przyrostowi energii potencjalnej)."
+          }
+        ],
+        "faq": [
+          { "q": "Czemu siła dośrodkowa nie wykonuje pracy?", "a": "Bo jest prostopadła do prędkości (i przemieszczenia). Kąt wynosi 90 stopni, a cos 90° = 0, więc praca jest zerowa." }
+        ]
+      },
+      {
+        "slug": "energia-kinetyczna",
+        "name": "Energia kinetyczna",
+        "intro": "Energia związana z ruchem ciała, zależna od masy i kwadratu prędkości.",
+        "problems": [
+          {
+            "title": "Energia rozpędzonego ciała",
+            "tresc": "Oblicz energię kinetyczną samochodu o masie 1200 kg jadącego z prędkością 20 m/s.",
+            "steps": [
+              "Wzór: \\( E_k = \\frac{m v^2}{2} \\).",
+              "\\( E_k = \\frac{1200 \\cdot 20^2}{2} = \\frac{1200 \\cdot 400}{2} \\).",
+              "\\( E_k = 240000\\,\\mathrm{J} = 240\\,\\mathrm{kJ} \\)."
+            ],
+            "answer": "Energia kinetyczna wynosi 240 kJ."
+          },
+          {
+            "title": "Praca a zmiana prędkości",
+            "tresc": "Ciało o masie 2 kg przyspieszono z 3 m/s do 7 m/s. Oblicz pracę siły wypadkowej.",
+            "steps": [
+              "Twierdzenie o pracy i energii: \\( W = E_{k2} - E_{k1} \\).",
+              "\\( E_{k1} = \\frac{2 \\cdot 3^2}{2} = 9\\,\\mathrm{J} \\), \\( E_{k2} = \\frac{2 \\cdot 7^2}{2} = 49\\,\\mathrm{J} \\).",
+              "\\( W = 49 - 9 = 40\\,\\mathrm{J} \\)."
+            ],
+            "answer": "Praca siły wypadkowej wynosi 40 J."
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego droga hamowania rośnie czterokrotnie przy dwukrotnej prędkości?", "a": "Bo energia kinetyczna zależy od kwadratu prędkości. Cała ta energia musi zostać rozproszona przez tarcie na drodze hamowania." }
+        ]
+      },
+      {
+        "slug": "zasada-zachowania-energii",
+        "name": "Zasada zachowania energii",
+        "intro": "W braku tarcia suma energii kinetycznej i potencjalnej pozostaje stała.",
+        "problems": [
+          {
+            "title": "Prędkość u podstawy równi",
+            "tresc": "Ciało zsuwa się bez tarcia z wysokości 5 m. Jaką prędkość uzyska u podstawy? Przyjmij g = 10 m/s².",
+            "steps": [
+              "Zasada zachowania energii: \\( m g h = \\frac{m v^2}{2} \\).",
+              "Masa się skraca: \\( v = \\sqrt{2 g h} \\).",
+              "\\( v = \\sqrt{2 \\cdot 10 \\cdot 5} = \\sqrt{100} = 10\\,\\mathrm{\\frac{m}{s}} \\)."
+            ],
+            "answer": "Prędkość u podstawy wynosi 10 m/s, niezależnie od masy."
+          },
+          {
+            "title": "Wahadło",
+            "tresc": "Wahadło wychylono tak, że kulka uniosła się o 0,2 m. Jaką prędkość będzie miała w najniższym punkcie? Przyjmij g = 10 m/s².",
+            "steps": [
+              "Energia potencjalna zamienia się w kinetyczną: \\( m g h = \\frac{m v^2}{2} \\).",
+              "\\( v = \\sqrt{2 g h} = \\sqrt{2 \\cdot 10 \\cdot 0{,}2} \\).",
+              "\\( v = \\sqrt{4} = 2\\,\\mathrm{\\frac{m}{s}} \\)."
+            ],
+            "answer": "Prędkość w najniższym punkcie wynosi 2 m/s."
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego prędkość u podstawy nie zależy od masy?", "a": "Bo w równaniu mgh = mv²/2 masa skraca się po obu stronach. Wszystkie ciała zsuwające się bez tarcia z tej samej wysokości mają tę samą prędkość." }
+        ]
+      },
+      {
+        "slug": "moc-i-sprawnosc",
+        "name": "Moc i sprawność",
+        "intro": "Moc opisuje szybkość pracy, a sprawność - jaką jej część wykorzystujemy użytecznie.",
+        "problems": [
+          {
+            "title": "Moc dźwigu",
+            "tresc": "Dźwig podnosi ładunek o masie 500 kg na wysokość 12 m w czasie 20 s. Oblicz moc użyteczną. Przyjmij g = 10 m/s².",
+            "steps": [
+              "Praca użyteczna: \\( W = m g h = 500 \\cdot 10 \\cdot 12 = 60000\\,\\mathrm{J} \\).",
+              "Moc: \\( P = \\frac{W}{t} = \\frac{60000}{20} \\).",
+              "\\( P = 3000\\,\\mathrm{W} = 3\\,\\mathrm{kW} \\)."
+            ],
+            "answer": "Moc użyteczna dźwigu wynosi 3 kW."
+          },
+          {
+            "title": "Sprawność silnika",
+            "tresc": "Silnik o mocy pobieranej 5 kW wykonuje pracę użyteczną z mocą 4 kW. Oblicz jego sprawność.",
+            "steps": [
+              "Sprawność: \\( \\eta = \\frac{P_u}{P_d} \\cdot 100\\% \\).",
+              "\\( \\eta = \\frac{4}{5} \\cdot 100\\% = 80\\% \\)."
+            ],
+            "answer": "Sprawność silnika wynosi 80%."
+          }
+        ],
+        "faq": [
+          { "q": "Gdzie podziewa się brakująca energia przy sprawności poniżej 100%?", "a": "Zamienia się głównie w ciepło z powodu tarcia, oporów i strat w przewodach. Energia nie ginie - przechodzi w formy nieużyteczne." }
+        ]
+      }
+    ],
+    "related": ["kinematyka", "dynamika", "ped-i-zasada-zachowania"]
+  },
+  {
+    "slug": "ped-i-zasada-zachowania",
+    "name": "Pęd i zasada zachowania pędu",
+    "dopelniacz": "pędu i zasady zachowania pędu",
+    "metaTeoria": "Pęd i zasada zachowania pędu - teoria, wzory, definicje. Popęd siły, zderzenia sprężyste i niesprężyste, odrzut. Wszystko wyjaśnione krok po kroku.",
+    "metaMatura": "Pęd i zasada zachowania pędu na maturze z fizyki - zderzenia, odrzut, popęd siły. Typowe zadania i strategia CKE, poziom podstawowy i rozszerzony.",
+    "intro": "Pęd to jedna z najważniejszych wielkości w fizyce, opisująca ilość ruchu ciała. Poznasz definicję pędu, popędu siły oraz fundamentalną zasadę zachowania pędu, która rządzi zderzeniami i zjawiskiem odrzutu. Ten dział jest kluczem do analizy zderzeń sprężystych i niesprężystych na maturze.",
+    "theory": [
+      {
+        "heading": "Pęd ciała",
+        "html": "<p><strong>Pęd</strong> \\( \\vec{p} \\) to wektorowa wielkość będąca iloczynem masy i prędkości ciała:</p>$$ \\vec{p} = m \\vec{v} $$<p>Jednostką pędu jest \\( \\mathrm{\\frac{kg \\cdot m}{s}} \\). Pęd ma kierunek i zwrot zgodny z prędkością. Pęd układu ciał to suma wektorowa pędów wszystkich ciał.</p><ul><li>Większy pęd ma ciało o większej masie lub większej prędkości.</li><li>Pęd jest wektorem, więc przy dodawaniu trzeba uwzględniać kierunki.</li></ul>"
+      },
+      {
+        "heading": "Popęd siły i druga zasada dynamiki",
+        "html": "<p><strong>Popęd siły</strong> to iloczyn siły i czasu jej działania, równy zmianie pędu:</p>$$ \\vec{F} \\Delta t = \\Delta \\vec{p} $$<p>To ogólniejsza postać drugiej zasady dynamiki: \\( \\vec{F} = \\frac{\\Delta \\vec{p}}{\\Delta t} \\). Im dłużej działa siła, tym większa zmiana pędu. Wyjaśnia to działanie poduszek powietrznych - wydłużenie czasu zderzenia zmniejsza siłę.</p>"
+      },
+      {
+        "heading": "Zasada zachowania pędu",
+        "html": "<p><strong>Zasada zachowania pędu</strong> mówi, że w układzie izolowanym (brak sił zewnętrznych) całkowity pęd jest stały:</p>$$ \\vec{p}_{przed} = \\vec{p}_{po} $$<p>Wynika ona z trzeciej zasady dynamiki - siły wewnętrzne między ciałami są przeciwne, więc znoszą się. To jedna z najbardziej uniwersalnych zasad fizyki, obowiązująca także w mikroświecie.</p>"
+      },
+      {
+        "heading": "Zderzenia niesprężyste",
+        "html": "<p>W <strong>zderzeniu doskonale niesprężystym</strong> ciała po zderzeniu poruszają się razem (sklejają się). Zachowany jest pęd, ale nie energia kinetyczna - część zamienia się w ciepło i deformację:</p>$$ m_1 v_1 + m_2 v_2 = (m_1 + m_2) v $$<p>Z tego równania wyznaczamy wspólną prędkość po zderzeniu. To typowy model dla zderzeń wagonów czy plasteliny.</p>"
+      },
+      {
+        "heading": "Zderzenia sprężyste",
+        "html": "<p>W <strong>zderzeniu doskonale sprężystym</strong> zachowane są jednocześnie pęd i energia kinetyczna:</p>$$ m_1 v_1 + m_2 v_2 = m_1 v_1' + m_2 v_2' $$<p>oraz \\( \\frac{m_1 v_1^2}{2} + \\frac{m_2 v_2^2}{2} = \\frac{m_1 v_1'^2}{2} + \\frac{m_2 v_2'^2}{2} \\). Przy równych masach ciała wymieniają się prędkościami. To model zderzeń kul bilardowych.</p>"
+      },
+      {
+        "heading": "Zjawisko odrzutu",
+        "html": "<p><strong>Odrzut</strong> to bezpośrednia konsekwencja zasady zachowania pędu. Gdy układ początkowo spoczywa, a jedna część wyrzuca masę w jedną stronę, reszta uzyskuje pęd w stronę przeciwną:</p>$$ 0 = m_1 v_1 + m_2 v_2 $$<p>Na tej zasadzie działają rakiety i broń palna. Ciało o większej masie uzyskuje mniejszą prędkość odrzutu.</p>"
+      }
+    ],
+    "formulas": [
+      { "name": "Pęd ciała", "latex": "\\vec{p} = m \\vec{v}", "desc": "Iloczyn masy i prędkości ciała." },
+      { "name": "Popęd siły", "latex": "\\vec{F} \\Delta t = \\Delta \\vec{p}", "desc": "Zmiana pędu równa popędowi siły." },
+      { "name": "Druga zasada dynamiki (pęd)", "latex": "\\vec{F} = \\frac{\\Delta \\vec{p}}{\\Delta t}", "desc": "Siła równa szybkości zmiany pędu." },
+      { "name": "Zasada zachowania pędu", "latex": "\\vec{p}_{przed} = \\vec{p}_{po}", "desc": "Pęd układu izolowanego jest stały." },
+      { "name": "Zderzenie niesprężyste", "latex": "m_1 v_1 + m_2 v_2 = (m_1 + m_2) v", "desc": "Ciała poruszają się razem po zderzeniu." },
+      { "name": "Zderzenie sprężyste (pęd)", "latex": "m_1 v_1 + m_2 v_2 = m_1 v_1' + m_2 v_2'", "desc": "Pęd zachowany w zderzeniu sprężystym." },
+      { "name": "Zderzenie sprężyste (energia)", "latex": "\\frac{m_1 v_1^2}{2} = \\frac{m_1 v_1'^2}{2} + \\frac{m_2 v_2'^2}{2}", "desc": "Energia kinetyczna też zachowana." },
+      { "name": "Odrzut", "latex": "0 = m_1 v_1 + m_2 v_2", "desc": "Dla układu początkowo spoczywającego." },
+      { "name": "Pęd a energia kinetyczna", "latex": "E_k = \\frac{p^2}{2m}", "desc": "Związek energii kinetycznej z pędem." }
+    ],
+    "definitions": [
+      { "term": "Pęd", "def": "Wektorowa wielkość równa iloczynowi masy i prędkości ciała, miara ilości ruchu." },
+      { "term": "Popęd siły", "def": "Iloczyn siły i czasu jej działania, równy zmianie pędu ciała." },
+      { "term": "Układ izolowany", "def": "Układ, na który nie działają zewnętrzne siły wypadkowe." },
+      { "term": "Zderzenie sprężyste", "def": "Zderzenie, w którym zachowane są zarówno pęd, jak i energia kinetyczna." },
+      { "term": "Zderzenie niesprężyste", "def": "Zderzenie, w którym zachowany jest pęd, lecz część energii kinetycznej ginie." },
+      { "term": "Odrzut", "def": "Ruch ciała w stronę przeciwną do wyrzucanej masy, zgodny z zasadą zachowania pędu." }
+    ],
+    "maturaInfo": {
+      "poziom": "podstawowy i rozszerzony",
+      "zakres": "Pęd, popęd siły, zasada zachowania pędu, zderzenia sprężyste i niesprężyste, odrzut, związek pędu z energią.",
+      "html": "<p>Zasada zachowania pędu to potężne narzędzie maturalne, zwłaszcza w zadaniach o zderzeniach i odrzucie. Na poziomie podstawowym dominują zderzenia niesprężyste (sklejanie ciał). Na rozszerzonym pojawiają się zderzenia sprężyste oraz zderzenia dwuwymiarowe wymagające rozkładu pędu na składowe. Kluczowe jest pamiętanie, że pęd to wektor.</p>",
+      "typoweZadania": [
+        "Obliczenie wspólnej prędkości po zderzeniu niesprężystym (sklejenie wagonów).",
+        "Wyznaczenie prędkości odrzutu działa lub łodzi przy wyrzucie masy.",
+        "Analiza zderzenia sprężystego dwóch kul o różnych masach.",
+        "Obliczenie siły z popędu przy zderzeniu w danym czasie."
+      ],
+      "strategia": [
+        "Zawsze ustal kierunek dodatni i przypisz znaki prędkości zgodnie z nim.",
+        "Zapisz pęd układu przed i po zdarzeniu i przyrównaj je do siebie.",
+        "W zderzeniach sprężystych użyj dwóch równań - na pęd i na energię kinetyczną."
+      ]
+    },
+    "faqTeoria": [
+      { "q": "Czym różni się pęd od energii kinetycznej?", "a": "Pęd to wektor (m·v), zależny liniowo od prędkości. Energia kinetyczna to skalar (mv²/2), zależny od kwadratu prędkości. W zderzeniach pęd jest zawsze zachowany, energia nie zawsze." },
+      { "q": "Dlaczego pęd jest zawsze zachowany w zderzeniu, a energia nie?", "a": "Pęd zachowuje się dzięki trzeciej zasadie dynamiki (siły wewnętrzne się znoszą). Energia kinetyczna może zamienić się w ciepło i deformację, dlatego w zderzeniach niesprężystych maleje." },
+      { "q": "Jak poduszka powietrzna chroni kierowcę?", "a": "Wydłuża czas zderzenia. Skoro zmiana pędu jest taka sama, to dłuższy czas oznacza mniejszą siłę działającą na ciało (z popędu F·Δt = Δp)." },
+      { "q": "Czy pojedyncze ciało może zmienić swój pęd?", "a": "Tak, jeśli działa na nie siła zewnętrzna. Zachowanie pędu dotyczy układu izolowanego. Pęd pojedynczego ciała zmienia się pod wpływem siły zgodnie z popędem." }
+    ],
+    "faqMatura": [
+      { "q": "Jak rozpoznać, czy zderzenie jest sprężyste czy niesprężyste?", "a": "Jeśli ciała po zderzeniu poruszają się razem (sklejają się), jest niesprężyste. Jeśli odbijają się i zachowana jest energia kinetyczna - sprężyste. Treść zadania zwykle to precyzuje." },
+      { "q": "Jak zapisać znaki prędkości w zadaniach o pędzie?", "a": "Wybierz jeden kierunek jako dodatni. Prędkości w tę stronę są dodatnie, w przeciwną - ujemne. Konsekwentnie stosuj te znaki w równaniu zachowania pędu." },
+      { "q": "Jak liczyć odrzut rakiety lub działa?", "a": "Pęd początkowy układu to zero. Po wyrzuceniu masy: 0 = m₁v₁ + m₂v₂, więc prędkości mają przeciwne zwroty, a ich wartości są odwrotnie proporcjonalne do mas." },
+      { "q": "Czy w zderzeniu niesprężystym energia ginie?", "a": "Nie ginie - zamienia się w ciepło, dźwięk i deformację. Zachowana jest energia całkowita, ale nie energia kinetyczna. Pęd pozostaje zachowany." }
+    ],
+    "subtopics": [
+      {
+        "slug": "ped-i-poped",
+        "name": "Pęd i popęd siły",
+        "intro": "Pęd opisuje ilość ruchu, a popęd siły wiąże siłę z czasem jej działania i zmianą pędu.",
+        "problems": [
+          {
+            "title": "Pęd samochodu",
+            "tresc": "Oblicz pęd samochodu o masie 1000 kg jadącego z prędkością 25 m/s.",
+            "steps": [
+              "Wzór: \\( p = m v \\).",
+              "\\( p = 1000 \\cdot 25 = 25000\\,\\mathrm{\\frac{kg \\cdot m}{s}} \\)."
+            ],
+            "answer": "Pęd samochodu wynosi 25000 kg·m/s."
+          },
+          {
+            "title": "Siła z popędu",
+            "tresc": "Piłka o masie 0,4 kg uderza w ścianę z prędkością 10 m/s i odbija się z prędkością 8 m/s. Czas kontaktu to 0,05 s. Oblicz średnią siłę działającą na piłkę.",
+            "steps": [
+              "Zmiana pędu (kierunki przeciwne): \\( \\Delta p = m(v' - (-v)) = 0{,}4 \\cdot (8 + 10) \\).",
+              "\\( \\Delta p = 0{,}4 \\cdot 18 = 7{,}2\\,\\mathrm{\\frac{kg \\cdot m}{s}} \\).",
+              "Siła: \\( F = \\frac{\\Delta p}{\\Delta t} = \\frac{7{,}2}{0{,}05} = 144\\,\\mathrm{N} \\)."
+            ],
+            "answer": "Średnia siła wynosi 144 N."
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego przy odbiciu zmiana pędu jest większa niż przy zatrzymaniu?", "a": "Bo prędkość zmienia zwrot. Zmiana pędu to suma wartości przed i po (m·v + m·v'), a nie różnica. Dlatego odbicie wymaga większej siły." }
+        ]
+      },
+      {
+        "slug": "zderzenia-niesprezyste",
+        "name": "Zderzenia niesprężyste",
+        "intro": "Ciała po zderzeniu poruszają się razem; zachowany jest tylko pęd.",
+        "problems": [
+          {
+            "title": "Sklejenie wagonów",
+            "tresc": "Wagon o masie 10 ton jadący z prędkością 3 m/s zderza się i sczepia z nieruchomym wagonem o masie 5 ton. Oblicz prędkość po zderzeniu.",
+            "steps": [
+              "Zasada zachowania pędu: \\( m_1 v_1 = (m_1 + m_2) v \\).",
+              "\\( 10000 \\cdot 3 = (10000 + 5000) \\cdot v \\).",
+              "\\( v = \\frac{30000}{15000} = 2\\,\\mathrm{\\frac{m}{s}} \\)."
+            ],
+            "answer": "Po zderzeniu wagony jadą razem z prędkością 2 m/s."
+          },
+          {
+            "title": "Pocisk w klocku",
+            "tresc": "Pocisk o masie 0,02 kg lecący z prędkością 400 m/s wbija się w nieruchomy klocek o masie 1,98 kg. Oblicz prędkość klocka z pociskiem po uderzeniu.",
+            "steps": [
+              "Zachowanie pędu: \\( m_p v_p = (m_p + m_k) v \\).",
+              "\\( 0{,}02 \\cdot 400 = (0{,}02 + 1{,}98) \\cdot v \\).",
+              "\\( v = \\frac{8}{2} = 4\\,\\mathrm{\\frac{m}{s}} \\)."
+            ],
+            "answer": "Klocek z pociskiem porusza się z prędkością 4 m/s."
+          }
+        ],
+        "faq": [
+          { "q": "Czemu w zderzeniu niesprężystym maleje energia kinetyczna?", "a": "Część energii zamienia się w ciepło, dźwięk i trwałą deformację ciał. Pęd pozostaje zachowany, ale energia kinetyczna układu jest mniejsza po zderzeniu." }
+        ]
+      },
+      {
+        "slug": "zderzenia-sprezyste",
+        "name": "Zderzenia sprężyste",
+        "intro": "Zachowane są jednocześnie pęd i energia kinetyczna; ciała odbijają się od siebie.",
+        "problems": [
+          {
+            "title": "Równe masy",
+            "tresc": "Kula o masie 1 kg lecąca z prędkością 6 m/s zderza się sprężyście centralnie z nieruchomą kulą o tej samej masie. Jakie będą prędkości po zderzeniu?",
+            "steps": [
+              "Dla równych mas w zderzeniu sprężystym ciała wymieniają się prędkościami.",
+              "Pierwsza kula zatrzymuje się: \\( v_1' = 0 \\).",
+              "Druga kula uzyskuje prędkość pierwszej: \\( v_2' = 6\\,\\mathrm{\\frac{m}{s}} \\)."
+            ],
+            "answer": "Pierwsza kula zatrzymuje się, druga odjeżdża z prędkością 6 m/s."
+          },
+          {
+            "title": "Sprawdzenie zachowania energii",
+            "tresc": "Dla zderzenia z poprzedniego zadania sprawdź, czy zachowana jest energia kinetyczna (m = 1 kg, v = 6 m/s).",
+            "steps": [
+              "Energia przed: \\( E_k = \\frac{1 \\cdot 6^2}{2} = 18\\,\\mathrm{J} \\).",
+              "Energia po: \\( \\frac{1 \\cdot 0^2}{2} + \\frac{1 \\cdot 6^2}{2} = 18\\,\\mathrm{J} \\).",
+              "Energia przed równa energii po - zderzenie jest sprężyste."
+            ],
+            "answer": "Energia kinetyczna jest zachowana (18 J = 18 J), co potwierdza sprężystość zderzenia."
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego przy równych masach ciała wymieniają się prędkościami?", "a": "Bo tylko takie rozwiązanie spełnia jednocześnie zachowanie pędu i energii kinetycznej. To charakterystyczna cecha sprężystych zderzeń ciał o jednakowej masie." }
+        ]
+      },
+      {
+        "slug": "odrzut",
+        "name": "Zjawisko odrzutu",
+        "intro": "Konsekwencja zasady zachowania pędu - wyrzucenie masy nadaje reszcie układu przeciwny pęd.",
+        "problems": [
+          {
+            "title": "Odrzut działa",
+            "tresc": "Działo o masie 2000 kg wystrzeliwuje pocisk o masie 10 kg z prędkością 500 m/s. Oblicz prędkość odrzutu działa.",
+            "steps": [
+              "Pęd początkowy układu wynosi zero: \\( 0 = m_d v_d + m_p v_p \\).",
+              "\\( v_d = -\\frac{m_p v_p}{m_d} = -\\frac{10 \\cdot 500}{2000} \\).",
+              "\\( v_d = -2{,}5\\,\\mathrm{\\frac{m}{s}} \\) (zwrot przeciwny do pocisku)."
+            ],
+            "answer": "Działo odskakuje z prędkością 2,5 m/s w stronę przeciwną do pocisku."
+          },
+          {
+            "title": "Odrzut na łodzi",
+            "tresc": "Człowiek o masie 70 kg stoi w nieruchomej łodzi o masie 130 kg. Wyskakuje z prędkością 2 m/s. Jaką prędkość uzyska łódź?",
+            "steps": [
+              "Zachowanie pędu: \\( 0 = m_c v_c + m_l v_l \\).",
+              "\\( v_l = -\\frac{m_c v_c}{m_l} = -\\frac{70 \\cdot 2}{130} \\).",
+              "\\( v_l \\approx -1{,}08\\,\\mathrm{\\frac{m}{s}} \\)."
+            ],
+            "answer": "Łódź odpływa z prędkością około 1,08 m/s w stronę przeciwną do człowieka."
+          }
+        ],
+        "faq": [
+          { "q": "Dlaczego cięższe ciało uzyskuje mniejszą prędkość odrzutu?", "a": "Bo pędy obu ciał muszą być równe co do wartości (suma zero). Przy większej masie ta sama wartość pędu oznacza mniejszą prędkość." }
+        ]
+      }
+    ],
+    "related": ["dynamika", "praca-moc-energia", "kinematyka"]
+  }
+]

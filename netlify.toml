@@ -1,3 +1,10 @@
+[build]
+  # Generuje statyczne strony SEO (HTML + sitemap.xml + robots.txt) przy każdym deployu.
+  # Dzięki temu do gitu trafia tylko źródło w seo/, a output powstaje na buildzie.
+  command = "node seo/generate.js"
+  publish = "."
+  functions = "netlify/functions"
+
 [build.environment]
   SECRETS_SCAN_OMIT_KEYS = "FRONTEND_URL"
 

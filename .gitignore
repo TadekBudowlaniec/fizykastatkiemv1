@@ -5,3 +5,13 @@ backend/.env
 # CSV files and folders
 csv/
 *.csv
+
+# Strony SEO generowane na buildzie przez `node seo/generate.js`
+# (źródłem prawdy jest katalog seo/ — output nie idzie do gitu)
+/baza-wiedzy/
+/fizyka/
+/matura-z-fizyki/
+/zadania-z-fizyki/
+/korepetycje-z-fizyki/
+/sitemap.xml
+/robots.txt
