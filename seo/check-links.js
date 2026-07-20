@@ -11,7 +11,7 @@ function walk(d) {
   }
   return r;
 }
-const dirs = ['fizyka', 'zadania-z-fizyki', 'matura-z-fizyki', 'korepetycje-z-fizyki', 'baza-wiedzy'].map(d => path.join(ROOT, d));
+const dirs = ['fizyka', 'zadania-z-fizyki', 'matura-z-fizyki', 'korepetycje-z-fizyki', 'baza-wiedzy', 'blog'].map(d => path.join(ROOT, d));
 let files = [];
 dirs.forEach(d => { files = files.concat(walk(d)); });
 const toUrl = f => '/' + path.relative(ROOT, f).split(path.sep).join('/').replace(/index\.html$/, '');

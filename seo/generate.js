@@ -39,6 +39,14 @@ function loadTopics() {
   return topics;
 }
 
+// Wczytaj artykuły blogowe z seo/content/blog.json
+function loadPosts() {
+  const file = path.join(__dirname, 'content', 'blog.json');
+  if (!fs.existsSync(file)) return [];
+  try { return JSON.parse(fs.readFileSync(file, 'utf8')); }
+  catch (e) { console.error(`Błąd JSON w blog.json: ${e.message}`); process.exit(1); }
+}
+
 // ---------------------------------------------------------------------------
 // Pomocnicze
 // ---------------------------------------------------------------------------
@@ -74,6 +82,7 @@ function header() {
       <div class="nav-main-buttons">
         <a class="btn btn-outline nav-cta-btn" href="/kurs">📚 Kurs</a>
         <a class="btn btn-outline nav-cta-btn" href="/baza-wiedzy/">📖 Baza wiedzy</a>
+        <a class="btn btn-outline nav-cta-btn" href="/blog/">📝 Blog</a>
         <a class="btn btn-outline nav-cta-btn" href="/korepetycje">👨‍🏫 Korepetycje</a>
         <a class="btn btn-primary nav-cta-btn" href="/register">✨ Załóż konto</a>
       </div>
@@ -87,6 +96,7 @@ function footer() {
   <div class="container footer-content">
     <div class="footer-links">
       <a href="/baza-wiedzy/">Baza wiedzy</a>
+      <a href="/blog/">Blog</a>
       <a href="/korepetycje">Korepetycje</a>
       <a href="/kurs">Kurs online</a>
       <a href="/regulamin">Regulamin</a>
@@ -536,6 +546,99 @@ ${ctaCenter()}
   writePage(canonical, shell({ title, desc, canonical, main, keywords: 'fizyka, teoria fizyki, wzory fizyka, zadania z fizyki, matura fizyka, baza wiedzy', jsonld: [bc.ld, collection] }));
 }
 
+function genArtykul(post, postsBySlug, topicsBySlug) {
+  const canonical = `/blog/${post.slug}/`;
+  const title = `${post.title} | ${BRAND}`;
+  const desc = post.metaDesc || post.excerpt;
+  const bc = breadcrumbs([
+    { name: 'Strona główna', url: '/' },
+    { name: 'Blog', url: '/blog/' },
+    { name: post.title, url: null }
+  ]);
+  const faq = faqBlock(post.faq);
+  const article = {
+    '@context': 'https://schema.org', '@type': 'Article',
+    headline: plain(post.title), inLanguage: 'pl',
+    description: plain(desc), datePublished: post.date || TODAY, dateModified: TODAY,
+    author: { '@type': 'Organization', name: BRAND },
+    publisher: { '@type': 'Organization', name: BRAND, logo: { '@type': 'ImageObject', url: `${SITE}/images/logo_magenta.png` } },
+    mainEntityOfPage: SITE + canonical
+  };
+  const chips = (post.sections || []).map((s, i) => `<a href="#sek-${i}">${esc(s.heading)}</a>`).join('');
+  const body = (post.sections || []).map((s, i) => `<section id="sek-${i}"><h2>${esc(s.heading)}</h2>${s.html}</section>`).join('\n');
+  // Linkowanie wewnętrzne: powiązane artykuły + działy bazy wiedzy
+  const cards = [];
+  (post.related || []).forEach(sl => {
+    const p = postsBySlug[sl];
+    if (p) cards.push(relatedCard('Artykuł', p.title, p.excerpt, `/blog/${p.slug}/`));
+  });
+  (post.relatedTopics || []).forEach(sl => {
+    const t = topicsBySlug[sl];
+    if (t) cards.push(relatedCard('Baza wiedzy', t.name, `Teoria i wzory z ${t.dopelniacz}.`, `/fizyka/${t.slug}/`));
+  });
+  const main = `<main class="seo-main">
+${bc.html}
+<div class="seo-hero">
+  <p class="eyebrow">Blog</p>
+  <h1>${esc(post.title)}</h1>
+  <p>${esc(post.intro)}</p>
+  <div class="hero-cta"><a class="btn btn-light" href="/baza-wiedzy/">📖 Baza wiedzy</a></div>
+</div>
+${chips ? `<nav class="chip-nav">${chips}</nav>` : ''}
+<div class="prose">
+${body}
+${faq.html}
+</div>
+${ctaCenter()}
+${cards.length ? `<h2>Zobacz również</h2><div class="related-grid">${cards.join('')}</div>` : ''}
+</main>`;
+  writePage(canonical, shell({
+    title, desc, canonical, main, keywords: post.keywords,
+    jsonld: [bc.ld, article, faq.ld]
+  }));
+}
+
+function genBlogHub(posts) {
+  const canonical = `/blog/`;
+  const title = `Blog o fizyce i maturze — porady i plany nauki | ${BRAND}`;
+  const desc = `Blog Fizyka Statkiem: jak uczyć się fizyki do matury, jak korzystać z karty wzorów, najczęstsze błędy maturalne i kierunki studiów wymagające fizyki.`;
+  const bc = breadcrumbs([
+    { name: 'Strona główna', url: '/' },
+    { name: 'Blog', url: null }
+  ]);
+  const cards = posts.map(p => relatedCard('Artykuł', p.title, p.excerpt, `/blog/${p.slug}/`)).join('');
+  const collection = {
+    '@context': 'https://schema.org', '@type': 'CollectionPage',
+    name: 'Blog o fizyce i maturze', inLanguage: 'pl', description: plain(desc),
+    isPartOf: { '@type': 'WebSite', name: BRAND, url: SITE }, url: SITE + canonical
+  };
+  const itemList = {
+    '@context': 'https://schema.org', '@type': 'ItemList',
+    itemListElement: posts.map((p, i) => ({
+      '@type': 'ListItem', position: i + 1, name: plain(p.title), url: `${SITE}/blog/${p.slug}/`
+    }))
+  };
+  const main = `<main class="seo-main">
+${bc.html}
+<div class="seo-hero">
+  <p class="eyebrow">Blog</p>
+  <h1>Blog o fizyce i maturze</h1>
+  <p>Praktyczne poradniki dla maturzystów: jak zaplanować naukę, jak czytać kartę wzorów, gdzie najczęściej traci się punkty i jakie studia wymagają fizyki.</p>
+  <div class="hero-cta">
+    <a class="btn btn-light" href="/baza-wiedzy/">📖 Baza wiedzy</a>
+    <a class="btn btn-light" href="/oferta-ratunkowa">⚓ Kurs maturalny</a>
+  </div>
+</div>
+<div class="hub-section"><h2>📝 Najnowsze artykuły</h2><div class="hub-grid">${cards}</div></div>
+${ctaCenter()}
+</main>`;
+  writePage(canonical, shell({
+    title, desc, canonical, main,
+    keywords: 'blog fizyka, nauka fizyki, matura z fizyki porady, jak uczyć się fizyki',
+    jsonld: [bc.ld, collection, itemList]
+  }));
+}
+
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
@@ -565,6 +668,18 @@ function main() {
   genCityHub(topics); add('/korepetycje-z-fizyki/', '0.8', 'monthly');
   cities.forEach(c => { genCity(c, topics); add(`/korepetycje-z-fizyki/${c.slug}/`, '0.7', 'monthly'); });
 
+  // Blog — artykuły poradnikowe
+  const posts = loadPosts();
+  const postsBySlug = {};
+  posts.forEach(p => { postsBySlug[p.slug] = p; });
+  if (posts.length) {
+    genBlogHub(posts); add('/blog/', '0.8', 'weekly');
+    posts.forEach(p => {
+      genArtykul(p, postsBySlug, topicsBySlug);
+      add(`/blog/${p.slug}/`, '0.7', 'monthly');
+    });
+  }
+
   // Sitemap
   const sm = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -589,7 +704,7 @@ Sitemap: ${SITE}/sitemap.xml
   console.log(`✓ Wygenerowano ${_written} podstron HTML`);
   console.log(`✓ Sitemap: ${urls.length} URL-i -> sitemap.xml`);
   console.log(`✓ robots.txt zapisany`);
-  console.log(`  Działów: ${topics.length}, Miast: ${cities.length}`);
+  console.log(`  Działów: ${topics.length}, Miast: ${cities.length}, Artykułów: ${posts.length}`);
 }
 
 main();
