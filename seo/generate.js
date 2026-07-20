@@ -113,7 +113,7 @@ const KATEX = `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"\\\\(",right:"\\\\)",display:false}],throwOnError:false});}});</script>`;
 
-function shell({ title, desc, canonical, jsonld = [], main, keywords }) {
+function shell({ title, desc, canonical, jsonld = [], main, keywords, robots }) {
   const url = SITE + canonical;
   const ld = jsonld.filter(Boolean)
     .map(o => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n');
@@ -126,7 +126,7 @@ function shell({ title, desc, canonical, jsonld = [], main, keywords }) {
 <meta name="description" content="${esc(desc)}">
 ${keywords ? `<meta name="keywords" content="${esc(keywords)}">` : ''}
 <link rel="canonical" href="${esc(url)}">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="${robots || 'index, follow, max-image-preview:large'}">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="pl_PL">
 <meta property="og:site_name" content="${BRAND}">
@@ -639,6 +639,40 @@ ${ctaCenter()}
   }));
 }
 
+// Strona 404 — serwowana przez regułę catch-all w _redirects z kodem 404.
+// Dzięki temu nieistniejące adresy zwracają twardy błąd zamiast kopii strony
+// głównej (miękkie 404), którą Google indeksowałby jako duplikat.
+function gen404(topics, posts) {
+  const title = `Nie znaleziono strony (404) | ${BRAND}`;
+  const desc = 'Ta strona nie istnieje lub została przeniesiona. Skorzystaj z bazy wiedzy, bloga albo wróć na stronę główną.';
+  const dzialy = topics.slice(0, 6)
+    .map(t => relatedCard('Teoria', t.name, `Teoria i wzory z ${t.dopelniacz}.`, `/fizyka/${t.slug}/`)).join('');
+  const artykuly = posts.slice(0, 3)
+    .map(p => relatedCard('Artykuł', p.title, p.excerpt, `/blog/${p.slug}/`)).join('');
+  const main = `<main class="seo-main">
+<div class="seo-hero">
+  <p class="eyebrow">Błąd 404</p>
+  <h1>Nie znaleziono takiej strony</h1>
+  <p>Adres, pod który trafiłeś, nie istnieje lub został zmieniony. Poniżej znajdziesz miejsca, od których warto zacząć.</p>
+  <div class="hero-cta">
+    <a class="btn btn-light" href="/">🏠 Strona główna</a>
+    <a class="btn btn-light" href="/baza-wiedzy/">📖 Baza wiedzy</a>
+    <a class="btn btn-light" href="/blog/">📝 Blog</a>
+  </div>
+</div>
+${dzialy ? `<div class="hub-section"><h2>📖 Popularne działy fizyki</h2><div class="hub-grid">${dzialy}</div></div>` : ''}
+${artykuly ? `<div class="hub-section"><h2>📝 Z bloga</h2><div class="hub-grid">${artykuly}</div></div>` : ''}
+${ctaCenter()}
+</main>`;
+  const html = shell({
+    title, desc, canonical: '/404.html', main,
+    robots: 'noindex, follow',
+    jsonld: [],
+  });
+  fs.writeFileSync(path.join(ROOT, '404.html'), html, 'utf8');
+  _written++;
+}
+
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
@@ -679,6 +713,9 @@ function main() {
       add(`/blog/${p.slug}/`, '0.7', 'monthly');
     });
   }
+
+  // Strona 404 (poza sitemap — nie indeksujemy jej)
+  gen404(topics, posts);
 
   // Sitemap
   const sm = `<?xml version="1.0" encoding="UTF-8"?>

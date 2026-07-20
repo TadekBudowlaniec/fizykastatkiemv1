@@ -1,1 +1,25 @@
-/*    /index.html   200
+# Trasy obsługiwane po stronie klienta przez SPA (js/navigation.js -> pathToSection).
+# Netlify serwuje najpierw realne pliki statyczne (baza-wiedzy, fizyka, blog,
+# zadania-z-fizyki, matura-z-fizyki, korepetycje-z-fizyki, css, js, images),
+# więc te reguły dotyczą wyłącznie adresów bez odpowiadającego im pliku.
+/home                    /index.html   200
+/kurs                    /index.html   200
+/user                    /index.html   200
+/login                   /index.html   200
+/register                /index.html   200
+/pricing                 /index.html   200
+/korepetycje             /index.html   200
+/regulamin               /index.html   200
+/polityka-prywatnosci    /index.html   200
+/oferta-ratunkowa        /index.html   200
+/planer                  /index.html   200
+
+# Powrót ze Stripe po udanej płatności (create-checkout-session.js -> success_url).
+# Nie ma go w pathToSection, ale musi trafić do aplikacji, a nie na 404.
+/sukces                  /index.html   200
+
+# Wszystko pozostałe: twarde 404 zamiast kopii strony głównej.
+# Wcześniejsza reguła `/* /index.html 200` powodowała miękkie 404 — dowolny
+# błędny adres zwracał 200 z treścią landing page, co Google mógł indeksować
+# jako duplikat strony głównej.
+/*                       /404.html     404
