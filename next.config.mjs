@@ -2,6 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Zgodność ze starymi URL-ami SEO (canonical z końcowym "/")
+  trailingSlash: true,
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'kldekjrpottsqebueojg.supabase.co' },

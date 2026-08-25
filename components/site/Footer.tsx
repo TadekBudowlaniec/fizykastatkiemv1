@@ -85,7 +85,6 @@ export function Footer() {
               {[
                 { label: 'Instagram', href: SITE.socials.instagram },
                 { label: 'Facebook', href: SITE.socials.facebook },
-                { label: 'TikTok', href: SITE.socials.tiktok },
               ].map((s) => (
                 <a
                   key={s.label}

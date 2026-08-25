@@ -1,0 +1,47 @@
+import type { MetadataRoute } from 'next';
+import { SITE } from '@/lib/site';
+import { getTopics, getCities, getPosts } from '@/lib/seo';
+
+export const dynamic = 'force-static';
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+  const url = (path: string) => `${SITE.url}${path}`;
+  const items: MetadataRoute.Sitemap = [];
+
+  const add = (
+    path: string,
+    priority: number,
+    changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency']
+  ) => items.push({ url: url(path), lastModified: now, changeFrequency, priority });
+
+  // Strony aplikacji / marketing
+  add('/', 1.0, 'weekly');
+  add('/cennik', 0.9, 'monthly');
+  add('/korepetycje', 0.9, 'monthly');
+  add('/kurs', 0.8, 'monthly');
+  add('/oferta-ratunkowa', 0.8, 'monthly');
+  add('/baza-wiedzy/', 0.9, 'weekly');
+
+  const topics = getTopics();
+  for (const t of topics) {
+    add(`/fizyka/${t.slug}/`, 0.8, 'monthly');
+    add(`/matura-z-fizyki/${t.slug}/`, 0.8, 'monthly');
+    add(`/zadania-z-fizyki/${t.slug}/`, 0.8, 'monthly');
+    for (const s of t.subtopics ?? []) {
+      add(`/zadania-z-fizyki/${t.slug}/${s.slug}/`, 0.7, 'monthly');
+    }
+  }
+
+  add('/korepetycje-z-fizyki/', 0.8, 'monthly');
+  for (const c of getCities()) {
+    add(`/korepetycje-z-fizyki/${c.slug}/`, 0.7, 'monthly');
+  }
+
+  add('/blog/', 0.8, 'weekly');
+  for (const p of getPosts()) {
+    add(`/blog/${p.slug}/`, 0.7, 'monthly');
+  }
+
+  return items;
+}

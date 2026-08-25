@@ -1,0 +1,7 @@
+# Normalizuj końce linii — źródła jako LF w repo
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.svg text eol=lf
+*.ico binary

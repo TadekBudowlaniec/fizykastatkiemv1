@@ -61,7 +61,7 @@ const orgJsonLd = {
   url: SITE.url,
   email: SITE.email,
   logo: `${SITE.url}/images/logo_magenta.png`,
-  sameAs: [SITE.socials.instagram, SITE.socials.facebook, SITE.socials.tiktok],
+  sameAs: [SITE.socials.instagram, SITE.socials.facebook],
 };
 
 export default function RootLayout({

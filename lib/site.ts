@@ -6,10 +6,10 @@ export const SITE = {
   description:
     'Kursy fizyki online do matury: mechanika, termodynamika, elektromagnetyzm, optyka i fizyka współczesna. Wideo HD, PDF-y, zadania i planer nauki.',
   ogImage: '/images/logo_magenta.png',
+  owner: 'Cezary Prusak',
   socials: {
-    instagram: 'https://instagram.com/fizykastatkiem',
-    facebook: 'https://facebook.com/fizykastatkiem',
-    tiktok: 'https://tiktok.com/@fizykastatkiem',
+    instagram: 'https://www.instagram.com/fizykastatkiem/',
+    facebook: 'https://www.facebook.com/profile.php?id=61557090640926',
   },
 } as const;
 
