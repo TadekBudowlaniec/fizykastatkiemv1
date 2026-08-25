@@ -1,10 +1,11 @@
 [build]
-  # Next.js build. Plugin @netlify/plugin-nextjs ustawia publish/runtime automatycznie.
+  # Next.js build z pluginem @netlify/plugin-nextjs.
   command = "npm run build"
+  publish = ".next"
   functions = "netlify/functions"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "22"
   SECRETS_SCAN_OMIT_KEYS = "FRONTEND_URL,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
 
 [[plugins]]
