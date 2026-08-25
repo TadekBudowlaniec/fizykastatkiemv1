@@ -15,12 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency']
   ) => items.push({ url: url(path), lastModified: now, changeFrequency, priority });
 
-  // Strony aplikacji / marketing
+  // Strony aplikacji / marketing (trailing slash — zgodnie z trailingSlash: true)
   add('/', 1.0, 'weekly');
-  add('/cennik', 0.9, 'monthly');
-  add('/korepetycje', 0.9, 'monthly');
-  add('/kurs', 0.8, 'monthly');
-  add('/oferta-ratunkowa', 0.8, 'monthly');
+  add('/cennik/', 0.9, 'monthly');
+  add('/korepetycje/', 0.9, 'monthly');
+  add('/kurs/', 0.8, 'monthly');
+  add('/oferta-ratunkowa/', 0.8, 'monthly');
   add('/baza-wiedzy/', 0.9, 'weekly');
 
   const topics = getTopics();
