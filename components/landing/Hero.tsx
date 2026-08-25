@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { SqueezeForm } from './SqueezeForm';
 import { Eyebrow } from '@/components/ui/SectionHeading';
 
@@ -34,6 +35,16 @@ export function Hero() {
           <div className="mt-8">
             <SqueezeForm />
           </div>
+
+          <p className="mt-3 text-sm text-slate-400">
+            Wolisz zacząć od razu?{' '}
+            <Link
+              href="/cennik"
+              className="font-semibold text-brand-300 underline underline-offset-4 transition-colors hover:text-magenta-400"
+            >
+              Zobacz pakiety kursu →
+            </Link>
+          </p>
 
           <ul className="mt-8 flex flex-wrap gap-2.5">
             {trust.map((t) => (

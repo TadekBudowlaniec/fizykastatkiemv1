@@ -1,4 +1,5 @@
 import { Hero } from '@/components/landing/Hero';
+import { StatsBar } from '@/components/landing/StatsBar';
 import { Guarantee } from '@/components/landing/Guarantee';
 import { Toolkit } from '@/components/landing/Toolkit';
 import { HowItWorks } from '@/components/landing/HowItWorks';
@@ -72,6 +73,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Hero />
+      <StatsBar />
       <Guarantee />
       <Toolkit />
       <HowItWorks />
