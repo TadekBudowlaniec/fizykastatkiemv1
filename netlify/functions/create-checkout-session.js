@@ -162,7 +162,8 @@ exports.handler = async (event) => {
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ id: session.id }),
+            // `id` zachowane dla kompatybilności; `url` do bezpośredniego przekierowania (Next.js).
+            body: JSON.stringify({ id: session.id, url: session.url }),
         };
     } catch (err) {
         console.error('Stripe error:', err);
