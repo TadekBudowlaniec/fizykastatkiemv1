@@ -1,0 +1,257 @@
+@import "tailwindcss";
+
+/* ============================================================
+   FIZYKA STATKIEM — Design System v2
+   Motyw: "deep ocean" (dramatyczne ciemne hero) + jasne,
+   przewiewne sekcje treści. Sygnaturowy gradient violet→magenta
+   z oceanicznym akcentem cyan.
+   ============================================================ */
+
+@theme {
+  /* --- Brand --- */
+  --color-brand-50:  #f2efff;
+  --color-brand-100: #e6e0ff;
+  --color-brand-200: #cbbdff;
+  --color-brand-300: #a892ff;
+  --color-brand-400: #8a6bff;
+  --color-brand-500: #6b4df6;  /* violet — brand primary */
+  --color-brand-600: #5636ea;
+  --color-brand-700: #4527c2;
+  --color-brand-800: #38219c;
+  --color-brand-900: #2c1a7a;
+
+  /* --- Magenta accent --- */
+  --color-magenta-400: #ff6fae;
+  --color-magenta-500: #f43f8f;
+  --color-magenta-600: #db2777;
+
+  /* --- Ocean / cyan accent --- */
+  --color-ocean-300: #67e8f9;
+  --color-ocean-400: #22d3ee;
+  --color-ocean-500: #06b6d4;
+
+  /* --- Ink / navy (dark surfaces) --- */
+  --color-navy-950: #070b18;
+  --color-navy-900: #0b1224;
+  --color-navy-800: #0f1b36;
+  --color-navy-700: #16223f;
+  --color-navy-600: #1e2c4d;
+
+  /* --- Neutrals --- */
+  --color-ink:      #0f172a;
+  --color-slate:    #334155;
+  --color-muted:    #64748b;
+  --color-line:     #e6e8f0;
+  --color-surface:  #ffffff;
+  --color-cloud:    #f6f8ff;
+  --color-foam:     #eef3ff;
+
+  /* --- Fonts (mapped to next/font in layout) --- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-poppins), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Radii --- */
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+  --radius-3xl: 2.25rem;
+
+  /* --- Shadows --- */
+  --shadow-soft: 0 4px 24px -8px rgba(15, 23, 42, 0.12);
+  --shadow-card: 0 10px 40px -12px rgba(15, 23, 42, 0.16);
+  --shadow-glow: 0 20px 60px -20px rgba(107, 77, 246, 0.55);
+  --shadow-glow-magenta: 0 20px 60px -20px rgba(244, 63, 143, 0.5);
+
+  /* --- Animations --- */
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-float-slow: float 14s ease-in-out infinite;
+  --animate-aurora: aurora 18s ease infinite;
+  --animate-fade-up: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-shimmer: shimmer 2.5s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50%      { transform: translateY(-18px) rotate(1.5deg); }
+}
+@keyframes aurora {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(4%, -6%) scale(1.08); }
+  66%      { transform: translate(-5%, 4%) scale(0.96); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.04); }
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+:root {
+  --brand-gradient: linear-gradient(120deg, #6b4df6 0%, #a855f7 45%, #f43f8f 100%);
+  --ocean-gradient: linear-gradient(150deg, #0b1224 0%, #0f1b36 55%, #16223f 100%);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-cloud);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(107, 77, 246, 0.22);
+  color: var(--color-ink);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* Fokus dostępny dla klawiatury */
+:focus-visible {
+  outline: 3px solid var(--color-brand-400);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Cienki, markowy scrollbar */
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-brand-400), var(--color-magenta-500));
+  border-radius: 999px;
+  border: 3px solid var(--color-cloud);
+}
+
+/* ============================================================
+   REUSABLE UTILITIES
+   ============================================================ */
+
+/* Tekst z gradientem marki */
+.text-gradient {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Szklane karty */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+.glass-light {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Obramowanie z gradientem */
+.border-gradient {
+  position: relative;
+  background-clip: padding-box;
+  border: 1px solid transparent;
+}
+.border-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--brand-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Aurora glow (dekoracyjne rozmyte plamy) */
+.aurora {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(80px);
+  opacity: 0.55;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Subtelna siatka w tle sekcji dark */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+/* Prose — treść lekcji, blog, SEO, dokumenty prawne */
+.prose-fs {
+  color: var(--color-slate);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+.prose-fs h2 { font-size: 1.75rem; margin: 2.25rem 0 1rem; }
+.prose-fs h3 { font-size: 1.3rem; margin: 1.75rem 0 0.75rem; }
+.prose-fs p { margin: 0 0 1.1rem; }
+.prose-fs ul, .prose-fs ol { margin: 0 0 1.1rem 1.25rem; }
+.prose-fs li { margin: 0.4rem 0; }
+.prose-fs ul { list-style: disc; }
+.prose-fs ol { list-style: decimal; }
+.prose-fs a { color: var(--color-brand-600); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.prose-fs a:hover { color: var(--color-magenta-600); }
+.prose-fs strong { color: var(--color-ink); font-weight: 700; }
+.prose-fs blockquote {
+  border-left: 4px solid var(--color-brand-400);
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  margin: 1.5rem 0;
+  color: var(--color-muted);
+  font-style: italic;
+}
+.prose-fs code {
+  background: var(--color-foam);
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+.prose-fs table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+.prose-fs th, .prose-fs td { border: 1px solid var(--color-line); padding: 0.65rem 0.85rem; text-align: left; }
+.prose-fs th { background: var(--color-foam); font-weight: 700; color: var(--color-ink); }
+
+/* KaTeX overflow na mobile */
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.35rem 0; }
+
+/* Animacja wejścia na scroll (JS dodaje .in-view) */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; }
+}

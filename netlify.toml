@@ -1,12 +1,14 @@
 [build]
-  # Generuje statyczne strony SEO (HTML + sitemap.xml + robots.txt) przy każdym deployu.
-  # Dzięki temu do gitu trafia tylko źródło w seo/, a output powstaje na buildzie.
-  command = "node seo/generate.js"
-  publish = "."
+  # Next.js build. Plugin @netlify/plugin-nextjs ustawia publish/runtime automatycznie.
+  command = "npm run build"
   functions = "netlify/functions"
 
 [build.environment]
-  SECRETS_SCAN_OMIT_KEYS = "FRONTEND_URL"
+  NODE_VERSION = "20"
+  SECRETS_SCAN_OMIT_KEYS = "FRONTEND_URL,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 [[headers]]
   for = "/*"

@@ -1,19 +1,35 @@
+# dependencies
+/node_modules
+/backend/node_modules
+/.pnp
+.pnp.js
+
+# env
 .env
-.env.local
+.env*.local
 backend/.env
 
-# CSV files and folders
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# netlify
+.netlify/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
 csv/
 *.csv
 
-# Strony SEO generowane na buildzie przez `node seo/generate.js`
-# (źródłem prawdy jest katalog seo/ — output nie idzie do gitu)
-/baza-wiedzy/
-/fizyka/
-/matura-z-fizyki/
-/zadania-z-fizyki/
-/korepetycje-z-fizyki/
-/blog/
-/sitemap.xml
-/robots.txt
-/404.html
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# typescript
+*.tsbuildinfo
