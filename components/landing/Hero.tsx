@@ -13,16 +13,17 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(160deg,#070b18_0%,#0b1224_45%,#16223f_100%)] text-white">
       {/* Aurora glow */}
-      <div className="aurora left-[-8%] top-[-10%] h-[28rem] w-[28rem] animate-[aurora_18s_ease_infinite] bg-brand-600/50" />
-      <div className="aurora right-[-6%] top-[10%] h-[26rem] w-[26rem] animate-[aurora_22s_ease_infinite] bg-magenta-500/35" />
-      <div className="aurora bottom-[-20%] left-[30%] h-[24rem] w-[24rem] bg-ocean-500/25" />
-      <div className="bg-grid absolute inset-0" />
+      <div className="aurora left-[-8%] top-[-10%] h-[30rem] w-[30rem] animate-[aurora_18s_ease_infinite] bg-brand-600/45" />
+      <div className="aurora right-[-4%] top-[6%] h-[28rem] w-[28rem] animate-[aurora_22s_ease_infinite] bg-magenta-500/30" />
+      <div className="aurora bottom-[-25%] left-[28%] h-[24rem] w-[24rem] bg-ocean-500/20" />
+      {/* delikatna winieta u góry */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(ellipse_60%_100%_at_50%_0%,rgba(107,77,246,0.18),transparent)]" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-24 pt-16 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:pb-32 lg:pt-24">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pb-20 pt-14 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:pb-28 lg:pt-20">
         {/* Copy */}
         <div className="animate-[fadeUp_0.7s_cubic-bezier(0.22,1,0.36,1)_both]">
           <Eyebrow dark>🚢 Kurs maturalny z fizyki — matura 2027</Eyebrow>
-          <h1 className="mt-5 font-display text-[2.6rem] font-extrabold leading-[1.08] text-white sm:text-5xl lg:text-[3.4rem]">
+          <h1 className="mt-5 font-display text-[2.7rem] font-extrabold leading-[1.06] text-white sm:text-5xl lg:text-[3.4rem]">
             Zdaj maturę z fizyki{' '}
             <span className="text-gradient">bez stresu i chaosu</span>.
           </h1>
@@ -59,26 +60,35 @@ export function Hero() {
           </ul>
         </div>
 
-        {/* Visual */}
-        <div className="relative hidden items-center justify-center md:flex">
-          <div className="relative w-72 lg:w-[22rem]">
-            {/* poświata za statkiem */}
-            <div className="absolute left-1/2 top-1/2 -z-10 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(107,77,246,0.45),transparent_70%)] blur-2xl sm:h-96 sm:w-96" />
-            <Image
-              src="/images/bialy.svg"
-              alt="Statek Fizyka Statkiem"
-              width={460}
-              height={460}
-              priority
-              className="relative mx-auto w-full animate-[float_8s_ease-in-out_infinite] drop-shadow-[0_30px_60px_rgba(107,77,246,0.45)]"
-            />
+        {/* Visual — statek w reflektorze */}
+        <div className="relative hidden md:block">
+          <div className="relative mx-auto aspect-square w-full max-w-[24rem] lg:max-w-[26rem]">
+            {/* koncentryczne pierścienie */}
+            <div className="absolute inset-0 rounded-full border border-white/[0.06]" />
+            <div className="absolute inset-[9%] rounded-full border border-white/[0.09]" />
+            <div className="absolute inset-[19%] rounded-full border border-white/[0.05]" />
 
-            {/* Pływające karty — w obrębie ramki statku */}
-            <div className="glass absolute left-0 top-2 rounded-2xl px-4 py-3 text-left shadow-glow">
+            {/* poświata za statkiem */}
+            <div className="absolute inset-[8%] rounded-full bg-[radial-gradient(circle,rgba(139,107,255,0.55),rgba(244,63,143,0.18)_52%,transparent_72%)] blur-2xl" />
+
+            {/* statek */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Image
+                src="/images/bialy.svg"
+                alt="Statek Fizyka Statkiem"
+                width={460}
+                height={460}
+                priority
+                className="w-[70%] animate-[float_8s_ease-in-out_infinite] drop-shadow-[0_24px_60px_rgba(107,77,246,0.55)]"
+              />
+            </div>
+
+            {/* karty statystyk — solidne, czytelne */}
+            <div className="absolute left-0 top-[14%] rounded-2xl bg-navy-800/90 px-4 py-3 text-left shadow-glow ring-1 ring-white/10 backdrop-blur-sm">
               <p className="text-2xl font-extrabold text-white">16</p>
               <p className="text-xs text-slate-300">działów kursu</p>
             </div>
-            <div className="glass absolute bottom-4 right-0 rounded-2xl px-4 py-3 text-left shadow-glow-magenta">
+            <div className="absolute bottom-[12%] right-0 rounded-2xl bg-navy-800/90 px-4 py-3 text-left shadow-glow-magenta ring-1 ring-white/10 backdrop-blur-sm">
               <p className="text-2xl font-extrabold text-white">100%</p>
               <p className="text-xs text-slate-300">zakres matury</p>
             </div>
