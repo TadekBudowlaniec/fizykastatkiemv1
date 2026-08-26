@@ -30,7 +30,7 @@ export function Header() {
         'sticky top-0 z-[500] transition-all duration-300',
         scrolled
           ? 'bg-navy-950/92 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(0,0,0,0.5)] ring-1 ring-white/5'
-          : 'bg-navy-950/70 backdrop-blur-md'
+          : 'bg-transparent'
       )}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
