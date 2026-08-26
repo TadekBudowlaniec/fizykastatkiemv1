@@ -29,8 +29,8 @@ export function Header() {
       className={cn(
         'sticky top-0 z-[500] transition-all duration-300',
         scrolled
-          ? 'bg-navy-950/92 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(0,0,0,0.5)] ring-1 ring-white/5'
-          : 'bg-transparent'
+          ? 'bg-navy-950/95 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(0,0,0,0.5)] ring-1 ring-white/5'
+          : 'bg-navy-950'
       )}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
