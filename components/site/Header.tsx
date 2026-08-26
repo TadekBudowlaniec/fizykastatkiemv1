@@ -61,8 +61,8 @@ export function Header() {
                 className={cn(
                   'rounded-full px-4 py-2 text-sm font-semibold transition-colors',
                   active
-                    ? 'bg-white/10 text-white'
-                    : 'text-slate-200/80 hover:bg-white/5 hover:text-white'
+                    ? 'bg-white/15 text-white'
+                    : 'text-slate-100 hover:bg-white/10 hover:text-white'
                 )}
               >
                 {l.label}
@@ -75,7 +75,7 @@ export function Header() {
         <div className="hidden items-center gap-2 lg:flex">
           {!loading && user ? (
             <>
-              <Button href="/kurs" variant="ghost" size="sm" className="text-slate-200/80 hover:text-white hover:bg-white/5">
+              <Button href="/kurs" variant="ghost" size="sm" className="text-slate-100 hover:text-white hover:bg-white/10">
                 Mój kurs
               </Button>
               <Button href="/user" variant="light" size="sm">
@@ -83,14 +83,14 @@ export function Header() {
               </Button>
               <button
                 onClick={() => signOut()}
-                className="rounded-full px-3 py-2 text-sm font-semibold text-slate-300/70 transition-colors hover:text-white"
+                className="rounded-full px-3 py-2 text-sm font-semibold text-slate-200 transition-colors hover:text-white"
               >
                 Wyloguj
               </button>
             </>
           ) : (
             <>
-              <Button href="/login" variant="ghost" size="sm" className="text-slate-200/90 hover:text-white hover:bg-white/5">
+              <Button href="/login" variant="ghost" size="sm" className="text-slate-100 hover:text-white hover:bg-white/10">
                 Zaloguj
               </Button>
               <Button href="/cennik" variant="gradient" size="sm">
