@@ -21,10 +21,10 @@ export function Hero() {
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-24 pt-16 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:pb-32 lg:pt-24">
         {/* Copy */}
         <div className="animate-[fadeUp_0.7s_cubic-bezier(0.22,1,0.36,1)_both]">
-          <Eyebrow dark>🚢 7 tygodni do matury</Eyebrow>
-          <h1 className="mt-5 font-display text-[2.6rem] font-extrabold leading-[1.05] sm:text-5xl lg:text-6xl">
-            Zdaj maturę z fizyki —{' '}
-            <span className="text-gradient">płynąc pod prąd</span> chaosu.
+          <Eyebrow dark>🚢 Kurs maturalny z fizyki — matura 2027</Eyebrow>
+          <h1 className="mt-5 font-display text-[2.6rem] font-extrabold leading-[1.08] text-white sm:text-5xl lg:text-[3.4rem]">
+            Zdaj maturę z fizyki{' '}
+            <span className="text-gradient">bez stresu i chaosu</span>.
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-300/85">
             Kompletny kurs online: wideo HD, gotowe PDF-y, setki zadań i
@@ -60,25 +60,28 @@ export function Hero() {
         </div>
 
         {/* Visual */}
-        <div className="relative flex items-center justify-center">
-          <div className="absolute h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(107,77,246,0.5),transparent_70%)] blur-2xl sm:h-96 sm:w-96" />
-          <Image
-            src="/images/bialy.svg"
-            alt="Statek Fizyka Statkiem"
-            width={460}
-            height={460}
-            priority
-            className="relative w-64 animate-[float_8s_ease-in-out_infinite] drop-shadow-[0_30px_60px_rgba(107,77,246,0.45)] sm:w-80 lg:w-[26rem]"
-          />
+        <div className="relative hidden items-center justify-center md:flex">
+          <div className="relative w-72 lg:w-[22rem]">
+            {/* poświata za statkiem */}
+            <div className="absolute left-1/2 top-1/2 -z-10 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(107,77,246,0.45),transparent_70%)] blur-2xl sm:h-96 sm:w-96" />
+            <Image
+              src="/images/bialy.svg"
+              alt="Statek Fizyka Statkiem"
+              width={460}
+              height={460}
+              priority
+              className="relative mx-auto w-full animate-[float_8s_ease-in-out_infinite] drop-shadow-[0_30px_60px_rgba(107,77,246,0.45)]"
+            />
 
-          {/* Floating stat cards */}
-          <div className="glass absolute -left-2 top-6 rounded-2xl px-4 py-3 text-left shadow-glow sm:left-0">
-            <p className="text-2xl font-extrabold text-white">16</p>
-            <p className="text-xs text-slate-300">działów kursu</p>
-          </div>
-          <div className="glass absolute bottom-8 right-0 rounded-2xl px-4 py-3 text-left shadow-glow-magenta">
-            <p className="text-2xl font-extrabold text-white">100%</p>
-            <p className="text-xs text-slate-300">zakres matury</p>
+            {/* Pływające karty — w obrębie ramki statku */}
+            <div className="glass absolute left-0 top-2 rounded-2xl px-4 py-3 text-left shadow-glow">
+              <p className="text-2xl font-extrabold text-white">16</p>
+              <p className="text-xs text-slate-300">działów kursu</p>
+            </div>
+            <div className="glass absolute bottom-4 right-0 rounded-2xl px-4 py-3 text-left shadow-glow-magenta">
+              <p className="text-2xl font-extrabold text-white">100%</p>
+              <p className="text-xs text-slate-300">zakres matury</p>
+            </div>
           </div>
         </div>
       </div>

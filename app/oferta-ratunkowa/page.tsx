@@ -4,9 +4,9 @@ import { PricingTiers } from '@/components/shop/PricingTiers';
 import { PromoCountdown } from '@/components/shop/PromoCountdown';
 
 export const metadata: Metadata = {
-  title: 'Pakiet Ratunkowy — 7 tygodni do matury',
+  title: 'Pakiet Ratunkowy — ostatnia prosta przed maturą',
   description:
-    'Ostatnia szansa przed maturą z fizyki. Wybierz Pakiet Ratunkowy i uratuj swój wynik w ostatnich tygodniach nauki.',
+    'Nadrób zaległości z fizyki przed maturą. Wybierz Pakiet Ratunkowy i uratuj swój wynik — nawet jeśli zaczynasz późno.',
   alternates: { canonical: '/oferta-ratunkowa' },
 };
 
@@ -33,11 +33,11 @@ export default function OfertaRatunkowaPage() {
         <h1 className="mx-auto mt-6 max-w-3xl font-display text-4xl font-extrabold leading-[1.05] sm:text-5xl md:text-6xl">
           Pakiet Ratunkowy
           <br />
-          <span className="text-gradient">na 7 tygodni przed maturą</span>
+          <span className="text-gradient">na ostatniej prostej przed maturą</span>
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg text-slate-300/85">
-          Obejrzyj krótkie wideo i dowiedz się, jak w ostatnich tygodniach
-          uratować wynik z fizyki.
+          Obejrzyj krótkie wideo i dowiedz się, jak szybko nadrobić fizykę i
+          uratować swój wynik na maturze.
         </p>
 
         {/* Placeholder VSL */}
