@@ -31,7 +31,7 @@ const COURSE_SLUGS = [
 ];
 
 /**
- * 16 działów kursu. ID nadawane po kolejności 1..16 — naprawia bug z oryginału,
+ * 16 działów kursu. ID nadawane po kolejności 1..16 - naprawia bug z oryginału,
  * gdzie Grawitacja i Elektrostatyka miały ten sam buyAccess('9').
  */
 export const COURSES: Course[] = (rawCourses as Omit<Course, 'slug'>[]).map(
@@ -106,7 +106,7 @@ export const PLANS: Plan[] = [
     cta: 'Wybieram Diamond',
     features: [
       'Wszystko z pakietu Gold',
-      'Zajęcia indywidualne 1:1 — 1h tygodniowo',
+      'Zajęcia indywidualne 1:1 - 1h tygodniowo',
       'Stały kontakt i wsparcie',
       'Plan nauki dopasowany do Twoich braków',
     ],

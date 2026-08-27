@@ -10,7 +10,7 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: 'Fizyka Statkiem — Kursy fizyki online do matury',
+    default: 'Fizyka Statkiem - Kursy fizyki online do matury',
     template: '%s | Fizyka Statkiem',
   },
   description: SITE.description,
@@ -32,13 +32,13 @@ export const metadata: Metadata = {
     locale: 'pl_PL',
     url: SITE.url,
     siteName: SITE.name,
-    title: 'Fizyka Statkiem — Kursy fizyki online do matury',
+    title: 'Fizyka Statkiem - Kursy fizyki online do matury',
     description: SITE.description,
     images: [{ url: SITE.ogImage, width: 1200, height: 630, alt: SITE.name }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fizyka Statkiem — Kursy fizyki online',
+    title: 'Fizyka Statkiem - Kursy fizyki online',
     description: SITE.description,
     images: [SITE.ogImage],
   },
@@ -70,8 +70,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pl" className={`${inter.variable} ${poppins.variable}`}>
-      <body>
+    <html lang="pl" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}

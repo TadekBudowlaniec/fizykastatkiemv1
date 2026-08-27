@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     t.metaMatura ||
     `${t.name} na maturze z fizyki: wymagania CKE, typowe zadania i strategia. Poziom podstawowy i rozszerzony.`;
   return {
-    title: `Matura z fizyki: ${t.name} — wymagania i zadania`,
+    title: `Matura z fizyki: ${t.name} - wymagania i zadania`,
     description: desc,
     keywords: `matura ${t.name.toLowerCase()}, ${t.name.toLowerCase()} matura, matura z fizyki, fizyka rozszerzona`,
     alternates: { canonical: `${SITE.url}/matura-z-fizyki/${t.slug}/` },
@@ -158,7 +158,7 @@ export default async function MaturaPage({ params }: Params) {
           <RelatedGrid>
             <RelatedCard
               kicker="Teoria i wzory"
-              title={`${t.name} — teoria`}
+              title={`${t.name} - teoria`}
               desc={`Definicje, prawa i wzory z ${t.dopelniacz}.`}
               href={`/fizyka/${t.slug}`}
             />

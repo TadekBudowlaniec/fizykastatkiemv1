@@ -24,7 +24,7 @@ const reviews = [
     initials: 'F',
     color: 'from-ocean-500 to-brand-600',
     image: `${SUPA}/Filip.jpg`,
-    text: 'Filmiki tłumaczą wszystko prościej niż w szkole. Zadania z rozwiązaniami to złoto — w końcu wiedziałem, gdzie robię błędy.',
+    text: 'Filmiki tłumaczą wszystko prościej niż w szkole. Zadania z rozwiązaniami to złoto - w końcu wiedziałem, gdzie robię błędy.',
   },
   {
     name: 'Daria',
@@ -32,7 +32,7 @@ const reviews = [
     initials: 'D',
     color: 'from-magenta-500 to-brand-600',
     image: `${SUPA}/Daria.jpg`,
-    text: 'Najlepsza inwestycja przed maturą. PDF-y wydrukowane, obejrzane wideo, arkusze rozwiązane — i wynik, o jakim marzyłam.',
+    text: 'Najlepsza inwestycja przed maturą. PDF-y wydrukowane, obejrzane wideo, arkusze rozwiązane - i wynik, o jakim marzyłam.',
   },
 ];
 
@@ -68,7 +68,7 @@ export function Testimonials() {
         <SectionHeading
           eyebrow="Owoce współpracy"
           title="Prawdziwe wiadomości od naszych uczniów"
-          subtitle="Screeny prosto z telefonu — kliknij, aby powiększyć i przeczytać."
+          subtitle="Screeny prosto z telefonu - kliknij, aby powiększyć i przeczytać."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {reviews.map((r, i) => (
@@ -129,7 +129,7 @@ export function Testimonials() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={zoom}
-            alt="Opinia ucznia — powiększenie"
+            alt="Opinia ucznia - powiększenie"
             className="max-h-[90vh] max-w-[92vw] rounded-2xl shadow-2xl sm:max-w-md"
             onClick={(e) => e.stopPropagation()}
           />

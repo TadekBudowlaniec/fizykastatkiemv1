@@ -108,7 +108,7 @@ export default function PlanerPage() {
     return (
       <AppHero
         title="Twój planer nauki do matury 🧭"
-        subtitle="Podaj e-mail — wyślemy Ci magiczny link, który otworzy Twój spersonalizowany planer."
+        subtitle="Podaj e-mail - wyślemy Ci magiczny link, który otworzy Twój spersonalizowany planer."
         breadcrumb={[
           { label: 'Start', href: '/' },
           { label: 'Planer', href: '/planer' },
@@ -149,7 +149,7 @@ export default function PlanerPage() {
     <>
       <AppHero
         title="Twój planer nauki 🧭"
-        subtitle={`Cel: matura z fizyki — ${examStr}. Krok po kroku, aż do wyniku.`}
+        subtitle={`Cel: matura z fizyki - ${examStr}. Krok po kroku, aż do wyniku.`}
         breadcrumb={[
           { label: 'Start', href: '/' },
           { label: 'Planer', href: '/planer' },

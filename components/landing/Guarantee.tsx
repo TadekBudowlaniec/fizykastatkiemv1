@@ -17,7 +17,7 @@ export function Guarantee() {
                 </h2>
                 <p className="mt-2 max-w-2xl text-muted">
                   Przerób cały kurs, rozwiąż zadania i zdawaj według planera.
-                  Jeśli mimo to nie zdasz matury — dostajesz{' '}
+                  Jeśli mimo to nie zdasz matury - dostajesz{' '}
                   <strong className="text-ink">
                     kolejny rok dostępu za darmo
                   </strong>

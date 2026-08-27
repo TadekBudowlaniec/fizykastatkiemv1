@@ -13,7 +13,7 @@ export const SITE = {
   },
 } as const;
 
-/** Publiczne (bezpieczne) klucze — fallback, gdy brak zmiennych env. */
+/** Publiczne (bezpieczne) klucze - fallback, gdy brak zmiennych env. */
 export const PUBLIC_ENV = {
   supabaseUrl:
     process.env.NEXT_PUBLIC_SUPABASE_URL ||

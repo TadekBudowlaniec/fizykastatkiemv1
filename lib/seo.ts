@@ -1,4 +1,4 @@
-// Loadery treści SEO — czytają te same źródła co seo/generate.js.
+// Loadery treści SEO - czytają te same źródła co seo/generate.js.
 // Dane statyczne (import JSON) => pełne SSG w Next.js.
 import batch1 from '@/seo/content/batch1.json';
 import batch2 from '@/seo/content/batch2.json';

@@ -103,7 +103,7 @@ export async function upsertUserTask(
   const { error } = await supabase
     .from('user_tasks')
     .upsert(payload, { onConflict: 'user_id,task_id' });
-  // Fallback: schema bez completed_at (PGRST204) — powtórz bez tej kolumny
+  // Fallback: schema bez completed_at (PGRST204) - powtórz bez tej kolumny
   if (error) {
     if (String(error.code) === 'PGRST204') {
       const { user_id, task_id, status: st } = payload;

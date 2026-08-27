@@ -14,7 +14,7 @@ const desc =
   'Korepetycje z fizyki online w całej Polsce. Indywidualne lekcje 1:1, przygotowanie do matury podstawowej i rozszerzonej. Wybierz swoje miasto.';
 
 export const metadata: Metadata = {
-  title: 'Korepetycje z fizyki online — cała Polska | matura i liceum',
+  title: 'Korepetycje z fizyki online - cała Polska | matura i liceum',
   description: desc,
   keywords: 'korepetycje z fizyki online, korepetycje fizyka, matura fizyka',
   alternates: { canonical: `${SITE.url}/korepetycje-z-fizyki/` },
@@ -32,7 +32,7 @@ export default function KorepetycjeHub() {
       <JsonLd data={breadcrumbLd(crumbs)} />
       <SeoHero
         eyebrow="Korepetycje z fizyki online"
-        title="Korepetycje z fizyki online — cała Polska"
+        title="Korepetycje z fizyki online - cała Polska"
         intro="Uczymy fizyki online w całym kraju. Indywidualne lekcje 1:1, kurs maturalny i baza zadań z rozwiązaniami. Wybierz swoje miasto albo od razu sprawdź ofertę."
         crumbs={crumbs}
       />

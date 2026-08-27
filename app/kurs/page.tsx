@@ -68,7 +68,7 @@ export default function DashboardPage() {
                 Moduł „Tutaj zacznij”
               </h3>
               <p className="relative mt-2 max-w-sm text-slate-300/85">
-                Darmowe lekcje wprowadzające — jak uczyć się fizyki skutecznie i
+                Darmowe lekcje wprowadzające - jak uczyć się fizyki skutecznie i
                 jak korzystać z platformy.
               </p>
               <span className="relative mt-4 inline-flex items-center gap-1.5 font-semibold text-white">

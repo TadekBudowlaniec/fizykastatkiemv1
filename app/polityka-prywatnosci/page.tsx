@@ -5,7 +5,7 @@ import { Container } from '@/components/ui/Container';
 export const metadata: Metadata = {
   title: 'Polityka prywatności',
   description:
-    'Polityka prywatności i plików cookies fizykastatkiem.pl — zasady przetwarzania danych osobowych zgodnie z RODO.',
+    'Polityka prywatności i plików cookies fizykastatkiem.pl - zasady przetwarzania danych osobowych zgodnie z RODO.',
   alternates: { canonical: '/polityka-prywatnosci' },
 };
 
@@ -63,7 +63,7 @@ export default function PolitykaPage() {
             <p>Twoje dane osobowe przetwarzane są w następujących celach:</p>
             <ol>
               <li>
-                Świadczenie usług drogą elektroniczną (Konto Użytkownika) – w
+                Świadczenie usług drogą elektroniczną (Konto Użytkownika) - w
                 celu umożliwienia Ci rejestracji, logowania oraz dostępu do
                 zakupionych kursów.
                 <br />
@@ -73,7 +73,7 @@ export default function PolitykaPage() {
                 </em>
               </li>
               <li>
-                Realizacja zamówień (Sprzedaż) – w celu obsłużenia procesu zakupu
+                Realizacja zamówień (Sprzedaż) - w celu obsłużenia procesu zakupu
                 kursu oraz przyjęcia płatności.
                 <br />
                 <em>
@@ -82,7 +82,7 @@ export default function PolitykaPage() {
                 </em>
               </li>
               <li>
-                Realizacja obowiązków prawnych – np. wystawianie
+                Realizacja obowiązków prawnych - np. wystawianie
                 faktur/rachunków oraz prowadzenie księgowości.
                 <br />
                 <em>
@@ -91,7 +91,7 @@ export default function PolitykaPage() {
                 </em>
               </li>
               <li>
-                Komunikacja techniczna i systemowa – wysyłanie powiadomień
+                Komunikacja techniczna i systemowa - wysyłanie powiadomień
                 dotyczących Twojego konta (np. potwierdzenie rejestracji, reset
                 hasła, potwierdzenie zakupu).
                 <br />
@@ -101,7 +101,7 @@ export default function PolitykaPage() {
                 </em>
               </li>
               <li>
-                Ustalenie, dochodzenie lub obrona przed roszczeniami – w celach
+                Ustalenie, dochodzenie lub obrona przed roszczeniami - w celach
                 archiwalnych i dowodowych.
                 <br />
                 <em>
@@ -119,31 +119,31 @@ export default function PolitykaPage() {
             </p>
             <ol>
               <li>
-                Netlify (Netlify, Inc., USA) – dostawca usług hostingowych
+                Netlify (Netlify, Inc., USA) - dostawca usług hostingowych
                 (serwera), na którym znajduje się strona. Netlify może
                 przetwarzać dane takie jak adres IP w logach serwera w celu
                 zapewnienia bezpieczeństwa i stabilności strony.
               </li>
               <li>
-                Supabase (Supabase, Inc., USA/Singapur) – dostawca bazy danych
+                Supabase (Supabase, Inc., USA/Singapur) - dostawca bazy danych
                 oraz systemu autoryzacji. To tutaj przechowywane są Twoje dane
                 logowania (e-mail, zaszyfrowane hasło) oraz informacje o Twoim
                 koncie.
               </li>
               <li>
-                Brevo (dawniej Sendinblue, Francja) – dostawca systemu
+                Brevo (dawniej Sendinblue, Francja) - dostawca systemu
                 mailingowego. Twój adres e-mail jest przekazywany do Brevo
                 wyłącznie w celu wysyłki wiadomości transakcyjnych (np. link
                 aktywacyjny, reset hasła) niezbędnych do funkcjonowania serwisu.
               </li>
               <li>
-                Stripe (Stripe, Inc., USA/Irlandia) – operator płatności. W
+                Stripe (Stripe, Inc., USA/Irlandia) - operator płatności. W
                 przypadku zakupu kursu, dane niezbędne do realizacji transakcji
                 są przetwarzane przez Stripe. Administrator nie przechowuje
                 pełnych danych Twojej karty płatniczej.
               </li>
               <li>
-                Biuro rachunkowe / System księgowy – podmioty wspierające
+                Biuro rachunkowe / System księgowy - podmioty wspierające
                 Administratora w realizacji obowiązków podatkowych (jeśli
                 dotyczy).
               </li>
@@ -167,7 +167,7 @@ export default function PolitykaPage() {
               <li>Prawo dostępu do treści swoich danych.</li>
               <li>Prawo do sprostowania (poprawiania) danych.</li>
               <li>
-                Prawo do usunięcia danych (prawo do bycia zapomnianym) – w
+                Prawo do usunięcia danych (prawo do bycia zapomnianym) - w
                 przypadkach przewidzianych przez prawo.
               </li>
               <li>Prawo do ograniczenia przetwarzania danych.</li>

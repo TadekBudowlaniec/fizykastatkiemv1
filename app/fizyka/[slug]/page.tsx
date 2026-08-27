@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     t.metaTeoria ||
     `${t.name}: teoria, wzory i definicje. Wytłumaczenie krok po kroku dla licealistów i maturzystów.`;
   return {
-    title: `${t.name} — teoria, wzory i definicje | Fizyka`,
+    title: `${t.name} - teoria, wzory i definicje | Fizyka`,
     description: desc,
     keywords: `${t.name.toLowerCase()}, ${t.name.toLowerCase()} wzory, ${t.name.toLowerCase()} teoria, fizyka, matura`,
     alternates: { canonical: `${SITE.url}/fizyka/${t.slug}/` },
@@ -48,13 +48,13 @@ export default async function TeoriaPage({ params }: Params) {
   const crumbs = [
     { name: 'Strona główna', url: '/' },
     { name: 'Baza wiedzy', url: '/baza-wiedzy/' },
-    { name: `${t.name} — teoria` },
+    { name: `${t.name} - teoria` },
   ];
 
   const article = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `${t.name} — teoria i wzory`,
+    headline: `${t.name} - teoria i wzory`,
     inLanguage: 'pl',
     description: plain(t.metaTeoria || t.intro),
     author: { '@type': 'Organization', name: SITE.name },
@@ -74,7 +74,7 @@ export default async function TeoriaPage({ params }: Params) {
       <JsonLd data={[breadcrumbLd(crumbs), article, faqLd(t.faqTeoria ?? [])].filter(Boolean) as object[]} />
       <SeoHero
         eyebrow="Teoria fizyki"
-        title={`${t.name} — teoria, wzory i definicje`}
+        title={`${t.name} - teoria, wzory i definicje`}
         intro={t.intro}
         crumbs={crumbs}
       >

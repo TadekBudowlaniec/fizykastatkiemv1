@@ -59,9 +59,9 @@ export function generatePlanRows(userId: string, knownTopicIds: number[]): PlanR
   for (const t of STUDY_TOPICS) {
     if (known.has(t.id)) continue;
     queue.push({ topic: t.name, type: 'video', desc: `Obejrzyj lekcje wideo: ${t.name}` });
-    queue.push({ topic: t.name, type: 'etap_1', desc: `Przerób PDF — Etap 1: ${t.name}` });
-    queue.push({ topic: t.name, type: 'etap_2', desc: `Przerób PDF — Etap 2: ${t.name}` });
-    queue.push({ topic: t.name, type: 'etap_3', desc: `Zadania — Etap 3: ${t.name}` });
+    queue.push({ topic: t.name, type: 'etap_1', desc: `Przerób PDF - Etap 1: ${t.name}` });
+    queue.push({ topic: t.name, type: 'etap_2', desc: `Przerób PDF - Etap 2: ${t.name}` });
+    queue.push({ topic: t.name, type: 'etap_3', desc: `Zadania - Etap 3: ${t.name}` });
   }
 
   const rows: PlanRow[] = [];
@@ -75,7 +75,7 @@ export function generatePlanRows(userId: string, knownTopicIds: number[]): PlanR
         scheduled_date: ymd(d),
         topic_name: 'Odpoczynek',
         activity_type: 'rest',
-        description: 'Dzień wolny 🌴 — naładuj baterie.',
+        description: 'Dzień wolny 🌴 - naładuj baterie.',
         is_completed: false,
       });
     }

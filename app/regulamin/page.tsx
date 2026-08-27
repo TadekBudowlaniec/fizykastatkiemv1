@@ -5,7 +5,7 @@ import { Container } from '@/components/ui/Container';
 export const metadata: Metadata = {
   title: 'Regulamin',
   description:
-    'Regulamin sklepu internetowego i platformy kursowej fizykastatkiem.pl — zasady zakupu kursów, płatności, licencji oraz Gwarancji Zdanej Matury.',
+    'Regulamin sklepu internetowego i platformy kursowej fizykastatkiem.pl - zasady zakupu kursów, płatności, licencji oraz Gwarancji Zdanej Matury.',
   alternates: { canonical: '/regulamin' },
 };
 
@@ -61,38 +61,38 @@ export default function RegulaminPage() {
 
             <h3>§2 Definicje</h3>
             <p>
-              <strong>Sprzedawca</strong> – Cezary Prusak, zam. ul. Pszenna
+              <strong>Sprzedawca</strong> - Cezary Prusak, zam. ul. Pszenna
               4/25, Lublin.
             </p>
             <p>
-              <strong>Klient / Użytkownik</strong> – osoba fizyczna, osoba prawna
+              <strong>Klient / Użytkownik</strong> - osoba fizyczna, osoba prawna
               lub jednostka organizacyjna dokonująca zakupów w Sklepie.
             </p>
             <p>
-              <strong>Konsument</strong> – Klient będący osobą fizyczną
+              <strong>Konsument</strong> - Klient będący osobą fizyczną
               dokonującą zakupów niezwiązanych bezpośrednio z jej działalnością
               gospodarczą lub zawodową.
             </p>
             <p>
-              <strong>Sklep / Platforma</strong> – serwis internetowy dostępny
+              <strong>Sklep / Platforma</strong> - serwis internetowy dostępny
               pod adresem https://fizykastatkiem.pl.
             </p>
             <p>
-              <strong>Produkt / Produkt Elektroniczny</strong> – treści cyfrowe
+              <strong>Produkt / Produkt Elektroniczny</strong> - treści cyfrowe
               (kursy wideo, materiały PDF, dostęp do platformy edukacyjnej)
               dostępne w Sklepie, będące przedmiotem Umowy Sprzedaży.
             </p>
             <p>
-              <strong>Konto Użytkownika</strong> – indywidualny panel dostępny
+              <strong>Konto Użytkownika</strong> - indywidualny panel dostępny
               dla Klienta po zalogowaniu, w którym udostępniane są zakupione
               Produkty.
             </p>
             <p>
-              <strong>Operator Płatności</strong> – serwis Stripe (Stripe, Inc.),
+              <strong>Operator Płatności</strong> - serwis Stripe (Stripe, Inc.),
               za pośrednictwem którego realizowane są płatności.
             </p>
             <p>
-              <strong>Umowa Sprzedaży</strong> – umowa zawarta na odległość
+              <strong>Umowa Sprzedaży</strong> - umowa zawarta na odległość
               pomiędzy Sprzedawcą a Klientem, której przedmiotem jest zakup
               Produktu.
             </p>

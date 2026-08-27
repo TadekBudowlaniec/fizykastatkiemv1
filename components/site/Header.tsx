@@ -27,7 +27,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        'sticky top-0 z-[500] transition-all duration-300',
+        'sticky top-0 z-[500] text-white transition-all duration-300',
         scrolled
           ? 'bg-navy-950/95 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(0,0,0,0.5)] ring-1 ring-white/5'
           : 'bg-navy-950'
@@ -62,7 +62,7 @@ export function Header() {
                   'rounded-full px-4 py-2 text-sm font-semibold transition-colors',
                   active
                     ? 'bg-white/15 text-white'
-                    : 'text-white/90 hover:bg-white/10 hover:text-white'
+                    : 'text-white hover:bg-white/10'
                 )}
               >
                 {l.label}
@@ -75,7 +75,7 @@ export function Header() {
         <div className="hidden items-center gap-2 lg:flex">
           {!loading && user ? (
             <>
-              <Button href="/kurs" variant="ghost" size="sm" className="text-slate-100 hover:text-white hover:bg-white/10">
+              <Button href="/kurs" variant="ghost" size="sm" className="!text-white hover:bg-white/10">
                 Mój kurs
               </Button>
               <Button href="/user" variant="light" size="sm">
@@ -83,14 +83,14 @@ export function Header() {
               </Button>
               <button
                 onClick={() => signOut()}
-                className="rounded-full px-3 py-2 text-sm font-semibold text-slate-200 transition-colors hover:text-white"
+                className="rounded-full px-3 py-2 text-sm font-semibold text-white/80 transition-colors hover:text-white"
               >
                 Wyloguj
               </button>
             </>
           ) : (
             <>
-              <Button href="/login" variant="ghost" size="sm" className="text-slate-100 hover:text-white hover:bg-white/10">
+              <Button href="/login" variant="ghost" size="sm" className="!text-white hover:bg-white/10">
                 Zaloguj
               </Button>
               <Button href="/cennik" variant="gradient" size="sm">

@@ -3,13 +3,13 @@
     "slug": "prad-elektryczny",
     "name": "Prąd elektryczny",
     "dopelniacz": "prądu elektrycznego",
-    "metaTeoria": "Prąd elektryczny – teoria do matury: prawo Ohma, opór, praca i moc prądu, prawa Kirchhoffa, łączenie oporników. Wzory, definicje i przykłady.",
+    "metaTeoria": "Prąd elektryczny - teoria do matury: prawo Ohma, opór, praca i moc prądu, prawa Kirchhoffa, łączenie oporników. Wzory, definicje i przykłady.",
     "metaMatura": "Prąd elektryczny na maturze z fizyki (CKE): zadania z prawa Ohma, mocy, oporu i obwodów. Sprawdzone strategie, schematy i pełne rozwiązania.",
-    "intro": "Prąd elektryczny to uporządkowany ruch ładunków elektrycznych. Ten dział obejmuje natężenie prądu, prawo Ohma, opór elektryczny, pracę i moc prądu oraz prawa Kirchhoffa. To jeden z najczęściej sprawdzanych obszarów na maturze z fizyki – zarówno na poziomie podstawowym, jak i rozszerzonym.",
+    "intro": "Prąd elektryczny to uporządkowany ruch ładunków elektrycznych. Ten dział obejmuje natężenie prądu, prawo Ohma, opór elektryczny, pracę i moc prądu oraz prawa Kirchhoffa. To jeden z najczęściej sprawdzanych obszarów na maturze z fizyki - zarówno na poziomie podstawowym, jak i rozszerzonym.",
     "theory": [
       {
         "heading": "Natężenie prądu i ładunek",
-        "html": "<p>Prąd elektryczny to uporządkowany ruch nośników ładunku (w metalach – elektronów swobodnych). Miarą prądu jest <strong>natężenie</strong>, czyli ładunek przepływający przez przekrój przewodnika w jednostce czasu: \\( I = \\frac{q}{t} \\). Jednostką natężenia jest amper (A), a 1 A = 1 C/s.</p><ul><li>Umowny kierunek prądu jest zgodny z ruchem ładunków dodatnich, czyli przeciwny do ruchu elektronów.</li><li>Prąd stały (DC) ma stały kierunek i wartość, prąd zmienny (AC) okresowo zmienia kierunek.</li><li>Warunkiem przepływu prądu jest zamknięty obwód oraz różnica potencjałów (napięcie).</li></ul>"
+        "html": "<p>Prąd elektryczny to uporządkowany ruch nośników ładunku (w metalach - elektronów swobodnych). Miarą prądu jest <strong>natężenie</strong>, czyli ładunek przepływający przez przekrój przewodnika w jednostce czasu: \\( I = \\frac{q}{t} \\). Jednostką natężenia jest amper (A), a 1 A = 1 C/s.</p><ul><li>Umowny kierunek prądu jest zgodny z ruchem ładunków dodatnich, czyli przeciwny do ruchu elektronów.</li><li>Prąd stały (DC) ma stały kierunek i wartość, prąd zmienny (AC) okresowo zmienia kierunek.</li><li>Warunkiem przepływu prądu jest zamknięty obwód oraz różnica potencjałów (napięcie).</li></ul>"
       },
       {
         "heading": "Prawo Ohma i opór elektryczny",
@@ -17,7 +17,7 @@
       },
       {
         "heading": "Praca i moc prądu elektrycznego",
-        "html": "<p>Przepływający prąd wykonuje pracę kosztem energii pola elektrycznego: \\( W = U \\cdot I \\cdot t \\). Szybkość wykonywania pracy to <strong>moc</strong>: \\( P = U \\cdot I \\). Korzystając z prawa Ohma otrzymujemy też \\( P = I^2 R = \\frac{U^2}{R} \\).</p><ul><li>Jednostką pracy jest dżul (J), a często używamy kilowatogodziny: 1 kWh = 3,6 MJ.</li><li>Ciepło wydzielone na oporniku opisuje prawo Joule'a–Lenza: \\( Q = I^2 R t \\).</li><li>Sprawność urządzenia to stosunek mocy użytecznej do pobranej: \\( \\eta = \\frac{P_{uż}}{P_{pob}} \\).</li></ul>"
+        "html": "<p>Przepływający prąd wykonuje pracę kosztem energii pola elektrycznego: \\( W = U \\cdot I \\cdot t \\). Szybkość wykonywania pracy to <strong>moc</strong>: \\( P = U \\cdot I \\). Korzystając z prawa Ohma otrzymujemy też \\( P = I^2 R = \\frac{U^2}{R} \\).</p><ul><li>Jednostką pracy jest dżul (J), a często używamy kilowatogodziny: 1 kWh = 3,6 MJ.</li><li>Ciepło wydzielone na oporniku opisuje prawo Joule'a-Lenza: \\( Q = I^2 R t \\).</li><li>Sprawność urządzenia to stosunek mocy użytecznej do pobranej: \\( \\eta = \\frac{P_{uż}}{P_{pob}} \\).</li></ul>"
       },
       {
         "heading": "Łączenie oporników",
@@ -34,7 +34,7 @@
       { "name": "Opór przewodnika", "latex": "R = \\rho \\frac{l}{S}", "desc": "Zależność oporu od materiału, długości i przekroju." },
       { "name": "Moc prądu", "latex": "P = U \\cdot I = I^2 R = \\frac{U^2}{R}", "desc": "Trzy równoważne postacie wzoru na moc." },
       { "name": "Praca prądu", "latex": "W = U \\cdot I \\cdot t", "desc": "Energia przekazana przez prąd w czasie t." },
-      { "name": "Prawo Joule'a–Lenza", "latex": "Q = I^2 R t", "desc": "Ciepło wydzielone na oporniku." },
+      { "name": "Prawo Joule'a-Lenza", "latex": "Q = I^2 R t", "desc": "Ciepło wydzielone na oporniku." },
       { "name": "Opór szeregowy", "latex": "R_s = R_1 + R_2 + \\dots", "desc": "Opory dodają się w połączeniu szeregowym." },
       { "name": "Opór równoległy", "latex": "\\frac{1}{R_r} = \\frac{1}{R_1} + \\frac{1}{R_2}", "desc": "Odwrotności oporów dodają się równolegle." },
       { "name": "Prawo Ohma dla obwodu", "latex": "I = \\frac{\\varepsilon}{R + r}", "desc": "Natężenie z SEM i oporem wewnętrznym." },
@@ -42,7 +42,7 @@
     ],
     "definitions": [
       { "term": "Natężenie prądu", "def": "Wielkość fizyczna równa ładunkowi przepływającemu przez przekrój przewodnika w jednostce czasu, mierzona w amperach." },
-      { "term": "Opór elektryczny", "def": "Miara przeciwstawiania się przewodnika przepływowi prądu; stosunek napięcia do natężenia, jednostka – om." },
+      { "term": "Opór elektryczny", "def": "Miara przeciwstawiania się przewodnika przepływowi prądu; stosunek napięcia do natężenia, jednostka - om." },
       { "term": "Opór właściwy", "def": "Stała materiałowa charakteryzująca zdolność substancji do przewodzenia prądu, oznaczana ρ, w jednostkach Ω·m." },
       { "term": "Siła elektromotoryczna", "def": "Praca wykonana przez źródło przy przeniesieniu jednostkowego ładunku w całym obwodzie; napięcie źródła bez obciążenia." },
       { "term": "Opór wewnętrzny", "def": "Opór samego źródła prądu, powodujący spadek napięcia na zaciskach pod obciążeniem." },
@@ -60,7 +60,7 @@
       ],
       "strategia": [
         "Zawsze najpierw narysuj i uprość schemat obwodu, redukując opory szeregowe i równoległe do zastępczego.",
-        "Pilnuj jednostek SI – zamieniaj mΩ, kΩ, mA na podstawowe przed podstawieniem.",
+        "Pilnuj jednostek SI - zamieniaj mΩ, kΩ, mA na podstawowe przed podstawieniem.",
         "Przy obwodach z SEM pamiętaj o oporze wewnętrznym i wzorze U = ε - I·r."
       ]
     },
@@ -74,7 +74,7 @@
       { "q": "Jak liczyć opór zastępczy obwodu mieszanego?", "a": "Rozkładaj obwód na fragmenty czysto szeregowe i czysto równoległe, licz je osobno, a potem łącz wyniki, idąc od najgłębiej zagnieżdżonych elementów ku zaciskom." },
       { "q": "Jak wyznaczyć SEM i opór wewnętrzny na maturze?", "a": "Zapisz U = ε - I·r dla dwóch różnych prądów i rozwiąż układ dwóch równań. Z wykresu U(I) ε to punkt przecięcia z osią, a r to nachylenie prostej." },
       { "q": "Jak obliczyć koszt zużytej energii?", "a": "Oblicz energię w kWh (W = P·t z mocą w kW i czasem w h), a następnie pomnóż przez cenę za kWh. Uważaj na zamianę watów na kilowaty." },
-      { "q": "Czy mogę używać P = U²/R zawsze?", "a": "Tak, jeśli opór jest stały. Wszystkie trzy postacie wzoru na moc są równoważne dla elementu omowego – wybierz tę, w której masz dane wielkości." }
+      { "q": "Czy mogę używać P = U²/R zawsze?", "a": "Tak, jeśli opór jest stały. Wszystkie trzy postacie wzoru na moc są równoważne dla elementu omowego - wybierz tę, w której masz dane wielkości." }
     ],
     "subtopics": [
       {
@@ -130,7 +130,7 @@
             "tresc": "Przez opornik o oporze 10 Ω płynie prąd 2 A przez 5 minut. Oblicz ciepło wydzielone na oporniku.",
             "steps": [
               "Zamieniamy czas: \\( t = 5\\ \\text{min} = 300\\ \\text{s} \\).",
-              "Stosujemy prawo Joule'a–Lenza: \\( Q = I^2 R t = 2^2 \\cdot 10 \\cdot 300 \\).",
+              "Stosujemy prawo Joule'a-Lenza: \\( Q = I^2 R t = 2^2 \\cdot 10 \\cdot 300 \\).",
               "Liczymy: \\( 4 \\cdot 10 \\cdot 300 = 12000\\ \\text{J} \\).",
               "Czyli \\( Q = 12\\ \\text{kJ} \\)."
             ],
@@ -212,17 +212,17 @@
     "slug": "magnetyzm",
     "name": "Magnetyzm",
     "dopelniacz": "magnetyzmu",
-    "metaTeoria": "Magnetyzm – teoria do matury: pole magnetyczne, siła Lorentza, siła elektrodynamiczna, pole przewodnika i solenoidu. Wzory, definicje, przykłady.",
+    "metaTeoria": "Magnetyzm - teoria do matury: pole magnetyczne, siła Lorentza, siła elektrodynamiczna, pole przewodnika i solenoidu. Wzory, definicje, przykłady.",
     "metaMatura": "Magnetyzm na maturze z fizyki (CKE): zadania z siły Lorentza, siły na przewodnik i ruchu cząstki w polu. Strategie i pełne rozwiązania krok po kroku.",
     "intro": "Magnetyzm opisuje pole magnetyczne oraz jego oddziaływanie z prądem i poruszającymi się ładunkami. W tym dziale poznasz indukcję magnetyczną, siłę Lorentza, siłę elektrodynamiczną oraz pole magnetyczne przewodników i solenoidów. To kluczowy temat maturalny na poziomie rozszerzonym.",
     "theory": [
       {
         "heading": "Pole magnetyczne i indukcja",
-        "html": "<p>Pole magnetyczne wytwarzają magnesy oraz poruszające się ładunki (prądy). Wielkością wektorową opisującą pole jest <strong>indukcja magnetyczna</strong> \\( \\vec{B} \\), mierzona w teslach (T). Linie pola wychodzą z bieguna północnego, a wchodzą do południowego.</p><ul><li>Bieguny magnetyczne zawsze występują parami – nie istnieje pojedynczy monopol magnetyczny.</li><li>Pole jednorodne ma w każdym punkcie te same wartość i kierunek.</li><li>Indukcja \\( \\vec{B} \\) jest analogiem natężenia pola elektrycznego, ale działa na prąd i ruchome ładunki.</li></ul>"
+        "html": "<p>Pole magnetyczne wytwarzają magnesy oraz poruszające się ładunki (prądy). Wielkością wektorową opisującą pole jest <strong>indukcja magnetyczna</strong> \\( \\vec{B} \\), mierzona w teslach (T). Linie pola wychodzą z bieguna północnego, a wchodzą do południowego.</p><ul><li>Bieguny magnetyczne zawsze występują parami - nie istnieje pojedynczy monopol magnetyczny.</li><li>Pole jednorodne ma w każdym punkcie te same wartość i kierunek.</li><li>Indukcja \\( \\vec{B} \\) jest analogiem natężenia pola elektrycznego, ale działa na prąd i ruchome ładunki.</li></ul>"
       },
       {
         "heading": "Siła Lorentza",
-        "html": "<p>Na ładunek \\( q \\) poruszający się z prędkością \\( v \\) w polu magnetycznym działa <strong>siła Lorentza</strong>: \\( F = q v B \\sin\\alpha \\), gdzie \\( \\alpha \\) to kąt między prędkością a wektorem indukcji. Siła jest prostopadła do prędkości i do pola.</p><ul><li>Kierunek siły wyznaczamy regułą lewej dłoni lub reguły śruby prawoskrętnej.</li><li>Siła Lorentza nie wykonuje pracy – zmienia tylko kierunek prędkości, nie jej wartość.</li><li>Gdy prędkość jest równoległa do pola (\\( \\alpha = 0 \\)), siła wynosi zero.</li></ul>"
+        "html": "<p>Na ładunek \\( q \\) poruszający się z prędkością \\( v \\) w polu magnetycznym działa <strong>siła Lorentza</strong>: \\( F = q v B \\sin\\alpha \\), gdzie \\( \\alpha \\) to kąt między prędkością a wektorem indukcji. Siła jest prostopadła do prędkości i do pola.</p><ul><li>Kierunek siły wyznaczamy regułą lewej dłoni lub reguły śruby prawoskrętnej.</li><li>Siła Lorentza nie wykonuje pracy - zmienia tylko kierunek prędkości, nie jej wartość.</li><li>Gdy prędkość jest równoległa do pola (\\( \\alpha = 0 \\)), siła wynosi zero.</li></ul>"
       },
       {
         "heading": "Ruch cząstki w polu magnetycznym",
@@ -266,9 +266,9 @@
         "Porównywanie ruchu protonu i elektronu w tym samym polu."
       ],
       "strategia": [
-        "Zacznij od ustalenia kierunków – narysuj wektory v, B i wyznacz F regułą lewej dłoni.",
+        "Zacznij od ustalenia kierunków - narysuj wektory v, B i wyznacz F regułą lewej dłoni.",
         "W ruchu po okręgu przyrównaj siłę Lorentza do siły dośrodkowej m·v²/r.",
-        "Pilnuj kąta α – siła jest maksymalna przy 90° i zerowa przy ruchu równoległym do pola."
+        "Pilnuj kąta α - siła jest maksymalna przy 90° i zerowa przy ruchu równoległym do pola."
       ]
     },
     "faqTeoria": [
@@ -409,7 +409,7 @@
           }
         ],
         "faq": [
-          { "q": "Jak skierowane jest pole wokół przewodnika?", "a": "Linie pola tworzą koncentryczne okręgi wokół przewodnika. Ich zwrot wskazuje reguła prawej dłoni – kciuk wzdłuż prądu, palce wzdłuż pola." }
+          { "q": "Jak skierowane jest pole wokół przewodnika?", "a": "Linie pola tworzą koncentryczne okręgi wokół przewodnika. Ich zwrot wskazuje reguła prawej dłoni - kciuk wzdłuż prądu, palce wzdłuż pola." }
         ]
       }
     ],
@@ -419,21 +419,21 @@
     "slug": "indukcja-elektromagnetyczna",
     "name": "Indukcja elektromagnetyczna",
     "dopelniacz": "indukcji elektromagnetycznej",
-    "metaTeoria": "Indukcja elektromagnetyczna – teoria do matury: prawo Faradaya, reguła Lenza, strumień magnetyczny, SEM indukcji, samoindukcja. Wzory i przykłady.",
+    "metaTeoria": "Indukcja elektromagnetyczna - teoria do matury: prawo Faradaya, reguła Lenza, strumień magnetyczny, SEM indukcji, samoindukcja. Wzory i przykłady.",
     "metaMatura": "Indukcja elektromagnetyczna na maturze (CKE): zadania z prawa Faradaya, SEM indukcji i prądnicy. Strategie i pełne rozwiązania krok po kroku.",
     "intro": "Indukcja elektromagnetyczna to zjawisko powstawania siły elektromotorycznej przy zmianie strumienia magnetycznego. W tym dziale poznasz prawo Faradaya, regułę Lenza, samoindukcję oraz zasadę działania prądnicy i transformatora. To fundament współczesnej elektroenergetyki i ważny temat maturalny.",
     "theory": [
       {
         "heading": "Strumień magnetyczny",
-        "html": "<p>Podstawą indukcji jest <strong>strumień magnetyczny</strong> – miara liczby linii pola przechodzących przez powierzchnię: \\( \\Phi = B S \\cos\\alpha \\), gdzie \\( \\alpha \\) to kąt między wektorem indukcji a normalną do powierzchni. Jednostką jest weber (Wb).</p><ul><li>Strumień jest największy, gdy powierzchnia jest prostopadła do linii pola (\\( \\alpha = 0 \\)).</li><li>Strumień maleje do zera, gdy powierzchnia jest równoległa do linii pola.</li><li>Zmiana strumienia może wynikać ze zmiany B, S lub kąta α.</li></ul>"
+        "html": "<p>Podstawą indukcji jest <strong>strumień magnetyczny</strong> - miara liczby linii pola przechodzących przez powierzchnię: \\( \\Phi = B S \\cos\\alpha \\), gdzie \\( \\alpha \\) to kąt między wektorem indukcji a normalną do powierzchni. Jednostką jest weber (Wb).</p><ul><li>Strumień jest największy, gdy powierzchnia jest prostopadła do linii pola (\\( \\alpha = 0 \\)).</li><li>Strumień maleje do zera, gdy powierzchnia jest równoległa do linii pola.</li><li>Zmiana strumienia może wynikać ze zmiany B, S lub kąta α.</li></ul>"
       },
       {
         "heading": "Prawo Faradaya",
-        "html": "<p><strong>Prawo indukcji Faradaya</strong> mówi, że siła elektromotoryczna indukcji jest równa szybkości zmiany strumienia magnetycznego: \\( \\varepsilon = -\\frac{\\Delta \\Phi}{\\Delta t} \\). Dla cewki o N zwojach: \\( \\varepsilon = -N \\frac{\\Delta \\Phi}{\\Delta t} \\).</p><ul><li>Im szybciej zmienia się strumień, tym większa indukowana SEM.</li><li>SEM powstaje tylko przy zmianie strumienia – pole stałe nie indukuje napięcia.</li><li>Znak minus wynika z reguły Lenza i opisuje kierunek prądu indukcyjnego.</li></ul>"
+        "html": "<p><strong>Prawo indukcji Faradaya</strong> mówi, że siła elektromotoryczna indukcji jest równa szybkości zmiany strumienia magnetycznego: \\( \\varepsilon = -\\frac{\\Delta \\Phi}{\\Delta t} \\). Dla cewki o N zwojach: \\( \\varepsilon = -N \\frac{\\Delta \\Phi}{\\Delta t} \\).</p><ul><li>Im szybciej zmienia się strumień, tym większa indukowana SEM.</li><li>SEM powstaje tylko przy zmianie strumienia - pole stałe nie indukuje napięcia.</li><li>Znak minus wynika z reguły Lenza i opisuje kierunek prądu indukcyjnego.</li></ul>"
       },
       {
         "heading": "Reguła Lenza",
-        "html": "<p><strong>Reguła Lenza</strong> określa kierunek prądu indukcyjnego: prąd płynie tak, by przeciwdziałać przyczynie, która go wywołała. Jest to konsekwencja zasady zachowania energii.</p><ul><li>Gdy strumień rośnie, prąd indukcyjny wytwarza pole przeciwne do narastającego.</li><li>Gdy strumień maleje, prąd podtrzymuje zanikające pole.</li><li>Dzięki regule Lenza nie można uzyskać energii za darmo – trzeba wykonać pracę przeciw siłom hamującym.</li></ul>"
+        "html": "<p><strong>Reguła Lenza</strong> określa kierunek prądu indukcyjnego: prąd płynie tak, by przeciwdziałać przyczynie, która go wywołała. Jest to konsekwencja zasady zachowania energii.</p><ul><li>Gdy strumień rośnie, prąd indukcyjny wytwarza pole przeciwne do narastającego.</li><li>Gdy strumień maleje, prąd podtrzymuje zanikające pole.</li><li>Dzięki regule Lenza nie można uzyskać energii za darmo - trzeba wykonać pracę przeciw siłom hamującym.</li></ul>"
       },
       {
         "heading": "SEM indukcji w przewodniku",
@@ -459,7 +459,7 @@
       { "term": "Siła elektromotoryczna indukcji", "def": "Napięcie powstające w obwodzie wskutek zmiany strumienia magnetycznego, opisane prawem Faradaya." },
       { "term": "Reguła Lenza", "def": "Zasada mówiąca, że prąd indukcyjny przeciwdziała zmianie strumienia, która go wywołała; wynika z zasady zachowania energii." },
       { "term": "Samoindukcja", "def": "Zjawisko indukowania SEM w cewce wskutek zmiany płynącego przez nią prądu." },
-      { "term": "Indukcyjność", "def": "Wielkość L charakteryzująca cewkę, określająca SEM samoindukcji przy danej szybkości zmiany prądu; jednostka – henr." },
+      { "term": "Indukcyjność", "def": "Wielkość L charakteryzująca cewkę, określająca SEM samoindukcji przy danej szybkości zmiany prądu; jednostka - henr." },
       { "term": "Transformator", "def": "Urządzenie zmieniające napięcie prądu zmiennego dzięki indukcji wzajemnej dwóch cewek o różnej liczbie zwojów." }
     ],
     "maturaInfo": {
@@ -475,7 +475,7 @@
       "strategia": [
         "Najpierw ustal, co zmienia strumień: indukcja B, powierzchnia S czy kąt α, i policz ΔΦ.",
         "Stosuj prawo Faradaya z liczbą zwojów N i poprawną jednostką czasu w sekundach.",
-        "Do kierunku prądu używaj reguły Lenza – prąd zawsze przeciwdziała zmianie."
+        "Do kierunku prądu używaj reguły Lenza - prąd zawsze przeciwdziała zmianie."
       ]
     },
     "faqTeoria": [
@@ -487,7 +487,7 @@
     "faqMatura": [
       { "q": "Jak liczyć SEM, gdy zmienia się powierzchnia ramki?", "a": "Policz ΔΦ = B·ΔS (przy stałym B i prostopadłym polu), a potem podziel przez Δt i pomnóż przez liczbę zwojów N." },
       { "q": "Jak wyznaczyć prąd w uzwojeniu transformatora?", "a": "Z zachowania mocy U₁I₁ = U₂I₂ dla transformatora idealnego. Znając napięcia i jeden z prądów, wyliczysz drugi prąd." },
-      { "q": "Jak rozpoznać kierunek prądu w zadaniu?", "a": "Ustal czy strumień rośnie czy maleje, a następnie zastosuj regułę Lenza – prąd wytwarza pole przeciwne do wzrostu lub podtrzymujące spadek." },
+      { "q": "Jak rozpoznać kierunek prądu w zadaniu?", "a": "Ustal czy strumień rośnie czy maleje, a następnie zastosuj regułę Lenza - prąd wytwarza pole przeciwne do wzrostu lub podtrzymujące spadek." },
       { "q": "Czy SEM przewodnika zależy od oporu?", "a": "Nie, SEM = B·l·v zależy tylko od pola, długości i prędkości. Opór wpływa dopiero na natężenie prądu I = ε/R." }
     ],
     "subtopics": [
@@ -626,7 +626,7 @@
     "slug": "optyka-geometryczna",
     "name": "Optyka geometryczna",
     "dopelniacz": "optyki geometrycznej",
-    "metaTeoria": "Optyka geometryczna – teoria do matury: prawo odbicia i załamania, soczewki, zwierciadła, równanie soczewki, powiększenie. Wzory i przykłady.",
+    "metaTeoria": "Optyka geometryczna - teoria do matury: prawo odbicia i załamania, soczewki, zwierciadła, równanie soczewki, powiększenie. Wzory i przykłady.",
     "metaMatura": "Optyka geometryczna na maturze (CKE): zadania z soczewek, zwierciadeł, załamania i całkowitego wewnętrznego odbicia. Strategie i pełne rozwiązania.",
     "intro": "Optyka geometryczna opisuje rozchodzenie się światła za pomocą promieni. W tym dziale poznasz prawo odbicia i załamania, działanie soczewek i zwierciadeł, równanie soczewki, powiększenie oraz całkowite wewnętrzne odbicie. To wdzięczny i często sprawdzany temat maturalny.",
     "theory": [

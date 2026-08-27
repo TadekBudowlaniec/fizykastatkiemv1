@@ -9,7 +9,7 @@ import { SITE } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Korepetycje z fizyki i matematyki',
   description:
-    'Korepetycje z fizyki i matematyki — stacjonarnie w Lublinie i online (Discord + tablica). Indywidualny plan pod maturę i egzamin 8-klasisty.',
+    'Korepetycje z fizyki i matematyki - stacjonarnie w Lublinie i online (Discord + tablica). Indywidualny plan pod maturę i egzamin 8-klasisty.',
   alternates: { canonical: '/korepetycje' },
 };
 
@@ -36,7 +36,7 @@ const logistics = [
   {
     icon: '🎯',
     title: 'Indywidualny plan',
-    desc: 'Matura, egzamin 8-klasisty czy bieżące sprawdziany — dopasowuję tempo i metody pod Twoje potrzeby.',
+    desc: 'Matura, egzamin 8-klasisty czy bieżące sprawdziany - dopasowuję tempo i metody pod Twoje potrzeby.',
   },
 ];
 
@@ -85,7 +85,7 @@ export default function KorepetycjePage() {
                 <span className="text-gradient">proste i logiczne</span>
               </h1>
               <p className="mt-5 max-w-xl text-lg text-slate-300/85">
-                Cześć, jestem Czarek — student III roku informatyki. Pomagam
+                Cześć, jestem Czarek - student III roku informatyki. Pomagam
                 uczniom nie tylko zdać, ale <strong className="text-white">zrozumieć</strong>{' '}
                 materiał. Bez wkuwania, bez stresu.
               </p>

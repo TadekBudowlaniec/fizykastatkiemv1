@@ -120,7 +120,7 @@ export function CourseView({ courseId }: { courseId: number }) {
                 </Button>
                 {!user && (
                   <Button href="/login" variant="outline" size="lg">
-                    Mam już dostęp — zaloguj
+                    Mam już dostęp - zaloguj
                   </Button>
                 )}
               </div>
@@ -149,7 +149,7 @@ export function CourseView({ courseId }: { courseId: number }) {
         }
         subtitle={
           isStart
-            ? 'Zacznij tutaj — wprowadzenie do skutecznej nauki fizyki.'
+            ? 'Zacznij tutaj - wprowadzenie do skutecznej nauki fizyki.'
             : 'Wideo, materiały PDF i zadania z rozwiązaniami w jednym miejscu.'
         }
         breadcrumb={breadcrumb}

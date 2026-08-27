@@ -9,7 +9,7 @@ export function PricingSection() {
         <SectionHeading
           eyebrow="Oferta"
           title="Wybierz pakiet i płyń po swój wynik"
-          subtitle="Najpierw złap całość, potem dopracuj szczegóły. Trzy poziomy wsparcia — od samodzielnej nauki po VIP 1:1."
+          subtitle="Najpierw złap całość, potem dopracuj szczegóły. Trzy poziomy wsparcia - od samodzielnej nauki po VIP 1:1."
         />
         <div className="mx-auto mt-14 max-w-5xl">
           <PricingTiers />

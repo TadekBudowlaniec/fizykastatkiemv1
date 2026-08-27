@@ -24,7 +24,7 @@ export function SqueezeForm() {
       });
       if (error) throw error;
       setStatus('sent');
-      setMsg('Sprawdź skrzynkę — wysłaliśmy link do Twojego planera nauki.');
+      setMsg('Sprawdź skrzynkę - wysłaliśmy link do Twojego planera nauki.');
     } catch {
       setStatus('error');
       setMsg('Nie udało się wysłać. Sprawdź adres e-mail i spróbuj ponownie.');

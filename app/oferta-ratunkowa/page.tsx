@@ -4,9 +4,9 @@ import { PricingTiers } from '@/components/shop/PricingTiers';
 import { PromoCountdown } from '@/components/shop/PromoCountdown';
 
 export const metadata: Metadata = {
-  title: 'Pakiet Ratunkowy — ostatnia prosta przed maturą',
+  title: 'Pakiet Ratunkowy - ostatnia prosta przed maturą',
   description:
-    'Nadrób zaległości z fizyki przed maturą. Wybierz Pakiet Ratunkowy i uratuj swój wynik — nawet jeśli zaczynasz późno.',
+    'Nadrób zaległości z fizyki przed maturą. Wybierz Pakiet Ratunkowy i uratuj swój wynik - nawet jeśli zaczynasz późno.',
   alternates: { canonical: '/oferta-ratunkowa' },
 };
 

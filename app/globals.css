@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================================
-   FIZYKA STATKIEM — Design System v2
+   FIZYKA STATKIEM - Design System v2
    Motyw: "deep ocean" (dramatyczne ciemne hero) + jasne,
    przewiewne sekcje treści. Sygnaturowy gradient violet→magenta
    z oceanicznym akcentem cyan.
@@ -14,7 +14,7 @@
   --color-brand-200: #cbbdff;
   --color-brand-300: #a892ff;
   --color-brand-400: #8a6bff;
-  --color-brand-500: #6b4df6;  /* violet — brand primary */
+  --color-brand-500: #6b4df6;  /* violet - brand primary */
   --color-brand-600: #5636ea;
   --color-brand-700: #4527c2;
   --color-brand-800: #38219c;
@@ -126,7 +126,7 @@ h1, h2, h3, h4, h5 {
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.1;
-  /* Dziedzicz kolor z kontekstu — ciemne sekcje (text-white) dają biel,
+  /* Dziedzicz kolor z kontekstu - ciemne sekcje (text-white) dają biel,
      jasne sekcje dziedziczą ink z body. Nie wymuszamy ciemnego. */
   color: inherit;
 }
@@ -213,7 +213,7 @@ a { color: inherit; text-decoration: none; }
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
 }
 
-/* Prose — treść lekcji, blog, SEO, dokumenty prawne */
+/* Prose - treść lekcji, blog, SEO, dokumenty prawne */
 .prose-fs {
   color: var(--color-slate);
   font-size: 1.05rem;

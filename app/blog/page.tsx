@@ -14,7 +14,7 @@ const desc =
   'Blog Fizyka Statkiem: jak uczyć się fizyki do matury, jak korzystać z karty wzorów, najczęstsze błędy maturalne i kierunki studiów wymagające fizyki.';
 
 export const metadata: Metadata = {
-  title: 'Blog o fizyce i maturze — porady i plany nauki',
+  title: 'Blog o fizyce i maturze - porady i plany nauki',
   description: desc,
   keywords:
     'blog fizyka, nauka fizyki, matura z fizyki porady, jak uczyć się fizyki',

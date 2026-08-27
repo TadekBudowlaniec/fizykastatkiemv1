@@ -13,7 +13,7 @@ const items = [
   {
     icon: '📄',
     title: 'Gotowe PDF-y i wzory',
-    desc: 'Teoria, kluczowe wzory i zadania w 3 etapach — do druku i powtórki w każdej chwili.',
+    desc: 'Teoria, kluczowe wzory i zadania w 3 etapach - do druku i powtórki w każdej chwili.',
   },
   {
     icon: '✅',
@@ -29,7 +29,7 @@ export function Toolkit() {
         <SectionHeading
           eyebrow="Twój zestaw narzędzi"
           title="Wszystko, czego potrzebujesz w jednym miejscu"
-          subtitle="Zamiast dziesiątek zakładek i chaosu — jedna platforma, która prowadzi Cię do matury."
+          subtitle="Zamiast dziesiątek zakładek i chaosu - jedna platforma, która prowadzi Cię do matury."
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
@@ -54,7 +54,7 @@ export function Toolkit() {
                   Spersonalizowany planer do matury
                 </h3>
                 <p className="mt-2 flex-1 text-muted">
-                  Zaznacz, co już umiesz, a planer rozpisze naukę dzień po dniu —
+                  Zaznacz, co już umiesz, a planer rozpisze naukę dzień po dniu -
                   aż do 21 dni arkuszy maturalnych na finiszu. Bez zgadywania, co
                   robić dalej.
                 </p>

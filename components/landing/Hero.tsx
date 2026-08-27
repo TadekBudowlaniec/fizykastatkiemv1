@@ -22,14 +22,14 @@ export function Hero() {
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pb-20 pt-14 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:pb-28 lg:pt-20">
         {/* Copy */}
         <div className="animate-[fadeUp_0.7s_cubic-bezier(0.22,1,0.36,1)_both]">
-          <Eyebrow dark>🚢 Kurs maturalny z fizyki — matura 2027</Eyebrow>
+          <Eyebrow dark>🚢 Kurs maturalny z fizyki - matura 2027</Eyebrow>
           <h1 className="mt-5 font-display text-[2.7rem] font-extrabold leading-[1.06] text-white sm:text-5xl lg:text-[3.4rem]">
             Zdaj maturę z fizyki{' '}
             <span className="text-gradient">bez stresu i chaosu</span>.
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-300/85">
             Kompletny kurs online: wideo HD, gotowe PDF-y, setki zadań i
-            spersonalizowany planer nauki. Od podstaw do rozszerzenia — krok po
+            spersonalizowany planer nauki. Od podstaw do rozszerzenia - krok po
             kroku, aż do wyniku, z którego będziesz dumny.
           </p>
 
@@ -60,7 +60,7 @@ export function Hero() {
           </ul>
         </div>
 
-        {/* Visual — statek w reflektorze */}
+        {/* Visual - statek w reflektorze */}
         <div className="relative hidden md:block">
           <div className="relative mx-auto aspect-square w-full max-w-[24rem] lg:max-w-[26rem]">
             {/* koncentryczne pierścienie */}
@@ -83,7 +83,7 @@ export function Hero() {
               />
             </div>
 
-            {/* karty statystyk — solidne, czytelne */}
+            {/* karty statystyk - solidne, czytelne */}
             <div className="absolute left-0 top-[14%] rounded-2xl bg-navy-800/90 px-4 py-3 text-left shadow-glow ring-1 ring-white/10 backdrop-blur-sm">
               <p className="text-2xl font-extrabold text-white">16</p>
               <p className="text-xs text-slate-300">działów kursu</p>

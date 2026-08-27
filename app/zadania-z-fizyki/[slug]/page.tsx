@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!t) return {};
   return {
     title: `Zadania z ${t.dopelniacz} z rozwiązaniami`,
-    description: `Zadania z ${t.dopelniacz} z pełnymi rozwiązaniami krok po kroku. ${t.name} — przykłady na poziomie liceum i matury.`,
+    description: `Zadania z ${t.dopelniacz} z pełnymi rozwiązaniami krok po kroku. ${t.name} - przykłady na poziomie liceum i matury.`,
     keywords: `zadania z ${t.dopelniacz}, ${t.name.toLowerCase()} zadania, zadania z fizyki, rozwiązania`,
     alternates: { canonical: `${SITE.url}/zadania-z-fizyki/${t.slug}/` },
   };
@@ -49,7 +49,7 @@ export default async function ZadaniaHub({ params }: Params) {
       <JsonLd data={breadcrumbLd(crumbs)} />
       <SeoHero
         eyebrow="Zadania z rozwiązaniami"
-        title={`Zadania z ${t.dopelniacz} — rozwiązania krok po kroku`}
+        title={`Zadania z ${t.dopelniacz} - rozwiązania krok po kroku`}
         intro={t.intro}
         crumbs={crumbs}
       >

@@ -11,10 +11,10 @@ import {
 } from '@/components/seo/SeoBits';
 
 const desc =
-  'Darmowa baza wiedzy z fizyki: teoria, wzory i zadania z rozwiązaniami ze wszystkich działów — od kinematyki po fizykę jądrową. Idealne na maturę.';
+  'Darmowa baza wiedzy z fizyki: teoria, wzory i zadania z rozwiązaniami ze wszystkich działów - od kinematyki po fizykę jądrową. Idealne na maturę.';
 
 export const metadata: Metadata = {
-  title: 'Baza wiedzy z fizyki — teoria, wzory i zadania z rozwiązaniami',
+  title: 'Baza wiedzy z fizyki - teoria, wzory i zadania z rozwiązaniami',
   description: desc,
   alternates: { canonical: `${SITE.url}/baza-wiedzy/` },
 };
@@ -62,7 +62,7 @@ export default function BazaWiedzy() {
       <JsonLd data={[breadcrumbLd(crumbs), collection]} />
       <SeoHero
         eyebrow="Baza wiedzy"
-        title="Baza wiedzy z fizyki — teoria, wzory i zadania"
+        title="Baza wiedzy z fizyki - teoria, wzory i zadania"
         intro="Wszystko, czego potrzebujesz do nauki fizyki w jednym miejscu: przejrzysta teoria, komplet wzorów i setki zadań z rozwiązaniami krok po kroku. Idealne do powtórki przed maturą."
         crumbs={crumbs}
       />

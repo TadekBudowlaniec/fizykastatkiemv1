@@ -16,11 +16,11 @@ export const metadata: Metadata = {
 const faq: FaqItem[] = [
   {
     q: 'Czy płatność jest jednorazowa?',
-    a: 'Tak. Płacisz raz i masz dostęp do materiałów do końca sesji maturalnej — bez abonamentu i ukrytych opłat.',
+    a: 'Tak. Płacisz raz i masz dostęp do materiałów do końca sesji maturalnej - bez abonamentu i ukrytych opłat.',
   },
   {
     q: 'Jakie formy płatności obsługujecie?',
-    a: 'Płatności realizuje Stripe — obsługujemy BLIK, karty płatnicze (Visa, Mastercard) oraz Klarna.',
+    a: 'Płatności realizuje Stripe - obsługujemy BLIK, karty płatnicze (Visa, Mastercard) oraz Klarna.',
   },
   {
     q: 'Czym różnią się pakiety?',
@@ -52,7 +52,7 @@ function Cell({ on }: { on: boolean }) {
   return on ? (
     <span className="text-brand-500">✓</span>
   ) : (
-    <span className="text-slate-300">—</span>
+    <span className="text-slate-300">-</span>
   );
 }
 
@@ -66,7 +66,7 @@ export default function CennikPage() {
             Wybierz pakiet i płyń po swój <span className="text-gradient">wynik</span>
           </>
         }
-        subtitle="Trzy poziomy wsparcia — od samodzielnej nauki po VIP 1:1. Płatność jednorazowa, dostęp do końca matury."
+        subtitle="Trzy poziomy wsparcia - od samodzielnej nauki po VIP 1:1. Płatność jednorazowa, dostęp do końca matury."
         crumbs={[{ label: 'Start', href: '/' }, { label: 'Cennik' }]}
       />
 
@@ -122,7 +122,7 @@ export default function CennikPage() {
                 Potrzebujesz tylko jednego działu?
               </h3>
               <p className="mt-1 text-muted">
-                Uzupełnij braki punktowo — pojedynczy dział z wideo, PDF-ami i
+                Uzupełnij braki punktowo - pojedynczy dział z wideo, PDF-ami i
                 zadaniami za jedyne {SINGLE_COURSE_PRICE} zł.
               </p>
             </div>
@@ -136,7 +136,7 @@ export default function CennikPage() {
       <FaqSection
         items={faq}
         title="Pytania o płatności"
-        subtitle="Masz inne pytanie? Napisz do nas — pomożemy dobrać pakiet."
+        subtitle="Masz inne pytanie? Napisz do nas - pomożemy dobrać pakiet."
       />
     </>
   );

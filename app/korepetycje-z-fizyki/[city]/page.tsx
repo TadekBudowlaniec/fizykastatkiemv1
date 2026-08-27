@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const c = getCity(city);
   if (!c) return {};
   return {
-    title: `Korepetycje z fizyki online — ${c.name} | matura i liceum`,
+    title: `Korepetycje z fizyki online - ${c.name} | matura i liceum`,
     description: `Korepetycje z fizyki online dla uczniów z ${c.locative}. Przygotowanie do matury i poprawa ocen. Indywidualne lekcje 1:1, elastyczne terminy.`,
     keywords: `korepetycje z fizyki ${c.name.toLowerCase()}, fizyka ${c.name.toLowerCase()}, korepetycje fizyka online, matura fizyka ${c.name.toLowerCase()}`,
     alternates: { canonical: `${SITE.url}/korepetycje-z-fizyki/${c.slug}/` },
@@ -52,7 +52,7 @@ export default async function CityPage({ params }: Params) {
     '@context': 'https://schema.org',
     '@type': 'Service',
     serviceType: 'Korepetycje z fizyki online',
-    name: `Korepetycje z fizyki online — ${c.name}`,
+    name: `Korepetycje z fizyki online - ${c.name}`,
     description: plain(desc),
     areaServed: { '@type': 'City', name: c.name },
     provider: {
@@ -71,19 +71,19 @@ export default async function CityPage({ params }: Params) {
         c.name
       } (np. ${(c.dzielnice ?? [])
         .slice(0, 3)
-        .join(', ')}) bez dojazdów — wystarczy komputer i internet.`,
+        .join(', ')}) bez dojazdów - wystarczy komputer i internet.`,
     },
     {
       q: 'Czy przygotujecie mnie do matury z fizyki?',
-      a: 'Tak, specjalizujemy się w przygotowaniu do matury z fizyki na poziomie podstawowym i rozszerzonym — od podstaw aż po zadania maturalne CKE.',
+      a: 'Tak, specjalizujemy się w przygotowaniu do matury z fizyki na poziomie podstawowym i rozszerzonym - od podstaw aż po zadania maturalne CKE.',
     },
     {
       q: 'Ile kosztują korepetycje z fizyki?',
-      a: 'Mamy kilka pakietów — od samodzielnego kursu online po indywidualne lekcje live. Szczegóły i ceny znajdziesz na stronie korepetycji.',
+      a: 'Mamy kilka pakietów - od samodzielnego kursu online po indywidualne lekcje live. Szczegóły i ceny znajdziesz na stronie korepetycji.',
     },
     {
       q: 'Od czego zacząć naukę fizyki?',
-      a: 'Najlepiej od solidnych podstaw — zajrzyj do naszej Bazy wiedzy z teorią i zadaniami z każdego działu, a na lekcjach uzupełnimy luki.',
+      a: 'Najlepiej od solidnych podstaw - zajrzyj do naszej Bazy wiedzy z teorią i zadaniami z każdego działu, a na lekcjach uzupełnimy luki.',
     },
   ];
 
@@ -92,8 +92,8 @@ export default async function CityPage({ params }: Params) {
       <JsonLd data={[breadcrumbLd(crumbs), service, faqLd(faqs)].filter(Boolean) as object[]} />
       <SeoHero
         eyebrow="Korepetycje z fizyki online"
-        title={`Korepetycje z fizyki online — ${c.name}`}
-        intro={`Uczysz się w ${c.locative} i potrzebujesz wsparcia z fizyki? Prowadzimy indywidualne korepetycje online 1:1 oraz kurs maturalny — bez dojazdów, w dogodnych terminach.`}
+        title={`Korepetycje z fizyki online - ${c.name}`}
+        intro={`Uczysz się w ${c.locative} i potrzebujesz wsparcia z fizyki? Prowadzimy indywidualne korepetycje online 1:1 oraz kurs maturalny - bez dojazdów, w dogodnych terminach.`}
         crumbs={crumbs}
       >
         <Link
@@ -112,10 +112,10 @@ export default async function CityPage({ params }: Params) {
             </h2>
             <p>{c.akcent}</p>
             <p>
-              Naszą metodą uczymy fizyki <strong>prosto i obrazowo</strong> —
+              Naszą metodą uczymy fizyki <strong>prosto i obrazowo</strong> -
               tłumaczymy mechanizm zjawiska, a nie każemy wkuwać wzorów na
               pamięć. Lekcje online sprawdzają się u uczniów z całego {c.name}
-              {dz ? ` — od dzielnic takich jak ${dz}` : ''}.
+              {dz ? ` - od dzielnic takich jak ${dz}` : ''}.
             </p>
           </section>
 
@@ -142,19 +142,19 @@ export default async function CityPage({ params }: Params) {
             </h2>
             <ul>
               <li>
-                <strong>Lekcje 1:1</strong> — pełna uwaga nauczyciela skupiona na
+                <strong>Lekcje 1:1</strong> - pełna uwaga nauczyciela skupiona na
                 Twoich brakach.
               </li>
               <li>
-                <strong>Przygotowanie do matury</strong> — poziom podstawowy i
+                <strong>Przygotowanie do matury</strong> - poziom podstawowy i
                 rozszerzony, zadania CKE.
               </li>
               <li>
-                <strong>Materiały i baza zadań</strong> — dostęp do teorii i
+                <strong>Materiały i baza zadań</strong> - dostęp do teorii i
                 zadań z rozwiązaniami online.
               </li>
               <li>
-                <strong>Elastyczne terminy</strong> — uczysz się wtedy, kiedy Ci
+                <strong>Elastyczne terminy</strong> - uczysz się wtedy, kiedy Ci
                 pasuje, bez dojazdów po {c.locative}.
               </li>
             </ul>
@@ -162,7 +162,7 @@ export default async function CityPage({ params }: Params) {
 
           <section className="not-prose">
             <h2 className="mb-4 font-display text-2xl font-extrabold text-ink">
-              Materiały do nauki — wszystkie działy fizyki
+              Materiały do nauki - wszystkie działy fizyki
             </h2>
             <RelatedGrid>
               {topics.slice(0, 12).map((t) => (

@@ -1,11 +1,11 @@
 [
   {
     "slug": "jak-nauczyc-sie-fizyki-do-matury",
-    "title": "Jak nauczyć się fizyki do matury — plan nauki krok po kroku",
+    "title": "Jak nauczyć się fizyki do matury - plan nauki krok po kroku",
     "metaDesc": "Jak nauczyć się fizyki do matury od podstaw? Realny plan nauki na 3, 6 i 12 miesięcy, kolejność działów i metody, które faktycznie działają.",
     "keywords": "jak nauczyć się fizyki, plan nauki fizyki, fizyka do matury, nauka fizyki od podstaw, powtórka do matury z fizyki",
     "excerpt": "Fizyki nie da się nauczyć wkuwaniem wzorów. Oto plan, który zaczyna się od zrozumienia, a kończy na sprawnym rozwiązywaniu zadań maturalnych.",
-    "intro": "Najczęstszy błąd w nauce fizyki to zaczynanie od wzorów. Karta wzorów będzie na maturze na Twoim stoliku — sama znajomość formuł niczego nie załatwia. Liczy się umiejętność przełożenia treści zadania na model fizyczny. Ten plan prowadzi Cię przez tę drogę krok po kroku.",
+    "intro": "Najczęstszy błąd w nauce fizyki to zaczynanie od wzorów. Karta wzorów będzie na maturze na Twoim stoliku - sama znajomość formuł niczego nie załatwia. Liczy się umiejętność przełożenia treści zadania na model fizyczny. Ten plan prowadzi Cię przez tę drogę krok po kroku.",
     "sections": [
       {
         "heading": "Dlaczego wkuwanie wzorów nie działa",
@@ -13,41 +13,41 @@
       },
       {
         "heading": "Trzy etapy skutecznej nauki",
-        "html": "<p><strong>Etap 1 — zrozumienie zjawiska.</strong> Zanim dotkniesz wzoru, opowiedz sobie własnymi słowami, co się dzieje. Ciało spada, więc rośnie prędkość, a maleje wysokość. Energia potencjalna zamienia się w kinetyczną. Dopiero taki opis warto zapisać matematycznie.</p><p><strong>Etap 2 — zadania wzorcowe.</strong> Dla każdego działu istnieje kilkanaście schematów zadań, które wracają co roku. Rozwiąż je z pełnym zrozumieniem każdego kroku, nie przepisując rozwiązania.</p><p><strong>Etap 3 — arkusze na czas.</strong> Ostatnia faza to praca na pełnych arkuszach CKE z zegarkiem. Buduje odporność na presję i uczy gospodarowania czasem, czego nie da żadna liczba pojedynczych zadań.</p>"
+        "html": "<p><strong>Etap 1 - zrozumienie zjawiska.</strong> Zanim dotkniesz wzoru, opowiedz sobie własnymi słowami, co się dzieje. Ciało spada, więc rośnie prędkość, a maleje wysokość. Energia potencjalna zamienia się w kinetyczną. Dopiero taki opis warto zapisać matematycznie.</p><p><strong>Etap 2 - zadania wzorcowe.</strong> Dla każdego działu istnieje kilkanaście schematów zadań, które wracają co roku. Rozwiąż je z pełnym zrozumieniem każdego kroku, nie przepisując rozwiązania.</p><p><strong>Etap 3 - arkusze na czas.</strong> Ostatnia faza to praca na pełnych arkuszach CKE z zegarkiem. Buduje odporność na presję i uczy gospodarowania czasem, czego nie da żadna liczba pojedynczych zadań.</p>"
       },
       {
         "heading": "W jakiej kolejności uczyć się działów",
-        "html": "<p>Fizyka jest kumulatywna — kolejne działy opierają się na wcześniejszych. Nauka „od końca podręcznika” to najprostsza droga do frustracji.</p><ol><li><strong>Kinematyka</strong> — język opisu ruchu, podstawa wszystkiego dalej.</li><li><strong>Dynamika</strong> — zasady Newtona, siły, tarcie.</li><li><strong>Praca, moc, energia</strong> oraz <strong>pęd</strong> — zasady zachowania, najczęstsze narzędzie na maturze.</li><li><strong>Grawitacja</strong> i <strong>ruch obrotowy</strong> — rozszerzenie mechaniki.</li><li><strong>Drgania i fale</strong>, potem <strong>termodynamika</strong>.</li><li><strong>Elektrostatyka</strong>, <strong>prąd</strong>, <strong>magnetyzm</strong>, <strong>indukcja</strong>.</li><li><strong>Optyka</strong>, na końcu <strong>fizyka atomowa, jądrowa</strong> i <strong>teoria względności</strong>.</li></ol><p>Mechanika to fundament. Jeśli kuleje, każdy kolejny dział będzie trudniejszy, niż powinien.</p>"
+        "html": "<p>Fizyka jest kumulatywna - kolejne działy opierają się na wcześniejszych. Nauka „od końca podręcznika” to najprostsza droga do frustracji.</p><ol><li><strong>Kinematyka</strong> - język opisu ruchu, podstawa wszystkiego dalej.</li><li><strong>Dynamika</strong> - zasady Newtona, siły, tarcie.</li><li><strong>Praca, moc, energia</strong> oraz <strong>pęd</strong> - zasady zachowania, najczęstsze narzędzie na maturze.</li><li><strong>Grawitacja</strong> i <strong>ruch obrotowy</strong> - rozszerzenie mechaniki.</li><li><strong>Drgania i fale</strong>, potem <strong>termodynamika</strong>.</li><li><strong>Elektrostatyka</strong>, <strong>prąd</strong>, <strong>magnetyzm</strong>, <strong>indukcja</strong>.</li><li><strong>Optyka</strong>, na końcu <strong>fizyka atomowa, jądrowa</strong> i <strong>teoria względności</strong>.</li></ol><p>Mechanika to fundament. Jeśli kuleje, każdy kolejny dział będzie trudniejszy, niż powinien.</p>"
       },
       {
-        "heading": "Plan na 12 miesięcy — wersja komfortowa",
-        "html": "<p>Start we wrześniu klasy maturalnej daje najwięcej swobody. Zakładając 4–5 godzin nauki fizyki tygodniowo:</p><ul><li><strong>Wrzesień–listopad:</strong> pełna mechanika (kinematyka, dynamika, energia, pęd, grawitacja, ruch obrotowy).</li><li><strong>Grudzień–styczeń:</strong> drgania, fale, hydrostatyka, termodynamika.</li><li><strong>Luty–marzec:</strong> elektryczność i magnetyzm — najobszerniejszy blok w rozszerzeniu.</li><li><strong>Kwiecień:</strong> optyka, fizyka atomowa i jądrowa, teoria względności.</li><li><strong>Maj:</strong> wyłącznie arkusze maturalne i domykanie luk.</li></ul>"
+        "heading": "Plan na 12 miesięcy - wersja komfortowa",
+        "html": "<p>Start we wrześniu klasy maturalnej daje najwięcej swobody. Zakładając 4-5 godzin nauki fizyki tygodniowo:</p><ul><li><strong>Wrzesień-listopad:</strong> pełna mechanika (kinematyka, dynamika, energia, pęd, grawitacja, ruch obrotowy).</li><li><strong>Grudzień-styczeń:</strong> drgania, fale, hydrostatyka, termodynamika.</li><li><strong>Luty-marzec:</strong> elektryczność i magnetyzm - najobszerniejszy blok w rozszerzeniu.</li><li><strong>Kwiecień:</strong> optyka, fizyka atomowa i jądrowa, teoria względności.</li><li><strong>Maj:</strong> wyłącznie arkusze maturalne i domykanie luk.</li></ul>"
       },
       {
-        "heading": "Plan na 3 miesiące — wersja ratunkowa",
-        "html": "<p>Trzy miesiące to za mało na spokojne przerobienie całego materiału, więc konieczna jest selekcja. Priorytetem są działy o największej wadze punktowej i najwyższej powtarzalności na egzaminie.</p><ul><li><strong>Miesiąc 1:</strong> mechanika w całości — bez niej nie ruszysz dalej.</li><li><strong>Miesiąc 2:</strong> elektryczność, magnetyzm, termodynamika.</li><li><strong>Miesiąc 3:</strong> arkusze na czas, a między nimi doraźne uzupełnianie tego, co arkusze obnażą.</li></ul><p>W tym wariancie nie da się uczyć wszystkiego równie dokładnie. Lepiej opanować 70% materiału solidnie niż 100% pobieżnie — na maturze punktuje się pełne rozwiązania, nie rozpoznanie tematu.</p>"
+        "heading": "Plan na 3 miesiące - wersja ratunkowa",
+        "html": "<p>Trzy miesiące to za mało na spokojne przerobienie całego materiału, więc konieczna jest selekcja. Priorytetem są działy o największej wadze punktowej i najwyższej powtarzalności na egzaminie.</p><ul><li><strong>Miesiąc 1:</strong> mechanika w całości - bez niej nie ruszysz dalej.</li><li><strong>Miesiąc 2:</strong> elektryczność, magnetyzm, termodynamika.</li><li><strong>Miesiąc 3:</strong> arkusze na czas, a między nimi doraźne uzupełnianie tego, co arkusze obnażą.</li></ul><p>W tym wariancie nie da się uczyć wszystkiego równie dokładnie. Lepiej opanować 70% materiału solidnie niż 100% pobieżnie - na maturze punktuje się pełne rozwiązania, nie rozpoznanie tematu.</p>"
       },
       {
         "heading": "Jak rozwiązywać zadania, żeby się na nich uczyć",
-        "html": "<p>Rozwiązanie zadania z podglądaniem odpowiedzi po dwóch minutach nie uczy niczego poza rozpoznawaniem cudzych rozwiązań. Trzymaj się stałej procedury:</p><ol><li>Przeczytaj treść dwa razy i wypisz dane wraz z jednostkami.</li><li>Narysuj sytuację — schemat, siły, układ współrzędnych.</li><li>Nazwij zjawisko i wybierz prawo, które je opisuje.</li><li>Przekształć wzór symbolicznie i dopiero na końcu podstaw liczby.</li><li>Sprawdź jednostki wyniku i oceń, czy rząd wielkości jest sensowny.</li></ol><p>Punkt piąty wyłapuje większość błędów rachunkowych. Prędkość samochodu rzędu 400 m/s to sygnał, że coś poszło nie tak — niezależnie od tego, jak ładnie wygląda rachunek.</p>"
+        "html": "<p>Rozwiązanie zadania z podglądaniem odpowiedzi po dwóch minutach nie uczy niczego poza rozpoznawaniem cudzych rozwiązań. Trzymaj się stałej procedury:</p><ol><li>Przeczytaj treść dwa razy i wypisz dane wraz z jednostkami.</li><li>Narysuj sytuację - schemat, siły, układ współrzędnych.</li><li>Nazwij zjawisko i wybierz prawo, które je opisuje.</li><li>Przekształć wzór symbolicznie i dopiero na końcu podstaw liczby.</li><li>Sprawdź jednostki wyniku i oceń, czy rząd wielkości jest sensowny.</li></ol><p>Punkt piąty wyłapuje większość błędów rachunkowych. Prędkość samochodu rzędu 400 m/s to sygnał, że coś poszło nie tak - niezależnie od tego, jak ładnie wygląda rachunek.</p>"
       },
       {
         "heading": "Ile czasu naprawdę potrzebujesz",
-        "html": "<p>Uczciwa odpowiedź: przy nauce od podstaw do poziomu rozszerzonego to zwykle 200–300 godzin pracy. Rozłożone na rok daje 4–6 godzin tygodniowo, na trzy miesiące — 15–20 godzin tygodniowo.</p><p>Kluczowa jest jednak regularność, nie sumaryczna liczba godzin. Trzy sesje po 90 minut w tygodniu dają znacznie więcej niż jedna sześciogodzinna w weekend, bo fizyka wymaga czasu na „osadzenie się” pojęć między sesjami.</p>"
+        "html": "<p>Uczciwa odpowiedź: przy nauce od podstaw do poziomu rozszerzonego to zwykle 200-300 godzin pracy. Rozłożone na rok daje 4-6 godzin tygodniowo, na trzy miesiące - 15-20 godzin tygodniowo.</p><p>Kluczowa jest jednak regularność, nie sumaryczna liczba godzin. Trzy sesje po 90 minut w tygodniu dają znacznie więcej niż jedna sześciogodzinna w weekend, bo fizyka wymaga czasu na „osadzenie się” pojęć między sesjami.</p>"
       }
     ],
     "faq": [
       {
         "q": "Czy da się nauczyć fizyki do matury w 3 miesiące?",
-        "a": "Tak, ale wymaga to około 15–20 godzin nauki tygodniowo i świadomej selekcji materiału. Priorytetem powinna być mechanika oraz elektryczność i magnetyzm, a ostatni miesiąc należy poświęcić wyłącznie arkuszom maturalnym."
+        "a": "Tak, ale wymaga to około 15-20 godzin nauki tygodniowo i świadomej selekcji materiału. Priorytetem powinna być mechanika oraz elektryczność i magnetyzm, a ostatni miesiąc należy poświęcić wyłącznie arkuszom maturalnym."
       },
       {
         "q": "Od którego działu zacząć naukę fizyki?",
-        "a": "Od kinematyki, a następnie dynamiki. Mechanika jest fundamentem, na którym opierają się wszystkie kolejne działy — nauka w innej kolejności znacznie utrudnia zrozumienie materiału."
+        "a": "Od kinematyki, a następnie dynamiki. Mechanika jest fundamentem, na którym opierają się wszystkie kolejne działy - nauka w innej kolejności znacznie utrudnia zrozumienie materiału."
       },
       {
         "q": "Czy trzeba znać wzory na pamięć?",
-        "a": "Nie, na maturze dostajesz kartę wzorów CKE. Musisz natomiast wiedzieć, który wzór zastosować w danej sytuacji i umieć go przekształcić — a tego karta za Ciebie nie zrobi."
+        "a": "Nie, na maturze dostajesz kartę wzorów CKE. Musisz natomiast wiedzieć, który wzór zastosować w danej sytuacji i umieć go przekształcić - a tego karta za Ciebie nie zrobi."
       },
       {
         "q": "Ile zadań dziennie rozwiązywać?",
@@ -59,31 +59,31 @@
   },
   {
     "slug": "karta-wzorow-maturalnych-fizyka",
-    "title": "Karta wzorów na maturze z fizyki — jak z niej korzystać",
+    "title": "Karta wzorów na maturze z fizyki - jak z niej korzystać",
     "metaDesc": "Karta wzorów CKE na maturze z fizyki: co dokładnie zawiera, czego w niej nie ma i jak jej używać, żeby nie tracić czasu na egzaminie.",
     "keywords": "karta wzorów fizyka, wzory maturalne fizyka, tablice maturalne fizyka, wybrane wzory i stałe fizykochemiczne, matura fizyka wzory",
     "excerpt": "Dostajesz ją na egzaminie za darmo, a mimo to większość zdających traci przez nią czas. Powód jest prosty: pierwszy raz otwierają ją na maturze.",
-    "intro": "Na maturze z fizyki otrzymujesz broszurę CKE „Wybrane wzory i stałe fizykochemiczne na egzamin maturalny z biologii, chemii i fizyki”. To ogromne ułatwienie — pod warunkiem, że znasz jej układ. Zdający, który szuka wzoru na oscylator harmoniczny metodą kartkowania, traci minuty, których na egzaminie nie ma.",
+    "intro": "Na maturze z fizyki otrzymujesz broszurę CKE „Wybrane wzory i stałe fizykochemiczne na egzamin maturalny z biologii, chemii i fizyki”. To ogromne ułatwienie - pod warunkiem, że znasz jej układ. Zdający, który szuka wzoru na oscylator harmoniczny metodą kartkowania, traci minuty, których na egzaminie nie ma.",
     "sections": [
       {
         "heading": "Co znajdziesz w karcie wzorów",
         "html": "<p>Karta obejmuje wzory ze wszystkich działów fizyki objętych podstawą programową oraz zestaw stałych fizycznych. Znajdziesz w niej między innymi:</p><ul><li>zależności kinematyczne dla ruchu jednostajnego i jednostajnie zmiennego,</li><li>zasady dynamiki, wzory na pęd, pracę, moc i energię,</li><li>prawo powszechnego ciążenia i wzory dla ruchu po okręgu,</li><li>równania drgań i fal,</li><li>równanie stanu gazu doskonałego i zasady termodynamiki,</li><li>prawo Coulomba, prawa Ohma i Kirchhoffa, wzory na pole magnetyczne i indukcję,</li><li>wzory z optyki geometrycznej i falowej,</li><li>zależności z fizyki atomowej, jądrowej i teorii względności,</li><li>stałe: \\( g \\), \\( G \\), \\( c \\), \\( h \\), ładunek elementarny, stała Avogadra i inne.</li></ul>"
       },
       {
-        "heading": "Czego w karcie nie ma — i to jest sedno",
-        "html": "<p>Karta zawiera wzory, ale nie zawiera niczego, co decyduje o rozwiązaniu zadania. Nie znajdziesz w niej:</p><ul><li><strong>informacji, który wzór zastosować</strong> w konkretnej sytuacji fizycznej,</li><li><strong>przekształceń</strong> — wzory podane są w formie podstawowej,</li><li><strong>warunków stosowalności</strong>, na przykład tego, że zasada zachowania energii mechanicznej obowiązuje wyłącznie bez sił rozpraszających,</li><li><strong>interpretacji symboli</strong> w nietypowym kontekście zadania.</li></ul><p>Dlatego zdanie „i tak dostanę wzory” jest jedną z najkosztowniejszych iluzji przed maturą z fizyki.</p>"
+        "heading": "Czego w karcie nie ma - i to jest sedno",
+        "html": "<p>Karta zawiera wzory, ale nie zawiera niczego, co decyduje o rozwiązaniu zadania. Nie znajdziesz w niej:</p><ul><li><strong>informacji, który wzór zastosować</strong> w konkretnej sytuacji fizycznej,</li><li><strong>przekształceń</strong> - wzory podane są w formie podstawowej,</li><li><strong>warunków stosowalności</strong>, na przykład tego, że zasada zachowania energii mechanicznej obowiązuje wyłącznie bez sił rozpraszających,</li><li><strong>interpretacji symboli</strong> w nietypowym kontekście zadania.</li></ul><p>Dlatego zdanie „i tak dostanę wzory” jest jedną z najkosztowniejszych iluzji przed maturą z fizyki.</p>"
       },
       {
         "heading": "Jak nauczyć się karty przed egzaminem",
-        "html": "<p>Zasada jest jedna: pracuj z kartą od pierwszego dnia nauki, a nie od dnia egzaminu. Pobierz aktualną wersję ze strony CKE i wydrukuj ją.</p><p>Rozwiązuj wszystkie zadania, korzystając wyłącznie z niej — nawet gdy wzór pamiętasz. Po kilkudziesięciu zadaniach będziesz wiedzieć, że wzory na drgania są na konkretnej stronie, a stałe na końcu. Ta orientacja jest warta na egzaminie kilku minut, a czasem jednego zadania więcej.</p><p>Zaznacz sobie ołówkiem na własnym wydruku najczęściej używane strony. Na maturze dostaniesz czysty egzemplarz, ale pamięć wzrokowa układu zostanie.</p>"
+        "html": "<p>Zasada jest jedna: pracuj z kartą od pierwszego dnia nauki, a nie od dnia egzaminu. Pobierz aktualną wersję ze strony CKE i wydrukuj ją.</p><p>Rozwiązuj wszystkie zadania, korzystając wyłącznie z niej - nawet gdy wzór pamiętasz. Po kilkudziesięciu zadaniach będziesz wiedzieć, że wzory na drgania są na konkretnej stronie, a stałe na końcu. Ta orientacja jest warta na egzaminie kilku minut, a czasem jednego zadania więcej.</p><p>Zaznacz sobie ołówkiem na własnym wydruku najczęściej używane strony. Na maturze dostaniesz czysty egzemplarz, ale pamięć wzrokowa układu zostanie.</p>"
       },
       {
         "heading": "Typowe pułapki przy korzystaniu z karty",
-        "html": "<p><strong>Mylenie symboli.</strong> Litera \\( T \\) oznacza zarówno okres drgań, jak i temperaturę w termodynamice, a \\( p \\) to zarówno pęd, jak i ciśnienie. Kontekst rozstrzyga — karta nie.</p><p><strong>Stosowanie wzoru bez sprawdzenia założeń.</strong> Wzór na okres wahadła matematycznego obowiązuje dla małych wychyleń. Karta tego nie przypomni.</p><p><strong>Podstawianie w złych jednostkach.</strong> Wzory zakładają układ SI. Podstawienie kilometrów zamiast metrów albo minut zamiast sekund daje wynik błędny mimo poprawnej metody.</p>"
+        "html": "<p><strong>Mylenie symboli.</strong> Litera \\( T \\) oznacza zarówno okres drgań, jak i temperaturę w termodynamice, a \\( p \\) to zarówno pęd, jak i ciśnienie. Kontekst rozstrzyga - karta nie.</p><p><strong>Stosowanie wzoru bez sprawdzenia założeń.</strong> Wzór na okres wahadła matematycznego obowiązuje dla małych wychyleń. Karta tego nie przypomni.</p><p><strong>Podstawianie w złych jednostkach.</strong> Wzory zakładają układ SI. Podstawienie kilometrów zamiast metrów albo minut zamiast sekund daje wynik błędny mimo poprawnej metody.</p>"
       },
       {
         "heading": "Strategia na egzaminie",
-        "html": "<p>Kolejność pracy nad zadaniem powinna być zawsze ta sama. Najpierw analiza sytuacji fizycznej i decyzja, jakie prawo tu obowiązuje. Dopiero potem sięgasz do karty po konkretną postać wzoru.</p><p>Odwrotna kolejność — najpierw szukanie wzoru, w którym występują dane z treści — jest najczęstszą przyczyną rozwiązań całkowicie chybionych. Wzór dopasowany do symboli, a nie do zjawiska, prowadzi donikąd.</p>"
+        "html": "<p>Kolejność pracy nad zadaniem powinna być zawsze ta sama. Najpierw analiza sytuacji fizycznej i decyzja, jakie prawo tu obowiązuje. Dopiero potem sięgasz do karty po konkretną postać wzoru.</p><p>Odwrotna kolejność - najpierw szukanie wzoru, w którym występują dane z treści - jest najczęstszą przyczyną rozwiązań całkowicie chybionych. Wzór dopasowany do symboli, a nie do zjawiska, prowadzi donikąd.</p>"
       }
     ],
     "faq": [
@@ -97,7 +97,7 @@
       },
       {
         "q": "Skąd pobrać kartę wzorów?",
-        "a": "Aktualna wersja jest publikowana na stronie Centralnej Komisji Egzaminacyjnej. Warto pracować z tą samą wersją, którą dostaniesz na egzaminie — układ bywa aktualizowany."
+        "a": "Aktualna wersja jest publikowana na stronie Centralnej Komisji Egzaminacyjnej. Warto pracować z tą samą wersją, którą dostaniesz na egzaminie - układ bywa aktualizowany."
       }
     ],
     "relatedTopics": ["kinematyka", "termodynamika", "elektrostatyka"],
@@ -105,19 +105,19 @@
   },
   {
     "slug": "matura-z-fizyki-rozszerzona-jak-wyglada",
-    "title": "Matura z fizyki rozszerzona — jak wygląda egzamin",
+    "title": "Matura z fizyki rozszerzona - jak wygląda egzamin",
     "metaDesc": "Matura z fizyki na poziomie rozszerzonym: czas trwania, liczba punktów, typy zadań i zasady oceniania. Wszystko, co trzeba wiedzieć przed egzaminem.",
     "keywords": "matura z fizyki rozszerzona, matura fizyka jak wygląda, ile trwa matura z fizyki, punktacja matura fizyka, arkusz maturalny fizyka",
     "excerpt": "Fizyka na maturze występuje wyłącznie jako przedmiot dodatkowy na poziomie rozszerzonym. Sprawdź, jak zbudowany jest arkusz i za co dokładnie dostaje się punkty.",
-    "intro": "Fizyka zdawana jest na maturze jako przedmiot dodatkowy, wyłącznie na poziomie rozszerzonym. Nie obowiązuje przy niej próg zdawalności — wynik jest przeliczany na punkty rekrutacyjne na studia. Znajomość konstrukcji arkusza i zasad oceniania jest tu równie ważna jak znajomość materiału.",
+    "intro": "Fizyka zdawana jest na maturze jako przedmiot dodatkowy, wyłącznie na poziomie rozszerzonym. Nie obowiązuje przy niej próg zdawalności - wynik jest przeliczany na punkty rekrutacyjne na studia. Znajomość konstrukcji arkusza i zasad oceniania jest tu równie ważna jak znajomość materiału.",
     "sections": [
       {
         "heading": "Podstawowe parametry egzaminu",
-        "html": "<p>Egzamin z fizyki na poziomie rozszerzonym trwa <strong>180 minut</strong>. Arkusz obejmuje wszystkie działy fizyki z podstawy programowej, a zadania mają zróżnicowaną formę.</p><p>Ponieważ fizyka jest przedmiotem dodatkowym, nie ma progu 30% wymaganego przy przedmiotach obowiązkowych. Każdy wynik pozwala zdać maturę — ale to uczelnie decydują, ile punktów faktycznie potrzebujesz na wybrany kierunek.</p><p>Szczegółowe parametry danego rocznika, łącznie z liczbą punktów do zdobycia, publikuje CKE w informatorze i komunikatach na dany rok. Warto sprawdzić je przed rozpoczęciem powtórek.</p>"
+        "html": "<p>Egzamin z fizyki na poziomie rozszerzonym trwa <strong>180 minut</strong>. Arkusz obejmuje wszystkie działy fizyki z podstawy programowej, a zadania mają zróżnicowaną formę.</p><p>Ponieważ fizyka jest przedmiotem dodatkowym, nie ma progu 30% wymaganego przy przedmiotach obowiązkowych. Każdy wynik pozwala zdać maturę - ale to uczelnie decydują, ile punktów faktycznie potrzebujesz na wybrany kierunek.</p><p>Szczegółowe parametry danego rocznika, łącznie z liczbą punktów do zdobycia, publikuje CKE w informatorze i komunikatach na dany rok. Warto sprawdzić je przed rozpoczęciem powtórek.</p>"
       },
       {
         "heading": "Typy zadań w arkuszu",
-        "html": "<p><strong>Zadania zamknięte</strong> — wielokrotnego wyboru, prawda/fałsz, zadania na dobieranie. Punktowane zero-jedynkowo, bez punktów częściowych. Warto rozwiązywać je jako pierwsze, bo dają najszybszy zysk punktowy.</p><p><strong>Zadania otwarte krótkiej odpowiedzi</strong> — wymagają obliczenia, uzasadnienia lub uzupełnienia. Zwykle za 1–2 punkty.</p><p><strong>Zadania obliczeniowe</strong> — pełne rozwiązanie z podaniem metody. To tutaj obowiązują punkty częściowe i to one najbardziej różnicują wyniki.</p><p><strong>Zadania doświadczalne</strong> — analiza wyników pomiarów, wykresy, ocena niepewności. Często zaniedbywane w przygotowaniach, a pojawiają się regularnie.</p>"
+        "html": "<p><strong>Zadania zamknięte</strong> - wielokrotnego wyboru, prawda/fałsz, zadania na dobieranie. Punktowane zero-jedynkowo, bez punktów częściowych. Warto rozwiązywać je jako pierwsze, bo dają najszybszy zysk punktowy.</p><p><strong>Zadania otwarte krótkiej odpowiedzi</strong> - wymagają obliczenia, uzasadnienia lub uzupełnienia. Zwykle za 1-2 punkty.</p><p><strong>Zadania obliczeniowe</strong> - pełne rozwiązanie z podaniem metody. To tutaj obowiązują punkty częściowe i to one najbardziej różnicują wyniki.</p><p><strong>Zadania doświadczalne</strong> - analiza wyników pomiarów, wykresy, ocena niepewności. Często zaniedbywane w przygotowaniach, a pojawiają się regularnie.</p>"
       },
       {
         "heading": "Jak przyznawane są punkty w zadaniach obliczeniowych",
@@ -125,7 +125,7 @@
       },
       {
         "heading": "Gospodarowanie czasem",
-        "html": "<p>180 minut przy typowej liczbie zadań daje około 4–5 minut na punkt. Sprawdzoną strategią jest przejście arkusza w trzech falach.</p><ol><li><strong>Fala pierwsza (ok. 40 min):</strong> wszystkie zadania zamknięte i te otwarte, które widzisz od razu.</li><li><strong>Fala druga (ok. 100 min):</strong> zadania obliczeniowe wymagające dłuższej pracy.</li><li><strong>Fala trzecia (ok. 40 min):</strong> zadania odłożone, uzupełnienie rozwiązań częściowych i sprawdzenie jednostek.</li></ol><p>Zasada nadrzędna: jeśli utknąłeś na zadaniu na dłużej niż kilka minut, przejdź dalej i wróć później. Czas spędzony na jednym trudnym zadaniu kosztuje zwykle więcej punktów, niż przynosi.</p>"
+        "html": "<p>180 minut przy typowej liczbie zadań daje około 4-5 minut na punkt. Sprawdzoną strategią jest przejście arkusza w trzech falach.</p><ol><li><strong>Fala pierwsza (ok. 40 min):</strong> wszystkie zadania zamknięte i te otwarte, które widzisz od razu.</li><li><strong>Fala druga (ok. 100 min):</strong> zadania obliczeniowe wymagające dłuższej pracy.</li><li><strong>Fala trzecia (ok. 40 min):</strong> zadania odłożone, uzupełnienie rozwiązań częściowych i sprawdzenie jednostek.</li></ol><p>Zasada nadrzędna: jeśli utknąłeś na zadaniu na dłużej niż kilka minut, przejdź dalej i wróć później. Czas spędzony na jednym trudnym zadaniu kosztuje zwykle więcej punktów, niż przynosi.</p>"
       },
       {
         "heading": "Jak przygotować się do formy egzaminu",
@@ -143,7 +143,7 @@
       },
       {
         "q": "Czy dostaje się punkty za samo rozpoczęcie zadania?",
-        "a": "W zadaniach otwartych obowiązują punkty częściowe za poprawną metodę — rozpoznanie zjawiska i zapisanie właściwego prawa może dać punkt nawet bez ukończenia obliczeń. Dlatego nie warto zostawiać zadań pustych."
+        "a": "W zadaniach otwartych obowiązują punkty częściowe za poprawną metodę - rozpoznanie zjawiska i zapisanie właściwego prawa może dać punkt nawet bez ukończenia obliczeń. Dlatego nie warto zostawiać zadań pustych."
       },
       {
         "q": "Co jest oceniane oprócz wyniku liczbowego?",
@@ -155,11 +155,11 @@
   },
   {
     "slug": "najczestsze-bledy-na-maturze-z-fizyki",
-    "title": "Najczęstsze błędy na maturze z fizyki — i jak ich uniknąć",
-    "metaDesc": "Jednostki, zaokrąglenia, porzucone zadania i błędne założenia — lista najczęstszych błędów na maturze z fizyki wraz ze sposobami ich uniknięcia.",
+    "title": "Najczęstsze błędy na maturze z fizyki - i jak ich uniknąć",
+    "metaDesc": "Jednostki, zaokrąglenia, porzucone zadania i błędne założenia - lista najczęstszych błędów na maturze z fizyki wraz ze sposobami ich uniknięcia.",
     "keywords": "błędy na maturze z fizyki, jednostki fizyka matura, jak nie stracić punktów matura fizyka, matura fizyka wskazówki",
     "excerpt": "Większość utraconych punktów na maturze z fizyki nie wynika z braku wiedzy, lecz z kilku powtarzalnych błędów. Każdy z nich da się wyeliminować.",
-    "intro": "Analiza arkuszy pokazuje regularność: zdający tracą punkty w tych samych miejscach, rok po roku. Rzadko chodzi o nieznajomość materiału — częściej o pośpiech, brak nawyku i drobne zaniedbania na końcu rozwiązania. To dobra wiadomość, bo takie straty są najłatwiejsze do odzyskania.",
+    "intro": "Analiza arkuszy pokazuje regularność: zdający tracą punkty w tych samych miejscach, rok po roku. Rzadko chodzi o nieznajomość materiału - częściej o pośpiech, brak nawyku i drobne zaniedbania na końcu rozwiązania. To dobra wiadomość, bo takie straty są najłatwiejsze do odzyskania.",
     "sections": [
       {
         "heading": "Błąd 1: jednostki spoza układu SI",
@@ -167,7 +167,7 @@
       },
       {
         "heading": "Błąd 2: brak jednostki w wyniku",
-        "html": "<p>Wynik liczbowy bez jednostki jest w fizyce niepełny i regularnie kosztuje punkt, mimo że całe rozwiązanie było poprawne. To najbardziej bolesna kategoria strat — wiedza była, punktu nie ma.</p><p><strong>Jak temu zapobiec:</strong> wyrób odruch podkreślania wyniku wraz z jednostką. Przy sprawdzaniu arkusza przejrzyj wyłącznie końcówki rozwiązań i upewnij się, że każda ma jednostkę.</p>"
+        "html": "<p>Wynik liczbowy bez jednostki jest w fizyce niepełny i regularnie kosztuje punkt, mimo że całe rozwiązanie było poprawne. To najbardziej bolesna kategoria strat - wiedza była, punktu nie ma.</p><p><strong>Jak temu zapobiec:</strong> wyrób odruch podkreślania wyniku wraz z jednostką. Przy sprawdzaniu arkusza przejrzyj wyłącznie końcówki rozwiązań i upewnij się, że każda ma jednostkę.</p>"
       },
       {
         "heading": "Błąd 3: porzucanie zadań otwartych",
@@ -175,7 +175,7 @@
       },
       {
         "heading": "Błąd 4: zaokrąglanie w trakcie obliczeń",
-        "html": "<p>Zaokrąglenie wyniku pośredniego do dwóch cyfr, a potem użycie go w kolejnych krokach, potrafi przesunąć wynik końcowy poza zakres tolerancji przyjęty w kluczu.</p><p><strong>Jak temu zapobiec:</strong> prowadź obliczenia symbolicznie tak długo, jak się da — przekształć wzór do postaci końcowej i dopiero wtedy podstaw liczby. Zaokrąglaj wyłącznie wynik ostateczny, do sensownej liczby cyfr znaczących.</p>"
+        "html": "<p>Zaokrąglenie wyniku pośredniego do dwóch cyfr, a potem użycie go w kolejnych krokach, potrafi przesunąć wynik końcowy poza zakres tolerancji przyjęty w kluczu.</p><p><strong>Jak temu zapobiec:</strong> prowadź obliczenia symbolicznie tak długo, jak się da - przekształć wzór do postaci końcowej i dopiero wtedy podstaw liczby. Zaokrąglaj wyłącznie wynik ostateczny, do sensownej liczby cyfr znaczących.</p>"
       },
       {
         "heading": "Błąd 5: stosowanie praw poza ich zakresem",
@@ -187,13 +187,13 @@
       },
       {
         "heading": "Błąd 7: brak oceny sensowności wyniku",
-        "html": "<p>Masa elektronu rzędu kilograma, prędkość przekraczająca prędkość światła, temperatura ujemna w skali Kelvina — takie wyniki sygnalizują błąd rachunkowy, ale zostają na arkuszu, bo nikt na nie nie spojrzał krytycznie.</p><p><strong>Jak temu zapobiec:</strong> po każdym zadaniu zadaj sobie jedno pytanie: czy ta liczba może opisywać rzeczywistość? Dziesięć sekund refleksji ratuje punkty częściej, niż się wydaje.</p>"
+        "html": "<p>Masa elektronu rzędu kilograma, prędkość przekraczająca prędkość światła, temperatura ujemna w skali Kelvina - takie wyniki sygnalizują błąd rachunkowy, ale zostają na arkuszu, bo nikt na nie nie spojrzał krytycznie.</p><p><strong>Jak temu zapobiec:</strong> po każdym zadaniu zadaj sobie jedno pytanie: czy ta liczba może opisywać rzeczywistość? Dziesięć sekund refleksji ratuje punkty częściej, niż się wydaje.</p>"
       }
     ],
     "faq": [
       {
         "q": "Jaki błąd najczęściej kosztuje punkty na maturze z fizyki?",
-        "a": "Błędy w jednostkach — zarówno podstawianie wartości spoza układu SI, jak i pominięcie jednostki w wyniku końcowym. Obie kategorie są w pełni możliwe do wyeliminowania nawykiem."
+        "a": "Błędy w jednostkach - zarówno podstawianie wartości spoza układu SI, jak i pominięcie jednostki w wyniku końcowym. Obie kategorie są w pełni możliwe do wyeliminowania nawykiem."
       },
       {
         "q": "Czy warto pisać rozwiązanie, jeśli nie znam wyniku?",
@@ -209,23 +209,23 @@
   },
   {
     "slug": "jakie-studia-wymagaja-fizyki",
-    "title": "Jakie studia wymagają fizyki — kierunki i rekrutacja",
+    "title": "Jakie studia wymagają fizyki - kierunki i rekrutacja",
     "metaDesc": "Na jakie studia potrzebna jest matura z fizyki? Lista kierunków technicznych i ścisłych, zasady przeliczania punktów i alternatywy dla fizyki w rekrutacji.",
     "keywords": "jakie studia wymagają fizyki, fizyka na studia, kierunki z fizyką, rekrutacja na politechnikę, matura z fizyki studia",
-    "excerpt": "Fizyka rozszerzona otwiera drzwi do większości kierunków technicznych — i często jest przedmiotem o najwyższym mnożniku w rekrutacji.",
+    "excerpt": "Fizyka rozszerzona otwiera drzwi do większości kierunków technicznych - i często jest przedmiotem o najwyższym mnożniku w rekrutacji.",
     "intro": "Decyzja o zdawaniu fizyki zapada zwykle w klasie drugiej, na długo przed wyborem uczelni. Warto więc wiedzieć, które kierunki jej wymagają, a na których stanowi jedynie alternatywę dla matematyki lub informatyki. Ta wiedza bywa też najlepszą motywacją do nauki.",
     "sections": [
       {
         "heading": "Kierunki, na których fizyka jest praktycznie niezbędna",
-        "html": "<p>Na części kierunków fizyka pojawia się w rekrutacji jako przedmiot punktowany z wysoką wagą, a jej brak realnie obniża szanse przyjęcia:</p><ul><li><strong>kierunki inżynierskie na politechnikach</strong> — budownictwo, mechanika i budowa maszyn, elektrotechnika, energetyka, lotnictwo i kosmonautyka, inżynieria materiałowa, automatyka i robotyka,</li><li><strong>fizyka, fizyka techniczna, astronomia</strong>,</li><li><strong>fizyka medyczna</strong> i pokrewne kierunki na styku nauk ścisłych i medycyny,</li><li><strong>inżynieria biomedyczna</strong> oraz <strong>mechatronika</strong>,</li><li><strong>geofizyka</strong> i część kierunków geologicznych.</li></ul>"
+        "html": "<p>Na części kierunków fizyka pojawia się w rekrutacji jako przedmiot punktowany z wysoką wagą, a jej brak realnie obniża szanse przyjęcia:</p><ul><li><strong>kierunki inżynierskie na politechnikach</strong> - budownictwo, mechanika i budowa maszyn, elektrotechnika, energetyka, lotnictwo i kosmonautyka, inżynieria materiałowa, automatyka i robotyka,</li><li><strong>fizyka, fizyka techniczna, astronomia</strong>,</li><li><strong>fizyka medyczna</strong> i pokrewne kierunki na styku nauk ścisłych i medycyny,</li><li><strong>inżynieria biomedyczna</strong> oraz <strong>mechatronika</strong>,</li><li><strong>geofizyka</strong> i część kierunków geologicznych.</li></ul>"
       },
       {
         "heading": "Kierunki, gdzie fizyka jest jedną z opcji",
-        "html": "<p>Na wielu kierunkach uczelnie dopuszczają wybór jednego przedmiotu z listy — najczęściej fizyki, chemii, informatyki lub biologii. Fizyka bywa tam opcją korzystną, bo średnie wyniki z tego przedmiotu bywają niższe, co przy przeliczaniu punktów działa na korzyść dobrze przygotowanych.</p><ul><li><strong>informatyka</strong> — zwykle matematyka plus jeden przedmiot do wyboru,</li><li><strong>architektura</strong> — obok egzaminu z rysunku,</li><li><strong>chemia, biotechnologia, ochrona środowiska</strong>,</li><li><strong>zarządzanie i inżynieria produkcji</strong>,</li><li><strong>logistyka</strong> na uczelniach technicznych.</li></ul>"
+        "html": "<p>Na wielu kierunkach uczelnie dopuszczają wybór jednego przedmiotu z listy - najczęściej fizyki, chemii, informatyki lub biologii. Fizyka bywa tam opcją korzystną, bo średnie wyniki z tego przedmiotu bywają niższe, co przy przeliczaniu punktów działa na korzyść dobrze przygotowanych.</p><ul><li><strong>informatyka</strong> - zwykle matematyka plus jeden przedmiot do wyboru,</li><li><strong>architektura</strong> - obok egzaminu z rysunku,</li><li><strong>chemia, biotechnologia, ochrona środowiska</strong>,</li><li><strong>zarządzanie i inżynieria produkcji</strong>,</li><li><strong>logistyka</strong> na uczelniach technicznych.</li></ul>"
       },
       {
         "heading": "Jak przeliczane są punkty rekrutacyjne",
-        "html": "<p>Każda uczelnia ma własny wzór rekrutacyjny, ale konstrukcja jest zwykle podobna: wynik procentowy z każdego przedmiotu mnoży się przez przypisaną mu wagę, a wyniki się sumuje.</p><p>Na kierunkach technicznych matematyka rozszerzona ma zazwyczaj najwyższą wagę, a fizyka drugą w kolejności. Poziom rozszerzony jest niemal zawsze premiowany wyższym mnożnikiem niż podstawowy — a fizykę zdaje się wyłącznie na rozszerzeniu.</p><p>Ponieważ zasady różnią się między uczelniami i bywają zmieniane, jedynym wiarygodnym źródłem jest aktualna uchwała rekrutacyjna konkretnej uczelni na dany rok. Warto sprawdzić ją przed ostatecznym wyborem przedmiotów.</p>"
+        "html": "<p>Każda uczelnia ma własny wzór rekrutacyjny, ale konstrukcja jest zwykle podobna: wynik procentowy z każdego przedmiotu mnoży się przez przypisaną mu wagę, a wyniki się sumuje.</p><p>Na kierunkach technicznych matematyka rozszerzona ma zazwyczaj najwyższą wagę, a fizyka drugą w kolejności. Poziom rozszerzony jest niemal zawsze premiowany wyższym mnożnikiem niż podstawowy - a fizykę zdaje się wyłącznie na rozszerzeniu.</p><p>Ponieważ zasady różnią się między uczelniami i bywają zmieniane, jedynym wiarygodnym źródłem jest aktualna uchwała rekrutacyjna konkretnej uczelni na dany rok. Warto sprawdzić ją przed ostatecznym wyborem przedmiotów.</p>"
       },
       {
         "heading": "Czy warto zdawać fizykę, jeśli nie jestem pewien kierunku",
@@ -233,17 +233,17 @@
       },
       {
         "heading": "Ile punktów potrzeba na popularne kierunki",
-        "html": "<p>Progi punktowe nie są ustalane odgórnie — wynikają z liczby miejsc i wyników kandydatów w danym roku, więc zmieniają się z rekrutacji na rekrutację. Utrzymuje się jednak stała prawidłowość: najwyższe progi mają kierunki takie jak automatyka i robotyka, informatyka czy lotnictwo, niższe — kierunki o mniejszej popularności.</p><p>Zamiast szukać liczb sprzed kilku lat, sprawdź progi z ostatniej rekrutacji na stronie wybranej uczelni i potraktuj je jako orientacyjny punkt odniesienia, a nie gwarancję.</p>"
+        "html": "<p>Progi punktowe nie są ustalane odgórnie - wynikają z liczby miejsc i wyników kandydatów w danym roku, więc zmieniają się z rekrutacji na rekrutację. Utrzymuje się jednak stała prawidłowość: najwyższe progi mają kierunki takie jak automatyka i robotyka, informatyka czy lotnictwo, niższe - kierunki o mniejszej popularności.</p><p>Zamiast szukać liczb sprzed kilku lat, sprawdź progi z ostatniej rekrutacji na stronie wybranej uczelni i potraktuj je jako orientacyjny punkt odniesienia, a nie gwarancję.</p>"
       }
     ],
     "faq": [
       {
         "q": "Czy fizyka jest potrzebna na politechnikę?",
-        "a": "Na większości kierunków inżynierskich tak — fizyka jest przedmiotem punktowanym w rekrutacji, zwykle z drugą co do wysokości wagą po matematyce. Szczegóły określa uchwała rekrutacyjna danej uczelni."
+        "a": "Na większości kierunków inżynierskich tak - fizyka jest przedmiotem punktowanym w rekrutacji, zwykle z drugą co do wysokości wagą po matematyce. Szczegóły określa uchwała rekrutacyjna danej uczelni."
       },
       {
         "q": "Czy można dostać się na informatykę bez fizyki?",
-        "a": "Zwykle tak — na wielu uczelniach fizyka jest jednym z przedmiotów do wyboru obok informatyki, chemii czy biologii. Kluczowa jest natomiast matematyka rozszerzona."
+        "a": "Zwykle tak - na wielu uczelniach fizyka jest jednym z przedmiotów do wyboru obok informatyki, chemii czy biologii. Kluczowa jest natomiast matematyka rozszerzona."
       },
       {
         "q": "Czy fizykę zdaje się na poziomie podstawowym?",
@@ -251,7 +251,7 @@
       },
       {
         "q": "Jaki wynik z fizyki jest dobry?",
-        "a": "Zależy od kierunku i rocznika — progi zależą od liczby miejsc i wyników pozostałych kandydatów. Na najbardziej obleganych kierunkach technicznych bezpieczny poziom to zwykle wynik wyraźnie powyżej średniej krajowej."
+        "a": "Zależy od kierunku i rocznika - progi zależą od liczby miejsc i wyników pozostałych kandydatów. Na najbardziej obleganych kierunkach technicznych bezpieczny poziom to zwykle wynik wyraźnie powyżej średniej krajowej."
       }
     ],
     "relatedTopics": ["dynamika", "elektrostatyka", "grawitacja"],
@@ -259,27 +259,27 @@
   },
   {
     "slug": "jak-rozwiazywac-zadania-z-fizyki",
-    "title": "Jak rozwiązywać zadania z fizyki — uniwersalny schemat krok po kroku",
-    "metaDesc": "Jak rozwiązywać zadania z fizyki, żeby nie utknąć na starcie? Uniwersalny schemat pięciu kroków, który działa w każdym dziale — od kinematyki po elektryczność.",
+    "title": "Jak rozwiązywać zadania z fizyki - uniwersalny schemat krok po kroku",
+    "metaDesc": "Jak rozwiązywać zadania z fizyki, żeby nie utknąć na starcie? Uniwersalny schemat pięciu kroków, który działa w każdym dziale - od kinematyki po elektryczność.",
     "keywords": "jak rozwiązywać zadania z fizyki, schemat rozwiązywania zadań, zadania z fizyki matura, metoda rozwiązywania zadań fizyka, analiza zadania fizyka",
-    "excerpt": "Większość zadań z fizyki nie jest trudna sama w sobie — trudność bierze się z braku metody. Oto schemat, który sprawdza się w każdym dziale.",
+    "excerpt": "Większość zadań z fizyki nie jest trudna sama w sobie - trudność bierze się z braku metody. Oto schemat, który sprawdza się w każdym dziale.",
     "intro": "Zdający, który patrzy na zadanie i nie wie, „od czego zacząć”, najczęściej nie ma braków w wiedzy, lecz braku procedury. Fizyka maturalna jest w tym sensie łaskawa: te same pięć kroków prowadzi do rozwiązania niezależnie od tego, czy zadanie dotyczy równi pochyłej, obwodu elektrycznego, czy rozpadu jądra. Ten schemat zamienia „nie wiem, jak to ugryźć” w powtarzalny proces.",
     "sections": [
       {
         "heading": "Dlaczego potrzebujesz stałego schematu",
-        "html": "<p>Zadanie z fizyki to tłumaczenie z języka opisu na język matematyki i z powrotem. Bez ustalonej kolejności działań łatwo pominąć krok — najczęściej analizę zjawiska — i od razu rzucić się na wzory. To prosta droga do rozwiązania, które „liczy się ładnie”, ale odpowiada na inne pytanie niż zadane.</p><p>Stały schemat ma dwie zalety. Po pierwsze, daje początek nawet wtedy, gdy nie widzisz całej drogi do wyniku. Po drugie, na egzaminie działa automatycznie, bez obciążania uwagi, którą możesz przeznaczyć na trudną część zadania.</p>"
+        "html": "<p>Zadanie z fizyki to tłumaczenie z języka opisu na język matematyki i z powrotem. Bez ustalonej kolejności działań łatwo pominąć krok - najczęściej analizę zjawiska - i od razu rzucić się na wzory. To prosta droga do rozwiązania, które „liczy się ładnie”, ale odpowiada na inne pytanie niż zadane.</p><p>Stały schemat ma dwie zalety. Po pierwsze, daje początek nawet wtedy, gdy nie widzisz całej drogi do wyniku. Po drugie, na egzaminie działa automatycznie, bez obciążania uwagi, którą możesz przeznaczyć na trudną część zadania.</p>"
       },
       {
         "heading": "Krok 1: przeczytaj i wypisz dane w SI",
-        "html": "<p>Przeczytaj treść dwukrotnie. Za pierwszym razem dla ogólnego sensu, za drugim — wypisując wielkości. Każdą daną zapisz z symbolem, wartością i jednostką, od razu przeliczoną na układ SI.</p><ul><li>prędkość \\( 72\\ \\mathrm{km/h} \\) zapisz jako \\( 20\\ \\mathrm{m/s} \\),</li><li>masę \\( 500\\ \\mathrm{g} \\) jako \\( 0{,}5\\ \\mathrm{kg} \\),</li><li>czas \\( 5\\ \\mathrm{min} \\) jako \\( 300\\ \\mathrm{s} \\).</li></ul><p>Osobno wypisz szukaną. To pozornie błaha czynność, ale samo uporządkowanie danych często podpowiada, którym prawem operować.</p>"
+        "html": "<p>Przeczytaj treść dwukrotnie. Za pierwszym razem dla ogólnego sensu, za drugim - wypisując wielkości. Każdą daną zapisz z symbolem, wartością i jednostką, od razu przeliczoną na układ SI.</p><ul><li>prędkość \\( 72\\ \\mathrm{km/h} \\) zapisz jako \\( 20\\ \\mathrm{m/s} \\),</li><li>masę \\( 500\\ \\mathrm{g} \\) jako \\( 0{,}5\\ \\mathrm{kg} \\),</li><li>czas \\( 5\\ \\mathrm{min} \\) jako \\( 300\\ \\mathrm{s} \\).</li></ul><p>Osobno wypisz szukaną. To pozornie błaha czynność, ale samo uporządkowanie danych często podpowiada, którym prawem operować.</p>"
       },
       {
         "heading": "Krok 2: narysuj sytuację",
-        "html": "<p>Rysunek jest narzędziem, nie ozdobą. Nanieś ciała, kierunki ruchu, wszystkie siły, układ współrzędnych i kąty. W zadaniach z mechaniki rysunek sił wprost pokazuje, które składowe wchodzą do równań. W optyce bieg promieni rozstrzyga o konstrukcji obrazu, a w elektryczności schemat obwodu decyduje, co jest połączone szeregowo, a co równolegle.</p><p>Dobrze wykonany rysunek bywa też osobno punktowanym elementem rozwiązania. Jeśli nie wiesz, jak zacząć zadanie z dynamiki, zacznij od narysowania wszystkich sił — kolejne kroki często wynikają z niego same.</p>"
+        "html": "<p>Rysunek jest narzędziem, nie ozdobą. Nanieś ciała, kierunki ruchu, wszystkie siły, układ współrzędnych i kąty. W zadaniach z mechaniki rysunek sił wprost pokazuje, które składowe wchodzą do równań. W optyce bieg promieni rozstrzyga o konstrukcji obrazu, a w elektryczności schemat obwodu decyduje, co jest połączone szeregowo, a co równolegle.</p><p>Dobrze wykonany rysunek bywa też osobno punktowanym elementem rozwiązania. Jeśli nie wiesz, jak zacząć zadanie z dynamiki, zacznij od narysowania wszystkich sił - kolejne kroki często wynikają z niego same.</p>"
       },
       {
         "heading": "Krok 3: nazwij zjawisko i wybierz prawo",
-        "html": "<p>To najważniejszy krok — decyduje o całym rozwiązaniu. Zadaj pytanie: co się tu fizycznie dzieje i jakie prawo to opisuje? Kilka typowych rozpoznań:</p><ul><li>zderzenie ciał → <strong>zasada zachowania pędu</strong>,</li><li>ruch bez sił rozpraszających i pytanie o prędkość albo wysokość → <strong>zasada zachowania energii</strong>,</li><li>przyspieszenie i siły → <strong>druga zasada dynamiki</strong>,</li><li>obwód z opornikami → <strong>prawa Ohma i Kirchhoffa</strong>.</li></ul><p>Wybór prawa wynika ze zjawiska, nigdy z tego, „w którym wzorze występują dane z treści”. Dopasowywanie wzoru do symboli to najczęstsza przyczyna rozwiązań całkowicie chybionych.</p>"
+        "html": "<p>To najważniejszy krok - decyduje o całym rozwiązaniu. Zadaj pytanie: co się tu fizycznie dzieje i jakie prawo to opisuje? Kilka typowych rozpoznań:</p><ul><li>zderzenie ciał → <strong>zasada zachowania pędu</strong>,</li><li>ruch bez sił rozpraszających i pytanie o prędkość albo wysokość → <strong>zasada zachowania energii</strong>,</li><li>przyspieszenie i siły → <strong>druga zasada dynamiki</strong>,</li><li>obwód z opornikami → <strong>prawa Ohma i Kirchhoffa</strong>.</li></ul><p>Wybór prawa wynika ze zjawiska, nigdy z tego, „w którym wzorze występują dane z treści”. Dopasowywanie wzoru do symboli to najczęstsza przyczyna rozwiązań całkowicie chybionych.</p>"
       },
       {
         "heading": "Krok 4: przekształć symbolicznie, potem podstaw liczby",
@@ -287,7 +287,7 @@
       },
       {
         "heading": "Krok 5: sprawdź jednostki i sensowność wyniku",
-        "html": "<p>Na koniec dwie szybkie kontrole. Pierwsza — analiza jednostkowa: podstaw same jednostki do wzoru końcowego i sprawdź, czy wychodzi ta oczekiwana. Jeśli w zadaniu o prędkość wychodzi Ci \\( \\mathrm{kg\\cdot m} \\), gdzieś jest błąd w przekształceniu.</p><p>Druga — ocena rzędu wielkości: czy liczba może opisywać rzeczywistość? Prędkość pieszego \\( 300\\ \\mathrm{m/s} \\), masa elektronu rzędu kilograma czy sprawność silnika powyżej 100% to sygnały do powrotu do rachunku. Dziesięć sekund tej refleksji ratuje punkty częściej, niż się wydaje.</p>"
+        "html": "<p>Na koniec dwie szybkie kontrole. Pierwsza - analiza jednostkowa: podstaw same jednostki do wzoru końcowego i sprawdź, czy wychodzi ta oczekiwana. Jeśli w zadaniu o prędkość wychodzi Ci \\( \\mathrm{kg\\cdot m} \\), gdzieś jest błąd w przekształceniu.</p><p>Druga - ocena rzędu wielkości: czy liczba może opisywać rzeczywistość? Prędkość pieszego \\( 300\\ \\mathrm{m/s} \\), masa elektronu rzędu kilograma czy sprawność silnika powyżej 100% to sygnały do powrotu do rachunku. Dziesięć sekund tej refleksji ratuje punkty częściej, niż się wydaje.</p>"
       },
       {
         "heading": "Co robić, gdy schemat nie ruszy z miejsca",
@@ -313,7 +313,7 @@
       },
       {
         "q": "Czy ten schemat działa we wszystkich działach fizyki?",
-        "a": "Tak. Pięć kroków — dane, rysunek, wybór prawa, przekształcenie, kontrola wyniku — jest uniwersalne dla kinematyki, dynamiki, elektryczności, optyki i pozostałych działów. Zmienia się tylko treść kroku trzeciego, czyli wybrane prawo fizyczne."
+        "a": "Tak. Pięć kroków - dane, rysunek, wybór prawa, przekształcenie, kontrola wyniku - jest uniwersalne dla kinematyki, dynamiki, elektryczności, optyki i pozostałych działów. Zmienia się tylko treść kroku trzeciego, czyli wybrane prawo fizyczne."
       }
     ],
     "relatedTopics": ["kinematyka", "dynamika", "ped-i-zasada-zachowania"],
@@ -321,19 +321,19 @@
   },
   {
     "slug": "wzory-z-kinematyki-matura",
-    "title": "Wzory z kinematyki na maturę — komplet z wyjaśnieniem",
+    "title": "Wzory z kinematyki na maturę - komplet z wyjaśnieniem",
     "metaDesc": "Wszystkie wzory z kinematyki potrzebne na maturze z fizyki: ruch jednostajny, jednostajnie zmienny, rzuty i ruch po okręgu, z warunkami stosowania.",
     "keywords": "wzory z kinematyki, kinematyka matura, wzory ruch jednostajnie przyspieszony, rzut poziomy wzory, ruch po okręgu wzory, kinematyka wzory matura",
     "excerpt": "Kinematyka to fundament całej mechaniki, a jej wzorów jest zaskakująco mało. Oto komplet potrzebny na maturze, z zaznaczeniem, kiedy wolno go stosować.",
-    "intro": "Kinematyka opisuje ruch bez pytania o jego przyczyny — to język, w którym zapisana jest cała dalsza mechanika. Dobra wiadomość: podstawowych wzorów jest tu naprawdę niewiele, a większość zadań sprowadza się do rozpoznania rodzaju ruchu. Poniżej komplet, który wystarcza na maturze rozszerzonej, wraz z warunkami stosowania, których karta wzorów nie podaje.",
+    "intro": "Kinematyka opisuje ruch bez pytania o jego przyczyny - to język, w którym zapisana jest cała dalsza mechanika. Dobra wiadomość: podstawowych wzorów jest tu naprawdę niewiele, a większość zadań sprowadza się do rozpoznania rodzaju ruchu. Poniżej komplet, który wystarcza na maturze rozszerzonej, wraz z warunkami stosowania, których karta wzorów nie podaje.",
     "sections": [
       {
         "heading": "Ruch jednostajny prostoliniowy",
-        "html": "<p>Najprostszy przypadek: stała prędkość, brak przyspieszenia. Cała kinematyka tego ruchu mieści się w jednej zależności:</p><p>\\( s = v\\,t \\)</p><p>gdzie \\( s \\) to droga, \\( v \\) — stała prędkość, \\( t \\) — czas. Wykres prędkości od czasu jest linią poziomą, a pole pod nim równa się przebytej drodze. Wykres drogi od czasu jest linią prostą, której nachylenie odpowiada prędkości. Ta interpretacja graficzna wraca w zadaniach częściej niż sam wzór.</p>"
+        "html": "<p>Najprostszy przypadek: stała prędkość, brak przyspieszenia. Cała kinematyka tego ruchu mieści się w jednej zależności:</p><p>\\( s = v\\,t \\)</p><p>gdzie \\( s \\) to droga, \\( v \\) - stała prędkość, \\( t \\) - czas. Wykres prędkości od czasu jest linią poziomą, a pole pod nim równa się przebytej drodze. Wykres drogi od czasu jest linią prostą, której nachylenie odpowiada prędkości. Ta interpretacja graficzna wraca w zadaniach częściej niż sam wzór.</p>"
       },
       {
         "heading": "Ruch jednostajnie zmienny",
-        "html": "<p>Ruch ze stałym przyspieszeniem \\( a \\). To najważniejszy przypadek na maturze, opisany trzema zależnościami:</p><ul><li>prędkość: \\( v = v_0 + a\\,t \\),</li><li>droga: \\( s = v_0 t + \\dfrac{a t^2}{2} \\),</li><li>zależność bezczasowa: \\( v^2 = v_0^2 + 2 a s \\).</li></ul><p>Dla ruchu przyspieszonego przyjmuj \\( a > 0 \\), dla opóźnionego \\( a < 0 \\) (albo odwrotny zwrot). Wzór bezczasowy jest wygodny, gdy w zadaniu nie występuje czas — pozwala ominąć rozwiązywanie równania kwadratowego. Warunek stosowania wszystkich trzech: przyspieszenie musi być stałe.</p>"
+        "html": "<p>Ruch ze stałym przyspieszeniem \\( a \\). To najważniejszy przypadek na maturze, opisany trzema zależnościami:</p><ul><li>prędkość: \\( v = v_0 + a\\,t \\),</li><li>droga: \\( s = v_0 t + \\dfrac{a t^2}{2} \\),</li><li>zależność bezczasowa: \\( v^2 = v_0^2 + 2 a s \\).</li></ul><p>Dla ruchu przyspieszonego przyjmuj \\( a > 0 \\), dla opóźnionego \\( a < 0 \\) (albo odwrotny zwrot). Wzór bezczasowy jest wygodny, gdy w zadaniu nie występuje czas - pozwala ominąć rozwiązywanie równania kwadratowego. Warunek stosowania wszystkich trzech: przyspieszenie musi być stałe.</p>"
       },
       {
         "heading": "Spadek swobodny i rzut pionowy",
@@ -341,7 +341,7 @@
       },
       {
         "heading": "Rzut poziomy",
-        "html": "<p>Rzut poziomy to złożenie dwóch niezależnych ruchów: jednostajnego w poziomie i spadku swobodnego w pionie. Ta niezależność jest sednem — pozwala rozdzielić zadanie na dwa proste.</p><ul><li>poziomo: \\( x = v_0\\,t \\),</li><li>pionowo: \\( y = \\dfrac{g t^2}{2} \\).</li></ul><p>Czas lotu wyznacza wyłącznie ruch pionowy — zależy od wysokości, nie od prędkości początkowej. Dwa ciała zrzucone i wystrzelone poziomo z tej samej wysokości spadną w tej samej chwili. Zasięg rzutu obliczysz, wstawiając czas spadku do równania poziomego.</p>"
+        "html": "<p>Rzut poziomy to złożenie dwóch niezależnych ruchów: jednostajnego w poziomie i spadku swobodnego w pionie. Ta niezależność jest sednem - pozwala rozdzielić zadanie na dwa proste.</p><ul><li>poziomo: \\( x = v_0\\,t \\),</li><li>pionowo: \\( y = \\dfrac{g t^2}{2} \\).</li></ul><p>Czas lotu wyznacza wyłącznie ruch pionowy - zależy od wysokości, nie od prędkości początkowej. Dwa ciała zrzucone i wystrzelone poziomo z tej samej wysokości spadną w tej samej chwili. Zasięg rzutu obliczysz, wstawiając czas spadku do równania poziomego.</p>"
       },
       {
         "heading": "Ruch jednostajny po okręgu",
@@ -353,13 +353,13 @@
       },
       {
         "heading": "Jak korzystać z wykresów w kinematyce",
-        "html": "<p>Znaczna część zadań kinematycznych to odczyt z wykresu, a nie podstawianie do wzoru. Warto zapamiętać dwie reguły uniwersalne:</p><ul><li><strong>nachylenie wykresu</strong> jest pochodną — nachylenie wykresu \\( x(t) \\) daje prędkość, a nachylenie \\( v(t) \\) daje przyspieszenie,</li><li><strong>pole pod wykresem</strong> jest całką — pole pod \\( v(t) \\) daje drogę, a pole pod \\( a(t) \\) daje przyrost prędkości.</li></ul><p>Te dwie zasady pozwalają rozwiązać większość zadań graficznych bez sięgania po jakikolwiek wzór.</p>"
+        "html": "<p>Znaczna część zadań kinematycznych to odczyt z wykresu, a nie podstawianie do wzoru. Warto zapamiętać dwie reguły uniwersalne:</p><ul><li><strong>nachylenie wykresu</strong> jest pochodną - nachylenie wykresu \\( x(t) \\) daje prędkość, a nachylenie \\( v(t) \\) daje przyspieszenie,</li><li><strong>pole pod wykresem</strong> jest całką - pole pod \\( v(t) \\) daje drogę, a pole pod \\( a(t) \\) daje przyrost prędkości.</li></ul><p>Te dwie zasady pozwalają rozwiązać większość zadań graficznych bez sięgania po jakikolwiek wzór.</p>"
       }
     ],
     "faq": [
       {
         "q": "Ile wzorów z kinematyki trzeba znać na maturę?",
-        "a": "Naprawdę niewiele. Wystarczy jeden wzór na ruch jednostajny, trzy na ruch jednostajnie zmienny, po dwa równania na rzut poziomy i pionowy oraz zestaw zależności dla ruchu po okręgu. Wszystkie są w karcie wzorów CKE — kluczowe jest rozpoznanie rodzaju ruchu."
+        "a": "Naprawdę niewiele. Wystarczy jeden wzór na ruch jednostajny, trzy na ruch jednostajnie zmienny, po dwa równania na rzut poziomy i pionowy oraz zestaw zależności dla ruchu po okręgu. Wszystkie są w karcie wzorów CKE - kluczowe jest rozpoznanie rodzaju ruchu."
       },
       {
         "q": "Kiedy używać wzoru bezczasowego v² = v₀² + 2as?",
@@ -383,7 +383,7 @@
   },
   {
     "slug": "fizyka-rozszerzona-czy-warto",
-    "title": "Fizyka rozszerzona — czy warto ją zdawać na maturze",
+    "title": "Fizyka rozszerzona - czy warto ją zdawać na maturze",
     "metaDesc": "Czy warto zdawać fizykę rozszerzoną na maturze? Za i przeciw, wartość w rekrutacji, wymagany nakład pracy i dla kogo ten wybór ma sens.",
     "keywords": "fizyka rozszerzona czy warto, czy zdawać fizykę na maturze, fizyka rozszerzona matura, wybór przedmiotów maturalnych, fizyka do rekrutacji",
     "excerpt": "Wybór fizyki rozszerzonej to jedna z ważniejszych decyzji maturalnych. Sprawdź, kiedy naprawdę się opłaca, a kiedy lepiej postawić na inny przedmiot.",
@@ -391,27 +391,27 @@
     "sections": [
       {
         "heading": "Fizyka istnieje na maturze tylko jako rozszerzenie",
-        "html": "<p>Warto zacząć od faktu, który porządkuje całą decyzję: fizyka jest przedmiotem dodatkowym zdawanym wyłącznie na poziomie rozszerzonym. Nie ma matury podstawowej z fizyki. „Zdaję fizykę” zawsze oznacza poziom rozszerzony, egzamin trwający 180 minut i zakres obejmujący całą podstawę programową.</p><p>Nie obowiązuje przy niej próg 30% wymagany przy przedmiotach obowiązkowych — każdy wynik pozwala zdać maturę. Liczba zdobytych punktów przekłada się natomiast na punkty rekrutacyjne, a o wymaganym poziomie decyduje wybrana uczelnia.</p>"
+        "html": "<p>Warto zacząć od faktu, który porządkuje całą decyzję: fizyka jest przedmiotem dodatkowym zdawanym wyłącznie na poziomie rozszerzonym. Nie ma matury podstawowej z fizyki. „Zdaję fizykę” zawsze oznacza poziom rozszerzony, egzamin trwający 180 minut i zakres obejmujący całą podstawę programową.</p><p>Nie obowiązuje przy niej próg 30% wymagany przy przedmiotach obowiązkowych - każdy wynik pozwala zdać maturę. Liczba zdobytych punktów przekłada się natomiast na punkty rekrutacyjne, a o wymaganym poziomie decyduje wybrana uczelnia.</p>"
       },
       {
         "heading": "Argumenty za zdawaniem fizyki",
-        "html": "<ul><li><strong>Otwiera niemal całą politechnikę.</strong> Na kierunkach inżynierskich fizyka jest przedmiotem punktowanym, zwykle z drugą co do wysokości wagą po matematyce.</li><li><strong>Wysoki mnożnik przy relatywnie niższej konkurencji.</strong> Fizykę zdaje mniej osób niż na przykład biologię, a średnie wyniki bywają niższe — dobrze przygotowany kandydat zyskuje przewagę.</li><li><strong>Ułatwia pierwszy rok studiów technicznych.</strong> Fizyka jest tam przedmiotem obowiązkowym i częstą przyczyną niezaliczenia semestru. Solidna baza maturalna procentuje długo po rekrutacji.</li><li><strong>Świetnie komponuje się z matematyką.</strong> Oba przedmioty wzajemnie się wzmacniają, więc łączny nakład pracy jest mniejszy niż suma dwóch niezależnych.</li></ul>"
+        "html": "<ul><li><strong>Otwiera niemal całą politechnikę.</strong> Na kierunkach inżynierskich fizyka jest przedmiotem punktowanym, zwykle z drugą co do wysokości wagą po matematyce.</li><li><strong>Wysoki mnożnik przy relatywnie niższej konkurencji.</strong> Fizykę zdaje mniej osób niż na przykład biologię, a średnie wyniki bywają niższe - dobrze przygotowany kandydat zyskuje przewagę.</li><li><strong>Ułatwia pierwszy rok studiów technicznych.</strong> Fizyka jest tam przedmiotem obowiązkowym i częstą przyczyną niezaliczenia semestru. Solidna baza maturalna procentuje długo po rekrutacji.</li><li><strong>Świetnie komponuje się z matematyką.</strong> Oba przedmioty wzajemnie się wzmacniają, więc łączny nakład pracy jest mniejszy niż suma dwóch niezależnych.</li></ul>"
       },
       {
         "heading": "Argumenty przeciw",
-        "html": "<ul><li><strong>Duży nakład pracy.</strong> Rzetelne przygotowanie do rozszerzenia to zwykle 200–300 godzin nauki. Jeśli fizyka nie jest Ci potrzebna do rekrutacji, ten czas lepiej zainwestować gdzie indziej.</li><li><strong>Wymaga myślenia, nie pamięci.</strong> Fizyki nie da się „wykuć” na ostatni tydzień. Kto liczy na naukę pamięciową, zwykle odbija się od tego przedmiotu.</li><li><strong>Nie każdy kierunek jej wymaga.</strong> Na wielu studiach, także technicznych jak informatyka, fizyka jest tylko jedną z opcji do wyboru, a czasem nie liczy się wcale.</li></ul><p>Krótko: fizyka opłaca się wtedy, gdy prowadzi do celu, a nie jako „dodatkowy przedmiot na wszelki wypadek”.</p>"
+        "html": "<ul><li><strong>Duży nakład pracy.</strong> Rzetelne przygotowanie do rozszerzenia to zwykle 200-300 godzin nauki. Jeśli fizyka nie jest Ci potrzebna do rekrutacji, ten czas lepiej zainwestować gdzie indziej.</li><li><strong>Wymaga myślenia, nie pamięci.</strong> Fizyki nie da się „wykuć” na ostatni tydzień. Kto liczy na naukę pamięciową, zwykle odbija się od tego przedmiotu.</li><li><strong>Nie każdy kierunek jej wymaga.</strong> Na wielu studiach, także technicznych jak informatyka, fizyka jest tylko jedną z opcji do wyboru, a czasem nie liczy się wcale.</li></ul><p>Krótko: fizyka opłaca się wtedy, gdy prowadzi do celu, a nie jako „dodatkowy przedmiot na wszelki wypadek”.</p>"
       },
       {
         "heading": "Dla kogo fizyka rozszerzona ma sens",
-        "html": "<p>Wybór jest niemal oczywisty, jeśli myślisz o kierunkach inżynierskich, fizyce, astronomii, fizyce medycznej, inżynierii biomedycznej, mechatronice czy energetyce. Na tych kierunkach fizyka realnie podnosi wynik rekrutacyjny.</p><p>Ma też sens, jeśli fizyka po prostu wychodzi Ci dobrze i sprawia satysfakcję — dobre wyniki z „trudnego” przedmiotu dają w rekrutacji przewagę większą niż przeciętne wyniki z przedmiotu popularnego. Jeśli natomiast celujesz w kierunki humanistyczne, ekonomiczne czy medyczne oparte na biologii i chemii, fizyka rozszerzona zwykle nie jest najlepszą inwestycją czasu.</p>"
+        "html": "<p>Wybór jest niemal oczywisty, jeśli myślisz o kierunkach inżynierskich, fizyce, astronomii, fizyce medycznej, inżynierii biomedycznej, mechatronice czy energetyce. Na tych kierunkach fizyka realnie podnosi wynik rekrutacyjny.</p><p>Ma też sens, jeśli fizyka po prostu wychodzi Ci dobrze i sprawia satysfakcję - dobre wyniki z „trudnego” przedmiotu dają w rekrutacji przewagę większą niż przeciętne wyniki z przedmiotu popularnego. Jeśli natomiast celujesz w kierunki humanistyczne, ekonomiczne czy medyczne oparte na biologii i chemii, fizyka rozszerzona zwykle nie jest najlepszą inwestycją czasu.</p>"
       },
       {
         "heading": "Ile pracy realnie wymaga fizyka rozszerzona",
-        "html": "<p>Uczciwy szacunek to 200–300 godzin przy nauce od podstaw do poziomu rozszerzonego. Rozłożone na dwa lata daje to bardzo komfortowe kilka godzin tygodniowo, na rok — 4–6 godzin, na trzy miesiące — intensywne 15–20 godzin tygodniowo.</p><p>Kluczowa jest regularność, nie sumaryczna liczba godzin. Fizyka wymaga czasu na osadzenie się pojęć między sesjami, więc trzy krótsze sesje w tygodniu dają więcej niż jedna maratońska w weekend. To argument za wczesnym startem — przy nauce od klasy drugiej tygodniowe obciążenie jest naprawdę niewielkie.</p>"
+        "html": "<p>Uczciwy szacunek to 200-300 godzin przy nauce od podstaw do poziomu rozszerzonego. Rozłożone na dwa lata daje to bardzo komfortowe kilka godzin tygodniowo, na rok - 4-6 godzin, na trzy miesiące - intensywne 15-20 godzin tygodniowo.</p><p>Kluczowa jest regularność, nie sumaryczna liczba godzin. Fizyka wymaga czasu na osadzenie się pojęć między sesjami, więc trzy krótsze sesje w tygodniu dają więcej niż jedna maratońska w weekend. To argument za wczesnym startem - przy nauce od klasy drugiej tygodniowe obciążenie jest naprawdę niewielkie.</p>"
       },
       {
         "heading": "Jak podjąć decyzję krok po kroku",
-        "html": "<ol><li>Wypisz 3–5 kierunków, które realnie rozważasz.</li><li>Sprawdź w aktualnych zasadach rekrutacji tych uczelni, czy i z jaką wagą liczy się fizyka.</li><li>Oceń, czy fizyka wychodzi Ci lepiej, czy gorzej od alternatyw (chemia, informatyka, biologia).</li><li>Uwzględnij synergię z matematyką rozszerzoną, którą i tak zwykle zdajesz na kierunki techniczne.</li></ol><p>Jeśli fizyka pojawia się w wymaganiach większości Twoich kierunków, decyzja jest prosta. Jeśli tylko w części — porównaj ją z alternatywami pod kątem tego, w czym masz większą szansę na wysoki wynik.</p>"
+        "html": "<ol><li>Wypisz 3-5 kierunków, które realnie rozważasz.</li><li>Sprawdź w aktualnych zasadach rekrutacji tych uczelni, czy i z jaką wagą liczy się fizyka.</li><li>Oceń, czy fizyka wychodzi Ci lepiej, czy gorzej od alternatyw (chemia, informatyka, biologia).</li><li>Uwzględnij synergię z matematyką rozszerzoną, którą i tak zwykle zdajesz na kierunki techniczne.</li></ol><p>Jeśli fizyka pojawia się w wymaganiach większości Twoich kierunków, decyzja jest prosta. Jeśli tylko w części - porównaj ją z alternatywami pod kątem tego, w czym masz większą szansę na wysoki wynik.</p>"
       }
     ],
     "faq": [
@@ -425,7 +425,7 @@
       },
       {
         "q": "Ile trzeba się uczyć do fizyki rozszerzonej?",
-        "a": "Przy nauce od podstaw to zwykle 200–300 godzin. Rozłożone na dwa lata oznacza kilka godzin tygodniowo, ale przy starcie na trzy miesiące przed maturą rośnie do 15–20 godzin tygodniowo. Najważniejsza jest regularność."
+        "a": "Przy nauce od podstaw to zwykle 200-300 godzin. Rozłożone na dwa lata oznacza kilka godzin tygodniowo, ale przy starcie na trzy miesiące przed maturą rośnie do 15-20 godzin tygodniowo. Najważniejsza jest regularność."
       },
       {
         "q": "Czy fizyka jest trudniejsza od innych przedmiotów rozszerzonych?",
@@ -441,35 +441,35 @@
   },
   {
     "slug": "korepetycje-z-fizyki-czy-samodzielna-nauka",
-    "title": "Korepetycje z fizyki czy samodzielna nauka — co wybrać",
+    "title": "Korepetycje z fizyki czy samodzielna nauka - co wybrać",
     "metaDesc": "Korepetycje z fizyki czy nauka samodzielna do matury? Porównanie kosztów, skuteczności i czasu oraz podpowiedź, kiedy naprawdę warto wziąć korepetytora.",
     "keywords": "korepetycje z fizyki, samodzielna nauka fizyki, korepetycje czy samodzielna nauka, przygotowanie do matury z fizyki, korepetytor fizyka matura",
     "excerpt": "Korepetycje bywają skuteczne, ale nie zawsze są potrzebne. Sprawdź, kiedy warto w nie zainwestować, a kiedy wystarczy dobrze poprowadzona nauka samodzielna.",
-    "intro": "Pytanie „korepetycje czy sam?” zadaje sobie większość maturzystów zdających fizykę. Odpowiedź nie jest uniwersalna — zależy od punktu startowego, samodyscypliny i tego, ile czasu zostało do egzaminu. Zamiast ogólnego „to zależy”, poniżej konkretne kryteria, które pomogą podjąć decyzję świadomie i nie przepłacić.",
+    "intro": "Pytanie „korepetycje czy sam?” zadaje sobie większość maturzystów zdających fizykę. Odpowiedź nie jest uniwersalna - zależy od punktu startowego, samodyscypliny i tego, ile czasu zostało do egzaminu. Zamiast ogólnego „to zależy”, poniżej konkretne kryteria, które pomogą podjąć decyzję świadomie i nie przepłacić.",
     "sections": [
       {
         "heading": "Co realnie dają korepetycje",
-        "html": "<p>Dobry korepetytor daje trzy rzeczy, które trudno zorganizować samemu. Po pierwsze, <strong>diagnozę</strong> — wskazuje, gdzie dokładnie leży problem, zamiast pozwalać błądzić. Po drugie, <strong>natychmiastową informację zwrotną</strong> — błąd w rozumowaniu zostaje wychwycony od razu, a nie utrwalony przez tygodnie. Po trzecie, <strong>strukturę i tempo</strong> — narzucony rytm spotkań wymusza regularność.</p><p>Czego korepetycje nie dają: nie zastąpią samodzielnej pracy między spotkaniami. Godzina tygodniowo z korepetytorem bez rozwiązywania zadań w międzyczasie to wyrzucone pieniądze. Korepetytor pokazuje drogę — przejść ją musisz sam.</p>"
+        "html": "<p>Dobry korepetytor daje trzy rzeczy, które trudno zorganizować samemu. Po pierwsze, <strong>diagnozę</strong> - wskazuje, gdzie dokładnie leży problem, zamiast pozwalać błądzić. Po drugie, <strong>natychmiastową informację zwrotną</strong> - błąd w rozumowaniu zostaje wychwycony od razu, a nie utrwalony przez tygodnie. Po trzecie, <strong>strukturę i tempo</strong> - narzucony rytm spotkań wymusza regularność.</p><p>Czego korepetycje nie dają: nie zastąpią samodzielnej pracy między spotkaniami. Godzina tygodniowo z korepetytorem bez rozwiązywania zadań w międzyczasie to wyrzucone pieniądze. Korepetytor pokazuje drogę - przejść ją musisz sam.</p>"
       },
       {
         "heading": "Co daje nauka samodzielna",
-        "html": "<p>Nauka samodzielna ma zalety, które łatwo przeoczyć. Jest darmowa i całkowicie elastyczna czasowo. Przede wszystkim jednak <strong>uczy samodzielnego dochodzenia do rozwiązania</strong> — a to dokładnie ta umiejętność, którą sprawdza matura. Zdający, który zawsze miał podpowiedź pod ręką, na egzaminie zostaje sam z arkuszem.</p><p>Jej słabości to brak zewnętrznej korekty błędów i większe wymagania wobec samodyscypliny. Bez narzuconego rytmu łatwo odkładać naukę, a błędne rozumienie potrafi utrwalać się miesiącami, jeśli nikt go nie skoryguje.</p>"
+        "html": "<p>Nauka samodzielna ma zalety, które łatwo przeoczyć. Jest darmowa i całkowicie elastyczna czasowo. Przede wszystkim jednak <strong>uczy samodzielnego dochodzenia do rozwiązania</strong> - a to dokładnie ta umiejętność, którą sprawdza matura. Zdający, który zawsze miał podpowiedź pod ręką, na egzaminie zostaje sam z arkuszem.</p><p>Jej słabości to brak zewnętrznej korekty błędów i większe wymagania wobec samodyscypliny. Bez narzuconego rytmu łatwo odkładać naukę, a błędne rozumienie potrafi utrwalać się miesiącami, jeśli nikt go nie skoryguje.</p>"
       },
       {
         "heading": "Kiedy warto wziąć korepetycje",
-        "html": "<ul><li><strong>Masz duże, konkretne braki z podstaw</strong> — na przykład nie rozumiesz mechaniki, przez co całe rozszerzenie się sypie. Kilka celnych spotkań potrafi odblokować dalszą samodzielną naukę.</li><li><strong>Uczysz się, ale wyniki nie rosną</strong> — to znak, że utrwalasz błąd, którego sam nie widzisz. Ktoś z zewnątrz wychwyci go w kilka minut.</li><li><strong>Brakuje Ci samodyscypliny</strong> — jeśli bez terminu nie siadasz do nauki, regularne spotkania bywają jedynym, co realnie wymusza pracę.</li><li><strong>Zostało mało czasu, a materiału dużo</strong> — korepetytor pomaga wybrać, na czym skupić się najpierw.</li></ul>"
+        "html": "<ul><li><strong>Masz duże, konkretne braki z podstaw</strong> - na przykład nie rozumiesz mechaniki, przez co całe rozszerzenie się sypie. Kilka celnych spotkań potrafi odblokować dalszą samodzielną naukę.</li><li><strong>Uczysz się, ale wyniki nie rosną</strong> - to znak, że utrwalasz błąd, którego sam nie widzisz. Ktoś z zewnątrz wychwyci go w kilka minut.</li><li><strong>Brakuje Ci samodyscypliny</strong> - jeśli bez terminu nie siadasz do nauki, regularne spotkania bywają jedynym, co realnie wymusza pracę.</li><li><strong>Zostało mało czasu, a materiału dużo</strong> - korepetytor pomaga wybrać, na czym skupić się najpierw.</li></ul>"
       },
       {
         "heading": "Kiedy wystarczy samodzielna nauka",
-        "html": "<ul><li><strong>Masz solidne podstawy z mechaniki</strong> i uczysz się systematycznie od dawna.</li><li><strong>Potrafisz sam rozpoznać, czego nie rozumiesz</strong>, i skutecznie szukać wyjaśnień.</li><li><strong>Masz zapas czasu</strong> — przy nauce od klasy drugiej czy trzeciej spokojnie nadrobisz ewentualne luki bez pośpiechu.</li><li><strong>Twoje wyniki na arkuszach próbnych rosną</strong> — to najlepszy dowód, że obrana metoda działa.</li></ul><p>Dla wielu zdających optymalny jest wariant mieszany: samodzielna nauka jako trzon, a korepetycje doraźnie — kilka spotkań na odblokowanie konkretnego, opornego działu.</p>"
+        "html": "<ul><li><strong>Masz solidne podstawy z mechaniki</strong> i uczysz się systematycznie od dawna.</li><li><strong>Potrafisz sam rozpoznać, czego nie rozumiesz</strong>, i skutecznie szukać wyjaśnień.</li><li><strong>Masz zapas czasu</strong> - przy nauce od klasy drugiej czy trzeciej spokojnie nadrobisz ewentualne luki bez pośpiechu.</li><li><strong>Twoje wyniki na arkuszach próbnych rosną</strong> - to najlepszy dowód, że obrana metoda działa.</li></ul><p>Dla wielu zdających optymalny jest wariant mieszany: samodzielna nauka jako trzon, a korepetycje doraźnie - kilka spotkań na odblokowanie konkretnego, opornego działu.</p>"
       },
       {
         "heading": "Rachunek kosztów i realny zwrot",
-        "html": "<p>Korepetycje to wydatek, który warto ocenić chłodno. Zamiast pytać „czy stać mnie na korepetycje?”, zapytaj „czy tej samej poprawy nie osiągnę taniej?”. Często najpierw warto sprawdzić darmowe i tanie zasoby: arkusze CKE z kluczami odpowiedzi, materiały do nauki online, opracowania teorii z zadaniami.</p><p>Jeśli po rzetelnej próbie samodzielnej nauki wyniki stoją w miejscu, korepetycje stają się racjonalną inwestycją — bo kupujesz wtedy nie „wiedzę”, lecz diagnozę i korektę błędu, których sam nie potrafisz przeprowadzić. To najlepszy moment, żeby po nie sięgnąć.</p>"
+        "html": "<p>Korepetycje to wydatek, który warto ocenić chłodno. Zamiast pytać „czy stać mnie na korepetycje?”, zapytaj „czy tej samej poprawy nie osiągnę taniej?”. Często najpierw warto sprawdzić darmowe i tanie zasoby: arkusze CKE z kluczami odpowiedzi, materiały do nauki online, opracowania teorii z zadaniami.</p><p>Jeśli po rzetelnej próbie samodzielnej nauki wyniki stoją w miejscu, korepetycje stają się racjonalną inwestycją - bo kupujesz wtedy nie „wiedzę”, lecz diagnozę i korektę błędu, których sam nie potrafisz przeprowadzić. To najlepszy moment, żeby po nie sięgnąć.</p>"
       },
       {
         "heading": "Jak uczyć się samodzielnie, żeby to działało",
-        "html": "<p>Nauka samodzielna wymaga narzuconej sobie struktury, inaczej rozmywa się w prokrastynacji. Sprawdzają się cztery zasady:</p><ol><li><strong>Stały harmonogram</strong> — konkretne dni i godziny, traktowane jak zajęcia obowiązkowe.</li><li><strong>Praca na arkuszach CKE z kluczem</strong> — klucz odpowiedzi pełni rolę korektora, wskazując, gdzie tracisz punkty.</li><li><strong>Analiza błędów zamiast liczby zadań</strong> — trzy zadania rozwiązane do końca z analizą pomyłek dają więcej niż dziesięć przejrzanych z rozwiązaniem.</li><li><strong>Pomiar postępu na arkuszach próbnych</strong> — regularny wynik na pełnym arkuszu pokazuje, czy metoda działa, czy trzeba coś zmienić.</li></ol>"
+        "html": "<p>Nauka samodzielna wymaga narzuconej sobie struktury, inaczej rozmywa się w prokrastynacji. Sprawdzają się cztery zasady:</p><ol><li><strong>Stały harmonogram</strong> - konkretne dni i godziny, traktowane jak zajęcia obowiązkowe.</li><li><strong>Praca na arkuszach CKE z kluczem</strong> - klucz odpowiedzi pełni rolę korektora, wskazując, gdzie tracisz punkty.</li><li><strong>Analiza błędów zamiast liczby zadań</strong> - trzy zadania rozwiązane do końca z analizą pomyłek dają więcej niż dziesięć przejrzanych z rozwiązaniem.</li><li><strong>Pomiar postępu na arkuszach próbnych</strong> - regularny wynik na pełnym arkuszu pokazuje, czy metoda działa, czy trzeba coś zmienić.</li></ol>"
       }
     ],
     "faq": [
@@ -483,7 +483,7 @@
       },
       {
         "q": "Czy same korepetycje wystarczą, żeby zdać fizykę?",
-        "a": "Nie. Korepetycje pokazują drogę, ale bez samodzielnego rozwiązywania zadań między spotkaniami są nieskuteczne. Godzina tygodniowo bez pracy własnej nie przełoży się na wynik — matura sprawdza samodzielne dochodzenie do rozwiązania."
+        "a": "Nie. Korepetycje pokazują drogę, ale bez samodzielnego rozwiązywania zadań między spotkaniami są nieskuteczne. Godzina tygodniowo bez pracy własnej nie przełoży się na wynik - matura sprawdza samodzielne dochodzenie do rozwiązania."
       },
       {
         "q": "Ile kosztują korepetycje z fizyki i czy się opłacają?",
@@ -499,11 +499,11 @@
   },
   {
     "slug": "zadania-doswiadczalne-na-maturze-z-fizyki",
-    "title": "Zadania doświadczalne na maturze z fizyki — jak je rozwiązywać",
+    "title": "Zadania doświadczalne na maturze z fizyki - jak je rozwiązywać",
     "metaDesc": "Zadania doświadczalne na maturze z fizyki: analiza danych pomiarowych, wykresy, niepewności i wyznaczanie wielkości z nachylenia prostej. Praktyczny poradnik.",
     "keywords": "zadania doświadczalne fizyka, matura fizyka doświadczenie, niepewność pomiaru fizyka, analiza wyników pomiarów, wykres z pomiarów fizyka, linearyzacja fizyka",
     "excerpt": "Zadania doświadczalne pojawiają się na maturze regularnie, a mimo to są najczęściej zaniedbywanym typem zadań. Oto jak zdobyć w nich pełne punkty.",
-    "intro": "Zadania doświadczalne sprawdzają coś, czego nie da się wykuć: umiejętność pracy z realnymi danymi pomiarowymi. Analiza tabeli wyników, sporządzenie wykresu, wyznaczenie wielkości z nachylenia prostej i ocena niepewności wracają na maturze co roku. Paradoksalnie są to zadania, w których stała procedura daje punkty najłatwiej — pod warunkiem, że się ją zna.",
+    "intro": "Zadania doświadczalne sprawdzają coś, czego nie da się wykuć: umiejętność pracy z realnymi danymi pomiarowymi. Analiza tabeli wyników, sporządzenie wykresu, wyznaczenie wielkości z nachylenia prostej i ocena niepewności wracają na maturze co roku. Paradoksalnie są to zadania, w których stała procedura daje punkty najłatwiej - pod warunkiem, że się ją zna.",
     "sections": [
       {
         "heading": "Dlaczego warto ćwiczyć ten typ zadań",
@@ -511,23 +511,23 @@
       },
       {
         "heading": "Praca z tabelą wyników pomiarów",
-        "html": "<p>Zadanie zwykle zaczyna się od tabeli z wynikami serii pomiarów. Pierwsze kroki są zawsze te same:</p><ul><li>sprawdź jednostki w nagłówkach kolumn i w razie potrzeby przelicz je na SI,</li><li>jeśli zadanie tego wymaga, oblicz wartości pochodne, na przykład kwadrat okresu albo odwrotność odległości,</li><li>zwróć uwagę na wynik wyraźnie odstający od pozostałych — bywa on częścią zadania i wymaga komentarza.</li></ul><p>Uporządkowanie tabeli to fundament — na błędnie przeliczonych danych żaden dalszy krok nie da poprawnego wyniku.</p>"
+        "html": "<p>Zadanie zwykle zaczyna się od tabeli z wynikami serii pomiarów. Pierwsze kroki są zawsze te same:</p><ul><li>sprawdź jednostki w nagłówkach kolumn i w razie potrzeby przelicz je na SI,</li><li>jeśli zadanie tego wymaga, oblicz wartości pochodne, na przykład kwadrat okresu albo odwrotność odległości,</li><li>zwróć uwagę na wynik wyraźnie odstający od pozostałych - bywa on częścią zadania i wymaga komentarza.</li></ul><p>Uporządkowanie tabeli to fundament - na błędnie przeliczonych danych żaden dalszy krok nie da poprawnego wyniku.</p>"
       },
       {
-        "heading": "Sporządzanie wykresu — na czym tracą punkty",
-        "html": "<p>Wykres bywa osobno punktowany, a straty są zwykle za to samo. Kompletny wykres musi mieć:</p><ul><li><strong>opisane osie</strong> z symbolem wielkości i jednostką,</li><li><strong>sensownie dobraną skalę</strong>, tak by punkty wypełniały większość pola, a nie skupiały się w rogu,</li><li><strong>naniesione punkty pomiarowe</strong> wyraźnie zaznaczone,</li><li><strong>prostą lub krzywą dopasowaną</strong> do punktów — linia ma przechodzić „przez środek” rozrzutu, a nie łączyć kolejne punkty łamaną.</li></ul><p>Najczęstszy błąd to właśnie łączenie punktów odcinkami zamiast wpasowania jednej gładkiej prostej. Pomiar zawsze obarczony jest rozrzutem — linia trendu go uśrednia.</p>"
+        "heading": "Sporządzanie wykresu - na czym tracą punkty",
+        "html": "<p>Wykres bywa osobno punktowany, a straty są zwykle za to samo. Kompletny wykres musi mieć:</p><ul><li><strong>opisane osie</strong> z symbolem wielkości i jednostką,</li><li><strong>sensownie dobraną skalę</strong>, tak by punkty wypełniały większość pola, a nie skupiały się w rogu,</li><li><strong>naniesione punkty pomiarowe</strong> wyraźnie zaznaczone,</li><li><strong>prostą lub krzywą dopasowaną</strong> do punktów - linia ma przechodzić „przez środek” rozrzutu, a nie łączyć kolejne punkty łamaną.</li></ul><p>Najczęstszy błąd to właśnie łączenie punktów odcinkami zamiast wpasowania jednej gładkiej prostej. Pomiar zawsze obarczony jest rozrzutem - linia trendu go uśrednia.</p>"
       },
       {
         "heading": "Linearyzacja: sprowadzanie zależności do prostej",
-        "html": "<p>Prostą łatwo narysować i łatwo z niej odczytać nachylenie, dlatego kluczową techniką jest linearyzacja — takie dobranie osi, by zależność stała się liniowa. Przykłady:</p><ul><li>dla wahadła \\( T = 2\\pi\\sqrt{\\dfrac{l}{g}} \\) wykres \\( T^2 \\) w funkcji \\( l \\) jest prostą,</li><li>dla ruchu jednostajnie zmiennego \\( s = \\dfrac{a t^2}{2} \\) prostą daje wykres \\( s \\) w funkcji \\( t^2 \\).</li></ul><p>Zamiast rysować krzywą i zgadywać jej kształt, przekształcasz zmienne tak, by dane układały się wzdłuż linii prostej. To standardowy chwyt w zadaniach doświadczalnych i warto rozpoznawać go od razu.</p>"
+        "html": "<p>Prostą łatwo narysować i łatwo z niej odczytać nachylenie, dlatego kluczową techniką jest linearyzacja - takie dobranie osi, by zależność stała się liniowa. Przykłady:</p><ul><li>dla wahadła \\( T = 2\\pi\\sqrt{\\dfrac{l}{g}} \\) wykres \\( T^2 \\) w funkcji \\( l \\) jest prostą,</li><li>dla ruchu jednostajnie zmiennego \\( s = \\dfrac{a t^2}{2} \\) prostą daje wykres \\( s \\) w funkcji \\( t^2 \\).</li></ul><p>Zamiast rysować krzywą i zgadywać jej kształt, przekształcasz zmienne tak, by dane układały się wzdłuż linii prostej. To standardowy chwyt w zadaniach doświadczalnych i warto rozpoznawać go od razu.</p>"
       },
       {
         "heading": "Wyznaczanie wielkości z nachylenia prostej",
-        "html": "<p>Gdy dane leżą na prostej, szukaną wielkość odczytuje się z jej współczynnika nachylenia. Nachylenie liczysz z dwóch dobrze rozstawionych punktów leżących na linii trendu (nie z punktów pomiarowych): \\( a = \\dfrac{\\Delta y}{\\Delta x} \\).</p><p>Dla wahadła z wykresu \\( T^2(l) \\) nachylenie wynosi \\( \\dfrac{4\\pi^2}{g} \\), skąd wyznaczasz \\( g = \\dfrac{4\\pi^2}{\\text{nachylenie}} \\). Metoda nachylenia jest dokładniejsza niż liczenie z pojedynczego pomiaru, bo korzysta z całej serii danych naraz — dlatego jest w kluczu odpowiedzi rozwiązaniem preferowanym.</p>"
+        "html": "<p>Gdy dane leżą na prostej, szukaną wielkość odczytuje się z jej współczynnika nachylenia. Nachylenie liczysz z dwóch dobrze rozstawionych punktów leżących na linii trendu (nie z punktów pomiarowych): \\( a = \\dfrac{\\Delta y}{\\Delta x} \\).</p><p>Dla wahadła z wykresu \\( T^2(l) \\) nachylenie wynosi \\( \\dfrac{4\\pi^2}{g} \\), skąd wyznaczasz \\( g = \\dfrac{4\\pi^2}{\\text{nachylenie}} \\). Metoda nachylenia jest dokładniejsza niż liczenie z pojedynczego pomiaru, bo korzysta z całej serii danych naraz - dlatego jest w kluczu odpowiedzi rozwiązaniem preferowanym.</p>"
       },
       {
         "heading": "Niepewność pomiaru w praktyce maturalnej",
-        "html": "<p>Zadania nie wymagają pełnej teorii niepewności, ale oczekują jej rozumienia na poziomie praktycznym. Warto umieć:</p><ul><li>rozróżnić <strong>niepewność pomiaru pojedynczego</strong> (wynikającą z działki przyrządu) od <strong>rozrzutu serii pomiarów</strong>,</li><li>zapisać wynik z sensowną liczbą cyfr znaczących — wynik nie może być dokładniejszy niż dane, z których powstał,</li><li>skomentować, czy wynik doświadczenia jest zgodny z wartością tablicową w granicach niepewności.</li></ul><p>Typowe polecenie brzmi „oceń, czy wyznaczona wartość jest zgodna z wartością tablicową”. Odpowiedź to porównanie z uwzględnieniem rozrzutu, a nie stwierdzenie, że liczby „nie są równe”.</p>"
+        "html": "<p>Zadania nie wymagają pełnej teorii niepewności, ale oczekują jej rozumienia na poziomie praktycznym. Warto umieć:</p><ul><li>rozróżnić <strong>niepewność pomiaru pojedynczego</strong> (wynikającą z działki przyrządu) od <strong>rozrzutu serii pomiarów</strong>,</li><li>zapisać wynik z sensowną liczbą cyfr znaczących - wynik nie może być dokładniejszy niż dane, z których powstał,</li><li>skomentować, czy wynik doświadczenia jest zgodny z wartością tablicową w granicach niepewności.</li></ul><p>Typowe polecenie brzmi „oceń, czy wyznaczona wartość jest zgodna z wartością tablicową”. Odpowiedź to porównanie z uwzględnieniem rozrzutu, a nie stwierdzenie, że liczby „nie są równe”.</p>"
       },
       {
         "heading": "Lista kontrolna do zadania doświadczalnego",
@@ -553,7 +553,7 @@
       },
       {
         "q": "Jak ocenić zgodność wyniku z wartością tablicową?",
-        "a": "Porównaj wyznaczoną wartość z tablicową, uwzględniając niepewność pomiaru i rozrzut serii. Jeśli wartość tablicowa mieści się w granicach niepewności wyniku, uznaje się je za zgodne — samo stwierdzenie, że liczby nie są dokładnie równe, nie wystarcza."
+        "a": "Porównaj wyznaczoną wartość z tablicową, uwzględniając niepewność pomiaru i rozrzut serii. Jeśli wartość tablicowa mieści się w granicach niepewności wyniku, uznaje się je za zgodne - samo stwierdzenie, że liczby nie są dokładnie równe, nie wystarcza."
       }
     ],
     "relatedTopics": ["kinematyka", "drgania-harmoniczne", "grawitacja"],

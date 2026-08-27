@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const s = t?.subtopics?.find((x) => x.slug === sub);
   if (!t || !s) return {};
   return {
-    title: `${s.name} — zadania z rozwiązaniami | ${t.name}`,
+    title: `${s.name} - zadania z rozwiązaniami | ${t.name}`,
     description: `${s.name}: zadania z fizyki z pełnymi rozwiązaniami krok po kroku. ${
       s.intro ?? ''
     }`.slice(0, 160),
@@ -59,7 +59,7 @@ export default async function ZadaniaSub({ params }: Params) {
       <JsonLd data={[breadcrumbLd(crumbs), faqLd(s.faq ?? [])].filter(Boolean) as object[]} />
       <SeoHero
         eyebrow={`${t.name} · zadania`}
-        title={`${s.name} — zadania z rozwiązaniami`}
+        title={`${s.name} - zadania z rozwiązaniami`}
         intro={s.intro}
         crumbs={crumbs}
       />
@@ -101,7 +101,7 @@ export default async function ZadaniaSub({ params }: Params) {
               ))}
             <RelatedCard
               kicker="Teoria"
-              title={`${t.name} — teoria`}
+              title={`${t.name} - teoria`}
               desc={`Wzory i definicje z ${t.dopelniacz}.`}
               href={`/fizyka/${t.slug}`}
             />

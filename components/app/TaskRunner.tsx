@@ -113,7 +113,7 @@ export function TaskRunner({ courseId }: { courseId: number }) {
     try {
       await upsertUserTask(user.id, current.id, status);
     } catch {
-      /* zapis nieudany — kontynuuj lokalnie */
+      /* zapis nieudany - kontynuuj lokalnie */
     }
     pickNext(tasks, nextProg);
   };

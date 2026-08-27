@@ -16,7 +16,7 @@ export function SuccessClient() {
         setChecked(true);
       }
     }, 2000);
-    // Promocja zużyta — wyczyść znacznik
+    // Promocja zużyta - wyczyść znacznik
     window.localStorage.removeItem('promoStartedAt');
     return () => clearTimeout(t);
   }, [refreshAccess]);
@@ -38,7 +38,7 @@ export function SuccessClient() {
         {user ? (
           <p className="mt-4 text-lg text-slate-300/85">
             {checked
-              ? 'Twój dostęp został aktywowany. Miłej nauki — płyniemy po Twój wynik!'
+              ? 'Twój dostęp został aktywowany. Miłej nauki - płyniemy po Twój wynik!'
               : 'Aktywujemy Twój dostęp do kursu…'}
           </p>
         ) : (

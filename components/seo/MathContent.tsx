@@ -7,7 +7,7 @@ import { cn } from '@/lib/cn';
  * Renderuje zaufaną treść HTML (nasze pliki seo/content/*.json) i uruchamia
  * KaTeX auto-render dla delimiterów $$…$$ (display), \(…\) oraz $…$ (inline).
  *
- * Treść jest wstrzykiwana już na serwerze (SSG) — dzięki temu jest widoczna
+ * Treść jest wstrzykiwana już na serwerze (SSG) - dzięki temu jest widoczna
  * dla robotów wyszukiwarek. KaTeX dokłada renderowanie wzorów po stronie klienta.
  */
 export function MathContent({
@@ -35,7 +35,7 @@ export function MathContent({
           throwOnError: false,
         });
       } catch {
-        /* KaTeX niedostępny — treść zostaje w formie tekstowej */
+        /* KaTeX niedostępny - treść zostaje w formie tekstowej */
       }
     })();
     return () => {

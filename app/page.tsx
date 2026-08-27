@@ -29,14 +29,14 @@ const faq: FaqItem[] = [
   },
   {
     q: 'Jakie są formy płatności?',
-    a: 'Płatność jest jednorazowa i bezpieczna przez Stripe — obsługujemy BLIK, karty płatnicze oraz Klarna.',
+    a: 'Płatność jest jednorazowa i bezpieczna przez Stripe - obsługujemy BLIK, karty płatnicze oraz Klarna.',
   },
 ];
 
 const courseJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Course',
-  name: 'Fizyka Statkiem — Kompletny kurs fizyki do matury',
+  name: 'Fizyka Statkiem - Kompletny kurs fizyki do matury',
   description: SITE.description,
   provider: {
     '@type': 'Organization',
@@ -82,7 +82,7 @@ export default function Home() {
       <PricingSection />
       <FaqSection
         items={faq}
-        subtitle="Nie znalazłeś odpowiedzi? Napisz do nas — pomożemy wybrać najlepszą ścieżkę."
+        subtitle="Nie znalazłeś odpowiedzi? Napisz do nas - pomożemy wybrać najlepszą ścieżkę."
       />
       <FinalCta />
     </>

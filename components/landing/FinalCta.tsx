@@ -13,7 +13,7 @@ export function FinalCta() {
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-slate-300/85">
           Dołącz do kursu, odbierz planer i przestań się zastanawiać, od czego
-          zacząć. Płyniemy razem — aż do wyniku, z którego będziesz dumny.
+          zacząć. Płyniemy razem - aż do wyniku, z którego będziesz dumny.
         </p>
         <div className="mt-9 flex flex-wrap justify-center gap-3">
           <Button href="/cennik" variant="gradient" size="lg">

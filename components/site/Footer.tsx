@@ -78,7 +78,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-300/70">
-              Kursy fizyki online, które prowadzą Cię do matury krok po kroku —
+              Kursy fizyki online, które prowadzą Cię do matury krok po kroku -
               wideo HD, PDF-y, zadania i planer nauki.
             </p>
             <div className="mt-5 flex gap-3">

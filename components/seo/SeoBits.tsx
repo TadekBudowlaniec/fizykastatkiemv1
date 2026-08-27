@@ -221,7 +221,7 @@ export function CtaBand() {
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-slate-300/85">
           Dołącz do kursu online albo umów indywidualne korepetycje. Tłumaczymy
-          fizykę prosto — krok po kroku, aż zrozumiesz.
+          fizykę prosto - krok po kroku, aż zrozumiesz.
         </p>
         <div className="mt-7 flex flex-wrap justify-center gap-3">
           <Link
