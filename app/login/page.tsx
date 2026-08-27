@@ -23,8 +23,20 @@ export default function LoginPage() {
     try {
       await signIn(email, password);
       router.push('/kurs');
-    } catch {
-      setError('Nieprawidłowy e-mail lub hasło.');
+    } catch (err) {
+      const raw = err instanceof Error ? err.message : String(err);
+      let msg = 'Nie udało się zalogować. Spróbuj ponownie.';
+      if (/invalid login credentials/i.test(raw)) {
+        msg = 'Nieprawidłowy e-mail lub hasło.';
+      } else if (/email not confirmed/i.test(raw)) {
+        msg =
+          'Twój adres e-mail nie jest jeszcze potwierdzony. Sprawdź skrzynkę (także SPAM) i kliknij link aktywacyjny.';
+      } else if (/failed to fetch|network/i.test(raw)) {
+        msg = 'Problem z połączeniem. Sprawdź internet i spróbuj ponownie.';
+      } else if (raw) {
+        msg = raw;
+      }
+      setError(msg);
       setLoading(false);
     }
   };
