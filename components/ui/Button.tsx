@@ -21,7 +21,7 @@ const variants: Record<Variant, string> = {
     'border-2 border-brand-500 text-brand-600 hover:bg-brand-500 hover:text-white hover:-translate-y-0.5',
   ghost: 'text-slate hover:text-brand-600 hover:bg-brand-50',
   light:
-    'bg-white text-brand-700 shadow-soft hover:-translate-y-0.5 hover:shadow-card',
+    'bg-white text-[#4527c2] shadow-soft hover:-translate-y-0.5 hover:shadow-card',
   dark: 'bg-navy-900 text-white hover:bg-navy-800 hover:-translate-y-0.5',
 };
 

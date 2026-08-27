@@ -27,7 +27,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        'sticky top-0 z-[500] text-white transition-all duration-300',
+        'sticky top-0 z-[500] transition-all duration-300',
         scrolled
           ? 'bg-navy-950/95 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(0,0,0,0.5)] ring-1 ring-white/5'
           : 'bg-navy-950'
