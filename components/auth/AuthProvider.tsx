@@ -8,7 +8,7 @@ import {
   useCallback,
   type ReactNode,
 } from 'react';
-import type { User, AuthChangeEvent, Session } from '@supabase/supabase-js';
+import type { User } from '@supabase/supabase-js';
 import { getSupabaseBrowser } from '@/lib/supabase/client';
 
 type Enrollment = { course_id: number; access_granted: boolean };
@@ -35,52 +35,70 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [enrollments, setEnrollments] = useState<Enrollment[]>([]);
 
-  const loadAccess = useCallback(
-    async (u: User | null) => {
-      if (!u) {
-        setEnrollments([]);
-        setIsAdmin(false);
-        return;
-      }
-      const [{ data: userRow }, { data: enr }] = await Promise.all([
-        supabase.from('users').select('is_admin').eq('id', u.id).maybeSingle(),
-        supabase
-          .from('enrollments')
-          .select('course_id, access_granted')
-          .eq('user_id', u.id)
-          .eq('access_granted', true),
-      ]);
-      setIsAdmin(Boolean((userRow as { is_admin?: boolean } | null)?.is_admin));
-      setEnrollments((enr as Enrollment[] | null) ?? []);
-    },
-    [supabase]
-  );
-
+  // --- 1) Śledzenie sesji ---
+  // WAŻNE: w callbacku onAuthStateChange NIE wolno wywoływać funkcji Supabase
+  // (getUser / getSession / from(...)), bo klient używa Web Locks do tokenu i
+  // dochodzi do zakleszczenia (logowanie „wisi”). Callback tylko ustawia usera;
+  // dane dostępu ładujemy w osobnym efekcie poniżej.
   useEffect(() => {
     let active = true;
-    (async () => {
-      const {
-        data: { user: u },
-      } = await supabase.auth.getUser();
-      if (!active) return;
-      setUser(u ?? null);
-      await loadAccess(u ?? null);
-      setLoading(false);
-    })();
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }) => {
+        if (!active) return;
+        setUser(session?.user ?? null);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (active) setLoading(false);
+      });
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (_event: AuthChangeEvent, session: Session | null) => {
-      const u = session?.user ?? null;
-      setUser(u);
-      await loadAccess(u);
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
     });
 
     return () => {
       active = false;
       subscription.unsubscribe();
     };
-  }, [supabase, loadAccess]);
+  }, [supabase]);
+
+  // --- 2) Ładowanie dostępu (poza callbackiem auth) ---
+  const loadAccess = useCallback(
+    async (uid: string) => {
+      try {
+        const [{ data: userRow }, { data: enr }] = await Promise.all([
+          supabase.from('users').select('is_admin').eq('id', uid).maybeSingle(),
+          supabase
+            .from('enrollments')
+            .select('course_id, access_granted')
+            .eq('user_id', uid)
+            .eq('access_granted', true),
+        ]);
+        setIsAdmin(
+          Boolean((userRow as { is_admin?: boolean } | null)?.is_admin)
+        );
+        setEnrollments((enr as Enrollment[] | null) ?? []);
+      } catch {
+        // brak dostępu do danych nie może blokować logowania
+        setIsAdmin(false);
+        setEnrollments([]);
+      }
+    },
+    [supabase]
+  );
+
+  useEffect(() => {
+    if (user?.id) {
+      loadAccess(user.id);
+    } else {
+      setIsAdmin(false);
+      setEnrollments([]);
+    }
+  }, [user?.id, loadAccess]);
 
   const hasAccessToCourse = useCallback(
     (courseId: number | string) => {
@@ -97,7 +115,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       data: { user: u },
     } = await supabase.auth.getUser();
     setUser(u ?? null);
-    await loadAccess(u ?? null);
+    if (u?.id) await loadAccess(u.id);
   }, [supabase, loadAccess]);
 
   const signIn = useCallback(
@@ -107,9 +125,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         password,
       });
       if (error) throw error;
-      await refreshAccess();
+      // onAuthStateChange ustawi usera, a efekt załaduje dostęp — bez blokowania.
     },
-    [supabase, refreshAccess]
+    [supabase]
   );
 
   const signUp = useCallback(
@@ -120,7 +138,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         options: { data: { full_name: name } },
       });
       if (error) throw error;
-      // Zapewnij wiersz w tabeli users (idempotentnie)
       if (data.user) {
         await supabase.from('users').upsert(
           {
