@@ -75,7 +75,7 @@ export default async function CityPage({ params }: Params) {
     },
     {
       q: 'Czy przygotujecie mnie do matury z fizyki?',
-      a: 'Tak, specjalizujemy się w przygotowaniu do matury z fizyki na poziomie podstawowym i rozszerzonym - od podstaw aż po zadania maturalne CKE.',
+      a: 'Tak, specjalizujemy się w przygotowaniu do matury z fizyki na poziomie rozszerzonym - od podstaw aż po zadania maturalne CKE.',
     },
     {
       q: 'Ile kosztują korepetycje z fizyki?',
@@ -146,8 +146,8 @@ export default async function CityPage({ params }: Params) {
                 Twoich brakach.
               </li>
               <li>
-                <strong>Przygotowanie do matury</strong> - poziom podstawowy i
-                rozszerzony, zadania CKE.
+                <strong>Przygotowanie do matury</strong> - poziom rozszerzony,
+                zadania CKE.
               </li>
               <li>
                 <strong>Materiały i baza zadań</strong> - dostęp do teorii i

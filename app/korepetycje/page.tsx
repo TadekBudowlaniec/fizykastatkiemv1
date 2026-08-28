@@ -62,7 +62,7 @@ const proofs = [
     quote:
       'Córka wróciła zadowolona. Z tego co policzyła, powinna mieć 90%. Poszła na egzamin naprawdę spokojna.',
     author: 'Mama Darii',
-    role: 'Matura podstawowa',
+    role: 'Matura rozszerzona',
   },
 ];
 

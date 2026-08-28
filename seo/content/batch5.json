@@ -48,7 +48,7 @@
       { "term": "Rząd widma", "def": "Liczba całkowita m określająca kolejne maksimum interferencyjne lub dyfrakcyjne." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Interferencja, dyfrakcja, siatka dyfrakcyjna, polaryzacja, rozszczepienie światła, wyznaczanie długości fali.",
       "html": "<p>Optyka falowa pojawia się głównie na poziomie rozszerzonym. Najczęściej spotkasz zadania z siatki dyfrakcyjnej (równanie \\( d\\sin\\theta = m\\lambda \\)) oraz doświadczenia Younga. Wymagane jest rozumienie warunków wzmocnienia i wygaszenia oraz umiejętność wyznaczenia długości fali z danych eksperymentalnych. Polaryzacja i prawo Malusa pojawiają się w zadaniach jakościowych i prostych rachunkowych.</p>",
       "typoweZadania": [
@@ -72,7 +72,7 @@
     "faqMatura": [
       { "q": "Jaki wzór jest kluczowy w zadaniach z siatki dyfrakcyjnej?", "a": "Równanie siatki d sin θ = mλ. Z niego wyznaczasz długość fali, kąt ugięcia lub rząd widma, w zależności od tego, co jest dane." },
       { "q": "Jak obliczyć maksymalny rząd widma?", "a": "Z warunku sin θ ≤ 1 wynika m ≤ d/λ. Maksymalny rząd to największa liczba całkowita spełniająca tę nierówność." },
-      { "q": "Czy optyka falowa jest na poziomie podstawowym?", "a": "W ograniczonym zakresie - głównie jakościowe rozumienie interferencji i dyfrakcji. Zadania rachunkowe z siatki dominują na poziomie rozszerzonym." }
+      { "q": "Czy optyka falowa jest w zakresie podstawowym?", "a": "W ograniczonym zakresie - głównie jakościowe rozumienie interferencji i dyfrakcji. Zadania rachunkowe z siatki dominują na poziomie rozszerzonym." }
     ],
     "subtopics": [
       {
@@ -253,7 +253,7 @@
       { "term": "Dualizm korpuskularno-falowy", "def": "Właściwość materii i promieniowania przejawiania zarówno cech falowych, jak i cząsteczkowych." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Foton, efekt fotoelektryczny, model Bohra, poziomy energetyczne, widma, fala de Broglie'a, dualizm.",
       "html": "<p>Fizyka kwantowa to częsty temat zadań maturalnych, zwłaszcza efekt fotoelektryczny i model Bohra. Trzeba sprawnie zamieniać elektronowolty na dżule (\\( 1\\,\\mathrm{eV} = 1{,}6\\cdot10^{-19}\\,\\mathrm{J} \\)) i korzystać z równania Einsteina. W zadaniach z widm wodoru obliczasz energię przeskoku i długość emitowanej fali.</p>",
       "typoweZadania": [
@@ -456,7 +456,7 @@
       { "term": "Aktywność", "def": "Liczba rozpadów promieniotwórczych zachodzących w próbce w jednostce czasu, mierzona w bekerelach." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Budowa jądra, rozpady alfa/beta/gamma, prawo rozpadu, czas połowiczny, deficyt masy, energia wiązania, reakcje jądrowe.",
       "html": "<p>Fizyka jądrowa to wdzięczny dział maturalny - zadania są schematyczne i policzalne. Najczęściej obliczasz, ile substancji pozostało po danym czasie (prawo rozpadu) albo bilansujesz reakcję jądrową (zachowanie A i Z). W zadaniach o energii wiązania liczysz deficyt masy i mnożysz przez \\( c^2 \\).</p>",
       "typoweZadania": [
@@ -660,7 +660,7 @@
       { "term": "Czynnik Lorentza", "def": "Współczynnik γ, który rośnie wraz z prędkością i opisuje siłę efektów relatywistycznych." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Postulaty Einsteina, dylatacja czasu, skrócenie długości, E=mc², energia i pęd relatywistyczny.",
       "html": "<p>Teoria względności pojawia się głównie na poziomie rozszerzonym, choć jej idee i wzór \\( E = mc^2 \\) bywają też na podstawowym. W zadaniach najczęściej obliczasz czynnik Lorentza, a potem dylatację czasu lub skrócenie długości. Druga grupa zadań dotyczy energii: spoczynkowej, całkowitej i kinetycznej.</p>",
       "typoweZadania": [

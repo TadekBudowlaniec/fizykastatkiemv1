@@ -5,7 +5,7 @@
     "dopelniacz": "hydrostatyki",
     "metaTeoria": "Hydrostatyka i aerostatyka - ciśnienie hydrostatyczne, prawo Pascala i prawo Archimedesa. Wzory, definicje i wyjaśnienia krok po kroku do matury.",
     "metaMatura": "Zadania maturalne z hydrostatyki: ciśnienie, siła wyporu, prawo Archimedesa i Pascala. Rozwiązania krok po kroku, typowe zadania CKE i strategia.",
-    "intro": "Hydrostatyka i aerostatyka opisują ciecze i gazy w spoczynku. Poznasz tu ciśnienie hydrostatyczne, prawo Pascala oraz prawo Archimedesa i siłę wyporu. Te zagadnienia są stałym elementem matury z fizyki na poziomie podstawowym i rozszerzonym.",
+    "intro": "Hydrostatyka i aerostatyka opisują ciecze i gazy w spoczynku. Poznasz tu ciśnienie hydrostatyczne, prawo Pascala oraz prawo Archimedesa i siłę wyporu. Te zagadnienia są stałym elementem matury z fizyki na poziomie rozszerzonym.",
     "theory": [
       {
         "heading": "Ciśnienie i jego jednostki",
@@ -51,9 +51,9 @@
       { "term": "Ciśnienie atmosferyczne", "def": "Ciśnienie wywierane przez słup powietrza atmosferycznego, przy powierzchni Ziemi około 1013 hPa." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Ciśnienie, ciśnienie hydrostatyczne, prawo Pascala, prawo Archimedesa, siła wyporu, warunki pływania ciał, ciśnienie atmosferyczne.",
-      "html": "<p>Hydrostatyka pojawia się na maturze zarówno samodzielnie, jak i w połączeniu z dynamiką (równowaga sił) oraz energią. Zadania zwykle wymagają obliczenia ciśnienia, siły wyporu lub ustalenia, czy ciało pływa, czy tonie. Na poziomie rozszerzonym częste są zadania z prasą hydrauliczną i analiza równowagi ciał częściowo zanurzonych.</p>",
+      "html": "<p>Hydrostatyka pojawia się na maturze zarówno samodzielnie, jak i w połączeniu z dynamiką (równowaga sił) oraz energią. Zadania zwykle wymagają obliczenia ciśnienia, siły wyporu lub ustalenia, czy ciało pływa, czy tonie. W zakresie rozszerzonym częste są zadania z prasą hydrauliczną i analiza równowagi ciał częściowo zanurzonych.</p>",
       "typoweZadania": [
         "Obliczenie ciśnienia hydrostatycznego na danej głębokości w wodzie lub innej cieczy.",
         "Wyznaczenie siły wyporu działającej na zanurzone ciało i porównanie jej z ciężarem.",
@@ -216,7 +216,7 @@
     "dopelniacz": "termodynamiki",
     "metaTeoria": "Termodynamika i ciepło - temperatura, ciepło właściwe, bilans cieplny i zasady termodynamiki. Wzory, definicje i wyjaśnienia krok po kroku do matury.",
     "metaMatura": "Zadania maturalne z termodynamiki: bilans cieplny, ciepło właściwe, przemiany fazowe i I zasada termodynamiki. Rozwiązania krok po kroku i strategia CKE.",
-    "intro": "Termodynamika opisuje energię cieplną, temperaturę i przemiany energii. Poznasz tu ciepło właściwe, bilans cieplny, przemiany fazowe oraz zasady termodynamiki. To kluczowy dział na maturze z fizyki na poziomie podstawowym i rozszerzonym.",
+    "intro": "Termodynamika opisuje energię cieplną, temperaturę i przemiany energii. Poznasz tu ciepło właściwe, bilans cieplny, przemiany fazowe oraz zasady termodynamiki. To kluczowy dział na maturze z fizyki na poziomie rozszerzonym.",
     "theory": [
       {
         "heading": "Temperatura i energia wewnętrzna",
@@ -262,9 +262,9 @@
       { "term": "Entropia", "def": "Wielkość termodynamiczna będąca miarą nieuporządkowania układu; w układzie izolowanym nie maleje." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Temperatura, ciepło właściwe, bilans cieplny, przemiany fazowe, I i II zasada termodynamiki, sprawność silników cieplnych.",
-      "html": "<p>Termodynamika jest jednym z najczęściej sprawdzanych działów. Na poziomie podstawowym dominują zadania z bilansu cieplnego i ciepła właściwego. Na rozszerzonym dochodzą zasady termodynamiki, sprawność silników oraz analiza wykresów przemian. Często łączy się je z gazami doskonałymi.</p>",
+      "html": "<p>Termodynamika jest jednym z najczęściej sprawdzanych działów. W zakresie podstawowym dominują zadania z bilansu cieplnego i ciepła właściwego. Na rozszerzonym dochodzą zasady termodynamiki, sprawność silników oraz analiza wykresów przemian. Często łączy się je z gazami doskonałymi.</p>",
       "typoweZadania": [
         "Obliczenie ciepła potrzebnego do ogrzania substancji o określoną temperaturę.",
         "Wyznaczenie temperatury końcowej mieszaniny z bilansu cieplnego.",
@@ -473,7 +473,7 @@
       { "term": "Stała gazowa", "def": "Uniwersalna stała R równa około 8,31 J/(mol K), występująca w równaniu Clapeyrona." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Model gazu doskonałego, równanie Clapeyrona, przemiany izotermiczna, izobaryczna i izochoryczna, praca gazu, energia wewnętrzna.",
       "html": "<p>Gazy doskonałe są mocno reprezentowane na poziomie rozszerzonym. Typowe zadania wymagają zastosowania równania Clapeyrona lub odpowiedniej przemiany, a także interpretacji wykresów p-V i p-T. Często łączy się je z pierwszą zasadą termodynamiki i obliczaniem pracy oraz ciepła.</p>",
       "typoweZadania": [
@@ -638,7 +638,7 @@
     "dopelniacz": "elektrostatyki",
     "metaTeoria": "Elektrostatyka - prawo Coulomba, natężenie i potencjał pola elektrycznego oraz pojemność kondensatora. Wzory i wyjaśnienia krok po kroku do matury.",
     "metaMatura": "Zadania maturalne z elektrostatyki: prawo Coulomba, pole elektryczne, potencjał i kondensatory. Rozwiązania krok po kroku, typowe zadania CKE i strategia.",
-    "intro": "Elektrostatyka bada ładunki elektryczne w spoczynku i ich oddziaływania. Poznasz tu prawo Coulomba, natężenie i potencjał pola elektrycznego oraz pojemność kondensatora. To istotny dział matury z fizyki na poziomie podstawowym i rozszerzonym.",
+    "intro": "Elektrostatyka bada ładunki elektryczne w spoczynku i ich oddziaływania. Poznasz tu prawo Coulomba, natężenie i potencjał pola elektrycznego oraz pojemność kondensatora. To istotny dział matury z fizyki na poziomie rozszerzonym.",
     "theory": [
       {
         "heading": "Ładunek elektryczny",
@@ -684,9 +684,9 @@
       { "term": "Kondensator", "def": "Układ dwóch przewodników rozdzielonych dielektrykiem, służący do gromadzenia ładunku i energii pola elektrycznego." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Ładunek elektryczny, prawo Coulomba, natężenie i potencjał pola elektrycznego, napięcie, kondensatory, energia pola.",
-      "html": "<p>Elektrostatyka pojawia się na maturze regularnie, często jako wstęp do zagadnień prądu elektrycznego. Na poziomie podstawowym dominują zadania z prawem Coulomba i natężeniem pola. Na rozszerzonym dochodzą kondensatory, energia pola oraz ruch ładunków w polu elektrycznym połączony z dynamiką.</p>",
+      "html": "<p>Elektrostatyka pojawia się na maturze regularnie, często jako wstęp do zagadnień prądu elektrycznego. W zakresie podstawowym dominują zadania z prawem Coulomba i natężeniem pola. Na rozszerzonym dochodzą kondensatory, energia pola oraz ruch ładunków w polu elektrycznym połączony z dynamiką.</p>",
       "typoweZadania": [
         "Obliczenie siły Coulomba między dwoma ładunkami punktowymi.",
         "Wyznaczenie natężenia pola elektrycznego w danym punkcie.",

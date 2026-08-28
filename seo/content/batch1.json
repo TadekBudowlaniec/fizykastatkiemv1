@@ -4,7 +4,7 @@
     "name": "Kinematyka",
     "dopelniacz": "kinematyki",
     "metaTeoria": "Kinematyka - teoria, wzory i definicje. Ruch jednostajny, jednostajnie przyspieszony, rzuty. Prędkość, przyspieszenie i droga krok po kroku.",
-    "metaMatura": "Kinematyka na maturze z fizyki - typowe zadania, wykresy ruchu, rzuty i strategia rozwiązywania. Poziom podstawowy i rozszerzony CKE.",
+    "metaMatura": "Kinematyka na maturze z fizyki - typowe zadania, wykresy ruchu, rzuty i strategia rozwiązywania. Poziom rozszerzony CKE.",
     "intro": "Kinematyka to dział mechaniki opisujący ruch ciał bez wnikania w jego przyczyny. Poznasz tu pojęcia toru, drogi, przemieszczenia, prędkości i przyspieszenia oraz najważniejsze rodzaje ruchu: jednostajny prostoliniowy, jednostajnie przyspieszony i rzuty. To fundament całej mechaniki i podstawa wielu zadań maturalnych.",
     "theory": [
       {
@@ -53,9 +53,9 @@
       { "term": "Przyspieszenie", "def": "Wektorowa wielkość określająca tempo zmiany prędkości w czasie." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Ruch jednostajny i jednostajnie zmienny, wykresy ruchu, spadek swobodny, rzut poziomy i ukośny, względność ruchu.",
-      "html": "<p>Kinematyka pojawia się niemal na każdej maturze z fizyki. Na poziomie podstawowym dominują zadania z odczytem wykresów oraz proste obliczenia drogi, prędkości i przyspieszenia. Na poziomie rozszerzonym częste są rzuty, składanie prędkości i analiza ruchu względnego. Kluczowe jest sprawne przeliczanie jednostek oraz rozumienie, że pole pod wykresem \\( v(t) \\) to droga.</p>",
+      "html": "<p>Kinematyka pojawia się niemal na każdej maturze z fizyki. W zakresie podstawowym dominują zadania z odczytem wykresów oraz proste obliczenia drogi, prędkości i przyspieszenia. W zakresie rozszerzonym częste są rzuty, składanie prędkości i analiza ruchu względnego. Kluczowe jest sprawne przeliczanie jednostek oraz rozumienie, że pole pod wykresem \\( v(t) \\) to droga.</p>",
       "typoweZadania": [
         "Odczyt drogi i przyspieszenia z wykresu prędkości od czasu.",
         "Obliczenie czasu lotu i zasięgu w rzucie poziomym z wysokości h.",
@@ -208,7 +208,7 @@
     "name": "Dynamika - zasady Newtona",
     "dopelniacz": "dynamiki",
     "metaTeoria": "Dynamika i zasady dynamiki Newtona - teoria, wzory, definicje. Siła, masa, tarcie, siła dośrodkowa. Trzy zasady Newtona krok po kroku.",
-    "metaMatura": "Dynamika na maturze z fizyki - zasady Newtona, tarcie, równia, ruch po okręgu. Typowe zadania i strategia CKE, poziom podstawowy i rozszerzony.",
+    "metaMatura": "Dynamika na maturze z fizyki - zasady Newtona, tarcie, równia, ruch po okręgu. Typowe zadania i strategia CKE, poziom rozszerzony.",
     "intro": "Dynamika bada przyczyny ruchu ciał, czyli siły. Fundamentem działu są trzy zasady dynamiki Newtona, które wiążą siłę, masę i przyspieszenie. Poznasz tu pojęcie siły wypadkowej, tarcia, siły dośrodkowej oraz nauczysz się analizować ruch na równi pochyłej. To kluczowy dział na maturze z fizyki.",
     "theory": [
       {
@@ -257,9 +257,9 @@
       { "term": "Siła dośrodkowa", "def": "Wypadkowa siła skierowana do środka okręgu, utrzymująca ciało na torze kołowym." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Trzy zasady dynamiki, siła wypadkowa, tarcie, równia pochyła, ruch po okręgu, siła dośrodkowa, układy ciał połączonych.",
-      "html": "<p>Dynamika to jeden z najważniejszych działów maturalnych. Zadania wymagają rozrysowania wszystkich sił działających na ciało i zapisania drugiej zasady dynamiki dla każdej osi. Na poziomie rozszerzonym pojawiają się układy ciał połączonych nicią, ruch po równi z tarciem oraz ruch po okręgu. Kluczowa jest umiejętność rozkładania sił na składowe.</p>",
+      "html": "<p>Dynamika to jeden z najważniejszych działów maturalnych. Zadania wymagają rozrysowania wszystkich sił działających na ciało i zapisania drugiej zasady dynamiki dla każdej osi. W zakresie rozszerzonym pojawiają się układy ciał połączonych nicią, ruch po równi z tarciem oraz ruch po okręgu. Kluczowa jest umiejętność rozkładania sił na składowe.</p>",
       "typoweZadania": [
         "Obliczenie przyspieszenia układu dwóch ciał połączonych nicią przez bloczek.",
         "Wyznaczenie przyspieszenia ciała zsuwającego się po równi z tarciem.",
@@ -412,7 +412,7 @@
     "name": "Praca, moc, energia",
     "dopelniacz": "pracy, mocy i energii",
     "metaTeoria": "Praca, moc i energia - teoria, wzory i definicje. Energia kinetyczna i potencjalna, zasada zachowania energii, sprawność. Wszystko krok po kroku.",
-    "metaMatura": "Praca, moc i energia na maturze z fizyki - zasada zachowania energii, sprawność, typowe zadania i strategia CKE. Poziom podstawowy i rozszerzony.",
+    "metaMatura": "Praca, moc i energia na maturze z fizyki - zasada zachowania energii, sprawność, typowe zadania i strategia CKE. Poziom rozszerzony.",
     "intro": "Praca, moc i energia to dział łączący opis ruchu z bilansem energetycznym. Poznasz definicję pracy mechanicznej, mocy oraz różne formy energii: kinetyczną i potencjalną. Kluczowa jest zasada zachowania energii mechanicznej, która znacznie upraszcza rozwiązywanie zadań maturalnych.",
     "theory": [
       {
@@ -460,7 +460,7 @@
       { "term": "Sprawność", "def": "Stosunek energii użytecznej do energii dostarczonej, wyrażony w procentach." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Praca, moc, energia kinetyczna i potencjalna, zasada zachowania energii mechanicznej, sprawność, twierdzenie o pracy i energii.",
       "html": "<p>Zadania energetyczne często można rozwiązać szybciej niż dynamiczne, korzystając z zasady zachowania energii. Na maturze typowe są zadania o ciele spadającym, zjeżdżającym z równi czy wahadle. Trzeba uważać na tarcie - wtedy energia mechaniczna nie jest zachowana, a różnica zamienia się w ciepło. Sprawność pojawia się w zadaniach o silnikach i dźwigach.</p>",
       "typoweZadania": [
@@ -615,7 +615,7 @@
     "name": "Pęd i zasada zachowania pędu",
     "dopelniacz": "pędu i zasady zachowania pędu",
     "metaTeoria": "Pęd i zasada zachowania pędu - teoria, wzory, definicje. Popęd siły, zderzenia sprężyste i niesprężyste, odrzut. Wszystko wyjaśnione krok po kroku.",
-    "metaMatura": "Pęd i zasada zachowania pędu na maturze z fizyki - zderzenia, odrzut, popęd siły. Typowe zadania i strategia CKE, poziom podstawowy i rozszerzony.",
+    "metaMatura": "Pęd i zasada zachowania pędu na maturze z fizyki - zderzenia, odrzut, popęd siły. Typowe zadania i strategia CKE, poziom rozszerzony.",
     "intro": "Pęd to jedna z najważniejszych wielkości w fizyce, opisująca ilość ruchu ciała. Poznasz definicję pędu, popędu siły oraz fundamentalną zasadę zachowania pędu, która rządzi zderzeniami i zjawiskiem odrzutu. Ten dział jest kluczem do analizy zderzeń sprężystych i niesprężystych na maturze.",
     "theory": [
       {
@@ -663,9 +663,9 @@
       { "term": "Odrzut", "def": "Ruch ciała w stronę przeciwną do wyrzucanej masy, zgodny z zasadą zachowania pędu." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Pęd, popęd siły, zasada zachowania pędu, zderzenia sprężyste i niesprężyste, odrzut, związek pędu z energią.",
-      "html": "<p>Zasada zachowania pędu to potężne narzędzie maturalne, zwłaszcza w zadaniach o zderzeniach i odrzucie. Na poziomie podstawowym dominują zderzenia niesprężyste (sklejanie ciał). Na rozszerzonym pojawiają się zderzenia sprężyste oraz zderzenia dwuwymiarowe wymagające rozkładu pędu na składowe. Kluczowe jest pamiętanie, że pęd to wektor.</p>",
+      "html": "<p>Zasada zachowania pędu to potężne narzędzie maturalne, zwłaszcza w zadaniach o zderzeniach i odrzucie. W zakresie podstawowym dominują zderzenia niesprężyste (sklejanie ciał). Na rozszerzonym pojawiają się zderzenia sprężyste oraz zderzenia dwuwymiarowe wymagające rozkładu pędu na składowe. Kluczowe jest pamiętanie, że pęd to wektor.</p>",
       "typoweZadania": [
         "Obliczenie wspólnej prędkości po zderzeniu niesprężystym (sklejenie wagonów).",
         "Wyznaczenie prędkości odrzutu działa lub łodzi przy wyrzucie masy.",

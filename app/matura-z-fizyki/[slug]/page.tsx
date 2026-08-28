@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!t) return {};
   const desc =
     t.metaMatura ||
-    `${t.name} na maturze z fizyki: wymagania CKE, typowe zadania i strategia. Poziom podstawowy i rozszerzony.`;
+    `${t.name} na maturze z fizyki: wymagania CKE, typowe zadania i strategia. Poziom rozszerzony.`;
   return {
     title: `Matura z fizyki: ${t.name} - wymagania i zadania`,
     description: desc,
@@ -94,7 +94,7 @@ export default async function MaturaPage({ params }: Params) {
               <p className="prose-fs">{t.intro}</p>
             )}
             <p className="prose-fs mt-3">
-              <strong>Poziom:</strong> {mi.poziom || 'podstawowy i rozszerzony'}.
+              <strong>Poziom:</strong> {mi.poziom || 'rozszerzony'}.
             </p>
           </section>
 

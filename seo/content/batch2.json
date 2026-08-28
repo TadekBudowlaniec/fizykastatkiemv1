@@ -47,7 +47,7 @@
       { "term": "Toczenie bez poślizgu", "def": "Ruch, w którym punkt styku ciała z podłożem ma chwilowo zerową prędkość, co daje warunek v = ωr." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Ruch obrotowy w pełnym zakresie pojawia się głównie na poziomie rozszerzonym: moment siły, moment bezwładności, moment pędu i jego zasada zachowania, energia obrotu oraz toczenie po równi.",
       "html": "<p>Na maturze rozszerzonej z fizyki zadania z ruchu obrotowego często łączą zasadę zachowania energii z zasadą zachowania momentu pędu. Typowo trzeba porównać staczanie się różnych brył po równi, obliczyć przyspieszenie kątowe z momentu siły lub wykorzystać \\( I_1\\omega_1 = I_2\\omega_2 \\). Wartości momentów bezwładności brył podawane są zwykle w treści zadania lub w karcie wzorów.</p>",
       "typoweZadania": [
@@ -250,7 +250,7 @@
       { "term": "Orbita geostacjonarna", "def": "Orbita, na której okres obiegu satelity równa się okresowi obrotu Ziemi, więc satelita pozostaje nad tym samym punktem." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Grawitacja to częsty temat na obu poziomach: prawo ciążenia, przyspieszenie grawitacyjne, ruch satelitów, prędkości kosmiczne oraz prawa Keplera (rozszerzony pełniej obejmuje energię w polu i wyprowadzenia).",
       "html": "<p>Zadania maturalne z grawitacji najczęściej wykorzystują przyrównanie siły grawitacji do siły dośrodkowej dla satelitów oraz III prawo Keplera do porównywania orbit. Trzeba sprawnie operować potęgami 10 i przeliczać jednostki. Często wymagane jest wyznaczenie masy planety z parametrów orbity jej księżyca lub porównanie przyspieszeń na różnych planetach.</p>",
       "typoweZadania": [
@@ -453,7 +453,7 @@
       { "term": "Rezonans", "def": "Gwałtowny wzrost amplitudy drgań, gdy częstotliwość wymuszająca równa się częstotliwości własnej układu." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Ruch harmoniczny obejmuje wzory na okres wahadła i sprężyny, energię drgań oraz zależności wychylenia, prędkości i przyspieszenia od czasu. Poziom rozszerzony wymaga analizy równań ruchu i wykresów.",
       "html": "<p>Na maturze zadania z drgań często wymagają odczytu wielkości z równania ruchu \\( x(t) = A\\sin(\\omega t) \\) lub z wykresu - amplitudy, okresu, częstotliwości. Częste są też zadania na okres wahadła i sprężyny oraz bilans energii (przeliczanie energii potencjalnej na kinetyczną). Warto pamiętać, że okres wahadła nie zależy od masy ani amplitudy.</p>",
       "typoweZadania": [
@@ -655,7 +655,7 @@
       { "term": "Efekt Dopplera", "def": "Zmiana obserwowanej częstotliwości fali spowodowana ruchem źródła lub obserwatora." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Fale mechaniczne obejmują równanie fali, długość i prędkość, interferencję, fale stojące, akustykę oraz efekt Dopplera. Poziom rozszerzony wymaga analizy interferencji i wzorów Dopplera.",
       "html": "<p>Na maturze najczęstsze są zadania na podstawowy związek \\( v = \\lambda f \\) oraz na fale stojące w strunach i słupach powietrza. Pojawia się też efekt Dopplera (głównie jakościowo i ilościowo na rozszerzeniu) oraz dudnienia. Trzeba uważać na jednostki częstotliwości (Hz, kHz) i prawidłowo identyfikować fale poprzeczne i podłużne.</p>",
       "typoweZadania": [

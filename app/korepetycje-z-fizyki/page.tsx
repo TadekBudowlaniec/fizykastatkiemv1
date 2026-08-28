@@ -11,7 +11,7 @@ import {
 } from '@/components/seo/SeoBits';
 
 const desc =
-  'Korepetycje z fizyki online w całej Polsce. Indywidualne lekcje 1:1, przygotowanie do matury podstawowej i rozszerzonej. Wybierz swoje miasto.';
+  'Korepetycje z fizyki online w całej Polsce. Indywidualne lekcje 1:1, przygotowanie do matury rozszerzonej. Wybierz swoje miasto.';
 
 export const metadata: Metadata = {
   title: 'Korepetycje z fizyki online - cała Polska | matura i liceum',

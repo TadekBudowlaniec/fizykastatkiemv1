@@ -5,7 +5,7 @@
     "dopelniacz": "prądu elektrycznego",
     "metaTeoria": "Prąd elektryczny - teoria do matury: prawo Ohma, opór, praca i moc prądu, prawa Kirchhoffa, łączenie oporników. Wzory, definicje i przykłady.",
     "metaMatura": "Prąd elektryczny na maturze z fizyki (CKE): zadania z prawa Ohma, mocy, oporu i obwodów. Sprawdzone strategie, schematy i pełne rozwiązania.",
-    "intro": "Prąd elektryczny to uporządkowany ruch ładunków elektrycznych. Ten dział obejmuje natężenie prądu, prawo Ohma, opór elektryczny, pracę i moc prądu oraz prawa Kirchhoffa. To jeden z najczęściej sprawdzanych obszarów na maturze z fizyki - zarówno na poziomie podstawowym, jak i rozszerzonym.",
+    "intro": "Prąd elektryczny to uporządkowany ruch ładunków elektrycznych. Ten dział obejmuje natężenie prądu, prawo Ohma, opór elektryczny, pracę i moc prądu oraz prawa Kirchhoffa. To jeden z najczęściej sprawdzanych obszarów na maturze z fizyki - zarówno w zakresie podstawowym, jak i rozszerzonym.",
     "theory": [
       {
         "heading": "Natężenie prądu i ładunek",
@@ -49,9 +49,9 @@
       { "term": "Moc prądu", "def": "Energia przekazywana przez prąd w jednostce czasu, równa iloczynowi napięcia i natężenia." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Prawo Ohma, opór i jego zależności, praca i moc prądu, prawo Joule'a-Lenza, łączenie oporników, SEM i opór wewnętrzny, prawa Kirchhoffa, charakterystyki prądowo-napięciowe.",
-      "html": "<p>Prąd elektryczny pojawia się na maturze niemal co roku. Na poziomie podstawowym dominują zadania na prawo Ohma, moc i koszt energii. Na poziomie rozszerzonym dochodzą obwody z SEM i oporem wewnętrznym, prawa Kirchhoffa oraz analiza wykresów I(U). Kluczowa jest sprawność rachunkowa i umiejętność upraszczania obwodów.</p>",
+      "html": "<p>Prąd elektryczny pojawia się na maturze niemal co roku. W zakresie podstawowym dominują zadania na prawo Ohma, moc i koszt energii. W zakresie rozszerzonym dochodzą obwody z SEM i oporem wewnętrznym, prawa Kirchhoffa oraz analiza wykresów I(U). Kluczowa jest sprawność rachunkowa i umiejętność upraszczania obwodów.</p>",
       "typoweZadania": [
         "Obliczanie oporu zastępczego mieszanego układu oporników.",
         "Wyznaczanie mocy i kosztu energii elektrycznej urządzenia.",
@@ -256,7 +256,7 @@
       { "term": "Solenoid", "def": "Cewka utworzona z wielu zwojów przewodnika, wytwarzająca wewnątrz jednorodne pole magnetyczne." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Pole magnetyczne i jego linie, siła Lorentza, ruch cząstki naładowanej w polu, siła elektrodynamiczna na przewodnik, pole przewodnika i solenoidu, reguły wyznaczania kierunku siły.",
       "html": "<p>Magnetyzm jest tematem głównie poziomu rozszerzonego. Zadania wymagają sprawnego stosowania reguł kierunkowych oraz łączenia magnetyzmu z dynamiką (siła dośrodkowa) i energią. Częste są zadania z ruchu cząstki po okręgu oraz z siły na przewodnik. Uważaj na kąt α we wzorach z sinusem.</p>",
       "typoweZadania": [
@@ -463,7 +463,7 @@
       { "term": "Transformator", "def": "Urządzenie zmieniające napięcie prądu zmiennego dzięki indukcji wzajemnej dwóch cewek o różnej liczbie zwojów." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Strumień magnetyczny, prawo Faradaya, reguła Lenza, SEM ruchu przewodnika, samoindukcja, prądnica, transformator, prąd przemienny.",
       "html": "<p>Indukcja elektromagnetyczna to temat głównie poziomu rozszerzonego, choć transformator i prądnica pojawiają się też na podstawowym. Zadania wymagają rozumienia zmiany strumienia i poprawnego stosowania reguły Lenza. Często trzeba połączyć indukcję z prawem Ohma i bilansem energii. Uważaj na jednostki czasu i powierzchni.</p>",
       "typoweZadania": [
@@ -670,7 +670,7 @@
       { "term": "Zdolność skupiająca", "def": "Odwrotność ogniskowej soczewki, mierzona w dioptriach (D); im większa, tym silniej soczewka skupia światło." }
     ],
     "maturaInfo": {
-      "poziom": "podstawowy i rozszerzony",
+      "poziom": "rozszerzony",
       "zakres": "Prawo odbicia i załamania, prawo Snella, współczynnik załamania, całkowite wewnętrzne odbicie, soczewki i zwierciadła, równanie soczewki, powiększenie, konstrukcje obrazów.",
       "html": "<p>Optyka geometryczna pojawia się na obu poziomach matury. Zadania obejmują obliczenia z prawa Snella, równania soczewki oraz analizę charakteru obrazu. Często trzeba wykonać konstrukcję graficzną obrazu lub policzyć kąt graniczny. Kluczowa jest konwencja znaków: ogniskowa rozpraszająca i obraz pozorny mają wartości ujemne.</p>",
       "typoweZadania": [

@@ -13,7 +13,7 @@ import { SITE } from '@/lib/site';
 const faq: FaqItem[] = [
   {
     q: 'Dla kogo jest kurs?',
-    a: 'Dla maturzystów zdających fizykę na poziomie podstawowym i rozszerzonym, oraz dla uczniów, którzy chcą nadrobić zaległości w trakcie roku.',
+    a: 'Dla maturzystów zdających fizykę na poziomie rozszerzonym oraz dla uczniów, którzy chcą nadrobić zaległości w trakcie roku.',
   },
   {
     q: 'Jak długo mam dostęp do kursu?',
