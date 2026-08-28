@@ -61,7 +61,7 @@ export default function OfertaRatunkowaPage() {
           </h2>
           <PromoCountdown />
           <div className="mx-auto mt-10 max-w-5xl text-left">
-            <PricingTiers />
+            <PricingTiers promo />
           </div>
           <p className="mt-8 text-sm text-slate-400">
             30-dniowa gwarancja zwrotu pieniędzy. Bez ryzyka.

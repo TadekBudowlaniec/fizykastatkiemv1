@@ -31,11 +31,19 @@ function Check() {
   );
 }
 
-export function PricingTiers({ dark = false }: { dark?: boolean }) {
+export function PricingTiers({
+  dark = false,
+  promo = false,
+}: {
+  dark?: boolean;
+  /** Ceny promocyjne (tylko /oferta-ratunkowa, gdzie ustawiany jest promoStartedAt) */
+  promo?: boolean;
+}) {
   return (
     <div className="grid gap-6 lg:grid-cols-3 lg:items-start">
       {PLANS.map((plan) => {
         const featured = plan.featured;
+        const price = promo ? plan.promoPrice : plan.price;
         return (
           <div
             key={plan.key}
@@ -66,7 +74,7 @@ export function PricingTiers({ dark = false }: { dark?: boolean }) {
               </div>
               <div className="flex items-baseline justify-center gap-1">
                 <span className="font-display text-5xl font-extrabold text-gradient">
-                  {plan.price}
+                  {price}
                 </span>
                 <span className="text-xl font-bold text-ink">zł</span>
               </div>
