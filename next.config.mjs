@@ -2,6 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Lint uruchamiamy osobno (npm run lint); build go nie blokuje.
+  eslint: { ignoreDuringBuilds: true },
   // Zgodność ze starymi URL-ami SEO (canonical z końcowym "/")
   trailingSlash: true,
   images: {

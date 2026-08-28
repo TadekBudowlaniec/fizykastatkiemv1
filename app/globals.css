@@ -258,6 +258,10 @@ a { color: inherit; text-decoration: none; }
 /* Animacja wejścia na scroll (JS dodaje .in-view) */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
 .reveal.in-view { opacity: 1; transform: translateY(0); }
+/* Fallback: bez JS (albo gdy observer nie zadziała) treść musi być widoczna. */
+@media (scripting: none) {
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }

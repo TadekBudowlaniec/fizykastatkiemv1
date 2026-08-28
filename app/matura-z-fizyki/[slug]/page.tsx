@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
-import { getTopics, getTopic, topicsBySlug, plain } from '@/lib/seo';
+import { getTopics, getTopic, topicsBySlug, plain, SEO_PUBLISHED, seoModified } from '@/lib/seo';
 import { MathContent } from '@/components/seo/MathContent';
 import {
   SeoHero,
@@ -63,6 +63,9 @@ export default async function MaturaPage({ params }: Params) {
       logo: { '@type': 'ImageObject', url: `${SITE.url}/images/logo_magenta.png` },
     },
     mainEntityOfPage: SITE.url + canonical,
+    image: `${SITE.url}/images/logo_magenta.png`,
+    datePublished: SEO_PUBLISHED,
+    dateModified: seoModified(),
   };
 
   return (

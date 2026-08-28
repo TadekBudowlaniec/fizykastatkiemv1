@@ -119,3 +119,9 @@ export function plain(s: string | undefined | null): string {
     .replace(/\s+/g, ' ')
     .trim();
 }
+
+// --- Daty do JSON-LD Article (strony evergreen) ---
+export const SEO_PUBLISHED = '2025-09-01';
+export function seoModified(): string {
+  return process.env.SEO_DATE || new Date().toISOString().slice(0, 10);
+}

@@ -8,6 +8,8 @@ import {
   postsBySlug,
   topicsBySlug,
   plain,
+  SEO_PUBLISHED,
+  seoModified,
 } from '@/lib/seo';
 import { MathContent } from '@/components/seo/MathContent';
 import {
@@ -57,7 +59,7 @@ export default async function ArticlePage({ params }: Params) {
 
   const article = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: plain(p.title),
     inLanguage: 'pl',
     description: plain(p.metaDesc || p.excerpt),
@@ -68,6 +70,9 @@ export default async function ArticlePage({ params }: Params) {
       logo: { '@type': 'ImageObject', url: `${SITE.url}/images/logo_magenta.png` },
     },
     mainEntityOfPage: SITE.url + canonical,
+    image: `${SITE.url}/images/logo_magenta.png`,
+    datePublished: p.date || SEO_PUBLISHED,
+    dateModified: seoModified(),
   };
 
   return (
