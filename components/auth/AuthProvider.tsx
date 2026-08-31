@@ -16,6 +16,7 @@ type Enrollment = { course_id: number; access_granted: boolean };
 type AuthState = {
   user: User | null;
   loading: boolean;
+  accessLoading: boolean;
   isAdmin: boolean;
   enrollments: Enrollment[];
   hasAnyAccess: boolean;
@@ -34,6 +35,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [enrollments, setEnrollments] = useState<Enrollment[]>([]);
+  // true dopóki nie wczytamy dostępu zalogowanego usera — zapobiega migotaniu
+  // ekranu „zablokowane"/„0/16" zanim enrollments dojadą.
+  const [accessLoading, setAccessLoading] = useState(true);
 
   // --- 1) Śledzenie sesji ---
   // WAŻNE: w callbacku onAuthStateChange NIE wolno wywoływać funkcji Supabase
@@ -69,6 +73,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // --- 2) Ładowanie dostępu (poza callbackiem auth) ---
   const loadAccess = useCallback(
     async (uid: string) => {
+      setAccessLoading(true);
       try {
         const [{ data: userRow }, { data: enr }] = await Promise.all([
           supabase.from('users').select('is_admin').eq('id', uid).maybeSingle(),
@@ -86,6 +91,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         // brak dostępu do danych nie może blokować logowania
         setIsAdmin(false);
         setEnrollments([]);
+      } finally {
+        setAccessLoading(false);
       }
     },
     [supabase]
@@ -97,6 +104,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } else {
       setIsAdmin(false);
       setEnrollments([]);
+      setAccessLoading(false); // brak usera — nie ma czego ładować
     }
   }, [user?.id, loadAccess]);
 
@@ -164,6 +172,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const value: AuthState = {
     user,
     loading,
+    accessLoading,
     isAdmin,
     enrollments,
     hasAnyAccess: isAdmin || enrollments.length > 0,

@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/Button';
 import { COURSES } from '@/lib/courses';
 
 export default function UserPage() {
-  const { user, loading, isAdmin, enrollments, signOut } = useAuth();
+  const { user, loading, accessLoading, isAdmin, enrollments, signOut } = useAuth();
   const [current, setCurrent] = useState('');
   const [next, setNext] = useState('');
   const [repeat, setRepeat] = useState('');
@@ -20,7 +20,7 @@ export default function UserPage() {
   );
   const [saving, setSaving] = useState(false);
 
-  if (loading) {
+  if (loading || (user && accessLoading)) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center text-muted">
         Ładowanie…

@@ -47,12 +47,12 @@ const coursePdfFiles = {
     7: {
         3: { bucket: 'Etap 3', file: 'Hydrostatyka ETAP 3.pdf' },
         2: { bucket: 'Etap 2', file: 'Hydrostatyka ETAP 2.pdf' },
-        1: { bucket: 'Etap 3', file: 'Hydrostatyka ETAP 1.pdf' },
+        1: { bucket: 'Etap 1', file: 'Hydrostatyka ETAP 1.pdf' },
     },
     8: {
         3: { bucket: 'Etap 3', file: 'Termodynamika ETAP 3.pdf' },
         2: { bucket: 'Etap 2', file: 'Termodynamika ETAP 2.pdf' },
-        1: { bucket: 'Etap 3', file: 'Termodynamika ETAP 1.pdf' },
+        1: { bucket: 'Etap 1', file: 'Termodynamika ETAP 1.pdf' },
     },
     9: {
         3: { bucket: 'Etap 3', file: 'Grawitacja i astronomia ETAP 3.pdf' },

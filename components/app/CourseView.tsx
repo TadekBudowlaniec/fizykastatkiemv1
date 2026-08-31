@@ -25,7 +25,7 @@ function lessonIcon(title: string): string {
 }
 
 export function CourseView({ courseId }: { courseId: number }) {
-  const { user, loading, hasAccessToCourse } = useAuth();
+  const { user, loading, accessLoading, hasAccessToCourse } = useAuth();
   const isStart = courseId === 0;
   const meta = getCourse(courseId);
   const title = isStart ? 'Tutaj zacznij' : meta?.title ?? 'Dział';
@@ -69,7 +69,9 @@ export function CourseView({ courseId }: { courseId: number }) {
     );
   }
 
-  if (loading) {
+  // Czekamy aż znamy sesję ORAZ (dla zalogowanego) wczytamy jego dostęp —
+  // inaczej płacący user zobaczyłby na chwilę ekran „zablokowane".
+  if (loading || (!isStart && !!user && accessLoading)) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center text-muted">
         Ładowanie…

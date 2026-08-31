@@ -5,21 +5,56 @@ import { Button } from '@/components/ui/Button';
 import { useAuth } from '@/components/auth/AuthProvider';
 
 export function SuccessClient() {
-  const { user, refreshAccess } = useAuth();
-  const [checked, setChecked] = useState(false);
+  const { user, refreshAccess, hasAnyAccess } = useAuth();
+  const [status, setStatus] = useState<'checking' | 'active' | 'pending'>(
+    'checking'
+  );
 
+  // Promocja zużyta - wyczyść znacznik (raz)
   useEffect(() => {
-    const t = setTimeout(async () => {
+    try {
+      window.localStorage.removeItem('promoStartedAt');
+    } catch {
+      /* localStorage niedostępny — bez znaczenia */
+    }
+  }, []);
+
+  // Poll dostępu — webhook (zwłaszcza async/Klarna) może chwilę zająć.
+  // NIE twierdzimy „aktywowano", dopóki dostęp realnie się nie pojawi.
+  useEffect(() => {
+    if (!user) return; // gość dostaje instrukcję o mailu poniżej
+    if (hasAnyAccess) {
+      setStatus('active');
+      return;
+    }
+
+    let cancelled = false;
+    let timer: ReturnType<typeof setTimeout>;
+    let attempts = 0;
+    const MAX = 8; // ~1.5s + 7×2s ≈ 17s
+
+    const poll = async () => {
+      if (cancelled) return;
+      attempts += 1;
       try {
         await refreshAccess();
-      } finally {
-        setChecked(true);
+      } catch {
+        /* ignoruj — spróbujemy ponownie */
       }
-    }, 2000);
-    // Promocja zużyta - wyczyść znacznik
-    window.localStorage.removeItem('promoStartedAt');
-    return () => clearTimeout(t);
-  }, [refreshAccess]);
+      if (cancelled) return;
+      if (attempts >= MAX) {
+        setStatus('pending');
+        return;
+      }
+      timer = setTimeout(poll, 2000);
+    };
+    timer = setTimeout(poll, 1500);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [user, hasAnyAccess, refreshAccess]);
 
   return (
     <section className="relative flex min-h-[75vh] items-center justify-center overflow-hidden bg-[linear-gradient(160deg,#070b18,#0b1224_55%,#16223f)] px-5 py-20 text-center text-white">
@@ -37,9 +72,11 @@ export function SuccessClient() {
 
         {user ? (
           <p className="mt-4 text-lg text-slate-300/85">
-            {checked
+            {status === 'active'
               ? 'Twój dostęp został aktywowany. Miłej nauki - płyniemy po Twój wynik!'
-              : 'Aktywujemy Twój dostęp do kursu…'}
+              : status === 'pending'
+                ? 'Płatność potwierdzona! Aktywacja dostępu może potrwać chwilę — odśwież stronę za moment albo wejdź do kursu, dostęp pojawi się automatycznie.'
+                : 'Aktywujemy Twój dostęp do kursu…'}
           </p>
         ) : (
           <p className="mt-4 text-lg text-slate-300/85">

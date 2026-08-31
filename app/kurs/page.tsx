@@ -9,10 +9,10 @@ import { CourseTile } from '@/components/app/CourseTile';
 import { COURSES } from '@/lib/courses';
 
 export default function DashboardPage() {
-  const { user, loading, isAdmin, enrollments } = useAuth();
+  const { user, loading, accessLoading, isAdmin, enrollments } = useAuth();
 
   const unlocked = isAdmin ? COURSES.length : enrollments.length;
-  const pct = Math.round((unlocked / COURSES.length) * 100);
+  const pct = accessLoading ? 0 : Math.round((unlocked / COURSES.length) * 100);
 
   return (
     <>
@@ -33,7 +33,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between text-sm text-slate-300">
               <span>Odblokowane działy</span>
               <span className="font-semibold text-white">
-                {unlocked} / {COURSES.length}
+                {accessLoading ? '…' : `${unlocked} / ${COURSES.length}`}
               </span>
             </div>
             <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-white/10">
@@ -105,7 +105,7 @@ export default function DashboardPage() {
             ))}
           </div>
 
-          {user && unlocked === 0 && !isAdmin && (
+          {user && !accessLoading && unlocked === 0 && !isAdmin && (
             <div className="mt-10 rounded-3xl border border-brand-100 bg-brand-50/60 p-7 text-center">
               <p className="text-lg font-bold text-ink">
                 Nie masz jeszcze dostępu do działów
