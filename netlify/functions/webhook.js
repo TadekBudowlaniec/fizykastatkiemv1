@@ -55,18 +55,38 @@ const supabase = createClient(
 
 const CLIENT_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
+// Znajdź użytkownika Supabase Auth po e-mailu — Z PAGINACJĄ.
+// listUsers() bez argumentów zwraca tylko pierwszą stronę (~50 userów); po
+// przekroczeniu tej liczby powracający gość nie był znajdowany, przez co
+// createUser padał na „email exists" i płacący klient nie dostawał dostępu.
+async function findAuthUserByEmail(email) {
+    const target = String(email || '').toLowerCase();
+    const perPage = 1000;
+    for (let page = 1; page <= 1000; page++) {
+        const { data, error } = await supabase.auth.admin.listUsers({ page, perPage });
+        if (error) {
+            console.error('Error listing users (page', page, '):', error);
+            return { user: null, error };
+        }
+        const users = data?.users || [];
+        const found = users.find(u => (u.email || '').toLowerCase() === target);
+        if (found) return { user: found, error: null };
+        if (users.length < perPage) break; // ostatnia strona
+    }
+    return { user: null, error: null };
+}
+
 // Znajdź lub utwórz użytkownika Supabase Auth po emailu
 async function findOrCreateUser(email) {
-    // Szukaj istniejącego usera w Supabase Auth po emailu
-    const { data: { users }, error: listError } = await supabase.auth.admin.listUsers();
-    if (listError) {
-        console.error('Error listing users:', listError);
-    }
-
-    const existingAuthUser = users?.find(u => u.email === email);
+    // Szukaj istniejącego usera w Supabase Auth po emailu (paginacja)
+    const { user: existingAuthUser, error: listError } = await findAuthUserByEmail(email);
     if (existingAuthUser) {
         console.log('Found existing auth user:', existingAuthUser.id, email);
         return existingAuthUser.id;
+    }
+    // Gdy listowanie padło — nie twórz na ślepo (ryzyko duplikatu konta).
+    if (listError) {
+        return null;
     }
 
     // Utwórz nowe konto w Supabase Auth — generuje random hasło
@@ -78,6 +98,13 @@ async function findOrCreateUser(email) {
 
     if (createError) {
         console.error('Error creating auth user:', createError);
+        // Wyścig/duplikat: konto mogło powstać równolegle — spróbuj znaleźć ponownie,
+        // zamiast zwracać null (co blokowałoby dostęp opłaconemu klientowi).
+        const retry = await findAuthUserByEmail(email);
+        if (retry.user) {
+            console.log('Recovered existing auth user after create error:', retry.user.id, email);
+            return retry.user.id;
+        }
         return null;
     }
 
@@ -115,9 +142,22 @@ exports.handler = async (event) => {
         return { statusCode: 400, body: `Webhook Error: ${err.message}` };
     }
 
-    if (eventData.type === 'checkout.session.completed') {
+    // Nadajemy dostęp na 'completed' ORAZ 'async_payment_succeeded' (Klarna itp.).
+    const PROVISION_EVENTS = ['checkout.session.completed', 'checkout.session.async_payment_succeeded'];
+
+    if (PROVISION_EVENTS.includes(eventData.type)) {
         const session = eventData.data.object;
-        console.log('Processing completed session:', session.id);
+        console.log('Processing session:', session.id, 'type:', eventData.type, 'payment_status:', session.payment_status);
+
+        // KRYTYCZNE: dostęp nadajemy WYŁĄCZNIE po potwierdzonej płatności.
+        // - card/BLIK: 'checkout.session.completed' przychodzi od razu jako 'paid'
+        // - Klarna (metoda asynchroniczna): 'completed' bywa 'unpaid' — wtedy czekamy
+        //   na 'checkout.session.async_payment_succeeded' (dopiero ono jest 'paid').
+        // - kupon 100%: 'no_payment_required'.
+        if (session.payment_status !== 'paid' && session.payment_status !== 'no_payment_required') {
+            console.log('Payment not confirmed — skipping provisioning:', session.id, session.payment_status);
+            return { statusCode: 200, body: JSON.stringify({ received: true, pending: true }) };
+        }
 
         try {
             // --- Ustal userId: z metadata (zalogowany) lub po emailu (gość) ---
