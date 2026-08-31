@@ -262,15 +262,19 @@ export default function PlanerPage() {
                             {!rest ? (
                               <button
                                 onClick={() => toggleDone(item)}
-                                className={cn(
-                                  'flex h-6 w-6 flex-none items-center justify-center rounded-md border-2 text-xs text-white transition',
-                                  item.is_completed
-                                    ? 'border-brand-500 bg-brand-500'
-                                    : 'border-line hover:border-brand-400'
-                                )}
+                                className="-my-2 flex h-10 w-6 flex-none items-center justify-center"
                                 aria-label="Oznacz jako zrobione"
                               >
-                                {item.is_completed && '✓'}
+                                <span
+                                  className={cn(
+                                    'flex h-6 w-6 items-center justify-center rounded-md border-2 text-xs text-white transition',
+                                    item.is_completed
+                                      ? 'border-brand-500 bg-brand-500'
+                                      : 'border-line hover:border-brand-400'
+                                  )}
+                                >
+                                  {item.is_completed && '✓'}
+                                </span>
                               </button>
                             ) : (
                               <span className="text-xl">{meta.icon}</span>

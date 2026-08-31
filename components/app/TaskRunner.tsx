@@ -216,7 +216,7 @@ export function TaskRunner({ courseId }: { courseId: number }) {
               key={src}
               src={src}
               alt="Ilustracja zadania"
-              className="max-h-64 rounded-xl border border-line"
+              className="max-h-64 max-w-full rounded-xl border border-line object-contain"
             />
           ))}
         </div>
@@ -282,7 +282,7 @@ export function TaskRunner({ courseId }: { courseId: number }) {
                 <img
                   src={current.solution}
                   alt="Rozwiązanie"
-                  className="max-h-96 rounded-xl border border-line"
+                  className="max-h-96 max-w-full rounded-xl border border-line object-contain"
                 />
               ) : (
                 <MarkdownLesson content={current.solution ?? 'Brak rozwiązania.'} />

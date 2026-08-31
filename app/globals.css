@@ -224,6 +224,10 @@ a { color: inherit; text-decoration: none; }
   color: var(--color-slate);
   font-size: 1.05rem;
   line-height: 1.8;
+  /* Długie URL-e / nierozłamywalne tokeny nie mogą wychodzić poza kolumnę
+     (body ma overflow-x:hidden, więc inaczej byłyby ucinane bez scrolla). */
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 .prose-fs h2 { font-size: 1.75rem; margin: 2.25rem 0 1rem; }
 .prose-fs h3 { font-size: 1.3rem; margin: 1.75rem 0 0.75rem; }
@@ -248,12 +252,16 @@ a { color: inherit; text-decoration: none; }
   border-radius: 6px;
   font-size: 0.9em;
 }
-.prose-fs table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+/* Tabele w treści: przewijalne w poziomie na wąskich ekranach zamiast ucinane. */
+.prose-fs table { display: block; overflow-x: auto; max-width: 100%; width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
 .prose-fs th, .prose-fs td { border: 1px solid var(--color-line); padding: 0.65rem 0.85rem; text-align: left; }
 .prose-fs th { background: var(--color-foam); font-weight: 700; color: var(--color-ink); }
 
 /* KaTeX overflow na mobile */
 .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.35rem 0; }
+/* Długie inline-math i bloki kodu też przewijalne zamiast ucinane. */
+.prose-fs .katex { max-width: 100%; overflow-x: auto; }
+.prose-fs pre { overflow-x: auto; max-width: 100%; }
 
 /* Animacja wejścia na scroll (JS dodaje .in-view) */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }

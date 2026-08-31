@@ -166,7 +166,7 @@ export function CourseView({ courseId }: { courseId: number }) {
                 key={t.key}
                 onClick={() => setTab(t.key)}
                 className={cn(
-                  'rounded-full px-5 py-2.5 text-sm font-semibold transition-all',
+                  'whitespace-nowrap rounded-full px-3 py-2.5 text-xs font-semibold transition-all sm:px-5 sm:text-sm',
                   tab === t.key
                     ? 'bg-[linear-gradient(120deg,#6b4df6,#f43f8f)] text-white shadow-soft'
                     : 'text-muted hover:text-brand-600'

@@ -4,7 +4,7 @@ import { PricingTiers } from '@/components/shop/PricingTiers';
 
 export function PricingSection() {
   return (
-    <section id="cennik" className="bg-white py-20 sm:py-24">
+    <section id="cennik" className="bg-white py-14 sm:py-24">
       <Container size="wide">
         <SectionHeading
           eyebrow="Oferta"

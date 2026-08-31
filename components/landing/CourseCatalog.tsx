@@ -6,7 +6,7 @@ import { COURSES, SINGLE_COURSE_PRICE } from '@/lib/courses';
 
 export function CourseCatalog() {
   return (
-    <section id="kursy" className="bg-cloud py-20 sm:py-24">
+    <section id="kursy" className="bg-cloud py-14 sm:py-24">
       <Container size="wide">
         <SectionHeading
           eyebrow="Program kursu"

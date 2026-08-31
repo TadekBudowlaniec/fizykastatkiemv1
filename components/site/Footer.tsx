@@ -43,7 +43,7 @@ function FooterCol({
           <li key={l.href}>
             <Link
               href={l.href}
-              className="text-sm text-slate-300/70 transition-colors hover:text-white"
+              className="block py-1 text-sm text-slate-300/70 transition-colors hover:text-white"
             >
               {l.label}
             </Link>

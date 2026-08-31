@@ -23,7 +23,7 @@ export function Hero() {
         {/* Copy */}
         <div className="animate-[fadeUp_0.7s_cubic-bezier(0.22,1,0.36,1)_both]">
           <Eyebrow dark>🚢 Kurs maturalny z fizyki - matura 2027</Eyebrow>
-          <h1 className="mt-5 font-display text-[2.7rem] font-extrabold leading-[1.06] text-white sm:text-5xl lg:text-[3.4rem]">
+          <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.08] text-white sm:text-5xl lg:text-[3.4rem]">
             Zdaj maturę z fizyki{' '}
             <span className="text-gradient">bez stresu i chaosu</span>.
           </h1>

@@ -63,7 +63,7 @@ export function Testimonials() {
   }, [zoom]);
 
   return (
-    <section className="bg-white py-20 sm:py-24">
+    <section className="bg-white py-14 sm:py-24">
       <Container>
         <SectionHeading
           eyebrow="Owoce współpracy"

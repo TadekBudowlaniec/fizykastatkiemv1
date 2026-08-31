@@ -24,7 +24,7 @@ const items = [
 
 export function Toolkit() {
   return (
-    <section className="bg-cloud py-20 sm:py-24">
+    <section className="bg-cloud py-14 sm:py-24">
       <Container>
         <SectionHeading
           eyebrow="Twój zestaw narzędzi"
