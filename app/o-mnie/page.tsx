@@ -6,9 +6,9 @@ import { SITE } from '@/lib/site';
 import { JsonLd, breadcrumbLd } from '@/components/seo/SeoBits';
 
 export const metadata: Metadata = {
-  title: 'O mnie — Czarek, korepetytor i twórca kursu fizyki',
+  title: 'O mnie — Cezary Prusak, korepetytor i twórca kursu fizyki',
   description:
-    'Kim jestem: Cezary „Czarek” Prusak. Fizykę rozszerzoną zdałem na 82%. Uczę fizyki i matematyki online oraz w Lublinie i tworzę kurs maturalny Fizyka Statkiem.',
+    'Kim jestem: Cezary Prusak. Fizykę rozszerzoną zdałem na 82%. Uczę fizyki i matematyki online oraz w Lublinie i tworzę kurs maturalny Fizyka Statkiem.',
   alternates: { canonical: '/o-mnie/' },
 };
 
@@ -34,7 +34,7 @@ export default function OMniePage() {
         eyebrow="O mnie"
         title={
           <>
-            Cześć, jestem <span className="text-gradient">Czarek</span>
+            Cześć, jestem <span className="text-gradient">Cezary Prusak</span>
           </>
         }
         subtitle="Uczę fizyki i matematyki tak, żebyś zrozumiał mechanizm — nie wkuwał wzorów. Prowadzę korepetycje i tworzę kurs maturalny Fizyka Statkiem."
@@ -45,7 +45,7 @@ export default function OMniePage() {
         <Container size="narrow">
           <div className="prose-fs max-w-none">
             <p>
-              Nazywam się <strong>Cezary „Czarek” Prusak</strong>. Fizykę na
+              Nazywam się <strong>Cezary Prusak</strong>. Fizykę na
               maturze zdałem na poziomie rozszerzonym na <strong>82%</strong>,
               matematykę rozszerzoną na <strong>92%</strong>, a podstawową na{' '}
               <strong>100%</strong>. Od tamtej pory pomagam maturzystom
