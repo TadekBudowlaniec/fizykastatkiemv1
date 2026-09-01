@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
 import { PricingTiers } from '@/components/shop/PricingTiers';
 import { PromoCountdown } from '@/components/shop/PromoCountdown';
+import { PLANS } from '@/lib/courses';
+import { SITE } from '@/lib/site';
+import { JsonLd, breadcrumbLd } from '@/components/seo/SeoBits';
 
 export const metadata: Metadata = {
   title: 'Pakiet Ratunkowy - ostatnia prosta przed maturą',
@@ -10,9 +13,40 @@ export const metadata: Metadata = {
   alternates: { canonical: '/oferta-ratunkowa/' },
 };
 
+const ofertaJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Pakiety Ratunkowe kursu maturalnego z fizyki (promocja)',
+    itemListElement: PLANS.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Product',
+        name: `Kurs maturalny z fizyki — ${p.name} (Pakiet Ratunkowy)`,
+        description: p.features.join('. ') + '.',
+        brand: { '@type': 'Brand', name: SITE.name },
+        offers: {
+          '@type': 'Offer',
+          priceCurrency: 'PLN',
+          price: String(p.promoPrice),
+          availability: 'https://schema.org/InStock',
+          url: `${SITE.url}/oferta-ratunkowa/`,
+          priceValidUntil: '2026-12-31',
+        },
+      },
+    })),
+  },
+  breadcrumbLd([
+    { name: 'Start', url: '/' },
+    { name: 'Oferta Ratunkowa', url: '/oferta-ratunkowa/' },
+  ]),
+];
+
 export default function OfertaRatunkowaPage() {
   return (
     <div className="relative overflow-hidden bg-[linear-gradient(160deg,#070b18,#0b1224_50%,#16223f)] text-white">
+      <JsonLd data={ofertaJsonLd} />
       {/* Orby */}
       <div className="aurora left-[-8%] top-[6%] h-80 w-80 animate-[aurora_18s_ease_infinite] bg-brand-600/45" />
       <div className="aurora right-[-6%] top-[30%] h-72 w-72 animate-[aurora_22s_ease_infinite] bg-magenta-500/40" />

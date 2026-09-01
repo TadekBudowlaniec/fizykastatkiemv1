@@ -5,7 +5,32 @@ import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
 import { SITE } from '@/lib/site';
-import { JsonLd, breadcrumbLd } from '@/components/seo/SeoBits';
+import { TUTORING_PRICE } from '@/lib/courses';
+import { FaqSection, type FaqItem } from '@/components/ui/Faq';
+import { JsonLd, breadcrumbLd, faqLd } from '@/components/seo/SeoBits';
+
+const korepetycjeFaq: FaqItem[] = [
+  {
+    q: 'Ile kosztują korepetycje z fizyki?',
+    a: `Korepetycje kosztują ${TUTORING_PRICE} zł za 60 minut — tyle samo online i stacjonarnie w Lublinie. Płatność po zajęciach lub z góry za pakiet lekcji.`,
+  },
+  {
+    q: 'Korepetycje z fizyki online czy stacjonarnie w Lublinie?',
+    a: 'Prowadzę oba warianty. Online na Discordzie z interaktywną tablicą (notatki zapisują się automatycznie), a stacjonarnie w Lublinie na os. Rury. Skuteczność jest taka sama — wybierasz to, co dla Ciebie wygodniejsze.',
+  },
+  {
+    q: 'Czy przygotujesz mnie do matury rozszerzonej z fizyki?',
+    a: 'Tak, to moja specjalność. Fizykę rozszerzoną zdałem na 82%, a moi uczniowie regularnie osiągają 90%+. Uczę pod wymagania CKE i typowe zadania maturalne.',
+  },
+  {
+    q: 'Jak wyglądają zajęcia online?',
+    a: 'Spotykamy się na Discordzie z interaktywną tablicą. Rozwiązujemy zadania na żywo, a wszystkie notatki zostają u Ciebie do powtórki.',
+  },
+  {
+    q: 'Od kiedy zacząć przygotowania do matury z fizyki?',
+    a: 'Im wcześniej, tym spokojniej — ale nawet kilka miesięcy skoncentrowanej pracy potrafi dać duży skok wyniku. Zaczynamy od diagnozy braków na pierwszej lekcji.',
+  },
+];
 
 const korepetycjeJsonLd = [
   {
@@ -23,7 +48,21 @@ const korepetycjeJsonLd = [
     ],
     audience: { '@type': 'EducationalAudience', educationalRole: 'student' },
     inLanguage: 'pl',
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'PLN',
+      price: String(TUTORING_PRICE),
+      availability: 'https://schema.org/InStock',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: String(TUTORING_PRICE),
+        priceCurrency: 'PLN',
+        unitCode: 'HUR',
+        unitText: '60 minut',
+      },
+    },
   },
+  faqLd(korepetycjeFaq),
   breadcrumbLd([
     { name: 'Start', url: '/' },
     { name: 'Korepetycje z fizyki', url: '/korepetycje/' },
@@ -138,6 +177,9 @@ export default function KorepetycjePage() {
                 <Button href={mailto} variant="gradient" size="lg">
                   Umów pierwszą lekcję
                 </Button>
+                <p className="text-sm font-semibold text-white">
+                  {TUTORING_PRICE} zł / 60 min · online i stacjonarnie w Lublinie
+                </p>
                 <p className="text-sm text-magenta-300">
                   📅 Zostały ostatnie wolne terminy!
                 </p>
@@ -226,6 +268,12 @@ export default function KorepetycjePage() {
           </div>
         </Container>
       </section>
+
+      {/* FAQ */}
+      <FaqSection
+        items={korepetycjeFaq}
+        subtitle="Masz inne pytanie? Napisz — odpowiem osobiście."
+      />
 
       {/* Finalne CTA */}
       <section className="relative overflow-hidden bg-[linear-gradient(150deg,#070b18,#0f1b36)] py-20 text-white sm:py-24">

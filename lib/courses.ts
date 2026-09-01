@@ -138,3 +138,6 @@ export const PLANS: Plan[] = [
 
 /** Cena pojedynczego działu (zł) */
 export const SINGLE_COURSE_PRICE = 49;
+
+/** Cena korepetycji indywidualnych (zł za 60 minut) */
+export const TUTORING_PRICE = 100;

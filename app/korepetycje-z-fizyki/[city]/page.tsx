@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
+import { TUTORING_PRICE } from '@/lib/courses';
 import { getCities, getCity, getTopics, plain, type Faq } from '@/lib/seo';
 import {
   SeoHero,
@@ -62,6 +63,19 @@ export default async function CityPage({ params }: Params) {
     },
     audience: { '@type': 'EducationalAudience', educationalRole: 'student' },
     inLanguage: 'pl',
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'PLN',
+      price: String(TUTORING_PRICE),
+      availability: 'https://schema.org/InStock',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: String(TUTORING_PRICE),
+        priceCurrency: 'PLN',
+        unitCode: 'HUR',
+        unitText: '60 minut',
+      },
+    },
   };
 
   const faqs: Faq[] = [
@@ -79,7 +93,7 @@ export default async function CityPage({ params }: Params) {
     },
     {
       q: 'Ile kosztują korepetycje z fizyki?',
-      a: 'Mamy kilka pakietów - od samodzielnego kursu online po indywidualne lekcje live. Szczegóły i ceny znajdziesz na stronie korepetycji.',
+      a: `Korepetycje indywidualne z fizyki online 1:1 kosztują ${TUTORING_PRICE} zł za 60 minut. Alternatywnie dostępny jest samodzielny kurs maturalny online — od 49 zł za pojedynczy dział. Pełny cennik pakietów znajdziesz w zakładce Cennik.`,
     },
     {
       q: 'Od czego zacząć naukę fizyki?',
