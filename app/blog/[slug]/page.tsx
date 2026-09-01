@@ -25,6 +25,16 @@ import {
 
 type Params = { params: Promise<{ slug: string }> };
 
+const MIESIACE = [
+  'stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca',
+  'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia',
+];
+function formatPlDate(iso: string): string {
+  const [y, m, d] = iso.split('-').map(Number);
+  if (!y || !m || !d) return iso;
+  return `${d} ${MIESIACE[m - 1]} ${y}`;
+}
+
 export function generateStaticParams() {
   return getPosts().map((p) => ({ slug: p.slug }));
 }
@@ -94,6 +104,9 @@ export default async function ArticlePage({ params }: Params) {
 
       <section className="bg-cloud py-14 sm:py-16">
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
+          <p className="mb-8 text-sm text-muted">
+            Opublikowano: {formatPlDate(p.date || SEO_PUBLISHED)}
+          </p>
           <div className="space-y-8">
             {(p.sections ?? []).map((s, i) => (
               <section key={i} id={`sek-${i}`}>

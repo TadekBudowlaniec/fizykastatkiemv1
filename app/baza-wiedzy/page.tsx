@@ -32,7 +32,7 @@ export default function BazaWiedzy() {
     name: 'Baza wiedzy z fizyki',
     inLanguage: 'pl',
     description: plain(desc),
-    isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+    isPartOf: { '@id': `${SITE.url}/#website` },
     url: `${SITE.url}/baza-wiedzy/`,
   };
 

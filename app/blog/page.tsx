@@ -22,7 +22,10 @@ export const metadata: Metadata = {
 };
 
 export default function BlogHub() {
-  const posts = getPosts();
+  // Najnowsze na górze — sekcja nazywa się „Najnowsze artykuły”.
+  const posts = [...getPosts()].sort((a, b) =>
+    (b.date ?? '').localeCompare(a.date ?? '')
+  );
   const crumbs = [
     { name: 'Strona główna', url: '/' },
     { name: 'Blog' },
@@ -34,7 +37,7 @@ export default function BlogHub() {
     name: 'Blog o fizyce i maturze',
     inLanguage: 'pl',
     description: plain(desc),
-    isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+    isPartOf: { '@id': `${SITE.url}/#website` },
     url: `${SITE.url}/blog/`,
   };
   const itemList = {
