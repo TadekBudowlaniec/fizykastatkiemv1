@@ -9,6 +9,14 @@ import { PricingSection } from '@/components/landing/PricingSection';
 import { FaqSection, type FaqItem } from '@/components/ui/Faq';
 import { FinalCta } from '@/components/landing/FinalCta';
 import { SITE } from '@/lib/site';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Kurs maturalny z fizyki online — matura rozszerzona',
+  description:
+    'Kurs maturalny z fizyki online (poziom rozszerzony): 16 działów wideo HD, PDF-y, setki zadań CKE i planer nauki. Gwarancja zdanej matury. Od 49 zł za dział.',
+  alternates: { canonical: '/' },
+};
 
 const faq: FaqItem[] = [
   {
@@ -36,18 +44,29 @@ const faq: FaqItem[] = [
 const courseJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Course',
-  name: 'Fizyka Statkiem - Kompletny kurs fizyki do matury',
+  name: 'Fizyka Statkiem — Kurs maturalny z fizyki online',
   description: SITE.description,
+  inLanguage: 'pl',
   provider: {
-    '@type': 'Organization',
+    '@type': 'EducationalOrganization',
+    '@id': `${SITE.url}/#org`,
     name: SITE.name,
-    sameAs: SITE.url,
+    url: SITE.url,
+  },
+  hasCourseInstance: {
+    '@type': 'CourseInstance',
+    courseMode: 'online',
+    inLanguage: 'pl',
+    instructor: { '@id': `${SITE.url}/#czarek` },
   },
   offers: {
     '@type': 'Offer',
     category: 'Kurs online',
     priceCurrency: 'PLN',
-    price: '599',
+    price: '699',
+    availability: 'https://schema.org/InStock',
+    url: `${SITE.url}/cennik/`,
+    priceValidUntil: '2026-12-31',
   },
 };
 

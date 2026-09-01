@@ -57,7 +57,7 @@ export default async function TeoriaPage({ params }: Params) {
     headline: `${t.name} - teoria i wzory`,
     inLanguage: 'pl',
     description: plain(t.metaTeoria || t.intro),
-    author: { '@type': 'Organization', name: SITE.name },
+    author: { '@type': 'Person', '@id': `${SITE.url}/#czarek`, name: SITE.owner },
     publisher: {
       '@type': 'Organization',
       name: SITE.name,

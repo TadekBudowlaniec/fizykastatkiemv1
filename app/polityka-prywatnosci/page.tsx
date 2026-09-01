@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Polityka prywatności',
   description:
     'Polityka prywatności i plików cookies fizykastatkiem.pl - zasady przetwarzania danych osobowych zgodnie z RODO.',
-  alternates: { canonical: '/polityka-prywatnosci' },
+  alternates: { canonical: '/polityka-prywatnosci/' },
 };
 
 export default function PolitykaPage() {

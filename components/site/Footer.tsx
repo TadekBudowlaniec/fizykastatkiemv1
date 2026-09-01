@@ -16,6 +16,7 @@ const examLinks = [
   { label: 'Zadania z fizyki', href: '/zadania-z-fizyki/kinematyka' },
   { label: 'Blog maturalny', href: '/blog' },
   { label: 'Planer nauki', href: '/planer' },
+  { label: 'O mnie', href: '/o-mnie' },
 ];
 
 const cityLinks = [

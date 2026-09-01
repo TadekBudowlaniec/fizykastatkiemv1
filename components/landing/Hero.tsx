@@ -24,13 +24,14 @@ export function Hero() {
         <div className="animate-[fadeUp_0.7s_cubic-bezier(0.22,1,0.36,1)_both]">
           <Eyebrow dark>🚢 Kurs maturalny z fizyki - matura 2027</Eyebrow>
           <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.08] text-white sm:text-5xl lg:text-[3.4rem]">
-            Zdaj maturę z fizyki{' '}
-            <span className="text-gradient">bez stresu i chaosu</span>.
+            Kurs maturalny z fizyki{' '}
+            <span className="text-gradient">online</span>
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-300/85">
-            Kompletny kurs online: wideo HD, gotowe PDF-y, setki zadań i
-            spersonalizowany planer nauki. Od podstaw do rozszerzenia - krok po
-            kroku, aż do wyniku, z którego będziesz dumny.
+            Kompletny kurs maturalny z fizyki na poziomie rozszerzonym: 16 działów
+            wideo HD, gotowe PDF-y, setki zadań CKE i spersonalizowany planer
+            nauki. Od podstaw do rozszerzenia — bez stresu i chaosu, krok po
+            kroku aż do wyniku, z którego będziesz dumny.
           </p>
 
           <div className="mt-8">

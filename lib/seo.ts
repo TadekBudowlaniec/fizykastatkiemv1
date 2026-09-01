@@ -122,6 +122,8 @@ export function plain(s: string | undefined | null): string {
 
 // --- Daty do JSON-LD Article (strony evergreen) ---
 export const SEO_PUBLISHED = '2025-09-01';
+// Stała data modyfikacji (nie `now`) — inaczej każdy deploy zawyżałby
+// dateModified wszystkich artykułów na dzień builda, co osłabia zaufanie.
 export function seoModified(): string {
-  return process.env.SEO_DATE || new Date().toISOString().slice(0, 10);
+  return process.env.SEO_DATE || SEO_PUBLISHED;
 }

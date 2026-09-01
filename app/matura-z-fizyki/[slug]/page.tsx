@@ -56,7 +56,7 @@ export default async function MaturaPage({ params }: Params) {
     headline: `Matura z fizyki: ${t.name}`,
     inLanguage: 'pl',
     description: plain(t.metaMatura || t.intro),
-    author: { '@type': 'Organization', name: SITE.name },
+    author: { '@type': 'Person', '@id': `${SITE.url}/#czarek`, name: SITE.owner },
     publisher: {
       '@type': 'Organization',
       name: SITE.name,

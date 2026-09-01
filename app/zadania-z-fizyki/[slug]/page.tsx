@@ -46,7 +46,7 @@ export default async function ZadaniaHub({ params }: Params) {
 
   return (
     <>
-      <JsonLd data={breadcrumbLd(crumbs)} />
+      <JsonLd data={[breadcrumbLd(crumbs), faqLd(t.faqTeoria ?? [])]} />
       <SeoHero
         eyebrow="Zadania z rozwiązaniami"
         title={`Zadania z ${t.dopelniacz} - rozwiązania krok po kroku`}

@@ -7,6 +7,10 @@ export const SITE = {
     'Kursy fizyki online do matury: mechanika, termodynamika, elektromagnetyzm, optyka i fizyka współczesna. Wideo HD, PDF-y, zadania i planer nauki.',
   ogImage: '/images/logo_magenta.png',
   owner: 'Cezary Prusak',
+  ownerAlias: 'Czarek',
+  telephone: '+48 665 115 132',
+  addressLocality: 'Lublin',
+  addressRegion: 'lubelskie',
   socials: {
     instagram: 'https://www.instagram.com/fizykastatkiem/',
     facebook: 'https://www.facebook.com/profile.php?id=61557090640926',

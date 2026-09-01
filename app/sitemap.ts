@@ -5,7 +5,9 @@ import { getTopics, getCities, getPosts } from '@/lib/seo';
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  // Stała data — inaczej każdy deploy oznaczałby WSZYSTKIE ~200 URL jako
+  // „zmienione dziś”, co Google traktuje jak szum i przestaje ufać lastmod.
+  const now = new Date(process.env.SEO_DATE || '2025-09-01');
   const url = (path: string) => `${SITE.url}${path}`;
   const items: MetadataRoute.Sitemap = [];
 
@@ -19,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   add('/', 1.0, 'weekly');
   add('/cennik/', 0.9, 'monthly');
   add('/korepetycje/', 0.9, 'monthly');
-  add('/kurs/', 0.8, 'monthly');
+  add('/o-mnie/', 0.6, 'yearly');
   add('/oferta-ratunkowa/', 0.8, 'monthly');
   add('/baza-wiedzy/', 0.9, 'weekly');
 
@@ -42,6 +44,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const p of getPosts()) {
     add(`/blog/${p.slug}/`, 0.7, 'monthly');
   }
+
+  // Strony prawne (linkowane w stopce)
+  add('/regulamin/', 0.3, 'yearly');
+  add('/polityka-prywatnosci/', 0.3, 'yearly');
 
   return items;
 }

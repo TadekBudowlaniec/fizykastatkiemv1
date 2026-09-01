@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Regulamin',
   description:
     'Regulamin sklepu internetowego i platformy kursowej fizykastatkiem.pl - zasady zakupu kursów, płatności, licencji oraz Gwarancji Zdanej Matury.',
-  alternates: { canonical: '/regulamin' },
+  alternates: { canonical: '/regulamin/' },
 };
 
 export default function RegulaminPage() {

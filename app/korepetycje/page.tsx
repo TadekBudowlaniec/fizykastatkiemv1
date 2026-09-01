@@ -5,12 +5,36 @@ import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
 import { SITE } from '@/lib/site';
+import { JsonLd, breadcrumbLd } from '@/components/seo/SeoBits';
+
+const korepetycjeJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${SITE.url}/korepetycje/#service`,
+    serviceType: 'Korepetycje z fizyki i matematyki',
+    name: 'Korepetycje z fizyki — matura rozszerzona (online i Lublin)',
+    description:
+      'Indywidualne korepetycje z fizyki (i matematyki): przygotowanie do matury rozszerzonej i egzaminu ósmoklasisty. Online (Discord + interaktywna tablica) oraz stacjonarnie w Lublinie.',
+    provider: { '@id': `${SITE.url}/#czarek` },
+    areaServed: [
+      { '@type': 'City', name: 'Lublin' },
+      { '@type': 'Country', name: 'Polska' },
+    ],
+    audience: { '@type': 'EducationalAudience', educationalRole: 'student' },
+    inLanguage: 'pl',
+  },
+  breadcrumbLd([
+    { name: 'Start', url: '/' },
+    { name: 'Korepetycje z fizyki', url: '/korepetycje/' },
+  ]),
+];
 
 export const metadata: Metadata = {
-  title: 'Korepetycje z fizyki i matematyki',
+  title: 'Korepetycje z fizyki — matura rozszerzona (online i Lublin)',
   description:
-    'Korepetycje z fizyki i matematyki - stacjonarnie w Lublinie i online (Discord + tablica). Indywidualny plan pod maturę i egzamin 8-klasisty.',
-  alternates: { canonical: '/korepetycje' },
+    'Korepetycje z fizyki do matury rozszerzonej — online (Discord + tablica) i stacjonarnie w Lublinie. Prowadzi Czarek (82% z fizyki rozszerzonej). Także matematyka i egzamin 8-klasisty.',
+  alternates: { canonical: '/korepetycje/' },
 };
 
 const mailto =
@@ -69,6 +93,7 @@ const proofs = [
 export default function KorepetycjePage() {
   return (
     <>
+      <JsonLd data={korepetycjeJsonLd} />
       {/* Hero */}
       <section className="relative overflow-hidden bg-[linear-gradient(160deg,#070b18,#0b1224_55%,#16223f)] py-16 text-white sm:py-24">
         <div className="aurora left-[-6%] top-[-10%] h-80 w-80 bg-brand-600/45" />
@@ -81,13 +106,15 @@ export default function KorepetycjePage() {
                 🚀 Skutecznie, szybko i z pasją
               </span>
               <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.06] sm:text-5xl">
-                Matematyka i fizyka staną się{' '}
-                <span className="text-gradient">proste i logiczne</span>
+                Korepetycje z fizyki —{' '}
+                <span className="text-gradient">zrozum, nie wkuwaj</span>
               </h1>
               <p className="mt-5 max-w-xl text-lg text-slate-300/85">
-                Cześć, jestem Czarek - student III roku informatyki. Pomagam
-                uczniom nie tylko zdać, ale <strong className="text-white">zrozumieć</strong>{' '}
-                materiał. Bez wkuwania, bez stresu.
+                Cześć, jestem Czarek. Fizykę rozszerzoną na maturze zdałem na{' '}
+                <strong className="text-white">82%</strong>, a moi uczniowie
+                regularnie osiągają 90%+. Uczę fizyki i matematyki —{' '}
+                <strong className="text-white">pokazuję mechanizm zjawiska</strong>,
+                a nie każę wkuwać wzorów. Online i stacjonarnie w Lublinie.
               </p>
 
               <p className="mt-8 text-sm font-semibold uppercase tracking-wide text-slate-400">
@@ -133,6 +160,7 @@ export default function KorepetycjePage() {
                 alt="Korepetytor Czarek"
                 width={420}
                 height={420}
+                priority
                 className="relative w-64 animate-[float_8s_ease-in-out_infinite] drop-shadow-[0_30px_60px_rgba(107,77,246,0.45)] sm:w-80"
               />
             </div>

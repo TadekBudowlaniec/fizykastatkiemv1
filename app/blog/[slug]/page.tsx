@@ -63,7 +63,7 @@ export default async function ArticlePage({ params }: Params) {
     headline: plain(p.title),
     inLanguage: 'pl',
     description: plain(p.metaDesc || p.excerpt),
-    author: { '@type': 'Organization', name: SITE.name },
+    author: { '@type': 'Person', '@id': `${SITE.url}/#czarek`, name: SITE.owner },
     publisher: {
       '@type': 'Organization',
       name: SITE.name,

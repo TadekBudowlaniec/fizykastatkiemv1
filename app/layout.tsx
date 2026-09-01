@@ -24,9 +24,8 @@ export const metadata: Metadata = {
     'elektromagnetyzm',
     'optyka',
   ],
-  authors: [{ name: SITE.name }],
+  authors: [{ name: SITE.owner }],
   creator: SITE.name,
-  alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     locale: 'pl_PL',
@@ -54,14 +53,70 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const orgJsonLd = {
+// Jeden graf encji (@id) współdzielony przez całą witrynę — spina Organizację,
+// WebSite i osobę (autora/korepetytora) w spójną wiedzę dla Google i silników AI.
+const graphJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'EducationalOrganization',
-  name: SITE.name,
-  url: SITE.url,
-  email: SITE.email,
-  logo: `${SITE.url}/images/logo_magenta.png`,
-  sameAs: [SITE.socials.instagram, SITE.socials.facebook],
+  '@graph': [
+    {
+      '@type': 'EducationalOrganization',
+      '@id': `${SITE.url}/#org`,
+      name: SITE.name,
+      url: SITE.url,
+      email: SITE.email,
+      telephone: SITE.telephone,
+      description:
+        'Kursy fizyki online do matury (poziom rozszerzony) oraz korepetycje z fizyki i matematyki — Lublin i online.',
+      logo: `${SITE.url}/images/logo_magenta.png`,
+      image: `${SITE.url}/images/logo_magenta.png`,
+      founder: { '@id': `${SITE.url}/#czarek` },
+      areaServed: { '@type': 'Country', name: 'Polska' },
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: SITE.addressLocality,
+        addressRegion: SITE.addressRegion,
+        addressCountry: 'PL',
+      },
+      knowsLanguage: 'pl',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: SITE.email,
+        telephone: SITE.telephone,
+        availableLanguage: 'Polish',
+      },
+      sameAs: [SITE.socials.instagram, SITE.socials.facebook],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE.url}/#website`,
+      name: SITE.name,
+      url: SITE.url,
+      inLanguage: 'pl',
+      publisher: { '@id': `${SITE.url}/#org` },
+    },
+    {
+      '@type': 'Person',
+      '@id': `${SITE.url}/#czarek`,
+      name: SITE.owner,
+      alternateName: SITE.ownerAlias,
+      jobTitle: 'Nauczyciel fizyki i matematyki, twórca kursu Fizyka Statkiem',
+      description:
+        'Korepetytor i twórca kursu maturalnego z fizyki. Fizykę rozszerzoną na maturze zdał na 82%, uczy fizyki i matematyki online oraz w Lublinie.',
+      url: `${SITE.url}/o-mnie/`,
+      email: SITE.email,
+      telephone: SITE.telephone,
+      worksFor: { '@id': `${SITE.url}/#org` },
+      knowsAbout: [
+        'Fizyka',
+        'Matematyka',
+        'Matura z fizyki',
+        'Matura z matematyki',
+        'Fizyka rozszerzona',
+      ],
+      sameAs: [SITE.socials.instagram, SITE.socials.facebook],
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -74,7 +129,7 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(graphJsonLd) }}
         />
         <AuthProvider>
           <Header />

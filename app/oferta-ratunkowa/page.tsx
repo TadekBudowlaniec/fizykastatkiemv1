@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Pakiet Ratunkowy - ostatnia prosta przed maturą',
   description:
     'Nadrób zaległości z fizyki przed maturą. Wybierz Pakiet Ratunkowy i uratuj swój wynik - nawet jeśli zaczynasz późno.',
-  alternates: { canonical: '/oferta-ratunkowa' },
+  alternates: { canonical: '/oferta-ratunkowa/' },
 };
 
 export default function OfertaRatunkowaPage() {

@@ -4,13 +4,15 @@ import { Container } from '@/components/ui/Container';
 import { PricingTiers } from '@/components/shop/PricingTiers';
 import { FaqSection, type FaqItem } from '@/components/ui/Faq';
 import { Button } from '@/components/ui/Button';
-import { SINGLE_COURSE_PRICE } from '@/lib/courses';
+import { PLANS, SINGLE_COURSE_PRICE } from '@/lib/courses';
+import { SITE } from '@/lib/site';
+import { JsonLd, breadcrumbLd, faqLd } from '@/components/seo/SeoBits';
 
 export const metadata: Metadata = {
   title: 'Cennik kursu fizyki',
   description:
     'Wybierz pakiet kursu fizyki do matury: Silver, Gold lub Diamond. Płatność jednorazowa, BLIK, karta i Klarna. Pojedyncze działy już od 49 zł.',
-  alternates: { canonical: '/cennik' },
+  alternates: { canonical: '/cennik/' },
 };
 
 const faq: FaqItem[] = [
@@ -48,6 +50,38 @@ const compare = [
   { label: 'Plan pod Twoje braki', s: false, g: false, d: true },
 ];
 
+const pakietyLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Pakiety kursu maturalnego z fizyki',
+  itemListElement: PLANS.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Product',
+      name: `Kurs maturalny z fizyki — ${p.name}`,
+      description: p.features.join('. ') + '.',
+      brand: { '@type': 'Brand', name: SITE.name },
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'PLN',
+        price: String(p.price),
+        availability: 'https://schema.org/InStock',
+        url: `${SITE.url}/cennik/`,
+      },
+    },
+  })),
+};
+
+const cennikJsonLd = [
+  pakietyLd,
+  faqLd(faq),
+  breadcrumbLd([
+    { name: 'Start', url: '/' },
+    { name: 'Cennik', url: '/cennik/' },
+  ]),
+];
+
 function Cell({ on }: { on: boolean }) {
   return on ? (
     <span className="text-brand-500">✓</span>
@@ -59,6 +93,7 @@ function Cell({ on }: { on: boolean }) {
 export default function CennikPage() {
   return (
     <>
+      <JsonLd data={cennikJsonLd} />
       <PageHero
         eyebrow="Oferta"
         title={
