@@ -31,15 +31,14 @@ export const metadata: Metadata = {
     locale: 'pl_PL',
     url: SITE.url,
     siteName: SITE.name,
-    title: 'Fizyka Statkiem - Kursy fizyki online do matury',
+    title: 'Kurs maturalny z fizyki online | Fizyka Statkiem',
     description: SITE.description,
-    images: [{ url: SITE.ogImage, width: 1200, height: 630, alt: SITE.name }],
+    // og:image dostarcza app/opengraph-image.tsx (generowana karta 1200×630).
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fizyka Statkiem - Kursy fizyki online',
+    title: 'Kurs maturalny z fizyki online | Fizyka Statkiem',
     description: SITE.description,
-    images: [SITE.ogImage],
   },
   icons: {
     icon: '/images/czarny_statek.png',

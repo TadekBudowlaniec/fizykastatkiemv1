@@ -1,6 +1,7 @@
 [
   {
     "slug": "jak-nauczyc-sie-fizyki-do-matury",
+    "date": "2026-01-14",
     "title": "Jak nauczyć się fizyki do matury - plan nauki krok po kroku",
     "metaDesc": "Jak nauczyć się fizyki do matury od podstaw? Realny plan nauki na 3, 6 i 12 miesięcy, kolejność działów i metody, które faktycznie działają.",
     "keywords": "jak nauczyć się fizyki, plan nauki fizyki, fizyka do matury, nauka fizyki od podstaw, powtórka do matury z fizyki",
@@ -59,6 +60,7 @@
   },
   {
     "slug": "karta-wzorow-maturalnych-fizyka",
+    "date": "2026-02-05",
     "title": "Karta wzorów na maturze z fizyki - jak z niej korzystać",
     "metaDesc": "Karta wzorów CKE na maturze z fizyki: co dokładnie zawiera, czego w niej nie ma i jak jej używać, żeby nie tracić czasu na egzaminie.",
     "keywords": "karta wzorów fizyka, wzory maturalne fizyka, tablice maturalne fizyka, wybrane wzory i stałe fizykochemiczne, matura fizyka wzory",
@@ -105,6 +107,7 @@
   },
   {
     "slug": "matura-z-fizyki-rozszerzona-jak-wyglada",
+    "date": "2026-02-26",
     "title": "Matura z fizyki rozszerzona - jak wygląda egzamin",
     "metaDesc": "Matura z fizyki na poziomie rozszerzonym: czas trwania, liczba punktów, typy zadań i zasady oceniania. Wszystko, co trzeba wiedzieć przed egzaminem.",
     "keywords": "matura z fizyki rozszerzona, matura fizyka jak wygląda, ile trwa matura z fizyki, punktacja matura fizyka, arkusz maturalny fizyka",
@@ -155,6 +158,7 @@
   },
   {
     "slug": "najczestsze-bledy-na-maturze-z-fizyki",
+    "date": "2026-03-19",
     "title": "Najczęstsze błędy na maturze z fizyki - i jak ich uniknąć",
     "metaDesc": "Jednostki, zaokrąglenia, porzucone zadania i błędne założenia - lista najczęstszych błędów na maturze z fizyki wraz ze sposobami ich uniknięcia.",
     "keywords": "błędy na maturze z fizyki, jednostki fizyka matura, jak nie stracić punktów matura fizyka, matura fizyka wskazówki",
@@ -209,6 +213,7 @@
   },
   {
     "slug": "jakie-studia-wymagaja-fizyki",
+    "date": "2026-04-09",
     "title": "Jakie studia wymagają fizyki - kierunki i rekrutacja",
     "metaDesc": "Na jakie studia potrzebna jest matura z fizyki? Lista kierunków technicznych i ścisłych, zasady przeliczania punktów i alternatywy dla fizyki w rekrutacji.",
     "keywords": "jakie studia wymagają fizyki, fizyka na studia, kierunki z fizyką, rekrutacja na politechnikę, matura z fizyki studia",
@@ -259,6 +264,7 @@
   },
   {
     "slug": "jak-rozwiazywac-zadania-z-fizyki",
+    "date": "2026-04-30",
     "title": "Jak rozwiązywać zadania z fizyki - uniwersalny schemat krok po kroku",
     "metaDesc": "Jak rozwiązywać zadania z fizyki, żeby nie utknąć na starcie? Uniwersalny schemat pięciu kroków, który działa w każdym dziale - od kinematyki po elektryczność.",
     "keywords": "jak rozwiązywać zadania z fizyki, schemat rozwiązywania zadań, zadania z fizyki matura, metoda rozwiązywania zadań fizyka, analiza zadania fizyka",
@@ -321,6 +327,7 @@
   },
   {
     "slug": "wzory-z-kinematyki-matura",
+    "date": "2026-05-21",
     "title": "Wzory z kinematyki na maturę - komplet z wyjaśnieniem",
     "metaDesc": "Wszystkie wzory z kinematyki potrzebne na maturze z fizyki: ruch jednostajny, jednostajnie zmienny, rzuty i ruch po okręgu, z warunkami stosowania.",
     "keywords": "wzory z kinematyki, kinematyka matura, wzory ruch jednostajnie przyspieszony, rzut poziomy wzory, ruch po okręgu wzory, kinematyka wzory matura",
@@ -383,6 +390,7 @@
   },
   {
     "slug": "fizyka-rozszerzona-czy-warto",
+    "date": "2026-06-18",
     "title": "Fizyka rozszerzona - czy warto ją zdawać na maturze",
     "metaDesc": "Czy warto zdawać fizykę rozszerzoną na maturze? Za i przeciw, wartość w rekrutacji, wymagany nakład pracy i dla kogo ten wybór ma sens.",
     "keywords": "fizyka rozszerzona czy warto, czy zdawać fizykę na maturze, fizyka rozszerzona matura, wybór przedmiotów maturalnych, fizyka do rekrutacji",
@@ -441,6 +449,7 @@
   },
   {
     "slug": "korepetycje-z-fizyki-czy-samodzielna-nauka",
+    "date": "2026-07-16",
     "title": "Korepetycje z fizyki czy samodzielna nauka - co wybrać",
     "metaDesc": "Korepetycje z fizyki czy nauka samodzielna do matury? Porównanie kosztów, skuteczności i czasu oraz podpowiedź, kiedy naprawdę warto wziąć korepetytora.",
     "keywords": "korepetycje z fizyki, samodzielna nauka fizyki, korepetycje czy samodzielna nauka, przygotowanie do matury z fizyki, korepetytor fizyka matura",
@@ -499,6 +508,7 @@
   },
   {
     "slug": "zadania-doswiadczalne-na-maturze-z-fizyki",
+    "date": "2026-08-20",
     "title": "Zadania doświadczalne na maturze z fizyki - jak je rozwiązywać",
     "metaDesc": "Zadania doświadczalne na maturze z fizyki: analiza danych pomiarowych, wykresy, niepewności i wyznaczanie wielkości z nachylenia prostej. Praktyczny poradnik.",
     "keywords": "zadania doświadczalne fizyka, matura fizyka doświadczenie, niepewność pomiaru fizyka, analiza wyników pomiarów, wykres z pomiarów fizyka, linearyzacja fizyka",
@@ -558,5 +568,99 @@
     ],
     "relatedTopics": ["kinematyka", "drgania-harmoniczne", "grawitacja"],
     "related": ["matura-z-fizyki-rozszerzona-jak-wyglada", "jak-rozwiazywac-zadania-z-fizyki"]
+  },
+  {
+    "slug": "ile-kosztuja-korepetycje-z-fizyki",
+    "date": "2026-08-27",
+    "title": "Ile kosztują korepetycje z fizyki w 2026 roku",
+    "metaDesc": "Ile kosztują korepetycje z fizyki w 2026? Aktualne widełki cen w Polsce, różnica online vs stacjonarnie, co wpływa na stawkę i kiedy taniej wychodzi kurs online.",
+    "keywords": "ile kosztują korepetycje z fizyki, cena korepetycji z fizyki, korepetycje fizyka cennik, korepetycje z fizyki online cena",
+    "excerpt": "Konkretne widełki cen korepetycji z fizyki w 2026 roku, co wpływa na stawkę i kiedy bardziej opłaca się kurs online zamiast lekcji 1:1.",
+    "intro": "Cena korepetycji z fizyki w Polsce zależy od poziomu (podstawa czy rozszerzenie), formy (online czy stacjonarnie), doświadczenia nauczyciela i miasta. Poniżej znajdziesz aktualne widełki na 2026 rok oraz podpowiedź, kiedy zamiast pojedynczych lekcji lepiej sprawdzi się kurs online.",
+    "sections": [
+      {
+        "heading": "Ile kosztują korepetycje z fizyki w 2026 roku",
+        "html": "<p>W 2026 roku stawki za korepetycje z fizyki w Polsce mieszczą się zwykle w przedziale <strong>60–150 zł za 60 minut</strong>. Rozrzut wynika głównie z poziomu i formy zajęć:</p><ul><li><strong>Poziom podstawowy / szkoła:</strong> najczęściej 60–90 zł za godzinę.</li><li><strong>Matura rozszerzona:</strong> zwykle 90–150 zł za godzinę — więcej, bo wymaga węższej specjalizacji.</li><li><strong>Online (1:1):</strong> często nieco taniej niż stacjonarnie, bo odpada dojazd.</li><li><strong>Duże miasta</strong> (Warszawa, Kraków, Wrocław) bywają o kilkanaście–kilkadziesiąt procent droższe niż mniejsze miejscowości.</li></ul>"
+      },
+      {
+        "heading": "Co wpływa na cenę korepetycji",
+        "html": "<p>Na konkretną stawkę składa się kilka czynników:</p><ol><li><strong>Poziom i cel</strong> — przygotowanie do matury rozszerzonej jest droższe niż pomoc z bieżącym materiałem.</li><li><strong>Doświadczenie i wyniki nauczyciela</strong> — korepetytor z udokumentowanymi wynikami uczniów zwykle kosztuje więcej.</li><li><strong>Forma</strong> — dojazd do ucznia to zwykle dopłata; online eliminuje ten koszt.</li><li><strong>Pakiety</strong> — wykupienie z góry serii lekcji często obniża cenę pojedynczej godziny.</li></ol>"
+      },
+      {
+        "heading": "Ile kosztują korepetycje w Fizyka Statkiem",
+        "html": "<p>U mnie korepetycje z fizyki (i matematyki) kosztują <strong>100 zł za 60 minut</strong> — tyle samo online (Discord + interaktywna tablica) i stacjonarnie w Lublinie. Zajęcia są w pełni indywidualne i nastawione na maturę rozszerzoną. Sam zdałem fizykę rozszerzoną na 82%, a moi uczniowie regularnie osiągają 90%+.</p><p>Jeśli budżet jest ograniczony, alternatywą jest samodzielny <strong>kurs online</strong>: pojedynczy dział kosztuje <strong>49 zł</strong>, a pełny pakiet z 16 działami, PDF-ami, zadaniami i planerem — od 699 zł za cały materiał do matury.</p>"
+      },
+      {
+        "heading": "Korepetycje czy kurs online — co się bardziej opłaca",
+        "html": "<p>To zależy od tego, czego potrzebujesz. <strong>Korepetycje 1:1</strong> są niezastąpione, gdy masz konkretne braki, chcesz na bieżąco zadawać pytania i potrzebujesz kogoś, kto dopilnuje systematyczności. <strong>Kurs online</strong> wygrywa ceną i elastycznością, gdy potrafisz uczyć się samodzielnie i chcesz przerobić cały materiał we własnym tempie.</p><p>W praktyce najlepiej działa połączenie: kurs jako kompletna baza materiału, a korepetycje punktowo tam, gdzie coś się nie klei. Kilka godzin korepetycji plus kurs online kosztuje mniej niż comiesięczne regularne lekcje przez cały rok.</p>"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Ile kosztują korepetycje z fizyki w 2026 roku?",
+        "a": "W Polsce zwykle 60–150 zł za 60 minut — taniej na poziomie podstawowym, drożej przy przygotowaniu do matury rozszerzonej. W Fizyka Statkiem korepetycje kosztują 100 zł za 60 minut, online i stacjonarnie w Lublinie."
+      },
+      {
+        "q": "Czy korepetycje online są tańsze niż stacjonarne?",
+        "a": "Zwykle tak, bo odpada dojazd nauczyciela. Skuteczność jest przy tym taka sama — na interaktywnej tablicy rozwiązuje się zadania na żywo, a notatki zostają u ucznia."
+      },
+      {
+        "q": "Ile lekcji korepetycji potrzeba do matury z fizyki?",
+        "a": "Zależy od poziomu startowego. Przy solidnych podstawach wystarczy punktowe wsparcie (kilkanaście godzin w roku), przy nauce od zera realny jest jednak większy nakład — wtedy warto połączyć korepetycje z samodzielnym kursem."
+      },
+      {
+        "q": "Czy warto kupić pakiet korepetycji z góry?",
+        "a": "Jeśli planujesz regularną współpracę — tak, pakiety zwykle obniżają cenę pojedynczej godziny i porządkują harmonogram nauki do matury."
+      }
+    ],
+    "relatedTopics": ["kinematyka", "dynamika"],
+    "related": ["korepetycje-z-fizyki-czy-samodzielna-nauka", "fizyka-rozszerzona-czy-warto"]
+  },
+  {
+    "slug": "jak-wybrac-kurs-maturalny-z-fizyki",
+    "date": "2026-08-29",
+    "title": "Jak wybrać kurs maturalny z fizyki — na co zwrócić uwagę",
+    "metaDesc": "Jak wybrać kurs maturalny z fizyki? Lista kryteriów: zakres CKE, kompletność materiału, wideo i zadania, wsparcie, gwarancja i cena. Rodzaje kursów i czerwone flagi.",
+    "keywords": "jak wybrać kurs maturalny z fizyki, kurs maturalny fizyka, najlepszy kurs fizyki do matury, kurs fizyki online opinie",
+    "excerpt": "Praktyczna lista kryteriów wyboru kursu maturalnego z fizyki: zakres, materiały, wsparcie, gwarancja i cena — plus czerwone flagi, których warto unikać.",
+    "intro": "Kursów maturalnych z fizyki jest coraz więcej i łatwo przepłacić za coś, co okaże się zbiorem nagrań bez zadań. Ten przewodnik pokazuje, na co realnie patrzeć przy wyborze, jakie są rodzaje kursów i po czym poznać dobry.",
+    "sections": [
+      {
+        "heading": "Na co zwrócić uwagę przy wyborze kursu",
+        "html": "<p>Zanim zapłacisz, sprawdź sześć rzeczy:</p><ol><li><strong>Zakres zgodny z CKE i poziomem rozszerzonym</strong> — matura z fizyki jest dziś tylko na poziomie rozszerzonym, więc kurs musi pokrywać pełne wymagania.</li><li><strong>Kompletność</strong> — czy obejmuje wszystkie działy (mechanika, termodynamika, elektromagnetyzm, optyka, fizyka współczesna), a nie tylko wybrane tematy.</li><li><strong>Materiały</strong> — dobre wideo to za mało; potrzebujesz też PDF-ów, zadań z rozwiązaniami i quizów.</li><li><strong>Zadania maturalne</strong> — czy uczysz się rozwiązywać w schemacie CKE, czy tylko oglądasz teorię.</li><li><strong>Wsparcie i plan</strong> — planer nauki oraz możliwość zadawania pytań realnie zmieniają wynik.</li><li><strong>Gwarancja i cena</strong> — jasna cena, brak abonamentu i gwarancja zwrotu lub zdanej matury to sygnał, że twórca stoi za produktem.</li></ol>"
+      },
+      {
+        "heading": "Rodzaje kursów maturalnych z fizyki",
+        "html": "<p>Na rynku spotkasz kilka modeli, które różnią się ceną i poziomem wsparcia:</p><ul><li><strong>Kurs samodzielny online</strong> — nagrania, PDF-y i zadania, uczysz się we własnym tempie. Najtańszy i najbardziej elastyczny.</li><li><strong>Kurs z zajęciami na żywo</strong> — do materiałów dochodzą regularne spotkania grupowe, na których można zadawać pytania.</li><li><strong>Kurs z elementem 1:1</strong> — najdroższy, ale z indywidualnym wsparciem dopasowanym do Twoich braków.</li><li><strong>Korepetycje</strong> — nie kurs w klasycznym sensie, lecz punktowa pomoc; najlepiej działają jako uzupełnienie kursu.</li></ul>"
+      },
+      {
+        "heading": "Czerwone flagi, których lepiej unikać",
+        "html": "<p>Odpuść kurs, jeśli widzisz któryś z tych sygnałów:</p><ul><li>brak jasnej informacji o zakresie i aktualności względem wymagań CKE,</li><li>same nagrania teoretyczne, zero zadań z rozwiązaniami krok po kroku,</li><li>brak informacji, <strong>kto</strong> prowadzi kurs i jakie ma wyniki,</li><li>agresywny licznik „promocji”, ale żadnej gwarancji ani polityki zwrotu,</li><li>abonament, z którego trudno zrezygnować, zamiast jednorazowej płatności.</li></ul>"
+      },
+      {
+        "heading": "Jak wygląda dobrze zbudowany kurs",
+        "html": "<p>Dobry kurs prowadzi Cię od zrozumienia zjawiska, przez zadania wzorcowe, aż po arkusze na czas. W Fizyka Statkiem każdy z 16 działów zawiera wideo HD, PDF-y z teorią i wzorami, zadania z rozwiązaniami oraz quizy, a całość spina spersonalizowany planer nauki i Gwarancja Zdanej Matury. Kurs tworzy Czarek (Cezary Prusak), który fizykę rozszerzoną zdał na 82%. Płatność jest jednorazowa — pojedynczy dział od 49 zł, pełny pakiet od 699 zł — bez abonamentu.</p>"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Jak wybrać kurs maturalny z fizyki?",
+        "a": "Sprawdź, czy pokrywa pełny zakres CKE na poziomie rozszerzonym, czy poza wideo ma PDF-y i zadania z rozwiązaniami, czy zapewnia planer i wsparcie oraz czy ma jasną cenę i gwarancję. Unikaj kursów bez zadań i bez informacji, kto je prowadzi."
+      },
+      {
+        "q": "Czy kurs online wystarczy, żeby zdać maturę z fizyki?",
+        "a": "Tak, jeśli jest kompletny (teoria + zadania + arkusze) i uczysz się systematycznie. Przy większych brakach warto uzupełnić kurs kilkoma godzinami korepetycji."
+      },
+      {
+        "q": "Ile kosztuje dobry kurs maturalny z fizyki?",
+        "a": "Ceny są różne. W Fizyka Statkiem pojedynczy dział kosztuje 49 zł, a pełny pakiet z 16 działami od 699 zł — jednorazowo, bez abonamentu."
+      },
+      {
+        "q": "Czym kurs różni się od korepetycji?",
+        "a": "Kurs to kompletna, samodzielna baza materiału w stałej cenie. Korepetycje to indywidualna praca 1:1 rozliczana za godzinę. Najlepiej działają razem: kurs jako fundament, korepetycje punktowo tam, gdzie coś się nie klei."
+      }
+    ],
+    "relatedTopics": ["kinematyka", "dynamika", "termodynamika"],
+    "related": ["korepetycje-z-fizyki-czy-samodzielna-nauka", "jak-nauczyc-sie-fizyki-do-matury"]
   }
 ]
