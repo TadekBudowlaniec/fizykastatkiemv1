@@ -140,24 +140,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signUp = useCallback(
     async (email: string, password: string, name: string) => {
-      const { data, error } = await supabase.auth.signUp({
+      // Wiersz w public.users tworzy trigger on_auth_user_created (SECURITY
+      // DEFINER). NIE robimy tu klienckiego upsertu: przy włączonym
+      // potwierdzaniu e-maila po signUp nie ma sesji, więc taki zapis i tak
+      // jest blokowany przez RLS. full_name trafia do metadanych auth i stamtąd
+      // trigger kopiuje je do profilu.
+      const { error } = await supabase.auth.signUp({
         email,
         password,
         options: { data: { full_name: name } },
       });
       if (error) throw error;
-      if (data.user) {
-        await supabase.from('users').upsert(
-          {
-            id: data.user.id,
-            email,
-            full_name: name,
-            status: 'active',
-            is_admin: false,
-          },
-          { onConflict: 'id' }
-        );
-      }
     },
     [supabase]
   );

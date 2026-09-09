@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import { inter, poppins } from '@/lib/fonts';
 import { SITE } from '@/lib/site';
 import { AuthProvider } from '@/components/auth/AuthProvider';
@@ -126,6 +127,19 @@ export default function RootLayout({
   return (
     <html lang="pl" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
+        {/* Google Analytics (gtag.js) — ładowany po interakcji, bez blokowania renderu */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-LFRFD4WDLB"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-LFRFD4WDLB');
+          `}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(graphJsonLd) }}

@@ -224,13 +224,12 @@ exports.handler = async (event) => {
             if (userError && userError.code !== 'PGRST116') {
                 console.error('Error checking user:', userError);
             } else if (!existingUser) {
+                // UWAGA: tabela public.users NIE MA kolumny `email` (schemat:
+                // id, created_at, status, full_name, is_admin, stripe_customer_id).
+                // Wstawiamy tylko id; created_at wypełnia default now().
                 const { error: createUserError } = await supabase
                     .from('users')
-                    .insert({
-                        id: userId,
-                        email: customerEmail || 'unknown@example.com',
-                        created_at: new Date().toISOString()
-                    });
+                    .insert({ id: userId });
 
                 if (createUserError) {
                     console.error('Error creating user row:', createUserError);

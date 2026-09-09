@@ -206,9 +206,31 @@ security definer
 set search_path = public
 as $$
 begin
-  insert into public.users (id, email, is_admin)
-  values (new.id, new.email, false)
-  on conflict (id) do nothing;
+  -- WAŻNE: public.users NIE MA kolumny `email`. Realne kolumny:
+  -- id (uuid), created_at (default now()), status, full_name, is_admin,
+  -- stripe_customer_id. Wstawiamy tylko istniejące — odwołanie do nieistniejącej
+  -- kolumny rzuca wyjątek, który propaguje się do auth.users i signUp zwraca
+  -- „Database error saving new user" → rejestracja całkowicie przestaje działać.
+  begin
+    insert into public.users (id, full_name, is_admin)
+    values (
+      new.id,
+      new.raw_user_meta_data->>'full_name',
+      false
+    )
+    on conflict (id) do nothing;
+  exception when others then
+    -- Bezpiecznik: profil w public.users NIGDY nie może zablokować rejestracji.
+    -- W ostateczności minimalny insert (created_at wypełnia default now()),
+    -- a gdyby i to padło — milcząco odpuszczamy; loadAccess toleruje brak wiersza.
+    begin
+      insert into public.users (id)
+      values (new.id)
+      on conflict (id) do nothing;
+    exception when others then
+      null;
+    end;
+  end;
   return new;
 end;
 $$;
