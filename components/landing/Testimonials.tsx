@@ -9,6 +9,10 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 const SUPA =
   'https://kldekjrpottsqebueojg.supabase.co/storage/v1/object/public/opinie';
 
+// Realne opinie kursantów (za zgodą na publikację). Mamy łącznie 28
+// autentycznych, pozytywnych opinii — poniżej wybrane przykłady. Aby dodać
+// kolejne, dopisz obiekt do tej tablicy (obraz w bucketcie Supabase `opinie`);
+// grid poniżej skaluje się automatycznie. Nie dodawać gwiazdek ani średniej ocen.
 const reviews = [
   {
     name: 'Nadia',
@@ -36,18 +40,8 @@ const reviews = [
   },
 ];
 
-function Stars() {
-  return (
-    <div className="flex gap-0.5 text-amber-400" aria-label="5 na 5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
-          <path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9 4.8 17.6l1-5.8L1.5 7.7l5.9-.9L10 1.5z" />
-        </svg>
-      ))}
-    </div>
-  );
-}
-
+// Uwaga (audyt treści 2026-09): usunięto komponent gwiazdek (fałszywa
+// wizualizacja średniej oceny). Prezentujemy wyłącznie realne screeny opinii.
 export function Testimonials() {
   const [zoom, setZoom] = useState<string | null>(null);
 
@@ -66,9 +60,9 @@ export function Testimonials() {
     <section className="bg-white py-14 sm:py-24">
       <Container>
         <SectionHeading
-          eyebrow="Owoce współpracy"
-          title="Prawdziwe wiadomości od naszych uczniów"
-          subtitle="Screeny prosto z telefonu - kliknij, aby powiększyć i przeczytać."
+          eyebrow="Opinie kursantów"
+          title="28/28 pozytywnych opinii"
+          subtitle="Wszystkie 28 opinii, które otrzymaliśmy od naszych absolwentów, są pozytywne. Poniżej kilka z nich - realne screeny prosto z telefonu (kliknij, aby powiększyć)."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {reviews.map((r, i) => (
@@ -93,8 +87,7 @@ export function Testimonials() {
                 </button>
 
                 <div className="flex flex-1 flex-col p-6">
-                  <Stars />
-                  <blockquote className="mt-3 flex-1 text-sm text-slate">
+                  <blockquote className="flex-1 text-sm text-slate">
                     „{r.text}”
                   </blockquote>
                   <figcaption className="mt-5 flex items-center gap-3">

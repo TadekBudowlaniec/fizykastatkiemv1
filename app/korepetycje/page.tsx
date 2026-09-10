@@ -20,7 +20,7 @@ const korepetycjeFaq: FaqItem[] = [
   },
   {
     q: 'Czy przygotujesz mnie do matury rozszerzonej z fizyki?',
-    a: 'Tak, to moja specjalność. Fizykę rozszerzoną zdałem na 82%, a moi uczniowie regularnie osiągają 90%+. Uczę pod wymagania CKE i typowe zadania maturalne.',
+    a: 'Tak, to moja specjalność. Fizykę rozszerzoną zdałem na 82% i uczę pod wymagania CKE oraz typowe zadania maturalne.',
   },
   {
     q: 'Jak wyglądają zajęcia online?',
@@ -150,8 +150,8 @@ export default function KorepetycjePage() {
               </h1>
               <p className="mt-5 max-w-xl text-lg text-slate-300/85">
                 Cześć, jestem Czarek. Fizykę rozszerzoną na maturze zdałem na{' '}
-                <strong className="text-white">82%</strong>, a moi uczniowie
-                regularnie osiągają 90%+. Uczę fizyki i matematyki —{' '}
+                <strong className="text-white">82%</strong>. Uczę fizyki i
+                matematyki —{' '}
                 <strong className="text-white">pokazuję mechanizm zjawiska</strong>,
                 a nie każę wkuwać wzorów. Online i stacjonarnie w Lublinie.
               </p>

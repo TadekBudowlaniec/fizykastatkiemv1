@@ -49,8 +49,7 @@ export default function OMniePage() {
               maturze zdałem na poziomie rozszerzonym na <strong>82%</strong>,
               matematykę rozszerzoną na <strong>92%</strong>, a podstawową na{' '}
               <strong>100%</strong>. Od tamtej pory pomagam maturzystom
-              osiągać wyniki, z których są dumni — moi uczniowie regularnie
-              przekraczają 90%.
+              przygotować się do egzaminu i osiągać wyniki, z których są dumni.
             </p>
             <p>
               Uczę <strong>fizyki</strong> i <strong>matematyki</strong> —{' '}

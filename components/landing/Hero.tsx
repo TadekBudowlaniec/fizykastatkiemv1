@@ -4,8 +4,8 @@ import { SqueezeForm } from './SqueezeForm';
 import { Eyebrow } from '@/components/ui/SectionHeading';
 
 const trust = [
-  { icon: '🎓', label: '2000+ maturzystów' },
-  { icon: '⭐', label: '4.9/5 średnia ocen' },
+  { icon: '🎓', label: '100% zdawalności' },
+  { icon: '✅', label: '28/28 absolwentów zdało maturę' },
   { icon: '🛡️', label: 'Gwarancja zdanej matury' },
 ];
 
@@ -29,9 +29,9 @@ export function Hero() {
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-300/85">
             Kompletny kurs maturalny z fizyki na poziomie rozszerzonym: 16 działów
-            wideo HD, gotowe PDF-y, setki zadań CKE i spersonalizowany planer
-            nauki. Od podstaw do rozszerzenia — bez stresu i chaosu, krok po
-            kroku aż do wyniku, z którego będziesz dumny.
+            wideo HD, gotowe PDF-y, setki zadań na wzór CKE i spersonalizowany
+            planer nauki. Od podstaw do rozszerzenia — bez stresu i chaosu, krok
+            po kroku aż do wyniku, z którego będziesz dumny.
           </p>
 
           <div className="mt-8">
