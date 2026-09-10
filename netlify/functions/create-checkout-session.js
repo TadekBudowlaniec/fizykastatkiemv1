@@ -17,26 +17,28 @@ const STRIPE_MIN_EXPIRES = 30 * 60;       // 30 min w sekundach
 const STRIPE_MAX_EXPIRES = 24 * 60 * 60;  // 24h w sekundach
 
 // Mapowanie courseId -> { name, regularPrice, promoPrice } (kwoty w GROSZACH)
+// Ceny zgodne z lib/courses.ts. Pakiet Gold (18) WYCOFANY — nie przywracać.
+// Bez fałszywej promocji: promoPrice == regularPrice (brak sztucznego rabatu).
+// Pojedynczy dział: 177 zł · Kurs Pełny (17): 828 zł · VIP 1:1 (19): 3497 zł.
 const courseData = {
-    1:  { name: 'Kinematyka',                        regularPrice: 4900, promoPrice: 4900 },
-    2:  { name: 'Dynamika',                          regularPrice: 4900, promoPrice: 4900 },
-    3:  { name: 'Praca, moc, energia',               regularPrice: 4900, promoPrice: 4900 },
-    4:  { name: 'Bryła sztywna',                     regularPrice: 4900, promoPrice: 4900 },
-    5:  { name: 'Ruch drgający',                     regularPrice: 4900, promoPrice: 4900 },
-    6:  { name: 'Fale mechaniczne',                  regularPrice: 4900, promoPrice: 4900 },
-    7:  { name: 'Hydrostatyka',                      regularPrice: 4900, promoPrice: 4900 },
-    8:  { name: 'Termodynamika',                     regularPrice: 4900, promoPrice: 4900 },
-    9:  { name: 'Grawitacja i astronomia',            regularPrice: 4900, promoPrice: 4900 },
-    10: { name: 'Elektrostatyka',                    regularPrice: 4900, promoPrice: 4900 },
-    11: { name: 'Prąd elektryczny',                  regularPrice: 4900, promoPrice: 4900 },
-    12: { name: 'Magnetyzm',                         regularPrice: 4900, promoPrice: 4900 },
-    13: { name: 'Indukcja elektromagnetyczna',       regularPrice: 4900, promoPrice: 4900 },
-    14: { name: 'Fale elektromagnetyczne i optyka',  regularPrice: 4900, promoPrice: 4900 },
-    15: { name: 'Fizyka atomowa',                    regularPrice: 4900, promoPrice: 4900 },
-    16: { name: 'Fizyka jądrowa i relatywistyka',    regularPrice: 4900, promoPrice: 4900 },
-    17: { name: 'Kurs Samodzielny (pełny dostęp)',     regularPrice: 69900, promoPrice: 59900 },
-    18: { name: 'Kurs + Live (pełny dostęp + live)',  regularPrice: 94700, promoPrice: 84700 },
-    19: { name: 'Kurs VIP 1:1 (indywidualna nauka)',  regularPrice: 199700, promoPrice: 189700 },
+    1:  { name: 'Kinematyka',                        regularPrice: 17700, promoPrice: 17700 },
+    2:  { name: 'Dynamika',                          regularPrice: 17700, promoPrice: 17700 },
+    3:  { name: 'Praca, moc, energia',               regularPrice: 17700, promoPrice: 17700 },
+    4:  { name: 'Bryła sztywna',                     regularPrice: 17700, promoPrice: 17700 },
+    5:  { name: 'Ruch drgający',                     regularPrice: 17700, promoPrice: 17700 },
+    6:  { name: 'Fale mechaniczne',                  regularPrice: 17700, promoPrice: 17700 },
+    7:  { name: 'Hydrostatyka',                      regularPrice: 17700, promoPrice: 17700 },
+    8:  { name: 'Termodynamika',                     regularPrice: 17700, promoPrice: 17700 },
+    9:  { name: 'Grawitacja i astronomia',            regularPrice: 17700, promoPrice: 17700 },
+    10: { name: 'Elektrostatyka',                    regularPrice: 17700, promoPrice: 17700 },
+    11: { name: 'Prąd elektryczny',                  regularPrice: 17700, promoPrice: 17700 },
+    12: { name: 'Magnetyzm',                         regularPrice: 17700, promoPrice: 17700 },
+    13: { name: 'Indukcja elektromagnetyczna',       regularPrice: 17700, promoPrice: 17700 },
+    14: { name: 'Fale elektromagnetyczne i optyka',  regularPrice: 17700, promoPrice: 17700 },
+    15: { name: 'Fizyka atomowa',                    regularPrice: 17700, promoPrice: 17700 },
+    16: { name: 'Fizyka jądrowa i relatywistyka',    regularPrice: 17700, promoPrice: 17700 },
+    17: { name: 'Kurs Pełny (pełny dostęp)',          regularPrice: 82800, promoPrice: 82800 },
+    19: { name: 'VIP 1:1 (indywidualne prowadzenie)', regularPrice: 349700, promoPrice: 349700 },
 };
 
 const CLIENT_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
@@ -107,7 +109,7 @@ exports.handler = async (event) => {
         }
 
         // Normalizacja courseId
-        const courseIdMap = { 'full_access': 17, 'full_access_live': 18, 'vip': 19 };
+        const courseIdMap = { 'full_access': 17, 'vip': 19 };
         const normalizedCourseId = courseIdMap[courseId] || Number(courseId);
 
         const course = courseData[normalizedCourseId];

@@ -38,7 +38,7 @@ export default function OgImage() {
           Kurs maturalny z fizyki online
         </div>
         <div style={{ display: 'flex', fontSize: 36, marginTop: 30, opacity: 0.85 }}>
-          Wideo HD · PDF-y · zadania CKE · planer · korepetycje
+          Wideo HD · PDF-y · zadania na wzór CKE · planer · korepetycje
         </div>
       </div>
     ),

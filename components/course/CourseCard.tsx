@@ -34,7 +34,14 @@ function Scope({ label, items }: { label: string; items: string[] }) {
   );
 }
 
-export function CourseCard({ course }: { course: Course }) {
+export function CourseCard({
+  course,
+  showBuy = true,
+}: {
+  course: Course;
+  /** false = tryb „program” (bez przycisku zakupu pojedynczego działu). */
+  showBuy?: boolean;
+}) {
   return (
     <article className="group flex flex-col rounded-3xl border border-line bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-200 hover:shadow-card">
       <div className="mb-4 flex items-center gap-3">
@@ -63,9 +70,11 @@ export function CourseCard({ course }: { course: Course }) {
         >
           Zobacz lekcje
         </Link>
-        <BuyButton courseId={course.id} variant="gradient" size="sm">
-          Kup dział · {SINGLE_COURSE_PRICE} zł
-        </BuyButton>
+        {showBuy && (
+          <BuyButton courseId={course.id} variant="gradient" size="sm">
+            Kup dział · {SINGLE_COURSE_PRICE} zł
+          </BuyButton>
+        )}
       </div>
     </article>
   );

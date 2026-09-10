@@ -29,14 +29,16 @@ export function FaqSection({
   eyebrow = 'FAQ',
   title = 'Najczęstsze pytania',
   subtitle,
+  id,
 }: {
   items: FaqItem[];
   eyebrow?: string;
   title?: string;
   subtitle?: string;
+  id?: string;
 }) {
   return (
-    <section className="bg-cloud py-20 sm:py-24">
+    <section id={id} className="bg-cloud py-20 sm:py-24 scroll-mt-24">
       <Container>
         <SectionHeading eyebrow={eyebrow} title={title} subtitle={subtitle} />
         <div className="mt-10">

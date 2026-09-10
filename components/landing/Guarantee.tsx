@@ -16,12 +16,24 @@ export function Guarantee() {
                   Gwarancja Zdanej Matury
                 </h2>
                 <p className="mt-2 max-w-2xl text-muted">
-                  Przerób cały kurs, rozwiąż zadania i zdawaj według planera.
-                  Jeśli mimo to nie zdasz matury - dostajesz{' '}
-                  <strong className="text-ink">
-                    kolejny rok dostępu za darmo
-                  </strong>
-                  . Bierzemy odpowiedzialność za Twój wynik.
+                  Przerób cały kurs zgodnie z warunkami gwarancji, podejdź do
+                  matury z fizyki i — jeśli mimo to uzyskasz wynik{' '}
+                  <strong className="text-ink">poniżej 30%</strong> — możesz
+                  ubiegać się o <strong className="text-ink">zwrot ceny kursu</strong>.
+                  Zgłoszenie w ciągu 7 dni od otrzymania oficjalnego wyniku.
+                  Wynik matury potwierdzasz oficjalnym dokumentem z wynikiem
+                  egzaminu.
+                </p>
+                <p className="mt-2 text-sm text-muted">
+                  Szczegółowe warunki w{' '}
+                  <a href="/cennik#faq" className="font-semibold text-brand-600 underline underline-offset-2 hover:text-magenta-600">
+                    FAQ
+                  </a>{' '}
+                  i{' '}
+                  <a href="/regulamin" className="font-semibold text-brand-600 underline underline-offset-2 hover:text-magenta-600">
+                    regulaminie (§9)
+                  </a>
+                  .
                 </p>
               </div>
             </div>

@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Strony aplikacji / marketing (trailing slash - zgodnie z trailingSlash: true)
   add('/', 1.0, 'weekly');
   add('/cennik/', 0.9, 'monthly');
+  add('/dzialy/', 0.7, 'monthly');
   add('/korepetycje/', 0.9, 'monthly');
   add('/o-mnie/', 0.6, 'yearly');
   add('/oferta-ratunkowa/', 0.8, 'monthly');

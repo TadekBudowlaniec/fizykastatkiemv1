@@ -1,20 +1,27 @@
 import { Hero } from '@/components/landing/Hero';
 import { StatsBar } from '@/components/landing/StatsBar';
-import { Guarantee } from '@/components/landing/Guarantee';
+import { ProblemSection } from '@/components/landing/ProblemSection';
 import { Toolkit } from '@/components/landing/Toolkit';
 import { HowItWorks } from '@/components/landing/HowItWorks';
-import { Testimonials } from '@/components/landing/Testimonials';
 import { CourseCatalog } from '@/components/landing/CourseCatalog';
+import { SocialProof } from '@/components/landing/SocialProof';
+import { Testimonials } from '@/components/landing/Testimonials';
+import { AuthorAuthority } from '@/components/landing/AuthorAuthority';
+import { Guarantee } from '@/components/landing/Guarantee';
 import { PricingSection } from '@/components/landing/PricingSection';
 import { FaqSection, type FaqItem } from '@/components/ui/Faq';
 import { FinalCta } from '@/components/landing/FinalCta';
+import { PLANS, SINGLE_COURSE_PRICE, VIP_SEATS } from '@/lib/courses';
 import { SITE } from '@/lib/site';
 import type { Metadata } from 'next';
+
+const fullPlan = PLANS.find((p) => p.key === 'full_access')!;
+const vipPlan = PLANS.find((p) => p.key === 'vip')!;
 
 export const metadata: Metadata = {
   title: 'Kurs maturalny z fizyki online — matura rozszerzona',
   description:
-    'Kurs maturalny z fizyki online (poziom rozszerzony): 16 działów wideo HD, PDF-y, setki zadań CKE i planer nauki. Gwarancja zdanej matury. Od 49 zł za dział.',
+    'Kurs maturalny z fizyki online (poziom rozszerzony): 16 działów wideo HD, PDF-y, zadania na wzór CKE i planer nauki. 100% zdawalności — 28/28 absolwentów zdało maturę. Gwarancja Zdanej Matury.',
   alternates: { canonical: '/' },
 };
 
@@ -25,15 +32,19 @@ const faq: FaqItem[] = [
   },
   {
     q: 'Jak długo mam dostęp do kursu?',
-    a: 'Dostęp masz do końca sesji maturalnej. W pakietach Gold i Diamond dochodzą dodatkowo zajęcia na żywo i wsparcie 1:1.',
+    a: 'Dostęp do materiałów masz do końca sesji maturalnej.',
+  },
+  {
+    q: 'Czym różni się Kurs Pełny od VIP 1:1?',
+    a: `Kurs Pełny (${fullPlan.price} zł) to samodzielna nauka według gotowego systemu — wszystkie 16 działów, PDF-y, zadania, quizy i planer. VIP 1:1 (${vipPlan.price} zł) to cały Kurs Pełny plus indywidualne prowadzenie 1:1 z Czarkiem: 1 godzina tygodniowo aż do matury, z planem pod Twoje braki. VIP ma realnie tylko ${VIP_SEATS} miejsc, bo każde oznacza indywidualną pracę.`,
   },
   {
     q: 'Czy mogę kupić tylko jeden dział?',
-    a: 'Tak. Jeśli chcesz uzupełnić konkretny temat, możesz kupić pojedynczy dział zamiast całego pakietu.',
+    a: `Tak. Jeśli chcesz uzupełnić konkretny temat, możesz kupić pojedynczy dział za ${SINGLE_COURSE_PRICE} zł zamiast całego kursu — pełną listę znajdziesz na stronie „Pojedyncze działy”.`,
   },
   {
-    q: 'Jak wygląda gwarancja?',
-    a: 'Jeśli przerobisz cały kurs zgodnie z planerem i nie zdasz matury, otrzymasz kolejny rok dostępu za darmo.',
+    q: 'Jak działa Gwarancja Zdanej Matury?',
+    a: 'Jeśli przerobisz cały kurs zgodnie z warunkami gwarancji (co najmniej 90% materiałów, zakup najpóźniej 30 dni przed egzaminem), podejdziesz do matury z fizyki i mimo to uzyskasz wynik poniżej 30%, możesz ubiegać się o zwrot ceny kursu. Zgłoszenie wysyłasz na nasz e-mail w ciągu 7 dni od otrzymania oficjalnego wyniku, dołączając oficjalny dokument z wynikiem egzaminu. Zgłoszenie (w tym postępy w kursie) podlega weryfikacji zgodnie z regulaminem (§9).',
   },
   {
     q: 'Jakie są formy płatności?',
@@ -63,7 +74,7 @@ const courseJsonLd = {
     '@type': 'Offer',
     category: 'Kurs online',
     priceCurrency: 'PLN',
-    price: '699',
+    price: String(fullPlan.price),
     availability: 'https://schema.org/InStock',
     url: `${SITE.url}/cennik/`,
     priceValidUntil: '2026-12-31',
@@ -93,11 +104,14 @@ export default function Home() {
       />
       <Hero />
       <StatsBar />
-      <Guarantee />
+      <ProblemSection />
       <Toolkit />
       <HowItWorks />
       <CourseCatalog />
+      <SocialProof />
       <Testimonials />
+      <AuthorAuthority />
+      <Guarantee />
       <PricingSection />
       <FaqSection
         items={faq}

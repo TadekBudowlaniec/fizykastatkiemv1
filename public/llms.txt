@@ -1,6 +1,6 @@
 # Fizyka Statkiem
 
-> Kurs maturalny z fizyki online (poziom rozszerzony) oraz korepetycje z fizyki i matematyki. Prowadzi Cezary „Czarek” Prusak — online i w Lublinie. https://fizykastatkiem.pl
+> Kurs maturalny z fizyki online (poziom rozszerzony) oraz korepetycje z fizyki i matematyki. Prowadzi Cezary Prusak — online i w Lublinie. https://fizykastatkiem.pl
 
 ## Czym jest Fizyka Statkiem
 - Kompletny kurs maturalny z fizyki online, poziom rozszerzony, 16 działów: mechanika, termodynamika, elektromagnetyzm, optyka i fizyka współczesna.
@@ -8,14 +8,17 @@
 - Dodatkowo: darmowa baza wiedzy (teoria i zadania z rozwiązaniami krok po kroku) oraz blog maturalny.
 
 ## Ceny (PLN, płatność jednorazowa — BLIK, karta, Klarna)
-- Pojedynczy dział: 49 zł
-- Pakiet Silver (kurs samodzielny): 699 zł
-- Pakiet Gold (kurs + live grupowy co 2 tygodnie): 947 zł
-- Pakiet Diamond (kurs + cotygodniowe zajęcia indywidualne 1:1): 1997 zł
+- Kurs Pełny (samodzielny, wszystkie 16 działów, PDF-y, zadania, quizy, planer, Gwarancja Zdanej Matury): 828 zł
+- VIP 1:1 / Diamond (cały Kurs Pełny + indywidualne prowadzenie 1:1 z Czarkiem, 1h tygodniowo aż do matury): 3497 zł — tylko 6 miejsc
+- Pojedynczy dział (osobno, na /dzialy): 177 zł
 - Korepetycje indywidualne z fizyki/matematyki: 100 zł za 60 minut (online i Lublin)
 
+## Skuteczność (dane prawdziwe)
+- 100% zdawalności: 28/28 absolwentów kursu zdało maturę.
+- Nie prowadzimy zbiorczego systemu ocen (brak gwiazdek / średniej „x/5”).
+
 ## Kto uczy
-- Cezary „Czarek” Prusak — korepetytor i twórca kursu Fizyka Statkiem.
+- Cezary Prusak — korepetytor i twórca kursu Fizyka Statkiem.
 - Wyniki matury: fizyka rozszerzona 82%, matematyka rozszerzona 92%, matematyka podstawowa 100%.
 - Metoda: tłumaczenie mechanizmu zjawiska zamiast wkuwania wzorów.
 
@@ -27,7 +30,8 @@
 
 ## Najważniejsze strony
 - Strona główna (kurs maturalny z fizyki): https://fizykastatkiem.pl/
-- Cennik i pakiety: https://fizykastatkiem.pl/cennik/
+- Cennik (Kurs Pełny i VIP 1:1): https://fizykastatkiem.pl/cennik/
+- Pojedyncze działy: https://fizykastatkiem.pl/dzialy/
 - Korepetycje z fizyki: https://fizykastatkiem.pl/korepetycje/
 - Baza wiedzy (teoria + zadania z rozwiązaniami): https://fizykastatkiem.pl/baza-wiedzy/
 - Blog maturalny: https://fizykastatkiem.pl/blog/

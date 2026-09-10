@@ -265,8 +265,8 @@ export default function RegulaminPage() {
               adres e-mail: fizykastatkiem@gmail.com.
             </p>
             <p>
-              b) Zgłoszenie musi wpłynąć w terminie do 30 dni od daty ogłoszenia
-              oficjalnych wyników matur przez CKE.
+              b) Zgłoszenie musi wpłynąć w terminie do 7 dni od otrzymania przez
+              Klienta oficjalnego wyniku egzaminu maturalnego z fizyki.
             </p>
             <p>
               c) Do zgłoszenia należy dołączyć skan lub zdjęcie oficjalnego

@@ -3,15 +3,13 @@ import { BuyButton } from '@/components/shop/BuyButton';
 import { cn } from '@/lib/cn';
 
 const accentRing: Record<string, string> = {
-  silver: 'ring-slate-200',
-  gold: 'ring-brand-300',
-  diamond: 'ring-magenta-400',
+  full: 'ring-slate-200',
+  vip: 'ring-magenta-400',
 };
 
 const accentGlow: Record<string, string> = {
-  silver: 'from-slate-100 to-white',
-  gold: 'from-brand-50 to-white',
-  diamond: 'from-magenta-400/10 to-white',
+  full: 'from-brand-50 to-white',
+  vip: 'from-magenta-400/10 to-white',
 };
 
 function Check() {
@@ -31,19 +29,11 @@ function Check() {
   );
 }
 
-export function PricingTiers({
-  dark = false,
-  promo = false,
-}: {
-  dark?: boolean;
-  /** Ceny promocyjne (tylko /oferta-ratunkowa, gdzie ustawiany jest promoStartedAt) */
-  promo?: boolean;
-}) {
+export function PricingTiers() {
   return (
-    <div className="grid gap-6 lg:grid-cols-3 lg:items-start">
+    <div className="grid gap-6 md:grid-cols-2 md:items-start">
       {PLANS.map((plan) => {
         const featured = plan.featured;
-        const price = promo ? plan.promoPrice : plan.price;
         return (
           <div
             key={plan.key}
@@ -52,7 +42,7 @@ export function PricingTiers({
               accentGlow[plan.accent],
               accentRing[plan.accent],
               featured
-                ? 'lg:-translate-y-4 lg:scale-[1.03] ring-2 ring-brand-400 shadow-glow'
+                ? 'ring-2 ring-brand-400 shadow-glow md:-translate-y-1'
                 : 'hover:-translate-y-1'
             )}
           >
@@ -66,18 +56,16 @@ export function PricingTiers({
               <p className="font-display text-2xl font-extrabold text-ink">
                 {plan.name}
               </p>
-              <p className="text-sm font-medium text-muted">{plan.subtitle}</p>
-              <div className="mt-5 flex items-end justify-center gap-2">
-                <span className="text-lg font-semibold text-slate-400 line-through">
-                  {plan.priceOld} zł
-                </span>
-              </div>
-              <div className="flex items-baseline justify-center gap-1">
+              <p className="mt-1 text-sm font-medium text-muted">
+                {plan.subtitle}
+              </p>
+              <div className="mt-5 flex items-baseline justify-center gap-1">
                 <span className="font-display text-5xl font-extrabold text-gradient">
-                  {price}
+                  {plan.price}
                 </span>
                 <span className="text-xl font-bold text-ink">zł</span>
               </div>
+              <p className="mt-1 text-xs text-muted">Płatność jednorazowa</p>
             </div>
 
             <ul className="mt-7 flex-1 space-y-3">
@@ -89,7 +77,14 @@ export function PricingTiers({
               ))}
             </ul>
 
-            <div className="mt-8">
+            {plan.seats != null && (
+              <p className="mt-6 rounded-2xl bg-magenta-50 px-4 py-3 text-center text-sm font-semibold text-magenta-700">
+                Tylko {plan.seats} miejsc — każde oznacza indywidualne
+                prowadzenie 1:1 aż do matury.
+              </p>
+            )}
+
+            <div className="mt-6">
               <BuyButton
                 courseId={plan.key}
                 variant={featured ? 'gradient' : 'outline'}

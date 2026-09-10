@@ -205,7 +205,8 @@ exports.handler = async (event) => {
             // Fallback: metadata.courseId (zawsze obecne)
             if (courseIds.length === 0 && session.metadata?.courseId) {
                 const metaCourseId = session.metadata.courseId;
-                // 17 = Kurs Samodzielny, 18 = Kurs + Live, 19 = VIP 1:1 — wszystkie dają full access
+                // 17 = Kurs Pełny, 19 = VIP 1:1 — oba dają pełny dostęp (16 działów).
+                // 18 (dawny Gold) wycofany — pozostaje na liście wstecznie dla starych sesji.
                 const fullAccessIds = ['full_access', '17', '18', '19'];
                 if (fullAccessIds.includes(metaCourseId)) {
                     courseIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];

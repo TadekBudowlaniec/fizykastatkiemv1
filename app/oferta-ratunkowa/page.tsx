@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
 import { PricingTiers } from '@/components/shop/PricingTiers';
-import { PromoCountdown } from '@/components/shop/PromoCountdown';
 import { PLANS } from '@/lib/courses';
 import { SITE } from '@/lib/site';
 import { JsonLd, breadcrumbLd } from '@/components/seo/SeoBits';
@@ -23,13 +22,13 @@ const ofertaJsonLd = [
       position: i + 1,
       item: {
         '@type': 'Product',
-        name: `Kurs maturalny z fizyki — ${p.name} (Pakiet Ratunkowy)`,
+        name: `Kurs maturalny z fizyki — ${p.name}`,
         description: p.features.join('. ') + '.',
         brand: { '@type': 'Brand', name: SITE.name },
         offers: {
           '@type': 'Offer',
           priceCurrency: 'PLN',
-          price: String(p.promoPrice),
+          price: String(p.price),
           availability: 'https://schema.org/InStock',
           url: `${SITE.url}/oferta-ratunkowa/`,
           priceValidUntil: '2026-12-31',
@@ -91,14 +90,14 @@ export default function OfertaRatunkowaPage() {
         {/* Oferta */}
         <div className="mt-16">
           <h2 className="font-display text-2xl font-extrabold sm:text-3xl">
-            Wybierz swój Pakiet Ratunkowy
+            Wybierz swój wariant
           </h2>
-          <PromoCountdown />
-          <div className="mx-auto mt-10 max-w-5xl text-left">
-            <PricingTiers promo />
+          <div className="mx-auto mt-10 max-w-4xl text-left">
+            <PricingTiers />
           </div>
           <p className="mt-8 text-sm text-slate-400">
-            30-dniowa gwarancja zwrotu pieniędzy. Bez ryzyka.
+            Objęte <strong className="text-slate-200">Gwarancją Zdanej Matury</strong> —
+            szczegóły w regulaminie.
           </p>
         </div>
       </Container>

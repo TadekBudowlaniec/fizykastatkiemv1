@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
-import { TUTORING_PRICE } from '@/lib/courses';
+import { TUTORING_PRICE, SINGLE_COURSE_PRICE } from '@/lib/courses';
 import { getCities, getCity, getTopics, plain, type Faq } from '@/lib/seo';
 import {
   SeoHero,
@@ -93,7 +93,7 @@ export default async function CityPage({ params }: Params) {
     },
     {
       q: 'Ile kosztują korepetycje z fizyki?',
-      a: `Korepetycje indywidualne z fizyki online 1:1 kosztują ${TUTORING_PRICE} zł za 60 minut. Alternatywnie dostępny jest samodzielny kurs maturalny online — od 49 zł za pojedynczy dział. Pełny cennik pakietów znajdziesz w zakładce Cennik.`,
+      a: `Korepetycje indywidualne z fizyki online 1:1 kosztują ${TUTORING_PRICE} zł za 60 minut. Alternatywnie dostępny jest samodzielny kurs maturalny online — od ${SINGLE_COURSE_PRICE} zł za pojedynczy dział. Pełny cennik znajdziesz w zakładce Cennik.`,
     },
     {
       q: 'Od czego zacząć naukę fizyki?',
@@ -161,7 +161,7 @@ export default async function CityPage({ params }: Params) {
               </li>
               <li>
                 <strong>Przygotowanie do matury</strong> - poziom rozszerzony,
-                zadania CKE.
+                zadania na wzór CKE.
               </li>
               <li>
                 <strong>Materiały i baza zadań</strong> - dostęp do teorii i

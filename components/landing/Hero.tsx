@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { SqueezeForm } from './SqueezeForm';
+import { Button } from '@/components/ui/Button';
 import { Eyebrow } from '@/components/ui/SectionHeading';
 
 const trust = [
@@ -34,19 +34,36 @@ export function Hero() {
             po kroku aż do wyniku, z którego będziesz dumny.
           </p>
 
-          <div className="mt-8">
-            <SqueezeForm />
+          {/* Główne CTA — sprzedażowe (Kurs Pełny + VIP 1:1) */}
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Button
+              href="/cennik"
+              variant="gradient"
+              size="lg"
+              className="w-full sm:w-auto"
+            >
+              Zobacz Kurs Pełny
+            </Button>
+            <Button
+              href="/cennik"
+              variant="outline"
+              size="lg"
+              className="w-full border-white/30 text-white hover:bg-white hover:text-navy-900 sm:w-auto"
+            >
+              Sprawdź VIP 1:1
+            </Button>
           </div>
 
-          <p className="mt-3 text-sm text-slate-400">
-            Wolisz zacząć od razu?{' '}
-            <Link
-              href="/cennik"
-              className="font-semibold text-brand-300 underline underline-offset-4 transition-colors hover:text-magenta-400"
-            >
-              Zobacz pakiety kursu →
-            </Link>
-          </p>
+          {/* Secondary — darmowy planer jako lead magnet (nie dominuje nad CTA) */}
+          <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+            <p className="text-sm font-semibold text-slate-200">
+              Nie jesteś jeszcze zdecydowany? Odbierz najpierw{' '}
+              <span className="text-brand-300">darmowy planer nauki</span>.
+            </p>
+            <div className="mt-3">
+              <SqueezeForm />
+            </div>
+          </div>
 
           <ul className="mt-8 flex flex-wrap gap-2.5">
             {trust.map((t) => (

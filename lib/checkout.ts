@@ -4,7 +4,7 @@ import { getSupabaseBrowser } from '@/lib/supabase/client';
 
 /**
  * Rozpoczyna checkout Stripe dla działu (1..16) lub pakietu
- * ('full_access' | 'full_access_live' | 'vip'). Obsługuje zalogowanych i gości.
+ * ('full_access' = Kurs Pełny | 'vip' = VIP 1:1). Obsługuje zalogowanych i gości.
  * Używa istniejącej Netlify Function /create-checkout-session i przekierowuje
  * na hostowaną stronę płatności Stripe (session.url).
  */

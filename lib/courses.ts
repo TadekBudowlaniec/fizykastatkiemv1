@@ -59,24 +59,25 @@ export function getCourse(id: number): Course | undefined {
 }
 
 // ---------------------------------------------------------------------------
-// Pakiety cenowe (checkout: full_access -> 17, full_access_live -> 18, vip -> 19)
+// Pakiety cenowe — dwa warianty głównej oferty (checkout: full_access -> 17, vip -> 19).
+// Pakiet Gold (live) WYCOFANY (restrukturyzacja oferty 2026-09) — nie przywracać.
 // Ceny MUSZĄ być zgodne z courseData w create-checkout-session.js (grosze/100):
-//   17: reg 699 / promo 599 · 18: reg 947 / promo 847 · 19: reg 1997 / promo 1897
-// `price` = cena regularna (pobierana poza promo), `promoPrice` = na /oferta-ratunkowa.
+//   17: 828 zł (Kurs Pełny) · 19: 3497 zł (VIP 1:1) · dział: 177 zł
+// Bez sztucznych cen przekreślonych i bez fałszywej promocji — cena = wartość.
 // ---------------------------------------------------------------------------
 
-export type PlanKey = 'full_access' | 'full_access_live' | 'vip';
+export type PlanKey = 'full_access' | 'vip';
 
 export type Plan = {
   key: PlanKey;
   name: string;
   subtitle: string;
-  priceOld: number;
   price: number;
-  promoPrice: number;
   featured?: boolean;
   badge?: string;
-  accent: 'silver' | 'gold' | 'diamond';
+  /** Realny limit miejsc (tylko VIP 1:1) — wynika z możliwości prowadzenia 1:1. */
+  seats?: number;
+  accent: 'full' | 'vip';
   features: string[];
   cta: string;
 };
@@ -84,13 +85,12 @@ export type Plan = {
 export const PLANS: Plan[] = [
   {
     key: 'full_access',
-    name: 'Silver',
-    subtitle: 'Kurs Samodzielny',
-    priceOld: 1999,
-    price: 699,
-    promoPrice: 599,
-    accent: 'silver',
-    cta: 'Wybieram Silver',
+    name: 'Kurs Pełny',
+    subtitle: 'Samodzielna nauka według gotowego systemu',
+    price: 828,
+    featured: true,
+    accent: 'full',
+    cta: 'Wybieram Kurs Pełny',
     features: [
       'Dostęp do wszystkich 16 działów kursu wideo HD',
       'Gotowe PDF-y z teorią, zadaniami i wzorami',
@@ -101,43 +101,33 @@ export const PLANS: Plan[] = [
     ],
   },
   {
-    key: 'full_access_live',
-    name: 'Gold',
-    subtitle: 'Kurs + Live',
-    priceOld: 2789,
-    price: 947,
-    promoPrice: 847,
-    featured: true,
-    badge: 'Najpopularniejszy',
-    accent: 'gold',
-    cta: 'Wybieram Gold',
-    features: [
-      'Wszystko z pakietu Silver',
-      'Live grupowy 2h co 2 tygodnie',
-      'Zadawanie pytań na żywo',
-      'Nagrania z live’ów do odtworzenia',
-    ],
-  },
-  {
     key: 'vip',
-    name: 'Diamond',
-    subtitle: 'Kurs VIP 1:1',
-    priceOld: 3499,
-    price: 1997,
-    promoPrice: 1897,
-    accent: 'diamond',
-    cta: 'Wybieram Diamond',
+    name: 'VIP 1:1',
+    subtitle: 'Diamond — Czarek prowadzi Cię indywidualnie aż do matury',
+    price: 3497,
+    seats: 6,
+    badge: 'Tylko 6 miejsc',
+    accent: 'vip',
+    cta: 'Wybieram VIP 1:1',
     features: [
-      'Wszystko z pakietu Gold',
-      'Zajęcia indywidualne 1:1 - 1h tygodniowo',
-      'Stały kontakt i wsparcie',
-      'Plan nauki dopasowany do Twoich braków',
+      'Cały Kurs Pełny (16 działów, PDF-y, zadania, planer)',
+      'Indywidualne prowadzenie 1:1 z Czarkiem',
+      '1 godzina zajęć tygodniowo — aż do matury',
+      'Plan pracy dopasowany do Twoich braków i potrzeb',
+      'Stały kontakt i wsparcie między zajęciami',
+      'Gwarancja Zdanej Matury',
     ],
   },
 ];
 
-/** Cena pojedynczego działu (zł) */
-export const SINGLE_COURSE_PRICE = 49;
+/**
+ * Realny limit miejsc VIP 1:1 — wynika z możliwości prowadzenia klientów 1:1.
+ * NIE jest sztucznym scarcity; komunikować wyłącznie jako prawdziwy limit.
+ */
+export const VIP_SEATS = 6;
+
+/** Cena pojedynczego działu (zł) — oferta poboczna na /dzialy */
+export const SINGLE_COURSE_PRICE = 177;
 
 /** Cena korepetycji indywidualnych (zł za 60 minut) */
 export const TUTORING_PRICE = 100;
