@@ -77,6 +77,8 @@ export type Plan = {
   badge?: string;
   /** Realny limit miejsc (tylko VIP 1:1) — wynika z możliwości prowadzenia 1:1. */
   seats?: number;
+  /** Prawdziwa kotwica wartości pod ceną (nie sztuczna przekreślona cena). */
+  anchor?: string;
   accent: 'full' | 'vip';
   features: string[];
   cta: string;
@@ -90,6 +92,7 @@ export const PLANS: Plan[] = [
     price: 828,
     featured: true,
     accent: 'full',
+    anchor: '16 działów osobno to 2 832 zł — w kursie ~52 zł za dział.',
     cta: 'Wybieram Kurs Pełny',
     features: [
       'Dostęp do wszystkich 16 działów kursu wideo HD',
@@ -108,6 +111,7 @@ export const PLANS: Plan[] = [
     seats: 6,
     badge: 'Tylko 6 miejsc',
     accent: 'vip',
+    anchor: 'Zawiera cały Kurs Pełny (828 zł) + cotygodniowe 1:1 z Czarkiem aż do matury.',
     cta: 'Wybieram VIP 1:1',
     features: [
       'Cały Kurs Pełny (16 działów, PDF-y, zadania, planer)',

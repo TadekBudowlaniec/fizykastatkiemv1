@@ -24,14 +24,13 @@ export function Hero() {
         <div className="animate-[fadeUp_0.7s_cubic-bezier(0.22,1,0.36,1)_both]">
           <Eyebrow dark>🚢 Kurs maturalny z fizyki - matura 2027</Eyebrow>
           <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.08] text-white sm:text-5xl lg:text-[3.4rem]">
-            Kurs maturalny z fizyki{' '}
-            <span className="text-gradient">online</span>
+            Zdaj maturę z fizyki rozszerzonej{' '}
+            <span className="text-gradient">krok po kroku</span>
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-300/85">
-            Kompletny kurs maturalny z fizyki na poziomie rozszerzonym: 16 działów
-            wideo HD, gotowe PDF-y, setki zadań na wzór CKE i spersonalizowany
-            planer nauki. Od podstaw do rozszerzenia — bez stresu i chaosu, krok
-            po kroku aż do wyniku, z którego będziesz dumny.
+            Bez chaosu i zgadywania, czego uczyć się dalej. 16 działów wideo HD,
+            PDF-y, setki zadań na wzór CKE i planer, który prowadzi Cię od podstaw
+            aż do egzaminu — z wynikiem, z którego będziesz dumny.
           </p>
 
           {/* Główne CTA — sprzedażowe (Kurs Pełny + VIP 1:1) */}

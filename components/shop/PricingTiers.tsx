@@ -66,6 +66,11 @@ export function PricingTiers() {
                 <span className="text-xl font-bold text-ink">zł</span>
               </div>
               <p className="mt-1 text-xs text-muted">Płatność jednorazowa</p>
+              {plan.anchor && (
+                <p className="mx-auto mt-3 max-w-[15rem] rounded-xl bg-brand-50 px-3 py-2 text-xs font-semibold text-brand-700">
+                  {plan.anchor}
+                </p>
+              )}
             </div>
 
             <ul className="mt-7 flex-1 space-y-3">

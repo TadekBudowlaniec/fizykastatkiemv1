@@ -11,6 +11,7 @@ import { Guarantee } from '@/components/landing/Guarantee';
 import { PricingSection } from '@/components/landing/PricingSection';
 import { FaqSection, type FaqItem } from '@/components/ui/Faq';
 import { FinalCta } from '@/components/landing/FinalCta';
+import { StickyCta } from '@/components/landing/StickyCta';
 import { PLANS, SINGLE_COURSE_PRICE, VIP_SEATS } from '@/lib/courses';
 import { SITE } from '@/lib/site';
 import type { Metadata } from 'next';
@@ -118,6 +119,7 @@ export default function Home() {
         subtitle="Nie znalazłeś odpowiedzi? Napisz do nas - pomożemy wybrać najlepszą ścieżkę."
       />
       <FinalCta />
+      <StickyCta />
     </>
   );
 }
