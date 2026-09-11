@@ -4,10 +4,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { getLessons } from '@/lib/db';
 import type { Lesson } from '@/lib/types';
-import { getCourse } from '@/lib/courses';
+import { getCourse, SINGLE_COURSE_PRICE, PLANS } from '@/lib/courses';
 import { AppHero } from '@/components/app/AppHero';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
+import { BuyButton } from '@/components/shop/BuyButton';
 import { PdfEtapy } from '@/components/app/PdfEtapy';
 import { TaskRunner } from '@/components/app/TaskRunner';
 import { LessonView } from '@/components/app/LessonView';
@@ -92,8 +93,20 @@ export function CourseView({ courseId }: { courseId: number }) {
     { label: title, href: `/kurs/${courseId}` },
   ];
 
-  // Brak dostępu (dla działów 1-16)
+  // Brak dostępu (dla działów 1-16) — podgląd struktury działu (przyciemniony,
+  // z kłódką) + bezpośrednie CTA zakupu. UWAGA: podgląd korzysta wyłącznie z
+  // PUBLICZNYCH danych działu (zakres z courses.json) — NIE ładujemy lekcji z
+  // bazy, żeby nie wyciekły video_id niezalogowanym.
   if (!access) {
+    const fullPrice = PLANS.find((p) => p.key === 'full_access')?.price ?? 828;
+    const modules = [
+      { icon: '🎬', label: 'Lekcje wideo HD' },
+      { icon: '📄', label: 'PDF-y: teoria, wzory, zadania (3 etapy)' },
+      { icon: '🧩', label: 'Quizy sprawdzające' },
+      { icon: '✅', label: 'Zadania z rozwiązaniami' },
+    ];
+    const scope = [...(meta?.basic ?? []), ...(meta?.extended ?? [])];
+
     return (
       <>
         <AppHero
@@ -102,27 +115,88 @@ export function CourseView({ courseId }: { courseId: number }) {
               <span className="text-4xl">{icon}</span> {title}
             </span>
           }
-          subtitle="Ten dział jest zablokowany. Odblokuj go w pakiecie albo pojedynczo."
+          subtitle="Podgląd struktury działu — odblokuj dostęp, aby zacząć naukę."
           breadcrumb={breadcrumb}
         />
-        <section className="bg-cloud py-14">
-          <Container size="narrow">
-            <div className="rounded-3xl border border-brand-100 bg-white p-8 text-center shadow-card">
-              <p className="text-5xl">🔒</p>
-              <h2 className="mt-3 text-2xl font-extrabold text-ink">
-                Odblokuj dział „{title}”
-              </h2>
-              <p className="mx-auto mt-2 max-w-md text-muted">
-                Zyskaj dostęp do lekcji wideo, PDF-ów w 3 etapach oraz zadań z
-                rozwiązaniami. Kup cały pakiet lub ten dział osobno.
-              </p>
-              <div className="mt-6 flex flex-wrap justify-center gap-3">
-                <Button href="/cennik" variant="gradient" size="lg">
-                  Zobacz pakiety
-                </Button>
+        <section className="bg-cloud py-12 sm:py-14">
+          <Container size="wide">
+            <div className="relative overflow-hidden rounded-3xl border border-line bg-white shadow-card">
+              {/* Podgląd struktury (rozmyty, nieinteraktywny) */}
+              <div
+                aria-hidden
+                className="pointer-events-none select-none p-6 blur-[3px] sm:p-8"
+              >
+                {/* mock zakładek */}
+                <div className="mb-8 inline-flex rounded-full border border-line bg-white p-1 shadow-soft">
+                  {['Lekcje', 'Materiały PDF', 'Zadania'].map((t, i) => (
+                    <span
+                      key={t}
+                      className={cn(
+                        'rounded-full px-4 py-2.5 text-xs font-semibold sm:text-sm',
+                        i === 0
+                          ? 'bg-[linear-gradient(120deg,#6b4df6,#f43f8f)] text-white'
+                          : 'text-muted'
+                      )}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {modules.map((m) => (
+                    <div
+                      key={m.label}
+                      className="flex items-center gap-3 rounded-2xl border border-line bg-white p-4 shadow-soft"
+                    >
+                      <span className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-brand-50 text-2xl">
+                        {m.icon}
+                      </span>
+                      <span className="font-semibold text-ink">{m.label}</span>
+                    </div>
+                  ))}
+                </div>
+                {scope.length > 0 && (
+                  <div className="mt-6">
+                    <p className="text-sm font-bold uppercase tracking-wide text-muted">
+                      W tym dziale przerobisz:
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {scope.slice(0, 10).map((s) => (
+                        <span
+                          key={s}
+                          className="rounded-full bg-cloud px-3 py-1.5 text-sm text-slate ring-1 ring-line"
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Nakładka z kłódką + CTA zakupu */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-gradient-to-b from-white/50 via-white/80 to-white/95 p-6 text-center">
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[linear-gradient(135deg,#6b4df6,#f43f8f)] text-3xl text-white shadow-glow">
+                  🔒
+                </span>
+                <h2 className="text-2xl font-extrabold text-ink">
+                  Odblokuj dostęp do działu „{title}”
+                </h2>
+                <p className="mx-auto max-w-md text-muted">
+                  Widzisz strukturę działu. Odblokuj, aby zobaczyć lekcje wideo,
+                  PDF-y w 3 etapach i zadania z rozwiązaniami.
+                </p>
+                <div className="mt-2 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center">
+                  <BuyButton courseId={courseId} variant="gradient" size="lg">
+                    Odblokuj ten dział · {SINGLE_COURSE_PRICE} zł
+                  </BuyButton>
+                  <BuyButton courseId="full_access" variant="outline" size="lg">
+                    Odblokuj pełny kurs · {fullPrice} zł
+                  </BuyButton>
+                </div>
                 {!user && (
-                  <Button href="/login" variant="outline" size="lg">
-                    Mam już dostęp - zaloguj
+                  <Button href="/login" variant="ghost" size="sm">
+                    Mam już dostęp - zaloguj się
                   </Button>
                 )}
               </div>

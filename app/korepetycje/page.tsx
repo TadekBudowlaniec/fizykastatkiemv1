@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { SITE } from '@/lib/site';
 import { TUTORING_PRICE } from '@/lib/courses';
 import { FaqSection, type FaqItem } from '@/components/ui/Faq';
+import { OpinieKorepetycje } from '@/components/korepetycje/OpinieKorepetycje';
 import { JsonLd, breadcrumbLd, faqLd } from '@/components/seo/SeoBits';
 
 const korepetycjeFaq: FaqItem[] = [
@@ -103,31 +104,6 @@ const logistics = [
   },
 ];
 
-const proofs = [
-  {
-    score: '🏆 94%',
-    subject: 'Fizyka rozsz.',
-    quote: 'Hejj, super poszło, 94%! Mega dzięki za pomoc ❤️',
-    author: 'Nadia',
-    role: 'Matura rozszerzona',
-  },
-  {
-    score: '⏱️ 1 mc',
-    subject: 'Po 10 latach',
-    quote:
-      'Jak na tak krótki czas przygotowania, wynik jest lepszy, niż się spodziewałem. (Niecały miesiąc nauki)',
-    author: 'Filip, 28 lat',
-    role: 'Matura rozszerzona',
-  },
-  {
-    score: '📈 ~90%',
-    subject: 'Matma podst.',
-    quote:
-      'Córka wróciła zadowolona. Z tego co policzyła, powinna mieć 90%. Poszła na egzamin naprawdę spokojna.',
-    author: 'Mama Darii',
-    role: 'Matura rozszerzona',
-  },
-];
 
 export default function KorepetycjePage() {
   return (
@@ -243,29 +219,7 @@ export default function KorepetycjePage() {
             title="Uczniowie czują się pewnie na maturze"
             subtitle="Historie maturzystów, którzy przestali wkuwać, a zaczęli rozumieć."
           />
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {proofs.map((p, i) => (
-              <Reveal key={p.author} delay={i * 90}>
-                <figure className="flex h-full flex-col rounded-3xl border border-line bg-cloud p-7 shadow-soft">
-                  <div className="flex items-center justify-between">
-                    <span className="font-display text-lg font-extrabold text-brand-600">
-                      {p.score}
-                    </span>
-                    <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-600">
-                      {p.subject}
-                    </span>
-                  </div>
-                  <blockquote className="mt-4 flex-1 text-slate">
-                    „{p.quote}”
-                  </blockquote>
-                  <figcaption className="mt-5 border-t border-line pt-4">
-                    <span className="block font-bold text-ink">{p.author}</span>
-                    <span className="block text-sm text-muted">{p.role}</span>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
+          <OpinieKorepetycje />
         </Container>
       </section>
 
