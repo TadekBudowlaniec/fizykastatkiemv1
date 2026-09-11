@@ -7,7 +7,7 @@ import { COURSES } from '@/lib/courses';
 
 export function CourseCatalog() {
   return (
-    <section id="program" className="bg-cloud py-14 sm:py-24">
+    <section id="program" className="scroll-mt-20 bg-cloud py-14 sm:py-24">
       <Container size="wide">
         <SectionHeading
           eyebrow="Program kursu"

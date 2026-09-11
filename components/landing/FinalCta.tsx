@@ -16,16 +16,16 @@ export function FinalCta() {
           zacząć. Płyniemy razem - aż do wyniku, z którego będziesz dumny.
         </p>
         <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
-          <Button href="/cennik" variant="gradient" size="lg" className="w-full sm:w-auto">
+          <Button href="#cennik" variant="gradient" size="lg" className="w-full sm:w-auto">
             Wybieram kurs
           </Button>
           <Button
-            href="/kurs"
+            href="#program"
             variant="outline"
             size="lg"
             className="w-full border-white/30 text-white hover:bg-white hover:text-navy-900 sm:w-auto"
           >
-            Zobacz platformę
+            Zobacz program (16 działów)
           </Button>
         </div>
       </div>

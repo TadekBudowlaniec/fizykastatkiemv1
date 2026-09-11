@@ -33,24 +33,22 @@ export function Hero() {
             aż do egzaminu — z wynikiem, z którego będziesz dumny.
           </p>
 
-          {/* Główne CTA — sprzedażowe (Kurs Pełny + VIP 1:1) */}
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          {/* Jedno dominujące CTA — scroll do cennika na tej samej stronie */}
+          <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
             <Button
-              href="/cennik"
+              href="#cennik"
               variant="gradient"
               size="lg"
               className="w-full sm:w-auto"
             >
-              Zobacz Kurs Pełny
+              Zobacz kurs i ceny
             </Button>
-            <Button
-              href="/cennik"
-              variant="outline"
-              size="lg"
-              className="w-full border-white/30 text-white hover:bg-white hover:text-navy-900 sm:w-auto"
+            <a
+              href="#cennik"
+              className="text-sm font-semibold text-slate-300 underline underline-offset-4 transition-colors hover:text-white"
             >
-              Sprawdź VIP 1:1
-            </Button>
+              albo indywidualne prowadzenie 1:1 (VIP) →
+            </a>
           </div>
 
           {/* Secondary — darmowy planer jako lead magnet (nie dominuje nad CTA) */}

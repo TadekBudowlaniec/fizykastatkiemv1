@@ -6,7 +6,6 @@ import { HowItWorks } from '@/components/landing/HowItWorks';
 import { CourseCatalog } from '@/components/landing/CourseCatalog';
 import { SocialProof } from '@/components/landing/SocialProof';
 import { Testimonials } from '@/components/landing/Testimonials';
-import { AuthorAuthority } from '@/components/landing/AuthorAuthority';
 import { Guarantee } from '@/components/landing/Guarantee';
 import { PricingSection } from '@/components/landing/PricingSection';
 import { FaqSection, type FaqItem } from '@/components/ui/Faq';
@@ -111,7 +110,6 @@ export default function Home() {
       <CourseCatalog />
       <SocialProof />
       <Testimonials />
-      <AuthorAuthority />
       <Guarantee />
       <PricingSection />
       <FaqSection
