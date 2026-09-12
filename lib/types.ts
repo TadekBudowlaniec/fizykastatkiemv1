@@ -51,3 +51,16 @@ export type StudyPlan = {
   description: string;
   is_completed: boolean;
 };
+
+// Postęp poziomów w zakładce „Materiały PDF" (tabela public.user_levels).
+export type UserLevel = {
+  user_id: string;
+  course_id: number;
+  poziom: number; // 1..4
+  completed_at?: string | null;
+};
+
+// Plik PDF w Storage (bucket „materialy-pdf") zwracany przez get-materialy-url.
+export type MaterialFile = {
+  name: string; // nazwa pliku, np. „1.1 Wstep.pdf"
+};

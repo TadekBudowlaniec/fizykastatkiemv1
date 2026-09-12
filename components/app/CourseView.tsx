@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '@/components/auth/AuthProvider';
-import { getLessons } from '@/lib/db';
+import { getLessons, getUserLevels, markLevel, unmarkLevel } from '@/lib/db';
 import type { Lesson } from '@/lib/types';
 import { getCourse, SINGLE_COURSE_PRICE, PLANS } from '@/lib/courses';
 import { AppHero } from '@/components/app/AppHero';
@@ -55,6 +55,54 @@ export function CourseView({ courseId }: { courseId: number }) {
     if (access) loadLessons();
     else setLessonsLoading(false);
   }, [access, loadLessons]);
+
+  // Postęp poziomów (Materiały PDF) — steruje odblokowaniem quizu (zadania).
+  const [levels, setLevels] = useState<Set<number>>(new Set());
+
+  const loadLevels = useCallback(async () => {
+    if (!user?.id || isStart) return;
+    try {
+      const rows = await getUserLevels(user.id, courseId);
+      setLevels(new Set(rows.map((r) => r.poziom)));
+    } catch {
+      setLevels(new Set());
+    }
+  }, [user?.id, isStart, courseId]);
+
+  useEffect(() => {
+    if (access && user?.id && !isStart) loadLevels();
+  }, [access, user?.id, isStart, loadLevels]);
+
+  const toggleLevel = useCallback(
+    async (poziom: number, done: boolean) => {
+      if (!user?.id) return;
+      // Optymistycznie aktualizujemy UI, potem zapis.
+      setLevels((prev) => {
+        const next = new Set(prev);
+        if (done) next.add(poziom);
+        else next.delete(poziom);
+        return next;
+      });
+      try {
+        if (done) await markLevel(user.id, courseId, poziom);
+        else await unmarkLevel(user.id, courseId, poziom);
+      } catch {
+        // cofnij przy błędzie
+        setLevels((prev) => {
+          const next = new Set(prev);
+          if (done) next.delete(poziom);
+          else next.add(poziom);
+          return next;
+        });
+      }
+    },
+    [user?.id, courseId]
+  );
+
+  const allLevelsDone = [1, 2, 3, 4].every((p) => levels.has(p));
+
+  // Skrót do lekcji na YouTube (CEL 5) — pierwsze wideo działu.
+  const ytId = lessons.find((l) => l.yt_id_wideo)?.yt_id_wideo ?? null;
 
   const valid = isStart || (courseId >= 1 && courseId <= 16 && meta);
 
@@ -233,6 +281,29 @@ export function CourseView({ courseId }: { courseId: number }) {
 
       <section className="bg-cloud py-12">
         <Container size="wide">
+          {/* Skrót do wideo na YouTube — widoczny niezależnie od zakładki (CEL 5) */}
+          {ytId && (
+            <a
+              href={`https://www.youtube.com/watch?v=${ytId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mb-6 flex items-center gap-3 rounded-2xl border border-line bg-white p-4 shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-card"
+            >
+              <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-brand-50 text-2xl">
+                ▶️
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block font-semibold text-ink">
+                  Obejrzyj lekcję na YouTube
+                </span>
+                <span className="block text-sm text-muted">
+                  Otwiera się w nowej karcie — odtwarzacz w zakładce „Lekcje” zostaje.
+                </span>
+              </span>
+              <span className="flex-none font-bold text-brand-600">↗</span>
+            </a>
+          )}
+
           {/* Zakładki */}
           <div className="mb-8 inline-flex rounded-full border border-line bg-white p-1 shadow-soft">
             {tabs.map((t) => (
@@ -286,10 +357,38 @@ export function CourseView({ courseId }: { courseId: number }) {
           )}
 
           {tab === 'materialy' && !isStart && (
-            <PdfEtapy courseId={courseId} hasAccess={access} />
+            <PdfEtapy
+              courseId={courseId}
+              hasAccess={access}
+              completed={levels}
+              onToggleLevel={toggleLevel}
+            />
           )}
 
-          {tab === 'zadania' && !isStart && <TaskRunner courseId={courseId} />}
+          {tab === 'zadania' && !isStart && (
+            <>
+              {/* Miękki gating: quiz zawsze dostępny, tylko zalecenie gdy < 4/4. */}
+              {!allLevelsDone && (
+                <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-brand-200 bg-brand-50 p-4 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-sm font-semibold text-ink">
+                    💡 Zalecamy ukończyć wszystkie 4 poziomy z tego działu przed
+                    quizem — masz{' '}
+                    <strong>
+                      {[1, 2, 3, 4].filter((p) => levels.has(p)).length}/4
+                    </strong>
+                    . Quiz jest dostępny, ale najlepiej działa po materiałach.
+                  </p>
+                  <button
+                    onClick={() => setTab('materialy')}
+                    className="whitespace-nowrap rounded-full border-2 border-brand-300 px-4 py-2 text-sm font-semibold text-brand-700 transition hover:bg-white"
+                  >
+                    Dokończ poziomy →
+                  </button>
+                </div>
+              )}
+              <TaskRunner courseId={courseId} />
+            </>
+          )}
         </Container>
       </section>
     </>

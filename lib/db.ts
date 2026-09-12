@@ -9,6 +9,8 @@ import type {
   UserTask,
   UserTaskStatus,
   StudyPlan,
+  UserLevel,
+  MaterialFile,
 } from '@/lib/types';
 
 // ---------------- Lekcje (tabela `video`) ----------------
@@ -174,19 +176,73 @@ export async function setPlanItemCompleted(
   if (error) throw error;
 }
 
-// ---------------- PDF (Netlify Function) ----------------
+// ---------------- Poziomy — postęp (tabela user_levels) ----------------
 
-export async function getSecurePdfUrl(
+export async function getUserLevels(
+  userId: string,
+  courseId: number
+): Promise<UserLevel[]> {
+  const supabase = getSupabaseBrowser();
+  const { data, error } = await supabase
+    .from('user_levels')
+    .select('user_id, course_id, poziom, completed_at')
+    .eq('user_id', userId)
+    .eq('course_id', courseId);
+  if (error) throw error;
+  return (data as UserLevel[]) ?? [];
+}
+
+export async function markLevel(
+  userId: string,
   courseId: number,
-  etap: number
-): Promise<string> {
+  poziom: number
+): Promise<void> {
+  const supabase = getSupabaseBrowser();
+  const { error } = await supabase.from('user_levels').upsert(
+    {
+      user_id: userId,
+      course_id: courseId,
+      poziom,
+      completed_at: new Date().toISOString(),
+    },
+    { onConflict: 'user_id,course_id,poziom' }
+  );
+  if (error) throw error;
+}
+
+export async function unmarkLevel(
+  userId: string,
+  courseId: number,
+  poziom: number
+): Promise<void> {
+  const supabase = getSupabaseBrowser();
+  const { error } = await supabase
+    .from('user_levels')
+    .delete()
+    .eq('user_id', userId)
+    .eq('course_id', courseId)
+    .eq('poziom', poziom);
+  if (error) throw error;
+}
+
+// ---------------- PDF (Netlify Functions) ----------------
+
+async function requireToken(): Promise<string> {
   const supabase = getSupabaseBrowser();
   const {
     data: { session },
   } = await supabase.auth.getSession();
   const token = session?.access_token;
   if (!token) throw new Error('Musisz być zalogowany.');
+  return token;
+}
 
+/** Poziom 4 (dawny Etap 3) — stary mechanizm/bucket, bez zmian. */
+export async function getSecurePdfUrl(
+  courseId: number,
+  etap: number
+): Promise<string> {
+  const token = await requireToken();
   const res = await fetch('/.netlify/functions/get-pdf-url', {
     method: 'POST',
     headers: {
@@ -197,6 +253,55 @@ export async function getSecurePdfUrl(
   });
   if (!res.ok) {
     if (res.status === 403) throw new Error('Brak dostępu do tego PDF.');
+    throw new Error('Nie udało się pobrać pliku PDF.');
+  }
+  const { url } = (await res.json()) as { url: string };
+  return url;
+}
+
+// ---- Materiały: nowy bucket „materialy-pdf", Poziomy 1–3 ----
+// Ta sama metoda co Poziom 4: kontrola dostępu + podpisany URL w Netlify Function.
+// Poziom 1 = zmienna liczba plików (listowanie folderu), Poziom 2/3 = stałe pliki.
+
+/** Lista plików danego poziomu (nazwy). Dla P1 dynamiczna, dla P2/P3 stała. */
+export async function listMaterialy(
+  courseId: number,
+  poziom: number
+): Promise<MaterialFile[]> {
+  const token = await requireToken();
+  const res = await fetch('/.netlify/functions/get-materialy-url', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ courseId, poziom, action: 'list' }),
+  });
+  if (!res.ok) {
+    if (res.status === 403) throw new Error('Brak dostępu do materiałów.');
+    throw new Error('Nie udało się wczytać listy plików.');
+  }
+  const { files } = (await res.json()) as { files: MaterialFile[] };
+  return files ?? [];
+}
+
+/** Podpisany URL do konkretnego pliku danego poziomu (otwierany na klik). */
+export async function getMaterialyUrl(
+  courseId: number,
+  poziom: number,
+  file: string
+): Promise<string> {
+  const token = await requireToken();
+  const res = await fetch('/.netlify/functions/get-materialy-url', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ courseId, poziom, action: 'sign', file }),
+  });
+  if (!res.ok) {
+    if (res.status === 403) throw new Error('Brak dostępu do tego pliku.');
     throw new Error('Nie udało się pobrać pliku PDF.');
   }
   const { url } = (await res.json()) as { url: string };
