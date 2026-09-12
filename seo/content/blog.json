@@ -662,5 +662,170 @@
     ],
     "relatedTopics": ["kinematyka", "dynamika", "termodynamika"],
     "related": ["korepetycje-z-fizyki-czy-samodzielna-nauka", "jak-nauczyc-sie-fizyki-do-matury"]
+  },
+  {
+    "slug": "jaka-matematyka-potrzebna-do-fizyki",
+    "date": "2026-09-03",
+    "title": "Jaka matematyka jest potrzebna do fizyki na maturze",
+    "metaDesc": "Ile matematyki trzeba, żeby zdać fizykę rozszerzoną? Przekształcanie wzorów, funkcje, trygonometria i wektory — konkretna lista umiejętności matematycznych.",
+    "keywords": "matematyka do fizyki, jaka matematyka potrzebna do fizyki, przekształcanie wzorów, trygonometria fizyka, matematyka matura fizyka",
+    "excerpt": "Fizyki nie da się zdać bez matematyki, ale potrzebujesz jej mniej, niż myślisz. Liczy się kilka konkretnych umiejętności, nie cały materiał.",
+    "intro": "Uczniowie często odkładają fizykę, bo „słabo im idzie matematyka”. To nieporozumienie oparte na przecenieniu, ile matematyki naprawdę potrzeba. Do fizyki na poziomie maturalnym wystarczy kilka konkretnych, powtarzalnych umiejętności matematycznych — nie cała matematyka rozszerzona. Ten artykuł wymienia je po kolei, żebyś wiedział, co dokładnie doszlifować.",
+    "sections": [
+      {
+        "heading": "Umiejętność numer jeden: przekształcanie wzorów",
+        "html": "<p>Jeśli miałbyś opanować tylko jedną rzecz, to właśnie tę. Niemal każde zadanie z fizyki wymaga wyznaczenia jednej wielkości z równania, w którym występuje kilka innych. To czysta algebra: mnożenie i dzielenie obu stron, przenoszenie wyrazów, pierwiastkowanie.</p><p>Przykład: z \\( E_k = \\frac{mv^2}{2} \\) wyznaczasz prędkość, dochodząc do \\( v = \\sqrt{\\frac{2E_k}{m}} \\). Ta jedna umiejętność decyduje o większości zadań obliczeniowych. Bez niej nawet znajomość fizyki nie wystarcza.</p>"
+      },
+      {
+        "heading": "Potęgi i notacja naukowa",
+        "html": "<p>Fizyka operuje liczbami bardzo dużymi i bardzo małymi — od masy elektronu po prędkość światła. Notacja naukowa, czyli zapis w postaci \\( a \\cdot 10^n \\), jest tu niezbędna.</p><p>Musisz sprawnie mnożyć i dzielić takie liczby, dodając i odejmując wykładniki: \\( 10^3 \\cdot 10^4 = 10^7 \\), a \\( \\frac{10^6}{10^2} = 10^4 \\). To pojawia się w każdym dziale, od elektrostatyki po fizykę jądrową, i jest ściśle związane z przeliczaniem przedrostków jednostek.</p>"
+      },
+      {
+        "heading": "Funkcje i proporcjonalność",
+        "html": "<p>Fizyka to w dużej mierze opisywanie zależności między wielkościami, a to język funkcji. Musisz rozumieć, co znaczy, że jedna wielkość jest wprost proporcjonalna do drugiej (rośnie tak samo) albo odwrotnie proporcjonalna (gdy jedna rośnie, druga maleje).</p><p>Przydaje się też rozpoznawanie zależności kwadratowej, jak w \\( E_k \\sim v^2 \\), gdzie podwojenie prędkości daje czterokrotny wzrost energii. Ta intuicja pomaga zarówno w zadaniach, jak i w ocenie sensowności wyniku.</p>"
+      },
+      {
+        "heading": "Trygonometria — ale tylko podstawy",
+        "html": "<p>Trygonometria straszy, a w fizyce maturalnej potrzebujesz jej naprawdę niewiele: sinus, cosinus i tangens kąta oraz umiejętność rozłożenia wektora na składowe.</p><p>Pojawia się przede wszystkim przy równi pochyłej, rzutach i siłach działających pod kątem. Kluczowa umiejętność to rozbicie siły na składową wzdłuż ruchu i prostopadłą do niego, na przykład \\( F_x = F\\cos\\alpha \\) oraz \\( F_y = F\\sin\\alpha \\). Kilka standardowych sytuacji wraca w kółko, więc wystarczy je opanować raz.</p>"
+      },
+      {
+        "heading": "Wektory",
+        "html": "<p>Wiele wielkości fizycznych — siła, prędkość, przyspieszenie, pęd — to wektory, czyli mają wartość i kierunek. Musisz umieć je dodawać (składać) i rozkładać na składowe.</p><p>To nie jest trudne, ale wymaga zrozumienia, że dwie siły o tej samej wartości mogą dać różny efekt zależnie od kierunku. Rozkład wektora na składowe łączy się bezpośrednio z podstawami trygonometrii i jest podstawą dynamiki.</p>"
+      },
+      {
+        "heading": "Czego NIE musisz umieć",
+        "html": "<p>Warto uspokoić: do fizyki maturalnej zwykle nie potrzebujesz zaawansowanego rachunku różniczkowego i całkowego, dowodów matematycznych ani trudnych zagadnień z matematyki rozszerzonej. Fizyka używa matematyki jako narzędzia, nie jako celu.</p><p>To dobra wiadomość dla osób, które uważają się za „humanistów”: bariera matematyczna w fizyce jest niższa, niż się wydaje. Jeśli opanujesz przekształcanie wzorów, potęgi, podstawy funkcji i trygonometrii oraz wektory, masz komplet narzędzi. Jak wpleść ich ćwiczenie w naukę fizyki, opisujemy w poradniku o planie nauki.</p>"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Czy trzeba być dobrym z matematyki, żeby zdać fizykę?",
+        "a": "Nie trzeba znać całej matematyki rozszerzonej. Wystarczy kilka konkretnych umiejętności: przekształcanie wzorów, potęgi i notacja naukowa, podstawy funkcji i proporcjonalności, elementarna trygonometria oraz wektory. Bariera matematyczna jest niższa, niż się wydaje."
+      },
+      {
+        "q": "Jaka umiejętność matematyczna jest najważniejsza w fizyce?",
+        "a": "Przekształcanie wzorów, czyli wyznaczanie jednej wielkości z równania z kilkoma innymi. To czysta algebra, która decyduje o większości zadań obliczeniowych — bez niej nawet znajomość fizyki nie wystarcza do rozwiązania."
+      },
+      {
+        "q": "Ile trygonometrii potrzeba do fizyki na maturze?",
+        "a": "Naprawdę niewiele: sinus, cosinus i tangens kąta oraz rozkład wektora na składowe. Pojawia się głównie przy równi pochyłej, rzutach i siłach pod kątem, a standardowe sytuacje powtarzają się, więc wystarczy opanować je raz."
+      },
+      {
+        "q": "Czy do fizyki maturalnej potrzebny jest rachunek całkowy?",
+        "a": "Zwykle nie. Fizyka na poziomie maturalnym nie wymaga zaawansowanego rachunku różniczkowego i całkowego ani dowodów matematycznych. Matematyka jest tu narzędziem do obliczeń, a nie celem samym w sobie."
+      }
+    ],
+    "relatedTopics": ["kinematyka", "dynamika", "optyka-geometryczna"],
+    "related": ["jak-nauczyc-sie-fizyki-do-matury", "jak-rozwiazywac-zadania-z-fizyki"]
+  },
+  {
+    "slug": "jednostki-w-fizyce-uklad-si",
+    "date": "2026-09-08",
+    "title": "Jednostki w fizyce — układ SI i przeliczanie bez błędów",
+    "metaDesc": "Układ SI, jednostki podstawowe i pochodne oraz przeliczanie przedrostków. Jak nie tracić punktów na jednostkach w zadaniach z fizyki i na maturze.",
+    "keywords": "jednostki w fizyce, układ SI, przeliczanie jednostek, jednostki podstawowe, przedrostki SI",
+    "excerpt": "Najczęstszy błąd na maturze z fizyki nie dotyczy wzorów, lecz jednostek. Dobra wiadomość: to błąd, który da się wyeliminować raz na zawsze.",
+    "intro": "Analiza arkuszy maturalnych pokazuje, że jednostki są miejscem, w którym uczniowie tracą najwięcej punktów mimo dobrego zrozumienia fizyki. Podstawiają kilometry na godzinę tam, gdzie wzór wymaga metrów na sekundę, albo zapominają jednostki w wyniku. Ten artykuł porządkuje układ SI i pokazuje, jak przeliczać jednostki tak, by przestały odbierać punkty.",
+    "sections": [
+      {
+        "heading": "Dlaczego układ SI jest punktem odniesienia",
+        "html": "<p>Międzynarodowy Układ Jednostek Miar, czyli SI, to wspólny język fizyki. Wszystkie wzory, których uczysz się w szkole i które masz na karcie maturalnej, zakładają jednostki SI. To założenie jest milczące — wzór nie ostrzeże Cię, że oczekuje sekund, a nie minut. Dlatego podstawianie w złych jednostkach daje wynik błędny mimo poprawnej metody.</p><p>Praktyczny wniosek jest prosty: zanim cokolwiek podstawisz, sprowadź wszystkie dane do jednostek podstawowych SI. To jedyny sposób, by mieć pewność, że wzór zadziała.</p>"
+      },
+      {
+        "heading": "Siedem jednostek podstawowych",
+        "html": "<p>Cały układ SI opiera się na siedmiu jednostkach podstawowych, z których wyprowadza się wszystkie pozostałe:</p><ul><li><strong>metr (m)</strong> — długość,</li><li><strong>kilogram (kg)</strong> — masa,</li><li><strong>sekunda (s)</strong> — czas,</li><li><strong>amper (A)</strong> — natężenie prądu,</li><li><strong>kelwin (K)</strong> — temperatura,</li><li><strong>mol (mol)</strong> — liczność materii,</li><li><strong>kandela (cd)</strong> — światłość.</li></ul><p>W zadaniach maturalnych najczęściej spotkasz pierwsze pięć. Warto zauważyć ciekawostkę: jednostką masy jest kilogram, a nie gram — to jedyna jednostka podstawowa z przedrostkiem w nazwie.</p>"
+      },
+      {
+        "heading": "Jednostki pochodne",
+        "html": "<p>Większość wielkości fizycznych ma jednostki pochodne, złożone z podstawowych. Zrozumienie, jak są zbudowane, pozwala je odtworzyć nawet bez pamiętania nazwy.</p><ul><li>prędkość: \\( \\mathrm{\\frac{m}{s}} \\),</li><li>siła — niuton: \\( 1\\,\\mathrm{N} = 1\\,\\mathrm{\\frac{kg \\cdot m}{s^2}} \\),</li><li>energia — dżul: \\( 1\\,\\mathrm{J} = 1\\,\\mathrm{N \\cdot m} = 1\\,\\mathrm{\\frac{kg \\cdot m^2}{s^2}} \\),</li><li>moc — wat: \\( 1\\,\\mathrm{W} = 1\\,\\mathrm{\\frac{J}{s}} \\),</li><li>ciśnienie — paskal: \\( 1\\,\\mathrm{Pa} = 1\\,\\mathrm{\\frac{N}{m^2}} \\).</li></ul><p>Rozkładanie jednostek pochodnych na podstawowe to potężne narzędzie sprawdzania wzorów, o czym za chwilę.</p>"
+      },
+      {
+        "heading": "Przedrostki SI — potęgi dziesiątki",
+        "html": "<p>Przedrostki mnożą jednostkę przez potęgę dziesiątki. Najważniejsze w zadaniach maturalnych:</p><ul><li>kilo (k) = \\( 10^3 \\), np. \\( 1\\,\\mathrm{km} = 1000\\,\\mathrm{m} \\),</li><li>centy (c) = \\( 10^{-2} \\), np. \\( 1\\,\\mathrm{cm} = 0{,}01\\,\\mathrm{m} \\),</li><li>mili (m) = \\( 10^{-3} \\), np. \\( 1\\,\\mathrm{mm} = 0{,}001\\,\\mathrm{m} \\),</li><li>mikro (µ) = \\( 10^{-6} \\), nano (n) = \\( 10^{-9} \\), mega (M) = \\( 10^6 \\), giga (G) = \\( 10^9 \\).</li></ul><p>Uwaga na jednostki złożone: \\( 1\\,\\mathrm{cm^2} = 10^{-4}\\,\\mathrm{m^2} \\), a nie \\( 10^{-2} \\), bo przedrostek jest podniesiony do kwadratu razem z jednostką. To klasyczna pułapka.</p>"
+      },
+      {
+        "heading": "Najważniejsze przeliczenie: km/h na m/s",
+        "html": "<p>To przeliczenie wraca w niemal każdym arkuszu, więc warto je mieć w małym palcu. Ponieważ \\( 1\\,\\mathrm{km} = 1000\\,\\mathrm{m} \\), a \\( 1\\,\\mathrm{h} = 3600\\,\\mathrm{s} \\), to:</p><p>\\( 1\\,\\mathrm{\\frac{km}{h}} = \\frac{1000\\,\\mathrm{m}}{3600\\,\\mathrm{s}} = \\frac{1}{3{,}6}\\,\\mathrm{\\frac{m}{s}} \\)</p><p>W praktyce: aby zamienić km/h na m/s, dzielisz przez 3,6; w drugą stronę mnożysz przez 3,6. Podstawienie prędkości w km/h wprost do wzoru z czasem w sekundach zawyża wynik 3,6 raza — to jeden z najczęstszych błędów na maturze.</p>"
+      },
+      {
+        "heading": "Analiza wymiarowa — darmowy test wzoru",
+        "html": "<p>Skoro każdą jednostkę pochodną da się rozłożyć na podstawowe, możesz sprawdzić poprawność wzoru, patrząc wyłącznie na jednostki. Jeśli po obu stronach równania jednostki się nie zgadzają, wzór jest na pewno błędny.</p><p>Przykład: sprawdzasz, czy energia kinetyczna to \\( \\frac{mv^2}{2} \\). Jednostki prawej strony: \\( \\mathrm{kg} \\cdot \\left(\\mathrm{\\frac{m}{s}}\\right)^2 = \\mathrm{\\frac{kg \\cdot m^2}{s^2}} = \\mathrm{J} \\). Wychodzi dżul, czyli jednostka energii — wzór przechodzi test. To technika, która wielokrotnie ratuje przed błędem w przekształceniu.</p>"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Jak zamienić km/h na m/s?",
+        "a": "Podziel wartość przez 3,6. Wynika to z tego, że kilometr to 1000 metrów, a godzina to 3600 sekund, więc 1 km/h równa się 1/3,6 m/s. W drugą stronę, z m/s na km/h, mnożysz przez 3,6."
+      },
+      {
+        "q": "Dlaczego trzeba przeliczać jednostki na SI?",
+        "a": "Bo wszystkie wzory zakładają jednostki układu SI, choć nigdzie tego nie sygnalizują. Podstawienie wartości w kilometrach, gramach czy minutach daje wynik błędny mimo poprawnej metody. Dane zawsze sprowadzaj do jednostek podstawowych."
+      },
+      {
+        "q": "Ile jest jednostek podstawowych w SI?",
+        "a": "Siedem: metr, kilogram, sekunda, amper, kelwin, mol i kandela. Wszystkie pozostałe jednostki, jak niuton, dżul czy wat, są jednostkami pochodnymi wyprowadzonymi z tych siedmiu."
+      },
+      {
+        "q": "Ile to jest 1 cm² w metrach kwadratowych?",
+        "a": "To 10⁻⁴ m², a nie 10⁻² m². Przedrostek centy oznacza 10⁻², ale przy jednostce podniesionej do kwadratu podnosi się do kwadratu razem z nią, dając 10⁻⁴. To częsta pułapka w zadaniach."
+      }
+    ],
+    "relatedTopics": ["kinematyka", "termodynamika", "prad-elektryczny"],
+    "related": ["najczestsze-bledy-na-maturze-z-fizyki", "karta-wzorow-maturalnych-fizyka"]
+  },
+  {
+    "slug": "wykresy-w-fizyce-jak-czytac",
+    "date": "2026-09-12",
+    "title": "Wykresy w fizyce — jak je czytać i rysować",
+    "metaDesc": "Jak czytać wykresy w fizyce: nachylenie, pole pod wykresem i punkty przecięcia. Wykres v(t), s(t) i inne — praktyczny przewodnik dla maturzysty.",
+    "keywords": "wykresy w fizyce, wykres v(t), pole pod wykresem, nachylenie wykresu, jak czytać wykresy fizyka",
+    "excerpt": "Wykres w fizyce to nie ilustracja, lecz źródło danych. Kto umie odczytać nachylenie i pole pod wykresem, ma połowę zadania rozwiązaną.",
+    "intro": "Zadania z wykresami odstraszają wielu maturzystów, choć rządzą się prostymi regułami. Wykres w fizyce niesie konkretne informacje zakodowane w jego kształcie: nachylenie i pole pod krzywą mają fizyczny sens. Gdy nauczysz się je odczytywać, wykres przestaje być przeszkodą, a staje się skrótem do rozwiązania.",
+    "sections": [
+      {
+        "heading": "Dwie informacje ukryte w każdym wykresie",
+        "html": "<p>Niezależnie od tego, co przedstawia wykres, prawie zawsze niesie dwie kluczowe informacje: <strong>nachylenie</strong> krzywej oraz <strong>pole</strong> pod nią. Obie mają fizyczny sens, który zależy od tego, jakie wielkości są na osiach.</p><p>Zrozumienie tej zasady jest ważniejsze niż zapamiętanie pojedynczych przypadków, bo pozwala odczytać nawet wykres, którego nigdy wcześniej nie widziałeś. Zamiast pytać „co to za wykres”, pytasz „co oznacza jego nachylenie i pole”.</p>"
+      },
+      {
+        "heading": "Nachylenie — jak szybko coś się zmienia",
+        "html": "<p>Nachylenie wykresu to stosunek zmiany wielkości z osi pionowej do zmiany wielkości z osi poziomej. Fizycznie oznacza tempo zmian.</p><ul><li>Na wykresie drogi od czasu \\( s(t) \\) nachylenie to prędkość: \\( v = \\frac{\\Delta s}{\\Delta t} \\).</li><li>Na wykresie prędkości od czasu \\( v(t) \\) nachylenie to przyspieszenie: \\( a = \\frac{\\Delta v}{\\Delta t} \\).</li></ul><p>Im bardziej stroma linia, tym szybsza zmiana. Linia pozioma oznacza brak zmian — na wykresie \\( v(t) \\) to ruch jednostajny, bo prędkość się nie zmienia.</p>"
+      },
+      {
+        "heading": "Pole pod wykresem — ile się nazbierało",
+        "html": "<p>Pole między krzywą a osią poziomą to iloczyn wielkości z obu osi, czyli suma nagromadzona w czasie.</p><ul><li>Na wykresie prędkości od czasu \\( v(t) \\) pole pod wykresem to droga: \\( s = v \\cdot t \\).</li><li>Na wykresie siły od drogi \\( F(s) \\) pole to praca: \\( W = F \\cdot s \\).</li></ul><p>Dla prostych kształtów pole liczysz jak pole figury geometrycznej. Pod wykresem \\( v(t) \\) ruchu jednostajnie przyspieszonego powstaje trójkąt lub trapez — i to jego pole daje przebytą drogę. Ta zależność zamienia trudne zadanie w prostą geometrię.</p>"
+      },
+      {
+        "heading": "Punkty charakterystyczne",
+        "html": "<p>Poza nachyleniem i polem warto odczytać punkty szczególne. Przecięcie z osią pionową to wartość początkowa. Przecięcie z osią poziomą to moment, w którym wielkość osiąga zero. Punkt przecięcia dwóch wykresów oznacza chwilę, gdy obie wielkości są równe — na przykład spotkanie dwóch ciał na wspólnym wykresie \\( s(t) \\).</p><p>Te punkty często są dokładnie tym, o co pyta zadanie, więc warto od nich zacząć lekturę wykresu.</p>"
+      },
+      {
+        "heading": "Jak rysować wykresy w zadaniach doświadczalnych",
+        "html": "<p>Na maturze bywa odwrotnie — to Ty rysujesz wykres z danych pomiarowych. Kilka zasad decyduje o punktach:</p><ul><li>Opisz osie: wielkość i jednostka przy każdej osi.</li><li>Dobierz skalę tak, by punkty wypełniały większość wykresu, a nie tłoczyły się w rogu.</li><li>Nanieś punkty pomiarowe i poprowadź linię trendu — prostą lub gładką krzywą — która najlepiej pasuje do punktów, zamiast łączyć je łamaną.</li></ul><p>Linia trendu uśrednia niepewności pomiarowe i pokazuje zależność, której szuka zadanie. Rysowanie łamanej łączącej wszystkie punkty to typowy błąd.</p>"
+      },
+      {
+        "heading": "Najczęstsze pułapki",
+        "html": "<p><strong>Mylenie wykresów \\( s(t) \\) i \\( v(t) \\).</strong> Linia pozioma na wykresie drogi oznacza postój, a na wykresie prędkości — ruch jednostajny. To dwie zupełnie różne sytuacje mimo podobnego kształtu.</p><p><strong>Odczyt nachylenia bez uwzględnienia skali osi.</strong> Nachylenie zależy od wartości, nie od wizualnej stromości — zawsze czytaj liczby z osi.</p><p><strong>Zapominanie o jednostkach nachylenia i pola.</strong> Wynik odczytany z wykresu ma jednostkę wynikającą z jednostek obu osi — pole pod \\( v(t) \\) wychodzi w metrach, bo \\( \\mathrm{\\frac{m}{s} \\cdot s = m} \\).</p>"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Co oznacza nachylenie wykresu w fizyce?",
+        "a": "Nachylenie to tempo zmian wielkości z osi pionowej względem osi poziomej. Na wykresie drogi od czasu nachylenie to prędkość, a na wykresie prędkości od czasu — przyspieszenie. Im bardziej stroma linia, tym szybsza zmiana."
+      },
+      {
+        "q": "Co oznacza pole pod wykresem?",
+        "a": "Pole między krzywą a osią poziomą to wielkość nagromadzona w czasie. Pod wykresem prędkości od czasu pole daje przebytą drogę, a pod wykresem siły od drogi — wykonaną pracę. Dla prostych kształtów liczy się je jak pole figury geometrycznej."
+      },
+      {
+        "q": "Czym różni się wykres s(t) od v(t)?",
+        "a": "Na wykresie drogi od czasu linia pozioma oznacza postój, a nachylenie to prędkość. Na wykresie prędkości od czasu linia pozioma oznacza ruch jednostajny, a nachylenie to przyspieszenie. Ten sam kształt znaczy więc co innego."
+      },
+      {
+        "q": "Jak rysować wykres z danych pomiarowych?",
+        "a": "Opisz osie z jednostkami, dobierz skalę tak, by punkty wypełniały wykres, nanieś punkty pomiarowe i poprowadź linię trendu najlepiej pasującą do nich, zamiast łączyć je łamaną. Linia trendu uśrednia niepewności pomiaru."
+      }
+    ],
+    "relatedTopics": ["kinematyka", "dynamika", "praca-moc-energia"],
+    "related": ["jak-rozwiazywac-zadania-z-fizyki", "jak-nauczyc-sie-fizyki-do-matury"]
   }
 ]
