@@ -5,10 +5,39 @@ import { Button } from '@/components/ui/Button';
 import { useAuth } from '@/components/auth/AuthProvider';
 
 export function SuccessClient() {
-  const { user, refreshAccess, hasAnyAccess } = useAuth();
+  const { user, refreshAccess, hasAnyAccess, sendMagicLink } = useAuth();
   const [status, setStatus] = useState<'checking' | 'active' | 'pending'>(
     'checking'
   );
+
+  // --- Gość: logowanie linkiem na e-mail użyty przy zakupie ---
+  const [email, setEmail] = useState('');
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  // Prefill e-maila, jeśli gość podał go wcześniej (formularz planera).
+  useEffect(() => {
+    try {
+      const e = window.localStorage.getItem('squeezeMagicEmail');
+      if (e) setEmail(e);
+    } catch {
+      /* localStorage niedostępny */
+    }
+  }, []);
+
+  const sendLoginLink = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setSending(true);
+    try {
+      await sendMagicLink(email);
+    } catch {
+      /* neutralnie — konto opłaconego gościa i tak istnieje */
+    } finally {
+      setSent(true);
+      setSending(false);
+    }
+  };
 
   // Promocja zużyta - wyczyść znacznik (raz)
   useEffect(() => {
@@ -71,33 +100,76 @@ export function SuccessClient() {
         </h1>
 
         {user ? (
-          <p className="mt-4 text-lg text-slate-300/85">
-            {status === 'active'
-              ? 'Twój dostęp został aktywowany. Miłej nauki - płyniemy po Twój wynik!'
-              : status === 'pending'
-                ? 'Płatność potwierdzona! Aktywacja dostępu może potrwać chwilę — odśwież stronę za moment albo wejdź do kursu, dostęp pojawi się automatycznie.'
-                : 'Aktywujemy Twój dostęp do kursu…'}
-          </p>
+          <>
+            <p className="mt-4 text-lg text-slate-300/85">
+              {status === 'active'
+                ? 'Twój dostęp został aktywowany. Miłej nauki - płyniemy po Twój wynik!'
+                : status === 'pending'
+                  ? 'Płatność potwierdzona! Aktywacja dostępu może potrwać chwilę — odśwież stronę za moment albo wejdź do kursu, dostęp pojawi się automatycznie.'
+                  : 'Aktywujemy Twój dostęp do kursu…'}
+            </p>
+            <div className="mt-9 flex flex-wrap justify-center gap-3">
+              <Button href="/kurs" variant="gradient" size="lg">
+                Przejdź do kursu
+              </Button>
+              <Button
+                href="/user"
+                variant="outline"
+                size="lg"
+                className="border-white/30 text-white hover:bg-white hover:text-navy-900"
+              >
+                Mój profil
+              </Button>
+            </div>
+          </>
         ) : (
-          <p className="mt-4 text-lg text-slate-300/85">
-            Wysłaliśmy na Twój e-mail link do logowania i aktywacji dostępu.
-            Sprawdź skrzynkę (także folder SPAM), zaloguj się i zaczynamy!
-          </p>
-        )}
+          <div className="mt-5">
+            <p className="text-lg text-slate-300/85">
+              Płatność potwierdzona! Aby wejść na kurs, zaloguj się linkiem —
+              wyślemy go na e-mail użyty przy zakupie.
+            </p>
 
-        <div className="mt-9 flex flex-wrap justify-center gap-3">
-          <Button href="/kurs" variant="gradient" size="lg">
-            Przejdź do kursu
-          </Button>
-          <Button
-            href="/user"
-            variant="outline"
-            size="lg"
-            className="border-white/30 text-white hover:bg-white hover:text-navy-900"
-          >
-            Mój profil
-          </Button>
-        </div>
+            {sent ? (
+              <div className="mx-auto mt-6 max-w-md rounded-2xl border border-ocean-400/30 bg-ocean-400/10 p-5 text-left">
+                <p className="font-semibold text-white">
+                  ✉️ Wysłaliśmy link do logowania na <b>{email}</b>.
+                </p>
+                <p className="mt-1 text-sm text-slate-300/85">
+                  Sprawdź skrzynkę (także folder SPAM), kliknij link i jesteś w
+                  kursie. Dostęp jest już przypisany do tego adresu.
+                </p>
+              </div>
+            ) : (
+              <form
+                onSubmit={sendLoginLink}
+                className="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row"
+              >
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(ev) => setEmail(ev.target.value)}
+                  placeholder="E-mail użyty przy zakupie"
+                  className="min-w-0 flex-1 rounded-full border border-white/15 bg-white/10 px-5 py-3.5 text-white placeholder:text-slate-400 backdrop-blur transition focus:border-brand-400 focus:bg-white/15 focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="whitespace-nowrap rounded-full bg-[linear-gradient(120deg,#6b4df6,#a855f7,#f43f8f)] px-7 py-3.5 font-semibold text-white shadow-glow transition hover:-translate-y-0.5 disabled:opacity-60"
+                >
+                  {sending ? 'Wysyłam…' : 'Wyślij link'}
+                </button>
+              </form>
+            )}
+
+            <p className="mt-4 text-sm text-slate-400">
+              Masz już hasło?{' '}
+              <a href="/login" className="font-semibold text-white underline">
+                Zaloguj się
+              </a>
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

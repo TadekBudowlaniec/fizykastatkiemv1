@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { getSupabaseBrowser } from '@/lib/supabase/client';
@@ -19,6 +19,23 @@ export default function UserPage() {
     null
   );
   const [saving, setSaving] = useState(false);
+  // Tryb odzyskiwania hasła — po kliknięciu linku „reset hasła" (bez starego hasła).
+  const [recovery, setRecovery] = useState(false);
+
+  useEffect(() => {
+    const supabase = getSupabaseBrowser();
+    try {
+      if (window.location.hash.includes('type=recovery')) setRecovery(true);
+    } catch {
+      /* brak window/hash */
+    }
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event) => {
+      if (event === 'PASSWORD_RECOVERY') setRecovery(true);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   if (loading || (user && accessLoading)) {
     return (
@@ -61,18 +78,27 @@ export default function UserPage() {
     setSaving(true);
     try {
       const supabase = getSupabaseBrowser();
-      // Re-autoryzacja
-      const { error: reauth } = await supabase.auth.signInWithPassword({
-        email: user.email!,
-        password: current,
-      });
-      if (reauth) throw new Error('reauth');
+      // W trybie odzyskiwania (recovery) mamy aktywną sesję z linku — bez
+      // re-autoryzacji starym hasłem (użytkownik go nie zna).
+      if (!recovery) {
+        const { error: reauth } = await supabase.auth.signInWithPassword({
+          email: user.email!,
+          password: current,
+        });
+        if (reauth) throw new Error('reauth');
+      }
       const { error } = await supabase.auth.updateUser({ password: next });
       if (error) throw error;
-      setMsg({ type: 'ok', text: 'Hasło zostało zmienione.' });
+      setMsg({
+        type: 'ok',
+        text: recovery
+          ? 'Nowe hasło zostało ustawione. Możesz już korzystać z konta.'
+          : 'Hasło zostało zmienione.',
+      });
       setCurrent('');
       setNext('');
       setRepeat('');
+      setRecovery(false);
     } catch (err) {
       setMsg({
         type: 'err',
@@ -137,16 +163,26 @@ export default function UserPage() {
               </div>
             </div>
 
-            {/* Zmiana hasła */}
+            {/* Zmiana / ustawienie hasła */}
             <div className="rounded-3xl border border-line bg-white p-7 shadow-soft">
-              <h2 className="text-xl font-extrabold text-ink">Zmiana hasła</h2>
+              <h2 className="text-xl font-extrabold text-ink">
+                {recovery ? 'Ustaw nowe hasło' : 'Zmiana hasła'}
+              </h2>
+              {recovery && (
+                <p className="mt-2 text-sm text-muted">
+                  Kliknąłeś link resetu hasła. Ustaw nowe hasło do swojego konta —
+                  stare nie jest potrzebne.
+                </p>
+              )}
               <form onSubmit={changePassword} className="mt-4 space-y-4">
-                <PasswordInput
-                  value={current}
-                  onChange={setCurrent}
-                  placeholder="Aktualne hasło"
-                  autoComplete="current-password"
-                />
+                {!recovery && (
+                  <PasswordInput
+                    value={current}
+                    onChange={setCurrent}
+                    placeholder="Aktualne hasło"
+                    autoComplete="current-password"
+                  />
+                )}
                 <PasswordInput
                   value={next}
                   onChange={setNext}
@@ -171,7 +207,11 @@ export default function UserPage() {
                   </p>
                 )}
                 <Button variant="gradient" disabled={saving}>
-                  {saving ? 'Zapisywanie…' : 'Zmień hasło'}
+                  {saving
+                    ? 'Zapisywanie…'
+                    : recovery
+                      ? 'Ustaw hasło'
+                      : 'Zmień hasło'}
                 </Button>
               </form>
             </div>

@@ -10,6 +10,7 @@ import {
 } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { getSupabaseBrowser } from '@/lib/supabase/client';
+import { SITE } from '@/lib/site';
 
 type Enrollment = { course_id: number; access_granted: boolean };
 
@@ -24,6 +25,10 @@ type AuthState = {
   refreshAccess: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, name: string) => Promise<void>;
+  /** Logowanie bez hasła — wysyła magic link (np. dla gościa po zakupie). */
+  sendMagicLink: (email: string) => Promise<void>;
+  /** Wysyła e-mail do zresetowania hasła. */
+  resetPassword: (email: string) => Promise<void>;
   signOut: () => Promise<void>;
 };
 
@@ -155,6 +160,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [supabase]
   );
 
+  // Magic link (logowanie bez hasła). shouldCreateUser:false — konto ma już
+  // istnieć (gość po zakupie jest tworzony przez webhook); nie tworzymy pustych
+  // kont z literówek. Wysyłka realnie działa (ten sam mechanizm co planer).
+  const sendMagicLink = useCallback(
+    async (email: string) => {
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: `${SITE.url}/kurs`,
+          shouldCreateUser: false,
+        },
+      });
+      if (error) throw error;
+    },
+    [supabase]
+  );
+
+  const resetPassword = useCallback(
+    async (email: string) => {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${SITE.url}/user`,
+      });
+      if (error) throw error;
+    },
+    [supabase]
+  );
+
   const signOut = useCallback(async () => {
     await supabase.auth.signOut();
     setUser(null);
@@ -173,6 +205,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     refreshAccess,
     signIn,
     signUp,
+    sendMagicLink,
+    resetPassword,
     signOut,
   };
 

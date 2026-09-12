@@ -10,11 +10,51 @@ import { Button } from '@/components/ui/Button';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { signIn } = useAuth();
+  const { signIn, sendMagicLink, resetPassword } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [linkLoading, setLinkLoading] = useState(false);
+
+  const sendLink = async () => {
+    if (!email) {
+      setError('Podaj e-mail powyżej — wyślemy link do logowania.');
+      return;
+    }
+    setError(null);
+    setInfo(null);
+    setLinkLoading(true);
+    try {
+      await sendMagicLink(email);
+    } catch {
+      /* neutralnie — nie zdradzamy, czy konto istnieje */
+    } finally {
+      setInfo(
+        `Jeśli konto z adresem ${email} istnieje, wysłaliśmy link do logowania. Sprawdź skrzynkę (także SPAM).`
+      );
+      setLinkLoading(false);
+    }
+  };
+
+  const forgotPassword = async () => {
+    if (!email) {
+      setError('Podaj e-mail powyżej — wyślemy link do zresetowania hasła.');
+      return;
+    }
+    setError(null);
+    setInfo(null);
+    try {
+      await resetPassword(email);
+    } catch {
+      /* neutralnie */
+    } finally {
+      setInfo(
+        `Jeśli konto z adresem ${email} istnieje, wysłaliśmy link do zresetowania hasła. Sprawdź skrzynkę (także SPAM).`
+      );
+    }
+  };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,6 +127,33 @@ export default function LoginPage() {
           {loading ? 'Logowanie…' : 'Zaloguj się'}
         </Button>
       </form>
+
+      {info && (
+        <p className="mt-4 rounded-lg bg-brand-50 px-3 py-2 text-sm text-brand-700">
+          {info}
+        </p>
+      )}
+
+      <div className="mt-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted">
+        <span className="h-px flex-1 bg-line" /> lub <span className="h-px flex-1 bg-line" />
+      </div>
+
+      <button
+        type="button"
+        onClick={sendLink}
+        disabled={linkLoading}
+        className="mt-4 w-full rounded-full border-2 border-brand-200 px-5 py-3 text-sm font-semibold text-brand-600 transition hover:border-brand-500 hover:bg-brand-50 disabled:opacity-60"
+      >
+        {linkLoading ? 'Wysyłanie…' : '✉️ Zaloguj przez link (bez hasła)'}
+      </button>
+
+      <button
+        type="button"
+        onClick={forgotPassword}
+        className="mt-3 block w-full text-center text-sm font-semibold text-muted underline underline-offset-4 hover:text-brand-600"
+      >
+        Nie pamiętam hasła
+      </button>
     </AuthCard>
   );
 }
