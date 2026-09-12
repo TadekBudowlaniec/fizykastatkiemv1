@@ -135,9 +135,17 @@ export function SuccessClient() {
                   ✉️ Wysłaliśmy link do logowania na <b>{email}</b>.
                 </p>
                 <p className="mt-1 text-sm text-slate-300/85">
-                  Sprawdź skrzynkę (także folder SPAM), kliknij link i jesteś w
-                  kursie. Dostęp jest już przypisany do tego adresu.
+                  Kliknij link w mailu (sprawdź też SPAM) — <b>zalogujemy Cię
+                  automatycznie i przeniesiemy prosto do kursu</b>. Dostęp jest
+                  już przypisany do tego adresu.
                 </p>
+                <button
+                  type="button"
+                  onClick={() => setSent(false)}
+                  className="mt-3 text-sm font-semibold text-brand-300 underline underline-offset-4 hover:text-white"
+                >
+                  Nie dostałeś maila? Wyślij ponownie
+                </button>
               </div>
             ) : (
               <form
@@ -162,12 +170,16 @@ export function SuccessClient() {
               </form>
             )}
 
-            <p className="mt-4 text-sm text-slate-400">
-              Masz już hasło?{' '}
-              <a href="/login" className="font-semibold text-white underline">
-                Zaloguj się
-              </a>
-            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Button
+                href="/login"
+                variant="outline"
+                size="lg"
+                className="border-white/30 text-white hover:bg-white hover:text-navy-900"
+              >
+                Wolę zalogować się hasłem
+              </Button>
+            </div>
           </div>
         )}
       </div>
