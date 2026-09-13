@@ -18,6 +18,12 @@ const nextConfig = {
       // Stare ścieżki SPA -> nowe trasy Next.js
       { source: '/home', destination: '/', permanent: true },
       { source: '/pricing', destination: '/cennik', permanent: false },
+      // Stary slug wpisu bloga (z generate.js) -> nowy slug w blog.json
+      {
+        source: '/blog/zadania-doswiadczalne-matura-fizyka',
+        destination: '/blog/zadania-doswiadczalne-na-maturze-z-fizyki',
+        permanent: true,
+      },
     ];
   },
 };
