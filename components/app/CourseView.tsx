@@ -1,28 +1,58 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useAuth } from '@/components/auth/AuthProvider';
-import { getLessons, getUserLevels, markLevel, unmarkLevel } from '@/lib/db';
-import type { Lesson } from '@/lib/types';
+import {
+  getLessons,
+  getUserLevels,
+  markLevel,
+  unmarkLevel,
+  listMaterialy,
+  getUserMaterialy,
+  markMaterial,
+  unmarkMaterial,
+} from '@/lib/db';
+import type { Lesson, MaterialFile } from '@/lib/types';
 import { getCourse, SINGLE_COURSE_PRICE, PLANS } from '@/lib/courses';
 import { AppHero } from '@/components/app/AppHero';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { BuyButton } from '@/components/shop/BuyButton';
-import { PdfEtapy } from '@/components/app/PdfEtapy';
+import { CoursePath, LEVELS } from '@/components/app/CoursePath';
+import { CourseVideo } from '@/components/app/CourseVideo';
 import { TaskRunner } from '@/components/app/TaskRunner';
 import { LessonView } from '@/components/app/LessonView';
+import {
+  IconArrow,
+  IconBook,
+  IconCheck,
+  IconPlay,
+  IconTarget,
+} from '@/components/app/CourseIcons';
 import { cn } from '@/lib/cn';
 
-type Tab = 'lekcje' | 'materialy' | 'zadania';
+// Poziomy liczone jako całość (Poziom 1 liczy się per plik).
+const WHOLE_LEVELS = [2, 3, 4];
 
-function lessonIcon(title: string): string {
-  const t = title.toLowerCase();
-  if (t.includes('wideo') || t.includes('film')) return '🎬';
-  if (t.includes('quiz') || t.includes('test') || t.includes('zadan')) return '🧩';
-  if (t.includes('planer')) return '🧭';
-  if (t.includes('wzor') || t.includes('teori')) return '📘';
-  return '📗';
+// Fallback, gdy tabela user_materialy nie istnieje jeszcze w Supabase
+// (patrz supabase/user-materialy.sql) — postęp plików trzymamy lokalnie.
+function localKey(userId: string, courseId: number) {
+  return `fs.materialy.${userId}.${courseId}`;
+}
+function readLocal(userId: string, courseId: number): Set<string> {
+  try {
+    const raw = localStorage.getItem(localKey(userId, courseId));
+    return new Set(raw ? (JSON.parse(raw) as string[]) : []);
+  } catch {
+    return new Set();
+  }
+}
+function writeLocal(userId: string, courseId: number, files: Set<string>) {
+  try {
+    localStorage.setItem(localKey(userId, courseId), JSON.stringify([...files]));
+  } catch {
+    /* ignoruj */
+  }
 }
 
 export function CourseView({ courseId }: { courseId: number }) {
@@ -34,16 +64,15 @@ export function CourseView({ courseId }: { courseId: number }) {
 
   const access = isStart || (!!user && hasAccessToCourse(courseId));
 
+  // ---------- Lekcje ----------
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [selected, setSelected] = useState<Lesson | null>(null);
-  const [tab, setTab] = useState<Tab>('lekcje');
   const [lessonsLoading, setLessonsLoading] = useState(true);
 
   const loadLessons = useCallback(async () => {
     setLessonsLoading(true);
     try {
-      const data = await getLessons(courseId);
-      setLessons(data);
+      setLessons(await getLessons(courseId));
     } catch {
       setLessons([]);
     } finally {
@@ -56,27 +85,57 @@ export function CourseView({ courseId }: { courseId: number }) {
     else setLessonsLoading(false);
   }, [access, loadLessons]);
 
-  // Postęp poziomów (Materiały PDF) — steruje odblokowaniem quizu (zadania).
-  const [levels, setLevels] = useState<Set<number>>(new Set());
+  const videoLessons = useMemo(
+    () => lessons.filter((l) => !!l.yt_id_wideo),
+    [lessons]
+  );
+  // Lekcje tekstowe bez wideo (np. „Tutaj zacznij") — otwierane w LessonView.
+  const textLessons = useMemo(
+    () =>
+      lessons.filter(
+        (l) => !l.yt_id_wideo && !!l.content && l.content.trim().length > 0
+      ),
+    [lessons]
+  );
 
-  const loadLevels = useCallback(async () => {
-    if (!user?.id || isStart) return;
-    try {
-      const rows = await getUserLevels(user.id, courseId);
-      setLevels(new Set(rows.map((r) => r.poziom)));
-    } catch {
-      setLevels(new Set());
-    }
-  }, [user?.id, isStart, courseId]);
+  // ---------- Pliki poziomów (P1 zmienna liczba, P2/P3 stałe) ----------
+  const [files, setFiles] = useState<Record<number, MaterialFile[]>>({});
+  const [filesLoading, setFilesLoading] = useState(true);
 
   useEffect(() => {
-    if (access && user?.id && !isStart) loadLevels();
-  }, [access, user?.id, isStart, loadLevels]);
+    if (!access || isStart) {
+      setFilesLoading(false);
+      return;
+    }
+    let cancelled = false;
+    setFilesLoading(true);
+    Promise.all([
+      listMaterialy(courseId, 1).catch(() => []),
+      listMaterialy(courseId, 2).catch(() => []),
+      listMaterialy(courseId, 3).catch(() => []),
+    ]).then(([p1, p2, p3]) => {
+      if (cancelled) return;
+      setFiles({ 1: p1, 2: p2, 3: p3 });
+      setFilesLoading(false);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [access, isStart, courseId]);
+
+  // ---------- Postęp: poziomy 2–4 (user_levels) ----------
+  const [levels, setLevels] = useState<Set<number>>(new Set());
+
+  useEffect(() => {
+    if (!access || !user?.id || isStart) return;
+    getUserLevels(user.id, courseId)
+      .then((rows) => setLevels(new Set(rows.map((r) => r.poziom))))
+      .catch(() => setLevels(new Set()));
+  }, [access, user?.id, isStart, courseId]);
 
   const toggleLevel = useCallback(
     async (poziom: number, done: boolean) => {
       if (!user?.id) return;
-      // Optymistycznie aktualizujemy UI, potem zapis.
       setLevels((prev) => {
         const next = new Set(prev);
         if (done) next.add(poziom);
@@ -87,7 +146,6 @@ export function CourseView({ courseId }: { courseId: number }) {
         if (done) await markLevel(user.id, courseId, poziom);
         else await unmarkLevel(user.id, courseId, poziom);
       } catch {
-        // cofnij przy błędzie
         setLevels((prev) => {
           const next = new Set(prev);
           if (done) next.delete(poziom);
@@ -99,11 +157,96 @@ export function CourseView({ courseId }: { courseId: number }) {
     [user?.id, courseId]
   );
 
-  const allLevelsDone = [1, 2, 3, 4].every((p) => levels.has(p));
+  // ---------- Postęp: pliki Poziomu 1 (user_materialy, fallback local) ----------
+  const [doneFiles, setDoneFiles] = useState<Set<string>>(new Set());
+  const [filesBackend, setFilesBackend] = useState<'db' | 'local'>('db');
 
-  // Skrót do lekcji na YouTube (CEL 5) — pierwsze wideo działu.
-  const ytId = lessons.find((l) => l.yt_id_wideo)?.yt_id_wideo ?? null;
+  useEffect(() => {
+    if (!access || !user?.id || isStart) return;
+    const uid = user.id;
+    getUserMaterialy(uid, courseId)
+      .then((rows) => {
+        setFilesBackend('db');
+        setDoneFiles(
+          new Set(rows.filter((r) => r.poziom === 1).map((r) => r.file))
+        );
+      })
+      .catch(() => {
+        setFilesBackend('local');
+        setDoneFiles(readLocal(uid, courseId));
+      });
+  }, [access, user?.id, isStart, courseId]);
 
+  const toggleFile = useCallback(
+    async (file: string, done: boolean) => {
+      if (!user?.id) return;
+      const uid = user.id;
+      const apply = (set: Set<string>, add: boolean) => {
+        const next = new Set(set);
+        if (add) next.add(file);
+        else next.delete(file);
+        return next;
+      };
+      setDoneFiles((prev) => {
+        const next = apply(prev, done);
+        if (filesBackend === 'local') writeLocal(uid, courseId, next);
+        return next;
+      });
+      if (filesBackend === 'local') return;
+      try {
+        if (done) await markMaterial(uid, courseId, 1, file);
+        else await unmarkMaterial(uid, courseId, 1, file);
+      } catch {
+        // Brak tabeli / błąd zapisu → przełącz na tryb lokalny, nie cofaj UI.
+        setFilesBackend('local');
+        setDoneFiles((prev) => {
+          writeLocal(uid, courseId, prev);
+          return prev;
+        });
+      }
+    },
+    [user?.id, courseId, filesBackend]
+  );
+
+  // ---------- Zbiorczy postęp działu ----------
+  const p1Files = files[1] ?? [];
+  const p1Done = p1Files.filter((f) => doneFiles.has(f.name)).length;
+  const wholeDone = WHOLE_LEVELS.filter((p) => levels.has(p)).length;
+  const totalSteps = p1Files.length + WHOLE_LEVELS.length;
+  const doneSteps = p1Done + wholeDone;
+  const pct = totalSteps ? Math.round((doneSteps / totalSteps) * 100) : 0;
+  const allDone = !filesLoading && totalSteps > 0 && doneSteps === totalSteps;
+
+  // ---------- Boczna nawigacja: aktywna sekcja ----------
+  const [activeSection, setActiveSection] = useState<string>('wideo');
+  const hasVideo = videoLessons.length > 0;
+
+  useEffect(() => {
+    if (!access || isStart || typeof IntersectionObserver === 'undefined')
+      return;
+    const ids = [
+      ...(hasVideo ? ['wideo'] : []),
+      ...LEVELS.map((l) => `poziom-${l.poziom}`),
+      'quiz',
+    ];
+    const els = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+    if (!els.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) setActiveSection(visible[0].target.id);
+      },
+      { rootMargin: '-25% 0px -60% 0px', threshold: 0 }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [access, isStart, hasVideo, filesLoading, lessonsLoading]);
+
+  // ---------- Walidacja / ładowanie ----------
   const valid = isStart || (courseId >= 1 && courseId <= 16 && meta);
 
   if (!valid) {
@@ -128,7 +271,6 @@ export function CourseView({ courseId }: { courseId: number }) {
     );
   }
 
-  // Widok pojedynczej lekcji
   if (selected) {
     return (
       <LessonView lesson={selected} onBack={() => setSelected(null)} courseTitle={title} />
@@ -147,12 +289,6 @@ export function CourseView({ courseId }: { courseId: number }) {
   // bazy, żeby nie wyciekły video_id niezalogowanym.
   if (!access) {
     const fullPrice = PLANS.find((p) => p.key === 'full_access')?.price ?? 828;
-    const modules = [
-      { icon: '🎬', label: 'Lekcje wideo HD' },
-      { icon: '📄', label: 'PDF-y: teoria, wzory, zadania (3 etapy)' },
-      { icon: '🧩', label: 'Quizy sprawdzające' },
-      { icon: '✅', label: 'Zadania z rozwiązaniami' },
-    ];
     const scope = [...(meta?.basic ?? []), ...(meta?.extended ?? [])];
 
     return (
@@ -163,61 +299,41 @@ export function CourseView({ courseId }: { courseId: number }) {
               <span className="text-4xl">{icon}</span> {title}
             </span>
           }
-          subtitle="Podgląd struktury działu — odblokuj dostęp, aby zacząć naukę."
+          subtitle="Podgląd ścieżki działu — odblokuj dostęp, aby zacząć naukę."
           breadcrumb={breadcrumb}
         />
         <section className="bg-cloud py-12 sm:py-14">
           <Container size="wide">
             <div className="relative overflow-hidden rounded-3xl border border-line bg-white shadow-card">
-              {/* Podgląd struktury (rozmyty, nieinteraktywny) */}
+              {/* Podgląd ścieżki (rozmyty, nieinteraktywny) */}
               <div
                 aria-hidden
                 className="pointer-events-none select-none p-6 blur-[3px] sm:p-8"
               >
-                {/* mock zakładek */}
-                <div className="mb-8 inline-flex rounded-full border border-line bg-white p-1 shadow-soft">
-                  {['Lekcje', 'Materiały PDF', 'Zadania'].map((t, i) => (
-                    <span
-                      key={t}
-                      className={cn(
-                        'rounded-full px-4 py-2.5 text-xs font-semibold sm:text-sm',
-                        i === 0
-                          ? 'bg-[linear-gradient(120deg,#6b4df6,#f43f8f)] text-white'
-                          : 'text-muted'
-                      )}
+                <div className="mb-6 aspect-[21/9] rounded-2xl bg-navy-900" />
+                <ol className="space-y-3">
+                  {LEVELS.map((l) => (
+                    <li
+                      key={l.poziom}
+                      className="flex items-center gap-4 rounded-2xl border border-line p-4"
                     >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {modules.map((m) => (
-                    <div
-                      key={m.label}
-                      className="flex items-center gap-3 rounded-2xl border border-line bg-white p-4 shadow-soft"
-                    >
-                      <span className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-brand-50 text-2xl">
-                        {m.icon}
+                      <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white font-display font-extrabold text-brand-700 ring-1 ring-line">
+                        {l.poziom}
                       </span>
-                      <span className="font-semibold text-ink">{m.label}</span>
-                    </div>
+                      <span className="font-semibold text-ink">{l.title}</span>
+                    </li>
                   ))}
-                </div>
+                </ol>
                 {scope.length > 0 && (
-                  <div className="mt-6">
-                    <p className="text-sm font-bold uppercase tracking-wide text-muted">
-                      W tym dziale przerobisz:
-                    </p>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {scope.slice(0, 10).map((s) => (
-                        <span
-                          key={s}
-                          className="rounded-full bg-cloud px-3 py-1.5 text-sm text-slate ring-1 ring-line"
-                        >
-                          {s}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {scope.slice(0, 10).map((s) => (
+                      <span
+                        key={s}
+                        className="rounded-full bg-cloud px-3 py-1.5 text-sm text-slate ring-1 ring-line"
+                      >
+                        {s}
+                      </span>
+                    ))}
                   </div>
                 )}
               </div>
@@ -231,8 +347,8 @@ export function CourseView({ courseId }: { courseId: number }) {
                   Odblokuj dostęp do działu „{title}”
                 </h2>
                 <p className="mx-auto max-w-md text-muted">
-                  Widzisz strukturę działu. Odblokuj, aby zobaczyć lekcje wideo,
-                  PDF-y w 3 etapach i zadania z rozwiązaniami.
+                  Lekcja wideo, 4 poziomy materiałów PDF (od teorii po arkusze
+                  CKE) i quiz sprawdzający — w jednej ścieżce.
                 </p>
                 <div className="mt-2 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center">
                   <BuyButton courseId={courseId} variant="gradient" size="lg">
@@ -255,13 +371,59 @@ export function CourseView({ courseId }: { courseId: number }) {
     );
   }
 
-  const tabs: { key: Tab; label: string }[] = isStart
-    ? [{ key: 'lekcje', label: 'Lekcje' }]
-    : [
-        { key: 'lekcje', label: 'Lekcje' },
-        { key: 'materialy', label: 'Materiały PDF' },
-        { key: 'zadania', label: 'Zadania' },
-      ];
+  // ---------- „Tutaj zacznij" — tylko lekcje tekstowe/wideo ----------
+  if (isStart) {
+    return (
+      <>
+        <AppHero
+          title={
+            <span className="flex items-center gap-3">
+              <span className="text-4xl">{icon}</span> {title}
+            </span>
+          }
+          subtitle="Zacznij tutaj - wprowadzenie do skutecznej nauki fizyki."
+          breadcrumb={breadcrumb}
+        />
+        <section className="bg-cloud py-10 sm:py-14">
+          <Container>
+            {lessonsLoading ? (
+              <p className="text-muted">Ładowanie…</p>
+            ) : lessons.length === 0 ? (
+              <EmptyCard>Lekcje pojawią się wkrótce.</EmptyCard>
+            ) : (
+              <div className="space-y-8">
+                {hasVideo && (
+                  <CourseVideo lessons={videoLessons} onOpenNotes={setSelected} />
+                )}
+                {textLessons.length > 0 && (
+                  <LessonRows lessons={textLessons} onOpen={setSelected} />
+                )}
+              </div>
+            )}
+          </Container>
+        </section>
+      </>
+    );
+  }
+
+  // ---------- Dział 1–16: jedna długa ścieżka ----------
+  const navItems: { id: string; label: string; meta?: string; done?: boolean }[] =
+    [
+      ...(hasVideo ? [{ id: 'wideo', label: 'Lekcja wideo' }] : []),
+      ...LEVELS.map((l) => {
+        const isP1 = l.poziom === 1;
+        const done = isP1
+          ? p1Files.length > 0 && p1Done === p1Files.length
+          : levels.has(l.poziom);
+        return {
+          id: `poziom-${l.poziom}`,
+          label: l.title,
+          meta: isP1 && p1Files.length ? `${p1Done}/${p1Files.length}` : undefined,
+          done,
+        };
+      }),
+      { id: 'quiz', label: 'Quiz sprawdzający' },
+    ];
 
   return (
     <>
@@ -271,126 +433,230 @@ export function CourseView({ courseId }: { courseId: number }) {
             <span className="text-4xl">{icon}</span> {title}
           </span>
         }
-        subtitle={
-          isStart
-            ? 'Zacznij tutaj - wprowadzenie do skutecznej nauki fizyki.'
-            : 'Wideo, materiały PDF i zadania z rozwiązaniami w jednym miejscu.'
-        }
+        subtitle="Wideo, cztery poziomy materiałów i quiz — jedna ścieżka, krok po kroku."
         breadcrumb={breadcrumb}
-      />
-
-      <section className="bg-cloud py-12">
-        <Container size="wide">
-          {/* Skrót do wideo na YouTube — widoczny niezależnie od zakładki (CEL 5) */}
-          {ytId && (
-            <a
-              href={`https://www.youtube.com/watch?v=${ytId}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mb-6 flex items-center gap-3 rounded-2xl border border-line bg-white p-4 shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-card"
-            >
-              <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-brand-50 text-2xl">
-                ▶️
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="block font-semibold text-ink">
-                  Obejrzyj lekcję na YouTube
-                </span>
-                <span className="block text-sm text-muted">
-                  Otwiera się w nowej karcie — odtwarzacz w zakładce „Lekcje” zostaje.
-                </span>
-              </span>
-              <span className="flex-none font-bold text-brand-600">↗</span>
-            </a>
-          )}
-
-          {/* Zakładki */}
-          <div className="mb-8 inline-flex rounded-full border border-line bg-white p-1 shadow-soft">
-            {tabs.map((t) => (
-              <button
-                key={t.key}
-                onClick={() => setTab(t.key)}
-                className={cn(
-                  'whitespace-nowrap rounded-full px-3 py-2.5 text-xs font-semibold transition-all sm:px-5 sm:text-sm',
-                  tab === t.key
-                    ? 'bg-[linear-gradient(120deg,#6b4df6,#f43f8f)] text-white shadow-soft'
-                    : 'text-muted hover:text-brand-600'
-                )}
-              >
-                {t.label}
-              </button>
-            ))}
+      >
+        {/* Postęp działu — w hero, żeby był widoczny od razu (także mobile) */}
+        <div className="glass mt-7 max-w-md rounded-2xl p-4 sm:p-5">
+          <div className="flex items-center justify-between gap-4">
+            <span className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-brand-200">
+              Postęp działu
+            </span>
+            <span className="font-display text-lg font-extrabold text-white">
+              {filesLoading ? '—' : `${pct}%`}
+            </span>
           </div>
-
-          {tab === 'lekcje' && (
-            <div>
-              {lessonsLoading ? (
-                <p className="text-muted">Ładowanie lekcji…</p>
-              ) : lessons.length === 0 ? (
-                <p className="rounded-2xl border border-line bg-white p-6 text-muted">
-                  Lekcje do tego działu pojawią się wkrótce.
-                </p>
-              ) : (
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {lessons.map((l) => (
-                    <button
-                      key={l.video_id}
-                      onClick={() => setSelected(l)}
-                      className="group flex items-center gap-3 rounded-2xl border border-line bg-white p-4 text-left shadow-soft transition-all hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-card"
-                    >
-                      <span className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-brand-50 text-2xl">
-                        {lessonIcon(l.tytul_lekcji)}
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate font-semibold text-ink">
-                          {l.tytul_lekcji}
-                        </span>
-                        <span className="text-sm text-brand-600 group-hover:text-magenta-600">
-                          Otwórz →
-                        </span>
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-
-          {tab === 'materialy' && !isStart && (
-            <PdfEtapy
-              courseId={courseId}
-              hasAccess={access}
-              completed={levels}
-              onToggleLevel={toggleLevel}
+          <div className="mt-2.5 h-2 overflow-hidden rounded-full bg-white/10">
+            <div
+              className="h-full rounded-full bg-[linear-gradient(90deg,#6b4df6,#a855f7,#f43f8f)] transition-[width] duration-700 ease-out"
+              style={{ width: `${filesLoading ? 0 : pct}%` }}
             />
-          )}
+          </div>
+          <p className="mt-2.5 text-sm text-slate-300/85">
+            {filesLoading
+              ? 'Wczytuję ścieżkę…'
+              : allDone
+                ? 'Cały dział przerobiony — czas na quiz.'
+                : `${doneSteps} z ${totalSteps} kroków · teoria liczona per plik, poziomy 2–4 w całości`}
+          </p>
+        </div>
+      </AppHero>
 
-          {tab === 'zadania' && !isStart && (
-            <>
-              {/* Miękki gating: quiz zawsze dostępny, tylko zalecenie gdy < 4/4. */}
-              {!allLevelsDone && (
-                <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-brand-200 bg-brand-50 p-4 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-sm font-semibold text-ink">
-                    💡 Zalecamy ukończyć wszystkie 4 poziomy z tego działu przed
-                    quizem — masz{' '}
-                    <strong>
-                      {[1, 2, 3, 4].filter((p) => levels.has(p)).length}/4
-                    </strong>
-                    . Quiz jest dostępny, ale najlepiej działa po materiałach.
-                  </p>
-                  <button
-                    onClick={() => setTab('materialy')}
-                    className="whitespace-nowrap rounded-full border-2 border-brand-300 px-4 py-2 text-sm font-semibold text-brand-700 transition hover:bg-white"
-                  >
-                    Dokończ poziomy →
-                  </button>
-                </div>
+      <section className="bg-cloud py-10 sm:py-14">
+        <Container size="wide">
+          <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_17rem] lg:items-start lg:gap-12">
+            {/* Główna kolumna */}
+            <div className="space-y-12 sm:space-y-14">
+              {/* 1. Wideo */}
+              {!lessonsLoading && (hasVideo || textLessons.length > 0) && (
+                <section id="wideo" className="scroll-mt-28">
+                  <SectionHead
+                    icon={<IconPlay className="h-4 w-4" />}
+                    eyebrow="Krok 1"
+                    title="Obejrzyj lekcję"
+                    desc="Cały dział wyjaśniony od zera. Możesz wracać do wideo w trakcie przerabiania materiałów."
+                  />
+                  <div className="mt-6 space-y-4">
+                    {hasVideo && (
+                      <CourseVideo lessons={videoLessons} onOpenNotes={setSelected} />
+                    )}
+                    {textLessons.length > 0 && (
+                      <LessonRows lessons={textLessons} onOpen={setSelected} />
+                    )}
+                  </div>
+                </section>
               )}
-              <TaskRunner courseId={courseId} />
-            </>
-          )}
+
+              {/* 2. Ścieżka materiałów */}
+              <section className="scroll-mt-28">
+                <SectionHead
+                  icon={<IconBook className="h-4 w-4" />}
+                  eyebrow={hasVideo ? 'Krok 2' : 'Krok 1'}
+                  title="Przerób materiały"
+                  desc="Cztery poziomy — od teorii, przez zadania dogrzewające i maturalne, aż po prawdziwe arkusze CKE. Odhaczaj, co masz za sobą."
+                />
+                <div className="mt-6">
+                  <CoursePath
+                    courseId={courseId}
+                    hasAccess={access}
+                    files={files}
+                    filesLoading={filesLoading}
+                    doneFiles={doneFiles}
+                    doneLevels={levels}
+                    onToggleFile={toggleFile}
+                    onToggleLevel={toggleLevel}
+                  />
+                </div>
+              </section>
+
+              {/* 3. Quiz */}
+              <section id="quiz" className="scroll-mt-28">
+                <SectionHead
+                  icon={<IconTarget className="h-4 w-4" />}
+                  eyebrow="Na koniec"
+                  title="Sprawdź się"
+                  desc={
+                    allDone
+                      ? 'Ścieżka przerobiona w całości — teraz quiz pokaże, ile faktycznie zostało w głowie.'
+                      : `Quiz jest dostępny od razu, ale najlepiej działa po materiałach — masz ${doneSteps} z ${totalSteps} kroków.`
+                  }
+                />
+                <div className="mt-6">
+                  <TaskRunner courseId={courseId} />
+                </div>
+              </section>
+            </div>
+
+            {/* Boczna nawigacja (desktop) */}
+            <aside className="hidden lg:block">
+              <nav className="sticky top-24 rounded-3xl border border-line bg-white p-3 shadow-soft">
+                <p className="px-3 pb-2 pt-2 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-muted">
+                  Twoja ścieżka
+                </p>
+                <ol className="space-y-0.5">
+                  {navItems.map((it) => {
+                    const active = activeSection === it.id;
+                    return (
+                      <li key={it.id}>
+                        <a
+                          href={`#${it.id}`}
+                          className={cn(
+                            'flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-semibold transition-all duration-300',
+                            active
+                              ? 'bg-brand-50 text-brand-700'
+                              : 'text-slate hover:bg-cloud hover:text-ink'
+                          )}
+                        >
+                          <span
+                            className={cn(
+                              'flex h-5 w-5 flex-none items-center justify-center rounded-full transition-all duration-300',
+                              it.done
+                                ? 'bg-[linear-gradient(135deg,#6b4df6,#f43f8f)] text-white'
+                                : active
+                                  ? 'bg-white text-transparent ring-2 ring-brand-400'
+                                  : 'bg-white text-transparent ring-1 ring-line'
+                            )}
+                          >
+                            <IconCheck className="h-3 w-3" strokeWidth={3} />
+                          </span>
+                          <span className="min-w-0 flex-1 truncate">{it.label}</span>
+                          {it.meta && !it.done && (
+                            <span className="flex-none text-xs font-bold text-muted">
+                              {it.meta}
+                            </span>
+                          )}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ol>
+                <div className="mt-2 border-t border-line px-3 pb-1 pt-3">
+                  <div className="flex items-center justify-between text-xs font-bold">
+                    <span className="uppercase tracking-[0.14em] text-muted">Postęp</span>
+                    <span className="text-brand-700">{filesLoading ? '—' : `${pct}%`}</span>
+                  </div>
+                  <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-cloud">
+                    <div
+                      className="h-full rounded-full bg-[linear-gradient(90deg,#6b4df6,#f43f8f)] transition-[width] duration-700 ease-out"
+                      style={{ width: `${filesLoading ? 0 : pct}%` }}
+                    />
+                  </div>
+                </div>
+              </nav>
+            </aside>
+          </div>
         </Container>
       </section>
     </>
+  );
+}
+
+// ---------- drobne elementy ----------
+
+function SectionHead({
+  icon,
+  eyebrow,
+  title,
+  desc,
+}: {
+  icon: ReactNode;
+  eyebrow: string;
+  title: string;
+  desc: string;
+}) {
+  return (
+    <div className="max-w-2xl">
+      <p className="inline-flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-brand-500">
+        <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand-50 text-brand-600">
+          {icon}
+        </span>
+        {eyebrow}
+      </p>
+      <h2 className="mt-3 font-display text-2xl font-extrabold text-ink sm:text-3xl">
+        {title}
+      </h2>
+      <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">{desc}</p>
+    </div>
+  );
+}
+
+function EmptyCard({ children }: { children: ReactNode }) {
+  return (
+    <p className="rounded-2xl border border-line bg-white p-6 text-muted">
+      {children}
+    </p>
+  );
+}
+
+/** Lekcje tekstowe (markdown bez wideo) jako minimalistyczne wiersze. */
+function LessonRows({
+  lessons,
+  onOpen,
+}: {
+  lessons: Lesson[];
+  onOpen: (l: Lesson) => void;
+}) {
+  return (
+    <ul className="divide-y divide-line overflow-hidden rounded-3xl border border-line bg-white shadow-soft">
+      {lessons.map((l) => (
+        <li key={l.video_id}>
+          <button
+            onClick={() => onOpen(l)}
+            className="group flex w-full items-center gap-4 px-5 py-4 text-left transition-colors hover:bg-cloud sm:px-6"
+          >
+            <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-cloud text-slate transition-colors group-hover:bg-foam group-hover:text-brand-600">
+              <IconBook className="h-5 w-5" />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block truncate font-semibold text-ink">
+                {l.tytul_lekcji}
+              </span>
+              <span className="block text-xs text-muted">Lekcja do przeczytania</span>
+            </span>
+            <IconArrow className="h-4 w-4 flex-none text-muted transition-all group-hover:translate-x-0.5 group-hover:text-brand-600" />
+          </button>
+        </li>
+      ))}
+    </ul>
   );
 }

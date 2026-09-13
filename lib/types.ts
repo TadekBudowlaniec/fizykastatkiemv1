@@ -60,6 +60,15 @@ export type UserLevel = {
   completed_at?: string | null;
 };
 
+// Postęp per plik — Poziom 1 (tabela public.user_materialy).
+export type UserMaterial = {
+  user_id: string;
+  course_id: number;
+  poziom: number;
+  file: string;
+  completed_at?: string | null;
+};
+
 // Plik PDF w Storage (bucket „materialy-pdf") zwracany przez get-materialy-url.
 export type MaterialFile = {
   name: string; // nazwa pliku, np. „1.1 Wstep.pdf"

@@ -10,6 +10,7 @@ import type {
   UserTaskStatus,
   StudyPlan,
   UserLevel,
+  UserMaterial,
   MaterialFile,
 } from '@/lib/types';
 
@@ -222,6 +223,59 @@ export async function unmarkLevel(
     .eq('user_id', userId)
     .eq('course_id', courseId)
     .eq('poziom', poziom);
+  if (error) throw error;
+}
+
+// ---------------- Pliki Poziomu 1 — postęp per plik (user_materialy) ----------------
+
+export async function getUserMaterialy(
+  userId: string,
+  courseId: number
+): Promise<UserMaterial[]> {
+  const supabase = getSupabaseBrowser();
+  const { data, error } = await supabase
+    .from('user_materialy')
+    .select('user_id, course_id, poziom, file, completed_at')
+    .eq('user_id', userId)
+    .eq('course_id', courseId);
+  if (error) throw error;
+  return (data as UserMaterial[]) ?? [];
+}
+
+export async function markMaterial(
+  userId: string,
+  courseId: number,
+  poziom: number,
+  file: string
+): Promise<void> {
+  const supabase = getSupabaseBrowser();
+  const { error } = await supabase.from('user_materialy').upsert(
+    {
+      user_id: userId,
+      course_id: courseId,
+      poziom,
+      file,
+      completed_at: new Date().toISOString(),
+    },
+    { onConflict: 'user_id,course_id,poziom,file' }
+  );
+  if (error) throw error;
+}
+
+export async function unmarkMaterial(
+  userId: string,
+  courseId: number,
+  poziom: number,
+  file: string
+): Promise<void> {
+  const supabase = getSupabaseBrowser();
+  const { error } = await supabase
+    .from('user_materialy')
+    .delete()
+    .eq('user_id', userId)
+    .eq('course_id', courseId)
+    .eq('poziom', poziom)
+    .eq('file', file);
   if (error) throw error;
 }
 
