@@ -1,6 +1,13 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react';
 import { useAuth } from '@/components/auth/AuthProvider';
 import {
   getLessons,
@@ -36,20 +43,28 @@ const WHOLE_LEVELS = [2, 3, 4];
 
 // Fallback, gdy tabela user_materialy nie istnieje jeszcze w Supabase
 // (patrz supabase/user-materialy.sql) — postęp plików trzymamy lokalnie.
-function localKey(userId: string, courseId: number) {
-  return `fs.materialy.${userId}.${courseId}`;
+function localKey(userId: string, courseId: number, scope = 'materialy') {
+  return `fs.${scope}.${userId}.${courseId}`;
 }
-function readLocal(userId: string, courseId: number): Set<string> {
+function readLocal(userId: string, courseId: number, scope?: string): Set<string> {
   try {
-    const raw = localStorage.getItem(localKey(userId, courseId));
+    const raw = localStorage.getItem(localKey(userId, courseId, scope));
     return new Set(raw ? (JSON.parse(raw) as string[]) : []);
   } catch {
     return new Set();
   }
 }
-function writeLocal(userId: string, courseId: number, files: Set<string>) {
+function writeLocal(
+  userId: string,
+  courseId: number,
+  files: Set<string>,
+  scope?: string
+) {
   try {
-    localStorage.setItem(localKey(userId, courseId), JSON.stringify([...files]));
+    localStorage.setItem(
+      localKey(userId, courseId, scope),
+      JSON.stringify([...files])
+    );
   } catch {
     /* ignoruj */
   }
@@ -157,19 +172,28 @@ export function CourseView({ courseId }: { courseId: number }) {
     [user?.id, courseId]
   );
 
-  // ---------- Postęp: pliki Poziomu 1 (user_materialy, fallback local) ----------
+  // ---------- Postęp: pliki Poziomu 1 + wideo (user_materialy, fallback local) ----------
+  // poziom 1 = plik PDF, poziom 0 = obejrzane wideo (file = yt_id).
   const [doneFiles, setDoneFiles] = useState<Set<string>>(new Set());
+  const [watched, setWatched] = useState<Set<string>>(new Set());
+  const watchedRef = useRef(watched);
+  watchedRef.current = watched;
   const [filesBackend, setFilesBackend] = useState<'db' | 'local'>('db');
 
   useEffect(() => {
     if (!access || !user?.id || isStart) return;
     const uid = user.id;
+    // Wideo: najpierw stan lokalny (działa też przed migracją check 0..4),
+    // potem nadpisujemy tym, co jest w bazie (jeśli tabela odpowiada).
+    setWatched(readLocal(uid, courseId, 'video'));
     getUserMaterialy(uid, courseId)
       .then((rows) => {
         setFilesBackend('db');
         setDoneFiles(
           new Set(rows.filter((r) => r.poziom === 1).map((r) => r.file))
         );
+        const vid = rows.filter((r) => r.poziom === 0).map((r) => r.file);
+        if (vid.length) setWatched((prev) => new Set([...prev, ...vid]));
       })
       .catch(() => {
         setFilesBackend('local');
@@ -208,12 +232,41 @@ export function CourseView({ courseId }: { courseId: number }) {
     [user?.id, courseId, filesBackend]
   );
 
+  // Obejrzane wideo — zapis do user_materialy (poziom 0); przy błędzie (np.
+  // stary check 1..4 przed migracją) zostaje lokalnie, UI się nie cofa.
+  const toggleWatched = useCallback(
+    async (ytId: string, done: boolean) => {
+      if (!user?.id) return;
+      const uid = user.id;
+      // Auto-zaliczenie z playera może strzelać wielokrotnie — zapisujemy raz.
+      if (done && watchedRef.current.has(ytId)) return;
+      const next = new Set(watchedRef.current);
+      if (done) next.add(ytId);
+      else next.delete(ytId);
+      watchedRef.current = next;
+      setWatched(next);
+      writeLocal(uid, courseId, next, 'video');
+      try {
+        if (done) await markMaterial(uid, courseId, 0, ytId);
+        else await unmarkMaterial(uid, courseId, 0, ytId);
+      } catch {
+        /* zostaje w localStorage */
+      }
+    },
+    [user?.id, courseId]
+  );
+
   // ---------- Zbiorczy postęp działu ----------
   const p1Files = files[1] ?? [];
   const p1Done = p1Files.filter((f) => doneFiles.has(f.name)).length;
   const wholeDone = WHOLE_LEVELS.filter((p) => levels.has(p)).length;
-  const totalSteps = p1Files.length + WHOLE_LEVELS.length;
-  const doneSteps = p1Done + wholeDone;
+  const videosDone = videoLessons.filter(
+    (l) => !!l.yt_id_wideo && watched.has(l.yt_id_wideo)
+  ).length;
+  const allVideosDone =
+    videoLessons.length > 0 && videosDone === videoLessons.length;
+  const totalSteps = videoLessons.length + p1Files.length + WHOLE_LEVELS.length;
+  const doneSteps = videosDone + p1Done + wholeDone;
   const pct = totalSteps ? Math.round((doneSteps / totalSteps) * 100) : 0;
   const allDone = !filesLoading && totalSteps > 0 && doneSteps === totalSteps;
 
@@ -409,7 +462,9 @@ export function CourseView({ courseId }: { courseId: number }) {
   // ---------- Dział 1–16: jedna długa ścieżka ----------
   const navItems: { id: string; label: string; meta?: string; done?: boolean }[] =
     [
-      ...(hasVideo ? [{ id: 'wideo', label: 'Lekcja wideo' }] : []),
+      ...(hasVideo
+        ? [{ id: 'wideo', label: 'Lekcja wideo', done: allVideosDone }]
+        : []),
       ...LEVELS.map((l) => {
         const isP1 = l.poziom === 1;
         const done = isP1
@@ -457,14 +512,14 @@ export function CourseView({ courseId }: { courseId: number }) {
               ? 'Wczytuję ścieżkę…'
               : allDone
                 ? 'Cały dział przerobiony — czas na quiz.'
-                : `${doneSteps} z ${totalSteps} kroków · teoria liczona per plik, poziomy 2–4 w całości`}
+                : `${doneSteps} z ${totalSteps} kroków · wideo, każdy plik teorii i poziomy 2–4`}
           </p>
         </div>
       </AppHero>
 
       <section className="bg-cloud py-10 sm:py-14">
         <Container size="wide">
-          <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_17rem] lg:items-start lg:gap-12">
+          <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-12">
             {/* Główna kolumna */}
             <div className="space-y-12 sm:space-y-14">
               {/* 1. Wideo */}
@@ -478,7 +533,12 @@ export function CourseView({ courseId }: { courseId: number }) {
                   />
                   <div className="mt-6 space-y-4">
                     {hasVideo && (
-                      <CourseVideo lessons={videoLessons} onOpenNotes={setSelected} />
+                      <CourseVideo
+                        lessons={videoLessons}
+                        watched={watched}
+                        onToggleWatched={toggleWatched}
+                        onOpenNotes={setSelected}
+                      />
                     )}
                     {textLessons.length > 0 && (
                       <LessonRows lessons={textLessons} onOpen={setSelected} />
@@ -528,8 +588,8 @@ export function CourseView({ courseId }: { courseId: number }) {
             </div>
 
             {/* Boczna nawigacja (desktop) */}
-            <aside className="hidden lg:block">
-              <nav className="sticky top-24 rounded-3xl border border-line bg-white p-3 shadow-soft">
+            <aside className="hidden lg:sticky lg:top-24 lg:block lg:self-start">
+              <nav className="rounded-3xl border border-line bg-white p-3 shadow-soft">
                 <p className="px-3 pb-2 pt-2 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-muted">
                   Twoja ścieżka
                 </p>

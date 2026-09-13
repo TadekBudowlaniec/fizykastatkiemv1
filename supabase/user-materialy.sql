@@ -3,6 +3,7 @@
 -- ============================================================================
 -- Poziom 1 ma zmienną liczbę PDF-ów per dział i każdy z nich liczy się osobno
 -- do postępu działu. Poziomy 2–4 pozostają w public.user_levels (cały poziom).
+-- Poziom 0 = lekcja wideo (file = yt_id_wideo) — „obejrzane".
 -- Wzorzec 1:1 jak user_levels (RLS „własne wiersze", upsert onConflict).
 --
 -- URUCHOM w Supabase → SQL Editor (jednorazowo). Do czasu uruchomienia
@@ -13,8 +14,8 @@
 create table if not exists public.user_materialy (
   user_id      uuid        not null references auth.users(id) on delete cascade,
   course_id    integer     not null,               -- dział 1..16
-  poziom       smallint    not null check (poziom between 1 and 4),
-  file         text        not null,               -- nazwa pliku w Storage, np. „Etap_1.1_Ruch.pdf"
+  poziom       smallint    not null check (poziom between 0 and 4), -- 0 = wideo
+  file         text        not null,               -- nazwa pliku PDF lub yt_id (poziom 0)
   completed_at timestamptz not null default now(),
   primary key (user_id, course_id, poziom, file)
 );

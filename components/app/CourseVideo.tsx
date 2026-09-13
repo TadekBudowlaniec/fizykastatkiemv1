@@ -1,41 +1,107 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Lesson } from '@/lib/types';
 import { cn } from '@/lib/cn';
 import {
   IconArrow,
   IconBook,
+  IconCheck,
   IconExternal,
   IconPlay,
+  IconSpinner,
 } from '@/components/app/CourseIcons';
+
+// Próg auto-zaliczenia: obejrzane ≥ 90% albo zdarzenie „ended" z playera.
+const WATCHED_RATIO = 0.9;
 
 /**
  * Lekcja wideo osadzona bezpośrednio w ścieżce działu (bez osobnej zakładki).
  * Player ładuje się dopiero po kliknięciu w okładkę (lżejsza strona), a
  * YouTube jest tylko dyskretnym linkiem „otwórz w nowej karcie".
+ *
+ * „Obejrzane" liczy się do postępu działu: zalicza się automatycznie
+ * (postMessage z iframe YouTube: enablejsapi) albo ręcznie przełącznikiem.
  */
 export function CourseVideo({
   lessons,
+  watched,
+  onToggleWatched,
   onOpenNotes,
 }: {
   /** Lekcje z `yt_id_wideo` (co najmniej jedna). */
   lessons: Lesson[];
+  /** Obejrzane wideo (yt_id). Bez tych propsów śledzenie jest wyłączone. */
+  watched?: Set<string>;
+  onToggleWatched?: (ytId: string, done: boolean) => Promise<void>;
   /** Otwiera pełny widok lekcji (notatki markdown pod wideo). */
   onOpenNotes: (lesson: Lesson) => void;
 }) {
   const [activeId, setActiveId] = useState(lessons[0]?.video_id);
   const [playing, setPlaying] = useState(false);
   const [poster, setPoster] = useState<'max' | 'hq'>('max');
+  const [busy, setBusy] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const active = lessons.find((l) => l.video_id === activeId) ?? lessons[0];
   const ytId = active?.yt_id_wideo ?? '';
+  const tracking = !!watched && !!onToggleWatched;
+  const isWatched = !!watched?.has(ytId);
 
   // Zmiana lekcji → nowa okładka, player od nowa.
   useEffect(() => {
     setPlaying(false);
     setPoster('max');
   }, [activeId]);
+
+  // Auto-zaliczenie: subskrybujemy zdarzenia playera (bez ładowania YT API).
+  useEffect(() => {
+    if (!playing || !ytId || isWatched || !onToggleWatched) return;
+    const frame = iframeRef.current;
+    if (!frame) return;
+
+    const subscribe = () => {
+      frame.contentWindow?.postMessage(
+        JSON.stringify({ event: 'listening', id: ytId, channel: 'widget' }),
+        'https://www.youtube.com'
+      );
+    };
+    const onMessage = (e: MessageEvent) => {
+      if (e.origin !== 'https://www.youtube.com' || e.source !== frame.contentWindow)
+        return;
+      let data: { event?: string; info?: unknown };
+      try {
+        data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+      } catch {
+        return;
+      }
+      // Koniec filmu
+      if (data.event === 'onStateChange' && data.info === 0) {
+        onToggleWatched(ytId, true);
+        return;
+      }
+      // Postęp odtwarzania (currentTime / duration)
+      if (data.event === 'infoDelivery' && data.info && typeof data.info === 'object') {
+        const info = data.info as { currentTime?: number; duration?: number };
+        if (
+          typeof info.currentTime === 'number' &&
+          typeof info.duration === 'number' &&
+          info.duration > 0 &&
+          info.currentTime / info.duration >= WATCHED_RATIO
+        ) {
+          onToggleWatched(ytId, true);
+        }
+      }
+    };
+
+    window.addEventListener('message', onMessage);
+    frame.addEventListener('load', subscribe);
+    subscribe();
+    return () => {
+      window.removeEventListener('message', onMessage);
+      frame.removeEventListener('load', subscribe);
+    };
+  }, [playing, ytId, isWatched, onToggleWatched]);
 
   if (!active) return null;
 
@@ -44,15 +110,32 @@ export function CourseVideo({
     poster === 'max'
       ? `https://i.ytimg.com/vi/${ytId}/maxresdefault.jpg`
       : `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`;
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
+
+  const toggle = async () => {
+    if (!onToggleWatched) return;
+    setBusy(true);
+    try {
+      await onToggleWatched(ytId, !isWatched);
+    } finally {
+      setBusy(false);
+    }
+  };
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-line bg-white shadow-soft">
+    <div
+      className={cn(
+        'overflow-hidden rounded-3xl border bg-white shadow-soft transition-colors duration-500',
+        isWatched ? 'border-brand-200' : 'border-line'
+      )}
+    >
       {/* Player / okładka */}
       <div className="relative aspect-video bg-navy-950">
         {playing ? (
           <iframe
+            ref={iframeRef}
             className="absolute inset-0 h-full w-full"
-            src={`https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1&autoplay=1`}
+            src={`https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1&autoplay=1&enablejsapi=1&origin=${encodeURIComponent(origin)}`}
             title={active.tytul_lekcji}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -82,6 +165,11 @@ export function CourseVideo({
                 {active.tytul_lekcji}
               </span>
             </span>
+            {isWatched && (
+              <span className="absolute right-5 top-5 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-brand-700">
+                <IconCheck className="h-3.5 w-3.5" strokeWidth={2.5} /> Obejrzane
+              </span>
+            )}
           </button>
         )}
       </div>
@@ -90,28 +178,36 @@ export function CourseVideo({
       <div className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         {lessons.length > 1 ? (
           <div className="flex flex-wrap gap-2">
-            {lessons.map((l, i) => (
-              <button
-                key={l.video_id}
-                onClick={() => setActiveId(l.video_id)}
-                className={cn(
-                  'rounded-full px-3.5 py-1.5 text-sm font-semibold transition-all duration-300',
-                  l.video_id === active.video_id
-                    ? 'bg-brand-50 text-brand-700 ring-1 ring-brand-200'
-                    : 'text-muted hover:bg-cloud hover:text-ink'
-                )}
-              >
-                {i + 1}. {l.tytul_lekcji}
-              </button>
-            ))}
+            {lessons.map((l, i) => {
+              const done = !!l.yt_id_wideo && !!watched?.has(l.yt_id_wideo);
+              return (
+                <button
+                  key={l.video_id}
+                  onClick={() => setActiveId(l.video_id)}
+                  className={cn(
+                    'inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-semibold transition-all duration-300',
+                    l.video_id === active.video_id
+                      ? 'bg-brand-50 text-brand-700 ring-1 ring-brand-200'
+                      : 'text-muted hover:bg-cloud hover:text-ink'
+                  )}
+                >
+                  {done && <IconCheck className="h-3.5 w-3.5" strokeWidth={2.5} />}
+                  {i + 1}. {l.tytul_lekcji}
+                </button>
+              );
+            })}
           </div>
         ) : (
           <p className="text-sm text-muted">
-            Obejrzyj lekcję, a potem przejdź do materiałów poniżej.
+            {!tracking
+              ? 'Obejrzyj lekcję, a potem przejdź dalej.'
+              : isWatched
+                ? 'Lekcja zaliczona. Możesz do niej wracać w każdej chwili.'
+                : 'Zalicza się automatycznie po obejrzeniu — albo odhacz ręcznie.'}
           </p>
         )}
 
-        <div className="flex flex-none items-center gap-4">
+        <div className="flex flex-none flex-wrap items-center gap-x-4 gap-y-2">
           {hasNotes && (
             <button
               onClick={() => onOpenNotes(active)}
@@ -129,6 +225,35 @@ export function CourseVideo({
           >
             YouTube <IconExternal className="h-3.5 w-3.5" />
           </a>
+          {tracking && (
+          <button
+            onClick={toggle}
+            disabled={busy}
+            aria-pressed={isWatched}
+            className={cn(
+              'inline-flex items-center gap-2.5 rounded-full py-1.5 pl-1.5 pr-4 text-sm font-semibold ring-1 transition-all duration-300 disabled:opacity-60',
+              isWatched
+                ? 'bg-white text-brand-700 ring-brand-200'
+                : 'bg-white text-slate ring-line hover:text-brand-700 hover:ring-brand-300'
+            )}
+          >
+            <span
+              className={cn(
+                'flex h-6 w-6 items-center justify-center rounded-full transition-all duration-300',
+                isWatched
+                  ? 'bg-[linear-gradient(135deg,#6b4df6,#f43f8f)] text-white'
+                  : 'bg-cloud text-transparent ring-1 ring-line'
+              )}
+            >
+              {busy ? (
+                <IconSpinner className="h-3.5 w-3.5 text-brand-400" />
+              ) : (
+                <IconCheck className="h-3.5 w-3.5" strokeWidth={2.5} />
+              )}
+            </span>
+            {isWatched ? 'Obejrzane' : 'Oznacz jako obejrzane'}
+          </button>
+          )}
         </div>
       </div>
     </div>
