@@ -81,9 +81,10 @@ function loadYouTubeApi(): Promise<YTNamespace> {
 
 /**
  * Lekcja wideo osadzona bezpośrednio w ścieżce działu (bez osobnej zakładki).
- * Desktop: okładka, player ładuje się po kliknięciu. Dotyk: player od razu,
- * bez autoplay (mobilne przeglądarki i tak go blokują, a dwuetapowe
- * okładka -> iframe psuło pierwsze tapnięcie).
+ * Desktop: okładka, player ładuje się po kliknięciu. Dotyk (telefon/tablet):
+ * bez osadzonego playera - mobilny embed YouTube na części telefonów nie
+ * reagował na tapnięcia; okładka jest linkiem, który otwiera lekcję w
+ * aplikacji YouTube (albo w przeglądarce), gdzie odtwarzanie działa zawsze.
  *
  * Player tworzymy przez oficjalne YouTube IFrame API (najbardziej
  * przetestowana ścieżka na mobile); jeśli API nie dojdzie, zwykły iframe.
@@ -119,8 +120,8 @@ export function CourseVideo({
   const ytId = active?.yt_id_wideo ?? '';
   const tracking = !!watched && !!onToggleWatched;
   const isWatched = !!watched?.has(ytId);
-  const showPlayer = playing || touch;
-  const autoplay = playing && !touch;
+  const showPlayer = playing && !touch;
+  const autoplay = showPlayer;
 
   // Zmiana lekcji: nowa okładka, player od nowa.
   useEffect(() => {
@@ -239,6 +240,44 @@ export function CourseVideo({
               aria-label={active.tytul_lekcji}
             />
           )
+        ) : touch ? (
+          <a
+            href={`https://www.youtube.com/watch?v=${ytId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group absolute inset-0 flex items-center justify-center overflow-hidden rounded-t-3xl"
+            aria-label={`Otwórz w YouTube: ${active.tytul_lekcji}`}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={posterUrl}
+              alt=""
+              onError={() => poster === 'max' && setPoster('hq')}
+              className="absolute inset-0 h-full w-full object-cover opacity-90"
+            />
+            <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,11,24,0)_35%,rgba(7,11,24,0.75))]" />
+            <span className="relative flex flex-col items-center gap-3">
+              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 text-brand-600 shadow-[0_20px_50px_-12px_rgba(107,77,246,0.7)]">
+                <IconPlay className="ml-1 h-7 w-7" />
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3.5 py-1.5 text-sm font-semibold text-white ring-1 ring-white/25 backdrop-blur">
+                Otwórz w YouTube <IconExternal className="h-3.5 w-3.5" />
+              </span>
+            </span>
+            <span className="absolute bottom-4 left-5 right-5 text-left">
+              <span className="block text-[0.7rem] font-bold uppercase tracking-[0.14em] text-brand-200">
+                Lekcja wideo
+              </span>
+              <span className="mt-0.5 line-clamp-2 font-display text-base font-extrabold leading-tight text-white">
+                {active.tytul_lekcji}
+              </span>
+            </span>
+            {isWatched && (
+              <span className="absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-brand-700">
+                <IconCheck className="h-3.5 w-3.5" strokeWidth={2.5} /> Obejrzane
+              </span>
+            )}
+          </a>
         ) : (
           <button
             onClick={() => setPlaying(true)}
@@ -298,11 +337,17 @@ export function CourseVideo({
           </div>
         ) : (
           <p className="text-sm text-muted">
-            {!tracking
-              ? 'Obejrzyj lekcję, a potem przejdź dalej.'
-              : isWatched
+            {touch
+              ? isWatched
                 ? 'Lekcja zaliczona. Możesz do niej wracać w każdej chwili.'
-                : 'Zalicza się automatycznie po obejrzeniu, albo odhacz ręcznie.'}
+                : tracking
+                  ? 'Na telefonie lekcja otwiera się w YouTube. Po obejrzeniu odhacz ją tutaj.'
+                  : 'Na telefonie lekcja otwiera się w YouTube.'
+              : !tracking
+                ? 'Obejrzyj lekcję, a potem przejdź dalej.'
+                : isWatched
+                  ? 'Lekcja zaliczona. Możesz do niej wracać w każdej chwili.'
+                  : 'Zalicza się automatycznie po obejrzeniu, albo odhacz ręcznie.'}
           </p>
         )}
 
