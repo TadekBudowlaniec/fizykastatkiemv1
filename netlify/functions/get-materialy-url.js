@@ -22,6 +22,8 @@ const supabaseAdmin = createClient(
 );
 
 const BUCKET = 'materialy-pdf';
+// Foldery działów są w folderze-owijce (nie na root bucketu).
+const ROOT = 'Fizyka_Statkiem_Materialy';
 const SUBFOLDER = {
     1: 'Poziom1_Teoria',
     2: 'Poziom2_Zadania_Dogrzewajace',
@@ -29,10 +31,11 @@ const SUBFOLDER = {
 };
 
 // Nazwa folderu działu wynika z listy w buckecie (unikamy zgadywania nazwy PL
-// po numerze). Dopasowanie po prefiksie „NN_".
+// po numerze). Dopasowanie po prefiksie „NN_" wewnątrz folderu-owijki.
+// Zwraca pełną ścieżkę folderu działu (z ROOT).
 async function resolveCourseFolder(courseIdNum) {
     const prefix = String(courseIdNum).padStart(2, '0') + '_';
-    const { data, error } = await supabaseAdmin.storage.from(BUCKET).list('', {
+    const { data, error } = await supabaseAdmin.storage.from(BUCKET).list(ROOT, {
         limit: 1000,
     });
     if (error) {
@@ -42,7 +45,7 @@ async function resolveCourseFolder(courseIdNum) {
     const folder = (data || []).find(
         (e) => e.name && e.name.startsWith(prefix)
     );
-    return folder ? folder.name : null;
+    return folder ? `${ROOT}/${folder.name}` : null;
 }
 
 exports.handler = async (event) => {

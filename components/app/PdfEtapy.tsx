@@ -46,7 +46,7 @@ function prettyName(name: string): string {
   const base = name.replace(/\.pdf$/i, '');
   if (/^zadania$/i.test(base)) return 'Zadania';
   if (/^odpowiedzi$/i.test(base)) return 'Odpowiedzi';
-  return base;
+  return base.replace(/_/g, ' '); // podkreślenia → spacje (ładniejsze etykiety)
 }
 
 export function PdfEtapy({
