@@ -6,7 +6,7 @@ import { SITE } from '@/lib/site';
 import { JsonLd, breadcrumbLd } from '@/components/seo/SeoBits';
 
 export const metadata: Metadata = {
-  title: 'O mnie — Cezary Prusak, korepetytor i twórca kursu fizyki',
+  title: 'O mnie - Cezary Prusak, korepetytor i twórca kursu fizyki',
   description:
     'Kim jestem: Cezary Prusak. Fizykę rozszerzoną zdałem na 82%. Uczę fizyki i matematyki online oraz w Lublinie i tworzę kurs maturalny Fizyka Statkiem.',
   alternates: { canonical: '/o-mnie/' },
@@ -37,7 +37,7 @@ export default function OMniePage() {
             Cześć, jestem <span className="text-gradient">Cezary Prusak</span>
           </>
         }
-        subtitle="Uczę fizyki i matematyki tak, żebyś zrozumiał mechanizm — nie wkuwał wzorów. Prowadzę korepetycje i tworzę kurs maturalny Fizyka Statkiem."
+        subtitle="Uczę fizyki i matematyki tak, żebyś zrozumiał mechanizm - nie wkuwał wzorów. Prowadzę korepetycje i tworzę kurs maturalny Fizyka Statkiem."
         crumbs={[{ label: 'Start', href: '/' }, { label: 'O mnie' }]}
       />
 
@@ -52,7 +52,7 @@ export default function OMniePage() {
               przygotować się do egzaminu i osiągać wyniki, z których są dumni.
             </p>
             <p>
-              Uczę <strong>fizyki</strong> i <strong>matematyki</strong> —{' '}
+              Uczę <strong>fizyki</strong> i <strong>matematyki</strong> -{' '}
               indywidualnie (korepetycje) oraz w ramach kursu online{' '}
               <strong>Fizyka Statkiem</strong>. Moja zasada jest prosta:{' '}
               pokazuję, <em>skąd bierze się wzór i dlaczego zjawisko działa
@@ -63,15 +63,15 @@ export default function OMniePage() {
             <h2>Jak i gdzie uczę</h2>
             <ul>
               <li>
-                <strong>Online</strong> — Discord + interaktywna tablica,
+                <strong>Online</strong> - Discord + interaktywna tablica,
                 notatki zapisują się automatycznie.
               </li>
               <li>
-                <strong>Stacjonarnie w Lublinie</strong> — spotkania twarzą w
+                <strong>Stacjonarnie w Lublinie</strong> - spotkania twarzą w
                 twarz, możliwy dojazd do ucznia.
               </li>
               <li>
-                <strong>Zakres</strong> — matura z fizyki i matematyki (poziom
+                <strong>Zakres</strong> - matura z fizyki i matematyki (poziom
                 rozszerzony i podstawowy), egzamin ósmoklasisty, bieżące
                 sprawdziany.
               </li>

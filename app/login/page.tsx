@@ -20,7 +20,7 @@ export default function LoginPage() {
 
   const sendLink = async () => {
     if (!email) {
-      setError('Podaj e-mail powyżej — wyślemy link do logowania.');
+      setError('Podaj e-mail powyżej - wyślemy link do logowania.');
       return;
     }
     setError(null);
@@ -29,7 +29,7 @@ export default function LoginPage() {
     try {
       await sendMagicLink(email);
     } catch {
-      /* neutralnie — nie zdradzamy, czy konto istnieje */
+      /* neutralnie - nie zdradzamy, czy konto istnieje */
     } finally {
       setInfo(
         `Jeśli konto z adresem ${email} istnieje, wysłaliśmy link do logowania. Sprawdź skrzynkę (także SPAM).`
@@ -40,7 +40,7 @@ export default function LoginPage() {
 
   const forgotPassword = async () => {
     if (!email) {
-      setError('Podaj e-mail powyżej — wyślemy link do zresetowania hasła.');
+      setError('Podaj e-mail powyżej - wyślemy link do zresetowania hasła.');
       return;
     }
     setError(null);

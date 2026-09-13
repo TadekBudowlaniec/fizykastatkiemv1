@@ -18,7 +18,7 @@ export const LEVELS = [
   {
     poziom: 1,
     title: 'Teoria i Rozgrzewka',
-    desc: 'Zaczynamy spokojnie — teoria, wzory i pierwsze proste zadania, żeby wskoczyć w temat bez stresu. Każdy plik to jeden podrozdział; odhaczaj po kolei.',
+    desc: 'Zaczynamy spokojnie - teoria, wzory i pierwsze proste zadania, żeby wskoczyć w temat bez stresu. Każdy plik to jeden podrozdział; odhaczaj po kolei.',
     source: 'materialy' as const,
   },
   {
@@ -30,7 +30,7 @@ export const LEVELS = [
   {
     poziom: 3,
     title: 'Autorskie Zadania Maturalne',
-    desc: 'Mój własny zestaw w klimacie matury — trudniej niż w rozgrzewce. Zadania i odpowiedzi osobno.',
+    desc: 'Mój własny zestaw w klimacie matury - trudniej niż w rozgrzewce. Zadania i odpowiedzi osobno.',
     source: 'materialy' as const,
   },
   {
@@ -48,15 +48,15 @@ export function prettyName(name: string): string {
   return base.replace(/_/g, ' ');
 }
 
-// Krótki opis pod nazwą pliku — „landing" opisujący każdy plik.
+// Krótki opis pod nazwą pliku - „landing" opisujący każdy plik.
 function fileSubtitle(poziom: number, name: string): string {
   const base = name.replace(/\.pdf$/i, '');
   if (/^zadania$/i.test(base))
     return poziom === 2
-      ? 'Zestaw zadań utrwalających — rozwiąż samodzielnie'
-      : 'Zadania w formule maturalnej — z pełnym rozumowaniem';
+      ? 'Zestaw zadań utrwalających do samodzielnego rozwiązania'
+      : 'Zadania w formule maturalnej, z pełnym rozumowaniem';
   if (/^odpowiedzi$/i.test(base))
-    return 'Otwórz dopiero po rozwiązaniu — sprawdź i popraw błędy';
+    return 'Otwórz dopiero po rozwiązaniu zadań, sprawdź i popraw błędy';
   return 'Teoria, wzory i zadania rozgrzewkowe';
 }
 
@@ -216,46 +216,49 @@ export function CoursePath({
                       return (
                         <li
                           key={f.name}
-                          className="group flex items-center gap-3.5 py-3.5 sm:gap-4"
+                          className="flex items-center gap-2 sm:gap-3"
                         >
-                          <span
-                            className={cn(
-                              'flex h-10 w-10 flex-none items-center justify-center rounded-xl transition-colors duration-300',
-                              fileDone
-                                ? 'bg-brand-50 text-brand-600'
-                                : 'bg-cloud text-slate group-hover:bg-foam group-hover:text-brand-600'
-                            )}
-                          >
-                            <IconDoc className="h-5 w-5" />
-                          </span>
-                          <div className="min-w-0 flex-1">
-                            <p
-                              className={cn(
-                                'truncate font-semibold transition-colors',
-                                fileDone ? 'text-muted' : 'text-ink'
-                              )}
-                            >
-                              {lvl.source === 'etap3'
-                                ? 'Arkusz CKE'
-                                : prettyName(f.name)}
-                            </p>
-                            <p className="truncate text-xs text-muted">
-                              {lvl.source === 'etap3'
-                                ? 'Zadania z prawdziwych arkuszy, dobrane pod ten dział'
-                                : fileSubtitle(lvl.poziom, f.name)}
-                            </p>
-                          </div>
+                          {/* Cały wiersz otwiera PDF (wygodne na telefonie). */}
                           <button
                             onClick={() => open(lvl.poziom, f.name)}
                             disabled={!hasAccess || opening === key}
-                            className="inline-flex flex-none items-center gap-1.5 rounded-full bg-brand-50 px-3.5 py-2 text-sm font-semibold text-brand-700 transition-all duration-300 hover:bg-brand-100 disabled:cursor-wait disabled:opacity-60"
+                            className="group -mx-2 flex min-w-0 flex-1 items-center gap-3.5 rounded-2xl px-2 py-3.5 text-left transition-colors duration-300 hover:bg-cloud/70 disabled:cursor-wait sm:gap-4"
                           >
-                            {opening === key ? (
-                              <IconSpinner className="h-3.5 w-3.5" />
-                            ) : (
-                              <IconExternal className="h-3.5 w-3.5" />
-                            )}
-                            <span className="hidden sm:inline">Otwórz</span>
+                            <span
+                              className={cn(
+                                'flex h-10 w-10 flex-none items-center justify-center rounded-xl transition-colors duration-300',
+                                fileDone
+                                  ? 'bg-brand-50 text-brand-600'
+                                  : 'bg-cloud text-slate group-hover:bg-foam group-hover:text-brand-600'
+                              )}
+                            >
+                              <IconDoc className="h-5 w-5" />
+                            </span>
+                            <span className="min-w-0 flex-1">
+                              <span
+                                className={cn(
+                                  'block font-semibold leading-snug transition-colors',
+                                  fileDone ? 'text-muted' : 'text-ink'
+                                )}
+                              >
+                                {lvl.source === 'etap3'
+                                  ? 'Arkusz CKE'
+                                  : prettyName(f.name)}
+                              </span>
+                              <span className="mt-0.5 block text-xs leading-snug text-muted">
+                                {lvl.source === 'etap3'
+                                  ? 'Zadania z prawdziwych arkuszy, dobrane pod ten dział'
+                                  : fileSubtitle(lvl.poziom, f.name)}
+                              </span>
+                            </span>
+                            <span className="inline-flex flex-none items-center gap-1.5 rounded-full bg-brand-50 px-3.5 py-2 text-sm font-semibold text-brand-700 transition-all duration-300 group-hover:bg-brand-100 group-disabled:opacity-60">
+                              {opening === key ? (
+                                <IconSpinner className="h-3.5 w-3.5" />
+                              ) : (
+                                <IconExternal className="h-3.5 w-3.5" />
+                              )}
+                              <span className="hidden sm:inline">Otwórz</span>
+                            </span>
                           </button>
                           {isP1 && (
                             <CheckToggle

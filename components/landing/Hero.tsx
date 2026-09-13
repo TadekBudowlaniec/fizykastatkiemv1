@@ -30,10 +30,10 @@ export function Hero() {
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-300/85">
             Bez chaosu i zgadywania, czego uczyć się dalej. 16 działów wideo HD,
             PDF-y, setki zadań na wzór CKE i planer, który prowadzi Cię od podstaw
-            aż do egzaminu — z wynikiem, z którego będziesz dumny.
+            aż do egzaminu - z wynikiem, z którego będziesz dumny.
           </p>
 
-          {/* Jedno dominujące CTA — scroll do cennika na tej samej stronie */}
+          {/* Jedno dominujące CTA - scroll do cennika na tej samej stronie */}
           <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
             <Button
               href="#cennik"
@@ -51,7 +51,7 @@ export function Hero() {
             </a>
           </div>
 
-          {/* Secondary — darmowy planer jako lead magnet (nie dominuje nad CTA) */}
+          {/* Secondary - darmowy planer jako lead magnet (nie dominuje nad CTA) */}
           <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
             <p className="text-sm font-semibold text-slate-200">
               Nie jesteś jeszcze zdecydowany? Odbierz najpierw{' '}

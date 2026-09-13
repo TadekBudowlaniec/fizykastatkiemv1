@@ -1,13 +1,13 @@
 -- ============================================================================
--- Fizyka Statkiem — postęp per plik (Poziom 1 „Teoria i Rozgrzewka")
+-- Fizyka Statkiem - postęp per plik (Poziom 1 „Teoria i Rozgrzewka")
 -- ============================================================================
 -- Poziom 1 ma zmienną liczbę PDF-ów per dział i każdy z nich liczy się osobno
 -- do postępu działu. Poziomy 2–4 pozostają w public.user_levels (cały poziom).
--- Poziom 0 = lekcja wideo (file = yt_id_wideo) — „obejrzane".
+-- Poziom 0 = lekcja wideo (file = yt_id_wideo) - „obejrzane".
 -- Wzorzec 1:1 jak user_levels (RLS „własne wiersze", upsert onConflict).
 --
 -- URUCHOM w Supabase → SQL Editor (jednorazowo). Do czasu uruchomienia
--- frontend zapisuje postęp plików lokalnie (localStorage) — bez synchronizacji
+-- frontend zapisuje postęp plików lokalnie (localStorage) - bez synchronizacji
 -- między urządzeniami.
 -- ============================================================================
 

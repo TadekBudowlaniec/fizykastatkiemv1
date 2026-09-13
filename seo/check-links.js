@@ -1,4 +1,4 @@
-// seo/check-links.js — wykrywa martwe wewnętrzne linki w wygenerowanych stronach.
+// seo/check-links.js - wykrywa martwe wewnętrzne linki w wygenerowanych stronach.
 const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 function walk(d) {

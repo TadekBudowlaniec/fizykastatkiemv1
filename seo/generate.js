@@ -26,7 +26,7 @@ const cities = require('./cities.js');
 // Wczytaj treść działów z plików batch*.json
 function loadTopics() {
   const dir = path.join(__dirname, 'content');
-  if (!fs.existsSync(dir)) { console.error('Brak katalogu seo/content — uruchom agentów treści.'); process.exit(1); }
+  if (!fs.existsSync(dir)) { console.error('Brak katalogu seo/content - uruchom agentów treści.'); process.exit(1); }
   const files = fs.readdirSync(dir).filter(f => /^batch\d+\.json$/.test(f)).sort();
   let topics = [];
   for (const f of files) {
@@ -103,7 +103,7 @@ function footer() {
       <a href="/polityka-prywatnosci">Polityka Prywatności</a>
     </div>
     <div class="footer-contact">kontakt: <a href="mailto:${EMAIL}">${EMAIL}</a></div>
-    <div class="footer-copy">© ${TODAY.slice(0,4)} ${BRAND} — Wszelkie prawa zastrzeżone</div>
+    <div class="footer-copy">© ${TODAY.slice(0,4)} ${BRAND} - Wszelkie prawa zastrzeżone</div>
   </div>
 </footer>`;
 }
@@ -230,7 +230,7 @@ function relatedCard(kicker, title, desc, url) {
 function ctaCenter() {
   return `<div class="cta-band">
     <h2>Potrzebujesz pomocy z fizyką?</h2>
-    <p>Dołącz do kursu online albo umów indywidualne korepetycje. Tłumaczymy fizykę prosto — krok po kroku, aż zrozumiesz.</p>
+    <p>Dołącz do kursu online albo umów indywidualne korepetycje. Tłumaczymy fizykę prosto - krok po kroku, aż zrozumiesz.</p>
     <a class="btn btn-light" href="/korepetycje">👨‍🏫 Zobacz korepetycje</a>
     <a class="btn btn-light" href="/kurs">📚 Przejdź do kursu</a>
   </div>`;
@@ -240,7 +240,7 @@ function ctaCenter() {
 function relatedSection(topic, topicsBySlug, kind) {
   const cards = [];
   // Inne ujęcia tego samego działu
-  if (kind !== 'teoria') cards.push(relatedCard('Teoria i wzory', `${topic.name} — teoria`, `Definicje, prawa i wzory z ${topic.dopelniacz}.`, `/fizyka/${topic.slug}/`));
+  if (kind !== 'teoria') cards.push(relatedCard('Teoria i wzory', `${topic.name} - teoria`, `Definicje, prawa i wzory z ${topic.dopelniacz}.`, `/fizyka/${topic.slug}/`));
   if (kind !== 'zadania') cards.push(relatedCard('Zadania', `Zadania z ${topic.dopelniacz}`, `Rozwiązania krok po kroku.`, `/zadania-z-fizyki/${topic.slug}/`));
   if (kind !== 'matura') cards.push(relatedCard('Matura', `${topic.name} na maturze`, `Wymagania CKE i typowe zadania.`, `/matura-z-fizyki/${topic.slug}/`));
   // Działy powiązane
@@ -256,17 +256,17 @@ function relatedSection(topic, topicsBySlug, kind) {
 // ---------------------------------------------------------------------------
 function genTeoria(topic, topicsBySlug) {
   const canonical = `/fizyka/${topic.slug}/`;
-  const title = `${topic.name} — teoria, wzory i definicje | Fizyka | ${BRAND}`;
+  const title = `${topic.name} - teoria, wzory i definicje | Fizyka | ${BRAND}`;
   const desc = topic.metaTeoria || `${topic.name}: teoria, wzory i definicje. Wytłumaczenie krok po kroku dla licealistów i maturzystów.`;
   const bc = breadcrumbs([
     { name: 'Strona główna', url: '/' },
     { name: 'Baza wiedzy', url: '/baza-wiedzy/' },
-    { name: `${topic.name} — teoria`, url: null }
+    { name: `${topic.name} - teoria`, url: null }
   ]);
   const faq = faqBlock(topic.faqTeoria);
   const article = {
     '@context': 'https://schema.org', '@type': 'Article',
-    headline: `${topic.name} — teoria i wzory`, inLanguage: 'pl',
+    headline: `${topic.name} - teoria i wzory`, inLanguage: 'pl',
     description: plain(desc), datePublished: TODAY, dateModified: TODAY,
     author: { '@type': 'Organization', name: BRAND },
     publisher: { '@type': 'Organization', name: BRAND, logo: { '@type': 'ImageObject', url: `${SITE}/images/logo_magenta.png` } },
@@ -278,7 +278,7 @@ function genTeoria(topic, topicsBySlug) {
 ${bc.html}
 <div class="seo-hero">
   <p class="eyebrow">Teoria fizyki</p>
-  <h1>${esc(topic.name)} — teoria, wzory i definicje</h1>
+  <h1>${esc(topic.name)} - teoria, wzory i definicje</h1>
   <p>${esc(topic.intro)}</p>
   <div class="hero-cta"><a class="btn btn-light" href="/zadania-z-fizyki/${topic.slug}/">Przejdź do zadań →</a></div>
 </div>
@@ -301,7 +301,7 @@ ${relatedSection(topic, topicsBySlug, 'teoria')}
 
 function genMatura(topic, topicsBySlug) {
   const canonical = `/matura-z-fizyki/${topic.slug}/`;
-  const title = `Matura z fizyki: ${topic.name} — wymagania i zadania | ${BRAND}`;
+  const title = `Matura z fizyki: ${topic.name} - wymagania i zadania | ${BRAND}`;
   const desc = topic.metaMatura || `${topic.name} na maturze z fizyki: wymagania CKE, typowe zadania i strategia. Poziom podstawowy i rozszerzony.`;
   const bc = breadcrumbs([
     { name: 'Strona główna', url: '/' },
@@ -349,7 +349,7 @@ ${relatedSection(topic, topicsBySlug, 'matura')}
 function genZadaniaHub(topic, topicsBySlug) {
   const canonical = `/zadania-z-fizyki/${topic.slug}/`;
   const title = `Zadania z ${topic.dopelniacz} z rozwiązaniami | ${BRAND}`;
-  const desc = `Zadania z ${topic.dopelniacz} z pełnymi rozwiązaniami krok po kroku. ${topic.name} — przykłady na poziomie liceum i matury.`;
+  const desc = `Zadania z ${topic.dopelniacz} z pełnymi rozwiązaniami krok po kroku. ${topic.name} - przykłady na poziomie liceum i matury.`;
   const bc = breadcrumbs([
     { name: 'Strona główna', url: '/' },
     { name: 'Baza wiedzy', url: '/baza-wiedzy/' },
@@ -364,7 +364,7 @@ function genZadaniaHub(topic, topicsBySlug) {
 ${bc.html}
 <div class="seo-hero">
   <p class="eyebrow">Zadania z rozwiązaniami</p>
-  <h1>Zadania z ${esc(topic.dopelniacz)} — rozwiązania krok po kroku</h1>
+  <h1>Zadania z ${esc(topic.dopelniacz)} - rozwiązania krok po kroku</h1>
   <p>${esc(topic.intro)}</p>
   <div class="hero-cta"><a class="btn btn-light" href="/fizyka/${topic.slug}/">📖 Powtórz teorię</a></div>
 </div>
@@ -388,7 +388,7 @@ ${relatedSection(topic, topicsBySlug, 'zadania')}
 
 function genZadaniaSub(topic, sub, topicsBySlug) {
   const canonical = `/zadania-z-fizyki/${topic.slug}/${sub.slug}/`;
-  const title = `${sub.name} — zadania z rozwiązaniami | ${topic.name} | ${BRAND}`;
+  const title = `${sub.name} - zadania z rozwiązaniami | ${topic.name} | ${BRAND}`;
   const desc = `${sub.name}: zadania z fizyki z pełnymi rozwiązaniami krok po kroku. ${esc(sub.intro || '')}`.slice(0, 160);
   const bc = breadcrumbs([
     { name: 'Strona główna', url: '/' },
@@ -402,7 +402,7 @@ function genZadaniaSub(topic, sub, topicsBySlug) {
 ${bc.html}
 <div class="seo-hero">
   <p class="eyebrow">${esc(topic.name)} · zadania</p>
-  <h1>${esc(sub.name)} — zadania z rozwiązaniami</h1>
+  <h1>${esc(sub.name)} - zadania z rozwiązaniami</h1>
   <p>${esc(sub.intro || '')}</p>
 </div>
 <div class="prose">
@@ -413,7 +413,7 @@ ${ctaCenter()}
 <h2>Więcej zadań</h2>
 <div class="related-grid">
 ${(topic.subtopics || []).filter(x => x.slug !== sub.slug).map(x => relatedCard('Zadania', x.name, x.intro || '', `/zadania-z-fizyki/${topic.slug}/${x.slug}/`)).join('')}
-${relatedCard('Teoria', `${topic.name} — teoria`, `Wzory i definicje z ${topic.dopelniacz}.`, `/fizyka/${topic.slug}/`)}
+${relatedCard('Teoria', `${topic.name} - teoria`, `Wzory i definicje z ${topic.dopelniacz}.`, `/fizyka/${topic.slug}/`)}
 </div>
 </main>`;
   writePage(canonical, shell({
@@ -425,7 +425,7 @@ ${relatedCard('Teoria', `${topic.name} — teoria`, `Wzory i definicje z ${topic
 
 function genCity(city, topics) {
   const canonical = `/korepetycje-z-fizyki/${city.slug}/`;
-  const title = `Korepetycje z fizyki online — ${city.name} | matura i liceum | ${BRAND}`;
+  const title = `Korepetycje z fizyki online - ${city.name} | matura i liceum | ${BRAND}`;
   const desc = `Korepetycje z fizyki online dla uczniów z ${city.locative}. Przygotowanie do matury i poprawa ocen. Indywidualne lekcje 1:1, elastyczne terminy.`;
   const bc = breadcrumbs([
     { name: 'Strona główna', url: '/' },
@@ -437,39 +437,39 @@ function genCity(city, topics) {
   const dzialyLinks = topics.slice(0, 12).map(t => relatedCard('Dział', t.name, `Teoria i wzory z ${t.dopelniacz}.`, `/fizyka/${t.slug}/`)).join('');
   const service = {
     '@context': 'https://schema.org', '@type': 'Service',
-    serviceType: 'Korepetycje z fizyki online', name: `Korepetycje z fizyki online — ${city.name}`,
+    serviceType: 'Korepetycje z fizyki online', name: `Korepetycje z fizyki online - ${city.name}`,
     description: plain(desc), areaServed: { '@type': 'City', name: city.name },
     provider: { '@type': 'EducationalOrganization', name: BRAND, url: SITE },
     audience: { '@type': 'EducationalAudience', educationalRole: 'student' }, inLanguage: 'pl'
   };
   const faqCity = faqBlock([
-    { q: `Czy korepetycje z fizyki w ${city.locative} odbywają się online?`, a: `Tak. Prowadzimy lekcje online 1:1, więc możesz uczyć się z dowolnej dzielnicy ${city.name} (np. ${(city.dzielnice||[]).slice(0,3).join(', ')}) bez dojazdów — wystarczy komputer i internet.` },
-    { q: `Czy przygotujecie mnie do matury z fizyki?`, a: `Tak, specjalizujemy się w przygotowaniu do matury z fizyki na poziomie podstawowym i rozszerzonym — od podstaw aż po zadania maturalne CKE.` },
-    { q: `Ile kosztują korepetycje z fizyki?`, a: `Mamy kilka pakietów — od samodzielnego kursu online po indywidualne lekcje live. Szczegóły i ceny znajdziesz na stronie korepetycji.` },
-    { q: `Od czego zacząć naukę fizyki?`, a: `Najlepiej od solidnych podstaw — zajrzyj do naszej Bazy wiedzy z teorią i zadaniami z każdego działu, a na lekcjach uzupełnimy luki.` }
+    { q: `Czy korepetycje z fizyki w ${city.locative} odbywają się online?`, a: `Tak. Prowadzimy lekcje online 1:1, więc możesz uczyć się z dowolnej dzielnicy ${city.name} (np. ${(city.dzielnice||[]).slice(0,3).join(', ')}) bez dojazdów - wystarczy komputer i internet.` },
+    { q: `Czy przygotujecie mnie do matury z fizyki?`, a: `Tak, specjalizujemy się w przygotowaniu do matury z fizyki na poziomie podstawowym i rozszerzonym - od podstaw aż po zadania maturalne CKE.` },
+    { q: `Ile kosztują korepetycje z fizyki?`, a: `Mamy kilka pakietów - od samodzielnego kursu online po indywidualne lekcje live. Szczegóły i ceny znajdziesz na stronie korepetycji.` },
+    { q: `Od czego zacząć naukę fizyki?`, a: `Najlepiej od solidnych podstaw - zajrzyj do naszej Bazy wiedzy z teorią i zadaniami z każdego działu, a na lekcjach uzupełnimy luki.` }
   ]);
   const main = `<main class="seo-main">
 ${bc.html}
 <div class="seo-hero">
   <p class="eyebrow">Korepetycje z fizyki online</p>
-  <h1>Korepetycje z fizyki online — ${esc(city.name)}</h1>
-  <p>Uczysz się w ${esc(city.locative)} i potrzebujesz wsparcia z fizyki? Prowadzimy indywidualne korepetycje online 1:1 oraz kurs maturalny — bez dojazdów, w dogodnych terminach.</p>
+  <h1>Korepetycje z fizyki online - ${esc(city.name)}</h1>
+  <p>Uczysz się w ${esc(city.locative)} i potrzebujesz wsparcia z fizyki? Prowadzimy indywidualne korepetycje online 1:1 oraz kurs maturalny - bez dojazdów, w dogodnych terminach.</p>
   <div class="hero-cta"><a class="btn btn-light" href="/korepetycje">Sprawdź ofertę i ceny →</a></div>
 </div>
 <div class="prose">
 <section><h2>Korepetycje z fizyki dla uczniów z ${esc(city.name)}</h2>
 <p>${esc(city.akcent)}</p>
-<p>Naszą metodą uczymy fizyki <strong>prosto i obrazowo</strong> — tłumaczymy mechanizm zjawiska, a nie każemy wkuwać wzorów na pamięć. Lekcje online sprawdzają się u uczniów z całego ${esc(city.name)}${dz ? ` — od dzielnic takich jak ${esc(dz)}` : ''}.</p></section>
+<p>Naszą metodą uczymy fizyki <strong>prosto i obrazowo</strong> - tłumaczymy mechanizm zjawiska, a nie każemy wkuwać wzorów na pamięć. Lekcje online sprawdzają się u uczniów z całego ${esc(city.name)}${dz ? ` - od dzielnic takich jak ${esc(dz)}` : ''}.</p></section>
 ${ucz ? `<section><h2>Przygotowanie pod uczelnie w ${esc(city.locative)}</h2>
 <p>Dobry wynik z fizyki na maturze otwiera drzwi na kierunki techniczne lokalnych uczelni:</p><ul>${ucz}</ul></section>` : ''}
 <section><h2>Co zyskujesz?</h2>
 <ul>
-<li><strong>Lekcje 1:1</strong> — pełna uwaga nauczyciela skupiona na Twoich brakach.</li>
-<li><strong>Przygotowanie do matury</strong> — poziom podstawowy i rozszerzony, zadania CKE.</li>
-<li><strong>Materiały i baza zadań</strong> — dostęp do teorii i zadań z rozwiązaniami online.</li>
-<li><strong>Elastyczne terminy</strong> — uczysz się wtedy, kiedy Ci pasuje, bez dojazdów po ${esc(city.locative)}.</li>
+<li><strong>Lekcje 1:1</strong> - pełna uwaga nauczyciela skupiona na Twoich brakach.</li>
+<li><strong>Przygotowanie do matury</strong> - poziom podstawowy i rozszerzony, zadania CKE.</li>
+<li><strong>Materiały i baza zadań</strong> - dostęp do teorii i zadań z rozwiązaniami online.</li>
+<li><strong>Elastyczne terminy</strong> - uczysz się wtedy, kiedy Ci pasuje, bez dojazdów po ${esc(city.locative)}.</li>
 </ul></section>
-<section><h2>Materiały do nauki — wszystkie działy fizyki</h2>
+<section><h2>Materiały do nauki - wszystkie działy fizyki</h2>
 <p>Niezależnie od korepetycji możesz korzystać z naszej darmowej bazy wiedzy:</p>
 <div class="related-grid">${dzialyLinks}</div></section>
 ${faqCity.html}
@@ -487,7 +487,7 @@ ${ctaCenter()}
 
 function genCityHub(topics) {
   const canonical = `/korepetycje-z-fizyki/`;
-  const title = `Korepetycje z fizyki online — cała Polska | matura i liceum | ${BRAND}`;
+  const title = `Korepetycje z fizyki online - cała Polska | matura i liceum | ${BRAND}`;
   const desc = `Korepetycje z fizyki online w całej Polsce. Indywidualne lekcje 1:1, przygotowanie do matury podstawowej i rozszerzonej. Wybierz swoje miasto.`;
   const bc = breadcrumbs([
     { name: 'Strona główna', url: '/' },
@@ -498,7 +498,7 @@ function genCityHub(topics) {
 ${bc.html}
 <div class="seo-hero">
   <p class="eyebrow">Korepetycje z fizyki online</p>
-  <h1>Korepetycje z fizyki online — cała Polska</h1>
+  <h1>Korepetycje z fizyki online - cała Polska</h1>
   <p>Uczymy fizyki online w całym kraju. Indywidualne lekcje 1:1, kurs maturalny i baza zadań z rozwiązaniami. Wybierz swoje miasto albo od razu sprawdź ofertę.</p>
   <div class="hero-cta"><a class="btn btn-light" href="/korepetycje">Oferta i ceny →</a></div>
 </div>
@@ -513,8 +513,8 @@ ${ctaCenter()}
 
 function genHub(topics) {
   const canonical = `/baza-wiedzy/`;
-  const title = `Baza wiedzy z fizyki — teoria, wzory i zadania z rozwiązaniami | ${BRAND}`;
-  const desc = `Darmowa baza wiedzy z fizyki: teoria, wzory i zadania z rozwiązaniami ze wszystkich działów — od kinematyki po fizykę jądrową. Idealne na maturę.`;
+  const title = `Baza wiedzy z fizyki - teoria, wzory i zadania z rozwiązaniami | ${BRAND}`;
+  const desc = `Darmowa baza wiedzy z fizyki: teoria, wzory i zadania z rozwiązaniami ze wszystkich działów - od kinematyki po fizykę jądrową. Idealne na maturę.`;
   const bc = breadcrumbs([
     { name: 'Strona główna', url: '/' },
     { name: 'Baza wiedzy', url: null }
@@ -531,14 +531,14 @@ function genHub(topics) {
 ${bc.html}
 <div class="seo-hero">
   <p class="eyebrow">Baza wiedzy</p>
-  <h1>Baza wiedzy z fizyki — teoria, wzory i zadania</h1>
+  <h1>Baza wiedzy z fizyki - teoria, wzory i zadania</h1>
   <p>Wszystko, czego potrzebujesz do nauki fizyki w jednym miejscu: przejrzysta teoria, komplet wzorów i setki zadań z rozwiązaniami krok po kroku. Idealne do powtórki przed maturą.</p>
   <div class="hero-cta">
     <a class="btn btn-light" href="/korepetycje-z-fizyki/">👨‍🏫 Korepetycje online</a>
     <a class="btn btn-light" href="/oferta-ratunkowa">⚓ Kurs maturalny</a>
   </div>
 </div>
-<div class="hub-section"><h2>📖 Teoria i wzory — działy fizyki</h2><div class="hub-grid">${teoria}</div></div>
+<div class="hub-section"><h2>📖 Teoria i wzory - działy fizyki</h2><div class="hub-grid">${teoria}</div></div>
 <div class="hub-section"><h2>✍️ Zadania z rozwiązaniami</h2><div class="hub-grid">${zadania}</div></div>
 <div class="hub-section"><h2>🎓 Matura z fizyki</h2><div class="hub-grid">${matura}</div></div>
 ${ctaCenter()}
@@ -600,7 +600,7 @@ ${cards.length ? `<h2>Zobacz również</h2><div class="related-grid">${cards.joi
 
 function genBlogHub(posts) {
   const canonical = `/blog/`;
-  const title = `Blog o fizyce i maturze — porady i plany nauki | ${BRAND}`;
+  const title = `Blog o fizyce i maturze - porady i plany nauki | ${BRAND}`;
   const desc = `Blog Fizyka Statkiem: jak uczyć się fizyki do matury, jak korzystać z karty wzorów, najczęstsze błędy maturalne i kierunki studiów wymagające fizyki.`;
   const bc = breadcrumbs([
     { name: 'Strona główna', url: '/' },
@@ -639,7 +639,7 @@ ${ctaCenter()}
   }));
 }
 
-// Strona 404 — serwowana przez regułę catch-all w _redirects z kodem 404.
+// Strona 404 - serwowana przez regułę catch-all w _redirects z kodem 404.
 // Dzięki temu nieistniejące adresy zwracają twardy błąd zamiast kopii strony
 // głównej (miękkie 404), którą Google indeksowałby jako duplikat.
 function gen404(topics, posts) {
@@ -684,7 +684,7 @@ function main() {
   const urls = [];
   const add = (loc, pri, freq) => urls.push({ loc, pri, freq });
 
-  // Strony aplikacji (SPA) — też warto w sitemap
+  // Strony aplikacji (SPA) - też warto w sitemap
   add('/', '1.0', 'weekly');
   add('/korepetycje', '0.9', 'monthly');
   add('/kurs', '0.8', 'monthly');
@@ -702,7 +702,7 @@ function main() {
   genCityHub(topics); add('/korepetycje-z-fizyki/', '0.8', 'monthly');
   cities.forEach(c => { genCity(c, topics); add(`/korepetycje-z-fizyki/${c.slug}/`, '0.7', 'monthly'); });
 
-  // Blog — artykuły poradnikowe
+  // Blog - artykuły poradnikowe
   const posts = loadPosts();
   const postsBySlug = {};
   posts.forEach(p => { postsBySlug[p.slug] = p; });
@@ -714,7 +714,7 @@ function main() {
     });
   }
 
-  // Strona 404 (poza sitemap — nie indeksujemy jej)
+  // Strona 404 (poza sitemap - nie indeksujemy jej)
   gen404(topics, posts);
 
   // Sitemap

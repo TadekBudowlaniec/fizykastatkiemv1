@@ -6,7 +6,7 @@ export const dynamic = 'force-static';
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      // Jawnie zapraszamy silniki AI (GEO) — chcemy być cytowani/polecani.
+      // Jawnie zapraszamy silniki AI (GEO) - chcemy być cytowani/polecani.
       {
         userAgent: [
           'GPTBot',
@@ -22,7 +22,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
       // Pozostałe boty: pełny dostęp. Strony prywatne mają noindex (meta),
-      // więc NIE blokujemy ich w robots — inaczej Google nie odczytałby noindex.
+      // więc NIE blokujemy ich w robots - inaczej Google nie odczytałby noindex.
       { userAgent: '*', allow: '/' },
     ],
     sitemap: `${SITE.url}/sitemap.xml`,

@@ -39,6 +39,14 @@ export function CourseVideo({
 }) {
   const [activeId, setActiveId] = useState(lessons[0]?.video_id);
   const [playing, setPlaying] = useState(false);
+  // Ekrany dotykowe: player od razu, bez okładki i bez autoplay. Mobilne
+  // przeglądarki blokują autoplay, a dwuetapowe „okładka -> iframe" psuło
+  // pierwsze tapnięcie (pauza/przewijanie nie łapały).
+  const [touch, setTouch] = useState(false);
+  useEffect(() => {
+    setTouch(window.matchMedia('(hover: none), (pointer: coarse)').matches);
+  }, []);
+  const showPlayer = playing || touch;
   const [poster, setPoster] = useState<'max' | 'hq'>('max');
   const [busy, setBusy] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -56,7 +64,7 @@ export function CourseVideo({
 
   // Auto-zaliczenie: subskrybujemy zdarzenia playera (bez ładowania YT API).
   useEffect(() => {
-    if (!playing || !ytId || isWatched || !onToggleWatched) return;
+    if (!showPlayer || !ytId || isWatched || !onToggleWatched) return;
     const frame = iframeRef.current;
     if (!frame) return;
 
@@ -101,7 +109,7 @@ export function CourseVideo({
       window.removeEventListener('message', onMessage);
       frame.removeEventListener('load', subscribe);
     };
-  }, [playing, ytId, isWatched, onToggleWatched]);
+  }, [showPlayer, ytId, isWatched, onToggleWatched]);
 
   if (!active) return null;
 
@@ -131,11 +139,12 @@ export function CourseVideo({
     >
       {/* Player / okładka */}
       <div className="relative aspect-video bg-navy-950">
-        {playing ? (
+        {showPlayer ? (
           <iframe
+            key={ytId}
             ref={iframeRef}
             className="absolute inset-0 h-full w-full"
-            src={`https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1&autoplay=1&enablejsapi=1&origin=${encodeURIComponent(origin)}`}
+            src={`https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1&playsinline=1&enablejsapi=1${playing && !touch ? '&autoplay=1' : ''}&origin=${encodeURIComponent(origin)}`}
             title={active.tytul_lekcji}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -161,7 +170,7 @@ export function CourseVideo({
               <span className="block text-[0.7rem] font-bold uppercase tracking-[0.14em] text-brand-200">
                 Lekcja wideo
               </span>
-              <span className="mt-0.5 block truncate font-display text-lg font-extrabold text-white sm:text-xl">
+              <span className="mt-0.5 line-clamp-2 font-display text-lg font-extrabold leading-tight text-white sm:text-xl">
                 {active.tytul_lekcji}
               </span>
             </span>
@@ -203,7 +212,7 @@ export function CourseVideo({
               ? 'Obejrzyj lekcję, a potem przejdź dalej.'
               : isWatched
                 ? 'Lekcja zaliczona. Możesz do niej wracać w każdej chwili.'
-                : 'Zalicza się automatycznie po obejrzeniu — albo odhacz ręcznie.'}
+                : 'Zalicza się automatycznie po obejrzeniu - albo odhacz ręcznie.'}
           </p>
         )}
 

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/cn';
 
-// Przyklejony pasek CTA na mobile — pojawia się po zescrollowaniu poniżej Hero.
+// Przyklejony pasek CTA na mobile - pojawia się po zescrollowaniu poniżej Hero.
 // Zawsze widoczny przycisk zakupu na długim landingu = wyższa konwersja.
 export function StickyCta() {
   const [show, setShow] = useState(false);

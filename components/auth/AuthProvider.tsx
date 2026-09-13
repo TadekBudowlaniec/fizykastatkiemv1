@@ -25,7 +25,7 @@ type AuthState = {
   refreshAccess: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, name: string) => Promise<void>;
-  /** Logowanie bez hasła — wysyła magic link (np. dla gościa po zakupie). */
+  /** Logowanie bez hasła - wysyła magic link (np. dla gościa po zakupie). */
   sendMagicLink: (email: string) => Promise<void>;
   /** Wysyła e-mail do zresetowania hasła. */
   resetPassword: (email: string) => Promise<void>;
@@ -40,7 +40,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [enrollments, setEnrollments] = useState<Enrollment[]>([]);
-  // true dopóki nie wczytamy dostępu zalogowanego usera — zapobiega migotaniu
+  // true dopóki nie wczytamy dostępu zalogowanego usera - zapobiega migotaniu
   // ekranu „zablokowane"/„0/16" zanim enrollments dojadą.
   const [accessLoading, setAccessLoading] = useState(true);
 
@@ -109,7 +109,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } else {
       setIsAdmin(false);
       setEnrollments([]);
-      setAccessLoading(false); // brak usera — nie ma czego ładować
+      setAccessLoading(false); // brak usera - nie ma czego ładować
     }
   }, [user?.id, loadAccess]);
 
@@ -138,7 +138,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         password,
       });
       if (error) throw error;
-      // onAuthStateChange ustawi usera, a efekt załaduje dostęp — bez blokowania.
+      // onAuthStateChange ustawi usera, a efekt załaduje dostęp - bez blokowania.
     },
     [supabase]
   );
@@ -160,7 +160,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [supabase]
   );
 
-  // Magic link (logowanie bez hasła). shouldCreateUser:false — konto ma już
+  // Magic link (logowanie bez hasła). shouldCreateUser:false - konto ma już
   // istnieć (gość po zakupie jest tworzony przez webhook); nie tworzymy pustych
   // kont z literówek. Wysyłka realnie działa (ten sam mechanizm co planer).
   const sendMagicLink = useCallback(

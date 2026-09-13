@@ -10,14 +10,14 @@ const supabaseAuth = createClient(
 );
 
 // =============================================
-//  PROMOCJA — 1h od wejścia użytkownika
+//  PROMOCJA - 1h od wejścia użytkownika
 // =============================================
 const PROMO_DURATION_MS = 60 * 60 * 1000; // 1 godzina
 const STRIPE_MIN_EXPIRES = 30 * 60;       // 30 min w sekundach
 const STRIPE_MAX_EXPIRES = 24 * 60 * 60;  // 24h w sekundach
 
 // Mapowanie courseId -> { name, regularPrice, promoPrice } (kwoty w GROSZACH)
-// Ceny zgodne z lib/courses.ts. Pakiet Gold (18) WYCOFANY — nie przywracać.
+// Ceny zgodne z lib/courses.ts. Pakiet Gold (18) WYCOFANY - nie przywracać.
 // Bez fałszywej promocji: promoPrice == regularPrice (brak sztucznego rabatu).
 // Pojedynczy dział: 177 zł · Kurs Pełny (17): 828 zł · VIP 1:1 (19): 3497 zł.
 const courseData = {
@@ -60,7 +60,7 @@ function getPrice(course, promoStartedAt) {
     return isPromoActive(promoStartedAt) ? course.promoPrice : course.regularPrice;
 }
 
-// Oblicza expires_at — sesja wygasa gdy kończy się promo użytkownika
+// Oblicza expires_at - sesja wygasa gdy kończy się promo użytkownika
 function getExpiresAt(promoStartedAt) {
     if (!isPromoActive(promoStartedAt)) return undefined;
 
@@ -92,7 +92,7 @@ exports.handler = async (event) => {
 
         const authHeader = event.headers.authorization;
         if (authHeader && authHeader.startsWith('Bearer ')) {
-            // Tryb zalogowany — weryfikacja JWT
+            // Tryb zalogowany - weryfikacja JWT
             const token = authHeader.replace('Bearer ', '');
             const { data: { user }, error: authError } = await supabaseAuth.auth.getUser(token);
 
@@ -102,7 +102,7 @@ exports.handler = async (event) => {
             userId = user.id;
             customerEmail = user.email;
         } else {
-            // Tryb gość — email opcjonalny (Stripe zbierze jeśli brak)
+            // Tryb gość - email opcjonalny (Stripe zbierze jeśli brak)
             if (guestEmail) {
                 customerEmail = guestEmail;
             }
@@ -144,12 +144,12 @@ exports.handler = async (event) => {
             cancel_url: `${CLIENT_URL}/kurs`,
         };
 
-        // Jeśli zalogowany — przekaż userId w metadata
+        // Jeśli zalogowany - przekaż userId w metadata
         if (userId) {
             sessionParams.metadata.userId = userId;
         }
 
-        // Email: jeśli mamy — prefill, jeśli nie — Stripe zbierze sam
+        // Email: jeśli mamy - prefill, jeśli nie - Stripe zbierze sam
         if (customerEmail) {
             sessionParams.customer_email = customerEmail;
         }

@@ -93,7 +93,7 @@ export default async function CityPage({ params }: Params) {
     },
     {
       q: 'Ile kosztują korepetycje z fizyki?',
-      a: `Korepetycje indywidualne z fizyki online 1:1 kosztują ${TUTORING_PRICE} zł za 60 minut. Alternatywnie dostępny jest samodzielny kurs maturalny online — od ${SINGLE_COURSE_PRICE} zł za pojedynczy dział. Pełny cennik znajdziesz w zakładce Cennik.`,
+      a: `Korepetycje indywidualne z fizyki online 1:1 kosztują ${TUTORING_PRICE} zł za 60 minut. Alternatywnie dostępny jest samodzielny kurs maturalny online - od ${SINGLE_COURSE_PRICE} zł za pojedynczy dział. Pełny cennik znajdziesz w zakładce Cennik.`,
     },
     {
       q: 'Od czego zacząć naukę fizyki?',

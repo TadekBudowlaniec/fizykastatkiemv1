@@ -1,4 +1,4 @@
-// Minimalistyczne ikony (stroke, 1.75px) do panelu kursu — zamiast emoji na
+// Minimalistyczne ikony (stroke, 1.75px) do panelu kursu - zamiast emoji na
 // przyciskach. Emoji zostają tylko w tytule działu (ikona z courses.json).
 
 import type { SVGProps } from 'react';

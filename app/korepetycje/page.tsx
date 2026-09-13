@@ -13,11 +13,11 @@ import { JsonLd, breadcrumbLd, faqLd } from '@/components/seo/SeoBits';
 const korepetycjeFaq: FaqItem[] = [
   {
     q: 'Ile kosztują korepetycje z fizyki?',
-    a: `Korepetycje kosztują ${TUTORING_PRICE} zł za 60 minut — tyle samo online i stacjonarnie w Lublinie. Płatność po zajęciach lub z góry za pakiet lekcji.`,
+    a: `Korepetycje kosztują ${TUTORING_PRICE} zł za 60 minut - tyle samo online i stacjonarnie w Lublinie. Płatność po zajęciach lub z góry za pakiet lekcji.`,
   },
   {
     q: 'Korepetycje z fizyki online czy stacjonarnie w Lublinie?',
-    a: 'Prowadzę oba warianty. Online na Discordzie z interaktywną tablicą (notatki zapisują się automatycznie), a stacjonarnie w Lublinie na os. Rury. Skuteczność jest taka sama — wybierasz to, co dla Ciebie wygodniejsze.',
+    a: 'Prowadzę oba warianty. Online na Discordzie z interaktywną tablicą (notatki zapisują się automatycznie), a stacjonarnie w Lublinie na os. Rury. Skuteczność jest taka sama - wybierasz to, co dla Ciebie wygodniejsze.',
   },
   {
     q: 'Czy przygotujesz mnie do matury rozszerzonej z fizyki?',
@@ -29,7 +29,7 @@ const korepetycjeFaq: FaqItem[] = [
   },
   {
     q: 'Od kiedy zacząć przygotowania do matury z fizyki?',
-    a: 'Im wcześniej, tym spokojniej — ale nawet kilka miesięcy skoncentrowanej pracy potrafi dać duży skok wyniku. Zaczynamy od diagnozy braków na pierwszej lekcji.',
+    a: 'Im wcześniej, tym spokojniej - ale nawet kilka miesięcy skoncentrowanej pracy potrafi dać duży skok wyniku. Zaczynamy od diagnozy braków na pierwszej lekcji.',
   },
 ];
 
@@ -39,7 +39,7 @@ const korepetycjeJsonLd = [
     '@type': 'Service',
     '@id': `${SITE.url}/korepetycje/#service`,
     serviceType: 'Korepetycje z fizyki i matematyki',
-    name: 'Korepetycje z fizyki — matura rozszerzona (online i Lublin)',
+    name: 'Korepetycje z fizyki - matura rozszerzona (online i Lublin)',
     description:
       'Indywidualne korepetycje z fizyki (i matematyki): przygotowanie do matury rozszerzonej i egzaminu ósmoklasisty. Online (Discord + interaktywna tablica) oraz stacjonarnie w Lublinie.',
     provider: { '@id': `${SITE.url}/#czarek` },
@@ -71,9 +71,9 @@ const korepetycjeJsonLd = [
 ];
 
 export const metadata: Metadata = {
-  title: 'Korepetycje z fizyki — matura rozszerzona (online i Lublin)',
+  title: 'Korepetycje z fizyki - matura rozszerzona (online i Lublin)',
   description:
-    'Korepetycje z fizyki do matury rozszerzonej — online (Discord + tablica) i stacjonarnie w Lublinie. Prowadzi Czarek (82% z fizyki rozszerzonej). Także matematyka i egzamin 8-klasisty.',
+    'Korepetycje z fizyki do matury rozszerzonej - online (Discord + tablica) i stacjonarnie w Lublinie. Prowadzi Czarek (82% z fizyki rozszerzonej). Także matematyka i egzamin 8-klasisty.',
   alternates: { canonical: '/korepetycje/' },
 };
 
@@ -121,13 +121,13 @@ export default function KorepetycjePage() {
                 🚀 Skutecznie, szybko i z pasją
               </span>
               <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.06] sm:text-5xl">
-                Korepetycje z fizyki —{' '}
+                Korepetycje z fizyki -{' '}
                 <span className="text-gradient">zrozum, nie wkuwaj</span>
               </h1>
               <p className="mt-5 max-w-xl text-lg text-slate-300/85">
                 Cześć, jestem Czarek. Fizykę rozszerzoną na maturze zdałem na{' '}
                 <strong className="text-white">82%</strong>. Uczę fizyki i
-                matematyki —{' '}
+                matematyki -{' '}
                 <strong className="text-white">pokazuję mechanizm zjawiska</strong>,
                 a nie każę wkuwać wzorów. Online i stacjonarnie w Lublinie.
               </p>
@@ -226,7 +226,7 @@ export default function KorepetycjePage() {
       {/* FAQ */}
       <FaqSection
         items={korepetycjeFaq}
-        subtitle="Masz inne pytanie? Napisz — odpowiem osobiście."
+        subtitle="Masz inne pytanie? Napisz - odpowiem osobiście."
       />
 
       {/* Finalne CTA */}

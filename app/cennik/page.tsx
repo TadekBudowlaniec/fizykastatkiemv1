@@ -14,7 +14,7 @@ const vipPlan = PLANS.find((p) => p.key === 'vip')!;
 export const metadata: Metadata = {
   title: 'Cennik kursu fizyki',
   description:
-    'Cennik kursu maturalnego z fizyki: Kurs Pełny (828 zł) i VIP 1:1 z indywidualnym prowadzeniem (3497 zł, tylko 6 miejsc). Płatność jednorazowa — BLIK, karta, Klarna.',
+    'Cennik kursu maturalnego z fizyki: Kurs Pełny (828 zł) i VIP 1:1 z indywidualnym prowadzeniem (3497 zł, tylko 6 miejsc). Płatność jednorazowa - BLIK, karta, Klarna.',
   alternates: { canonical: '/cennik/' },
 };
 
@@ -29,7 +29,7 @@ const faq: FaqItem[] = [
   },
   {
     q: 'Czym różni się Kurs Pełny od VIP 1:1?',
-    a: `Kurs Pełny (${fullPlan.price} zł) to kompletny, samodzielny kurs: wszystkie 16 działów, PDF-y, zadania, quizy i planer. VIP 1:1 (${vipPlan.price} zł) obejmuje cały Kurs Pełny oraz indywidualne prowadzenie 1:1 z Czarkiem — 1 godzina tygodniowo aż do matury, z planem dopasowanym do Twoich braków. VIP ma realnie tylko ${VIP_SEATS} miejsc, bo każde oznacza indywidualną pracę.`,
+    a: `Kurs Pełny (${fullPlan.price} zł) to kompletny, samodzielny kurs: wszystkie 16 działów, PDF-y, zadania, quizy i planer. VIP 1:1 (${vipPlan.price} zł) obejmuje cały Kurs Pełny oraz indywidualne prowadzenie 1:1 z Czarkiem - 1 godzina tygodniowo aż do matury, z planem dopasowanym do Twoich braków. VIP ma realnie tylko ${VIP_SEATS} miejsc, bo każde oznacza indywidualną pracę.`,
   },
   {
     q: 'Czy mogę kupić tylko jeden dział?',
@@ -54,7 +54,7 @@ const compare = [
   { label: 'Moduł „Tutaj zacznij”', f: true, v: true },
   { label: 'Gwarancja Zdanej Matury', f: true, v: true },
   { label: 'Indywidualne prowadzenie 1:1 z Czarkiem', f: false, v: true },
-  { label: '1 godzina zajęć tygodniowo — aż do matury', f: false, v: true },
+  { label: '1 godzina zajęć tygodniowo - aż do matury', f: false, v: true },
   { label: 'Plan pracy pod Twoje braki', f: false, v: true },
   { label: 'Stały kontakt i wsparcie między zajęciami', f: false, v: true },
 ];
@@ -68,7 +68,7 @@ const pakietyLd = {
     position: i + 1,
     item: {
       '@type': 'Product',
-      name: `Kurs maturalny z fizyki — ${p.name}`,
+      name: `Kurs maturalny z fizyki - ${p.name}`,
       description: p.features.join('. ') + '.',
       brand: { '@type': 'Brand', name: SITE.name },
       offers: {
@@ -134,7 +134,7 @@ export default function CennikPage() {
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-center text-muted">
             Oba warianty zawierają cały kurs. VIP dokłada to, czego nie da żaden
-            zestaw materiałów — człowieka, który prowadzi Cię aż do matury.
+            zestaw materiałów - człowieka, który prowadzi Cię aż do matury.
           </p>
           <div className="mt-8 overflow-x-auto">
             <table className="w-full min-w-[520px] border-collapse text-sm">
@@ -169,7 +169,7 @@ export default function CennikPage() {
         </Container>
       </section>
 
-      {/* Pojedynczy dział — dyskretny link, nie główna karta cennika */}
+      {/* Pojedynczy dział - dyskretny link, nie główna karta cennika */}
       <section className="bg-cloud py-14">
         <Container>
           <div className="border-gradient flex flex-col items-center gap-5 rounded-3xl bg-white p-8 text-center shadow-card sm:flex-row sm:text-left">

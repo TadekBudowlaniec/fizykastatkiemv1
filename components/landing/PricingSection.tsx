@@ -23,7 +23,7 @@ export function PricingSection() {
           <div className="rounded-2xl border border-line bg-cloud p-5">
             <p className="font-bold text-ink">Kurs Pełny</p>
             <p className="mt-1 text-sm text-muted">
-              Samodzielna nauka według gotowego systemu — całość materiału,
+              Samodzielna nauka według gotowego systemu - całość materiału,
               planer i zadania w Twoich rękach.
             </p>
           </div>
@@ -31,7 +31,7 @@ export function PricingSection() {
             <p className="font-bold text-ink">VIP 1:1</p>
             <p className="mt-1 text-sm text-muted">
               System <strong>plus człowiek</strong>, który prowadzi Cię przez
-              cały proces. Nie musisz sam układać przygotowań — robi to z Tobą
+              cały proces. Nie musisz sam układać przygotowań - robi to z Tobą
               Czarek, aż do egzaminu.
             </p>
           </div>

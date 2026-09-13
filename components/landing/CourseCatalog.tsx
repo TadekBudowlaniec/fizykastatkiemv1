@@ -11,7 +11,7 @@ export function CourseCatalog() {
       <Container size="wide">
         <SectionHeading
           eyebrow="Program kursu"
-          title="16 działów — cały zakres matury z fizyki"
+          title="16 działów - cały zakres matury z fizyki"
           subtitle="Kompletny materiał od pierwszych tematów aż do matury. Wszystkie działy wchodzą w skład Kursu Pełnego."
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -22,7 +22,7 @@ export function CourseCatalog() {
           ))}
         </div>
 
-        {/* Dyskretny link do oferty pojedynczych działów — nie rozprasza
+        {/* Dyskretny link do oferty pojedynczych działów - nie rozprasza
             osoby zainteresowanej Kursem Pełnym. */}
         <p className="mt-10 text-center text-sm text-muted">
           Potrzebujesz tylko jednego działu zamiast całego kursu?{' '}

@@ -17,8 +17,8 @@ export function Guarantee() {
                 </h2>
                 <p className="mt-2 max-w-2xl text-muted">
                   Przerób cały kurs zgodnie z warunkami gwarancji, podejdź do
-                  matury z fizyki i — jeśli mimo to uzyskasz wynik{' '}
-                  <strong className="text-ink">poniżej 30%</strong> — możesz
+                  matury z fizyki i - jeśli mimo to uzyskasz wynik{' '}
+                  <strong className="text-ink">poniżej 30%</strong> - możesz
                   ubiegać się o <strong className="text-ink">zwrot ceny kursu</strong>.
                   Zgłoszenie w ciągu 7 dni od otrzymania oficjalnego wyniku.
                   Wynik matury potwierdzasz oficjalnym dokumentem z wynikiem

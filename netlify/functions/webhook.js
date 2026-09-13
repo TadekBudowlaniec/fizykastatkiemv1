@@ -44,7 +44,7 @@ const priceToCourseId = {
     'price_1RtPPaJLuu6b086bdmWNAsGI': 17
 };
 
-// Wymagaj SERVICE_KEY — webhook musi mieć pełne uprawnienia
+// Wymagaj SERVICE_KEY - webhook musi mieć pełne uprawnienia
 if (!process.env.SUPABASE_SERVICE_KEY) {
     console.error('FATAL: SUPABASE_SERVICE_KEY not configured');
 }
@@ -55,7 +55,7 @@ const supabase = createClient(
 
 const CLIENT_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
-// Znajdź użytkownika Supabase Auth po e-mailu — Z PAGINACJĄ.
+// Znajdź użytkownika Supabase Auth po e-mailu - Z PAGINACJĄ.
 // listUsers() bez argumentów zwraca tylko pierwszą stronę (~50 userów); po
 // przekroczeniu tej liczby powracający gość nie był znajdowany, przez co
 // createUser padał na „email exists" i płacący klient nie dostawał dostępu.
@@ -84,12 +84,12 @@ async function findOrCreateUser(email) {
         console.log('Found existing auth user:', existingAuthUser.id, email);
         return existingAuthUser.id;
     }
-    // Gdy listowanie padło — nie twórz na ślepo (ryzyko duplikatu konta).
+    // Gdy listowanie padło - nie twórz na ślepo (ryzyko duplikatu konta).
     if (listError) {
         return null;
     }
 
-    // Utwórz nowe konto w Supabase Auth — generuje random hasło
+    // Utwórz nowe konto w Supabase Auth - generuje random hasło
     // Użytkownik dostanie magic link do logowania
     const { data: newUser, error: createError } = await supabase.auth.admin.createUser({
         email: email,
@@ -98,7 +98,7 @@ async function findOrCreateUser(email) {
 
     if (createError) {
         console.error('Error creating auth user:', createError);
-        // Wyścig/duplikat: konto mogło powstać równolegle — spróbuj znaleźć ponownie,
+        // Wyścig/duplikat: konto mogło powstać równolegle - spróbuj znaleźć ponownie,
         // zamiast zwracać null (co blokowałoby dostęp opłaconemu klientowi).
         const retry = await findAuthUserByEmail(email);
         if (retry.user) {
@@ -110,7 +110,7 @@ async function findOrCreateUser(email) {
 
     console.log('Created new auth user:', newUser.user.id, email);
 
-    // Wyślij magic link — użytkownik kliknie i będzie zalogowany
+    // Wyślij magic link - użytkownik kliknie i będzie zalogowany
     const { error: otpError } = await supabase.auth.admin.generateLink({
         type: 'magiclink',
         email: email,
@@ -151,11 +151,11 @@ exports.handler = async (event) => {
 
         // KRYTYCZNE: dostęp nadajemy WYŁĄCZNIE po potwierdzonej płatności.
         // - card/BLIK: 'checkout.session.completed' przychodzi od razu jako 'paid'
-        // - Klarna (metoda asynchroniczna): 'completed' bywa 'unpaid' — wtedy czekamy
+        // - Klarna (metoda asynchroniczna): 'completed' bywa 'unpaid' - wtedy czekamy
         //   na 'checkout.session.async_payment_succeeded' (dopiero ono jest 'paid').
         // - kupon 100%: 'no_payment_required'.
         if (session.payment_status !== 'paid' && session.payment_status !== 'no_payment_required') {
-            console.log('Payment not confirmed — skipping provisioning:', session.id, session.payment_status);
+            console.log('Payment not confirmed - skipping provisioning:', session.id, session.payment_status);
             return { statusCode: 200, body: JSON.stringify({ received: true, pending: true }) };
         }
 
@@ -167,7 +167,7 @@ exports.handler = async (event) => {
 
             if (!userId && checkoutMode === 'guest') {
                 if (!customerEmail) {
-                    console.error('Guest checkout without email — cannot provision access');
+                    console.error('Guest checkout without email - cannot provision access');
                     return { statusCode: 400, body: JSON.stringify({ error: 'No email for guest checkout' }) };
                 }
                 // Znajdź lub utwórz konto po emailu
@@ -205,8 +205,8 @@ exports.handler = async (event) => {
             // Fallback: metadata.courseId (zawsze obecne)
             if (courseIds.length === 0 && session.metadata?.courseId) {
                 const metaCourseId = session.metadata.courseId;
-                // 17 = Kurs Pełny, 19 = VIP 1:1 — oba dają pełny dostęp (16 działów).
-                // 18 (dawny Gold) wycofany — pozostaje na liście wstecznie dla starych sesji.
+                // 17 = Kurs Pełny, 19 = VIP 1:1 - oba dają pełny dostęp (16 działów).
+                // 18 (dawny Gold) wycofany - pozostaje na liście wstecznie dla starych sesji.
                 const fullAccessIds = ['full_access', '17', '18', '19'];
                 if (fullAccessIds.includes(metaCourseId)) {
                     courseIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];

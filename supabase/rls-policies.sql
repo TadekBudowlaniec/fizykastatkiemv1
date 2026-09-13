@@ -1,5 +1,5 @@
 -- ============================================================================
--- Fizyka Statkiem — RLS (Row Level Security) dla płatnych treści
+-- Fizyka Statkiem - RLS (Row Level Security) dla płatnych treści
 -- ============================================================================
 -- PROBLEM (audyt): kluczem anon można było czytać całą tabelę `video`, `tasks`,
 -- `task_images` (płatne lekcje/zadania) oraz `enrollments` (kto co kupił).
@@ -12,13 +12,13 @@
 --   1) Najpierw wykonaj SEKCJĘ 0 (inspekcja) i sprawdź istniejące polityki.
 --   2) Zastosuj SEKCJĘ 1–4.
 --   3) Wykonaj SEKCJĘ „WERYFIKACJA".
---   4) Gdyby coś nie działało — SEKCJA „ROLLBACK" na dole.
+--   4) Gdyby coś nie działało - SEKCJA „ROLLBACK" na dole.
 -- Zakładam kolumny: video.course_id, tasks.course_id, task_images.task_id,
 --   enrollments(user_id, course_id, access_granted), users(id, is_admin).
 -- ============================================================================
 
 -- ---------- SEKCJA 0: INSPEKCJA (uruchom najpierw, nic nie zmienia) ----------
--- Pokazuje obecny stan RLS i istniejące polityki — jeśli jest tam permisywna
+-- Pokazuje obecny stan RLS i istniejące polityki - jeśli jest tam permisywna
 -- polityka „allow all / to public", trzeba ją usunąć (patrz komentarz niżej).
 select relname, relrowsecurity as rls_enabled
 from pg_class
@@ -35,7 +35,7 @@ order by tablename, policyname;
 -- ---------- SEKCJA 0.5: USUŃ STARE PERMISYWNE POLITYKI (WYMAGANE!) ----------
 -- WAŻNE: Postgres łączy polityki PERMISSIVE operatorem OR. Dopóki istnieje
 -- którakolwiek „allow all" (qual = true, rola public), nowe restrykcyjne
--- polityki NIC nie dają — każdy nadal czyta wszystko. Najpierw je usuń.
+-- polityki NIC nie dają - każdy nadal czyta wszystko. Najpierw je usuń.
 -- Nazwy pochodzą z Twojej inspekcji (SEKCJA 0).
 
 -- Płatne treści czytane obecnie przez „wszystkich":
@@ -46,21 +46,21 @@ drop policy if exists "Anyone can view active tasks"     on public.tasks;
 drop policy if exists "Anyone can view task images"      on public.task_images;
 
 -- users: „Allow select for authenticated (true)" = każdy zalogowany widzi
--- e-maile WSZYSTKICH. Usuwamy — SEKCJA 7 daje odczyt tylko własnego wiersza.
+-- e-maile WSZYSTKICH. Usuwamy - SEKCJA 7 daje odczyt tylko własnego wiersza.
 drop policy if exists "Allow select for authenticated" on public.users;
 
--- enrollments: KRYTYCZNE — klient NIE może wstawiać enrollmentów (inaczej
+-- enrollments: KRYTYCZNE - klient NIE może wstawiać enrollmentów (inaczej
 -- zalogowany user mógłby sam sobie nadać dostęp do płatnego działu).
 -- Enrollmenty pisze wyłącznie webhook (service_role, omija RLS). Aplikacja
 -- nigdy nie wstawia enrollmentów z klienta, więc to bezpieczne.
 drop policy if exists "Allow insert for authenticated" on public.enrollments;
 
--- users: nadmiarowe/luźne polityki insert — zastępuje je jedna z blokadą
+-- users: nadmiarowe/luźne polityki insert - zastępuje je jedna z blokadą
 -- eskalacji is_admin (SEKCJA 7). Wiersz i tak tworzy trigger on_auth_user_created.
 drop policy if exists "Allow insert for authenticated"             on public.users;
 drop policy if exists "Enable insert for authenticated users only" on public.users;
 
--- users: stara polityka UPDATE (rola public) — zastępuje ją users_update_self
+-- users: stara polityka UPDATE (rola public) - zastępuje ją users_update_self
 -- (SEKCJA 7, z twardą blokadą is_admin). Usunięcie = jedna kanoniczna reguła.
 drop policy if exists "Users can update own profile except is_admin" on public.users;
 
@@ -152,7 +152,7 @@ create policy "task_images_select_access" on public.task_images
     )
   );
 
--- ---------- SEKCJA 5: user_tasks (postępy w zadaniach — własne wiersze) ----------
+-- ---------- SEKCJA 5: user_tasks (postępy w zadaniach - własne wiersze) ----------
 -- Bez RLS każdy kluczem anon mógł czytać/nadpisywać/kasować cudze postępy
 -- (lib/db.ts filtruje tylko po user_id po stronie klienta). Zamykamy do własnych.
 alter table public.user_tasks enable row level security;
@@ -162,7 +162,7 @@ create policy "user_tasks_rw_own" on public.user_tasks
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
 
--- ---------- SEKCJA 6: study_plans (planer — własne wiersze) ----------
+-- ---------- SEKCJA 6: study_plans (planer - własne wiersze) ----------
 alter table public.study_plans enable row level security;
 drop policy if exists "study_plans_rw_own" on public.study_plans;
 create policy "study_plans_rw_own" on public.study_plans
@@ -172,7 +172,7 @@ create policy "study_plans_rw_own" on public.study_plans
 
 -- ---------- SEKCJA 7: users (własny wiersz; ZERO eskalacji is_admin) ----------
 -- Bez RLS kluczem anon można było odczytać e-maile WSZYSTKICH klientów.
--- Ograniczamy odczyt do własnego wiersza — to też sprawia, że podzapytania
+-- Ograniczamy odczyt do własnego wiersza - to też sprawia, że podzapytania
 -- admina w SEKCJACH 2–4 (u.id = auth.uid()) działają poprawnie.
 -- UWAGA: is_admin nadaje się WYŁĄCZNIE przez service_role / SQL, nigdy z klienta.
 alter table public.users enable row level security;
@@ -182,13 +182,13 @@ create policy "users_select_own" on public.users
   for select to authenticated
   using (auth.uid() = id);
 
--- Wstawianie własnego wiersza — is_admin MUSI być false/null (blokada eskalacji).
+-- Wstawianie własnego wiersza - is_admin MUSI być false/null (blokada eskalacji).
 drop policy if exists "users_insert_self" on public.users;
 create policy "users_insert_self" on public.users
   for insert to authenticated
   with check (auth.uid() = id and coalesce(is_admin, false) = false);
 
--- Aktualizacja własnego wiersza — również bez podniesienia is_admin do true.
+-- Aktualizacja własnego wiersza - również bez podniesienia is_admin do true.
 drop policy if exists "users_update_self" on public.users;
 create policy "users_update_self" on public.users
   for update to authenticated
@@ -208,7 +208,7 @@ as $$
 begin
   -- WAŻNE: public.users NIE MA kolumny `email`. Realne kolumny:
   -- id (uuid), created_at (default now()), status, full_name, is_admin,
-  -- stripe_customer_id. Wstawiamy tylko istniejące — odwołanie do nieistniejącej
+  -- stripe_customer_id. Wstawiamy tylko istniejące - odwołanie do nieistniejącej
   -- kolumny rzuca wyjątek, który propaguje się do auth.users i signUp zwraca
   -- „Database error saving new user" → rejestracja całkowicie przestaje działać.
   begin
@@ -222,7 +222,7 @@ begin
   exception when others then
     -- Bezpiecznik: profil w public.users NIGDY nie może zablokować rejestracji.
     -- W ostateczności minimalny insert (created_at wypełnia default now()),
-    -- a gdyby i to padło — milcząco odpuszczamy; loadAccess toleruje brak wiersza.
+    -- a gdyby i to padło - milcząco odpuszczamy; loadAccess toleruje brak wiersza.
     begin
       insert into public.users (id)
       values (new.id)
@@ -250,28 +250,28 @@ create trigger on_auth_user_created
 -- ============================================================================
 -- WERYFIKACJA (wykonaj po zastosowaniu)
 -- ============================================================================
--- A) Jako ANON (klucz anon, bez zalogowania) — powinny być PUSTE lub tylko course 0:
+-- A) Jako ANON (klucz anon, bez zalogowania) - powinny być PUSTE lub tylko course 0:
 --      select course_id, count(*) from public.video group by course_id;   -- tylko 0
 --      select count(*) from public.tasks;          -- 0
 --      select count(*) from public.enrollments;    -- 0
 --      select count(*) from public.user_tasks;     -- 0   (SEKCJA 5)
 --      select count(*) from public.study_plans;    -- 0   (SEKCJA 6)
---      select count(*) from public.users;          -- 0   (SEKCJA 7 — brak wycieku e-maili)
+--      select count(*) from public.users;          -- 0   (SEKCJA 7 - brak wycieku e-maili)
 -- B) Jako ZALOGOWANY user z enrollmentem na dział 2:
 --      - widzi lekcje/zadania działu 2, NIE widzi działu, którego nie kupił.
 --      - widzi TYLKO własne user_tasks / study_plans / własny wiersz users.
 --      - próba `update users set is_admin=true where id=auth.uid()` MUSI zostać
 --        odrzucona (blokada eskalacji z with check).
 -- C) W APLIKACJI: zaloguj się, wejdź na kupiony dział (lekcje + zadania działają),
---      wejdź na /kurs/0 (moduł „Tutaj zacznij") zalogowany i wylogowany — działa.
+--      wejdź na /kurs/0 (moduł „Tutaj zacznij") zalogowany i wylogowany - działa.
 --      Planer (/planer): generowanie i zaznaczanie planu działa (SEKCJA 6).
 --      Postępy w zadaniach zapisują się (SEKCJA 5).
 --      REJESTRACJA nowego konta: po potwierdzeniu e-maila wiersz w public.users
 --      istnieje (utworzony triggerem on_auth_user_created).
---      Płatności (webhook) i pobieranie PDF (get-pdf-url) — bez zmian (service_role).
+--      Płatności (webhook) i pobieranie PDF (get-pdf-url) - bez zmian (service_role).
 
 -- ============================================================================
--- ROLLBACK (gdyby cokolwiek się popsuło — przywraca stan sprzed skryptu)
+-- ROLLBACK (gdyby cokolwiek się popsuło - przywraca stan sprzed skryptu)
 -- ============================================================================
 -- drop policy if exists "enrollments_select_own"       on public.enrollments;
 -- drop policy if exists "video_select_access"          on public.video;

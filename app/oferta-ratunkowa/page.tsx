@@ -22,7 +22,7 @@ const ofertaJsonLd = [
       position: i + 1,
       item: {
         '@type': 'Product',
-        name: `Kurs maturalny z fizyki — ${p.name}`,
+        name: `Kurs maturalny z fizyki - ${p.name}`,
         description: p.features.join('. ') + '.',
         brand: { '@type': 'Brand', name: SITE.name },
         offers: {
@@ -96,7 +96,7 @@ export default function OfertaRatunkowaPage() {
             <PricingTiers />
           </div>
           <p className="mt-8 text-sm text-slate-400">
-            Objęte <strong className="text-slate-200">Gwarancją Zdanej Matury</strong> —
+            Objęte <strong className="text-slate-200">Gwarancją Zdanej Matury</strong> -
             szczegóły w regulaminie.
           </p>
         </div>

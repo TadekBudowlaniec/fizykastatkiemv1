@@ -115,7 +115,7 @@ exports.handler = async (event) => {
         // 4a. LISTA plików
         if (action === 'list') {
             if (poziomNum === 1) {
-                // Zmienna liczba plików — listujemy folder.
+                // Zmienna liczba plików - listujemy folder.
                 const { data, error } = await supabaseAdmin.storage.from(BUCKET).list(dir, {
                     limit: 1000,
                     sortBy: { column: 'name', order: 'asc' },
@@ -129,14 +129,14 @@ exports.handler = async (event) => {
                     .map((e) => ({ name: e.name }));
                 return { statusCode: 200, body: JSON.stringify({ files }) };
             }
-            // Poziom 2/3 — stałe pliki (bez listowania).
+            // Poziom 2/3 - stałe pliki (bez listowania).
             const files = [{ name: 'Zadania.pdf' }, { name: 'Odpowiedzi.pdf' }];
             return { statusCode: 200, body: JSON.stringify({ files }) };
         }
 
         // 4b. PODPISANY URL do konkretnego pliku
         // Serwer sam składa ścieżkę z zaufanych elementów; z body bierze tylko
-        // nazwę pliku i waliduje ją (bez „/" i „..") — brak path traversal.
+        // nazwę pliku i waliduje ją (bez „/" i „..") - brak path traversal.
         const safeFile = String(file || '');
         if (!safeFile || safeFile.includes('/') || safeFile.includes('..')) {
             return { statusCode: 400, body: JSON.stringify({ error: 'Nieprawidłowa nazwa pliku.' }) };

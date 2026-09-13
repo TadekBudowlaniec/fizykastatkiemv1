@@ -1,5 +1,5 @@
 -- ============================================================================
--- Fizyka Statkiem — „obejrzane" wideo w postępie działu
+-- Fizyka Statkiem - „obejrzane" wideo w postępie działu
 -- ============================================================================
 -- Rozszerza public.user_materialy o poziom 0 = lekcja wideo (file = yt_id).
 -- URUCHOM tylko, jeśli tabelę utworzyłeś PRZED dodaniem tej linii do

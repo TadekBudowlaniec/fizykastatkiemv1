@@ -3,10 +3,10 @@ import { defaultSchema } from 'rehype-sanitize';
 /**
  * Schemat sanityzacji dla treści lekcji/zadań (rehype-sanitize) uruchamiany PO
  * rehype-katex. Blokuje realne wektory XSS (script, event-handlery, złe protokoły
- * w href/src — to zostaje z defaultSchema), ale przepuszcza wyjście KaTeX
+ * w href/src - to zostaje z defaultSchema), ale przepuszcza wyjście KaTeX
  * (klasy + inline style na span/div) oraz podstawowe formatowanie treści.
  * Uwaga: nawet jeśli jakiś tag MathML wypadnie, widoczna część wzoru (spany HTML
- * KaTeX) i tak zostaje wyrenderowana — MathML to tylko warstwa dla czytników.
+ * KaTeX) i tak zostaje wyrenderowana - MathML to tylko warstwa dla czytników.
  */
 const base = defaultSchema;
 

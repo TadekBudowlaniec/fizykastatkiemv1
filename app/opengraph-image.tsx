@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 // Brandowana karta społecznościowa/AI 1200×630 (prawdziwy PNG, nie logo).
-export const alt = 'Fizyka Statkiem — kurs maturalny z fizyki online';
+export const alt = 'Fizyka Statkiem - kurs maturalny z fizyki online';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 

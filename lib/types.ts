@@ -60,7 +60,7 @@ export type UserLevel = {
   completed_at?: string | null;
 };
 
-// Postęp per plik — Poziom 1 (tabela public.user_materialy).
+// Postęp per plik - Poziom 1 (tabela public.user_materialy).
 export type UserMaterial = {
   user_id: string;
   course_id: number;

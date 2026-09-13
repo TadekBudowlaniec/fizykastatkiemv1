@@ -1,5 +1,5 @@
 -- ============================================================================
--- HOTFIX PRODUKCJA — rejestracja zwraca „Database error saving new user"
+-- HOTFIX PRODUKCJA - rejestracja zwraca „Database error saving new user"
 -- ============================================================================
 -- PRZYCZYNA: trigger on_auth_user_created wstawiał do public.users kolumnę
 -- `email`, której ta tabela NIE MA. Rzeczywisty schemat public.users:
@@ -11,7 +11,7 @@
 -- zwracał 500 „Database error saving new user". Tworzenie kont padało w 100%.
 --
 -- NAPRAWA: trigger wstawia TYLKO istniejące kolumny (id, full_name, is_admin);
--- created_at wypełnia default now(). Odporny na wyjątki — profil w public.users
+-- created_at wypełnia default now(). Odporny na wyjątki - profil w public.users
 -- nigdy więcej nie zablokuje rejestracji. Idempotentny; można uruchomić wielokrotnie.
 --
 -- URUCHOM: Supabase → SQL Editor → wklej całość → Run.
@@ -59,7 +59,7 @@ from auth.users u
 where not exists (select 1 from public.users p where p.id = u.id)
 on conflict (id) do nothing;
 
--- WERYFIKACJA: załóż testowe konto w aplikacji — powinno przejść bez błędu,
+-- WERYFIKACJA: załóż testowe konto w aplikacji - powinno przejść bez błędu,
 -- a poniższe zapytanie ma zwrócić świeży wiersz:
 --   select id, full_name, is_admin, created_at
 --   from public.users order by created_at desc limit 5;

@@ -5,7 +5,7 @@ import { getTopics, getCities, getPosts } from '@/lib/seo';
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Stała data — inaczej każdy deploy oznaczałby WSZYSTKIE ~200 URL jako
+  // Stała data - inaczej każdy deploy oznaczałby WSZYSTKIE ~200 URL jako
   // „zmienione dziś”, co Google traktuje jak szum i przestaje ufać lastmod.
   const now = new Date(process.env.SEO_DATE || '2025-09-01');
   const url = (path: string) => `${SITE.url}${path}`;

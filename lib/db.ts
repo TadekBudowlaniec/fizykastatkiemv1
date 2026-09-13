@@ -177,7 +177,7 @@ export async function setPlanItemCompleted(
   if (error) throw error;
 }
 
-// ---------------- Poziomy — postęp (tabela user_levels) ----------------
+// ---------------- Poziomy - postęp (tabela user_levels) ----------------
 
 export async function getUserLevels(
   userId: string,
@@ -226,7 +226,7 @@ export async function unmarkLevel(
   if (error) throw error;
 }
 
-// ---------------- Pliki Poziomu 1 — postęp per plik (user_materialy) ----------------
+// ---------------- Pliki Poziomu 1 - postęp per plik (user_materialy) ----------------
 
 export async function getUserMaterialy(
   userId: string,
@@ -291,7 +291,7 @@ async function requireToken(): Promise<string> {
   return token;
 }
 
-/** Poziom 4 (dawny Etap 3) — stary mechanizm/bucket, bez zmian. */
+/** Poziom 4 (dawny Etap 3) - stary mechanizm/bucket, bez zmian. */
 export async function getSecurePdfUrl(
   courseId: number,
   etap: number

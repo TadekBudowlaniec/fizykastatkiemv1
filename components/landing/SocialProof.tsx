@@ -1,7 +1,7 @@
 import { Container } from '@/components/ui/Container';
 import { Reveal } from '@/components/ui/Reveal';
 
-// Główny proof rezultatu — osobny punkt od opinii (opinie: komponent Testimonials).
+// Główny proof rezultatu - osobny punkt od opinii (opinie: komponent Testimonials).
 // Bez gwiazdek, bez średniej ocen, bez AggregateRating.
 export function SocialProof() {
   return (

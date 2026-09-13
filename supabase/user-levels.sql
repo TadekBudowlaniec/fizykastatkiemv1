@@ -1,5 +1,5 @@
 -- ============================================================================
--- Fizyka Statkiem — tabela postępu poziomów (Materiały PDF)
+-- Fizyka Statkiem - tabela postępu poziomów (Materiały PDF)
 -- ============================================================================
 -- Śledzi ukończenie 4 poziomów per dział przez zalogowanego użytkownika.
 -- Odblokowuje quiz (zakładka „Zadania") danego działu po ukończeniu 4/4 poziomów.

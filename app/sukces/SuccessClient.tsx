@@ -32,7 +32,7 @@ export function SuccessClient() {
     try {
       await sendMagicLink(email);
     } catch {
-      /* neutralnie — konto opłaconego gościa i tak istnieje */
+      /* neutralnie - konto opłaconego gościa i tak istnieje */
     } finally {
       setSent(true);
       setSending(false);
@@ -44,11 +44,11 @@ export function SuccessClient() {
     try {
       window.localStorage.removeItem('promoStartedAt');
     } catch {
-      /* localStorage niedostępny — bez znaczenia */
+      /* localStorage niedostępny - bez znaczenia */
     }
   }, []);
 
-  // Poll dostępu — webhook (zwłaszcza async/Klarna) może chwilę zająć.
+  // Poll dostępu - webhook (zwłaszcza async/Klarna) może chwilę zająć.
   // NIE twierdzimy „aktywowano", dopóki dostęp realnie się nie pojawi.
   useEffect(() => {
     if (!user) return; // gość dostaje instrukcję o mailu poniżej
@@ -68,7 +68,7 @@ export function SuccessClient() {
       try {
         await refreshAccess();
       } catch {
-        /* ignoruj — spróbujemy ponownie */
+        /* ignoruj - spróbujemy ponownie */
       }
       if (cancelled) return;
       if (attempts >= MAX) {
@@ -105,7 +105,7 @@ export function SuccessClient() {
               {status === 'active'
                 ? 'Twój dostęp został aktywowany. Miłej nauki - płyniemy po Twój wynik!'
                 : status === 'pending'
-                  ? 'Płatność potwierdzona! Aktywacja dostępu może potrwać chwilę — odśwież stronę za moment albo wejdź do kursu, dostęp pojawi się automatycznie.'
+                  ? 'Płatność potwierdzona! Aktywacja dostępu może potrwać chwilę - odśwież stronę za moment albo wejdź do kursu, dostęp pojawi się automatycznie.'
                   : 'Aktywujemy Twój dostęp do kursu…'}
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
@@ -125,7 +125,7 @@ export function SuccessClient() {
         ) : (
           <div className="mt-5">
             <p className="text-lg text-slate-300/85">
-              Płatność potwierdzona! Aby wejść na kurs, zaloguj się linkiem —
+              Płatność potwierdzona! Aby wejść na kurs, zaloguj się linkiem -
               wyślemy go na e-mail użyty przy zakupie.
             </p>
 
@@ -135,7 +135,7 @@ export function SuccessClient() {
                   ✉️ Wysłaliśmy link do logowania na <b>{email}</b>.
                 </p>
                 <p className="mt-1 text-sm text-slate-300/85">
-                  Kliknij link w mailu (sprawdź też SPAM) — <b>zalogujemy Cię
+                  Kliknij link w mailu (sprawdź też SPAM) - <b>zalogujemy Cię
                   automatycznie i przeniesiemy prosto do kursu</b>. Dostęp jest
                   już przypisany do tego adresu.
                 </p>

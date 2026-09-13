@@ -10,7 +10,7 @@ const SUPA =
   'https://kldekjrpottsqebueojg.supabase.co/storage/v1/object/public/opinie';
 
 // Realne opinie kursantów (za zgodą na publikację). Mamy łącznie 28
-// autentycznych, pozytywnych opinii — poniżej wybrane przykłady. Aby dodać
+// autentycznych, pozytywnych opinii - poniżej wybrane przykłady. Aby dodać
 // kolejne, dopisz obiekt do tej tablicy (obraz w bucketcie Supabase `opinie`);
 // grid poniżej skaluje się automatycznie. Nie dodawać gwiazdek ani średniej ocen.
 const reviews = [

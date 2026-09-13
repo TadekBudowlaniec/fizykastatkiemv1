@@ -19,9 +19,9 @@ const fullPlan = PLANS.find((p) => p.key === 'full_access')!;
 const vipPlan = PLANS.find((p) => p.key === 'vip')!;
 
 export const metadata: Metadata = {
-  title: 'Kurs maturalny z fizyki online — matura rozszerzona',
+  title: 'Kurs maturalny z fizyki online - matura rozszerzona',
   description:
-    'Kurs maturalny z fizyki online (poziom rozszerzony): 16 działów wideo HD, PDF-y, zadania na wzór CKE i planer nauki. 100% zdawalności — 28/28 absolwentów zdało maturę. Gwarancja Zdanej Matury.',
+    'Kurs maturalny z fizyki online (poziom rozszerzony): 16 działów wideo HD, PDF-y, zadania na wzór CKE i planer nauki. 100% zdawalności - 28/28 absolwentów zdało maturę. Gwarancja Zdanej Matury.',
   alternates: { canonical: '/' },
 };
 
@@ -36,11 +36,11 @@ const faq: FaqItem[] = [
   },
   {
     q: 'Czym różni się Kurs Pełny od VIP 1:1?',
-    a: `Kurs Pełny (${fullPlan.price} zł) to samodzielna nauka według gotowego systemu — wszystkie 16 działów, PDF-y, zadania, quizy i planer. VIP 1:1 (${vipPlan.price} zł) to cały Kurs Pełny plus indywidualne prowadzenie 1:1 z Czarkiem: 1 godzina tygodniowo aż do matury, z planem pod Twoje braki. VIP ma realnie tylko ${VIP_SEATS} miejsc, bo każde oznacza indywidualną pracę.`,
+    a: `Kurs Pełny (${fullPlan.price} zł) to samodzielna nauka według gotowego systemu - wszystkie 16 działów, PDF-y, zadania, quizy i planer. VIP 1:1 (${vipPlan.price} zł) to cały Kurs Pełny plus indywidualne prowadzenie 1:1 z Czarkiem: 1 godzina tygodniowo aż do matury, z planem pod Twoje braki. VIP ma realnie tylko ${VIP_SEATS} miejsc, bo każde oznacza indywidualną pracę.`,
   },
   {
     q: 'Czy mogę kupić tylko jeden dział?',
-    a: `Tak. Jeśli chcesz uzupełnić konkretny temat, możesz kupić pojedynczy dział za ${SINGLE_COURSE_PRICE} zł zamiast całego kursu — pełną listę znajdziesz na stronie „Pojedyncze działy”.`,
+    a: `Tak. Jeśli chcesz uzupełnić konkretny temat, możesz kupić pojedynczy dział za ${SINGLE_COURSE_PRICE} zł zamiast całego kursu - pełną listę znajdziesz na stronie „Pojedyncze działy”.`,
   },
   {
     q: 'Jak działa Gwarancja Zdanej Matury?',
@@ -55,7 +55,7 @@ const faq: FaqItem[] = [
 const courseJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Course',
-  name: 'Fizyka Statkiem — Kurs maturalny z fizyki online',
+  name: 'Fizyka Statkiem - Kurs maturalny z fizyki online',
   description: SITE.description,
   inLanguage: 'pl',
   provider: {

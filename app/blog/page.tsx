@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default function BlogHub() {
-  // Najnowsze na górze — sekcja nazywa się „Najnowsze artykuły”.
+  // Najnowsze na górze - sekcja nazywa się „Najnowsze artykuły”.
   const posts = [...getPosts()].sort((a, b) =>
     (b.date ?? '').localeCompare(a.date ?? '')
   );

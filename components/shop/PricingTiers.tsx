@@ -84,7 +84,7 @@ export function PricingTiers() {
 
             {plan.seats != null && (
               <p className="mt-6 rounded-2xl bg-magenta-50 px-4 py-3 text-center text-sm font-semibold text-magenta-700">
-                Tylko {plan.seats} miejsc — każde oznacza indywidualne
+                Tylko {plan.seats} miejsc - każde oznacza indywidualne
                 prowadzenie 1:1 aż do matury.
               </p>
             )}

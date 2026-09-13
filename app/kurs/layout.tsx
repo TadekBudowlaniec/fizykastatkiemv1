@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-// Panel kursu (płatna/zalogowana treść) — poza indeksem Google.
+// Panel kursu (płatna/zalogowana treść) - poza indeksem Google.
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };

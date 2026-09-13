@@ -11,7 +11,7 @@ const fullPlan = PLANS.find((p) => p.key === 'full_access')!;
 
 export const metadata: Metadata = {
   title: 'Pojedyncze działy z fizyki',
-  description: `Kup pojedynczy dział kursu maturalnego z fizyki za ${SINGLE_COURSE_PRICE} zł — wideo HD, PDF-y i zadania z rozwiązaniami. Uzupełnij braki punktowo lub weź cały Kurs Pełny.`,
+  description: `Kup pojedynczy dział kursu maturalnego z fizyki za ${SINGLE_COURSE_PRICE} zł - wideo HD, PDF-y i zadania z rozwiązaniami. Uzupełnij braki punktowo lub weź cały Kurs Pełny.`,
   alternates: { canonical: '/dzialy/' },
 };
 
@@ -25,7 +25,7 @@ const dzialyLd = [
       position: i + 1,
       item: {
         '@type': 'Product',
-        name: `Fizyka — dział ${c.id}: ${c.title}`,
+        name: `Fizyka - dział ${c.id}: ${c.title}`,
         brand: { '@type': 'Brand', name: SITE.name },
         offers: {
           '@type': 'Offer',
@@ -55,7 +55,7 @@ export default function DzialyPage() {
             <span className="text-gradient">punktowo</span>
           </>
         }
-        subtitle={`Nie potrzebujesz całego kursu? Kup sam dział, który sprawia Ci problem — za ${SINGLE_COURSE_PRICE} zł dostajesz wideo HD, PDF-y i zadania z rozwiązaniami.`}
+        subtitle={`Nie potrzebujesz całego kursu? Kup sam dział, który sprawia Ci problem - za ${SINGLE_COURSE_PRICE} zł dostajesz wideo HD, PDF-y i zadania z rozwiązaniami.`}
         crumbs={[{ label: 'Start', href: '/' }, { label: 'Pojedyncze działy' }]}
       />
 
@@ -68,7 +68,7 @@ export default function DzialyPage() {
               <strong className="text-ink">
                 Kurs Pełny ({fullPlan.price} zł)
               </strong>{' '}
-              to wszystkie 16 działów, planer i Gwarancja Zdanej Matury — taniej
+              to wszystkie 16 działów, planer i Gwarancja Zdanej Matury - taniej
               niż kupując działy pojedynczo.
             </p>
             <Link

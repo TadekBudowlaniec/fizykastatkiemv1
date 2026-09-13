@@ -19,7 +19,7 @@ export default function UserPage() {
     null
   );
   const [saving, setSaving] = useState(false);
-  // Tryb odzyskiwania hasła — po kliknięciu linku „reset hasła" (bez starego hasła).
+  // Tryb odzyskiwania hasła - po kliknięciu linku „reset hasła" (bez starego hasła).
   const [recovery, setRecovery] = useState(false);
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function UserPage() {
     setSaving(true);
     try {
       const supabase = getSupabaseBrowser();
-      // W trybie odzyskiwania (recovery) mamy aktywną sesję z linku — bez
+      // W trybie odzyskiwania (recovery) mamy aktywną sesję z linku - bez
       // re-autoryzacji starym hasłem (użytkownik go nie zna).
       if (!recovery) {
         const { error: reauth } = await supabase.auth.signInWithPassword({
@@ -170,7 +170,7 @@ export default function UserPage() {
               </h2>
               {recovery && (
                 <p className="mt-2 text-sm text-muted">
-                  Kliknąłeś link resetu hasła. Ustaw nowe hasło do swojego konta —
+                  Kliknąłeś link resetu hasła. Ustaw nowe hasło do swojego konta -
                   stare nie jest potrzebne.
                 </p>
               )}

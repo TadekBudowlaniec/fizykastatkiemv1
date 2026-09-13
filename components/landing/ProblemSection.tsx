@@ -11,7 +11,7 @@ const problems = [
   {
     icon: '🗂️',
     title: 'Nauka z przypadkowych źródeł',
-    desc: 'Filmiki z YouTube, luźne notatki, różne książki — brakuje jednego spójnego planu.',
+    desc: 'Filmiki z YouTube, luźne notatki, różne książki - brakuje jednego spójnego planu.',
   },
   {
     icon: '📉',
@@ -21,7 +21,7 @@ const problems = [
   {
     icon: '😰',
     title: 'Stres przed arkuszami',
-    desc: 'Im bliżej matury, tym więcej chaosu — zamiast spokojnej, zaplanowanej powtórki.',
+    desc: 'Im bliżej matury, tym więcej chaosu - zamiast spokojnej, zaplanowanej powtórki.',
   },
 ];
 

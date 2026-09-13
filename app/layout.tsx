@@ -53,7 +53,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-// Jeden graf encji (@id) współdzielony przez całą witrynę — spina Organizację,
+// Jeden graf encji (@id) współdzielony przez całą witrynę - spina Organizację,
 // WebSite i osobę (autora/korepetytora) w spójną wiedzę dla Google i silników AI.
 const graphJsonLd = {
   '@context': 'https://schema.org',
@@ -66,7 +66,7 @@ const graphJsonLd = {
       email: SITE.email,
       telephone: SITE.telephone,
       description:
-        'Kursy fizyki online do matury (poziom rozszerzony) oraz korepetycje z fizyki i matematyki — Lublin i online.',
+        'Kursy fizyki online do matury (poziom rozszerzony) oraz korepetycje z fizyki i matematyki - Lublin i online.',
       logo: `${SITE.url}/images/logo_magenta.png`,
       image: `${SITE.url}/images/logo_magenta.png`,
       founder: { '@id': `${SITE.url}/#czarek` },
@@ -127,7 +127,7 @@ export default function RootLayout({
   return (
     <html lang="pl" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
-        {/* Google Analytics (gtag.js) — ładowany po interakcji, bez blokowania renderu */}
+        {/* Google Analytics (gtag.js) - ładowany po interakcji, bez blokowania renderu */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-LFRFD4WDLB"
           strategy="afterInteractive"

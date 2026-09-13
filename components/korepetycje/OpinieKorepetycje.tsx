@@ -7,7 +7,7 @@ import { Reveal } from '@/components/ui/Reveal';
 const SUPA =
   'https://kldekjrpottsqebueojg.supabase.co/storage/v1/object/public/opinie';
 
-// Realne, zanonimizowane screeny opinii (za zgodą) — te same pliki co na stronie
+// Realne, zanonimizowane screeny opinii (za zgodą) - te same pliki co na stronie
 // głównej. Aby podmienić/dodać: wgraj obraz do bucketu Supabase `opinie` i zmień `image`.
 const proofs = [
   {

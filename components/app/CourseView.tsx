@@ -42,7 +42,7 @@ import { cn } from '@/lib/cn';
 const WHOLE_LEVELS = [2, 3, 4];
 
 // Fallback, gdy tabela user_materialy nie istnieje jeszcze w Supabase
-// (patrz supabase/user-materialy.sql) — postęp plików trzymamy lokalnie.
+// (patrz supabase/user-materialy.sql) - postęp plików trzymamy lokalnie.
 function localKey(userId: string, courseId: number, scope = 'materialy') {
   return `fs.${scope}.${userId}.${courseId}`;
 }
@@ -104,7 +104,7 @@ export function CourseView({ courseId }: { courseId: number }) {
     () => lessons.filter((l) => !!l.yt_id_wideo),
     [lessons]
   );
-  // Lekcje tekstowe bez wideo (np. „Tutaj zacznij") — otwierane w LessonView.
+  // Lekcje tekstowe bez wideo (np. „Tutaj zacznij") - otwierane w LessonView.
   const textLessons = useMemo(
     () =>
       lessons.filter(
@@ -232,13 +232,13 @@ export function CourseView({ courseId }: { courseId: number }) {
     [user?.id, courseId, filesBackend]
   );
 
-  // Obejrzane wideo — zapis do user_materialy (poziom 0); przy błędzie (np.
+  // Obejrzane wideo - zapis do user_materialy (poziom 0); przy błędzie (np.
   // stary check 1..4 przed migracją) zostaje lokalnie, UI się nie cofa.
   const toggleWatched = useCallback(
     async (ytId: string, done: boolean) => {
       if (!user?.id) return;
       const uid = user.id;
-      // Auto-zaliczenie z playera może strzelać wielokrotnie — zapisujemy raz.
+      // Auto-zaliczenie z playera może strzelać wielokrotnie - zapisujemy raz.
       if (done && watchedRef.current.has(ytId)) return;
       const next = new Set(watchedRef.current);
       if (done) next.add(ytId);
@@ -314,7 +314,7 @@ export function CourseView({ courseId }: { courseId: number }) {
     );
   }
 
-  // Czekamy aż znamy sesję ORAZ (dla zalogowanego) wczytamy jego dostęp —
+  // Czekamy aż znamy sesję ORAZ (dla zalogowanego) wczytamy jego dostęp -
   // inaczej płacący user zobaczyłby na chwilę ekran „zablokowane".
   if (loading || (!isStart && !!user && accessLoading)) {
     return (
@@ -336,9 +336,9 @@ export function CourseView({ courseId }: { courseId: number }) {
     { label: title, href: `/kurs/${courseId}` },
   ];
 
-  // Brak dostępu (dla działów 1-16) — podgląd struktury działu (przyciemniony,
+  // Brak dostępu (dla działów 1-16) - podgląd struktury działu (przyciemniony,
   // z kłódką) + bezpośrednie CTA zakupu. UWAGA: podgląd korzysta wyłącznie z
-  // PUBLICZNYCH danych działu (zakres z courses.json) — NIE ładujemy lekcji z
+  // PUBLICZNYCH danych działu (zakres z courses.json) - NIE ładujemy lekcji z
   // bazy, żeby nie wyciekły video_id niezalogowanym.
   if (!access) {
     const fullPrice = PLANS.find((p) => p.key === 'full_access')?.price ?? 828;
@@ -352,7 +352,7 @@ export function CourseView({ courseId }: { courseId: number }) {
               <span className="text-4xl">{icon}</span> {title}
             </span>
           }
-          subtitle="Podgląd ścieżki działu — odblokuj dostęp, aby zacząć naukę."
+          subtitle="Podgląd ścieżki działu - odblokuj dostęp, aby zacząć naukę."
           breadcrumb={breadcrumb}
         />
         <section className="bg-cloud py-12 sm:py-14">
@@ -401,7 +401,7 @@ export function CourseView({ courseId }: { courseId: number }) {
                 </h2>
                 <p className="mx-auto max-w-md text-muted">
                   Lekcja wideo, 4 poziomy materiałów PDF (od teorii po arkusze
-                  CKE) i quiz sprawdzający — w jednej ścieżce.
+                  CKE) i quiz sprawdzający - w jednej ścieżce.
                 </p>
                 <div className="mt-2 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center">
                   <BuyButton courseId={courseId} variant="gradient" size="lg">
@@ -424,7 +424,7 @@ export function CourseView({ courseId }: { courseId: number }) {
     );
   }
 
-  // ---------- „Tutaj zacznij" — tylko lekcje tekstowe/wideo ----------
+  // ---------- „Tutaj zacznij" - tylko lekcje tekstowe/wideo ----------
   if (isStart) {
     return (
       <>
@@ -488,17 +488,17 @@ export function CourseView({ courseId }: { courseId: number }) {
             <span className="text-4xl">{icon}</span> {title}
           </span>
         }
-        subtitle="Wideo, cztery poziomy materiałów i quiz — jedna ścieżka, krok po kroku."
+        subtitle="Wideo, cztery poziomy materiałów i quiz - jedna ścieżka, krok po kroku."
         breadcrumb={breadcrumb}
       >
-        {/* Postęp działu — w hero, żeby był widoczny od razu (także mobile) */}
+        {/* Postęp działu - w hero, żeby był widoczny od razu (także mobile) */}
         <div className="glass mt-7 max-w-md rounded-2xl p-4 sm:p-5">
           <div className="flex items-center justify-between gap-4">
             <span className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-brand-200">
               Postęp działu
             </span>
             <span className="font-display text-lg font-extrabold text-white">
-              {filesLoading ? '—' : `${pct}%`}
+              {filesLoading ? '-' : `${pct}%`}
             </span>
           </div>
           <div className="mt-2.5 h-2 overflow-hidden rounded-full bg-white/10">
@@ -511,7 +511,7 @@ export function CourseView({ courseId }: { courseId: number }) {
             {filesLoading
               ? 'Wczytuję ścieżkę…'
               : allDone
-                ? 'Cały dział przerobiony — czas na quiz.'
+                ? 'Cały dział przerobiony - czas na quiz.'
                 : `${doneSteps} z ${totalSteps} kroków · wideo, każdy plik teorii i poziomy 2–4`}
           </p>
         </div>
@@ -553,7 +553,7 @@ export function CourseView({ courseId }: { courseId: number }) {
                   icon={<IconBook className="h-4 w-4" />}
                   eyebrow={hasVideo ? 'Krok 2' : 'Krok 1'}
                   title="Przerób materiały"
-                  desc="Cztery poziomy — od teorii, przez zadania dogrzewające i maturalne, aż po prawdziwe arkusze CKE. Odhaczaj, co masz za sobą."
+                  desc="Cztery poziomy - od teorii, przez zadania dogrzewające i maturalne, aż po prawdziwe arkusze CKE. Odhaczaj, co masz za sobą."
                 />
                 <div className="mt-6">
                   <CoursePath
@@ -577,8 +577,8 @@ export function CourseView({ courseId }: { courseId: number }) {
                   title="Sprawdź się"
                   desc={
                     allDone
-                      ? 'Ścieżka przerobiona w całości — teraz quiz pokaże, ile faktycznie zostało w głowie.'
-                      : `Quiz jest dostępny od razu, ale najlepiej działa po materiałach — masz ${doneSteps} z ${totalSteps} kroków.`
+                      ? 'Ścieżka przerobiona w całości - teraz quiz pokaże, ile faktycznie zostało w głowie.'
+                      : `Quiz jest dostępny od razu, ale najlepiej działa po materiałach - masz ${doneSteps} z ${totalSteps} kroków.`
                   }
                 />
                 <div className="mt-6">
@@ -601,7 +601,7 @@ export function CourseView({ courseId }: { courseId: number }) {
                         <a
                           href={`#${it.id}`}
                           className={cn(
-                            'flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-semibold transition-all duration-300',
+                            'flex items-start gap-3 rounded-2xl px-3 py-2.5 text-sm font-semibold transition-all duration-300',
                             active
                               ? 'bg-brand-50 text-brand-700'
                               : 'text-slate hover:bg-cloud hover:text-ink'
@@ -609,7 +609,7 @@ export function CourseView({ courseId }: { courseId: number }) {
                         >
                           <span
                             className={cn(
-                              'flex h-5 w-5 flex-none items-center justify-center rounded-full transition-all duration-300',
+                              'mt-px flex h-5 w-5 flex-none items-center justify-center rounded-full transition-all duration-300',
                               it.done
                                 ? 'bg-[linear-gradient(135deg,#6b4df6,#f43f8f)] text-white'
                                 : active
@@ -619,9 +619,9 @@ export function CourseView({ courseId }: { courseId: number }) {
                           >
                             <IconCheck className="h-3 w-3" strokeWidth={3} />
                           </span>
-                          <span className="min-w-0 flex-1 truncate">{it.label}</span>
+                          <span className="min-w-0 flex-1 leading-snug">{it.label}</span>
                           {it.meta && !it.done && (
-                            <span className="flex-none text-xs font-bold text-muted">
+                            <span className="flex-none pt-0.5 text-xs font-bold text-muted">
                               {it.meta}
                             </span>
                           )}
@@ -633,7 +633,7 @@ export function CourseView({ courseId }: { courseId: number }) {
                 <div className="mt-2 border-t border-line px-3 pb-1 pt-3">
                   <div className="flex items-center justify-between text-xs font-bold">
                     <span className="uppercase tracking-[0.14em] text-muted">Postęp</span>
-                    <span className="text-brand-700">{filesLoading ? '—' : `${pct}%`}</span>
+                    <span className="text-brand-700">{filesLoading ? '-' : `${pct}%`}</span>
                   </div>
                   <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-cloud">
                     <div

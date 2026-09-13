@@ -11,9 +11,9 @@ export type Course = {
 };
 
 /**
- * KANONICZNA numeracja działów — MUSI być zgodna z bazą Supabase (course_id)
+ * KANONICZNA numeracja działów - MUSI być zgodna z bazą Supabase (course_id)
  * oraz z `courseData` w netlify/functions/create-checkout-session.js.
- * NIE zmieniać kolejności ID bez zmiany w bazie i funkcji Stripe — inaczej
+ * NIE zmieniać kolejności ID bez zmiany w bazie i funkcji Stripe - inaczej
  * użytkownik kupuje/otwiera inny dział niż widzi.
  * (tytuł musi dokładnie odpowiadać tytułowi w data/courses.json)
  */
@@ -59,11 +59,11 @@ export function getCourse(id: number): Course | undefined {
 }
 
 // ---------------------------------------------------------------------------
-// Pakiety cenowe — dwa warianty głównej oferty (checkout: full_access -> 17, vip -> 19).
-// Pakiet Gold (live) WYCOFANY (restrukturyzacja oferty 2026-09) — nie przywracać.
+// Pakiety cenowe - dwa warianty głównej oferty (checkout: full_access -> 17, vip -> 19).
+// Pakiet Gold (live) WYCOFANY (restrukturyzacja oferty 2026-09) - nie przywracać.
 // Ceny MUSZĄ być zgodne z courseData w create-checkout-session.js (grosze/100):
 //   17: 828 zł (Kurs Pełny) · 19: 3497 zł (VIP 1:1) · dział: 177 zł
-// Bez sztucznych cen przekreślonych i bez fałszywej promocji — cena = wartość.
+// Bez sztucznych cen przekreślonych i bez fałszywej promocji - cena = wartość.
 // ---------------------------------------------------------------------------
 
 export type PlanKey = 'full_access' | 'vip';
@@ -75,7 +75,7 @@ export type Plan = {
   price: number;
   featured?: boolean;
   badge?: string;
-  /** Realny limit miejsc (tylko VIP 1:1) — wynika z możliwości prowadzenia 1:1. */
+  /** Realny limit miejsc (tylko VIP 1:1) - wynika z możliwości prowadzenia 1:1. */
   seats?: number;
   /** Prawdziwa kotwica wartości pod ceną (nie sztuczna przekreślona cena). */
   anchor?: string;
@@ -92,7 +92,7 @@ export const PLANS: Plan[] = [
     price: 828,
     featured: true,
     accent: 'full',
-    anchor: '16 działów osobno to 2 832 zł — w kursie ~52 zł za dział.',
+    anchor: '16 działów osobno to 2 832 zł - w kursie ~52 zł za dział.',
     cta: 'Wybieram Kurs Pełny',
     features: [
       'Dostęp do wszystkich 16 działów kursu wideo HD',
@@ -106,7 +106,7 @@ export const PLANS: Plan[] = [
   {
     key: 'vip',
     name: 'VIP 1:1',
-    subtitle: 'Diamond — Czarek prowadzi Cię indywidualnie aż do matury',
+    subtitle: 'Diamond - Czarek prowadzi Cię indywidualnie aż do matury',
     price: 3497,
     seats: 6,
     badge: 'Tylko 6 miejsc',
@@ -116,7 +116,7 @@ export const PLANS: Plan[] = [
     features: [
       'Cały Kurs Pełny (16 działów, PDF-y, zadania, planer)',
       'Indywidualne prowadzenie 1:1 z Czarkiem',
-      '1 godzina zajęć tygodniowo — aż do matury',
+      '1 godzina zajęć tygodniowo - aż do matury',
       'Plan pracy dopasowany do Twoich braków i potrzeb',
       'Stały kontakt i wsparcie między zajęciami',
       'Gwarancja Zdanej Matury',
@@ -125,12 +125,12 @@ export const PLANS: Plan[] = [
 ];
 
 /**
- * Realny limit miejsc VIP 1:1 — wynika z możliwości prowadzenia klientów 1:1.
+ * Realny limit miejsc VIP 1:1 - wynika z możliwości prowadzenia klientów 1:1.
  * NIE jest sztucznym scarcity; komunikować wyłącznie jako prawdziwy limit.
  */
 export const VIP_SEATS = 6;
 
-/** Cena pojedynczego działu (zł) — oferta poboczna na /dzialy */
+/** Cena pojedynczego działu (zł) - oferta poboczna na /dzialy */
 export const SINGLE_COURSE_PRICE = 177;
 
 /** Cena korepetycji indywidualnych (zł za 60 minut) */
