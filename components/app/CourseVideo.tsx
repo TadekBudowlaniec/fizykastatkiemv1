@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Lesson } from '@/lib/types';
 import { cn } from '@/lib/cn';
 import {
@@ -12,16 +12,82 @@ import {
   IconSpinner,
 } from '@/components/app/CourseIcons';
 
-// Próg auto-zaliczenia: obejrzane ≥ 90% albo zdarzenie „ended" z playera.
+// Próg auto-zaliczenia: obejrzane >= 90% albo zdarzenie „ended" z playera.
 const WATCHED_RATIO = 0.9;
+const YT_API_SRC = 'https://www.youtube.com/iframe_api';
+const YT_API_TIMEOUT = 6000;
+
+// Minimalny typ playera z YouTube IFrame API (bez @types/youtube).
+type YTPlayer = {
+  destroy: () => void;
+  getCurrentTime: () => number;
+  getDuration: () => number;
+};
+type YTNamespace = {
+  Player: new (
+    el: HTMLElement,
+    opts: {
+      videoId: string;
+      width?: string;
+      height?: string;
+      playerVars?: Record<string, string | number>;
+      events?: {
+        onStateChange?: (e: { data: number }) => void;
+      };
+    }
+  ) => YTPlayer;
+  PlayerState: { ENDED: number };
+};
+declare global {
+  interface Window {
+    YT?: YTNamespace;
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
+
+// Ładuje YouTube IFrame API raz na stronę. Odrzuca po timeoucie (np. adblock),
+// wtedy komponent wraca do zwykłego iframe.
+let ytApiPromise: Promise<YTNamespace> | null = null;
+function loadYouTubeApi(): Promise<YTNamespace> {
+  if (typeof window === 'undefined') return Promise.reject(new Error('ssr'));
+  if (window.YT?.Player) return Promise.resolve(window.YT);
+  if (ytApiPromise) return ytApiPromise;
+  ytApiPromise = new Promise<YTNamespace>((resolve, reject) => {
+    const prev = window.onYouTubeIframeAPIReady;
+    const timer = window.setTimeout(() => {
+      ytApiPromise = null;
+      reject(new Error('yt-api-timeout'));
+    }, YT_API_TIMEOUT);
+    window.onYouTubeIframeAPIReady = () => {
+      prev?.();
+      window.clearTimeout(timer);
+      if (window.YT?.Player) resolve(window.YT);
+      else reject(new Error('yt-api-missing'));
+    };
+    if (!document.querySelector(`script[src="${YT_API_SRC}"]`)) {
+      const s = document.createElement('script');
+      s.src = YT_API_SRC;
+      s.async = true;
+      s.onerror = () => {
+        window.clearTimeout(timer);
+        ytApiPromise = null;
+        reject(new Error('yt-api-error'));
+      };
+      document.head.appendChild(s);
+    }
+  });
+  return ytApiPromise;
+}
 
 /**
  * Lekcja wideo osadzona bezpośrednio w ścieżce działu (bez osobnej zakładki).
- * Player ładuje się dopiero po kliknięciu w okładkę (lżejsza strona), a
- * YouTube jest tylko dyskretnym linkiem „otwórz w nowej karcie".
+ * Desktop: okładka, player ładuje się po kliknięciu. Dotyk: player od razu,
+ * bez autoplay (mobilne przeglądarki i tak go blokują, a dwuetapowe
+ * okładka -> iframe psuło pierwsze tapnięcie).
  *
- * „Obejrzane" liczy się do postępu działu: zalicza się automatycznie
- * (postMessage z iframe YouTube: enablejsapi) albo ręcznie przełącznikiem.
+ * Player tworzymy przez oficjalne YouTube IFrame API (najbardziej
+ * przetestowana ścieżka na mobile); jeśli API nie dojdzie, zwykły iframe.
+ * „Obejrzane" liczy się do postępu: automatycznie (koniec / >= 90%) albo ręcznie.
  */
 export function CourseVideo({
   lessons,
@@ -39,77 +105,103 @@ export function CourseVideo({
 }) {
   const [activeId, setActiveId] = useState(lessons[0]?.video_id);
   const [playing, setPlaying] = useState(false);
-  // Ekrany dotykowe: player od razu, bez okładki i bez autoplay. Mobilne
-  // przeglądarki blokują autoplay, a dwuetapowe „okładka -> iframe" psuło
-  // pierwsze tapnięcie (pauza/przewijanie nie łapały).
+  const [poster, setPoster] = useState<'max' | 'hq'>('max');
+  const [busy, setBusy] = useState(false);
   const [touch, setTouch] = useState(false);
+  const [apiFailed, setApiFailed] = useState(false);
+  const hostRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     setTouch(window.matchMedia('(hover: none), (pointer: coarse)').matches);
   }, []);
-  const showPlayer = playing || touch;
-  const [poster, setPoster] = useState<'max' | 'hq'>('max');
-  const [busy, setBusy] = useState(false);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const active = lessons.find((l) => l.video_id === activeId) ?? lessons[0];
   const ytId = active?.yt_id_wideo ?? '';
   const tracking = !!watched && !!onToggleWatched;
   const isWatched = !!watched?.has(ytId);
+  const showPlayer = playing || touch;
+  const autoplay = playing && !touch;
 
-  // Zmiana lekcji → nowa okładka, player od nowa.
+  // Zmiana lekcji: nowa okładka, player od nowa.
   useEffect(() => {
     setPlaying(false);
     setPoster('max');
   }, [activeId]);
 
-  // Auto-zaliczenie: subskrybujemy zdarzenia playera (bez ładowania YT API).
+  // Auto-zaliczenie: stabilna referencja, żeby nie przebudowywać playera.
+  const markWatchedRef = useRef<() => void>(() => {});
+  markWatchedRef.current = () => {
+    if (ytId && onToggleWatched && !isWatched) onToggleWatched(ytId, true);
+  };
+
+  // Tworzenie playera przez YT.Player w elemencie, którego React nie dotyka.
   useEffect(() => {
-    if (!showPlayer || !ytId || isWatched || !onToggleWatched) return;
-    const frame = iframeRef.current;
-    if (!frame) return;
+    if (!showPlayer || !ytId || apiFailed) return;
+    const host = hostRef.current;
+    if (!host) return;
 
-    const subscribe = () => {
-      frame.contentWindow?.postMessage(
-        JSON.stringify({ event: 'listening', id: ytId, channel: 'widget' }),
-        'https://www.youtube.com'
-      );
-    };
-    const onMessage = (e: MessageEvent) => {
-      if (e.origin !== 'https://www.youtube.com' || e.source !== frame.contentWindow)
-        return;
-      let data: { event?: string; info?: unknown };
-      try {
-        data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
-      } catch {
-        return;
-      }
-      // Koniec filmu
-      if (data.event === 'onStateChange' && data.info === 0) {
-        onToggleWatched(ytId, true);
-        return;
-      }
-      // Postęp odtwarzania (currentTime / duration)
-      if (data.event === 'infoDelivery' && data.info && typeof data.info === 'object') {
-        const info = data.info as { currentTime?: number; duration?: number };
-        if (
-          typeof info.currentTime === 'number' &&
-          typeof info.duration === 'number' &&
-          info.duration > 0 &&
-          info.currentTime / info.duration >= WATCHED_RATIO
-        ) {
-          onToggleWatched(ytId, true);
-        }
-      }
-    };
+    let cancelled = false;
+    let player: YTPlayer | null = null;
+    let poll: number | undefined;
+    const mount = document.createElement('div');
+    host.appendChild(mount);
 
-    window.addEventListener('message', onMessage);
-    frame.addEventListener('load', subscribe);
-    subscribe();
+    loadYouTubeApi()
+      .then((YT) => {
+        if (cancelled) return;
+        player = new YT.Player(mount, {
+          videoId: ytId,
+          width: '100%',
+          height: '100%',
+          playerVars: {
+            rel: 0,
+            modestbranding: 1,
+            playsinline: 1,
+            autoplay: autoplay ? 1 : 0,
+            origin: window.location.origin,
+          },
+          events: {
+            onStateChange: (e) => {
+              if (e.data === YT.PlayerState.ENDED) markWatchedRef.current();
+            },
+          },
+        });
+        poll = window.setInterval(() => {
+          if (!player) return;
+          try {
+            const d = player.getDuration();
+            const t = player.getCurrentTime();
+            if (d > 0 && t / d >= WATCHED_RATIO) markWatchedRef.current();
+          } catch {
+            /* player jeszcze niegotowy */
+          }
+        }, 5000);
+      })
+      .catch(() => {
+        if (!cancelled) setApiFailed(true);
+      });
+
     return () => {
-      window.removeEventListener('message', onMessage);
-      frame.removeEventListener('load', subscribe);
+      cancelled = true;
+      if (poll) window.clearInterval(poll);
+      try {
+        player?.destroy();
+      } catch {
+        /* ignoruj */
+      }
+      host.innerHTML = '';
     };
-  }, [showPlayer, ytId, isWatched, onToggleWatched]);
+  }, [showPlayer, ytId, autoplay, apiFailed]);
+
+  const toggle = useCallback(async () => {
+    if (!onToggleWatched || !ytId) return;
+    setBusy(true);
+    try {
+      await onToggleWatched(ytId, !isWatched);
+    } finally {
+      setBusy(false);
+    }
+  }, [onToggleWatched, ytId, isWatched]);
 
   if (!active) return null;
 
@@ -118,41 +210,39 @@ export function CourseVideo({
     poster === 'max'
       ? `https://i.ytimg.com/vi/${ytId}/maxresdefault.jpg`
       : `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`;
-  const origin = typeof window !== 'undefined' ? window.location.origin : '';
-
-  const toggle = async () => {
-    if (!onToggleWatched) return;
-    setBusy(true);
-    try {
-      await onToggleWatched(ytId, !isWatched);
-    } finally {
-      setBusy(false);
-    }
-  };
 
   return (
     <div
       className={cn(
-        'overflow-hidden rounded-3xl border bg-white shadow-soft transition-colors duration-500',
+        'rounded-3xl border bg-white shadow-soft transition-colors duration-500',
         isWatched ? 'border-brand-200' : 'border-line'
       )}
     >
-      {/* Player / okładka */}
-      <div className="relative aspect-video bg-navy-950">
+      {/* Player / okładka. Bez overflow-hidden na przodkach iframe (Chrome
+          Android potrafi nie renderować wideo pod clipem z border-radius). */}
+      <div className="relative aspect-video rounded-t-3xl bg-navy-950">
         {showPlayer ? (
-          <iframe
-            key={ytId}
-            ref={iframeRef}
-            className="absolute inset-0 h-full w-full"
-            src={`https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1&playsinline=1&enablejsapi=1${playing && !touch ? '&autoplay=1' : ''}&origin=${encodeURIComponent(origin)}`}
-            title={active.tytul_lekcji}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+          apiFailed ? (
+            <iframe
+              key={ytId}
+              className="yt-frame absolute inset-0 h-full w-full rounded-t-3xl"
+              src={`https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1&playsinline=1${autoplay ? '&autoplay=1' : ''}`}
+              title={active.tytul_lekcji}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+              allowFullScreen
+            />
+          ) : (
+            <div
+              ref={hostRef}
+              key={ytId}
+              className="yt-host absolute inset-0 rounded-t-3xl"
+              aria-label={active.tytul_lekcji}
+            />
+          )
         ) : (
           <button
             onClick={() => setPlaying(true)}
-            className="group absolute inset-0 flex items-center justify-center"
+            className="group absolute inset-0 flex items-center justify-center overflow-hidden rounded-t-3xl"
             aria-label={`Odtwórz: ${active.tytul_lekcji}`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -212,7 +302,7 @@ export function CourseVideo({
               ? 'Obejrzyj lekcję, a potem przejdź dalej.'
               : isWatched
                 ? 'Lekcja zaliczona. Możesz do niej wracać w każdej chwili.'
-                : 'Zalicza się automatycznie po obejrzeniu - albo odhacz ręcznie.'}
+                : 'Zalicza się automatycznie po obejrzeniu, albo odhacz ręcznie.'}
           </p>
         )}
 
@@ -235,33 +325,33 @@ export function CourseVideo({
             YouTube <IconExternal className="h-3.5 w-3.5" />
           </a>
           {tracking && (
-          <button
-            onClick={toggle}
-            disabled={busy}
-            aria-pressed={isWatched}
-            className={cn(
-              'inline-flex items-center gap-2.5 rounded-full py-1.5 pl-1.5 pr-4 text-sm font-semibold ring-1 transition-all duration-300 disabled:opacity-60',
-              isWatched
-                ? 'bg-white text-brand-700 ring-brand-200'
-                : 'bg-white text-slate ring-line hover:text-brand-700 hover:ring-brand-300'
-            )}
-          >
-            <span
+            <button
+              onClick={toggle}
+              disabled={busy}
+              aria-pressed={isWatched}
               className={cn(
-                'flex h-6 w-6 items-center justify-center rounded-full transition-all duration-300',
+                'inline-flex items-center gap-2.5 rounded-full py-1.5 pl-1.5 pr-4 text-sm font-semibold ring-1 transition-all duration-300 disabled:opacity-60',
                 isWatched
-                  ? 'bg-[linear-gradient(135deg,#6b4df6,#f43f8f)] text-white'
-                  : 'bg-cloud text-transparent ring-1 ring-line'
+                  ? 'bg-white text-brand-700 ring-brand-200'
+                  : 'bg-white text-slate ring-line hover:text-brand-700 hover:ring-brand-300'
               )}
             >
-              {busy ? (
-                <IconSpinner className="h-3.5 w-3.5 text-brand-400" />
-              ) : (
-                <IconCheck className="h-3.5 w-3.5" strokeWidth={2.5} />
-              )}
-            </span>
-            {isWatched ? 'Obejrzane' : 'Oznacz jako obejrzane'}
-          </button>
+              <span
+                className={cn(
+                  'flex h-6 w-6 items-center justify-center rounded-full transition-all duration-300',
+                  isWatched
+                    ? 'bg-[linear-gradient(135deg,#6b4df6,#f43f8f)] text-white'
+                    : 'bg-cloud text-transparent ring-1 ring-line'
+                )}
+              >
+                {busy ? (
+                  <IconSpinner className="h-3.5 w-3.5 text-brand-400" />
+                ) : (
+                  <IconCheck className="h-3.5 w-3.5" strokeWidth={2.5} />
+                )}
+              </span>
+              {isWatched ? 'Obejrzane' : 'Oznacz jako obejrzane'}
+            </button>
           )}
         </div>
       </div>
