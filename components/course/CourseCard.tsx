@@ -3,22 +3,35 @@ import type { Course } from '@/lib/courses';
 import { SINGLE_COURSE_PRICE } from '@/lib/courses';
 import { BuyButton } from '@/components/shop/BuyButton';
 
-/** Zakres działu jako zwarty ciąg zagadnień rozdzielonych kropką. */
+/** Zakres działu: domyślnie zwinięty, rozwija się po kliknięciu. */
 function Topics({ items }: { items: string[] }) {
   if (!items.length) return null;
   return (
-    <p className="rounded-xl bg-cloud px-4 py-3 text-sm leading-relaxed text-slate">
-      {items.map((it, i) => (
-        <span key={it}>
-          {i > 0 && (
-            <span aria-hidden className="mx-1.5 font-bold text-brand-400">
-              ·
-            </span>
-          )}
-          {it}
-        </span>
-      ))}
-    </p>
+    <details className="group/details rounded-xl bg-cloud px-4 py-2.5 [&_summary::-webkit-details-marker]:hidden">
+      <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate">
+        Zakres działu
+        <svg
+          className="h-4 w-4 text-muted transition-transform group-open/details:rotate-180"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden
+        >
+          <path
+            fillRule="evenodd"
+            d="M5.3 7.3a1 1 0 0 1 1.4 0L10 10.6l3.3-3.3a1 1 0 1 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 0-1.4Z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </summary>
+      <ul className="mt-2.5 space-y-1.5 text-sm text-muted">
+        {items.map((it) => (
+          <li key={it} className="flex gap-2">
+            <span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-brand-400" />
+            <span>{it}</span>
+          </li>
+        ))}
+      </ul>
+    </details>
   );
 }
 
