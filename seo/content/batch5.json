@@ -409,10 +409,10 @@
   },
   {
     "slug": "fizyka-jadrowa",
-    "name": "Fizyka jądrowa",
-    "dopelniacz": "fizyki jądrowej",
-    "metaTeoria": "Fizyka jądrowa: budowa jądra, rozpady promieniotwórcze, czas połowicznego rozpadu i energia wiązania. Teoria z wzorami i przykładami dla matury.",
-    "metaMatura": "Fizyka jądrowa na maturze: zadania z prawa rozpadu, czasu połowicznego zaniku i deficytu masy. Wzory, strategie i rozwiązania krok po kroku.",
+    "name": "Fizyka jądrowa i relatywistyka",
+    "dopelniacz": "fizyki jądrowej i relatywistyki",
+    "metaTeoria": "Fizyka jądrowa i relatywistyka: budowa jądra, rozpady promieniotwórcze, energia wiązania i szczególna teoria względności. Teoria z wzorami i przykładami dla matury.",
+    "metaMatura": "Fizyka jądrowa i relatywistyka na maturze: zadania z prawa rozpadu, deficytu masy i dylatacji czasu. Wzory, strategie i rozwiązania krok po kroku.",
     "intro": "Fizyka jądrowa zajmuje się budową jądra atomowego, jego przemianami oraz energią uwalnianą w reakcjach jądrowych. Kluczowe zagadnienia to rozpady promieniotwórcze (alfa, beta, gamma), prawo rozpadu i czas połowicznego zaniku oraz energia wiązania związana z deficytem masy. Dział wyjaśnia działanie reaktorów i datowanie izotopowe.",
     "theory": [
       {

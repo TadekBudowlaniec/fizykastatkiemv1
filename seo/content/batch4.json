@@ -1,10 +1,10 @@
 [
   {
     "slug": "prad-elektryczny",
-    "name": "Prąd elektryczny",
-    "dopelniacz": "prądu elektrycznego",
-    "metaTeoria": "Prąd elektryczny - teoria do matury: prawo Ohma, opór, praca i moc prądu, prawa Kirchhoffa, łączenie oporników. Wzory, definicje i przykłady.",
-    "metaMatura": "Prąd elektryczny na maturze z fizyki (CKE): zadania z prawa Ohma, mocy, oporu i obwodów. Sprawdzone strategie, schematy i pełne rozwiązania.",
+    "name": "Prąd stały",
+    "dopelniacz": "prądu stałego",
+    "metaTeoria": "Prąd stały - teoria do matury: prawo Ohma, opór, praca i moc prądu, prawa Kirchhoffa, łączenie oporników. Wzory, definicje i przykłady.",
+    "metaMatura": "Prąd stały na maturze z fizyki (CKE): zadania z prawa Ohma, mocy, oporu i obwodów. Sprawdzone strategie, schematy i pełne rozwiązania.",
     "intro": "Prąd elektryczny to uporządkowany ruch ładunków elektrycznych. Ten dział obejmuje natężenie prądu, prawo Ohma, opór elektryczny, pracę i moc prądu oraz prawa Kirchhoffa. To jeden z najczęściej sprawdzanych obszarów na maturze z fizyki - zarówno w zakresie podstawowym, jak i rozszerzonym.",
     "theory": [
       {
@@ -51,7 +51,7 @@
     "maturaInfo": {
       "poziom": "rozszerzony",
       "zakres": "Prawo Ohma, opór i jego zależności, praca i moc prądu, prawo Joule'a-Lenza, łączenie oporników, SEM i opór wewnętrzny, prawa Kirchhoffa, charakterystyki prądowo-napięciowe.",
-      "html": "<p>Prąd elektryczny pojawia się na maturze niemal co roku. W zakresie podstawowym dominują zadania na prawo Ohma, moc i koszt energii. W zakresie rozszerzonym dochodzą obwody z SEM i oporem wewnętrznym, prawa Kirchhoffa oraz analiza wykresów I(U). Kluczowa jest sprawność rachunkowa i umiejętność upraszczania obwodów.</p>",
+      "html": "<p>Prąd stały pojawia się na maturze niemal co roku. W zakresie podstawowym dominują zadania na prawo Ohma, moc i koszt energii. W zakresie rozszerzonym dochodzą obwody z SEM i oporem wewnętrznym, prawa Kirchhoffa oraz analiza wykresów I(U). Kluczowa jest sprawność rachunkowa i umiejętność upraszczania obwodów.</p>",
       "typoweZadania": [
         "Obliczanie oporu zastępczego mieszanego układu oporników.",
         "Wyznaczanie mocy i kosztu energii elektrycznej urządzenia.",
