@@ -226,7 +226,30 @@ export async function unmarkLevel(
   if (error) throw error;
 }
 
+/** Wszystkie ukończone poziomy użytkownika (planer: synchronizacja z kursem). */
+export async function getAllUserLevels(userId: string): Promise<UserLevel[]> {
+  const supabase = getSupabaseBrowser();
+  const { data, error } = await supabase
+    .from('user_levels')
+    .select('user_id, course_id, poziom, completed_at')
+    .eq('user_id', userId);
+  if (error) throw error;
+  return (data as UserLevel[]) ?? [];
+}
+
 // ---------------- Pliki Poziomu 1 - postęp per plik (user_materialy) ----------------
+
+/** Wszystkie ukończone pliki/wideo użytkownika (planer: synchronizacja z kursem). */
+export async function getAllUserMaterialy(userId: string): Promise<UserMaterial[]> {
+  const supabase = getSupabaseBrowser();
+  const { data, error } = await supabase
+    .from('user_materialy')
+    .select('user_id, course_id, poziom, file, completed_at')
+    .eq('user_id', userId);
+  if (error) throw error;
+  return (data as UserMaterial[]) ?? [];
+}
+
 
 export async function getUserMaterialy(
   userId: string,
