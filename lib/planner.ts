@@ -12,7 +12,7 @@ const ARKUSZ_DAYS = 21;
 // Typy aktywności = kroki ścieżki działu (spójne z panelem kursu):
 //   video        obejrzenie lekcji wideo
 //   p1:<plik>    jeden plik teorii Poziomu 1 (gdy znamy listę plików)
-//   p1           cały Poziom 1 (gdy listy plików nie znamy, np. brak dostępu)
+//   p1           cały Poziom 1 (tylko gdy dział nie ma jeszcze wgranych plików)
 //   p2 / p3 / p4 Poziom 2 (dogrzewające), 3 (autorskie maturalne), 4 (arkusz CKE)
 //   quiz         quiz sprawdzający działu
 //   arkusz       pełny arkusz maturalny na finiszu
@@ -102,8 +102,8 @@ type PlanRow = Omit<StudyPlan, 'id'>;
  * samej kolejności co w panelu kursu) rozłożone równomiernie na dni robocze,
  * niedziele = wolne, ostatnie ~21 dni = pełne arkusze maturalne.
  *
- * @param p1Files lista plików Poziomu 1 per dział (tylko działy, do których
- *   użytkownik ma dostęp; reszta dostaje jeden krok „cały Poziom 1").
+ * @param p1Files lista plików Poziomu 1 per dział - każdy plik to osobny
+ *   krok; dział bez wgranych materiałów dostaje jeden krok „cały Poziom 1".
  */
 export function generatePlanRows(
   userId: string,

@@ -57,7 +57,7 @@ const PATH_STEPS = [
 ];
 
 export default function PlanerPage() {
-  const { user, loading, hasAccessToCourse } = useAuth();
+  const { user, loading } = useAuth();
   const [plan, setPlan] = useState<StudyPlan[]>([]);
   const [phase, setPhase] = useState<'loading' | 'config' | 'plan'>('loading');
   const [known, setKnown] = useState<Set<number>>(new Set());
@@ -120,18 +120,17 @@ export default function PlanerPage() {
     if (!user) return;
     setBusy(true);
     try {
-      // Pliki Poziomu 1 znamy tylko dla działów z dostępem (get-materialy-url).
-      const withAccess = STUDY_TOPICS.filter(
-        (t) => !known.has(t.id) && hasAccessToCourse(t.id)
-      );
+      // Lista plików Poziomu 1 każdego działu (listowanie nazw jest dostępne
+      // dla każdego zalogowanego; treść PDF nadal wymaga dostępu do działu).
+      const toPlan = STUDY_TOPICS.filter((t) => !known.has(t.id));
       const p1Files: Record<number, string[]> = {};
       await Promise.all(
-        withAccess.map(async (t) => {
+        toPlan.map(async (t) => {
           try {
             const files = await listMaterialy(t.id, 1);
             if (files.length) p1Files[t.id] = files.map((f) => f.name);
           } catch {
-            /* brak listy - Poziom 1 jako jeden krok */
+            /* materiały działu jeszcze nie wgrane - Poziom 1 jako jeden krok */
           }
         })
       );

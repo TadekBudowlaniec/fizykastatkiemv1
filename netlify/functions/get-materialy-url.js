@@ -79,7 +79,11 @@ exports.handler = async (event) => {
             return { statusCode: 400, body: JSON.stringify({ error: 'Nieprawidłowa akcja.' }) };
         }
 
-        // 2. Kontrola dostępu: admin lub aktywny enrollment na ten dział
+        // 2. Kontrola dostępu: admin lub aktywny enrollment na ten dział.
+        // WYJĄTEK: action 'list' (same nazwy plików, bez linków) jest dostępna
+        // dla każdego zalogowanego - planer nauki rozpisuje Poziom 1 plik po
+        // pliku także dla działów, których użytkownik jeszcze nie kupił.
+        // Treść (podpisany URL) nadal wymaga enrollmentu.
         const { data: userRow } = await supabaseAdmin
             .from('users')
             .select('is_admin')
@@ -87,7 +91,7 @@ exports.handler = async (event) => {
             .single();
         const isAdmin = !!(userRow && userRow.is_admin);
 
-        if (!isAdmin) {
+        if (!isAdmin && action !== 'list') {
             const { data: enrollment, error: enrollError } = await supabaseAdmin
                 .from('enrollments')
                 .select('course_id')
