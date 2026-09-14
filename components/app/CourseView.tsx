@@ -342,7 +342,7 @@ export function CourseView({ courseId }: { courseId: number }) {
   // bazy, żeby nie wyciekły video_id niezalogowanym.
   if (!access) {
     const fullPrice = PLANS.find((p) => p.key === 'full_access')?.price ?? 828;
-    const scope = [...(meta?.basic ?? []), ...(meta?.extended ?? [])];
+    const scope = meta?.topics ?? [];
 
     return (
       <>

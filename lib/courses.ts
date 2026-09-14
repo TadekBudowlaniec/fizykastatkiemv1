@@ -4,8 +4,8 @@ export type Course = {
   id: number;
   icon: string;
   title: string;
-  basic: string[];
-  extended: string[];
+  /** Zakres działu - lista zagadnień (wyświetlana jako „a · b · c"). */
+  topics: string[];
   /** slug działu w bazie wiedzy SEO (/fizyka/<slug>/) do cross-linkowania */
   slug: string;
 };
@@ -28,15 +28,15 @@ const CANONICAL: { title: string; id: number; slug: string }[] = [
   { title: 'Termodynamika', id: 8, slug: 'termodynamika' },
   { title: 'Grawitacja i astronomia', id: 9, slug: 'grawitacja' },
   { title: 'Elektrostatyka', id: 10, slug: 'elektrostatyka' },
-  { title: 'Prąd elektryczny', id: 11, slug: 'prad-elektryczny' },
+  { title: 'Prąd stały', id: 11, slug: 'prad-elektryczny' },
   { title: 'Magnetyzm', id: 12, slug: 'magnetyzm' },
   { title: 'Indukcja elektromagnetyczna', id: 13, slug: 'indukcja-elektromagnetyczna' },
   { title: 'Fale elektromagnetyczne i optyka', id: 14, slug: 'optyka-falowa' },
   { title: 'Fizyka atomowa', id: 15, slug: 'fizyka-atomowa' },
-  { title: 'Fizyka jądrowa i relatywistyczna', id: 16, slug: 'fizyka-jadrowa' },
+  { title: 'Fizyka jądrowa i relatywistyka', id: 16, slug: 'fizyka-jadrowa' },
 ];
 
-type RawCourse = { icon: string; title: string; basic: string[]; extended: string[] };
+type RawCourse = { icon: string; title: string; topics: string[] };
 
 /** 16 działów kursu z poprawnym (kanonicznym) ID, posortowane rosnąco po ID. */
 export const COURSES: Course[] = (rawCourses as RawCourse[])
@@ -46,8 +46,7 @@ export const COURSES: Course[] = (rawCourses as RawCourse[])
       id: canon?.id ?? 0,
       icon: c.icon,
       title: c.title,
-      basic: c.basic,
-      extended: c.extended,
+      topics: c.topics,
       slug: canon?.slug ?? '',
     };
   })

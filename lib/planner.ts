@@ -71,9 +71,16 @@ export const activityMeta: Record<
   rest: { icon: '🌴', label: 'Dzień wolny', short: 'Wolne' },
 };
 
+// Dawne tytuły działów (plany wygenerowane przed zmianą nazw).
+const LEGACY_TITLES: Record<string, string> = {
+  'Prąd elektryczny': 'Prąd stały',
+  'Fizyka jądrowa i relatywistyczna': 'Fizyka jądrowa i relatywistyka',
+};
+
 /** ID działu po nazwie tematu z planu (topic_name = tytuł działu). */
 export function courseIdForTopic(topicName: string): number | null {
-  return COURSES.find((c) => c.title === topicName)?.id ?? null;
+  const title = LEGACY_TITLES[topicName] ?? topicName;
+  return COURSES.find((c) => c.title === title)?.id ?? null;
 }
 
 function prettyFile(name: string): string {

@@ -31,7 +31,7 @@ const courseData = {
     8:  { name: 'Termodynamika',                     regularPrice: 17700, promoPrice: 17700 },
     9:  { name: 'Grawitacja i astronomia',            regularPrice: 17700, promoPrice: 17700 },
     10: { name: 'Elektrostatyka',                    regularPrice: 17700, promoPrice: 17700 },
-    11: { name: 'Prąd elektryczny',                  regularPrice: 17700, promoPrice: 17700 },
+    11: { name: 'Prąd stały',                        regularPrice: 17700, promoPrice: 17700 },
     12: { name: 'Magnetyzm',                         regularPrice: 17700, promoPrice: 17700 },
     13: { name: 'Indukcja elektromagnetyczna',       regularPrice: 17700, promoPrice: 17700 },
     14: { name: 'Fale elektromagnetyczne i optyka',  regularPrice: 17700, promoPrice: 17700 },

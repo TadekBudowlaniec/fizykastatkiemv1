@@ -3,246 +3,195 @@
     "id": 1,
     "icon": "🏁",
     "title": "Kinematyka",
-    "basic": [
-      "wielkości: droga, przemieszczenie, prędkość, przyspieszenie",
-      "ruch prostoliniowy jednostajny i jednostajnie przyspieszony",
+    "topics": [
+      "droga, przemieszczenie, prędkość, przyspieszenie",
+      "ruch jednostajny i jednostajnie przyspieszony",
       "swobodne spadanie",
-      "wykresy s(t), v(t)"
-    ],
-    "extended": [
-      "ruch po okręgu (v, T, f, ad)",
-      "ruchy złożone (rzut pionowy, poziomy, ukośny)",
-      "analiza wektorowa prędkości i przyspieszenia"
+      "wykresy s(t) i v(t)",
+      "rzuty: pionowy, poziomy, ukośny",
+      "ruch po okręgu (prędkość kątowa, okres, częstotliwość, przyspieszenie dośrodkowe)"
     ]
   },
   {
     "id": 2,
     "icon": "🛠️",
     "title": "Dynamika",
-    "basic": [
-      "trzy zasady Newtona",
-      "siły: grawitacji, sprężystości, tarcia, oporu",
-      "równowaga sił",
-      "ciężar vs. masa"
-    ],
-    "extended": [
-      "siła dośrodkowa, układy nieinercjalne",
-      "zasada zachowania pędu, zderzenia",
-      "moment siły, moment pędu"
+    "topics": [
+      "trzy zasady dynamiki Newtona",
+      "siły grawitacji, sprężystości, tarcia i oporu",
+      "równia pochyła i rozkład sił",
+      "siła dośrodkowa i odśrodkowa, układy nieinercjalne",
+      "pęd, popęd siły i zderzenia"
     ]
   },
   {
     "id": 3,
     "icon": "⚙️",
     "title": "Praca, moc, energia",
-    "basic": [
-      "praca mechaniczna, moc",
-      "energia kinetyczna, potencjalna grawitacyjna, sprężystości",
-      "zasada zachowania energii",
-      "sprawność urządzeń"
-    ],
-    "extended": [
-      "twierdzenie o pracy i energii kinetycznej",
-      "energia potencjalna w polu sił",
-      "drgania harmoniczne (energia)"
+    "topics": [
+      "praca i moc",
+      "energia kinetyczna i potencjalna",
+      "zasada zachowania energii mechanicznej",
+      "praca siły tarcia",
+      "zderzenia sprężyste i niesprężyste (zasada zachowania pędu i energii)"
     ]
   },
   {
     "id": 4,
     "icon": "🧱",
     "title": "Bryła sztywna",
-    "basic": [
-      "pojęcie momentu siły (intuicyjnie)",
-      "równowaga dźwigni"
-    ],
-    "extended": [
-      "moment bezwładności",
-      "dynamika ruchu obrotowego",
-      "energia kinetyczna obrotowa",
-      "zasada zachowania momentu pędu"
+    "topics": [
+      "środek masy i kinematyka bryły",
+      "moment siły i statyka",
+      "moment bezwładności i II zasada dynamiki dla ruchu obrotowego",
+      "moment pędu i zasada jego zachowania",
+      "energia kinetyczna ruchu obrotowego, toczenie się brył",
+      "rodzaje równowagi bryły"
     ]
   },
   {
     "id": 5,
     "icon": "🔁",
     "title": "Ruch drgający",
-    "basic": [
-      "pojęcie drgań, okres, częstotliwość, amplituda",
-      "ruch harmoniczny (opis jakościowy)",
-      "przykłady: wahadło, sprężyna"
-    ],
-    "extended": [
-      "równanie x(t) = A sin(ωt + φ)",
-      "energia w ruchu harmonicznym",
-      "rezonans mechaniczny"
+    "topics": [
+      "kinematyka drgań: amplituda, okres, częstotliwość",
+      "dynamika oscylatora: wahadło matematyczne i sprężynowe",
+      "energia w ruchu drgającym, łączenie sprężyn",
+      "drgania tłumione i rezonans"
     ]
   },
   {
-    "id": 9,
-    "icon": "🪐",
-    "title": "Grawitacja i astronomia",
-    "basic": [
-      "prawo powszechnego ciążenia Newtona",
-      "przyspieszenie grawitacyjne g",
-      "III prawo Keplera (opisowo)"
+    "id": 6,
+    "title": "Fale mechaniczne",
+    "topics": [
+      "podstawowe wielkości opisujące falę",
+      "dźwięk, załamanie i odbicie",
+      "interferencja i zasada Huygensa",
+      "efekt Dopplera",
+      "klasyfikacja fal i fale stojące",
+      "poziom natężenia dźwięku (decybele)"
     ],
-    "extended": [
-      "g = GM/R²",
-      "energia potencjalna Ep = -GMm/r",
-      "prędkości kosmiczne",
-      "orbity satelitów"
-    ]
+    "icon": "🌊"
   },
   {
     "id": 7,
     "icon": "💧",
     "title": "Hydrostatyka",
-    "basic": [
-      "ciśnienie hydrostatyczne p = ρgh",
-      "prawo Pascala",
-      "prawo Archimedesa (siła wyporu)"
-    ],
-    "extended": [
-      "równania równowagi płynów",
-      "równanie Bernoulliego"
+    "topics": [
+      "ciśnienie i prawo Pascala",
+      "naczynia połączone i siła nacisku na ścianki",
+      "prawo Archimedesa i warunki pływania ciał",
+      "ruch ciał w płynach"
     ]
   },
   {
     "id": 8,
     "icon": "🔥",
     "title": "Termodynamika",
-    "basic": [
-      "ciepło właściwe, bilans cieplny",
-      "ciepło topnienia, parowania",
-      "rozszerzalność cieplna"
-    ],
-    "extended": [
-      "równanie Clapeyrona pV = nRT",
-      "I i II zasada termodynamiki",
-      "przemiany: izoT, izoV, izoP, adiabatyczna",
-      "silniki cieplne, sprawność"
+    "topics": [
+      "kinetyczna teoria gazu i równanie Clapeyrona",
+      "I zasada termodynamiki i zmiany stanu skupienia",
+      "przemiany gazowe i praca w termodynamice",
+      "cykle termodynamiczne i silniki cieplne",
+      "ciepło właściwe, przemiany fazowe, bilans cieplny",
+      "sposoby przekazywania ciepła",
+      "zaawansowana analiza wykresów z arkuszy CKE"
     ]
   },
   {
     "id": 9,
-    "icon": "➕",
-    "title": "Elektrostatyka",
-    "basic": [
-      "ładunki, przewodniki i izolatory",
-      "prawo Coulomba",
-      "natężenie pola",
-      "praca sił pola"
-    ],
-    "extended": [
-      "potencjał i różnica potencjałów",
-      "kondensatory (pojemność, energia)",
-      "linie pola, superpozycja"
+    "icon": "🪐",
+    "title": "Grawitacja i astronomia",
+    "topics": [
+      "prawo powszechnego ciążenia i przyspieszenie grawitacyjne",
+      "prawa Keplera i dynamika na orbitach",
+      "prędkości kosmiczne i orbita geostacjonarna",
+      "pole grawitacyjne i energia",
+      "jednostki odległości w kosmosie, prawo Hubble'a",
+      "gwiazdy: diagram H-R, ewolucja gwiazd, czarne dziury"
     ]
   },
   {
     "id": 10,
-    "icon": "🔌",
-    "title": "Prąd elektryczny",
-    "basic": [
-      "natężenie, napięcie, opór",
-      "prawo Ohma",
-      "praca i moc prądu",
-      "opór zastępczy"
-    ],
-    "extended": [
-      "prawa Kirchhoffa",
-      "opór właściwy i zależność od temperatury",
-      "przewodnictwo półprzewodników"
+    "icon": "➕",
+    "title": "Elektrostatyka",
+    "topics": [
+      "ładunek elektryczny i prawo Coulomba",
+      "natężenie pola i superpozycja wektorów",
+      "energia, praca i potencjał pola elektrycznego",
+      "ruch naładowanych cząstek, kondensatory",
+      "przewodniki w polu elektrycznym, polaryzacja dielektryków"
     ]
   },
   {
     "id": 11,
-    "icon": "🧲",
-    "title": "Magnetyzm",
-    "basic": [
-      "magnesy trwałe, bieguny",
-      "pole magnetyczne wokół przewodnika"
-    ],
-    "extended": [
-      "wektor indukcji magnetycznej B",
-      "siła Lorentza",
-      "ruch ładunku w polu magnetycznym",
-      "siła elektrodynamiczna"
+    "icon": "🔌",
+    "title": "Prąd stały",
+    "topics": [
+      "prawo Ohma i opór właściwy",
+      "prawa Kirchhoffa, praca i moc prądu",
+      "SEM i opór wewnętrzny",
+      "zależność oporu od temperatury",
+      "charakterystyki prądowo-napięciowe, dioda półprzewodnikowa"
     ]
   },
   {
     "id": 12,
-    "icon": "🌀",
-    "title": "Indukcja elektromagnetyczna",
-    "basic": [
-      "zjawisko indukcji (Faraday)",
-      "prawo Lenza (opisowo)"
-    ],
-    "extended": [
-      "SEM indukcji, strumień magnetyczny",
-      "prąd przemienny: wartość skuteczna, moc",
-      "transformatory"
+    "icon": "🧲",
+    "title": "Magnetyzm",
+    "topics": [
+      "magnesy trwałe i pole magnetyczne",
+      "pole magnetyczne wokół przewodnika",
+      "siła Lorentza i siła elektrodynamiczna",
+      "oddziaływanie przewodników, moment siły na ramkę",
+      "ruch śrubowy cząstki, ziemskie pole magnetyczne"
     ]
   },
   {
     "id": 13,
-    "icon": "🌊",
-    "title": "Fale mechaniczne",
-    "basic": [
-      "fala podłużna i poprzeczna",
-      "prędkość, długość fali, częstotliwość, okres",
-      "dźwięk: wysokość, natężenie, głośność"
-    ],
-    "extended": [
-      "równanie fali",
-      "fale stojące (struna, rura)",
-      "efekt Dopplera"
+    "icon": "🌀",
+    "title": "Indukcja elektromagnetyczna",
+    "topics": [
+      "strumień indukcji magnetycznej, zjawisko indukcji",
+      "reguła Lenza",
+      "prądnica, prąd przemienny, wykresy CKE"
     ]
   },
   {
     "id": 14,
     "icon": "🌈",
     "title": "Fale elektromagnetyczne i optyka",
-    "basic": [
-      "widmo fal EM (od radiowych po gamma)",
-      "prędkość światła",
-      "zastosowania fal EM"
-    ],
-    "extended": [
-      "optyka geometryczna (soczewki, zwierciadła)",
-      "prawo załamania światła",
-      "E = hf, λ = c/f",
-      "interferencja, dyfrakcja światła",
-      "polaryzacja"
+    "topics": [
+      "natura fali elektromagnetycznej, prędkość i natężenie",
+      "pełne widmo fal EM",
+      "optyka geometryczna: współczynnik załamania i prawo Snella",
+      "całkowite wewnętrzne odbicie, pryzmaty",
+      "interferencja i dyfrakcja fal",
+      "polaryzacja światła, efekt Dopplera, laser",
+      "soczewki: konstrukcja obrazów, równanie soczewki"
     ]
   },
   {
     "id": 15,
     "icon": "🧬",
     "title": "Fizyka atomowa",
-    "basic": [
-      "budowa atomu (jądro, elektrony)",
-      "widma liniowe",
-      "zjawisko fotoelektryczne (opisowo)"
-    ],
-    "extended": [
-      "równanie Einsteina dla fotoefektu",
-      "dualizm korpuskularno-falowy (λ = h/p)",
-      "model Bohra atomu wodoru"
+    "topics": [
+      "efekt fotoelektryczny",
+      "fotokomórka i dualizm korpuskularno-falowy",
+      "model Bohra atomu wodoru i widma",
+      "pęd fotonu i fala de Broglie'a",
+      "promieniowanie rentgenowskie i odrzut atomu"
     ]
   },
   {
     "id": 16,
     "icon": "☢️",
-    "title": "Fizyka jądrowa i relatywistyczna",
-    "basic": [
-      "promieniowanie jonizujące (α, β, γ)",
-      "zastosowania promieniotwórczości"
-    ],
-    "extended": [
+    "title": "Fizyka jądrowa i relatywistyka",
+    "topics": [
+      "szczególna teoria względności",
+      "budowa jądra atomowego i promieniotwórczość",
       "prawo rozpadu promieniotwórczego",
-      "rozszczepienie i synteza jądrowa",
-      "STR: E=mc², dylatacja czasu, skrócenie długości"
+      "energia wiązania, reakcje jądrowe, cząstki elementarne"
     ]
   }
 ]
