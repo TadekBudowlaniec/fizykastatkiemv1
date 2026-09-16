@@ -3,6 +3,11 @@
   "version": "2.0.0",
   "private": true,
   "description": "Fizyka Statkiem - platforma kursów fizyki online (Next.js)",
+  "browserslist": [
+    "last 2 years",
+    "not dead",
+    "not op_mini all"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",

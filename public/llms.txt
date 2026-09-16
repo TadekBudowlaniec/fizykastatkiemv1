@@ -29,10 +29,10 @@
 - Kontakt: fizykastatkiem@gmail.com, tel. +48 665 115 132.
 
 ## Najważniejsze strony
-- Strona główna (kurs maturalny z fizyki): https://fizykastatkiem.pl/
-- Cennik (Kurs Pełny i VIP 1:1): https://fizykastatkiem.pl/cennik/
-- Pojedyncze działy: https://fizykastatkiem.pl/dzialy/
-- Korepetycje z fizyki: https://fizykastatkiem.pl/korepetycje/
-- Baza wiedzy (teoria + zadania z rozwiązaniami): https://fizykastatkiem.pl/baza-wiedzy/
-- Blog maturalny: https://fizykastatkiem.pl/blog/
-- O mnie (Czarek): https://fizykastatkiem.pl/o-mnie/
+- [Strona główna — kurs maturalny z fizyki](https://fizykastatkiem.pl/)
+- [Cennik — Kurs Pełny i VIP 1:1](https://fizykastatkiem.pl/cennik/)
+- [Pojedyncze działy](https://fizykastatkiem.pl/dzialy/)
+- [Korepetycje z fizyki](https://fizykastatkiem.pl/korepetycje/)
+- [Baza wiedzy — teoria i zadania z rozwiązaniami](https://fizykastatkiem.pl/baza-wiedzy/)
+- [Blog maturalny](https://fizykastatkiem.pl/blog/)
+- [O mnie — Cezary Prusak](https://fizykastatkiem.pl/o-mnie/)
