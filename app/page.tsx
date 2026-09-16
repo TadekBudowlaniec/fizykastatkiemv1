@@ -6,6 +6,7 @@ import { HowItWorks } from '@/components/landing/HowItWorks';
 import { CourseCatalog } from '@/components/landing/CourseCatalog';
 import { SocialProof } from '@/components/landing/SocialProof';
 import { Testimonials } from '@/components/landing/Testimonials';
+import { KursVsKorepetycje } from '@/components/landing/KursVsKorepetycje';
 import { Guarantee } from '@/components/landing/Guarantee';
 import { PricingSection } from '@/components/landing/PricingSection';
 import { FaqSection, type FaqItem } from '@/components/ui/Faq';
@@ -21,7 +22,7 @@ const vipPlan = PLANS.find((p) => p.key === 'vip')!;
 export const metadata: Metadata = {
   title: 'Kurs maturalny z fizyki online - matura rozszerzona',
   description:
-    'Kurs maturalny z fizyki online (poziom rozszerzony): 16 działów wideo HD, PDF-y, zadania na wzór CKE i planer nauki. 100% zdawalności - 28/28 absolwentów zdało maturę. Gwarancja Zdanej Matury.',
+    'Kurs maturalny z fizyki online (poziom rozszerzony): 16 działów wideo HD, PDF-y, zadania na wzór CKE i planer nauki. 100% zdawalności - 28/28 absolwentów zdało maturę. Gwarancja Dobrego Wyniku.',
   alternates: { canonical: '/' },
 };
 
@@ -43,7 +44,7 @@ const faq: FaqItem[] = [
     a: `Tak. Jeśli chcesz uzupełnić konkretny temat, możesz kupić pojedynczy dział za ${SINGLE_COURSE_PRICE} zł zamiast całego kursu - pełną listę znajdziesz na stronie „Pojedyncze działy”.`,
   },
   {
-    q: 'Jak działa Gwarancja Zdanej Matury?',
+    q: 'Jak działa Gwarancja Dobrego Wyniku?',
     a: 'Jeśli przerobisz cały kurs zgodnie z warunkami gwarancji (co najmniej 90% materiałów, zakup najpóźniej 30 dni przed egzaminem), podejdziesz do matury z fizyki i mimo to uzyskasz wynik poniżej 30%, możesz ubiegać się o zwrot ceny kursu. Zgłoszenie wysyłasz na nasz e-mail w ciągu 7 dni od otrzymania oficjalnego wyniku, dołączając oficjalny dokument z wynikiem egzaminu. Zgłoszenie (w tym postępy w kursie) podlega weryfikacji zgodnie z regulaminem (§9).',
   },
   {
@@ -110,6 +111,7 @@ export default function Home() {
       <CourseCatalog />
       <SocialProof />
       <Testimonials />
+      <KursVsKorepetycje />
       <Guarantee />
       <PricingSection />
       <FaqSection

@@ -96,7 +96,7 @@ export default function OfertaRatunkowaPage() {
             <PricingTiers />
           </div>
           <p className="mt-8 text-sm text-slate-400">
-            Objęte <strong className="text-slate-200">Gwarancją Zdanej Matury</strong> -
+            Objęte <strong className="text-slate-200">Gwarancją Dobrego Wyniku</strong> -
             szczegóły w regulaminie.
           </p>
         </div>

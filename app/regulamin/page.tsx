@@ -5,7 +5,7 @@ import { Container } from '@/components/ui/Container';
 export const metadata: Metadata = {
   title: 'Regulamin',
   description:
-    'Regulamin sklepu internetowego i platformy kursowej fizykastatkiem.pl - zasady zakupu kursów, płatności, licencji oraz Gwarancji Zdanej Matury.',
+    'Regulamin sklepu internetowego i platformy kursowej fizykastatkiem.pl - zasady zakupu kursów, płatności, licencji oraz Gwarancji Dobrego Wyniku.',
   alternates: { canonical: '/regulamin/' },
 };
 
@@ -40,7 +40,7 @@ export default function RegulaminPage() {
             <p>
               Niniejszy Regulamin określa zasady korzystania ze Sklepu,
               składania zamówień na Produkty cyfrowe (kursy online), zawierania
-              umów sprzedaży, zasady „Gwarancji Zdanej Matury” oraz tryb
+              umów sprzedaży, zasady „Gwarancji Dobrego Wyniku” oraz tryb
               postępowania reklamacyjnego.
             </p>
             <p>
@@ -225,17 +225,16 @@ export default function RegulaminPage() {
               i przyjmuje do wiadomości utratę prawa do odstąpienia od umowy.
             </p>
 
-            <h3>§9 Gwarancja „Zdana Matura” (zwrot warunkowy)</h3>
+            <h3>§9 Gwarancja „Dobry Wynik” (zwrot warunkowy)</h3>
             <p>
               Niezależnie od wyłączenia prawa do odstąpienia od umowy opisanego w
               §8, Sprzedawca udziela Klientowi dobrowolnej, umownej gwarancji pod
-              nazwą „Gwarancja Zdanej Matury”.
+              nazwą „Gwarancja Dobrego Wyniku”.
             </p>
             <p>
               Gwarancja polega na zwrocie 100% ceny zapłaconej za kurs w
-              przypadku, gdy Klient nie uzyska pozytywnego wyniku (tj. uzyska
-              poniżej 30% punktów) z egzaminu maturalnego z fizyki, do którego
-              przygotowywał się przy użyciu Kursu.
+              przypadku, gdy Klient uzyska wynik poniżej 30% punktów z egzaminu
+              maturalnego z fizyki, do którego przygotowywał się przy użyciu Kursu.
             </p>
             <p>
               <strong>Warunki skorzystania z Gwarancji:</strong> Aby Klient mógł

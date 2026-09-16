@@ -8,21 +8,31 @@ export function Guarantee() {
         <Reveal>
           <div className="border-gradient relative overflow-hidden rounded-3xl bg-white p-8 shadow-card sm:p-10">
             <div className="flex flex-col items-center gap-6 text-center md:flex-row md:text-left">
-              <div className="flex h-20 w-20 flex-none items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#6b4df6,#f43f8f)] text-4xl shadow-glow">
-                🛡️
+              {/* Pieczęć gwarancji */}
+              <div className="relative flex h-28 w-28 flex-none items-center justify-center rounded-full bg-[linear-gradient(135deg,#6b4df6,#f43f8f)] text-white shadow-glow ring-4 ring-white">
+                <div className="text-center leading-tight">
+                  <div className="text-[0.55rem] font-extrabold uppercase tracking-[0.18em]">
+                    Gwarancja
+                  </div>
+                  <div className="my-0.5 text-3xl">🛡️</div>
+                  <div className="text-[0.55rem] font-extrabold uppercase tracking-[0.18em]">
+                    Dobry wynik
+                  </div>
+                </div>
               </div>
               <div>
                 <h2 className="text-2xl font-extrabold text-ink sm:text-3xl">
-                  Gwarancja Zdanej Matury
+                  Gwarancja Dobrego Wyniku
                 </h2>
                 <p className="mt-2 max-w-2xl text-muted">
-                  Przerób cały kurs zgodnie z warunkami gwarancji, podejdź do
-                  matury z fizyki i - jeśli mimo to uzyskasz wynik{' '}
-                  <strong className="text-ink">poniżej 30%</strong> - możesz
-                  ubiegać się o <strong className="text-ink">zwrot ceny kursu</strong>.
-                  Zgłoszenie w ciągu 7 dni od otrzymania oficjalnego wyniku.
-                  Wynik matury potwierdzasz oficjalnym dokumentem z wynikiem
-                  egzaminu.
+                  Jesteśmy pewni, że przy tym systemie osiągniesz dobry wynik -
+                  dlatego bierzemy ryzyko na siebie. Jeśli przerobisz cały kurs
+                  zgodnie z warunkami gwarancji, podejdziesz do matury z fizyki i
+                  mimo to uzyskasz wynik{' '}
+                  <strong className="text-ink">poniżej 30%</strong> -{' '}
+                  <strong className="text-ink">zwracamy Ci pełny koszt kursu</strong>.
+                  Zgłoszenie w ciągu 7 dni od otrzymania oficjalnego wyniku, który
+                  potwierdzasz oficjalnym dokumentem z egzaminu.
                 </p>
                 <p className="mt-2 text-sm text-muted">
                   Szczegółowe warunki w{' '}

@@ -99,7 +99,7 @@ export const PLANS: Plan[] = [
       'Quizy sprawdzające wiedzę po każdym dziale',
       'Spersonalizowany planer nauki do matury',
       'Moduł „Tutaj zacznij”',
-      'Gwarancja Zdanej Matury',
+      'Gwarancja Dobrego Wyniku',
     ],
   },
   {
@@ -118,7 +118,7 @@ export const PLANS: Plan[] = [
       '1 godzina zajęć tygodniowo - aż do matury',
       'Plan pracy dopasowany do Twoich braków i potrzeb',
       'Stały kontakt i wsparcie między zajęciami',
-      'Gwarancja Zdanej Matury',
+      'Gwarancja Dobrego Wyniku',
     ],
   },
 ];

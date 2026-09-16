@@ -37,13 +37,17 @@ export function PricingTiers() {
         return (
           <div
             key={plan.key}
+            id={plan.key === 'vip' ? 'vip' : undefined}
             className={cn(
-              'relative flex flex-col rounded-3xl bg-gradient-to-b p-8 shadow-card ring-1 transition-transform duration-300',
+              'relative flex flex-col scroll-mt-24 rounded-3xl bg-gradient-to-b p-8 shadow-card ring-1 transition-all duration-300',
               accentGlow[plan.accent],
               accentRing[plan.accent],
               featured
                 ? 'ring-2 ring-brand-400 shadow-glow md:-translate-y-1'
-                : 'hover:-translate-y-1'
+                : 'hover:-translate-y-1',
+              // Podświetlenie po wejściu z linku „VIP" w Hero (#vip)
+              plan.key === 'vip' &&
+                'target:-translate-y-1 target:shadow-glow-magenta target:ring-2 target:ring-magenta-500'
             )}
           >
             {plan.badge && (

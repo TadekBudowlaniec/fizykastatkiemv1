@@ -36,7 +36,7 @@ const faq: FaqItem[] = [
     a: `Tak. Jeśli chcesz uzupełnić konkretny temat, kupisz pojedynczy dział za ${SINGLE_COURSE_PRICE} zł zamiast całego kursu. Pełną listę znajdziesz na stronie „Pojedyncze działy”.`,
   },
   {
-    q: 'Jak działa Gwarancja Zdanej Matury?',
+    q: 'Jak działa Gwarancja Dobrego Wyniku?',
     a: 'Jeśli przerobisz cały kurs zgodnie z warunkami gwarancji (co najmniej 90% materiałów, zakup najpóźniej 30 dni przed egzaminem), podejdziesz do matury z fizyki i mimo to uzyskasz wynik poniżej 30%, możesz ubiegać się o zwrot ceny kursu. Zgłoszenie wysyłasz na nasz e-mail w ciągu 7 dni od otrzymania oficjalnego wyniku, dołączając oficjalny dokument z wynikiem egzaminu. Zgłoszenie (w tym postępy w kursie) podlega weryfikacji zgodnie z regulaminem (§9).',
   },
   {
@@ -52,7 +52,7 @@ const compare = [
   { label: 'Zadania z rozwiązaniami i quizy', f: true, v: true },
   { label: 'Spersonalizowany planer nauki', f: true, v: true },
   { label: 'Moduł „Tutaj zacznij”', f: true, v: true },
-  { label: 'Gwarancja Zdanej Matury', f: true, v: true },
+  { label: 'Gwarancja Dobrego Wyniku', f: true, v: true },
   { label: 'Indywidualne prowadzenie 1:1 z Czarkiem', f: false, v: true },
   { label: '1 godzina zajęć tygodniowo - aż do matury', f: false, v: true },
   { label: 'Plan pracy pod Twoje braki', f: false, v: true },

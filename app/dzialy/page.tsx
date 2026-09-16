@@ -68,7 +68,7 @@ export default function DzialyPage() {
               <strong className="text-ink">
                 Kurs Pełny ({fullPlan.price} zł)
               </strong>{' '}
-              to wszystkie 16 działów, planer i Gwarancja Zdanej Matury - taniej
+              to wszystkie 16 działów, planer i Gwarancja Dobrego Wyniku - taniej
               niż kupując działy pojedynczo.
             </p>
             <Link

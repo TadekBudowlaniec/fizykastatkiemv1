@@ -2,11 +2,12 @@ import Image from 'next/image';
 import { SqueezeForm } from './SqueezeForm';
 import { Button } from '@/components/ui/Button';
 import { Eyebrow } from '@/components/ui/SectionHeading';
+import { MaturaCountdown } from './MaturaCountdown';
 
 const trust = [
   { icon: '🎓', label: '100% zdawalności' },
   { icon: '✅', label: '28/28 absolwentów zdało maturę' },
-  { icon: '🛡️', label: 'Gwarancja zdanej matury' },
+  { icon: '🛡️', label: 'Gwarancja dobrego wyniku' },
 ];
 
 export function Hero() {
@@ -44,7 +45,7 @@ export function Hero() {
               Zobacz kurs i ceny
             </Button>
             <a
-              href="#cennik"
+              href="#vip"
               className="text-sm font-semibold text-slate-300 underline underline-offset-4 transition-colors hover:text-white"
             >
               albo indywidualne prowadzenie 1:1 (VIP) →
@@ -73,6 +74,8 @@ export function Hero() {
               </li>
             ))}
           </ul>
+
+          <MaturaCountdown />
         </div>
 
         {/* Visual - statek w reflektorze */}
