@@ -6,8 +6,9 @@ import { PLANS, TUTORING_PRICE } from '@/lib/courses';
 
 const fullPrice = PLANS.find((p) => p.key === 'full_access')!.price;
 const vipPrice = PLANS.find((p) => p.key === 'vip')!.price;
-// Ile godzin korepetycji „kosztuje" cały kurs (uczciwe porównanie wartości).
-const hours = Math.floor(fullPrice / TUTORING_PRICE); // 828 / 100 = 8
+// Równowartość ilu godzin korepetycji to cały kurs (uczciwe porównanie wartości).
+// 828 / 100 = ~8 h — używamy „równowartość zaledwie", bo to nieco ponad 8 h.
+const hours = Math.round(fullPrice / TUTORING_PRICE); // 828 / 100 -> 8
 
 export function KursVsKorepetycje() {
   return (
@@ -29,16 +30,24 @@ export function KursVsKorepetycje() {
               <h3 className="mt-4 text-xl font-extrabold text-ink">
                 Komplet do matury, w Twoim tempie
               </h3>
-              <p className="mt-2 flex-1 text-muted">
+              <p className="mt-2 text-muted">
                 Wszystkie 16 działów, PDF-y, zadania na wzór CKE, quizy i planer —
                 uczysz się kiedy chcesz i wracasz do materiału bez limitu.
               </p>
-              <p className="mt-5 border-t border-line pt-4 text-sm text-slate">
-                <span className="font-bold text-brand-600">
-                  To mniej niż {hours} godzin korepetycji
-                </span>{' '}
-                — a masz cały materiał do matury plus Gwarancję Dobrego Wyniku.
-              </p>
+              <div className="mt-auto pt-5">
+                <p className="border-t border-line pt-4 text-sm text-slate">
+                  <span className="font-bold text-brand-600">
+                    To równowartość zaledwie {hours} godzin korepetycji
+                  </span>{' '}
+                  — a masz cały materiał do matury plus Gwarancję Dobrego Wyniku.
+                </p>
+                <Link
+                  href="#cennik"
+                  className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-[linear-gradient(120deg,#6b4df6,#f43f8f)] px-5 py-3 text-sm font-bold text-white shadow-glow transition hover:-translate-y-0.5"
+                >
+                  Wybieram Kurs
+                </Link>
+              </div>
             </article>
           </Reveal>
 
@@ -51,15 +60,24 @@ export function KursVsKorepetycje() {
               <h3 className="mt-4 text-xl font-extrabold text-ink">
                 Punktowa pomoc pod konkretny problem
               </h3>
-              <p className="mt-2 flex-1 text-muted">
+              <p className="mt-2 text-muted">
                 Żywy człowiek i indywidualne tempo — rozbrajanie konkretnych
                 braków. Świetne, gdy utknąłeś na jednym temacie; najlepiej jako
                 uzupełnienie kursu.
               </p>
-              <p className="mt-5 border-t border-line pt-4 text-sm text-slate">
-                Elastyczne, ale rozliczane za godzinę — komplet materiału do
-                matury wychodzi drożej niż jeden kurs.
-              </p>
+              <div className="mt-auto pt-5">
+                <p className="border-t border-line pt-4 text-sm text-slate">
+                  Elastyczne, ale rozliczane za godzinę — przerabianie całego
+                  materiału od zera pochłonie znacznie więcej budżetu niż gotowy
+                  kurs.
+                </p>
+                <Link
+                  href="/korepetycje"
+                  className="mt-5 inline-flex w-full items-center justify-center rounded-full border-2 border-brand-200 px-5 py-3 text-sm font-bold text-brand-600 transition-all hover:border-brand-500 hover:bg-brand-50"
+                >
+                  Zapisz się na lekcję
+                </Link>
+              </div>
             </article>
           </Reveal>
 
