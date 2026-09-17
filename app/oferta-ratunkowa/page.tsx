@@ -69,23 +69,10 @@ export default function OfertaRatunkowaPage() {
           <span className="text-gradient">na ostatniej prostej przed maturą</span>
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg text-slate-300/85">
-          Obejrzyj krótkie wideo i dowiedz się, jak szybko nadrobić fizykę i
-          uratować swój wynik na maturze.
+          Zostało mało czasu do matury? Nadrób fizykę z gotowym systemem -
+          kompletny materiał, planer nauki i (w VIP) indywidualne prowadzenie 1:1
+          aż do egzaminu.
         </p>
-
-        {/* Placeholder VSL */}
-        <div className="mx-auto mt-10 max-w-3xl">
-          <div className="relative aspect-video overflow-hidden rounded-3xl border border-white/10 bg-navy-900/60 shadow-glow">
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-              <span className="flex h-20 w-20 items-center justify-center rounded-full bg-[linear-gradient(120deg,#6b4df6,#f43f8f)] text-2xl shadow-glow">
-                ▶
-              </span>
-              <p className="text-slate-300">
-                Tutaj pojawi się wideo sprzedażowe (VSL)
-              </p>
-            </div>
-          </div>
-        </div>
 
         {/* Oferta */}
         <div className="mt-16">
