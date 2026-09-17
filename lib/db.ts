@@ -147,6 +147,22 @@ export async function getStudyPlan(userId: string): Promise<StudyPlan[]> {
   return (data as StudyPlan[]) ?? [];
 }
 
+/** Kroki planu zaplanowane na dziś lub zaległe (data <= dziś), po dacie. */
+export async function getDuePlanItems(
+  userId: string,
+  today: string
+): Promise<StudyPlan[]> {
+  const supabase = getSupabaseBrowser();
+  const { data, error } = await supabase
+    .from('study_plans')
+    .select('*')
+    .eq('user_id', userId)
+    .lte('scheduled_date', today)
+    .order('scheduled_date', { ascending: true });
+  if (error) throw error;
+  return (data as StudyPlan[]) ?? [];
+}
+
 export async function deleteStudyPlan(userId: string): Promise<void> {
   const supabase = getSupabaseBrowser();
   const { error } = await supabase

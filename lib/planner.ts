@@ -104,21 +104,106 @@ export function nextExamDate(from = new Date()): Date {
 
 type PlanRow = Omit<StudyPlan, 'id'>;
 
-/**
- * Generuje plan nauki: kroki ścieżki każdego nieopanowanego działu (w tej
- * samej kolejności co w panelu kursu) rozłożone równomiernie na dni robocze,
- * niedziele = wolne, ostatnie ~21 dni = pełne arkusze maturalne.
- *
- * @param p1Files lista plików Poziomu 1 per dział - każdy plik to osobny
- *   krok; dział bez wgranych materiałów dostaje jeden krok „cały Poziom 1".
- */
-export function generatePlanRows(
-  userId: string,
+/** Dzisiejsza data jako YYYY-MM-DD (czas lokalny). */
+export function todayYmd(): string {
+  return ymd(new Date());
+}
+
+// ---------------------------------------------------------------------------
+// Tryby planu - ile ścieżki działu wchodzi do planu. Gdy do matury jest mało
+// czasu, pełna ścieżka daje nierealną liczbę kroków dziennie.
+// ---------------------------------------------------------------------------
+
+export type PlanMode = 'full' | 'short' | 'rescue';
+
+export const PLAN_MODES: {
+  key: PlanMode;
+  label: string;
+  desc: string;
+  steps: string;
+}[] = [
+  {
+    key: 'full',
+    label: 'Pełna ścieżka',
+    desc: 'Wszystko jak w panelu działu: wideo, każdy plik teorii, poziomy 2-4 i quiz.',
+    steps: 'wideo · P1 · P2 · P3 · P4 · quiz',
+  },
+  {
+    key: 'short',
+    label: 'Tryb skrócony',
+    desc: 'Bez arkuszy CKE (Poziom 4) i quizów. Zostaje rdzeń: wideo, teoria i zadania.',
+    steps: 'wideo · P1 · P2 · P3',
+  },
+  {
+    key: 'rescue',
+    label: 'Tryb ratunkowy',
+    desc: 'Tylko wideo i autorskie zadania maturalne. Gdy zostały tygodnie, nie miesiące.',
+    steps: 'wideo · P3',
+  },
+];
+
+/** Powyżej tylu kroków dziennie plan uznajemy za nierealny i ostrzegamy. */
+export const LOAD_WARN_PER_DAY = 3;
+
+type Act = { topic: string; type: string; desc: string };
+
+/** Kolejka kroków w kolejności ścieżki działu (jak w panelu kursu). */
+function buildQueue(
   knownTopicIds: number[],
-  p1Files: Record<number, string[]> = {}
-): PlanRow[] {
+  p1Files: Record<number, string[]>,
+  mode: PlanMode
+): Act[] {
   const known = new Set(knownTopicIds);
-  const today = new Date();
+  const queue: Act[] = [];
+  for (const t of STUDY_TOPICS) {
+    if (known.has(t.id)) continue;
+    queue.push({ topic: t.name, type: 'video', desc: 'Obejrzyj lekcję wideo działu' });
+    if (mode !== 'rescue') {
+      const files = p1Files[t.id] ?? [];
+      if (files.length) {
+        for (const f of files) {
+          queue.push({
+            topic: t.name,
+            type: `p1:${f}`,
+            desc: `Teoria: ${prettyFile(f)} (przeczytaj i zrób rozgrzewkę)`,
+          });
+        }
+      } else {
+        queue.push({
+          topic: t.name,
+          type: 'p1',
+          desc: 'Poziom 1: przerób wszystkie pliki teorii i rozgrzewkę',
+        });
+      }
+      queue.push({
+        topic: t.name,
+        type: 'p2',
+        desc: 'Poziom 2: rozwiąż zadania dogrzewające, sprawdź z odpowiedziami',
+      });
+    }
+    queue.push({
+      topic: t.name,
+      type: 'p3',
+      desc: 'Poziom 3: autorskie zadania maturalne, potem odpowiedzi',
+    });
+    if (mode === 'full') {
+      queue.push({
+        topic: t.name,
+        type: 'p4',
+        desc: 'Poziom 4: prawdziwe zadania CKE z tego działu',
+      });
+      queue.push({ topic: t.name, type: 'quiz', desc: 'Quiz sprawdzający działu' });
+    }
+  }
+  return queue;
+}
+
+/**
+ * Podział dni od jutra do matury: niedziele = wolne, ostatnie ~21 dni
+ * roboczych = arkusze, reszta = dni nauki.
+ */
+function partitionDays(from = new Date()) {
+  const today = new Date(from);
   today.setHours(0, 0, 0, 0);
   const exam = nextExamDate(today);
 
@@ -129,56 +214,48 @@ export function generatePlanRows(
     days.push(new Date(cursor));
     cursor.setDate(cursor.getDate() + 1);
   }
-  if (days.length === 0) return [];
 
   const isSunday = (d: Date) => d.getDay() === 0;
   const workingDays = days.filter((d) => !isSunday(d));
   const restDays = days.filter((d) => isSunday(d));
-
   const arkuszCount = Math.min(ARKUSZ_DAYS, Math.max(0, workingDays.length - 1));
   const arkuszDays = workingDays.slice(workingDays.length - arkuszCount);
   const studyDays = workingDays.slice(0, workingDays.length - arkuszCount);
+  return { exam, studyDays, arkuszDays, restDays };
+}
 
-  // Kolejka kroków - dokładnie jak ścieżka działu w panelu kursu.
-  type Act = { topic: string; type: string; desc: string };
-  const queue: Act[] = [];
-  for (const t of STUDY_TOPICS) {
-    if (known.has(t.id)) continue;
-    queue.push({ topic: t.name, type: 'video', desc: 'Obejrzyj lekcję wideo działu' });
-    const files = p1Files[t.id] ?? [];
-    if (files.length) {
-      for (const f of files) {
-        queue.push({
-          topic: t.name,
-          type: `p1:${f}`,
-          desc: `Teoria: ${prettyFile(f)} (przeczytaj i zrób rozgrzewkę)`,
-        });
-      }
-    } else {
-      queue.push({
-        topic: t.name,
-        type: 'p1',
-        desc: 'Poziom 1: przerób wszystkie pliki teorii i rozgrzewkę',
-      });
-    }
-    queue.push({
-      topic: t.name,
-      type: 'p2',
-      desc: 'Poziom 2: rozwiąż zadania dogrzewające, sprawdź z odpowiedziami',
-    });
-    queue.push({
-      topic: t.name,
-      type: 'p3',
-      desc: 'Poziom 3: autorskie zadania maturalne, potem odpowiedzi',
-    });
-    queue.push({
-      topic: t.name,
-      type: 'p4',
-      desc: 'Poziom 4: prawdziwe zadania CKE z tego działu',
-    });
-    queue.push({ topic: t.name, type: 'quiz', desc: 'Quiz sprawdzający działu' });
-  }
+/** Obciążenie planu przed wygenerowaniem: kroki, dni nauki, kroki/dzień. */
+export function planLoad(
+  knownTopicIds: number[],
+  p1Files: Record<number, string[]>,
+  mode: PlanMode
+): { steps: number; studyDays: number; perDay: number; topics: number } {
+  const queue = buildQueue(knownTopicIds, p1Files, mode);
+  const { studyDays } = partitionDays();
+  const topics = STUDY_TOPICS.length - new Set(knownTopicIds).size;
+  const perDay = studyDays.length ? queue.length / studyDays.length : Infinity;
+  return { steps: queue.length, studyDays: studyDays.length, perDay, topics };
+}
 
+/**
+ * Generuje plan nauki: kroki ścieżki każdego nieopanowanego działu (w tej
+ * samej kolejności co w panelu kursu) rozłożone równomiernie na dni robocze,
+ * niedziele = wolne, ostatnie ~21 dni = pełne arkusze maturalne.
+ *
+ * @param p1Files lista plików Poziomu 1 per dział - każdy plik to osobny
+ *   krok; dział bez wgranych materiałów dostaje jeden krok „cały Poziom 1".
+ * @param mode zakres ścieżki (patrz PLAN_MODES).
+ */
+export function generatePlanRows(
+  userId: string,
+  knownTopicIds: number[],
+  p1Files: Record<number, string[]> = {},
+  mode: PlanMode = 'full'
+): PlanRow[] {
+  const { exam, studyDays, arkuszDays, restDays } = partitionDays();
+  if (!studyDays.length && !arkuszDays.length && !restDays.length) return [];
+
+  const queue = buildQueue(knownTopicIds, p1Files, mode);
   const rows: PlanRow[] = [];
 
   const studyRange = studyDays.length ? studyDays[studyDays.length - 1] : exam;

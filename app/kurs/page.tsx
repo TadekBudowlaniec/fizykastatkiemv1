@@ -7,6 +7,7 @@ import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { CourseTile } from '@/components/app/CourseTile';
 import { COURSES } from '@/lib/courses';
+import { TodayPlan } from '@/components/app/TodayPlan';
 
 export default function DashboardPage() {
   const { user, loading, accessLoading, isAdmin, enrollments } = useAuth();
@@ -54,6 +55,13 @@ export default function DashboardPage() {
 
       <section className="bg-cloud py-14">
         <Container size="wide">
+          {/* Dziś w planie - kroki z planera na dziś (wszystkie działy) */}
+          {user && (
+            <div className="mb-10">
+              <TodayPlan />
+            </div>
+          )}
+
           {/* Szybki dostęp: Tutaj zacznij + Planer */}
           <div className="mb-10 grid gap-5 md:grid-cols-2">
             <Link

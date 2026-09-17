@@ -20,7 +20,12 @@ import {
   courseIdForTopic,
   isDoneInCourse,
   nextExamDate,
+  planLoad,
+  todayYmd,
+  PLAN_MODES,
+  LOAD_WARN_PER_DAY,
   type CourseProgress,
+  type PlanMode,
 } from '@/lib/planner';
 import type { StudyPlan } from '@/lib/types';
 import { AppHero } from '@/components/app/AppHero';
@@ -37,13 +42,6 @@ function formatDate(iso: string): string {
     day: 'numeric',
     month: 'long',
   });
-}
-
-function todayYmd(): string {
-  const d = new Date();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${d.getFullYear()}-${m}-${day}`;
 }
 
 // Struktura każdego działu w planie (spójna z panelem kursu).
@@ -63,6 +61,10 @@ export default function PlanerPage() {
   const [known, setKnown] = useState<Set<number>>(new Set());
   const [busy, setBusy] = useState(false);
   const [synced, setSynced] = useState(0); // ile kroków odhaczył postęp z kursu
+  const [mode, setMode] = useState<PlanMode>('full');
+  // Pliki Poziomu 1 per dział - do podglądu obciążenia i generowania.
+  const [p1Files, setP1Files] = useState<Record<number, string[]>>({});
+  const [p1Loading, setP1Loading] = useState(false);
 
   // Synchronizacja kurs -> planer: kroki zaliczone w panelu działu odhaczamy tu.
   const syncWithCourse = useCallback(
@@ -107,6 +109,32 @@ export default function PlanerPage() {
     if (user) load();
   }, [user, load]);
 
+  // Listowanie nazw plików P1 jest dostępne dla każdego zalogowanego (treść
+  // PDF nadal wymaga dostępu do działu). Pobieramy raz, gdy widać konfigurację.
+  useEffect(() => {
+    if (phase !== 'config' || !user) return;
+    let cancelled = false;
+    setP1Loading(true);
+    const files: Record<number, string[]> = {};
+    Promise.all(
+      STUDY_TOPICS.map(async (t) => {
+        try {
+          const list = await listMaterialy(t.id, 1);
+          if (list.length) files[t.id] = list.map((f) => f.name);
+        } catch {
+          /* materiały działu jeszcze nie wgrane - Poziom 1 jako jeden krok */
+        }
+      })
+    ).then(() => {
+      if (cancelled) return;
+      setP1Files(files);
+      setP1Loading(false);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [phase, user]);
+
   const toggleKnown = (id: number) => {
     setKnown((prev) => {
       const n = new Set(prev);
@@ -120,22 +148,7 @@ export default function PlanerPage() {
     if (!user) return;
     setBusy(true);
     try {
-      // Lista plików Poziomu 1 każdego działu (listowanie nazw jest dostępne
-      // dla każdego zalogowanego; treść PDF nadal wymaga dostępu do działu).
-      const toPlan = STUDY_TOPICS.filter((t) => !known.has(t.id));
-      const p1Files: Record<number, string[]> = {};
-      await Promise.all(
-        toPlan.map(async (t) => {
-          try {
-            const files = await listMaterialy(t.id, 1);
-            if (files.length) p1Files[t.id] = files.map((f) => f.name);
-          } catch {
-            /* materiały działu jeszcze nie wgrane - Poziom 1 jako jeden krok */
-          }
-        })
-      );
-
-      const rows = generatePlanRows(user.id, [...known], p1Files);
+      const rows = generatePlanRows(user.id, [...known], p1Files, mode);
       await deleteStudyPlan(user.id);
       await insertStudyPlan(rows);
       await load();
@@ -173,6 +186,8 @@ export default function PlanerPage() {
   };
 
   const today = todayYmd();
+  const load_ = planLoad([...known], p1Files, mode);
+  const overloaded = load_.perDay > LOAD_WARN_PER_DAY;
   const exam = nextExamDate();
   const examStr = exam.toLocaleDateString('pl-PL', {
     day: 'numeric',
@@ -198,6 +213,18 @@ export default function PlanerPage() {
   const steps = plan.filter((p) => p.activity_type !== 'rest');
   const doneCount = steps.filter((p) => p.is_completed).length;
   const pct = steps.length ? Math.round((doneCount / steps.length) * 100) : 0;
+  // Średnie obciążenie od dziś: niezrobione kroki / dni nauki (bez arkuszy,
+  // bez niedziel) od dziś do przodu.
+  const remaining = steps.filter(
+    (p) => !p.is_completed && activityKind(p.activity_type) !== 'arkusz'
+  ).length;
+  const studyDaysAhead = new Set(
+    steps
+      .filter(
+        (p) => p.scheduled_date >= today && activityKind(p.activity_type) !== 'arkusz'
+      )
+      .map((p) => p.scheduled_date)
+  ).size;
   const topicsInPlan = new Set(
     steps.filter((p) => courseIdForTopic(p.topic_name)).map((p) => p.topic_name)
   ).size;
@@ -262,6 +289,12 @@ export default function PlanerPage() {
             <p className="mt-2.5 text-sm text-slate-300/85">
               {doneCount} z {steps.length} kroków · {topicsInPlan}{' '}
               {topicsInPlan === 1 ? 'dział' : 'działów'} · {daysLeft} dni do matury
+              {studyDaysAhead > 0 && remaining > 0 && (
+                <>
+                  {' '}
+                  · ≈ {(remaining / studyDaysAhead).toFixed(1)} kroku/dzień
+                </>
+              )}
             </p>
           </div>
         )}
@@ -345,10 +378,108 @@ export default function PlanerPage() {
                   arkusze na czas. Kroki odhaczone w panelu działu zaliczają się w
                   planie automatycznie.
                 </p>
-                <div className="mt-6">
-                  <Button variant="gradient" size="lg" onClick={generate} disabled={busy}>
+              </div>
+
+              {/* Krok 2: zakres ścieżki + realizm */}
+              <div className="rounded-3xl border border-line bg-white p-6 shadow-soft sm:p-8">
+                <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-brand-500">
+                  Krok 2
+                </p>
+                <h2 className="mt-2 font-display text-2xl font-extrabold text-ink">
+                  Ile ścieżki wchodzi do planu
+                </h2>
+                <p className="mt-2 text-muted">
+                  Im mniej czasu do matury, tym węższa ścieżka ma sens. Poniżej
+                  widzisz, ile kroków dziennie wyjdzie z Twoich ustawień.
+                </p>
+
+                <div className="mt-5 grid gap-2.5 sm:grid-cols-3">
+                  {PLAN_MODES.map((m) => {
+                    const on = mode === m.key;
+                    const l = planLoad([...known], p1Files, m.key);
+                    const heavy = l.perDay > LOAD_WARN_PER_DAY;
+                    return (
+                      <button
+                        key={m.key}
+                        onClick={() => setMode(m.key)}
+                        aria-pressed={on}
+                        className={cn(
+                          'flex flex-col gap-1.5 rounded-2xl p-4 text-left ring-1 transition-all duration-300',
+                          on
+                            ? 'bg-brand-50 ring-brand-300'
+                            : 'bg-white ring-line hover:ring-brand-300'
+                        )}
+                      >
+                        <span className="flex items-center justify-between gap-2">
+                          <span className="font-bold text-ink">{m.label}</span>
+                          <span
+                            className={cn(
+                              'rounded-full px-2 py-0.5 text-[0.7rem] font-bold',
+                              heavy
+                                ? 'bg-magenta-500/10 text-magenta-600'
+                                : 'bg-brand-100 text-brand-700'
+                            )}
+                          >
+                            {p1Loading
+                              ? '…'
+                              : Number.isFinite(l.perDay)
+                                ? `≈ ${l.perDay.toFixed(1)}/dzień`
+                                : '-'}
+                          </span>
+                        </span>
+                        <span className="text-xs font-semibold text-brand-600">{m.steps}</span>
+                        <span className="text-sm leading-snug text-muted">{m.desc}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Podsumowanie obciążenia wybranego trybu */}
+                <div
+                  className={cn(
+                    'mt-5 rounded-2xl px-4 py-3 text-sm ring-1',
+                    overloaded
+                      ? 'bg-magenta-500/5 text-ink ring-magenta-500/20'
+                      : 'bg-cloud text-slate ring-line'
+                  )}
+                >
+                  {p1Loading ? (
+                    'Liczę kroki…'
+                  ) : load_.topics === 0 ? (
+                    'Zaznaczyłeś wszystkie działy jako opanowane - plan będzie zawierał tylko arkusze maturalne.'
+                  ) : load_.studyDays === 0 ? (
+                    'Do matury nie zostały już dni nauki - plan będzie zawierał tylko arkusze.'
+                  ) : (
+                    <>
+                      <strong>{load_.topics}</strong> działów ·{' '}
+                      <strong>{load_.steps}</strong> kroków ·{' '}
+                      <strong>{load_.studyDays}</strong> dni nauki →{' '}
+                      <strong>≈ {load_.perDay.toFixed(1)} kroku dziennie</strong>
+                      {overloaded && (
+                        <span className="mt-1.5 block text-magenta-600">
+                          To sporo - powyżej {LOAD_WARN_PER_DAY} kroków dziennie plan
+                          rzadko się udaje. Odznacz działy, które już umiesz, albo
+                          wybierz węższy tryb.
+                        </span>
+                      )}
+                    </>
+                  )}
+                </div>
+
+                <div className="mt-6 flex flex-wrap items-center gap-3">
+                  <Button
+                    variant="gradient"
+                    size="lg"
+                    onClick={generate}
+                    disabled={busy || p1Loading}
+                  >
                     {busy ? 'Generuję plan…' : 'Wygeneruj mój plan'}
                   </Button>
+                  {overloaded && !busy && !p1Loading && (
+                    <span className="text-sm text-muted">
+                      Możesz wygenerować mimo to.
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

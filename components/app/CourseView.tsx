@@ -29,6 +29,7 @@ import { CoursePath, LEVELS } from '@/components/app/CoursePath';
 import { CourseVideo } from '@/components/app/CourseVideo';
 import { TaskRunner } from '@/components/app/TaskRunner';
 import { LessonView } from '@/components/app/LessonView';
+import { TodayPlan } from '@/components/app/TodayPlan';
 import {
   IconArrow,
   IconBook,
@@ -138,6 +139,10 @@ export function CourseView({ courseId }: { courseId: number }) {
     };
   }, [access, isStart, courseId]);
 
+  // Każde odhaczenie w kursie -> karta „Dziś w planie" odświeża sync z planerem.
+  const [progressTick, setProgressTick] = useState(0);
+  const bump = () => setProgressTick((n) => n + 1);
+
   // ---------- Postęp: poziomy 2–4 (user_levels) ----------
   const [levels, setLevels] = useState<Set<number>>(new Set());
 
@@ -160,6 +165,7 @@ export function CourseView({ courseId }: { courseId: number }) {
       try {
         if (done) await markLevel(user.id, courseId, poziom);
         else await unmarkLevel(user.id, courseId, poziom);
+        bump();
       } catch {
         setLevels((prev) => {
           const next = new Set(prev);
@@ -220,6 +226,7 @@ export function CourseView({ courseId }: { courseId: number }) {
       try {
         if (done) await markMaterial(uid, courseId, 1, file);
         else await unmarkMaterial(uid, courseId, 1, file);
+        bump();
       } catch {
         // Brak tabeli / błąd zapisu → przełącz na tryb lokalny, nie cofaj UI.
         setFilesBackend('local');
@@ -249,6 +256,7 @@ export function CourseView({ courseId }: { courseId: number }) {
       try {
         if (done) await markMaterial(uid, courseId, 0, ytId);
         else await unmarkMaterial(uid, courseId, 0, ytId);
+        bump();
       } catch {
         /* zostaje w localStorage */
       }
@@ -522,6 +530,9 @@ export function CourseView({ courseId }: { courseId: number }) {
           <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-12">
             {/* Główna kolumna */}
             <div className="space-y-12 sm:space-y-14">
+              {/* 0. Dziś w planie (tylko gdy planer ma coś na dziś / zaległe) */}
+              <TodayPlan courseId={courseId} refreshKey={progressTick} />
+
               {/* 1. Wideo */}
               {!lessonsLoading && (hasVideo || textLessons.length > 0) && (
                 <section id="wideo" className="scroll-mt-28">
