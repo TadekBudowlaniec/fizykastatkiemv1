@@ -29,6 +29,7 @@ export type ActivityKind =
   | 'p4'
   | 'quiz'
   | 'arkusz'
+  | 'powtorka'
   | 'rest';
 
 export function activityKind(type: string): ActivityKind {
@@ -41,6 +42,7 @@ export function activityKind(type: string): ActivityKind {
     base === 'p4' ||
     base === 'quiz' ||
     base === 'arkusz' ||
+    base === 'powtorka' ||
     base === 'rest'
   )
     return base;
@@ -68,6 +70,7 @@ export const activityMeta: Record<
   p4: { icon: '📕', label: 'Poziom 4 · Arkusz CKE', short: 'Poziom 4' },
   quiz: { icon: '🧩', label: 'Quiz sprawdzający', short: 'Quiz' },
   arkusz: { icon: '📝', label: 'Arkusz maturalny', short: 'Arkusz' },
+  powtorka: { icon: '🔁', label: 'Powtórka', short: 'Powtórka' },
   rest: { icon: '🌴', label: 'Dzień wolny', short: 'Wolne' },
 };
 
@@ -229,12 +232,30 @@ export function planLoad(
   knownTopicIds: number[],
   p1Files: Record<number, string[]>,
   mode: PlanMode
-): { steps: number; studyDays: number; perDay: number; topics: number } {
+): {
+  steps: number;
+  studyDays: number;
+  perDay: number;
+  topics: number;
+  materialDays: number;
+  reviewDays: number;
+} {
   const queue = buildQueue(knownTopicIds, p1Files, mode);
   const { studyDays } = partitionDays();
   const topics = STUDY_TOPICS.length - new Set(knownTopicIds).size;
   const perDay = studyDays.length ? queue.length / studyDays.length : Infinity;
-  return { steps: queue.length, studyDays: studyDays.length, perDay, topics };
+  // Auto-tempo: materiał zajmuje tyle dni, ile kroków (max = dni nauki);
+  // nadmiar dni wypełniają powtórki (zamiast pustych luk).
+  const materialDays = Math.min(queue.length, studyDays.length);
+  const reviewDays = Math.max(0, studyDays.length - materialDays);
+  return {
+    steps: queue.length,
+    studyDays: studyDays.length,
+    perDay,
+    topics,
+    materialDays,
+    reviewDays,
+  };
 }
 
 /**
@@ -272,19 +293,51 @@ export function generatePlanRows(
     }
   }
 
-  // Równomierne rozłożenie kroków na dni nauki (bez pustych dni na końcu).
+  // Auto-tempo: kroki materiału rozłożone równo na dni nauki, a KAŻDY dzień bez
+  // nowego materiału dostaje powtórkę już poznanego działu (spaced repetition).
+  // Dzięki temu nie ma pustych dni, nawet gdy kroków jest mniej niż dni.
   if (queue.length && studyDays.length) {
+    // 1) Przypisz kroki materiału do dni (równomiernie, jak w panelu kursu).
+    const byDay: Act[][] = studyDays.map(() => []);
     queue.forEach((a, i) => {
-      const dayIdx = Math.floor((i * studyDays.length) / queue.length);
-      const d = studyDays[Math.min(dayIdx, studyDays.length - 1)];
-      rows.push({
-        user_id: userId,
-        scheduled_date: ymd(d),
-        topic_name: a.topic,
-        activity_type: a.type,
-        description: a.desc,
-        is_completed: false,
-      });
+      const dayIdx = Math.min(
+        Math.floor((i * studyDays.length) / queue.length),
+        studyDays.length - 1
+      );
+      byDay[dayIdx].push(a);
+    });
+
+    // 2) Przejdź dni po kolei: dzień z materiałem → kroki; dzień pusty → powtórka
+    //    działu wprowadzonego już wcześniej (round-robin).
+    const introduced: string[] = [];
+    let reviewPtr = 0;
+    studyDays.forEach((d, idx) => {
+      const items = byDay[idx];
+      if (items.length) {
+        for (const a of items) {
+          if (a.topic && !introduced.includes(a.topic)) introduced.push(a.topic);
+          rows.push({
+            user_id: userId,
+            scheduled_date: ymd(d),
+            topic_name: a.topic,
+            activity_type: a.type,
+            description: a.desc,
+            is_completed: false,
+          });
+        }
+      } else if (introduced.length) {
+        const topic = introduced[reviewPtr % introduced.length];
+        reviewPtr += 1;
+        rows.push({
+          user_id: userId,
+          scheduled_date: ymd(d),
+          topic_name: topic,
+          activity_type: 'powtorka',
+          description: `Powtórka: ${topic} — wróć do zadań (Poziom 3) i sprawdź, ile pamiętasz.`,
+          is_completed: false,
+        });
+      }
+      // dzień pusty, zanim cokolwiek wprowadzono: pomijamy (dzień 0 zawsze ma materiał).
     });
   }
 

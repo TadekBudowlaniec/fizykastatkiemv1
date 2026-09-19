@@ -389,8 +389,9 @@ export default function PlanerPage() {
                   Ile ścieżki wchodzi do planu
                 </h2>
                 <p className="mt-2 text-muted">
-                  Im mniej czasu do matury, tym węższa ścieżka ma sens. Poniżej
-                  widzisz, ile kroków dziennie wyjdzie z Twoich ustawień.
+                  Im mniej czasu do matury, tym węższa ścieżka ma sens. Tempo
+                  dobieramy automatycznie — a dni bez nowego materiału wypełniamy
+                  powtórkami, żeby nie było pustych okien.
                 </p>
 
                 <div className="mt-5 grid gap-2.5 sm:grid-cols-3">
@@ -422,9 +423,11 @@ export default function PlanerPage() {
                           >
                             {p1Loading
                               ? '…'
-                              : Number.isFinite(l.perDay)
-                                ? `≈ ${l.perDay.toFixed(1)}/dzień`
-                                : '-'}
+                              : !Number.isFinite(l.perDay)
+                                ? '-'
+                                : l.perDay >= 1
+                                  ? `≈ ${l.perDay.toFixed(1)}/dzień`
+                                  : 'spokojne'}
                           </span>
                         </span>
                         <span className="text-xs font-semibold text-brand-600">{m.steps}</span>
@@ -453,13 +456,23 @@ export default function PlanerPage() {
                     <>
                       <strong>{load_.topics}</strong> działów ·{' '}
                       <strong>{load_.steps}</strong> kroków ·{' '}
-                      <strong>{load_.studyDays}</strong> dni nauki →{' '}
-                      <strong>≈ {load_.perDay.toFixed(1)} kroku dziennie</strong>
-                      {overloaded && (
+                      <strong>{load_.studyDays}</strong> dni nauki
+                      {overloaded ? (
                         <span className="mt-1.5 block text-magenta-600">
-                          To sporo - powyżej {LOAD_WARN_PER_DAY} kroków dziennie plan
-                          rzadko się udaje. Odznacz działy, które już umiesz, albo
-                          wybierz węższy tryb.
+                          → ≈ {load_.perDay.toFixed(1)} kroku dziennie. To sporo -
+                          powyżej {LOAD_WARN_PER_DAY} kroków dziennie plan rzadko
+                          się udaje. Odznacz działy, które już umiesz, albo wybierz
+                          węższy tryb.
+                        </span>
+                      ) : load_.reviewDays > 0 ? (
+                        <span className="mt-1.5 block text-muted">
+                          Materiał rozłożę na <strong>{load_.materialDays}</strong>{' '}
+                          dni, a pozostałe <strong>{load_.reviewDays}</strong> dni
+                          wypełnią <strong>powtórki</strong> — bez pustych okien.
+                        </span>
+                      ) : (
+                        <span className="mt-1.5 block text-slate">
+                          → ≈ {load_.perDay.toFixed(1)} kroku dziennie.
                         </span>
                       )}
                     </>
