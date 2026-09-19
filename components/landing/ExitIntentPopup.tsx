@@ -138,7 +138,7 @@ export function ExitIntentPopup() {
         options: { emailRedirectTo: `${SITE.url}/planer` },
       });
       if (error) throw error;
-      // zapis leada + ew. Brevo (niezależnie od wysyłki linku)
+      // zapis leada + ew. start sekwencji (Resend, tylko przy zgodzie) — niezależnie od wysyłki linku
       void fetch('/.netlify/functions/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -203,7 +203,8 @@ export function ExitIntentPopup() {
             </h3>
             <p className="mt-2 text-muted">
               Darmowy plan przygotowań do matury z fizyki, który ułożył naukę już
-              28 maturzystom. Zajmie Ci minutę, a oszczędzi tygodnie chaosu.
+              28 maturzystom — plus darmowy 5-dniowy mini-kurs mailowy. Zajmie Ci
+              minutę, a oszczędzi tygodnie chaosu.
             </p>
 
             <form onSubmit={submit} className="mt-5">
@@ -221,7 +222,7 @@ export function ExitIntentPopup() {
                 </p>
               )}
 
-              <label className="mt-3 flex cursor-pointer items-start gap-2.5 text-xs text-muted">
+              <label className="mt-3 flex cursor-pointer items-start gap-3 rounded-2xl border border-line bg-cloud/60 p-3.5 text-xs text-muted transition hover:border-brand-400/50">
                 <input
                   type="checkbox"
                   checked={consent}
@@ -229,12 +230,12 @@ export function ExitIntentPopup() {
                   className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-brand-500"
                 />
                 <span>
-                  Chcę otrzymywać darmowe wskazówki do matury z fizyki i informacje
-                  o kursie. Zgodę mogę wycofać w każdej chwili. Więcej w{' '}
-                  <a
-                    href="/polityka-prywatnosci"
-                    className="underline hover:text-ink"
-                  >
+                  <span className="font-semibold text-ink">
+                    Tak, chcę też darmowy 5-dniowy mini-kurs mailowy
+                  </span>{' '}
+                  — konkretne wskazówki do matury z fizyki i info o kursie. Zgodę
+                  wycofasz jednym kliknięciem. Szczegóły w{' '}
+                  <a href="/polityka-prywatnosci" className="underline hover:text-ink">
                     polityce prywatności
                   </a>
                   .
@@ -251,7 +252,8 @@ export function ExitIntentPopup() {
             </form>
 
             <p className="mt-3 text-center text-xs text-muted">
-              Bez spamu. Możesz wypisać się jednym kliknięciem.
+              Planer dostajesz tak czy siak. Mini-kurs mailowy — tylko za zgodą,
+              wypiszesz się jednym kliknięciem.
             </p>
           </>
         )}

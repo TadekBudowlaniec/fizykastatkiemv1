@@ -12,8 +12,8 @@ export function SqueezeForm() {
   );
   const [msg, setMsg] = useState('');
 
-  // Zapis leada + ew. dodanie do sekwencji Brevo. Świadomie NIE blokuje UX:
-  // magic link do planera wysyła się niezależnie od tego, czy to się powiedzie.
+  // Zapis leada + ew. start sekwencji (Resend, tylko przy zgodzie). Świadomie NIE
+  // blokuje UX: magic link do planera wysyła się niezależnie od tego, czy to się uda.
   const captureLead = (mail: string, marketingConsent: boolean) => {
     void fetch('/.netlify/functions/subscribe', {
       method: 'POST',
@@ -79,7 +79,7 @@ export function SqueezeForm() {
         <p className="mt-2 text-sm text-magenta-400">{msg}</p>
       )}
 
-      <label className="mt-3 flex cursor-pointer items-start gap-2.5 text-xs text-slate-400">
+      <label className="mt-3 flex cursor-pointer items-start gap-3 rounded-2xl border border-white/15 bg-white/5 p-3.5 text-xs text-slate-300 transition hover:border-brand-400/50">
         <input
           type="checkbox"
           checked={consent}
@@ -87,13 +87,12 @@ export function SqueezeForm() {
           className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-brand-500"
         />
         <span>
-          Chcę otrzymywać darmowe wskazówki do matury z fizyki i informacje o
-          kursie. Zgodę mogę wycofać w każdej chwili (link w każdym mailu). Więcej
-          w{' '}
-          <a
-            href="/polityka-prywatnosci"
-            className="underline hover:text-slate-200"
-          >
+          <span className="font-semibold text-white">
+            Tak, chcę też darmowy 5-dniowy mini-kurs mailowy
+          </span>{' '}
+          — konkretne wskazówki do matury z fizyki i info o kursie. Zgodę
+          wycofasz jednym kliknięciem (link w każdym mailu). Szczegóły w{' '}
+          <a href="/polityka-prywatnosci" className="underline hover:text-slate-100">
             polityce prywatności
           </a>
           .
@@ -101,8 +100,8 @@ export function SqueezeForm() {
       </label>
 
       <p className="mt-2.5 text-xs text-slate-400">
-        Bez spamu. Darmowy planer nauki do matury + dostęp do modułu „Tutaj
-        zacznij”.
+        Bez spamu. Planer dostajesz tak czy siak — mini-kurs mailowy tylko jeśli
+        zaznaczysz zgodę powyżej.
       </p>
     </form>
   );
