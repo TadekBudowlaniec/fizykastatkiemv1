@@ -23,10 +23,12 @@ export function MaturaCountdown() {
   if (!info) return null;
 
   return (
-    <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-4 py-1.5 text-sm text-slate-200">
+    <p className="mt-4 inline-flex items-start gap-2 rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-2 text-sm leading-snug text-slate-200 sm:items-center sm:rounded-full sm:py-1.5">
       <span aria-hidden>⏳</span>
-      Do matury z fizyki (19 maja {info.year}) zostało{' '}
-      <strong className="font-bold text-white">~{info.weeks} tyg.</strong>
+      <span>
+        Do matury z fizyki (19 maja {info.year}) zostało{' '}
+        <strong className="whitespace-nowrap font-bold text-white">~{info.weeks} tyg.</strong>
+      </span>
     </p>
   );
 }

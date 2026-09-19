@@ -14,9 +14,11 @@ export function CourseCatalog() {
           title="16 działów - cały zakres matury z fizyki"
           subtitle="Kompletny materiał od pierwszych tematów aż do matury. Wszystkie działy wchodzą w skład Kursu Pełnego."
         />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {/* Telefon: 2 kompaktowe karty w rzędzie (16 kart w jednej kolumnie
+            robiło z landingu bardzo długą stronę). */}
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
           {COURSES.map((c, i) => (
-            <Reveal key={c.id} delay={(i % 4) * 60}>
+            <Reveal key={c.id} delay={(i % 4) * 60} className="min-w-0">
               <CourseCard course={c} showBuy={false} />
             </Reveal>
           ))}

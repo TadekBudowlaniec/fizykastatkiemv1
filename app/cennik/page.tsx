@@ -136,21 +136,24 @@ export default function CennikPage() {
             Oba warianty zawierają cały kurs. VIP dokłada to, czego nie da żaden
             zestaw materiałów - człowieka, który prowadzi Cię aż do matury.
           </p>
-          <div className="mt-8 overflow-x-auto">
-            <table className="w-full min-w-[520px] border-collapse text-sm">
+          {/* Tabela mieści się na telefonie bez przewijania w bok: wąskie
+              kolumny z ptaszkami, etykiety mogą się zawijać. */}
+          <div className="mt-8">
+            <table className="w-full border-collapse text-sm">
               <thead>
                 <tr className="border-b border-line text-left">
-                  <th className="py-4 pr-4 font-semibold text-muted">Co zawiera</th>
-                  <th className="px-3 py-4 text-center font-extrabold text-ink">
+                  <th className="py-4 pr-2 font-semibold text-muted sm:pr-4">Co zawiera</th>
+                  <th className="w-[4.5rem] px-1 py-4 text-center font-extrabold text-ink sm:w-32 sm:px-3">
                     Kurs Pełny
                     <span className="block text-xs font-semibold text-muted">
                       {fullPlan.price} zł
                     </span>
                   </th>
-                  <th className="px-3 py-4 text-center font-extrabold text-magenta-600">
+                  <th className="w-[4.5rem] px-1 py-4 text-center font-extrabold text-magenta-600 sm:w-32 sm:px-3">
                     VIP 1:1
                     <span className="block text-xs font-semibold text-muted">
-                      {vipPlan.price} zł · tylko {VIP_SEATS} miejsc
+                      {vipPlan.price} zł
+                      <span className="hidden sm:inline"> · tylko {VIP_SEATS} miejsc</span>
                     </span>
                   </th>
                 </tr>
@@ -158,13 +161,16 @@ export default function CennikPage() {
               <tbody>
                 {compare.map((row) => (
                   <tr key={row.label} className="border-b border-line/70">
-                    <td className="py-3.5 pr-4 text-slate">{row.label}</td>
-                    <td className="px-3 text-center text-lg"><Cell on={row.f} /></td>
-                    <td className="px-3 text-center text-lg"><Cell on={row.v} /></td>
+                    <td className="py-3.5 pr-2 text-slate sm:pr-4">{row.label}</td>
+                    <td className="px-1 text-center text-lg sm:px-3"><Cell on={row.f} /></td>
+                    <td className="px-1 text-center text-lg sm:px-3"><Cell on={row.v} /></td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            <p className="mt-3 text-center text-xs text-muted sm:hidden">
+              VIP 1:1: tylko {VIP_SEATS} miejsc.
+            </p>
           </div>
         </Container>
       </section>
@@ -172,7 +178,7 @@ export default function CennikPage() {
       {/* Pojedynczy dział - dyskretny link, nie główna karta cennika */}
       <section className="bg-cloud py-14">
         <Container>
-          <div className="border-gradient flex flex-col items-center gap-5 rounded-3xl bg-white p-8 text-center shadow-card sm:flex-row sm:text-left">
+          <div className="border-gradient flex flex-col items-center gap-5 rounded-3xl bg-white p-6 text-center shadow-card sm:flex-row sm:p-8 sm:text-left">
             <div className="flex h-16 w-16 flex-none items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#f2efff,#ffe6f3)] text-3xl ring-1 ring-brand-100">
               🎯
             </div>

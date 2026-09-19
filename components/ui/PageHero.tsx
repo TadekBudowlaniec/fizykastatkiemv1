@@ -65,7 +65,7 @@ export function PageHero({
           {title}
         </h1>
         {subtitle && (
-          <p className="mt-4 max-w-2xl text-lg text-slate-300/85">{subtitle}</p>
+          <p className="mt-4 max-w-2xl text-base text-slate-300/85 sm:text-lg">{subtitle}</p>
         )}
         {children}
       </div>

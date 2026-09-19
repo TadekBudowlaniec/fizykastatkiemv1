@@ -66,13 +66,13 @@ export default function DashboardPage() {
           <div className="mb-10 grid gap-5 md:grid-cols-2">
             <Link
               href="/kurs/0"
-              className="group relative overflow-hidden rounded-3xl bg-[linear-gradient(150deg,#0b1224,#16223f)] p-7 text-white shadow-card"
+              className="group relative overflow-hidden rounded-3xl bg-[linear-gradient(150deg,#0b1224,#16223f)] p-5 text-white shadow-card sm:p-7"
             >
               <div className="aurora right-0 top-0 h-40 w-40 bg-brand-500/40" />
               <p className="relative text-xs font-bold uppercase tracking-wider text-brand-200">
                 Zacznij tutaj
               </p>
-              <h3 className="relative mt-1 text-2xl font-extrabold">
+              <h3 className="relative mt-1 text-xl font-extrabold sm:text-2xl">
                 Moduł „Tutaj zacznij”
               </h3>
               <p className="relative mt-2 max-w-sm text-slate-300/85">
@@ -86,12 +86,12 @@ export default function DashboardPage() {
 
             <Link
               href="/planer"
-              className="group relative overflow-hidden rounded-3xl border border-line bg-white p-7 shadow-card"
+              className="group relative overflow-hidden rounded-3xl border border-line bg-white p-5 shadow-card sm:p-7"
             >
               <p className="text-xs font-bold uppercase tracking-wider text-brand-500">
                 Nawigator
               </p>
-              <h3 className="mt-1 text-2xl font-extrabold text-ink">
+              <h3 className="mt-1 text-xl font-extrabold text-ink sm:text-2xl">
                 Twój planer nauki 🧭
               </h3>
               <p className="mt-2 max-w-sm text-muted">
@@ -107,7 +107,7 @@ export default function DashboardPage() {
           <h2 className="mb-5 text-xl font-extrabold text-ink">
             Wszystkie działy
           </h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
             {COURSES.map((c) => (
               <CourseTile key={c.id} course={c} />
             ))}

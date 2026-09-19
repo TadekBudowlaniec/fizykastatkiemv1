@@ -12,11 +12,11 @@ export function AuthCard({
   footer?: ReactNode;
 }) {
   return (
-    <section className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden bg-[linear-gradient(160deg,#070b18,#0f1b36)] px-5 py-16">
+    <section className="relative flex min-h-[calc(100dvh-4rem)] items-center justify-center overflow-hidden bg-[linear-gradient(160deg,#070b18,#0f1b36)] px-4 py-10 sm:px-5 sm:py-16">
       <div className="aurora left-[10%] top-[6%] h-72 w-72 bg-brand-600/40" />
       <div className="aurora bottom-[6%] right-[10%] h-72 w-72 bg-magenta-500/30" />
       <div className="relative w-full max-w-md">
-        <div className="rounded-3xl bg-white p-8 shadow-glow sm:p-10">
+        <div className="rounded-3xl bg-white p-6 shadow-glow sm:p-10">
           <h1 className="text-center font-display text-2xl font-extrabold text-ink sm:text-3xl">
             {title}
           </h1>

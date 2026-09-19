@@ -20,15 +20,20 @@ export function Hero() {
       {/* delikatna winieta u góry */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(ellipse_60%_100%_at_50%_0%,rgba(107,77,246,0.18),transparent)]" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pb-20 pt-14 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:pb-28 lg:pt-20">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pb-14 pt-10 sm:px-8 sm:pb-20 sm:pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:pb-28 lg:pt-20">
         {/* Copy */}
         <div className="animate-[fadeUp_0.7s_cubic-bezier(0.22,1,0.36,1)_both]">
-          <Eyebrow dark>🚢 Kurs maturalny z fizyki - matura 2027</Eyebrow>
-          <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.08] text-white sm:text-5xl lg:text-[3.4rem]">
+          <Eyebrow dark>
+            <span aria-hidden>🚢</span>
+            {/* Krótsza wersja na telefonie - pełna nie mieści się w jednej linii */}
+            <span className="sm:hidden">Matura z fizyki 2027</span>
+            <span className="hidden sm:inline">Kurs maturalny z fizyki - matura 2027</span>
+          </Eyebrow>
+          <h1 className="mt-5 font-display text-[2.25rem] font-extrabold leading-[1.08] text-white sm:text-5xl lg:text-[3.4rem]">
             Zdaj maturę z fizyki rozszerzonej{' '}
             <span className="text-gradient">krok po kroku</span>
           </h1>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-300/85">
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-300/85 sm:mt-5 sm:text-lg">
             Bez chaosu i zgadywania, czego uczyć się dalej. 16 działów wideo HD,
             PDF-y, setki zadań na wzór CKE i planer, który prowadzi Cię od podstaw
             aż do egzaminu - z wynikiem, z którego będziesz dumny.
@@ -63,11 +68,11 @@ export function Hero() {
             </div>
           </div>
 
-          <ul className="mt-8 flex flex-wrap gap-2.5">
+          <ul className="mt-6 flex flex-wrap gap-2 sm:mt-8 sm:gap-2.5">
             {trust.map((t) => (
               <li
                 key={t.label}
-                className="glass flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-slate-200"
+                className="glass flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-slate-200 sm:gap-2 sm:px-4 sm:py-2 sm:text-sm"
               >
                 <span>{t.icon}</span>
                 {t.label}

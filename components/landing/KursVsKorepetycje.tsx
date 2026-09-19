@@ -23,7 +23,7 @@ export function KursVsKorepetycje() {
         <div className="relative mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
           {/* Kurs Pełny */}
           <Reveal>
-            <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-7 shadow-soft">
+            <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-6 shadow-soft sm:p-7">
               <span className="self-start rounded-full bg-brand-50 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-600">
                 Kurs Pełny · {fullPrice} zł
               </span>
@@ -53,7 +53,7 @@ export function KursVsKorepetycje() {
 
           {/* Korepetycje 1:1 */}
           <Reveal delay={90}>
-            <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-7 shadow-soft">
+            <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-6 shadow-soft sm:p-7">
               <span className="self-start rounded-full bg-cloud px-3 py-1 text-xs font-bold uppercase tracking-wide text-slate ring-1 ring-line">
                 Korepetycje 1:1 · {TUTORING_PRICE} zł / 60 min
               </span>
@@ -92,7 +92,7 @@ export function KursVsKorepetycje() {
 
         {/* Punchline — premium (navy), spokojny zamiast krzykliwego gradientu */}
         <Reveal>
-          <div className="mx-auto mt-6 flex max-w-4xl flex-col items-center gap-5 rounded-3xl bg-[linear-gradient(150deg,#0b1224,#16223f)] p-7 text-center text-white sm:flex-row sm:text-left">
+          <div className="mx-auto mt-6 flex max-w-4xl flex-col items-center gap-5 rounded-3xl bg-[linear-gradient(150deg,#0b1224,#16223f)] p-6 text-center text-white sm:flex-row sm:p-7 sm:text-left">
             <span className="flex h-14 w-14 flex-none items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#6b4df6,#f43f8f)] text-2xl shadow-glow">
               👑
             </span>

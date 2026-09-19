@@ -52,7 +52,7 @@ export function LessonView({
           )}
 
           {hasText && (
-            <article className="rounded-3xl border border-line bg-white p-7 shadow-soft sm:p-9">
+            <article className="rounded-3xl border border-line bg-white p-5 shadow-soft sm:p-9">
               <MarkdownLesson content={lesson.content!} />
             </article>
           )}

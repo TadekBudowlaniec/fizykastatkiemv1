@@ -6,6 +6,7 @@ import { getSupabaseBrowser } from '@/lib/supabase/client';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { COURSES } from '@/lib/courses';
+import { cn } from '@/lib/cn';
 
 type AdminUser = {
   id: string;
@@ -71,6 +72,17 @@ const SOURCE_LABEL: Record<string, string> = {
   exit_intent: 'Exit-popup',
 };
 
+// Ile wierszy list pokazujemy na start (mobile = karty, więc nie zalewamy ekranu).
+const PAGE = 30;
+
+function plural(n: number, one: string, few: string, many: string): string {
+  const m10 = n % 10;
+  const m100 = n % 100;
+  if (n === 1) return one;
+  if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few;
+  return many;
+}
+
 function fmtPln(v: number, currency = 'PLN'): string {
   try {
     return new Intl.NumberFormat('pl-PL', {
@@ -112,7 +124,16 @@ function fmtDay(iso: string | null): string {
 }
 
 // ── Ikony (inline SVG, bez zależności) ───────────────────────────────────────
-type IconName = 'overview' | 'sales' | 'students' | 'mail' | 'refresh' | 'wallet' | 'check' | 'send';
+type IconName =
+  | 'overview'
+  | 'sales'
+  | 'students'
+  | 'mail'
+  | 'refresh'
+  | 'wallet'
+  | 'check'
+  | 'send'
+  | 'search';
 function Icon({ name, className = 'h-5 w-5' }: { name: IconName; className?: string }) {
   const p: Record<IconName, React.ReactNode> = {
     overview: (
@@ -166,6 +187,12 @@ function Icon({ name, className = 'h-5 w-5' }: { name: IconName; className?: str
         <path d="M22 2 15 22l-4-9-9-4z" />
       </>
     ),
+    search: (
+      <>
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-3.5-3.5" />
+      </>
+    ),
   };
   return (
     <svg
@@ -192,6 +219,8 @@ const TONES: Record<Tone, string> = {
   slate: 'bg-slate-100 text-slate-600',
 };
 
+// Kafelek statystyki: na telefonie 2 w rzędzie (ciasny, ale czytelny),
+// od sm normalne rozmiary.
 function StatTile({
   label,
   value,
@@ -206,17 +235,26 @@ function StatTile({
   tone?: Tone;
 }) {
   return (
-    <div className="rounded-2xl border border-line bg-white p-5 shadow-card">
-      <div className="flex items-start justify-between gap-3">
-        <p className="text-xs font-bold uppercase tracking-wider text-muted">
+    <div className="min-w-0 rounded-2xl border border-line bg-white p-3.5 shadow-card sm:p-5">
+      <div className="flex items-start justify-between gap-2">
+        <p className="min-w-0 text-[0.65rem] font-bold uppercase leading-tight tracking-wider text-muted sm:text-xs">
           {label}
         </p>
-        <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${TONES[tone]}`}>
-          <Icon name={icon} className="h-[18px] w-[18px]" />
+        <span
+          className={cn(
+            'flex h-7 w-7 shrink-0 items-center justify-center rounded-lg sm:h-9 sm:w-9 sm:rounded-xl',
+            TONES[tone]
+          )}
+        >
+          <Icon name={icon} className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
         </span>
       </div>
-      <p className="mt-3 text-3xl font-extrabold tracking-tight text-ink">{value}</p>
-      {hint && <p className="mt-1 text-sm text-muted">{hint}</p>}
+      <p className="mt-2 truncate text-xl font-extrabold tracking-tight text-ink sm:mt-3 sm:text-3xl">
+        {value}
+      </p>
+      {hint && (
+        <p className="mt-0.5 truncate text-xs text-muted sm:mt-1 sm:text-sm">{hint}</p>
+      )}
     </div>
   );
 }
@@ -229,8 +267,59 @@ function SectionCard({
   className?: string;
 }) {
   return (
-    <div className={`rounded-2xl border border-line bg-white shadow-card ${className}`}>
+    <div className={cn('rounded-2xl border border-line bg-white shadow-card', className)}>
       {children}
+    </div>
+  );
+}
+
+function SearchInput({
+  value,
+  onChange,
+  placeholder,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder: string;
+}) {
+  return (
+    <label className="relative block w-full sm:max-w-xs">
+      <Icon
+        name="search"
+        className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"
+      />
+      <input
+        type="search"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="w-full rounded-full border border-line bg-white py-2.5 pl-10 pr-4 text-sm text-ink shadow-soft focus:border-brand-400 focus:outline-none"
+      />
+    </label>
+  );
+}
+
+function ShowMore({
+  shown,
+  total,
+  onMore,
+}: {
+  shown: number;
+  total: number;
+  onMore: () => void;
+}) {
+  if (total <= shown) return null;
+  return (
+    <div className="flex items-center justify-between gap-3 border-t border-line px-4 py-3 text-xs text-muted sm:px-5">
+      <span>
+        Pokazano {shown} z {total}
+      </span>
+      <button
+        onClick={onMore}
+        className="rounded-full bg-cloud px-3.5 py-1.5 text-xs font-semibold text-brand-700 transition hover:bg-brand-50"
+      >
+        Pokaż więcej
+      </button>
     </div>
   );
 }
@@ -243,7 +332,7 @@ function SequenceProgress({ sent, total }: { sent: number; total: number }) {
         {Array.from({ length: total }).map((_, i) => (
           <span
             key={i}
-            className={`h-1.5 w-5 rounded-full ${i < sent ? 'bg-brand-500' : 'bg-line'}`}
+            className={cn('h-1.5 w-4 rounded-full sm:w-5', i < sent ? 'bg-brand-500' : 'bg-line')}
           />
         ))}
       </div>
@@ -251,6 +340,41 @@ function SequenceProgress({ sent, total }: { sent: number; total: number }) {
         {sent}/{total}
       </span>
     </div>
+  );
+}
+
+function LeadStatus({ lead, totalDays }: { lead: LeadRow; totalDays: number }) {
+  const unsub = lead.status === 'unsubscribed';
+  if (unsub)
+    return (
+      <span className="rounded-full bg-red-50 px-2 py-0.5 text-[0.7rem] font-bold text-red-600">
+        wypisany
+      </span>
+    );
+  if (lead.consent_marketing && lead.seq_day_sent >= totalDays)
+    return (
+      <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[0.7rem] font-bold text-emerald-600">
+        ukończona
+      </span>
+    );
+  if (lead.consent_marketing)
+    return (
+      <span className="rounded-full bg-brand-50 px-2 py-0.5 text-[0.7rem] font-bold text-brand-600">
+        w trakcie
+      </span>
+    );
+  return (
+    <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[0.7rem] font-bold text-slate-500">
+      tylko planer
+    </span>
+  );
+}
+
+function SourceChip({ source }: { source: string }) {
+  return (
+    <span className="whitespace-nowrap rounded-full bg-slate-100 px-2 py-0.5 text-[0.7rem] font-semibold text-slate-600">
+      {SOURCE_LABEL[source] || source}
+    </span>
   );
 }
 
@@ -275,12 +399,16 @@ async function postAdmin<T>(path: string): Promise<T> {
   return (await res.json()) as T;
 }
 
-const NAV: { id: string; label: string; icon: IconName }[] = [
-  { id: 'przeglad', label: 'Przegląd', icon: 'overview' },
-  { id: 'sprzedaz', label: 'Sprzedaż', icon: 'sales' },
-  { id: 'kursanci', label: 'Kursanci', icon: 'students' },
-  { id: 'mailing', label: 'Sekwencja mailowa', icon: 'mail' },
+const NAV: { id: string; label: string; short: string; icon: IconName }[] = [
+  { id: 'przeglad', label: 'Przegląd', short: 'Przegląd', icon: 'overview' },
+  { id: 'sprzedaz', label: 'Sprzedaż', short: 'Sprzedaż', icon: 'sales' },
+  { id: 'kursanci', label: 'Kursanci', short: 'Kursanci', icon: 'students' },
+  { id: 'mailing', label: 'Sekwencja mailowa', short: 'Mailing', icon: 'mail' },
 ];
+
+// Odstęp kotwic: na mobile pod nagłówkiem strony (4rem) + przyklejonym paskiem
+// zakładek (~3.5rem); na desktopie sidebar nie zasłania treści.
+const SECTION = 'scroll-mt-[8rem] lg:scroll-mt-6';
 
 export default function AdminPage() {
   const { user, loading, isAdmin, accessLoading } = useAuth();
@@ -291,6 +419,8 @@ export default function AdminPage() {
   const [active, setActive] = useState('przeglad');
   const [error, setError] = useState<string | null>(null);
   const [fetching, setFetching] = useState(false);
+  const [usersShown, setUsersShown] = useState(PAGE);
+  const [leadsShown, setLeadsShown] = useState(PAGE);
 
   const load = useCallback(async () => {
     setFetching(true);
@@ -313,6 +443,28 @@ export default function AdminPage() {
     if (user && isAdmin) load();
   }, [user, isAdmin, load]);
 
+  const ready = !!user && isAdmin && !loading && !accessLoading;
+
+  // Aktywna zakładka podąża za przewijaniem (mobile: pasek, desktop: sidebar).
+  useEffect(() => {
+    if (!ready || typeof IntersectionObserver === 'undefined') return;
+    const els = NAV.map((n) => document.getElementById(n.id)).filter(
+      (el): el is HTMLElement => !!el
+    );
+    if (!els.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) setActive(visible[0].target.id);
+      },
+      { rootMargin: '-35% 0px -55% 0px', threshold: 0 }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [ready, stats, usersData]);
+
   const filteredUsers = (usersData?.users ?? []).filter((u) => {
     if (!q.trim()) return true;
     const needle = q.trim().toLowerCase();
@@ -334,14 +486,15 @@ export default function AdminPage() {
     return l.email.toLowerCase().includes(leadQ.trim().toLowerCase());
   });
 
+  const visibleUsers = filteredUsers.slice(0, usersShown);
+  const visibleLeads = filteredLeads.slice(0, leadsShown);
+
   // Lejek: ilu leadów otrzymało co najmniej mail dnia N (kumulatywnie).
   const funnel =
     leadsData?.byStage && leadsData.byStage.length
       ? Array.from({ length: leadsData.totalDays }).map((_, i) => {
           const day = i + 1;
-          const reached = leadsData.byStage
-            .slice(day)
-            .reduce((a, b) => a + b, 0);
+          const reached = leadsData.byStage.slice(day).reduce((a, b) => a + b, 0);
           return { day, reached };
         })
       : [];
@@ -361,7 +514,7 @@ export default function AdminPage() {
     return (
       <section className="min-h-[60vh] bg-cloud py-16">
         <Container size="narrow">
-          <div className="rounded-2xl border border-line bg-white p-8 text-center shadow-card">
+          <div className="rounded-2xl border border-line bg-white p-6 text-center shadow-card sm:p-8">
             <p className="text-lg font-bold text-ink">Musisz być zalogowany</p>
             <div className="mt-4 flex justify-center">
               <Button href="/login" variant="gradient">
@@ -377,7 +530,7 @@ export default function AdminPage() {
     return (
       <section className="min-h-[60vh] bg-cloud py-16">
         <Container size="narrow">
-          <div className="rounded-2xl border border-line bg-white p-8 text-center shadow-card">
+          <div className="rounded-2xl border border-line bg-white p-6 text-center shadow-card sm:p-8">
             <p className="text-lg font-bold text-ink">Brak dostępu</p>
             <p className="mt-1 text-muted">
               Ta strona jest dostępna tylko dla administratorów.
@@ -388,12 +541,65 @@ export default function AdminPage() {
     );
   }
 
+  const refreshButton = (
+    <button
+      onClick={load}
+      disabled={fetching}
+      className="flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-3 py-2 text-sm font-semibold text-ink transition hover:bg-cloud disabled:opacity-60"
+      aria-label="Odśwież dane"
+    >
+      <Icon name="refresh" className={cn('h-4 w-4', fetching && 'animate-spin')} />
+      <span className="hidden sm:inline">{fetching ? 'Odświeżanie…' : 'Odśwież'}</span>
+    </button>
+  );
+
   return (
-    <section className="min-h-screen bg-cloud py-8 sm:py-10 [scroll-behavior:smooth]">
-      <Container size="wide">
-        <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)]">
-          {/* ── Sidebar ── */}
-          <aside className="lg:sticky lg:top-6 lg:self-start">
+    <section className="min-h-screen bg-cloud pb-10 lg:py-10">
+      {/* ── Pasek mobile/tablet: tytuł + odśwież + zakładki (przyklejony) ── */}
+      <div className="sticky top-16 z-30 border-b border-line bg-cloud/90 backdrop-blur-lg lg:hidden">
+        <Container size="wide" className="flex items-center justify-between gap-3 pt-3">
+          <div className="flex min-w-0 items-center gap-2">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-500 text-white">
+              <Icon name="overview" className="h-4 w-4" />
+            </span>
+            <div className="min-w-0 leading-tight">
+              <p className="truncate text-sm font-extrabold text-ink">Panel admina</p>
+              {stats && (
+                <p className="truncate text-[0.65rem] text-muted">
+                  Aktualne na {fmtDate(stats.generatedAt)}
+                </p>
+              )}
+            </div>
+          </div>
+          {refreshButton}
+        </Container>
+        <nav
+          className="-mb-px flex gap-1 overflow-x-auto px-5 pb-2 pt-2 [scrollbar-width:none] sm:px-8 [&::-webkit-scrollbar]:hidden"
+          aria-label="Sekcje panelu"
+        >
+          {NAV.map((n) => (
+            <a
+              key={n.id}
+              href={`#${n.id}`}
+              onClick={() => setActive(n.id)}
+              className={cn(
+                'flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition',
+                active === n.id
+                  ? 'bg-brand-500 text-white shadow-soft'
+                  : 'bg-white text-slate ring-1 ring-line hover:text-ink'
+              )}
+            >
+              <Icon name={n.icon} className="h-4 w-4" />
+              {n.short}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <Container size="wide" className="pt-5 lg:pt-0">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[220px_minmax(0,1fr)]">
+          {/* ── Sidebar (desktop) ── */}
+          <aside className="hidden lg:sticky lg:top-6 lg:block lg:self-start">
             <div className="rounded-2xl border border-line bg-white p-4 shadow-card">
               <div className="mb-4 flex items-center gap-2 px-1">
                 <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-500 text-white">
@@ -405,17 +611,18 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              <nav className="flex gap-1 overflow-x-auto lg:flex-col lg:overflow-visible">
+              <nav className="flex flex-col gap-1">
                 {NAV.map((n) => (
                   <a
                     key={n.id}
                     href={`#${n.id}`}
                     onClick={() => setActive(n.id)}
-                    className={`flex shrink-0 items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm font-semibold transition ${
+                    className={cn(
+                      'flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm font-semibold transition',
                       active === n.id
                         ? 'bg-brand-50 text-brand-700'
                         : 'text-muted hover:bg-cloud hover:text-ink'
-                    }`}
+                    )}
                   >
                     <Icon name={n.icon} className="h-[18px] w-[18px]" />
                     {n.label}
@@ -424,14 +631,7 @@ export default function AdminPage() {
               </nav>
 
               <div className="mt-4 border-t border-line pt-4">
-                <button
-                  onClick={load}
-                  disabled={fetching}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-line bg-white px-3 py-2 text-sm font-semibold text-ink transition hover:bg-cloud disabled:opacity-60"
-                >
-                  <Icon name="refresh" className={`h-4 w-4 ${fetching ? 'animate-spin' : ''}`} />
-                  {fetching ? 'Odświeżanie…' : 'Odśwież'}
-                </button>
+                <div className="[&>button]:w-full">{refreshButton}</div>
                 {stats && (
                   <p className="mt-2 px-1 text-[0.7rem] text-muted">
                     Aktualne na {fmtDate(stats.generatedAt)}
@@ -442,7 +642,7 @@ export default function AdminPage() {
           </aside>
 
           {/* ── Main ── */}
-          <div className="min-w-0 space-y-10">
+          <div className="min-w-0 space-y-10 lg:space-y-12">
             {error && (
               <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
                 {error}
@@ -450,12 +650,12 @@ export default function AdminPage() {
             )}
 
             {/* Przegląd */}
-            <div id="przeglad" className="scroll-mt-6">
+            <div id="przeglad" className={SECTION}>
               <h1 className="text-2xl font-extrabold tracking-tight text-ink">Przegląd</h1>
               <p className="mt-1 text-sm text-muted">
                 Sprzedaż, dostępy i mailing w jednym miejscu.
               </p>
-              <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="mt-4 grid grid-cols-2 gap-3 sm:mt-5 sm:gap-4 xl:grid-cols-4">
                 <StatTile
                   icon="wallet"
                   tone="green"
@@ -494,19 +694,19 @@ export default function AdminPage() {
             </div>
 
             {/* Sprzedaż */}
-            <div id="sprzedaz" className="scroll-mt-6">
+            <div id="sprzedaz" className={SECTION}>
               <h2 className="text-xl font-extrabold tracking-tight text-ink">Sprzedaż</h2>
-              <div className="mt-5 grid gap-6 lg:grid-cols-2">
-                <SectionCard className="p-6">
-                  <h3 className="mb-4 text-base font-bold text-ink">Dostępy wg działu</h3>
+              <div className="mt-4 grid gap-4 sm:mt-5 sm:gap-6 lg:grid-cols-2">
+                <SectionCard className="p-4 sm:p-6">
+                  <h3 className="mb-3 text-base font-bold text-ink sm:mb-4">Dostępy wg działu</h3>
                   {stats && stats.enrollments.byCourse.length > 0 ? (
                     <ul className="divide-y divide-line">
                       {stats.enrollments.byCourse.map((b) => (
                         <li
                           key={b.course_id}
-                          className="flex items-center justify-between py-2.5 text-sm"
+                          className="flex items-center justify-between gap-3 py-2.5 text-sm"
                         >
-                          <span className="truncate pr-3 text-ink">{courseName(b.course_id)}</span>
+                          <span className="min-w-0 truncate text-ink">{courseName(b.course_id)}</span>
                           <span className="shrink-0 font-bold text-brand-600">{b.count}</span>
                         </li>
                       ))}
@@ -516,8 +716,8 @@ export default function AdminPage() {
                   )}
                 </SectionCard>
 
-                <SectionCard className="p-6">
-                  <h3 className="mb-4 text-base font-bold text-ink">Ostatnie dostępy</h3>
+                <SectionCard className="p-4 sm:p-6">
+                  <h3 className="mb-3 text-base font-bold text-ink sm:mb-4">Ostatnie dostępy</h3>
                   {stats && stats.enrollments.recent.length > 0 ? (
                     <ul className="divide-y divide-line">
                       {stats.enrollments.recent.map((r, i) => (
@@ -525,8 +725,10 @@ export default function AdminPage() {
                           key={`${r.user_id}-${r.course_id}-${i}`}
                           className="flex items-center justify-between gap-3 py-2.5 text-sm"
                         >
-                          <span className="truncate text-ink">{courseName(r.course_id)}</span>
-                          <span className="shrink-0 text-muted">{fmtDate(r.enrolled_at)}</span>
+                          <span className="min-w-0 truncate text-ink">{courseName(r.course_id)}</span>
+                          <span className="shrink-0 text-xs text-muted sm:text-sm">
+                            {fmtDate(r.enrolled_at)}
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -538,8 +740,8 @@ export default function AdminPage() {
             </div>
 
             {/* Kursanci */}
-            <div id="kursanci" className="scroll-mt-6">
-              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <div id="kursanci" className={SECTION}>
+              <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <h2 className="text-xl font-extrabold tracking-tight text-ink">
                   Kursanci
                   {usersData && (
@@ -548,16 +750,67 @@ export default function AdminPage() {
                     </span>
                   )}
                 </h2>
-                <input
+                <SearchInput
                   value={q}
-                  onChange={(e) => setQ(e.target.value)}
+                  onChange={(v) => {
+                    setQ(v);
+                    setUsersShown(PAGE);
+                  }}
                   placeholder="Szukaj: e-mail lub imię"
-                  className="w-full max-w-xs rounded-full border border-line bg-white px-4 py-2 text-sm text-ink shadow-soft focus:border-brand-400 focus:outline-none"
                 />
               </div>
 
               <SectionCard className="overflow-hidden">
-                <div className="overflow-x-auto">
+                {/* Mobile: karty */}
+                <ul className="divide-y divide-line lg:hidden">
+                  {visibleUsers.length > 0 ? (
+                    visibleUsers.map((u) => (
+                      <li key={u.id} className="flex items-start gap-3 px-4 py-3.5">
+                        <span
+                          className={cn(
+                            'flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold',
+                            u.courses > 0 ? 'bg-brand-50 text-brand-700' : 'bg-cloud text-muted'
+                          )}
+                        >
+                          {(u.full_name || u.email).slice(0, 1).toUpperCase()}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm font-semibold text-ink">
+                            <span className="break-all">{u.email}</span>
+                            {u.is_admin && (
+                              <span className="ml-2 inline-block whitespace-nowrap rounded-full bg-brand-50 px-2 py-0.5 align-middle text-[0.65rem] font-bold text-brand-600">
+                                admin
+                              </span>
+                            )}
+                          </p>
+                          <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-muted">
+                            <span>{u.full_name || 'bez imienia'}</span>
+                            <span aria-hidden>·</span>
+                            <span>{fmtDay(u.created_at)}</span>
+                          </p>
+                        </div>
+                        <span
+                          className={cn(
+                            'shrink-0 rounded-full px-2.5 py-1 text-xs font-bold',
+                            u.courses > 0
+                              ? 'bg-brand-50 text-brand-700'
+                              : 'bg-cloud text-muted'
+                          )}
+                          title="Odblokowane działy"
+                        >
+                          {u.courses} {plural(u.courses, 'dział', 'działy', 'działów')}
+                        </span>
+                      </li>
+                    ))
+                  ) : (
+                    <li className="px-4 py-6 text-center text-sm text-muted">
+                      {usersData ? 'Brak wyników.' : 'Ładowanie…'}
+                    </li>
+                  )}
+                </ul>
+
+                {/* Desktop: tabela */}
+                <div className="hidden overflow-x-auto lg:block">
                   <table className="w-full min-w-[560px] text-left text-sm">
                     <thead>
                       <tr className="border-b border-line bg-cloud/50 text-xs uppercase tracking-wider text-muted">
@@ -568,8 +821,8 @@ export default function AdminPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-line">
-                      {filteredUsers.length > 0 ? (
-                        filteredUsers.slice(0, 200).map((u) => (
+                      {visibleUsers.length > 0 ? (
+                        visibleUsers.map((u) => (
                           <tr key={u.id} className="transition hover:bg-cloud/60">
                             <td className="px-5 py-3">
                               <span className="text-ink">{u.email}</span>
@@ -598,30 +851,30 @@ export default function AdminPage() {
                     </tbody>
                   </table>
                 </div>
-                {filteredUsers.length > 200 && (
-                  <p className="border-t border-line px-5 py-3 text-xs text-muted">
-                    Pokazano pierwsze 200 z {filteredUsers.length}. Zawęź wyszukiwanie.
-                  </p>
-                )}
+                <ShowMore
+                  shown={visibleUsers.length}
+                  total={filteredUsers.length}
+                  onMore={() => setUsersShown((n) => n + PAGE)}
+                />
               </SectionCard>
             </div>
 
             {/* Sekwencja mailowa */}
-            <div id="mailing" className="scroll-mt-6">
+            <div id="mailing" className={SECTION}>
               <h2 className="text-xl font-extrabold tracking-tight text-ink">Sekwencja mailowa</h2>
               <p className="mt-1 text-sm text-muted">
                 5-dniowa sekwencja powitalna (Resend). „Wysłane" = maile już nadane do danego leada.
               </p>
 
               {!leadsData ? (
-                <div className="mt-5 rounded-2xl border border-line bg-white p-6 text-muted shadow-card">
+                <div className="mt-5 rounded-2xl border border-line bg-white p-5 text-muted shadow-card sm:p-6">
                   {leads && 'error' in leads
                     ? 'Brak dostępu do tabeli email_subscribers.'
                     : 'Brak danych o leadach.'}
                 </div>
               ) : (
                 <>
-                  <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                  <div className="mt-4 grid grid-cols-2 gap-3 sm:mt-5 sm:gap-4 xl:grid-cols-4">
                     <StatTile
                       icon="mail"
                       tone="brand"
@@ -652,15 +905,18 @@ export default function AdminPage() {
                   </div>
 
                   {/* Lejek dni */}
-                  <SectionCard className="mt-6 p-6">
-                    <h3 className="mb-4 text-base font-bold text-ink">
-                      Zasięg sekwencji (ilu leadów dostało mail danego dnia)
-                    </h3>
+                  <SectionCard className="mt-4 p-4 sm:mt-6 sm:p-6">
+                    <h3 className="mb-1 text-base font-bold text-ink">Zasięg sekwencji</h3>
+                    <p className="mb-4 text-xs text-muted sm:text-sm">
+                      Ilu leadów dostało mail danego dnia.
+                    </p>
                     <ul className="space-y-2.5">
                       {funnel.map((f) => (
                         <li key={f.day} className="flex items-center gap-3 text-sm">
-                          <span className="w-16 shrink-0 font-semibold text-ink">Dzień {f.day}</span>
-                          <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-cloud">
+                          <span className="w-14 shrink-0 font-semibold text-ink sm:w-16">
+                            Dzień {f.day}
+                          </span>
+                          <div className="h-2.5 min-w-0 flex-1 overflow-hidden rounded-full bg-cloud">
                             <div
                               className="h-full rounded-full bg-brand-500 transition-all"
                               style={{ width: `${(f.reached / funnelMax) * 100}%` }}
@@ -674,8 +930,8 @@ export default function AdminPage() {
                     </ul>
                   </SectionCard>
 
-                  {/* Tabela leadów */}
-                  <div className="mt-6 mb-4 flex flex-wrap items-center justify-between gap-3">
+                  {/* Lista leadów */}
+                  <div className="mb-4 mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <h3 className="text-base font-bold text-ink">
                       Leady w sekwencji
                       <span className="ml-2 text-sm font-semibold text-muted">
@@ -683,16 +939,57 @@ export default function AdminPage() {
                         {leadsData.list.length >= 500 ? ' (ostatnie 500)' : ''}
                       </span>
                     </h3>
-                    <input
+                    <SearchInput
                       value={leadQ}
-                      onChange={(e) => setLeadQ(e.target.value)}
+                      onChange={(v) => {
+                        setLeadQ(v);
+                        setLeadsShown(PAGE);
+                      }}
                       placeholder="Szukaj po e-mailu"
-                      className="w-full max-w-xs rounded-full border border-line bg-white px-4 py-2 text-sm text-ink shadow-soft focus:border-brand-400 focus:outline-none"
                     />
                   </div>
 
                   <SectionCard className="overflow-hidden">
-                    <div className="overflow-x-auto">
+                    {/* Mobile: karty */}
+                    <ul className="divide-y divide-line lg:hidden">
+                      {visibleLeads.length > 0 ? (
+                        visibleLeads.map((l) => {
+                          const unsub = l.status === 'unsubscribed';
+                          return (
+                            <li key={l.email} className="px-4 py-3.5">
+                              <div className="flex items-start justify-between gap-3">
+                                <p className="min-w-0 break-all text-sm font-semibold text-ink">
+                                  {l.email}
+                                </p>
+                                <LeadStatus lead={l} totalDays={leadsData.totalDays} />
+                              </div>
+                              <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-muted">
+                                <SourceChip source={l.source} />
+                                <span>
+                                  {l.consent_marketing ? (
+                                    <span className="text-emerald-600">✓ zgoda</span>
+                                  ) : (
+                                    <span>— bez zgody</span>
+                                  )}
+                                </span>
+                                <span>{fmtDay(l.created_at)}</span>
+                                {l.consent_marketing && !unsub && (
+                                  <SequenceProgress
+                                    sent={l.seq_day_sent}
+                                    total={leadsData.totalDays}
+                                  />
+                                )}
+                              </div>
+                            </li>
+                          );
+                        })
+                      ) : (
+                        <li className="px-4 py-6 text-center text-sm text-muted">Brak leadów.</li>
+                      )}
+                    </ul>
+
+                    {/* Desktop: tabela */}
+                    <div className="hidden overflow-x-auto lg:block">
                       <table className="w-full min-w-[720px] text-left text-sm">
                         <thead>
                           <tr className="border-b border-line bg-cloud/50 text-xs uppercase tracking-wider text-muted">
@@ -705,16 +1002,14 @@ export default function AdminPage() {
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-line">
-                          {filteredLeads.length > 0 ? (
-                            filteredLeads.map((l) => {
+                          {visibleLeads.length > 0 ? (
+                            visibleLeads.map((l) => {
                               const unsub = l.status === 'unsubscribed';
                               return (
                                 <tr key={l.email} className="transition hover:bg-cloud/60">
                                   <td className="px-5 py-3 text-ink">{l.email}</td>
                                   <td className="px-5 py-3">
-                                    <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[0.7rem] font-semibold text-slate-600">
-                                      {SOURCE_LABEL[l.source] || l.source}
-                                    </span>
+                                    <SourceChip source={l.source} />
                                   </td>
                                   <td className="px-5 py-3">
                                     {l.consent_marketing ? (
@@ -735,23 +1030,7 @@ export default function AdminPage() {
                                     )}
                                   </td>
                                   <td className="px-5 py-3">
-                                    {unsub ? (
-                                      <span className="rounded-full bg-red-50 px-2 py-0.5 text-[0.7rem] font-bold text-red-600">
-                                        wypisany
-                                      </span>
-                                    ) : l.consent_marketing && l.seq_day_sent >= leadsData.totalDays ? (
-                                      <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[0.7rem] font-bold text-emerald-600">
-                                        ukończona
-                                      </span>
-                                    ) : l.consent_marketing ? (
-                                      <span className="rounded-full bg-brand-50 px-2 py-0.5 text-[0.7rem] font-bold text-brand-600">
-                                        w trakcie
-                                      </span>
-                                    ) : (
-                                      <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[0.7rem] font-bold text-slate-500">
-                                        tylko planer
-                                      </span>
-                                    )}
+                                    <LeadStatus lead={l} totalDays={leadsData.totalDays} />
                                   </td>
                                   <td className="px-5 py-3 text-muted">{fmtDay(l.created_at)}</td>
                                 </tr>
@@ -767,12 +1046,17 @@ export default function AdminPage() {
                         </tbody>
                       </table>
                     </div>
+                    <ShowMore
+                      shown={visibleLeads.length}
+                      total={filteredLeads.length}
+                      onMore={() => setLeadsShown((n) => n + PAGE)}
+                    />
                   </SectionCard>
                 </>
               )}
 
               {/* Ruch na stronie */}
-              <div className="mt-6 rounded-2xl border border-dashed border-line bg-white/60 p-6">
+              <div className="mt-6 rounded-2xl border border-dashed border-line bg-white/60 p-5 sm:p-6">
                 <p className="text-xs font-bold uppercase tracking-wider text-muted">
                   Ruch na stronie
                 </p>

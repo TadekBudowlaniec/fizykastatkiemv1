@@ -151,7 +151,7 @@ export function CoursePath({
             <li
               key={lvl.poziom}
               id={`poziom-${lvl.poziom}`}
-              className="relative flex gap-5 scroll-mt-28"
+              className="relative flex gap-5 scroll-mt-32 lg:scroll-mt-28"
             >
               {/* Oś ścieżki (desktop) */}
               <div className="hidden w-11 flex-none flex-col items-center sm:flex">

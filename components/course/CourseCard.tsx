@@ -2,12 +2,18 @@ import Link from 'next/link';
 import type { Course } from '@/lib/courses';
 import { SINGLE_COURSE_PRICE } from '@/lib/courses';
 import { BuyButton } from '@/components/shop/BuyButton';
+import { cn } from '@/lib/cn';
 
 /** Zakres działu: domyślnie zwinięty, rozwija się po kliknięciu. */
-function Topics({ items }: { items: string[] }) {
+function Topics({ items, className }: { items: string[]; className?: string }) {
   if (!items.length) return null;
   return (
-    <details className="group/details rounded-xl bg-cloud px-4 py-2.5 [&_summary::-webkit-details-marker]:hidden">
+    <details
+      className={cn(
+        'group/details rounded-xl bg-cloud px-4 py-2.5 [&_summary::-webkit-details-marker]:hidden',
+        className
+      )}
+    >
       <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate">
         Zakres działu
         <svg
@@ -43,30 +49,57 @@ export function CourseCard({
   /** false = tryb „program” (bez przycisku zakupu pojedynczego działu). */
   showBuy?: boolean;
 }) {
+  // Tryb „program" (landing) na telefonie jest kompaktowy: 2 karty w rzędzie,
+  // ikona nad tytułem, zakres działu dopiero od sm. Tryb sklepowy (/dzialy)
+  // zostaje w jednej kolumnie z pełną treścią.
+  const compact = !showBuy;
   return (
-    <article className="group flex flex-col rounded-3xl border border-line bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-200 hover:shadow-card">
-      <div className="mb-4 flex items-center gap-3">
-        <span className="flex h-14 w-14 flex-none items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#f2efff,#ffe6f3)] text-3xl shadow-inner ring-1 ring-brand-100">
+    <article
+      className={cn(
+        'group flex h-full flex-col rounded-3xl border border-line bg-white shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-200 hover:shadow-card',
+        compact ? 'p-4 sm:p-6' : 'p-5 sm:p-6'
+      )}
+    >
+      <div
+        className={cn(
+          'mb-4 flex gap-3',
+          compact ? 'flex-col items-start sm:flex-row sm:items-center' : 'items-center'
+        )}
+      >
+        <span
+          className={cn(
+            'flex flex-none items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#f2efff,#ffe6f3)] shadow-inner ring-1 ring-brand-100',
+            compact ? 'h-11 w-11 text-2xl sm:h-14 sm:w-14 sm:text-3xl' : 'h-14 w-14 text-3xl'
+          )}
+        >
           {course.icon}
         </span>
-        <div>
-          <p className="text-xs font-bold uppercase tracking-wider text-brand-500">
+        <div className="min-w-0">
+          <p className="text-[0.7rem] font-bold uppercase tracking-wider text-brand-500 sm:text-xs">
             Dział {course.id}
           </p>
-          <h3 className="text-lg font-extrabold leading-tight text-ink">
+          <h3
+            className={cn(
+              'font-extrabold leading-tight text-ink [overflow-wrap:anywhere]',
+              compact ? 'text-[0.95rem] sm:text-lg' : 'text-lg'
+            )}
+          >
             {course.title}
           </h3>
         </div>
       </div>
 
       <div className="flex-1">
-        <Topics items={course.topics} />
+        <Topics items={course.topics} className={compact ? 'hidden sm:block' : undefined} />
       </div>
 
-      <div className="mt-5 flex flex-col gap-2.5">
+      <div className="mt-4 flex flex-col gap-2.5 sm:mt-5">
         <Link
           href={`/kurs/${course.id}`}
-          className="inline-flex items-center justify-center gap-1.5 rounded-full border-2 border-brand-200 px-5 py-2.5 text-sm font-semibold text-brand-600 transition-all hover:border-brand-500 hover:bg-brand-50"
+          className={cn(
+            'inline-flex items-center justify-center gap-1.5 rounded-full border-2 border-brand-200 font-semibold text-brand-600 transition-all hover:border-brand-500 hover:bg-brand-50',
+            compact ? 'px-3 py-2 text-xs sm:px-5 sm:py-2.5 sm:text-sm' : 'px-5 py-2.5 text-sm'
+          )}
         >
           Zobacz lekcje
         </Link>

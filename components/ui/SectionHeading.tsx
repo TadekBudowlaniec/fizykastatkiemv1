@@ -60,7 +60,7 @@ export function SectionHeading({
       {subtitle && (
         <p
           className={cn(
-            'text-lg max-w-2xl',
+            'text-base sm:text-lg max-w-2xl',
             dark ? 'text-slate-300/80' : 'text-muted'
           )}
         >

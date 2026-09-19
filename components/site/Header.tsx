@@ -124,10 +124,12 @@ export function Header() {
       <div
         className={cn(
           'overflow-hidden border-t border-white/5 bg-navy-950/95 backdrop-blur-xl transition-[max-height] duration-300 lg:hidden',
-          open ? 'max-h-[520px]' : 'max-h-0'
+          // Wysokość ograniczona do widocznego ekranu (dvh = bez paska adresu),
+          // wewnątrz przewijanie - na małych telefonach nic nie ucieka poza ekran.
+          open ? 'max-h-[calc(100dvh-4rem)] overflow-y-auto' : 'max-h-0'
         )}
       >
-        <div className="flex flex-col gap-1 px-5 py-4">
+        <div className="flex flex-col gap-1 px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
           {PRIMARY_NAV.map((l) => (
             <Link
               key={l.href}

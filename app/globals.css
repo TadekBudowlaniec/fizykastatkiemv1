@@ -156,6 +156,26 @@ a { color: inherit; text-decoration: none; }
 } /* koniec @layer base */
 
 /* ============================================================
+   MOBILE
+   ============================================================ */
+
+/* Bez niebieskiego „błysku" przy tapnięciu na Androidzie/iOS; fokus i tak
+   sygnalizujemy przez :focus-visible. */
+a, button, [role="button"], summary, label {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* iOS Safari przybliża stronę po tapnięciu w pole z czcionką < 16px. Poza
+   warstwami Tailwind, żeby wygrać z utility text-sm na inputach. */
+@media (max-width: 767px) {
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    font-size: max(16px, 1em);
+  }
+}
+
+/* ============================================================
    REUSABLE UTILITIES
    ============================================================ */
 
@@ -256,6 +276,12 @@ a { color: inherit; text-decoration: none; }
 .prose-fs table { display: block; overflow-x: auto; max-width: 100%; width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
 .prose-fs th, .prose-fs td { border: 1px solid var(--color-line); padding: 0.65rem 0.85rem; text-align: left; }
 .prose-fs th { background: var(--color-foam); font-weight: 700; color: var(--color-ink); }
+/* Telefon: odrobinę mniejszy tekst i nagłówki - więcej treści w kadrze. */
+@media (max-width: 639px) {
+  .prose-fs { font-size: 1rem; line-height: 1.7; }
+  .prose-fs h2 { font-size: 1.5rem; margin: 1.75rem 0 0.75rem; }
+  .prose-fs h3 { font-size: 1.2rem; margin: 1.5rem 0 0.6rem; }
+}
 
 /* KaTeX overflow na mobile */
 .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.35rem 0; }

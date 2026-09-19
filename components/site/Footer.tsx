@@ -62,10 +62,12 @@ export function Footer() {
       <div className="aurora left-[-10%] top-[-20%] h-72 w-72 bg-brand-600/40" />
       <div className="aurora right-[-5%] bottom-[-30%] h-80 w-80 bg-magenta-500/30" />
 
-      <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
+        {/* Telefon: marka na całą szerokość, kolumny linków po 2 w rzędzie
+            (3 kolumny jedna pod drugą robiły bardzo długą stopkę). */}
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           {/* Brand */}
-          <div>
+          <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2.5">
               <Image
                 src="/images/magenta_statek.png"
@@ -106,7 +108,7 @@ export function Footer() {
           <FooterCol title="Korepetycje" links={cityLinks} />
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
+        <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-slate-400 sm:mt-14 md:flex-row md:items-center md:justify-between">
           <p>
             © {year} {SITE.name}. Wszystkie prawa zastrzeżone.
           </p>

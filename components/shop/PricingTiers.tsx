@@ -39,7 +39,7 @@ export function PricingTiers() {
             key={plan.key}
             id={plan.key === 'vip' ? 'vip' : undefined}
             className={cn(
-              'relative flex flex-col scroll-mt-24 rounded-3xl bg-gradient-to-b p-8 shadow-card ring-1 transition-all duration-300',
+              'relative flex flex-col scroll-mt-24 rounded-3xl bg-gradient-to-b p-6 shadow-card ring-1 transition-all duration-300 sm:p-8',
               accentGlow[plan.accent],
               accentRing[plan.accent],
               featured
@@ -64,7 +64,7 @@ export function PricingTiers() {
                 {plan.subtitle}
               </p>
               <div className="mt-5 flex items-baseline justify-center gap-1">
-                <span className="font-display text-5xl font-extrabold text-gradient">
+                <span className="font-display text-[2.75rem] font-extrabold text-gradient sm:text-5xl">
                   {plan.price}
                 </span>
                 <span className="text-xl font-bold text-ink">zł</span>

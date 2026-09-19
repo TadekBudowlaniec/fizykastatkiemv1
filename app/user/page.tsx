@@ -126,12 +126,13 @@ export default function UserPage() {
         <Container size="narrow">
           <div className="grid gap-6">
             {/* Karta konta */}
-            <div className="rounded-3xl border border-line bg-white p-7 shadow-soft">
+            <div className="rounded-3xl border border-line bg-white p-5 shadow-soft sm:p-7">
               <h2 className="text-xl font-extrabold text-ink">Twoje konto</h2>
-              <dl className="mt-4 space-y-2 text-sm">
-                <div className="flex justify-between gap-4">
+              <dl className="mt-4 space-y-3 text-sm sm:space-y-2">
+                {/* Długi e-mail na telefonie: etykieta nad wartością, bez ucinania */}
+                <div className="flex flex-col gap-0.5 sm:flex-row sm:justify-between sm:gap-4">
                   <dt className="text-muted">E-mail</dt>
-                  <dd className="font-medium text-ink">{user.email}</dd>
+                  <dd className="break-all font-medium text-ink">{user.email}</dd>
                 </div>
                 <div className="flex justify-between gap-4">
                   <dt className="text-muted">Imię</dt>
@@ -164,7 +165,7 @@ export default function UserPage() {
             </div>
 
             {/* Zmiana / ustawienie hasła */}
-            <div className="rounded-3xl border border-line bg-white p-7 shadow-soft">
+            <div className="rounded-3xl border border-line bg-white p-5 shadow-soft sm:p-7">
               <h2 className="text-xl font-extrabold text-ink">
                 {recovery ? 'Ustaw nowe hasło' : 'Zmiana hasła'}
               </h2>

@@ -525,17 +525,52 @@ export function CourseView({ courseId }: { courseId: number }) {
         </div>
       </AppHero>
 
-      <section className="bg-cloud py-10 sm:py-14">
+      {/* Mobilna nawigacja ścieżki: przyklejone pigułki pod nagłówkiem strony
+          (na desktopie tę rolę pełni boczny panel). */}
+      <div className="sticky top-16 z-30 border-b border-line bg-cloud/90 backdrop-blur-lg lg:hidden">
+        <nav
+          className="flex gap-1.5 overflow-x-auto px-5 py-2.5 [scrollbar-width:none] sm:px-8 [&::-webkit-scrollbar]:hidden"
+          aria-label="Ścieżka działu"
+        >
+          {navItems.map((it) => {
+            const isActive = activeSection === it.id;
+            return (
+              <a
+                key={it.id}
+                href={`#${it.id}`}
+                className={cn(
+                  'flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition-all duration-300',
+                  isActive
+                    ? 'bg-brand-500 text-white shadow-soft'
+                    : it.done
+                      ? 'bg-brand-50 text-brand-700'
+                      : 'bg-white text-slate ring-1 ring-line'
+                )}
+              >
+                {it.done && <IconCheck className="h-3 w-3" strokeWidth={3} />}
+                {it.label}
+                {it.meta && !it.done && (
+                  <span className={cn('text-[0.65rem]', isActive ? 'text-white/80' : 'text-muted')}>
+                    {it.meta}
+                  </span>
+                )}
+              </a>
+            );
+          })}
+        </nav>
+      </div>
+
+      <section className="bg-cloud py-8 sm:py-14">
         <Container size="wide">
           <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-12">
             {/* Główna kolumna */}
-            <div className="space-y-12 sm:space-y-14">
+            <div className="space-y-10 sm:space-y-14">
               {/* 0. Dziś w planie (tylko gdy planer ma coś na dziś / zaległe) */}
               <TodayPlan courseId={courseId} refreshKey={progressTick} />
 
               {/* 1. Wideo */}
               {!lessonsLoading && (hasVideo || textLessons.length > 0) && (
-                <section id="wideo" className="scroll-mt-28">
+                <section id="wideo" className="scroll-mt-32 lg:scroll-mt-28">
                   <SectionHead
                     icon={<IconPlay className="h-4 w-4" />}
                     eyebrow="Krok 1"
@@ -581,7 +616,7 @@ export function CourseView({ courseId }: { courseId: number }) {
               </section>
 
               {/* 3. Quiz */}
-              <section id="quiz" className="scroll-mt-28">
+              <section id="quiz" className="scroll-mt-32 lg:scroll-mt-28">
                 <SectionHead
                   icon={<IconTarget className="h-4 w-4" />}
                   eyebrow="Na koniec"

@@ -155,7 +155,7 @@ export function TaskRunner({ courseId }: { courseId: number }) {
     const scored = counts.good + counts.bad;
     const score = scored ? Math.round((counts.good / scored) * 100) : 0;
     return (
-      <div className="rounded-3xl border border-line bg-white p-7 text-center shadow-soft">
+      <div className="rounded-3xl border border-line bg-white p-6 text-center shadow-soft sm:p-7">
         <p className="text-5xl">{score >= 60 ? '🎉' : '💪'}</p>
         <h3 className="mt-3 text-2xl font-extrabold text-ink">
           Wynik: {score}%
@@ -187,7 +187,7 @@ export function TaskRunner({ courseId }: { courseId: number }) {
   const correct = isClosed ? correctIndex(current.solution, options.length) : -1;
 
   return (
-    <div className="rounded-3xl border border-line bg-white p-6 shadow-soft sm:p-7">
+    <div className="rounded-3xl border border-line bg-white p-4 shadow-soft sm:p-7">
       {/* Pasek postępu */}
       <div className="mb-5">
         <div className="flex items-center justify-between text-sm text-muted">
@@ -273,7 +273,7 @@ export function TaskRunner({ courseId }: { courseId: number }) {
               Pokaż odpowiedź
             </Button>
           ) : (
-            <div className="rounded-2xl bg-cloud p-5">
+            <div className="rounded-2xl bg-cloud p-4 sm:p-5">
               <p className="mb-2 text-sm font-bold uppercase tracking-wide text-brand-600">
                 Rozwiązanie
               </p>

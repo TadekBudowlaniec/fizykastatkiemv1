@@ -6,7 +6,7 @@ export function Guarantee() {
     <section className="bg-cloud py-14">
       <Container>
         <Reveal>
-          <div className="border-gradient relative overflow-hidden rounded-3xl bg-white p-8 shadow-card sm:p-10">
+          <div className="border-gradient relative overflow-hidden rounded-3xl bg-white p-6 shadow-card sm:p-10">
             <div className="flex flex-col items-center gap-6 text-center md:flex-row md:text-left">
               {/* Pieczęć gwarancji */}
               <div className="relative flex h-28 w-28 flex-none items-center justify-center rounded-full bg-[linear-gradient(135deg,#6b4df6,#f43f8f)] text-white shadow-glow ring-4 ring-white">

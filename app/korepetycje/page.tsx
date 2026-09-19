@@ -110,7 +110,7 @@ export default function KorepetycjePage() {
     <>
       <JsonLd data={korepetycjeJsonLd} />
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[linear-gradient(160deg,#070b18,#0b1224_55%,#16223f)] py-16 text-white sm:py-24">
+      <section className="relative overflow-hidden bg-[linear-gradient(160deg,#070b18,#0b1224_55%,#16223f)] py-12 text-white sm:py-24">
         <div className="aurora left-[-6%] top-[-10%] h-80 w-80 bg-brand-600/45" />
         <div className="aurora right-[-6%] bottom-[-20%] h-80 w-80 bg-magenta-500/30" />
         <div className="bg-grid absolute inset-0" />
@@ -120,11 +120,11 @@ export default function KorepetycjePage() {
               <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-brand-200 ring-1 ring-white/15">
                 🚀 Skutecznie, szybko i z pasją
               </span>
-              <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.06] sm:text-5xl">
+              <h1 className="mt-5 font-display text-[2.25rem] font-extrabold leading-[1.06] sm:text-5xl">
                 Korepetycje z fizyki -{' '}
                 <span className="text-gradient">zrozum, nie wkuwaj</span>
               </h1>
-              <p className="mt-5 max-w-xl text-lg text-slate-300/85">
+              <p className="mt-4 max-w-xl text-base text-slate-300/85 sm:mt-5 sm:text-lg">
                 Cześć, jestem Czarek. Fizykę rozszerzoną na maturze zdałem na{' '}
                 <strong className="text-white">82%</strong>. Uczę fizyki i
                 matematyki -{' '}
@@ -135,22 +135,24 @@ export default function KorepetycjePage() {
               <p className="mt-8 text-sm font-semibold uppercase tracking-wide text-slate-400">
                 Moje wyniki z matury:
               </p>
-              <div className="mt-3 flex flex-wrap gap-3">
+              <div className="mt-3 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:gap-3">
                 {stats.map((s) => (
                   <div
                     key={s.lbl}
-                    className="glass rounded-2xl px-5 py-3 text-center"
+                    className="glass rounded-2xl px-2 py-3 text-center sm:px-5"
                   >
-                    <span className="block font-display text-2xl font-extrabold text-white">
+                    <span className="block font-display text-xl font-extrabold text-white sm:text-2xl">
                       {s.val}
                     </span>
-                    <span className="block text-xs text-slate-300">{s.lbl}</span>
+                    <span className="block text-[0.65rem] leading-tight text-slate-300 sm:text-xs">
+                      {s.lbl}
+                    </span>
                   </div>
                 ))}
               </div>
 
               <div className="mt-8 flex flex-col items-start gap-3">
-                <Button href={mailto} variant="gradient" size="lg">
+                <Button href={mailto} variant="gradient" size="lg" className="w-full sm:w-auto">
                   Umów pierwszą lekcję
                 </Button>
                 <p className="text-sm font-semibold text-white">
@@ -171,7 +173,8 @@ export default function KorepetycjePage() {
               </div>
             </div>
 
-            <div className="relative flex justify-center">
+            {/* Statek tylko od lg - na telefonie zajmował pół ekranu pod CTA. */}
+            <div className="relative hidden justify-center lg:flex">
               <div className="absolute h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(107,77,246,0.5),transparent_70%)] blur-2xl" />
               <Image
                 src="/images/bialy.svg"

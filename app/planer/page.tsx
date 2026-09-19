@@ -505,7 +505,7 @@ export default function PlanerPage() {
                 <h2 className="font-display text-xl font-extrabold text-ink">
                   Twój harmonogram
                 </h2>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   {nextDate && (
                     <a
                       href={`#dzien-${nextDate}`}
@@ -632,9 +632,11 @@ export default function PlanerPage() {
                               {courseId && !item.is_completed && (
                                 <Link
                                   href={`/kurs/${courseId}`}
-                                  className="hidden flex-none items-center gap-1 rounded-full px-3 py-1.5 text-xs font-semibold text-brand-700 transition hover:bg-brand-50 sm:inline-flex"
+                                  aria-label={`Otwórz dział: ${item.topic_name}`}
+                                  className="inline-flex h-9 w-9 flex-none items-center justify-center rounded-full bg-cloud text-brand-700 transition hover:bg-brand-50 sm:h-auto sm:w-auto sm:gap-1 sm:bg-transparent sm:px-3 sm:py-1.5 sm:text-xs sm:font-semibold"
                                 >
-                                  Otwórz dział <IconArrow className="h-3.5 w-3.5" />
+                                  <span className="hidden sm:inline">Otwórz dział</span>
+                                  <IconArrow className="h-3.5 w-3.5" />
                                 </Link>
                               )}
                             </li>
