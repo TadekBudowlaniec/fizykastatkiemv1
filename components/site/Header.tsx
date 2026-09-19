@@ -11,7 +11,7 @@ import { cn } from '@/lib/cn';
 
 export function Header() {
   const pathname = usePathname();
-  const { user, signOut, loading } = useAuth();
+  const { user, signOut, loading, isAdmin } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -75,6 +75,11 @@ export function Header() {
         <div className="hidden items-center gap-2 lg:flex">
           {!loading && user ? (
             <>
+              {isAdmin && (
+                <Button href="/admin" variant="ghost" size="sm" className="!text-brand-200 hover:bg-white/10">
+                  Admin
+                </Button>
+              )}
               <Button href="/kurs" variant="ghost" size="sm" className="!text-white hover:bg-white/10">
                 Mój kurs
               </Button>
@@ -135,6 +140,9 @@ export function Header() {
           <div className="mt-2 flex flex-col gap-2 border-t border-white/5 pt-3">
             {!loading && user ? (
               <>
+                {isAdmin && (
+                  <Button href="/admin" variant="ghost" className="text-brand-200 hover:bg-white/5 hover:text-white">Admin</Button>
+                )}
                 <Button href="/kurs" variant="light">Mój kurs</Button>
                 <Button href="/user" variant="ghost" className="text-slate-200 hover:bg-white/5 hover:text-white">Profil</Button>
                 <button onClick={() => signOut()} className="rounded-full px-4 py-3 text-sm font-semibold text-slate-400 hover:text-white">Wyloguj się</button>
