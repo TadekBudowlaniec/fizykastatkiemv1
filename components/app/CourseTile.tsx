@@ -34,7 +34,7 @@ export function CourseTile({ course }: { course: Course }) {
           <p className="text-[0.65rem] font-bold uppercase tracking-wider text-brand-500 sm:text-[0.7rem]">
             Dział {course.id}
           </p>
-          <h3 className="line-clamp-2 text-sm font-extrabold leading-tight text-ink [overflow-wrap:anywhere] sm:truncate sm:text-base">
+          <h3 className="line-clamp-3 text-sm font-extrabold leading-tight text-ink [overflow-wrap:anywhere] sm:line-clamp-none sm:truncate sm:text-base">
             {course.title}
           </h3>
         </div>
