@@ -133,23 +133,53 @@ exports.handler = async (event) => {
         try {
             const { data: subs, error: subErr } = await supabaseAdmin
                 .from('email_subscribers')
-                .select('consent_marketing, source, status, created_at')
+                .select('email, consent_marketing, source, status, seq_day_sent, created_at')
+                .order('created_at', { ascending: false })
                 .limit(20000);
             if (subErr) throw subErr;
+
+            const TOTAL_DAYS = 5;
             let withConsent = 0;
             let leads30 = 0;
             let unsub = 0;
+            let totalSent = 0; // suma wysłanych maili sekwencji (wśród ze zgodą)
+            let completed = 0; // ilu przeszło całe 5/5
+            const byStage = [0, 0, 0, 0, 0, 0]; // rozkład seq_day_sent 0..5 (ze zgodą, aktywni)
+
             for (const s of subs) {
                 if (s.consent_marketing) withConsent += 1;
                 if (s.status === 'unsubscribed') unsub += 1;
                 const t = s.created_at ? new Date(s.created_at).getTime() : 0;
                 if (t >= since30) leads30 += 1;
+
+                if (s.consent_marketing && s.status !== 'unsubscribed') {
+                    const d = Math.max(0, Math.min(TOTAL_DAYS, s.seq_day_sent || 0));
+                    totalSent += d;
+                    byStage[d] += 1;
+                    if (d >= TOTAL_DAYS) completed += 1;
+                }
             }
+
+            // Lista pojedynczych leadów (najnowsze) do tabeli w panelu.
+            const list = subs.slice(0, 500).map((s) => ({
+                email: s.email,
+                source: s.source,
+                consent_marketing: !!s.consent_marketing,
+                status: s.status,
+                seq_day_sent: Math.max(0, Math.min(TOTAL_DAYS, s.seq_day_sent || 0)),
+                created_at: s.created_at,
+            }));
+
             leads = {
                 total: subs.length,
                 withConsent,
                 last30d: leads30,
                 unsubscribed: unsub,
+                totalDays: TOTAL_DAYS,
+                totalSent,
+                completed,
+                byStage,
+                list,
             };
         } catch (e) {
             console.error('admin-stats leads error:', e);
