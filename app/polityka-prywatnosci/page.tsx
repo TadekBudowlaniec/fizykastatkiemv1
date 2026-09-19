@@ -131,10 +131,12 @@ export default function PolitykaPage() {
                 koncie.
               </li>
               <li>
-                Brevo (dawniej Sendinblue, Francja) - dostawca systemu
-                mailingowego. Twój adres e-mail jest przekazywany do Brevo
-                wyłącznie w celu wysyłki wiadomości transakcyjnych (np. link
-                aktywacyjny, reset hasła) niezbędnych do funkcjonowania serwisu.
+                Resend (Resend, Inc., USA) - dostawca systemu do wysyłki
+                wiadomości e-mail. Twój adres e-mail jest przekazywany do Resend
+                w celu wysyłki wiadomości transakcyjnych (np. link aktywacyjny,
+                reset hasła) oraz - jeśli wyrazisz na to odrębną zgodę -
+                wiadomości z sekwencji edukacyjno-marketingowej, z której możesz
+                w każdej chwili zrezygnować (link „wypisz się" w każdej wiadomości).
               </li>
               <li>
                 Stripe (Stripe, Inc., USA/Irlandia) - operator płatności. W

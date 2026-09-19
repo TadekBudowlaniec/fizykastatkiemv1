@@ -11,6 +11,11 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+# Cron dzienny: dosyłanie Dni 2-5 sekwencji powitalnej (Resend).
+# 08:00 UTC ~ 09:00-10:00 czasu PL. Dzień 1 wysyła subscribe.js od razu.
+[functions."send-sequence"]
+  schedule = "0 8 * * *"
+
 [[headers]]
   for = "/*"
   [headers.values]

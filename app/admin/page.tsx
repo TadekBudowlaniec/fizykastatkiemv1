@@ -381,7 +381,7 @@ export default function AdminPage() {
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   <StatTile label="Leady łącznie" value={String(leads.total)} />
                   <StatTile
-                    label="Ze zgodą (do Brevo)"
+                    label="Ze zgodą (mailing)"
                     value={String(leads.withConsent)}
                     hint="Trafiają do sekwencji"
                   />
