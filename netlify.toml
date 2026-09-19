@@ -6,7 +6,9 @@
 
 [build.environment]
   NODE_VERSION = "22"
-  SECRETS_SCAN_OMIT_KEYS = "FRONTEND_URL,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
+  # EMAIL_FROM to publiczny adres nadawcy (nie sekret) — skaner Netlify i tak
+  # traktuje każdą zmienną env jak sekret, więc jawnie go wykluczamy.
+  SECRETS_SCAN_OMIT_KEYS = "FRONTEND_URL,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,EMAIL_FROM"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
