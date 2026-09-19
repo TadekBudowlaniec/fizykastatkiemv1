@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
 import { TUTORING_PRICE, SINGLE_COURSE_PRICE } from '@/lib/courses';
-import { getCities, getCity, getTopics, plain, type Faq } from '@/lib/seo';
+import { getCities, getCity, getTopics, plain, seoTitle, type Faq } from '@/lib/seo';
 import {
   SeoHero,
   RelatedCard,
@@ -26,8 +26,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const c = getCity(city);
   if (!c) return {};
   return {
-    title: `Korepetycje z fizyki online - ${c.name} | matura i liceum`,
-    description: `Korepetycje z fizyki online dla uczniów z ${c.locative}. Przygotowanie do matury i poprawa ocen. Indywidualne lekcje 1:1, elastyczne terminy.`,
+    // Miasto blisko początku (local SEO), bez drugiego „|” w tytule.
+    title: seoTitle(`Korepetycje z fizyki ${c.name} - online, matura`),
+    description: `Korepetycje z fizyki online dla uczniów w ${c.locative}. Przygotowanie do matury i poprawa ocen. Indywidualne lekcje 1:1, elastyczne terminy.`,
     keywords: `korepetycje z fizyki ${c.name.toLowerCase()}, fizyka ${c.name.toLowerCase()}, korepetycje fizyka online, matura fizyka ${c.name.toLowerCase()}`,
     alternates: { canonical: `${SITE.url}/korepetycje-z-fizyki/${c.slug}/` },
   };
@@ -47,7 +48,7 @@ export default async function CityPage({ params }: Params) {
     { name: c.name },
   ];
 
-  const desc = `Korepetycje z fizyki online dla uczniów z ${c.locative}. Przygotowanie do matury i poprawa ocen. Indywidualne lekcje 1:1, elastyczne terminy.`;
+  const desc = `Korepetycje z fizyki online dla uczniów w ${c.locative}. Przygotowanie do matury i poprawa ocen. Indywidualne lekcje 1:1, elastyczne terminy.`;
 
   const service = {
     '@context': 'https://schema.org',
@@ -81,9 +82,7 @@ export default async function CityPage({ params }: Params) {
   const faqs: Faq[] = [
     {
       q: `Czy korepetycje z fizyki w ${c.locative} odbywają się online?`,
-      a: `Tak. Prowadzimy lekcje online 1:1, więc możesz uczyć się z dowolnej dzielnicy ${
-        c.name
-      } (np. ${(c.dzielnice ?? [])
+      a: `Tak. Prowadzimy lekcje online 1:1, więc możesz uczyć się z dowolnej dzielnicy miasta (np. ${(c.dzielnice ?? [])
         .slice(0, 3)
         .join(', ')}) bez dojazdów - wystarczy komputer i internet.`,
     },
@@ -122,13 +121,13 @@ export default async function CityPage({ params }: Params) {
         <div className="mx-auto max-w-3xl px-5 sm:px-8 space-y-10 prose-fs">
           <section>
             <h2 className="font-display text-2xl font-extrabold text-ink">
-              Korepetycje z fizyki dla uczniów z {c.name}
+              Korepetycje z fizyki w {c.locative}
             </h2>
             <p>{c.akcent}</p>
             <p>
               Naszą metodą uczymy fizyki <strong>prosto i obrazowo</strong> -
               tłumaczymy mechanizm zjawiska, a nie każemy wkuwać wzorów na
-              pamięć. Lekcje online sprawdzają się u uczniów z całego {c.name}
+              pamięć. Lekcje online sprawdzają się u uczniów z całego miasta
               {dz ? ` - od dzielnic takich jak ${dz}` : ''}.
             </p>
           </section>

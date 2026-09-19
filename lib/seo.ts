@@ -120,10 +120,34 @@ export function plain(s: string | undefined | null): string {
     .trim();
 }
 
-// --- Daty do JSON-LD Article (strony evergreen) ---
+// --- Daty do JSON-LD Article i sitemapy ---
 export const SEO_PUBLISHED = '2025-09-01';
-// Stała data modyfikacji (nie `now`) - inaczej każdy deploy zawyżałby
-// dateModified wszystkich artykułów na dzień builda, co osłabia zaufanie.
+/** Ostatnia realna aktualizacja treści bazy wiedzy (batch*.json). Podbijać
+ *  ręcznie przy edycji treści - NIE `new Date()`, bo każdy deploy zawyżałby
+ *  dateModified/lastmod wszystkich stron i Google przestałby ufać datom. */
+export const SEO_CONTENT_UPDATED = '2026-09-16';
+/** Ostatnia zmiana stron marketingowych (oferta, cennik, layout). */
+export const SITE_UPDATED = '2026-09-19';
 export function seoModified(): string {
-  return process.env.SEO_DATE || SEO_PUBLISHED;
+  return process.env.SEO_DATE || SEO_CONTENT_UPDATED;
+}
+
+/** Meta description: ucina na granicy słowa (nie w połowie wyrazu) i dokleja „…”. */
+export function clipDesc(text: string, max = 158): string {
+  const t = plain(text);
+  if (t.length <= max) return t;
+  const cut = t.slice(0, max - 1);
+  const at = cut.lastIndexOf(' ');
+  return (at > max * 0.6 ? cut.slice(0, at) : cut).replace(/[,;:.\s]+$/, '') + '…';
+}
+
+// --- Tytuły SERP ---
+// Layout dokleja „ | Fizyka Statkiem” (17 znaków). Google ucina tytuły ok.
+// 60 znaków, więc przy dłuższych bazach oddajemy tytuł bez sufiksu marki
+// (absolute) zamiast pozwolić, by ucięta została fraza kluczowa.
+const BRAND_SUFFIX_LEN = ' | Fizyka Statkiem'.length;
+const TITLE_MAX = 62;
+export function seoTitle(base: string): string | { absolute: string } {
+  const b = base.trim();
+  return b.length + BRAND_SUFFIX_LEN > TITLE_MAX ? { absolute: b } : b;
 }

@@ -14,7 +14,7 @@ const desc =
   'Korepetycje z fizyki online w całej Polsce. Indywidualne lekcje 1:1, przygotowanie do matury rozszerzonej. Wybierz swoje miasto.';
 
 export const metadata: Metadata = {
-  title: 'Korepetycje z fizyki online - cała Polska | matura i liceum',
+  title: 'Korepetycje z fizyki online - cała Polska',
   description: desc,
   keywords: 'korepetycje z fizyki online, korepetycje fizyka, matura fizyka',
   alternates: { canonical: `${SITE.url}/korepetycje-z-fizyki/` },
@@ -48,7 +48,7 @@ export default function KorepetycjeHub() {
                 key={c.slug}
                 kicker="Miasto"
                 title={`Fizyka ${c.name}`}
-                desc={`Korepetycje z fizyki online dla uczniów z ${c.locative}.`}
+                desc={`Korepetycje z fizyki online dla uczniów w ${c.locative}.`}
                 href={`/korepetycje-z-fizyki/${c.slug}`}
               />
             ))}

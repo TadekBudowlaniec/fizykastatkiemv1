@@ -6,7 +6,7 @@ import { SITE } from '@/lib/site';
 import { JsonLd, breadcrumbLd } from '@/components/seo/SeoBits';
 
 export const metadata: Metadata = {
-  title: 'O mnie - Cezary Prusak, korepetytor i twórca kursu fizyki',
+  title: 'Cezary Prusak - korepetytor fizyki i twórca kursu',
   description:
     'Kim jestem: Cezary Prusak. Fizykę rozszerzoną zdałem na 82%. Uczę fizyki i matematyki online oraz w Lublinie i tworzę kurs maturalny Fizyka Statkiem.',
   alternates: { canonical: '/o-mnie/' },

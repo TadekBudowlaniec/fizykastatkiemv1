@@ -8,8 +8,8 @@ import {
   postsBySlug,
   topicsBySlug,
   plain,
+  seoTitle,
   SEO_PUBLISHED,
-  seoModified,
 } from '@/lib/seo';
 import { MathContent } from '@/components/seo/MathContent';
 import {
@@ -44,12 +44,37 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const p = getPost(slug);
   if (!p) return {};
   const desc = p.metaDesc || p.excerpt;
+  const published = p.date || SEO_PUBLISHED;
   return {
-    title: p.title,
+    title: seoTitle(p.title),
     description: desc,
     keywords: p.keywords,
     alternates: { canonical: `${SITE.url}/blog/${p.slug}/` },
-    openGraph: { type: 'article', title: p.title, description: desc },
+    // Jawne `openGraph` na stronie zastępuje cały obiekt z layoutu, więc
+    // obraz trzeba podać ponownie - inaczej wpisy bloga nie mają og:image.
+    openGraph: {
+      type: 'article',
+      title: p.title,
+      description: desc,
+      url: `${SITE.url}/blog/${p.slug}/`,
+      publishedTime: published,
+      modifiedTime: published,
+      authors: [`${SITE.url}/o-mnie/`],
+      images: [
+        {
+          url: `${SITE.url}/opengraph-image/`,
+          width: 1200,
+          height: 630,
+          alt: 'Fizyka Statkiem - kurs maturalny z fizyki online',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: p.title,
+      description: desc,
+      images: [`${SITE.url}/twitter-image/`],
+    },
   };
 }
 
@@ -81,8 +106,10 @@ export default async function ArticlePage({ params }: Params) {
     },
     mainEntityOfPage: SITE.url + canonical,
     image: `${SITE.url}/images/logo_magenta.png`,
+    // dateModified nie może być wcześniejsze niż datePublished (wpisy mają
+    // daty z 2026, a globalna data modyfikacji dotyczy bazy wiedzy).
     datePublished: p.date || SEO_PUBLISHED,
-    dateModified: seoModified(),
+    dateModified: p.date || SEO_PUBLISHED,
   };
 
   return (

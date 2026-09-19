@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
-import { getTopics, getTopic } from '@/lib/seo';
+import { getTopics, getTopic, seoTitle } from '@/lib/seo';
 import {
   SeoHero,
   RelatedCard,
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const t = getTopic(slug);
   if (!t) return {};
   return {
-    title: `Zadania z ${t.dopelniacz} z rozwiązaniami`,
+    title: seoTitle(`Zadania z ${t.dopelniacz} z rozwiązaniami`),
     description: `Zadania z ${t.dopelniacz} z pełnymi rozwiązaniami krok po kroku. ${t.name} - przykłady na poziomie liceum i matury.`,
     keywords: `zadania z ${t.dopelniacz}, ${t.name.toLowerCase()} zadania, zadania z fizyki, rozwiązania`,
     alternates: { canonical: `${SITE.url}/zadania-z-fizyki/${t.slug}/` },

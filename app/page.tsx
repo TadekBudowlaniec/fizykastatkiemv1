@@ -20,9 +20,11 @@ const fullPlan = PLANS.find((p) => p.key === 'full_access')!;
 const vipPlan = PLANS.find((p) => p.key === 'vip')!;
 
 export const metadata: Metadata = {
-  title: 'Kurs maturalny z fizyki online - matura rozszerzona',
+  // Szablon „%s | Fizyka Statkiem” z layoutu NIE działa na page.tsx tego
+  // samego segmentu (root) - markę trzeba dopisać jawnie.
+  title: { absolute: 'Kurs maturalny z fizyki online | Fizyka Statkiem' },
   description:
-    'Kurs maturalny z fizyki online (poziom rozszerzony): 16 działów wideo HD, PDF-y, zadania na wzór CKE i planer nauki. 100% zdawalności - 28/28 absolwentów zdało maturę. Gwarancja Dobrego Wyniku.',
+    'Kurs maturalny z fizyki online (rozszerzony): 16 działów wideo HD, PDF-y, zadania na wzór CKE i planer nauki. 100% zdawalności (28/28). Gwarancja Dobrego Wyniku.',
   alternates: { canonical: '/' },
 };
 
@@ -65,6 +67,33 @@ const courseJsonLd = {
     name: SITE.name,
     url: SITE.url,
   },
+  // Pola, które Google (rich result „Course”) i silniki AI czytają najchętniej:
+  // poziom, czego uczy, dla kogo, ile trwa.
+  educationalLevel: 'Szkoła średnia - matura rozszerzona z fizyki',
+  teaches: [
+    'Kinematyka',
+    'Dynamika',
+    'Praca, moc, energia',
+    'Bryła sztywna',
+    'Ruch drgający',
+    'Fale mechaniczne',
+    'Hydrostatyka',
+    'Termodynamika',
+    'Grawitacja i astronomia',
+    'Elektrostatyka',
+    'Prąd stały',
+    'Magnetyzm',
+    'Indukcja elektromagnetyczna',
+    'Fale elektromagnetyczne i optyka',
+    'Fizyka atomowa',
+    'Fizyka jądrowa i relatywistyka',
+  ],
+  audience: {
+    '@type': 'EducationalAudience',
+    educationalRole: 'student',
+    audienceType: 'Maturzyści zdający fizykę na poziomie rozszerzonym',
+  },
+  isAccessibleForFree: false,
   hasCourseInstance: {
     '@type': 'CourseInstance',
     courseMode: 'online',

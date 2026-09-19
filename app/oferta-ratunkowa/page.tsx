@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   description:
     'Nadrób zaległości z fizyki przed maturą. Wybierz Pakiet Ratunkowy i uratuj swój wynik - nawet jeśli zaczynasz późno.',
   alternates: { canonical: '/oferta-ratunkowa/' },
+  // Strona promocyjna z paskiem „Sukces! link leci na maila” - nie ma sensu
+  // jako landing z Google (dubluje /cennik). Zostaje dostępna z linków.
+  robots: { index: false, follow: true },
 };
 
 const ofertaJsonLd = [

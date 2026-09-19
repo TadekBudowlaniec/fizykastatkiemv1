@@ -2,7 +2,15 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
-import { getTopics, getTopic, topicsBySlug, plain, SEO_PUBLISHED, seoModified } from '@/lib/seo';
+import {
+  getTopics,
+  getTopic,
+  topicsBySlug,
+  plain,
+  seoTitle,
+  SEO_PUBLISHED,
+  seoModified,
+} from '@/lib/seo';
 import { MathContent } from '@/components/seo/MathContent';
 import {
   SeoHero,
@@ -31,7 +39,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     t.metaTeoria ||
     `${t.name}: teoria, wzory i definicje. Wytłumaczenie krok po kroku dla licealistów i maturzystów.`;
   return {
-    title: `${t.name} - teoria, wzory i definicje | Fizyka`,
+    title: seoTitle(`${t.name} - teoria, wzory i definicje`),
     description: desc,
     keywords: `${t.name.toLowerCase()}, ${t.name.toLowerCase()} wzory, ${t.name.toLowerCase()} teoria, fizyka, matura`,
     alternates: { canonical: `${SITE.url}/fizyka/${t.slug}/` },

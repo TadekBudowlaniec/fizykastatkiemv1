@@ -28,6 +28,21 @@
 - Cena: 100 zł / 60 minut.
 - Kontakt: fizykastatkiem@gmail.com, tel. +48 665 115 132.
 
+## Fakty do cytowania (stan na wrzesień 2026)
+- Matura z fizyki (poziom rozszerzony) w Polsce odbywa się w maju; kurs przygotowuje do matury 2027 (egzamin 19 maja 2027).
+- Zakres kursu = pełna podstawa programowa CKE, poziom rozszerzony (16 działów, od kinematyki po fizykę jądrową i relatywistykę).
+- Każdy dział ma jedną ścieżkę: lekcja wideo → Poziom 1 (teoria i rozgrzewka, plik po pliku) → Poziom 2 (zadania dogrzewające) → Poziom 3 (autorskie zadania maturalne) → Poziom 4 (prawdziwe arkusze CKE) → quiz.
+- Planer nauki jest darmowy (bez zakupu kursu): rozpisuje naukę dzień po dniu do matury, pomija działy już opanowane, wypełnia luki powtórkami; ostatnie 3 tygodnie to arkusze na czas.
+- Gwarancja Dobrego Wyniku: jeśli kursant przerobi co najmniej 90% materiałów (zakup ≥30 dni przed egzaminem) i mimo to uzyska poniżej 30% na maturze, może ubiegać się o zwrot ceny kursu w 7 dni od otrzymania wyniku (regulamin §9).
+- Dostęp do kursu trwa do końca sesji maturalnej; płatność jednorazowa przez Stripe (BLIK, karta, Klarna); faktura na życzenie.
+- Baza wiedzy (darmowa, bez logowania): 20 działów × (teoria i wzory / matura: wymagania i strategia / zadania z rozwiązaniami), 80 zestawów zadań krok po kroku, 15 artykułów na blogu.
+
+## Najczęstsze pytania
+- Czym różni się Kurs Pełny od VIP 1:1? Kurs Pełny to samodzielna nauka według gotowego systemu (828 zł). VIP 1:1 (3497 zł) to ten sam kurs plus cotygodniowa godzina 1:1 z Czarkiem aż do matury; tylko 6 miejsc.
+- Czy można kupić jeden dział? Tak, 177 zł za dział na https://fizykastatkiem.pl/dzialy/ (16 działów osobno kosztowałoby 2 832 zł, cały kurs 828 zł).
+- Ile kosztują korepetycje? 100 zł za 60 minut, online (Discord + tablica) lub stacjonarnie w Lublinie; ta sama cena w obu formach.
+- Czy kurs jest na żywo? Nie - to nagrania wideo HD + materiały, dostępne od razu po zakupie, w dowolnym tempie. Zajęcia na żywo są tylko w wariancie VIP 1:1 i w korepetycjach.
+
 ## Najważniejsze strony
 - [Strona główna — kurs maturalny z fizyki](https://fizykastatkiem.pl/)
 - [Cennik — Kurs Pełny i VIP 1:1](https://fizykastatkiem.pl/cennik/)
@@ -36,3 +51,16 @@
 - [Baza wiedzy — teoria i zadania z rozwiązaniami](https://fizykastatkiem.pl/baza-wiedzy/)
 - [Blog maturalny](https://fizykastatkiem.pl/blog/)
 - [O mnie — Cezary Prusak](https://fizykastatkiem.pl/o-mnie/)
+- [Korepetycje z fizyki online — miasta](https://fizykastatkiem.pl/korepetycje-z-fizyki/)
+- [Darmowy planer nauki do matury](https://fizykastatkiem.pl/planer/)
+- [Regulamin (w tym §9 Gwarancja Dobrego Wyniku)](https://fizykastatkiem.pl/regulamin/)
+
+## Przykładowe strony bazy wiedzy
+- [Kinematyka — teoria i wzory](https://fizykastatkiem.pl/fizyka/kinematyka/)
+- [Matura z fizyki: Dynamika](https://fizykastatkiem.pl/matura-z-fizyki/dynamika/)
+- [Zadania z termodynamiki z rozwiązaniami](https://fizykastatkiem.pl/zadania-z-fizyki/termodynamika/)
+- [Blog: Jak nauczyć się fizyki do matury](https://fizykastatkiem.pl/blog/jak-nauczyc-sie-fizyki-do-matury/)
+- [Blog: Ile kosztują korepetycje z fizyki](https://fizykastatkiem.pl/blog/ile-kosztuja-korepetycje-z-fizyki/)
+
+## Mapa strony
+- https://fizykastatkiem.pl/sitemap.xml

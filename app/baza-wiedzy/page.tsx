@@ -14,7 +14,7 @@ const desc =
   'Darmowa baza wiedzy z fizyki: teoria, wzory i zadania z rozwiązaniami ze wszystkich działów - od kinematyki po fizykę jądrową. Idealne na maturę.';
 
 export const metadata: Metadata = {
-  title: 'Baza wiedzy z fizyki - teoria, wzory i zadania z rozwiązaniami',
+  title: 'Baza wiedzy z fizyki - teoria, wzory, zadania',
   description: desc,
   alternates: { canonical: `${SITE.url}/baza-wiedzy/` },
 };

@@ -71,9 +71,9 @@ const korepetycjeJsonLd = [
 ];
 
 export const metadata: Metadata = {
-  title: 'Korepetycje z fizyki - matura rozszerzona (online i Lublin)',
+  title: 'Korepetycje z fizyki online i w Lublinie - matura',
   description:
-    'Korepetycje z fizyki do matury rozszerzonej - online (Discord + tablica) i stacjonarnie w Lublinie. Prowadzi Czarek (82% z fizyki rozszerzonej). Także matematyka i egzamin 8-klasisty.',
+    'Korepetycje z fizyki do matury rozszerzonej: online (Discord + tablica) i stacjonarnie w Lublinie, 100 zł/60 min. Prowadzi Czarek (82% z fizyki rozszerzonej).',
   alternates: { canonical: '/korepetycje/' },
 };
 

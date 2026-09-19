@@ -2,7 +2,15 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
-import { getTopics, getTopic, topicsBySlug, plain, SEO_PUBLISHED, seoModified } from '@/lib/seo';
+import {
+  getTopics,
+  getTopic,
+  topicsBySlug,
+  plain,
+  seoTitle,
+  SEO_PUBLISHED,
+  seoModified,
+} from '@/lib/seo';
 import { MathContent } from '@/components/seo/MathContent';
 import {
   SeoHero,
@@ -30,7 +38,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     t.metaMatura ||
     `${t.name} na maturze z fizyki: wymagania CKE, typowe zadania i strategia. Poziom rozszerzony.`;
   return {
-    title: `Matura z fizyki: ${t.name} - wymagania i zadania`,
+    // Naturalna fraza („kinematyka na maturze”) i mieści się w limicie SERP.
+    title: seoTitle(`${t.name} na maturze z fizyki - wymagania i zadania`),
     description: desc,
     keywords: `matura ${t.name.toLowerCase()}, ${t.name.toLowerCase()} matura, matura z fizyki, fizyka rozszerzona`,
     alternates: { canonical: `${SITE.url}/matura-z-fizyki/${t.slug}/` },
@@ -78,10 +87,10 @@ export default async function MaturaPage({ params }: Params) {
         crumbs={crumbs}
       >
         <Link
-          href="/oferta-ratunkowa"
+          href="/cennik"
           className="rounded-full bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/20 transition hover:bg-white/20"
         >
-          ⚓ Kurs maturalny
+          ⚓ Kurs maturalny z fizyki
         </Link>
       </SeoHero>
 
