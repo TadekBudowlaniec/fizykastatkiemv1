@@ -31,6 +31,10 @@ type Stats = {
     byCourse: { course_id: number; count: number }[];
     recent: Recent[];
   };
+  leads:
+    | { total: number; withConsent: number; last30d: number; unsubscribed: number }
+    | { error: string }
+    | null;
   revenue:
     | { currency: string; totalNet: number; last30dNet: number; last30dCount: number }
     | { error: string }
@@ -157,6 +161,8 @@ export default function AdminPage() {
   const gate = loading || accessLoading;
   const revenue = stats?.revenue;
   const hasRevenue = revenue && !('error' in revenue);
+  const leads = stats?.leads;
+  const hasLeads = leads && !('error' in leads);
 
   return (
     <>
@@ -367,18 +373,37 @@ export default function AdminPage() {
                 )}
               </div>
 
-              {/* Następne fazy */}
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-3xl border border-dashed border-line bg-white/60 p-6">
-                  <p className="text-xs font-bold uppercase tracking-wider text-muted">
-                    Wkrótce
-                  </p>
-                  <h3 className="mt-1 text-lg font-bold text-ink">Leady i mailing</h3>
-                  <p className="mt-1 text-sm text-muted">
-                    Lista subskrybentów, dzień sekwencji, konwersja lead → klient
-                    (Brevo).
-                  </p>
+              {/* Leady i mailing */}
+              <h2 className="mt-10 mb-4 text-xl font-extrabold text-ink">
+                Leady i mailing
+              </h2>
+              {hasLeads ? (
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  <StatTile label="Leady łącznie" value={String(leads.total)} />
+                  <StatTile
+                    label="Ze zgodą (do Brevo)"
+                    value={String(leads.withConsent)}
+                    hint="Trafiają do sekwencji"
+                  />
+                  <StatTile
+                    label="Nowe leady (30 dni)"
+                    value={String(leads.last30d)}
+                  />
+                  <StatTile
+                    label="Wypisani"
+                    value={String(leads.unsubscribed)}
+                  />
                 </div>
+              ) : (
+                <div className="rounded-3xl border border-line bg-white p-6 text-muted shadow-card">
+                  {leads && 'error' in leads
+                    ? 'Brak dostępu do tabeli email_subscribers.'
+                    : 'Brak danych o leadach.'}
+                </div>
+              )}
+
+              {/* Ruch na stronie */}
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 <div className="rounded-3xl border border-dashed border-line bg-white/60 p-6">
                   <p className="text-xs font-bold uppercase tracking-wider text-muted">
                     Ruch na stronie

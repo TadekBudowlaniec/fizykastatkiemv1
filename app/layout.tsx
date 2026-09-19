@@ -5,6 +5,7 @@ import { SITE } from '@/lib/site';
 import { AuthProvider } from '@/components/auth/AuthProvider';
 import { Header } from '@/components/site/Header';
 import { Footer } from '@/components/site/Footer';
+import { ExitIntentPopup } from '@/components/landing/ExitIntentPopup';
 import 'katex/dist/katex.min.css';
 import './globals.css';
 
@@ -148,6 +149,7 @@ export default function RootLayout({
           <Header />
           <main>{children}</main>
           <Footer />
+          <ExitIntentPopup />
         </AuthProvider>
       </body>
     </html>

@@ -127,7 +127,36 @@ exports.handler = async (event) => {
 
         const recent = rows.slice(0, 15);
 
-        // 4) Przychód ze Stripe (nie może wywalić całego dashboardu)
+        // 4) Leady (email_subscribers) — nie może wywalić dashboardu, gdyby
+        // tabela jeszcze nie istniała na danym środowisku.
+        let leads = null;
+        try {
+            const { data: subs, error: subErr } = await supabaseAdmin
+                .from('email_subscribers')
+                .select('consent_marketing, source, status, created_at')
+                .limit(20000);
+            if (subErr) throw subErr;
+            let withConsent = 0;
+            let leads30 = 0;
+            let unsub = 0;
+            for (const s of subs) {
+                if (s.consent_marketing) withConsent += 1;
+                if (s.status === 'unsubscribed') unsub += 1;
+                const t = s.created_at ? new Date(s.created_at).getTime() : 0;
+                if (t >= since30) leads30 += 1;
+            }
+            leads = {
+                total: subs.length,
+                withConsent,
+                last30d: leads30,
+                unsubscribed: unsub,
+            };
+        } catch (e) {
+            console.error('admin-stats leads error:', e);
+            leads = { error: 'Brak dostępu do email_subscribers.' };
+        }
+
+        // 5) Przychód ze Stripe (nie może wywalić całego dashboardu)
         let revenue = null;
         try {
             revenue = await loadStripeRevenue();
@@ -144,6 +173,7 @@ exports.handler = async (event) => {
                 byCourse,
                 recent,
             },
+            leads,
             revenue,
             generatedAt: new Date().toISOString(),
         });
