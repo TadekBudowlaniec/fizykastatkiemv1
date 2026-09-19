@@ -8,6 +8,20 @@ import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { COURSES } from '@/lib/courses';
 
+type AdminUser = {
+  id: string;
+  email: string;
+  full_name: string | null;
+  is_admin: boolean;
+  courses: number;
+  created_at: string | null;
+};
+type UsersResponse = {
+  users: AdminUser[];
+  summary: { total: number; paying: number };
+  generatedAt: string;
+};
+
 type Recent = { user_id: string; course_id: number; enrolled_at: string | null };
 type Stats = {
   enrollments: {
@@ -80,45 +94,64 @@ function StatTile({
   );
 }
 
+async function postAdmin<T>(path: string): Promise<T> {
+  const supabase = getSupabaseBrowser();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const token = session?.access_token;
+  if (!token) throw new Error('Brak sesji.');
+  const res = await fetch(path, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error((body as { error?: string }).error || `Błąd ${res.status}`);
+  }
+  return (await res.json()) as T;
+}
+
 export default function AdminPage() {
   const { user, loading, isAdmin, accessLoading } = useAuth();
   const [stats, setStats] = useState<Stats | null>(null);
+  const [usersData, setUsersData] = useState<UsersResponse | null>(null);
+  const [q, setQ] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [fetching, setFetching] = useState(false);
 
   const load = useCallback(async () => {
     setFetching(true);
     setError(null);
-    try {
-      const supabase = getSupabaseBrowser();
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      const token = session?.access_token;
-      if (!token) throw new Error('Brak sesji.');
-
-      const res = await fetch('/.netlify/functions/admin-stats', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body.error || `Błąd ${res.status}`);
-      }
-      setStats((await res.json()) as Stats);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Nie udało się wczytać danych.');
-    } finally {
-      setFetching(false);
+    const [s, u] = await Promise.allSettled([
+      postAdmin<Stats>('/.netlify/functions/admin-stats'),
+      postAdmin<UsersResponse>('/.netlify/functions/admin-users'),
+    ]);
+    if (s.status === 'fulfilled') setStats(s.value);
+    if (u.status === 'fulfilled') setUsersData(u.value);
+    if (s.status === 'rejected' && u.status === 'rejected') {
+      setError(
+        s.reason instanceof Error ? s.reason.message : 'Nie udało się wczytać danych.'
+      );
     }
+    setFetching(false);
   }, []);
 
   useEffect(() => {
     if (user && isAdmin) load();
   }, [user, isAdmin, load]);
+
+  const filteredUsers = (usersData?.users ?? []).filter((u) => {
+    if (!q.trim()) return true;
+    const needle = q.trim().toLowerCase();
+    return (
+      u.email.toLowerCase().includes(needle) ||
+      (u.full_name ?? '').toLowerCase().includes(needle)
+    );
+  });
 
   // --- Bramka dostępu ---
   const gate = loading || accessLoading;
@@ -254,6 +287,84 @@ export default function AdminPage() {
                     <p className="text-muted">Brak danych.</p>
                   )}
                 </div>
+              </div>
+
+              {/* Kursanci */}
+              <div className="mt-10 mb-4 flex flex-wrap items-center justify-between gap-3">
+                <h2 className="text-xl font-extrabold text-ink">
+                  Kursanci
+                  {usersData && (
+                    <span className="ml-2 text-sm font-semibold text-muted">
+                      {usersData.summary.total} kont · {usersData.summary.paying} z
+                      dostępem
+                    </span>
+                  )}
+                </h2>
+                <input
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                  placeholder="Szukaj: e-mail lub imię"
+                  className="w-full max-w-xs rounded-full border border-line bg-white px-4 py-2 text-sm text-ink shadow-soft focus:border-brand-400 focus:outline-none"
+                />
+              </div>
+
+              <div className="overflow-hidden rounded-3xl border border-line bg-white shadow-card">
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[560px] text-left text-sm">
+                    <thead>
+                      <tr className="border-b border-line text-xs uppercase tracking-wider text-muted">
+                        <th className="px-5 py-3 font-bold">E-mail</th>
+                        <th className="px-5 py-3 font-bold">Imię</th>
+                        <th className="px-5 py-3 font-bold">Dostępy</th>
+                        <th className="px-5 py-3 font-bold">Rejestracja</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-line">
+                      {filteredUsers.length > 0 ? (
+                        filteredUsers.slice(0, 200).map((u) => (
+                          <tr key={u.id} className="hover:bg-cloud/60">
+                            <td className="px-5 py-3">
+                              <span className="text-ink">{u.email}</span>
+                              {u.is_admin && (
+                                <span className="ml-2 rounded-full bg-brand-50 px-2 py-0.5 text-[0.7rem] font-bold text-brand-600">
+                                  admin
+                                </span>
+                              )}
+                            </td>
+                            <td className="px-5 py-3 text-muted">
+                              {u.full_name || '—'}
+                            </td>
+                            <td className="px-5 py-3">
+                              <span
+                                className={
+                                  u.courses > 0
+                                    ? 'font-bold text-brand-600'
+                                    : 'text-muted'
+                                }
+                              >
+                                {u.courses}
+                              </span>
+                            </td>
+                            <td className="px-5 py-3 text-muted">
+                              {fmtDate(u.created_at)}
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={4} className="px-5 py-6 text-center text-muted">
+                            {usersData ? 'Brak wyników.' : 'Ładowanie…'}
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+                {filteredUsers.length > 200 && (
+                  <p className="border-t border-line px-5 py-3 text-xs text-muted">
+                    Pokazano pierwsze 200 z {filteredUsers.length}. Zawęź wyszukiwanie.
+                  </p>
+                )}
               </div>
 
               {/* Następne fazy */}

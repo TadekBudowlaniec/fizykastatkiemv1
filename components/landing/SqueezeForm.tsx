@@ -6,10 +6,25 @@ import { SITE } from '@/lib/site';
 
 export function SqueezeForm() {
   const [email, setEmail] = useState('');
+  const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<'idle' | 'loading' | 'sent' | 'error'>(
     'idle'
   );
   const [msg, setMsg] = useState('');
+
+  // Zapis leada + ew. dodanie do sekwencji Brevo. Świadomie NIE blokuje UX:
+  // magic link do planera wysyła się niezależnie od tego, czy to się powiedzie.
+  const captureLead = (mail: string, marketingConsent: boolean) => {
+    void fetch('/.netlify/functions/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: mail,
+        consent: marketingConsent,
+        source: 'planer_squeeze',
+      }),
+    }).catch(() => {});
+  };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,6 +38,7 @@ export function SqueezeForm() {
         options: { emailRedirectTo: `${SITE.url}/planer` },
       });
       if (error) throw error;
+      captureLead(email, consent);
       setStatus('sent');
       setMsg('Sprawdź skrzynkę - wysłaliśmy link do Twojego planera nauki.');
     } catch {
@@ -62,6 +78,28 @@ export function SqueezeForm() {
       {status === 'error' && (
         <p className="mt-2 text-sm text-magenta-400">{msg}</p>
       )}
+
+      <label className="mt-3 flex cursor-pointer items-start gap-2.5 text-xs text-slate-400">
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-brand-500"
+        />
+        <span>
+          Chcę otrzymywać darmowe wskazówki do matury z fizyki i informacje o
+          kursie. Zgodę mogę wycofać w każdej chwili (link w każdym mailu). Więcej
+          w{' '}
+          <a
+            href="/polityka-prywatnosci"
+            className="underline hover:text-slate-200"
+          >
+            polityce prywatności
+          </a>
+          .
+        </span>
+      </label>
+
       <p className="mt-2.5 text-xs text-slate-400">
         Bez spamu. Darmowy planer nauki do matury + dostęp do modułu „Tutaj
         zacznij”.
