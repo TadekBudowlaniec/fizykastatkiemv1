@@ -91,13 +91,41 @@ export function CoursePath({
     const key = `${poziom}:${file}`;
     setOpening(key);
     setError(null);
+
+    // Safari (macOS i iOS) blokuje window.open wywołane po `await` jako
+    // popup - okno musi powstać synchronicznie w handlerze kliknięcia.
+    // Otwieramy więc pustą kartę od razu, a po pobraniu podpisanego URL-a
+    // tylko ją przekierowujemy. Chrome/Firefox działają tak samo dobrze.
+    const win = window.open('', '_blank');
+    if (win) {
+      try {
+        win.opener = null;
+        win.document.title = 'Otwieram PDF…';
+        win.document.body.innerHTML =
+          '<p style="font-family:system-ui,sans-serif;padding:24px;color:#334155">Otwieram PDF…</p>';
+      } catch {
+        /* cross-origin / ograniczenia przeglądarki - nieistotne */
+      }
+    }
+
     try {
       const url =
         poziom === 4
           ? await getSecurePdfUrl(courseId, 3)
           : await getMaterialyUrl(courseId, poziom, file);
-      window.open(url, '_blank', 'noopener');
+      if (win && !win.closed) {
+        win.location.replace(url);
+      } else {
+        // Popup mimo wszystko zablokowany - otwórz PDF w bieżącej karcie.
+        window.location.assign(url);
+      }
     } catch (e) {
+      // Nie zostawiaj pustej karty „Otwieram PDF…”, gdy pobranie się nie udało.
+      try {
+        win?.close();
+      } catch {
+        /* ignoruj */
+      }
       setError(
         poziom === 4
           ? 'Arkusz CKE dla tego działu będzie wkrótce dostępny.'
