@@ -34,6 +34,19 @@ exports.handler = async (event) => {
         if (key !== CRON_SECRET) return json(401, { ok: false, error: 'Unauthorized' });
     }
 
+    // Tryb testowy: ?key=<CRON_SECRET>&test=<email> wysyła CAŁĄ sekwencję (Dni 1-5)
+    // na podany adres od razu, bez dotykania bazy. Podgląd „jak to wygląda u leada".
+    const testTo = isHttp && event.queryStringParameters ? event.queryStringParameters.test : '';
+    if (testTo) {
+        const results = [];
+        for (let d = 1; d <= TOTAL_DAYS; d++) {
+            const r = await sendSequenceEmail(testTo, d);
+            results.push({ day: d, ok: r.ok, id: r.id || null, error: r.error || null });
+        }
+        console.log(`send-sequence TEST -> ${testTo}:`, JSON.stringify(results));
+        return json(200, { ok: results.every((x) => x.ok), test: testTo, results });
+    }
+
     const now = Date.now();
 
     const { data: subs, error } = await supabase
