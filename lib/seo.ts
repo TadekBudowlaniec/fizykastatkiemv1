@@ -8,6 +8,7 @@ import batch5 from '@/seo/content/batch5.json';
 import blog from '@/seo/content/blog.json';
 // cities.js to CommonJS (module.exports = [...])
 import citiesRaw from '@/seo/cities.js';
+import { COURSES, type Course } from '@/lib/courses';
 
 export type Formula = { name: string; latex: string; desc: string };
 export type Definition = { term: string; def: string };
@@ -108,6 +109,20 @@ export function getCities(): City[] {
 }
 export function getCity(slug: string): City | undefined {
   return CITIES.find((c) => c.slug === slug);
+}
+
+// --- Temat bazy wiedzy -> dział kursu (do CTA „ten dział w kursie”) ---
+// 16 slugów pokrywa się z CANONICAL w lib/courses.ts; 4 tematy SEO nie mają
+// własnego działu i wskazują na dział, w którym są omawiane.
+const TOPIC_COURSE_ALIAS: Record<string, string> = {
+  'ped-i-zasada-zachowania': 'dynamika',
+  'gazy-przemiany': 'termodynamika',
+  'optyka-geometryczna': 'optyka-falowa',
+  'teoria-wzglednosci': 'fizyka-jadrowa',
+};
+export function courseForTopic(slug: string): Course | undefined {
+  const target = TOPIC_COURSE_ALIAS[slug] ?? slug;
+  return COURSES.find((c) => c.slug === target);
 }
 
 /** Czysty tekst do JSON-LD (usuwa tagi HTML i delimitery math). */

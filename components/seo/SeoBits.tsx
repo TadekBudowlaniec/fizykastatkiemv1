@@ -137,26 +137,37 @@ export function RelatedGrid({ children }: { children: React.ReactNode }) {
 }
 
 // --- Formulas / definitions / problems ---------------------------------
+/** Karta wzoru: numer, nazwa jako etykieta, DUŻY wzór na tle brand, opis. */
 export function FormulaGrid({ formulas }: { formulas: Formula[] }) {
   if (!formulas?.length) return null;
   return (
     <div className="not-prose grid gap-4 sm:grid-cols-2">
-      {formulas.map((f) => (
+      {formulas.map((f, i) => (
         <div
           key={f.name}
-          className="rounded-2xl border border-line bg-white p-5 shadow-soft"
+          className="relative overflow-hidden rounded-2xl border border-brand-100 bg-white p-4 shadow-soft sm:p-5"
         >
-          <div className="text-sm font-bold text-brand-600">{f.name}</div>
-          <div className="my-3 overflow-x-auto text-center text-lg">
-            <MathContent html={`$$${f.latex}$$`} className="prose-fs" />
+          <span
+            aria-hidden
+            className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(90deg,#6b4df6,#a855f7,#f43f8f)]"
+          />
+          <div className="flex items-start gap-3">
+            <span className="flex h-7 w-7 flex-none items-center justify-center rounded-lg bg-brand-500 text-xs font-extrabold text-white">
+              {i + 1}
+            </span>
+            <p className="pt-0.5 text-sm font-bold leading-snug text-ink">{f.name}</p>
           </div>
-          <div className="text-sm text-muted">{f.desc}</div>
+          <div className="mt-3 overflow-x-auto rounded-xl bg-[linear-gradient(135deg,#f2efff,#fff0f7)] px-3 py-4 text-center ring-1 ring-brand-100 [&_.katex-display]:my-0 [&_.katex]:text-[1.45rem] sm:[&_.katex]:text-[1.6rem]">
+            <MathContent html={`$$${f.latex}$$`} className="prose-fs !text-ink" />
+          </div>
+          <p className="mt-3 text-sm text-slate">{f.desc}</p>
         </div>
       ))}
     </div>
   );
 }
 
+/** Pojęcie: pasek akcentowy + duży termin - ma wyglądać jak hasło w słowniku, nie jak akapit. */
 export function DefinitionList({ defs }: { defs: Definition[] }) {
   if (!defs?.length) return null;
   return (
@@ -164,15 +175,124 @@ export function DefinitionList({ defs }: { defs: Definition[] }) {
       {defs.map((d) => (
         <div
           key={d.term}
-          className="rounded-2xl border border-line bg-cloud p-5"
+          className="rounded-2xl border-l-4 border-brand-500 bg-white p-4 shadow-soft ring-1 ring-line sm:p-5"
         >
-          <dt className="font-bold text-ink">{d.term}</dt>
-          <dd className="mt-1 text-sm text-slate">
-            <MathContent html={d.def} />
+          <dt className="font-display text-lg font-extrabold leading-tight text-brand-700">
+            {d.term}
+          </dt>
+          <dd className="mt-1.5 text-[0.95rem] leading-relaxed text-slate">
+            <MathContent html={d.def} className="!text-[0.95rem]" />
           </dd>
         </div>
       ))}
     </dl>
+  );
+}
+
+/**
+ * „Ściąga” tuż pod nagłówkiem strony teorii: najważniejsze wzory i pojęcia
+ * widoczne od razu, zanim czytelnik zacznie przewijać teorię. Linkuje do
+ * pełnych sekcji (#wzory, #pojecia).
+ */
+export function QuickSheet({
+  formulas,
+  defs,
+  limit = 6,
+}: {
+  formulas: Formula[];
+  defs: Definition[];
+  limit?: number;
+}) {
+  if (!formulas?.length && !defs?.length) return null;
+  const top = formulas.slice(0, limit);
+  const rest = Math.max(0, formulas.length - top.length);
+  return (
+    <section
+      aria-label="Ściąga: najważniejsze wzory i pojęcia"
+      className="relative overflow-hidden rounded-3xl bg-[linear-gradient(150deg,#0b1224,#16223f)] p-5 text-white shadow-card sm:p-7"
+    >
+      <div className="aurora right-[-10%] top-[-30%] h-56 w-56 bg-brand-500/40" />
+      <div className="aurora bottom-[-40%] left-[10%] h-56 w-56 bg-magenta-500/25" />
+
+      <div className="relative">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-brand-200 ring-1 ring-white/15">
+            ⚡ Ściąga - to musisz znać
+          </p>
+          <div className="flex gap-2 text-xs font-semibold">
+            {formulas.length > 0 && (
+              <a
+                href="#wzory"
+                className="rounded-full bg-white/10 px-3 py-1.5 text-white ring-1 ring-white/15 transition hover:bg-white/20"
+              >
+                Wszystkie wzory ↓
+              </a>
+            )}
+            {defs.length > 0 && (
+              <a
+                href="#pojecia"
+                className="rounded-full bg-white/10 px-3 py-1.5 text-white ring-1 ring-white/15 transition hover:bg-white/20"
+              >
+                Pojęcia ↓
+              </a>
+            )}
+          </div>
+        </div>
+
+        <div className="mt-5 grid gap-6 lg:grid-cols-[1.35fr_1fr] lg:gap-8">
+          {top.length > 0 && (
+            <div>
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-slate-400">
+                Najważniejsze wzory
+              </p>
+              <ul className="mt-3 grid gap-2">
+                {top.map((f) => (
+                  <li
+                    key={f.name}
+                    className="flex min-w-0 items-center justify-between gap-3 rounded-xl bg-white/[0.06] px-3.5 py-2.5 ring-1 ring-white/10"
+                  >
+                    <span className="min-w-0 text-xs font-semibold leading-snug text-slate-200">
+                      {f.name}
+                    </span>
+                    <span className="flex-none overflow-x-auto text-white [&_.katex]:text-[1.05rem]">
+                      <MathContent html={`\\(${f.latex}\\)`} className="!text-white" />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              {rest > 0 && (
+                <a
+                  href="#wzory"
+                  className="mt-3 inline-block text-xs font-semibold text-brand-200 underline underline-offset-4 hover:text-white"
+                >
+                  + jeszcze {rest} {rest === 1 ? 'wzór' : rest < 5 ? 'wzory' : 'wzorów'} niżej
+                </a>
+              )}
+            </div>
+          )}
+
+          {defs.length > 0 && (
+            <div>
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-slate-400">
+                Kluczowe pojęcia
+              </p>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {defs.map((d) => (
+                  <li key={d.term}>
+                    <a
+                      href="#pojecia"
+                      className="inline-block rounded-full bg-[linear-gradient(120deg,rgba(107,77,246,0.35),rgba(244,63,143,0.25))] px-3 py-1.5 text-sm font-semibold text-white ring-1 ring-white/15 transition hover:ring-white/40"
+                    >
+                      {d.term}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -210,25 +330,48 @@ export function ProblemCard({ p, n }: { p: Problem; n?: number }) {
 }
 
 // --- CTA band -----------------------------------------------------------
-export function CtaBand() {
+import type { Course } from '@/lib/courses';
+import { SINGLE_COURSE_PRICE } from '@/lib/courses';
+
+/**
+ * Pasek CTA pod treścią SEO. Z `course` pokazuje dodatkowo (jako główny)
+ * przycisk do konkretnego działu w panelu kursu - tam temat jest szeroko
+ * omówiony (wideo, 4 poziomy PDF, quiz) i można kupić sam ten dział.
+ */
+export function CtaBand({ course }: { course?: Course }) {
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(150deg,#070b18,#0f1b36)] py-16 text-white">
       <div className="aurora left-[15%] top-[-30%] h-64 w-64 bg-brand-600/40" />
       <div className="aurora right-[10%] bottom-[-30%] h-64 w-64 bg-magenta-500/30" />
       <div className="relative mx-auto max-w-3xl px-5 text-center sm:px-8">
         <h2 className="font-display text-2xl font-extrabold sm:text-3xl">
-          Potrzebujesz pomocy z fizyką?
+          {course
+            ? `Chcesz przerobić ten dział do końca?`
+            : 'Potrzebujesz pomocy z fizyką?'}
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-slate-300/85">
-          Dołącz do kursu online albo umów indywidualne korepetycje. Tłumaczymy
-          fizykę prosto - krok po kroku, aż zrozumiesz.
+          {course
+            ? `W kursie dział „${course.title}” ma lekcję wideo, cztery poziomy materiałów PDF (od teorii po arkusze CKE) i quiz. Możesz kupić sam ten dział za ${SINGLE_COURSE_PRICE} zł albo cały kurs.`
+            : 'Dołącz do kursu online albo umów indywidualne korepetycje. Tłumaczymy fizykę prosto - krok po kroku, aż zrozumiesz.'}
         </p>
-        <div className="mt-7 flex flex-wrap justify-center gap-3">
+        <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
+          {course && (
+            <Link
+              href={`/kurs/${course.id}`}
+              className="rounded-full bg-[linear-gradient(120deg,#6b4df6,#a855f7,#f43f8f)] px-7 py-3.5 font-semibold text-white shadow-glow transition hover:-translate-y-0.5"
+            >
+              {course.icon} Dział {course.id}: {course.title} →
+            </Link>
+          )}
           <Link
             href="/cennik"
-            className="rounded-full bg-[linear-gradient(120deg,#6b4df6,#a855f7,#f43f8f)] px-7 py-3.5 font-semibold text-white shadow-glow transition hover:-translate-y-0.5"
+            className={
+              course
+                ? 'rounded-full bg-white/10 px-7 py-3.5 font-semibold text-white ring-1 ring-white/20 transition hover:bg-white/20'
+                : 'rounded-full bg-[linear-gradient(120deg,#6b4df6,#a855f7,#f43f8f)] px-7 py-3.5 font-semibold text-white shadow-glow transition hover:-translate-y-0.5'
+            }
           >
-            📚 Przejdź do kursu
+            📚 {course ? 'Cały kurs i ceny' : 'Przejdź do kursu'}
           </Link>
           <Link
             href="/korepetycje"

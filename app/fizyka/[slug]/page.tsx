@@ -8,6 +8,7 @@ import {
   topicsBySlug,
   plain,
   seoTitle,
+  courseForTopic,
   SEO_PUBLISHED,
   seoModified,
 } from '@/lib/seo';
@@ -18,6 +19,7 @@ import {
   RelatedGrid,
   FormulaGrid,
   DefinitionList,
+  QuickSheet,
   SeoFaq,
   faqLd,
   CtaBand,
@@ -51,6 +53,7 @@ export default async function TeoriaPage({ params }: Params) {
   const t = getTopic(slug);
   if (!t) notFound();
   const bySlug = topicsBySlug();
+  const course = courseForTopic(t.slug);
 
   const canonical = `/fizyka/${t.slug}/`;
   const crumbs = [
@@ -97,8 +100,13 @@ export default async function TeoriaPage({ params }: Params) {
         </Link>
       </SeoHero>
 
-      <section className="bg-cloud py-14 sm:py-16">
+      <section className="bg-cloud py-10 sm:py-16">
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
+          {/* Ściąga na start - wzory i pojęcia widoczne przed teorią */}
+          <div className="mb-10 sm:mb-12">
+            <QuickSheet formulas={t.formulas ?? []} defs={t.definitions ?? []} />
+          </div>
+
           <div className="space-y-8">
             {(t.theory ?? []).map((s, i) => (
               <section key={i} id={`sek-${i}`}>
@@ -111,8 +119,11 @@ export default async function TeoriaPage({ params }: Params) {
           </div>
 
           {t.formulas?.length ? (
-            <div className="mt-12">
-              <h2 className="mb-5 font-display text-2xl font-extrabold text-ink">
+            <div id="wzory" className="mt-12 scroll-mt-24">
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-brand-500">
+                Do zapamiętania
+              </p>
+              <h2 className="mb-5 mt-1 font-display text-2xl font-extrabold text-ink sm:text-3xl">
                 Najważniejsze wzory
               </h2>
               <FormulaGrid formulas={t.formulas} />
@@ -120,8 +131,11 @@ export default async function TeoriaPage({ params }: Params) {
           ) : null}
 
           {t.definitions?.length ? (
-            <div className="mt-12">
-              <h2 className="mb-5 font-display text-2xl font-extrabold text-ink">
+            <div id="pojecia" className="mt-12 scroll-mt-24">
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-brand-500">
+                Słowniczek
+              </p>
+              <h2 className="mb-5 mt-1 font-display text-2xl font-extrabold text-ink sm:text-3xl">
                 Kluczowe pojęcia
               </h2>
               <DefinitionList defs={t.definitions} />
@@ -136,7 +150,7 @@ export default async function TeoriaPage({ params }: Params) {
         </div>
       </section>
 
-      <CtaBand />
+      <CtaBand course={course} />
 
       <section className="bg-white py-14">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">

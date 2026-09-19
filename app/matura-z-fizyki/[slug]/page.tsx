@@ -8,6 +8,7 @@ import {
   topicsBySlug,
   plain,
   seoTitle,
+  courseForTopic,
   SEO_PUBLISHED,
   seoModified,
 } from '@/lib/seo';
@@ -52,6 +53,7 @@ export default async function MaturaPage({ params }: Params) {
   if (!t) notFound();
   const bySlug = topicsBySlug();
   const mi = t.maturaInfo ?? {};
+  const course = courseForTopic(t.slug);
   const canonical = `/matura-z-fizyki/${t.slug}/`;
   const crumbs = [
     { name: 'Strona główna', url: '/' },
@@ -148,8 +150,11 @@ export default async function MaturaPage({ params }: Params) {
           ) : null}
 
           {t.formulas?.length ? (
-            <section>
-              <h2 className="mb-5 font-display text-2xl font-extrabold text-ink">
+            <section id="wzory" className="scroll-mt-24">
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-brand-500">
+                Do zapamiętania
+              </p>
+              <h2 className="mb-5 mt-1 font-display text-2xl font-extrabold text-ink sm:text-3xl">
                 Najważniejsze wzory
               </h2>
               <FormulaGrid formulas={t.formulas} />
@@ -160,7 +165,7 @@ export default async function MaturaPage({ params }: Params) {
         </div>
       </section>
 
-      <CtaBand />
+      <CtaBand course={course} />
 
       <section className="bg-white py-14">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
-import { getTopics, getTopic, seoTitle } from '@/lib/seo';
+import { getTopics, getTopic, seoTitle, courseForTopic } from '@/lib/seo';
 import {
   SeoHero,
   RelatedCard,
@@ -114,7 +114,7 @@ export default async function ZadaniaHub({ params }: Params) {
         </div>
       </section>
 
-      <CtaBand />
+      <CtaBand course={courseForTopic(t.slug)} />
     </>
   );
 }

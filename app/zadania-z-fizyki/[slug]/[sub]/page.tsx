@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SITE } from '@/lib/site';
-import { getTopics, getTopic, seoTitle, clipDesc } from '@/lib/seo';
+import { getTopics, getTopic, seoTitle, clipDesc, courseForTopic } from '@/lib/seo';
 import {
   SeoHero,
   RelatedCard,
@@ -82,7 +82,7 @@ export default async function ZadaniaSub({ params }: Params) {
         </div>
       </section>
 
-      <CtaBand />
+      <CtaBand course={courseForTopic(t.slug)} />
 
       <section className="bg-white py-14">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
