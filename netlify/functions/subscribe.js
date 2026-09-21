@@ -14,6 +14,7 @@
 
 const { createClient } = require('@supabase/supabase-js');
 const { sendSequenceEmail } = require('./_shared/mailer');
+const { sendAdminPush } = require('./_shared/push');
 
 const supabase = createClient(
     process.env.SUPABASE_URL,
@@ -52,6 +53,19 @@ exports.handler = async (event) => {
     }
 
     try {
+        // 0) Czy to nowy lead? (push tylko przy pierwszym zapisie, nie przy każdym ponownym wysłaniu planera)
+        let isNew = true;
+        try {
+            const { data: existing } = await supabase
+                .from('email_subscribers')
+                .select('email')
+                .eq('email', email)
+                .maybeSingle();
+            isNew = !existing;
+        } catch {
+            isNew = true;
+        }
+
         // 1) Dzień 1 od razu (tylko przy zgodzie marketingowej).
         let day1Sent = false;
         if (consent) {
@@ -78,6 +92,16 @@ exports.handler = async (event) => {
         if (error) {
             console.error('subscribe upsert error:', error);
             await supabase.from('email_subscribers').insert(row);
+        }
+
+        // 3) Push na telefon admina - best-effort, tylko dla nowych leadów.
+        if (isNew) {
+            await sendAdminPush({
+                title: consent ? '🧭 Nowy lead (ze zgodą na mailing)' : '🧭 Nowy lead (bez zgody)',
+                body: `${email} · ${source === 'exit_intent' ? 'exit-popup' : 'planer'}${consent ? (day1Sent ? ' · mail dnia 1 wysłany' : ' · mail dnia 1 NIE wyszedł') : ''}`,
+                url: '/admin/#mailing',
+                tag: `lead-${email}`,
+            });
         }
 
         return json(200, { ok: true, day1Sent });

@@ -2,6 +2,26 @@
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY);
 const { createClient } = require('@supabase/supabase-js');
+const { sendAdminPush, zl } = require('./_shared/push');
+
+// Nazwy do powiadomień push (metadata.courseId z create-checkout-session.js).
+const PLAN_NAMES = {
+    1: 'Kinematyka', 2: 'Dynamika', 3: 'Praca, moc, energia', 4: 'Bryła sztywna',
+    5: 'Ruch drgający', 6: 'Fale mechaniczne', 7: 'Hydrostatyka', 8: 'Termodynamika',
+    9: 'Grawitacja i astronomia', 10: 'Elektrostatyka', 11: 'Prąd stały', 12: 'Magnetyzm',
+    13: 'Indukcja elektromagnetyczna', 14: 'Fale elektromagnetyczne i optyka',
+    15: 'Fizyka atomowa', 16: 'Fizyka jądrowa i relatywistyka',
+    17: 'Kurs Pełny', 18: 'Kurs Pełny', 19: 'VIP 1:1',
+};
+function planName(session, courseIds) {
+    const meta = session && session.metadata ? session.metadata.courseId : null;
+    if (meta === 'full_access') return 'Kurs Pełny';
+    if (meta === 'vip') return 'VIP 1:1';
+    if (meta && PLAN_NAMES[Number(meta)]) return PLAN_NAMES[Number(meta)];
+    if (courseIds && courseIds.length === 16) return 'Kurs Pełny';
+    if (courseIds && courseIds.length === 1) return PLAN_NAMES[courseIds[0]] || `Dział ${courseIds[0]}`;
+    return 'zamówienie';
+}
 
 const coursePriceIds = {
     1: 'price_1RtPFoJLuu6b086bmfvVO4G8', // Kinematyka
@@ -174,6 +194,12 @@ exports.handler = async (event) => {
                 userId = await findOrCreateUser(customerEmail);
                 if (!userId) {
                     console.error('Failed to find/create user for:', customerEmail);
+                    await sendAdminPush({
+                        title: '⚠️ Płatność bez dostępu!',
+                        body: `${customerEmail} zapłacił(a) ${zl(session.amount_total, session.currency)}, ale nie udało się utworzyć konta. Nadaj dostęp ręcznie.`,
+                        url: '/admin/#kursanci',
+                        tag: `order-fail-${session.id}`,
+                    });
                     return { statusCode: 500, body: JSON.stringify({ error: 'Failed to provision user' }) };
                 }
             }
@@ -240,6 +266,7 @@ exports.handler = async (event) => {
             }
 
             // --- Dodaj enrollments ---
+            let enrollErrors = 0;
             for (const courseId of courseIds) {
                 const { error } = await supabase
                     .from('enrollments')
@@ -254,19 +281,75 @@ exports.handler = async (event) => {
                     });
 
                 if (error) {
+                    enrollErrors += 1;
                     console.error('Error adding enrollment for course', courseId, ':', error);
                 } else {
                     console.log(`Access granted for user ${userId} to course ${courseId}`);
                 }
             }
 
+            // --- Push na telefon admina (best-effort, po nadaniu dostępu) ---
+            const name = planName(session, courseIds);
+            const amount = zl(session.amount_total, session.currency);
+            const who = customerEmail || 'zalogowany użytkownik';
+            if (enrollErrors > 0 || courseIds.length === 0) {
+                await sendAdminPush({
+                    title: '⚠️ Płatność bez pełnego dostępu!',
+                    body: `${who} · ${name} · ${amount}. Błędy nadawania dostępu: ${enrollErrors || 'brak kursów do odblokowania'}. Sprawdź w Supabase.`,
+                    url: '/admin/#kursanci',
+                    tag: `order-fail-${session.id}`,
+                });
+            } else {
+                await sendAdminPush({
+                    title: `💰 Nowe zamówienie: ${name}`,
+                    body: `${amount} · ${who}${checkoutMode === 'guest' ? ' (gość - konto utworzone)' : ''}`,
+                    url: '/admin/#sprzedaz',
+                    tag: `order-${session.id}`,
+                });
+            }
+
             return { statusCode: 200, body: JSON.stringify({ received: true }) };
 
         } catch (error) {
             console.error('Error processing webhook:', error);
+            await sendAdminPush({
+                title: '⚠️ Błąd webhooka Stripe',
+                body: `Sesja ${session.id}${session.customer_email ? ' · ' + session.customer_email : ''}: ${error && error.message ? error.message : 'nieznany błąd'}. Dostęp mógł nie zostać nadany.`,
+                url: '/admin/#kursanci',
+                tag: `order-fail-${session.id}`,
+            });
             return { statusCode: 500, body: JSON.stringify({ error: 'Internal server error' }) };
         }
-    } else {
-        return { statusCode: 200, body: JSON.stringify({ received: true }) };
     }
+
+    // --- Zdarzenia, o których admin powinien wiedzieć (bez zmian w dostępach) ---
+    // Wymagają włączenia w Stripe → Developers → Webhooks → ten endpoint → Events.
+    try {
+        const obj = eventData.data && eventData.data.object ? eventData.data.object : {};
+        if (eventData.type === 'checkout.session.async_payment_failed') {
+            await sendAdminPush({
+                title: '❌ Płatność odroczona nie powiodła się',
+                body: `${obj.customer_email || (obj.customer_details && obj.customer_details.email) || 'klient'} · ${zl(obj.amount_total, obj.currency)} (np. Klarna). Dostęp NIE został nadany.`,
+                url: '/admin/#sprzedaz',
+                tag: `pay-fail-${obj.id}`,
+            });
+        } else if (eventData.type === 'charge.refunded') {
+            await sendAdminPush({
+                title: '↩️ Zwrot płatności',
+                body: `${zl(obj.amount_refunded, obj.currency)} z ${zl(obj.amount, obj.currency)} · ${obj.billing_details && obj.billing_details.email ? obj.billing_details.email : obj.receipt_email || 'klient'}. Rozważ cofnięcie dostępu.`,
+                url: '/admin/#kursanci',
+                tag: `refund-${obj.id}`,
+            });
+        } else if (eventData.type === 'charge.dispute.created') {
+            await sendAdminPush({
+                title: '🚨 Chargeback (spór) w Stripe',
+                body: `${zl(obj.amount, obj.currency)} · powód: ${obj.reason || 'nieznany'}. Odpowiedz w panelu Stripe w terminie.`,
+                url: '/admin/#sprzedaz',
+                tag: `dispute-${obj.id}`,
+            });
+        }
+    } catch (e) {
+        console.error('push for event failed:', eventData.type, e);
+    }
+    return { statusCode: 200, body: JSON.stringify({ received: true }) };
 };

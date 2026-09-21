@@ -18,6 +18,13 @@
 [functions."send-sequence"]
   schedule = "0 8 * * *"
 
+# Service worker (Web Push do panelu) - bez cache, żeby aktualizacje wchodziły od razu.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+    Service-Worker-Allowed = "/"
+
 [[headers]]
   for = "/*"
   [headers.values]

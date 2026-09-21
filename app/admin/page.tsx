@@ -1,12 +1,13 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { getSupabaseBrowser } from '@/lib/supabase/client';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { COURSES } from '@/lib/courses';
 import { cn } from '@/lib/cn';
+import { PushSettings, isStandaloneApp } from '@/components/admin/PushSettings';
 
 type AdminUser = {
   id: string;
@@ -133,7 +134,8 @@ type IconName =
   | 'wallet'
   | 'check'
   | 'send'
-  | 'search';
+  | 'search'
+  | 'bell';
 function Icon({ name, className = 'h-5 w-5' }: { name: IconName; className?: string }) {
   const p: Record<IconName, React.ReactNode> = {
     overview: (
@@ -191,6 +193,12 @@ function Icon({ name, className = 'h-5 w-5' }: { name: IconName; className?: str
       <>
         <circle cx="11" cy="11" r="7" />
         <path d="m20 20-3.5-3.5" />
+      </>
+    ),
+    bell: (
+      <>
+        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+        <path d="M13.7 21a2 2 0 0 1-3.4 0" />
       </>
     ),
   };
@@ -404,7 +412,11 @@ const NAV: { id: string; label: string; short: string; icon: IconName }[] = [
   { id: 'sprzedaz', label: 'Sprzedaż', short: 'Sprzedaż', icon: 'sales' },
   { id: 'kursanci', label: 'Kursanci', short: 'Kursanci', icon: 'students' },
   { id: 'mailing', label: 'Sekwencja mailowa', short: 'Mailing', icon: 'mail' },
+  { id: 'powiadomienia', label: 'Powiadomienia', short: 'Push', icon: 'bell' },
 ];
+
+// Auto-odświeżanie danych, gdy panel jest widoczny (PWA nie ma paska adresu).
+const REFRESH_MS = 60 * 1000;
 
 // Odstęp kotwic: na mobile pod nagłówkiem strony (4rem) + przyklejonym paskiem
 // zakładek (~3.5rem); na desktopie sidebar nie zasłania treści.
@@ -441,6 +453,35 @@ export default function AdminPage() {
 
   useEffect(() => {
     if (user && isAdmin) load();
+  }, [user, isAdmin, load]);
+
+  // Panel jako aplikacja na telefonie: dane odświeżają się same po powrocie na
+  // pierwszy plan (powrót z tła, przełączenie karty) i co minutę, gdy panel
+  // jest widoczny. Ręcznie: przycisk „Odśwież” w pasku / sidebarze.
+  const fetchingRef = useRef(false);
+  fetchingRef.current = fetching;
+  const [standalone, setStandalone] = useState(false);
+  useEffect(() => {
+    if (!user || !isAdmin) return;
+    setStandalone(isStandaloneApp());
+    let last = Date.now();
+    const refresh = () => {
+      if (document.visibilityState !== 'visible' || fetchingRef.current) return;
+      // Nie dublujemy odświeżeń, gdy focus/visibility/pageshow strzelą razem.
+      if (Date.now() - last < 5000) return;
+      last = Date.now();
+      load();
+    };
+    document.addEventListener('visibilitychange', refresh);
+    window.addEventListener('focus', refresh);
+    window.addEventListener('pageshow', refresh);
+    const id = window.setInterval(refresh, REFRESH_MS);
+    return () => {
+      document.removeEventListener('visibilitychange', refresh);
+      window.removeEventListener('focus', refresh);
+      window.removeEventListener('pageshow', refresh);
+      window.clearInterval(id);
+    };
   }, [user, isAdmin, load]);
 
   const ready = !!user && isAdmin && !loading && !accessLoading;
@@ -1069,6 +1110,58 @@ export default function AdminPage() {
                     Otwórz GA4 →
                   </Button>
                 </div>
+              </div>
+            </div>
+
+            {/* Powiadomienia (panel jako aplikacja na telefonie) */}
+            <div id="powiadomienia" className={SECTION}>
+              <h2 className="text-xl font-extrabold tracking-tight text-ink">Powiadomienia na telefon</h2>
+              <p className="mt-1 text-sm text-muted">
+                Panel dodany na ekran główny telefonu działa jak aplikacja i dostaje push o tym,
+                co się dzieje w projekcie.
+              </p>
+
+              <SectionCard className="mt-4 p-4 sm:mt-5 sm:p-6">
+                <h3 className="mb-3 text-base font-bold text-ink">Push na tym urządzeniu</h3>
+                <PushSettings />
+              </SectionCard>
+
+              <div className="mt-4 grid gap-4 sm:gap-6 lg:grid-cols-2">
+                <SectionCard className="p-4 sm:p-6">
+                  <h3 className="mb-3 text-base font-bold text-ink">Instalacja na iPhonie</h3>
+                  <ol className="list-inside list-decimal space-y-1.5 text-sm text-slate">
+                    <li>
+                      W Safari otwórz <strong>fizykastatkiem.pl/admin</strong> i zaloguj się.
+                    </li>
+                    <li>
+                      Udostępnij (kwadrat ze strzałką) → <strong>„Do ekranu początkowego”</strong> → Dodaj.
+                    </li>
+                    <li>Uruchom panel z ikony „FS Admin” na ekranie głównym (nie z Safari).</li>
+                    <li>
+                      Wejdź tu i kliknij <strong>„Włącz powiadomienia”</strong>, potem „Wyślij testowe”.
+                    </li>
+                  </ol>
+                  <p className="mt-3 text-xs text-muted">
+                    Wymagany iOS 16.4+. Sesja w aplikacji z ekranu głównego jest osobna od Safari - przy
+                    pierwszym uruchomieniu może poprosić o ponowne zalogowanie. Android/Chrome: menu ⋮ →
+                    „Dodaj do ekranu głównego”.
+                  </p>
+                </SectionCard>
+
+                <SectionCard className="p-4 sm:p-6">
+                  <h3 className="mb-3 text-base font-bold text-ink">O czym dostaniesz push</h3>
+                  <ul className="space-y-1.5 text-sm text-slate">
+                    <li>💰 Nowe opłacone zamówienie (kurs, VIP, pojedynczy dział) z kwotą i e-mailem.</li>
+                    <li>🧭 Nowy lead z planera / exit-popupu (ze zgodą lub bez).</li>
+                    <li>⚠️ Płatność, po której nie udało się nadać dostępu - do ręcznej interwencji.</li>
+                    <li>❌ Nieudana płatność odroczona (Klarna), ↩️ zwrot, 🚨 chargeback.</li>
+                    <li>⚠️ Błędy wysyłki sekwencji mailowej (cron dzienny).</li>
+                  </ul>
+                  <p className="mt-3 text-xs text-muted">
+                    Dane w panelu odświeżają się same po powrocie do aplikacji i co minutę, gdy jest
+                    otwarta{standalone ? ' (tryb aplikacji aktywny)' : ''}.
+                  </p>
+                </SectionCard>
               </div>
             </div>
           </div>

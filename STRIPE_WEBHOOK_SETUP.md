@@ -24,8 +24,13 @@ Wszystkie przyciski teraz używają `buyAccess()` zamiast `buyViaLink()`, co ozn
 ### 3. Wybierz eventy do nasłuchiwania
 Wybierz te eventy:
 - ✅ `checkout.session.completed` - **WYMAGANE**
-- ✅ `payment_intent.succeeded` - opcjonalne
-- ✅ `invoice.payment_succeeded` - opcjonalne
+- ✅ `checkout.session.async_payment_succeeded` - **WYMAGANE** (Klarna i inne płatności odroczone)
+- ✅ `checkout.session.async_payment_failed` - push do admina o nieudanej płatności odroczonej
+- ✅ `charge.refunded` - push do admina o zwrocie
+- ✅ `charge.dispute.created` - push do admina o chargebacku
+- `payment_intent.succeeded`, `invoice.payment_succeeded` - opcjonalne (ignorowane przez kod)
+
+Szczegóły powiadomień push: `docs/PWA_PUSH_ADMIN.md`.
 
 ### 4. Skopiuj Webhook Secret
 - Po utworzeniu webhook, skopiuj **Signing secret**

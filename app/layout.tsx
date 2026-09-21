@@ -44,8 +44,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: '/images/czarny_statek.png',
-    apple: '/images/czarny_statek.png',
+    apple: '/icons/apple-touch-icon.png',
   },
+  // Panel admina jako PWA na iOS: tytuł pod ikoną i tryb pełnoekranowy
+  // (manifest generuje app/manifest.ts, ikony w public/icons).
+  appleWebApp: { capable: true, title: 'FS Admin', statusBarStyle: 'default' },
 };
 
 export const viewport: Viewport = {

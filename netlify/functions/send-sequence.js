@@ -10,6 +10,7 @@
 
 const { createClient } = require('@supabase/supabase-js');
 const { sendSequenceEmail, TOTAL_DAYS } = require('./_shared/mailer');
+const { sendAdminPush } = require('./_shared/push');
 
 const supabase = createClient(
     process.env.SUPABASE_URL,
@@ -84,5 +85,14 @@ exports.handler = async (event) => {
     }
 
     console.log(`send-sequence done: sent=${sent} failed=${failed} skipped=${skipped} scanned=${(subs || []).length}`);
+    // Push tylko gdy coś nie poszło - codzienny sukces nie ma budzić telefonu.
+    if (failed > 0) {
+        await sendAdminPush({
+            title: '⚠️ Sekwencja mailowa: błędy wysyłki',
+            body: `Nie wyszło ${failed} z ${sent + failed} maili (Resend). Cron spróbuje jutro; sprawdź logi Netlify i limity Resend.`,
+            url: '/admin/#mailing',
+            tag: 'sequence-errors',
+        });
+    }
     return json(200, { ok: true, sent, failed, skipped, scanned: (subs || []).length });
 };
