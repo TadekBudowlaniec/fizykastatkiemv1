@@ -8,7 +8,9 @@
   NODE_VERSION = "22"
   # EMAIL_FROM to publiczny adres nadawcy (nie sekret) — skaner Netlify i tak
   # traktuje każdą zmienną env jak sekret, więc jawnie go wykluczamy.
-  SECRETS_SCAN_OMIT_KEYS = "FRONTEND_URL,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,EMAIL_FROM"
+  # VAPID_SUBJECT to publiczny adres mailto: (jest w treści strony), a
+  # NEXT_PUBLIC_VAPID_PUBLIC_KEY z definicji trafia do przeglądarki - nie są sekretami.
+  SECRETS_SCAN_OMIT_KEYS = "FRONTEND_URL,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,EMAIL_FROM,VAPID_SUBJECT,NEXT_PUBLIC_VAPID_PUBLIC_KEY"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
