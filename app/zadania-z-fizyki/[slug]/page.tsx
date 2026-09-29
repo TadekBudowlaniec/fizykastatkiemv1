@@ -14,6 +14,7 @@ import {
   JsonLd,
   breadcrumbLd,
 } from '@/components/seo/SeoBits';
+import { TopicOffer, LeadBox, SeoSalesLayer } from '@/components/seo/SalesBits';
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -88,9 +89,15 @@ export default async function ZadaniaHub({ params }: Params) {
             Przykładowe zadania z rozwiązaniami
           </h2>
           <div className="space-y-8">
-            {subs.map((s) =>
+            {subs.map((s, i) =>
               s.problems && s.problems[0] ? (
                 <div key={s.slug}>
+                  {i === 1 ? (
+                    <TopicOffer
+                      slug={t.slug}
+                      heading={`Chcesz rozwiązywać takie zadania samodzielnie? Dział kursu: ${t.name}`}
+                    />
+                  ) : null}
                   <h3 className="mb-3 text-lg font-bold text-brand-700">
                     {s.name}
                   </h3>
@@ -111,10 +118,14 @@ export default async function ZadaniaHub({ params }: Params) {
               <SeoFaq faqs={t.faqTeoria} />
             </div>
           ) : null}
+
+          {subs.length < 2 ? <TopicOffer slug={t.slug} /> : null}
+          <LeadBox source={`zadania/${t.slug}`} />
         </div>
       </section>
 
       <CtaBand course={courseForTopic(t.slug)} />
+      <SeoSalesLayer slug={t.slug} pageType="zadania" />
     </>
   );
 }

@@ -22,7 +22,7 @@ const supabase = createClient(
 );
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const ALLOWED_SOURCES = new Set(['planer_squeeze', 'exit_intent']);
+const ALLOWED_SOURCES = new Set(['planer_squeeze', 'exit_intent', 'baza_wiedzy']);
 
 function json(statusCode, body) {
     return {
@@ -98,7 +98,7 @@ exports.handler = async (event) => {
         if (isNew) {
             await sendAdminPush({
                 title: consent ? '🧭 Nowy lead (ze zgodą na mailing)' : '🧭 Nowy lead (bez zgody)',
-                body: `${email} · ${source === 'exit_intent' ? 'exit-popup' : 'planer'}${consent ? (day1Sent ? ' · mail dnia 1 wysłany' : ' · mail dnia 1 NIE wyszedł') : ''}`,
+                body: `${email} · ${{ exit_intent: 'exit-popup', baza_wiedzy: 'baza wiedzy' }[source] || 'planer'}${consent ? (day1Sent ? ' · mail dnia 1 wysłany' : ' · mail dnia 1 NIE wyszedł') : ''}`,
                 url: '/admin/#mailing',
                 tag: `lead-${email}`,
             });

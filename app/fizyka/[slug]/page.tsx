@@ -26,6 +26,7 @@ import {
   JsonLd,
   breadcrumbLd,
 } from '@/components/seo/SeoBits';
+import { TopicOffer, MaturaPath, LeadBox, SeoSalesLayer } from '@/components/seo/SalesBits';
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -109,13 +110,21 @@ export default async function TeoriaPage({ params }: Params) {
 
           <div className="space-y-8">
             {(t.theory ?? []).map((s, i) => (
-              <section key={i} id={`sek-${i}`}>
-                <h2 className="mb-3 font-display text-2xl font-extrabold text-ink">
-                  {s.heading}
-                </h2>
-                <MathContent html={s.html} />
-              </section>
+              <div key={i}>
+                <section id={`sek-${i}`}>
+                  <h2 className="mb-3 font-display text-2xl font-extrabold text-ink">
+                    {s.heading}
+                  </h2>
+                  <MathContent html={s.html} />
+                </section>
+                {/* Oferta po 2. sekcji - czytelnik jest już „w temacie”, a większość nie doczytuje do końca */}
+                {i === Math.min(1, (t.theory?.length ?? 1) - 1) ? <TopicOffer slug={t.slug} /> : null}
+              </div>
             ))}
+          </div>
+
+          <div className="mt-10">
+            <MaturaPath slug={t.slug} name={t.name} />
           </div>
 
           {t.formulas?.length ? (
@@ -147,10 +156,13 @@ export default async function TeoriaPage({ params }: Params) {
               <SeoFaq faqs={t.faqTeoria} />
             </div>
           ) : null}
+
+          <LeadBox source={`fizyka/${t.slug}`} />
         </div>
       </section>
 
       <CtaBand course={course} />
+      <SeoSalesLayer slug={t.slug} pageType="teoria" />
 
       <section className="bg-white py-14">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">

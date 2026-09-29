@@ -22,6 +22,7 @@ import {
   JsonLd,
   breadcrumbLd,
 } from '@/components/seo/SeoBits';
+import { FullCourseOffer, LeadBox, SeoSalesLayer } from '@/components/seo/SalesBits';
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -136,12 +137,16 @@ export default async function ArticlePage({ params }: Params) {
           </p>
           <div className="space-y-8">
             {(p.sections ?? []).map((s, i) => (
-              <section key={i} id={`sek-${i}`}>
-                <h2 className="mb-3 font-display text-2xl font-extrabold text-ink">
-                  {s.heading}
-                </h2>
-                <MathContent html={s.html} />
-              </section>
+              <div key={i}>
+                <section id={`sek-${i}`}>
+                  <h2 className="mb-3 font-display text-2xl font-extrabold text-ink">
+                    {s.heading}
+                  </h2>
+                  <MathContent html={s.html} />
+                </section>
+                {/* Wpisy są ogólne (plan nauki, matura) - oferta Kursu Pełnego, nie pojedynczego działu */}
+                {i === Math.min(1, (p.sections?.length ?? 1) - 1) ? <FullCourseOffer /> : null}
+              </div>
             ))}
           </div>
 
@@ -150,10 +155,13 @@ export default async function ArticlePage({ params }: Params) {
               <SeoFaq faqs={p.faq} />
             </div>
           ) : null}
+
+          <LeadBox source={`blog/${p.slug}`} />
         </div>
       </section>
 
       <CtaBand />
+      <SeoSalesLayer pageType="blog" />
 
       <section className="bg-white py-14">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">

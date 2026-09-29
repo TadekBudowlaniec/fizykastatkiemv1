@@ -3,8 +3,19 @@
 import { useState } from 'react';
 import { getSupabaseBrowser } from '@/lib/supabase/client';
 import { SITE } from '@/lib/site';
+import { track } from '@/components/seo/SeoClient';
 
-export function SqueezeForm() {
+/**
+ * `source` - źródło leada w bazie (musi być na liście ALLOWED_SOURCES w subscribe.js).
+ * `gaSource` - dokładniejsze źródło do GA4 (np. konkretna strona bazy wiedzy).
+ */
+export function SqueezeForm({
+  source = 'planer_squeeze',
+  gaSource,
+}: {
+  source?: 'planer_squeeze' | 'baza_wiedzy';
+  gaSource?: string;
+} = {}) {
   const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<'idle' | 'loading' | 'sent' | 'error'>(
@@ -21,7 +32,7 @@ export function SqueezeForm() {
       body: JSON.stringify({
         email: mail,
         consent: marketingConsent,
-        source: 'planer_squeeze',
+        source,
       }),
     }).catch(() => {});
   };
@@ -39,6 +50,7 @@ export function SqueezeForm() {
       });
       if (error) throw error;
       captureLead(email, consent);
+      track('generate_lead', { source: gaSource ?? source, consent });
       setStatus('sent');
       setMsg('Sprawdź skrzynkę - wysłaliśmy link do Twojego planera nauki.');
     } catch {

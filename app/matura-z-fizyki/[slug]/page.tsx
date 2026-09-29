@@ -24,6 +24,7 @@ import {
   JsonLd,
   breadcrumbLd,
 } from '@/components/seo/SeoBits';
+import { TopicOffer, LeadBox, SeoSalesLayer } from '@/components/seo/SalesBits';
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -131,6 +132,12 @@ export default async function MaturaPage({ params }: Params) {
             </section>
           ) : null}
 
+          <TopicOffer
+            slug={t.slug}
+            heading={`Przygotuj ${t.name.toLowerCase()} do matury z gotowym systemem`}
+            lead="Wiesz już, czego wymaga CKE. W dziale kursu przerabiasz dokładnie te typy zadań: lekcje wideo, PDF-y i zadania maturalne z rozwiązaniami."
+          />
+
           {mi.strategia?.length ? (
             <section>
               <h2 className="mb-4 font-display text-2xl font-extrabold text-ink">
@@ -162,10 +169,13 @@ export default async function MaturaPage({ params }: Params) {
           ) : null}
 
           {t.faqMatura?.length ? <SeoFaq faqs={t.faqMatura} /> : null}
+
+          <LeadBox source={`matura/${t.slug}`} />
         </div>
       </section>
 
       <CtaBand course={course} />
+      <SeoSalesLayer slug={t.slug} pageType="matura" />
 
       <section className="bg-white py-14">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">

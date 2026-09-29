@@ -13,6 +13,7 @@ import {
   JsonLd,
   breadcrumbLd,
 } from '@/components/seo/SeoBits';
+import { TopicOffer, MaturaPath, LeadBox, SeoSalesLayer } from '@/components/seo/SalesBits';
 
 type Params = { params: Promise<{ slug: string; sub: string }> };
 
@@ -68,9 +69,20 @@ export default async function ZadaniaSub({ params }: Params) {
 
       <section className="bg-cloud py-14 sm:py-16">
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
+          <MaturaPath slug={t.slug} name={t.name} />
           <div className="space-y-6">
             {(s.problems ?? []).map((p, i) => (
-              <ProblemCard key={i} p={p} n={i + 1} />
+              <div key={i}>
+                <ProblemCard p={p} n={i + 1} />
+                {/* Oferta po 2. zadaniu - moment, w którym czytelnik sprawdza, czy „umie” */}
+                {i === Math.min(1, (s.problems?.length ?? 1) - 1) ? (
+                  <TopicOffer
+                    slug={t.slug}
+                    heading={`Utknąłeś na zadaniu? Zobacz ${t.dopelniacz} wytłumaczone na wideo`}
+                    lead="Rozwiązanie na kartce nie zawsze wystarcza. W dziale kursu każdy typ zadania przerabiasz krok po kroku na wideo, a potem ćwiczysz na zadaniach typu CKE."
+                  />
+                ) : null}
+              </div>
             ))}
           </div>
 
@@ -79,10 +91,14 @@ export default async function ZadaniaSub({ params }: Params) {
               <SeoFaq faqs={s.faq} />
             </div>
           ) : null}
+
+          {s.problems?.length ? null : <TopicOffer slug={t.slug} />}
+          <LeadBox source={`zadania/${t.slug}/${s.slug}`} />
         </div>
       </section>
 
       <CtaBand course={courseForTopic(t.slug)} />
+      <SeoSalesLayer slug={t.slug} pageType="zadania_podtemat" />
 
       <section className="bg-white py-14">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">

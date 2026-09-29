@@ -71,6 +71,7 @@ function courseName(id: number): string {
 const SOURCE_LABEL: Record<string, string> = {
   planer_squeeze: 'Planer',
   exit_intent: 'Exit-popup',
+  baza_wiedzy: 'Baza wiedzy',
 };
 
 // Ile wierszy list pokazujemy na start (mobile = karty, więc nie zalewamy ekranu).
