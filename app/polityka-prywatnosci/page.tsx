@@ -41,7 +41,7 @@ export default function PolitykaPage() {
               <li>
                 Administratorem danych osobowych zbieranych za pośrednictwem
                 strony internetowej https://fizykastatkiem.pl jest Cezary Prusak,
-                zamieszkały przy ul. Pszennej 4/25, Lublin (zwany dalej
+                zamieszkały przy ul. Pszennej 4, Lublin (zwany dalej
                 „Administratorem”).
               </li>
               <li>
