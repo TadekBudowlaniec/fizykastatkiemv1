@@ -286,7 +286,12 @@ a, button, [role="button"], summary, label {
 /* KaTeX overflow na mobile */
 .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.35rem 0; }
 /* Długie inline-math i bloki kodu też przewijalne zamiast ucinane. */
-.prose-fs .katex { max-width: 100%; overflow-x: auto; }
+/* Przewijanie w poziomie robi wyłącznie .katex-display (z overflow-y:hidden).
+   .katex NIE może mieć overflow-x:auto - wtedy overflow-y liczy się jako auto
+   i ułamki/pierwiastki (wystające o ułamek piksela) dostają pionowy scrollbar. */
+.prose-fs .katex { max-width: 100%; }
+/* Każdy przewijany kontener ze wzorem: tylko poziomo, nigdy pionowo. */
+.overflow-x-auto:has(.katex) { overflow-y: hidden; }
 .prose-fs pre { overflow-x: auto; max-width: 100%; }
 
 /* Animacja wejścia na scroll (JS dodaje .in-view) */

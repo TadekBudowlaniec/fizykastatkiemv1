@@ -254,7 +254,7 @@ export function QuickSheet({
                     <span className="min-w-0 text-xs font-semibold leading-snug text-slate-200">
                       {f.name}
                     </span>
-                    <span className="flex-none overflow-x-auto text-white [&_.katex]:text-[1.05rem]">
+                    <span className="min-w-0 shrink overflow-x-auto overflow-y-hidden py-0.5 text-white [&_.katex]:text-[1.05rem]">
                       <MathContent html={`\\(${f.latex}\\)`} className="!text-white" />
                     </span>
                   </li>
