@@ -249,12 +249,13 @@ export function QuickSheet({
                 {top.map((f) => (
                   <li
                     key={f.name}
-                    className="flex min-w-0 items-center justify-between gap-3 rounded-xl bg-white/[0.06] px-3.5 py-2.5 ring-1 ring-white/10"
+                    className="flex min-w-0 flex-wrap items-center justify-between gap-x-3 gap-y-1 rounded-xl bg-white/[0.06] px-3.5 py-2.5 ring-1 ring-white/10"
                   >
-                    <span className="min-w-0 text-xs font-semibold leading-snug text-slate-200">
+                    {/* Wzór nie może się zwężać ani łamać (wtedy pojawiał się boczny scroll) - przy braku miejsca schodzi pod nazwę */}
+                    <span className="min-w-0 flex-1 basis-32 text-xs font-semibold leading-snug text-slate-200">
                       {f.name}
                     </span>
-                    <span className="min-w-0 shrink overflow-x-auto overflow-y-hidden py-0.5 text-white [&_.katex]:text-[1.05rem]">
+                    <span className="ml-auto max-w-full flex-none overflow-x-auto overflow-y-hidden whitespace-nowrap py-0.5 text-white [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [&_.katex]:text-[1.05rem]">
                       <MathContent html={`\\(${f.latex}\\)`} className="!text-white" />
                     </span>
                   </li>
