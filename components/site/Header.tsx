@@ -24,6 +24,11 @@ export function Header() {
 
   useEffect(() => setOpen(false), [pathname]);
 
+  // „Kurs” dla niezalogowanych (i robotów) prowadzi na publiczny program kursu,
+  // a nie do panelu /kurs (noindex, wymaga logowania). Kursant trafia do panelu.
+  const navHref = (href: string) =>
+    href === '/kurs' && !user ? '/kurs-fizyki-online' : href;
+
   return (
     <header
       className={cn(
@@ -52,12 +57,12 @@ export function Header() {
         {/* Desktop nav */}
         <div className="hidden items-center gap-1 lg:flex">
           {PRIMARY_NAV.map((l) => {
-            const active =
-              pathname === l.href || pathname.startsWith(l.href + '/');
+            const href = navHref(l.href);
+            const active = pathname === href || pathname.startsWith(href + '/');
             return (
               <Link
                 key={l.href}
-                href={l.href}
+                href={href}
                 className={cn(
                   'rounded-full px-4 py-2 text-sm font-semibold transition-colors',
                   active
@@ -133,7 +138,7 @@ export function Header() {
           {PRIMARY_NAV.map((l) => (
             <Link
               key={l.href}
-              href={l.href}
+              href={navHref(l.href)}
               className="rounded-xl px-4 py-3 text-base font-semibold text-slate-200 hover:bg-white/5"
             >
               {l.label}

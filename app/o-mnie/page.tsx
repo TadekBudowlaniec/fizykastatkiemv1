@@ -93,8 +93,8 @@ export default function OMniePage() {
           </div>
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Button href="/cennik" variant="gradient" size="lg" className="w-full sm:w-auto">
-              Zobacz kurs maturalny
+            <Button href="/" variant="gradient" size="lg" className="w-full sm:w-auto">
+              Zobacz kurs maturalny z fizyki
             </Button>
             <Button href="/korepetycje" variant="outline" size="lg" className="w-full sm:w-auto">
               Umów korepetycje

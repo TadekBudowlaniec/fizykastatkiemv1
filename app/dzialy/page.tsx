@@ -77,6 +77,15 @@ export default function DzialyPage() {
             >
               Zobacz Kurs Pełny →
             </Link>
+            <p className="mt-4 text-sm text-muted">
+              Lista zagadnień wszystkich działów:{' '}
+              <Link
+                href="/kurs-fizyki-online#program"
+                className="font-semibold text-brand-600 underline underline-offset-4 hover:text-magenta-600"
+              >
+                program kursu fizyki online
+              </Link>
+            </p>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

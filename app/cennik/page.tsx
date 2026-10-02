@@ -123,6 +123,15 @@ export default function CennikPage() {
           <p className="mt-8 text-center text-sm text-muted">
             Płatność jednorazowa · dostęp do końca matury · BLIK, karta, Klarna.
           </p>
+          <p className="mt-3 text-center text-sm text-muted">
+            Chcesz wiedzieć, co dokładnie jest w kursie?{' '}
+            <Link
+              href="/kurs-fizyki-online"
+              className="font-semibold text-brand-600 underline underline-offset-4 hover:text-magenta-600"
+            >
+              Zobacz program kursu fizyki online →
+            </Link>
+          </p>
         </Container>
       </section>
 

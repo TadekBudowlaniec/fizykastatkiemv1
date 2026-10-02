@@ -177,7 +177,14 @@ export function MaturaPath({ slug, name }: { slug: string; name: string }) {
 }
 
 /** Darmowy planer za e-mail - dla czytelników, którzy dziś jeszcze nie kupią. */
-export function LeadBox({ source }: { source: string }) {
+export function LeadBox({
+  source,
+  leadSource = 'baza_wiedzy',
+}: {
+  source: string;
+  /** Źródło leada w bazie - strony docelowe kursu zostają przy domyślnym „planer_squeeze”. */
+  leadSource?: 'planer_squeeze' | 'baza_wiedzy';
+}) {
   return (
     <aside
       id="planer"
@@ -194,7 +201,7 @@ export function LeadBox({ source }: { source: string }) {
           modułu „Tutaj zacznij”.
         </p>
         <div className="mt-5">
-          <SqueezeForm source="baza_wiedzy" gaSource={source} />
+          <SqueezeForm source={leadSource} gaSource={source} />
         </div>
       </div>
     </aside>

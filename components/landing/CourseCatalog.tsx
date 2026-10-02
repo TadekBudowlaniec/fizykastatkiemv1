@@ -27,6 +27,15 @@ export function CourseCatalog() {
         {/* Dyskretny link do oferty pojedynczych działów - nie rozprasza
             osoby zainteresowanej Kursem Pełnym. */}
         <p className="mt-10 text-center text-sm text-muted">
+          Chcesz zobaczyć listę zagadnień każdego działu?{' '}
+          <Link
+            href="/kurs-fizyki-online#program"
+            className="font-semibold text-brand-600 underline underline-offset-4 hover:text-magenta-600"
+          >
+            Pełny program kursu fizyki online →
+          </Link>
+        </p>
+        <p className="mt-3 text-center text-sm text-muted">
           Potrzebujesz tylko jednego działu zamiast całego kursu?{' '}
           <Link
             href="/dzialy"

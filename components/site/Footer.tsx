@@ -2,6 +2,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SITE } from '@/lib/site';
 
+// Linki z frazą w anchorze - z każdej strony serwisu do stron sprzedażowych kursu.
+const courseLinks = [
+  { label: 'Kurs maturalny z fizyki', href: '/' },
+  { label: 'Kurs fizyki online - program', href: '/kurs-fizyki-online' },
+  { label: 'Kurs fizyki od podstaw', href: '/kurs-fizyki-od-podstaw' },
+  { label: 'Cennik kursu', href: '/cennik' },
+  { label: 'Pojedyncze działy', href: '/dzialy' },
+];
+
 const learnLinks = [
   { label: 'Kinematyka', href: '/fizyka/kinematyka' },
   { label: 'Dynamika', href: '/fizyka/dynamika' },
@@ -64,10 +73,10 @@ export function Footer() {
 
       <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
         {/* Telefon: marka na całą szerokość, kolumny linków po 2 w rzędzie
-            (3 kolumny jedna pod drugą robiły bardzo długą stopkę). */}
-        <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+            (kolumny jedna pod drugą robiły bardzo długą stopkę). */}
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-3 lg:col-span-1">
+          <div className="col-span-2 md:col-span-4 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2.5">
               <Image
                 src="/images/magenta_statek.png"
@@ -103,6 +112,7 @@ export function Footer() {
             </div>
           </div>
 
+          <FooterCol title="Kurs" links={courseLinks} />
           <FooterCol title="Ucz się" links={learnLinks} />
           <FooterCol title="Matura" links={examLinks} />
           <FooterCol title="Korepetycje" links={cityLinks} />

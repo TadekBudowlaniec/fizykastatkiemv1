@@ -17,8 +17,10 @@ export const metadata: Metadata = {
   },
   description: SITE.description,
   keywords: [
-    'fizyka',
+    'kurs maturalny z fizyki',
+    'kurs maturalny fizyka',
     'kurs fizyki online',
+    'fizyka',
     'matura z fizyki',
     'korepetycje z fizyki',
     'mechanika',
@@ -28,19 +30,17 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: SITE.owner }],
   creator: SITE.name,
+  // Bez title/description/url: te pola dziedziczyła KAŻDA podstrona, więc ~190
+  // stron miało og:title i og:url strony głównej („Kurs maturalny z fizyki…”).
+  // Strona główna i strony docelowe podają własne (landingOpenGraph w lib/kurs.ts).
   openGraph: {
     type: 'website',
     locale: 'pl_PL',
-    url: SITE.url,
     siteName: SITE.name,
-    title: 'Kurs maturalny z fizyki online | Fizyka Statkiem',
-    description: SITE.description,
     // og:image dostarcza app/opengraph-image.tsx (generowana karta 1200×630).
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Kurs maturalny z fizyki online | Fizyka Statkiem',
-    description: SITE.description,
   },
   icons: {
     icon: '/images/czarny_statek.png',

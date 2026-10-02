@@ -49,6 +49,9 @@ export default function DashboardPage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Button href="/login" variant="light">Zaloguj się</Button>
             <Button href="/cennik" variant="gradient">Wybierz pakiet</Button>
+            <Button href="/kurs-fizyki-online" variant="ghost" className="!text-white hover:bg-white/10">
+              Zobacz program kursu
+            </Button>
           </div>
         )}
       </AppHero>

@@ -26,11 +26,13 @@ export function Hero() {
           <Eyebrow dark>
             <span aria-hidden>🚢</span>
             {/* Krótsza wersja na telefonie - pełna nie mieści się w jednej linii */}
-            <span className="sm:hidden">Matura z fizyki 2027</span>
-            <span className="hidden sm:inline">Kurs maturalny z fizyki - matura 2027</span>
+            <span className="sm:hidden">Matura 2027 · online</span>
+            <span className="hidden sm:inline">Matura 2027 · poziom rozszerzony · online</span>
           </Eyebrow>
+          {/* Fraza „kurs maturalny z fizyki” musi być w H1 (widocznym też na
+              telefonie) - wcześniej była tylko w eyebrow ukrytym na mobile. */}
           <h1 className="mt-5 font-display text-[2.25rem] font-extrabold leading-[1.08] text-white sm:text-5xl lg:text-[3.4rem]">
-            Zdaj maturę z fizyki rozszerzonej{' '}
+            Kurs maturalny z fizyki - zdaj rozszerzoną{' '}
             <span className="text-gradient">krok po kroku</span>
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-300/85 sm:mt-5 sm:text-lg">

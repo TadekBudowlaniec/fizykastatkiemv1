@@ -9,29 +9,47 @@ import { Testimonials } from '@/components/landing/Testimonials';
 import { KursVsKorepetycje } from '@/components/landing/KursVsKorepetycje';
 import { Guarantee } from '@/components/landing/Guarantee';
 import { PricingSection } from '@/components/landing/PricingSection';
+import { CourseFacts } from '@/components/landing/CourseFacts';
 import { FaqSection, type FaqItem } from '@/components/ui/Faq';
 import { FinalCta } from '@/components/landing/FinalCta';
 import { StickyCta } from '@/components/landing/StickyCta';
-import { PLANS, SINGLE_COURSE_PRICE, VIP_SEATS } from '@/lib/courses';
-import { SITE } from '@/lib/site';
+import { PLANS, SINGLE_COURSE_PRICE, VIP_SEATS, TUTORING_PRICE } from '@/lib/courses';
+import { courseLd, landingOpenGraph, MATURA } from '@/lib/kurs';
 import type { Metadata } from 'next';
 
 const fullPlan = PLANS.find((p) => p.key === 'full_access')!;
 const vipPlan = PLANS.find((p) => p.key === 'vip')!;
 
+const TITLE = `Kurs maturalny z fizyki online - matura ${MATURA.year} | Fizyka Statkiem`;
+const DESC = `Kurs maturalny z fizyki online do matury ${MATURA.year} (rozszerzony): 16 działów wideo, PDF-y, zadania CKE i planer. ${fullPlan.price} zł jednorazowo, 28/28 zdało maturę.`;
+
 export const metadata: Metadata = {
   // Szablon „%s | Fizyka Statkiem” z layoutu NIE działa na page.tsx tego
   // samego segmentu (root) - markę trzeba dopisać jawnie.
-  title: { absolute: 'Kurs maturalny z fizyki online | Fizyka Statkiem' },
-  description:
-    'Kurs maturalny z fizyki online (rozszerzony): 16 działów wideo HD, PDF-y, zadania na wzór CKE i planer nauki. 100% zdawalności (28/28). Gwarancja Dobrego Wyniku.',
+  title: { absolute: TITLE },
+  description: DESC,
   alternates: { canonical: '/' },
+  ...landingOpenGraph(TITLE, DESC, '/'),
 };
 
+// Pytania brzmią tak, jak wpisuje się je w wyszukiwarkę / zadaje asystentowi AI;
+// każda odpowiedź jest samodzielna (da się ją zacytować bez reszty strony).
 const faq: FaqItem[] = [
   {
-    q: 'Dla kogo jest kurs?',
-    a: 'Dla maturzystów zdających fizykę na poziomie rozszerzonym oraz dla uczniów, którzy chcą nadrobić zaległości w trakcie roku.',
+    q: 'Dla kogo jest kurs maturalny z fizyki?',
+    a: 'Dla maturzystów zdających fizykę na poziomie rozszerzonym (liceum i technikum) oraz dla uczniów, którzy chcą nadrobić zaległości w trakcie roku. Każdy dział zaczyna się od podstaw, więc kurs sprawdzi się też, gdy fizykę zaczynasz praktycznie od zera.',
+  },
+  {
+    q: 'Ile kosztuje kurs maturalny z fizyki?',
+    a: `Kurs Pełny kosztuje ${fullPlan.price} zł - płacisz raz, bez abonamentu, i masz wszystkie 16 działów do końca sesji maturalnej. VIP 1:1 z cotygodniowymi zajęciami indywidualnymi kosztuje ${vipPlan.price} zł, a pojedynczy dział ${SINGLE_COURSE_PRICE} zł.`,
+  },
+  {
+    q: 'Czy to kurs na żywo, czy z nagrań?',
+    a: `Kurs Pełny to nagrania wideo HD, PDF-y, zadania i quizy dostępne od razu po zakupie - uczysz się wtedy, kiedy masz czas, i wracasz do lekcji bez limitu. Zajęcia na żywo są w wariancie VIP 1:1 (godzina tygodniowo z Czarkiem) oraz na korepetycjach (${TUTORING_PRICE} zł za 60 minut).`,
+  },
+  {
+    q: `Czy kurs przygotowuje do matury ${MATURA.year}?`,
+    a: `Tak. Kurs obejmuje pełny zakres wymagań CKE z fizyki na poziomie rozszerzonym, a w każdym dziale kończysz na prawdziwych zadaniach z arkuszy CKE. Matura z fizyki w ${MATURA.year} roku odbędzie się ${MATURA.examDate}; planer rozpisze Ci naukę dzień po dniu do tej daty.`,
   },
   {
     q: 'Jak długo mam dostęp do kursu?',
@@ -55,61 +73,7 @@ const faq: FaqItem[] = [
   },
 ];
 
-const courseJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Course',
-  name: 'Fizyka Statkiem - Kurs maturalny z fizyki online',
-  description: SITE.description,
-  inLanguage: 'pl',
-  provider: {
-    '@type': 'EducationalOrganization',
-    '@id': `${SITE.url}/#org`,
-    name: SITE.name,
-    url: SITE.url,
-  },
-  // Pola, które Google (rich result „Course”) i silniki AI czytają najchętniej:
-  // poziom, czego uczy, dla kogo, ile trwa.
-  educationalLevel: 'Szkoła średnia - matura rozszerzona z fizyki',
-  teaches: [
-    'Kinematyka',
-    'Dynamika',
-    'Praca, moc, energia',
-    'Bryła sztywna',
-    'Ruch drgający',
-    'Fale mechaniczne',
-    'Hydrostatyka',
-    'Termodynamika',
-    'Grawitacja i astronomia',
-    'Elektrostatyka',
-    'Prąd stały',
-    'Magnetyzm',
-    'Indukcja elektromagnetyczna',
-    'Fale elektromagnetyczne i optyka',
-    'Fizyka atomowa',
-    'Fizyka jądrowa i relatywistyka',
-  ],
-  audience: {
-    '@type': 'EducationalAudience',
-    educationalRole: 'student',
-    audienceType: 'Maturzyści zdający fizykę na poziomie rozszerzonym',
-  },
-  isAccessibleForFree: false,
-  hasCourseInstance: {
-    '@type': 'CourseInstance',
-    courseMode: 'online',
-    inLanguage: 'pl',
-    instructor: { '@id': `${SITE.url}/#czarek` },
-  },
-  offers: {
-    '@type': 'Offer',
-    category: 'Kurs online',
-    priceCurrency: 'PLN',
-    price: String(fullPlan.price),
-    availability: 'https://schema.org/InStock',
-    url: `${SITE.url}/cennik/`,
-    priceValidUntil: '2026-12-31',
-  },
-};
+const courseJsonLd = courseLd();
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -143,6 +107,7 @@ export default function Home() {
       <KursVsKorepetycje />
       <Guarantee />
       <PricingSection />
+      <CourseFacts />
       <FaqSection
         items={faq}
         subtitle="Nie znalazłeś odpowiedzi? Napisz do nas - pomożemy wybrać najlepszą ścieżkę."

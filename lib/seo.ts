@@ -142,7 +142,7 @@ export const SEO_PUBLISHED = '2025-09-01';
  *  dateModified/lastmod wszystkich stron i Google przestałby ufać datom. */
 export const SEO_CONTENT_UPDATED = '2026-09-16';
 /** Ostatnia zmiana stron marketingowych (oferta, cennik, layout). */
-export const SITE_UPDATED = '2026-09-19';
+export const SITE_UPDATED = '2026-10-02';
 export function seoModified(): string {
   return process.env.SEO_DATE || SEO_CONTENT_UPDATED;
 }

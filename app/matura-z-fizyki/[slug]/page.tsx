@@ -89,8 +89,9 @@ export default async function MaturaPage({ params }: Params) {
         intro={mi.zakres || t.intro}
         crumbs={crumbs}
       >
+        {/* Anchor z frazą prowadzi na stronę, która ma na nią rankować (główna), nie na cennik */}
         <Link
-          href="/cennik"
+          href="/"
           className="rounded-full bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/20 transition hover:bg-white/20"
         >
           ⚓ Kurs maturalny z fizyki
