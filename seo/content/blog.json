@@ -980,5 +980,60 @@
     ],
     "relatedTopics": ["kinematyka", "dynamika", "praca-moc-energia"],
     "related": ["jak-nauczyc-sie-fizyki-do-matury", "matura-z-fizyki-rozszerzona-jak-wyglada", "kurs-maturalny-z-fizyki-nagrania-czy-na-zywo"]
+  },
+  {
+    "slug": "jak-zapisywac-rozwiazania-zadan-na-maturze-z-fizyki",
+    "date": "2026-10-24",
+    "title": "Jak zapisywać rozwiązania zadań na maturze z fizyki, żeby dostać pełne punkty",
+    "metaDesc": "Jak egzaminator ocenia zadania otwarte na maturze z fizyki? Punkty za metodę, błąd przeniesiony, jednostki i zaokrąglenia. Schemat zapisu, który nie traci punktów.",
+    "keywords": "jak zapisywać rozwiązania na maturze z fizyki, zasady oceniania matura fizyka, punkty za metodę fizyka, zadania otwarte matura z fizyki, jak oceniane są zadania z fizyki",
+    "excerpt": "Na maturze z fizyki punkty dostajesz za metodę, nie tylko za wynik. Zobacz, jak zapisać rozwiązanie zadania otwartego, żeby egzaminator mógł przyznać komplet punktów nawet przy pomyłce rachunkowej.",
+    "intro": "Zadania otwarte to większość punktów na maturze z fizyki, a egzaminator ocenia je według zasad oceniania CKE: osobne punkty za poprawną metodę (wzory, zależności, rysunek), osobne za wynik. Dobrze zapisane rozwiązanie z błędem rachunkowym traci zwykle jeden punkt; poprawny wynik bez widocznej metody może nie dostać żadnego. Poniżej schemat zapisu, który działa w każdym zadaniu obliczeniowym, i lista miejsc, w których maturzyści gubią punkty niepotrzebnie.",
+    "sections": [
+      {
+        "heading": "Za co dokładnie są punkty w zadaniu otwartym",
+        "html": "<p>Każde zadanie otwarte ma w zasadach oceniania rozpisane kryteria, zwykle w układzie: punkt za zapisanie właściwej zależności fizycznej, punkt za jej przekształcenie lub połączenie z drugą zależnością, punkt za wynik z jednostką. W zadaniach za 3 lub 4 punkty wynik liczbowy to zazwyczaj tylko jeden z nich.</p><table><thead><tr><th>Element rozwiązania</th><th>Przykład</th><th>Co ocenia egzaminator</th></tr></thead><tbody><tr><td>Metoda</td><td>zapis \\( F_w = mg \\sin\\alpha - \\mu mg \\cos\\alpha \\)</td><td>czy użyto właściwych praw i czy pasują do sytuacji z zadania</td></tr><tr><td>Przekształcenia</td><td>wyprowadzenie \\( a = g(\\sin\\alpha - \\mu\\cos\\alpha) \\)</td><td>poprawność algebry, spójność oznaczeń</td></tr><tr><td>Wynik</td><td>\\( a \\approx 2{,}3\\ \\mathrm{m/s^2} \\)</td><td>wartość liczbowa, jednostka, sensowne zaokrąglenie</td></tr></tbody></table><p>Wniosek praktyczny: każdy z tych elementów musi być <strong>widoczny na kartce</strong>. Obliczenia zrobione w głowie lub na kalkulatorze nie istnieją dla egzaminatora.</p>"
+      },
+      {
+        "heading": "Błąd przeniesiony - dlaczego pomyłka rachunkowa nie przekreśla zadania",
+        "html": "<p>Zasady oceniania CKE przewidują tak zwany błąd przeniesiony: jeśli w jednej części zadania pomylisz się w rachunkach, ale dalej liczysz poprawną metodą na błędnej wartości, kolejne punkty za metodę nadal możesz otrzymać. Tracisz zwykle tylko punkt za wynik w miejscu, w którym pojawił się błąd.</p><p>Działa to jednak pod jednym warunkiem: egzaminator musi widzieć, skąd wzięła się liczba. Jeśli zapiszesz tylko końcowy, błędny wynik, nie ma czego ocenić i zadanie dostaje 0 punktów. Dlatego zapis wzoru ogólnego przed podstawieniem liczb to nie formalność, tylko ubezpieczenie od pomyłki na kalkulatorze.</p><p>Uwaga na błędy, których ta zasada nie ratuje: zły wzór (na przykład \\( E_k = mv^2 \\) zamiast \\( E_k = \\frac{mv^2}{2} \\)), zła interpretacja sytuacji fizycznej lub pomylenie wielkości (droga zamiast przemieszczenia). To są błędy metody, a nie rachunku.</p>"
+      },
+      {
+        "heading": "Schemat zapisu, który działa w każdym zadaniu obliczeniowym",
+        "html": "<ol><li><strong>Dane i szukane</strong> - krótko, z jednostkami w SI. Przy okazji przeliczasz kilometry na metry i gramy na kilogramy, zanim zaczniesz liczyć.</li><li><strong>Rysunek lub schemat</strong> - w dynamice siły, w optyce bieg promieni, w obwodach kierunek prądu. W wielu zadaniach rysunek jest osobno punktowany.</li><li><strong>Wzór ogólny</strong> - prawo fizyczne w postaci literowej, na przykład \\( \\Delta p = F \\Delta t \\) albo \\( Q = mc\\Delta T \\).</li><li><strong>Przekształcenie do szukanej</strong> - najpierw na literach, dopiero potem podstawienie. Jedna linia algebry zamiast trzech linii liczb.</li><li><strong>Podstawienie i wynik</strong> - liczby z jednostkami, wynik zaokrąglony do liczby cyfr znaczących zgodnej z danymi, zwykle dwóch lub trzech.</li><li><strong>Odpowiedź jednym zdaniem</strong>, jeśli zadanie o coś pyta słownie - na przykład czy ciało oderwie się od podłoża.</li></ol><p>Ten schemat jest rozwinięciem uniwersalnej metody opisanej w artykule <a href=\"/blog/jak-rozwiazywac-zadania-z-fizyki/\">jak rozwiązywać zadania z fizyki</a>. Na maturze liczy się dodatkowo to, że każdy krok zostawia ślad, za który można przyznać punkt.</p>"
+      },
+      {
+        "heading": "Gdzie maturzyści tracą punkty niepotrzebnie",
+        "html": "<ul><li><strong>Brak jednostki przy wyniku</strong> lub jednostka niezgodna z wielkością. Wynik \\( v = 12 \\) bez m/s to zwykle utrata punktu za wynik.</li><li><strong>Podstawianie bez wzoru ogólnego</strong> - jeśli w podstawieniu jest literówka, egzaminator nie wie, czy metoda była poprawna.</li><li><strong>Mieszanie jednostek</strong> - masa w gramach, energia w dżulach. Więcej o tym w artykule o <a href=\"/blog/jednostki-w-fizyce-uklad-si/\">jednostkach i układzie SI</a>.</li><li><strong>Przesadne zaokrąglanie w trakcie</strong> - zaokrąglaj dopiero wynik końcowy, pośrednie wartości trzymaj z zapasem cyfr.</li><li><strong>Dwa rozwiązania obok siebie</strong> - jeśli zostawisz dwie różne odpowiedzi i nie skreślisz jednej, egzaminator ocenia to jako brak rozstrzygnięcia.</li><li><strong>Odpowiedź bez uzasadnienia</strong> w zadaniach typu „oceń, czy” - samo tak lub nie bez odwołania do prawa fizycznego nie daje punktu.</li><li><strong>Pisanie poza miejscem na odpowiedź</strong> - rozwiązanie na brudnopisie nie jest sprawdzane. Jeśli brakuje miejsca, napisz wyraźnie, gdzie jest ciąg dalszy.</li></ul><p>Pełną listę pułapek merytorycznych zebrałem w osobnym tekście o <a href=\"/blog/najczestsze-bledy-na-maturze-z-fizyki/\">najczęstszych błędach na maturze z fizyki</a>.</p>"
+      },
+      {
+        "heading": "Zadania na wyjaśnienie i uzasadnienie - jak pisać, żeby dostać punkt",
+        "html": "<p>Część zadań nie wymaga obliczeń, tylko wyjaśnienia zjawiska. Kryterium jest zwykle jedno: odpowiedź musi zawierać konkretny element fizyczny wskazany w zasadach oceniania, na przykład odwołanie do zasady zachowania pędu albo do zależności siły dośrodkowej od promienia.</p><p>Sprawdzony układ odpowiedzi to trzy zdania: <strong>co się dzieje</strong> (obserwacja), <strong>jakie prawo to opisuje</strong> (nazwa lub wzór), <strong>jak z tego prawa wynika odpowiedź</strong> (wniosek). Unikaj ogólników w stylu „bo tak działa fizyka” i opisów potocznych bez nazwania wielkości fizycznych. Jeśli możesz, wesprzyj argument krótkim zapisem symbolicznym: \\( F_d = \\frac{mv^2}{r} \\), więc przy stałej prędkości mniejszy promień oznacza większą siłę.</p>"
+      },
+      {
+        "heading": "Jak ćwiczyć zapis przed maturą",
+        "html": "<p>Najskuteczniejsza metoda to sprawdzanie własnych rozwiązań z oficjalnymi zasadami oceniania CKE, które są publikowane do każdego arkusza. Po rozwiązaniu zadania przyznaj sobie punkty tak, jak zrobiłby egzaminator: osobno za metodę, osobno za wynik. Po kilku arkuszach zobaczysz, które kryterium gubisz najczęściej.</p><p>W <a href=\"/\">kursie maturalnym Fizyka Statkiem</a> każde zadanie maturalne ma rozwiązanie zapisane w tym samym układzie, jaki opisałem powyżej, z zaznaczeniem, za co przypada punkt. Jeśli dopiero układasz plan, zajrzyj do artykułu o tym, <a href=\"/blog/kiedy-zaczac-przygotowania-do-matury-z-fizyki/\">kiedy zacząć przygotowania do matury z fizyki</a>, a konkretne zadania z zapisem krok po kroku znajdziesz w działach <a href=\"/matura-z-fizyki/dynamika/\">dynamika</a> i <a href=\"/matura-z-fizyki/praca-moc-energia/\">praca, moc, energia</a>.</p>"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Czy na maturze z fizyki dostanę punkty za sam wynik bez obliczeń?",
+        "a": "W zadaniach otwartych zwykle nie. Zasady oceniania CKE przewidują punkty za metodę i za wynik, a egzaminator musi widzieć, skąd wynik się wziął. Sam poprawny wynik bez zapisanej metody może dostać 0 punktów."
+      },
+      {
+        "q": "Co to jest błąd przeniesiony na maturze z fizyki?",
+        "a": "To sytuacja, gdy pomylisz się w rachunkach w jednej części zadania, ale dalej liczysz poprawną metodą na błędnej wartości. Kolejne punkty za metodę możesz wtedy dostać, tracisz zwykle tylko punkt za wynik w miejscu błędu. Zasada nie obejmuje błędów we wzorach ani w interpretacji zjawiska."
+      },
+      {
+        "q": "Czy brak jednostki przy wyniku odbiera punkty?",
+        "a": "Zwykle tak - punkt za wynik jest przyznawany za poprawną wartość z jednostką. Zapisuj jednostki przy wyniku końcowym i przeliczaj dane na SI przed podstawieniem."
+      },
+      {
+        "q": "Do ilu cyfr zaokrąglać wyniki na maturze z fizyki?",
+        "a": "Zaokrąglaj tylko wynik końcowy, do liczby cyfr znaczących zgodnej z danymi w zadaniu, najczęściej do dwóch lub trzech. Wartości pośrednie trzymaj z zapasem cyfr, żeby nie nabijać błędu zaokrągleń."
+      }
+    ],
+    "relatedTopics": ["dynamika", "praca-moc-energia", "ped-i-zasada-zachowania"],
+    "related": ["jak-rozwiazywac-zadania-z-fizyki", "najczestsze-bledy-na-maturze-z-fizyki", "jednostki-w-fizyce-uklad-si"]
   }
 ]
