@@ -2,12 +2,13 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAuth } from '@/components/auth/AuthProvider';
-import { getSupabaseBrowser } from '@/lib/supabase/client';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { COURSES } from '@/lib/courses';
 import { cn } from '@/lib/cn';
 import { PushSettings, isStandaloneApp } from '@/components/admin/PushSettings';
+import { StudentProgress } from '@/components/admin/StudentProgress';
+import { postAdmin } from '@/components/admin/adminApi';
 
 type AdminUser = {
   id: string;
@@ -387,27 +388,6 @@ function SourceChip({ source }: { source: string }) {
   );
 }
 
-async function postAdmin<T>(path: string): Promise<T> {
-  const supabase = getSupabaseBrowser();
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  const token = session?.access_token;
-  if (!token) throw new Error('Brak sesji.');
-  const res = await fetch(path, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  if (!res.ok) {
-    const body = await res.json().catch(() => ({}));
-    throw new Error((body as { error?: string }).error || `Błąd ${res.status}`);
-  }
-  return (await res.json()) as T;
-}
-
 const NAV: { id: string; label: string; short: string; icon: IconName }[] = [
   { id: 'przeglad', label: 'Przegląd', short: 'Przegląd', icon: 'overview' },
   { id: 'sprzedaz', label: 'Sprzedaż', short: 'Sprzedaż', icon: 'sales' },
@@ -434,6 +414,7 @@ export default function AdminPage() {
   const [fetching, setFetching] = useState(false);
   const [usersShown, setUsersShown] = useState(PAGE);
   const [leadsShown, setLeadsShown] = useState(PAGE);
+  const [selectedUser, setSelectedUser] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setFetching(true);
@@ -807,7 +788,12 @@ export default function AdminPage() {
                 <ul className="divide-y divide-line lg:hidden">
                   {visibleUsers.length > 0 ? (
                     visibleUsers.map((u) => (
-                      <li key={u.id} className="flex items-start gap-3 px-4 py-3.5">
+                      <li
+                        key={u.id}
+                        onClick={() => setSelectedUser(u.id)}
+                        className="flex cursor-pointer items-start gap-3 px-4 py-3.5 transition hover:bg-cloud/60"
+                        title="Pokaż postęp"
+                      >
                         <span
                           className={cn(
                             'flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold',
@@ -865,7 +851,12 @@ export default function AdminPage() {
                     <tbody className="divide-y divide-line">
                       {visibleUsers.length > 0 ? (
                         visibleUsers.map((u) => (
-                          <tr key={u.id} className="transition hover:bg-cloud/60">
+                          <tr
+                            key={u.id}
+                            onClick={() => setSelectedUser(u.id)}
+                            className="cursor-pointer transition hover:bg-cloud/60"
+                            title="Pokaż postęp"
+                          >
                             <td className="px-5 py-3">
                               <span className="text-ink">{u.email}</span>
                               {u.is_admin && (
@@ -1168,6 +1159,9 @@ export default function AdminPage() {
           </div>
         </div>
       </Container>
+      {selectedUser && (
+        <StudentProgress userId={selectedUser} onClose={() => setSelectedUser(null)} />
+      )}
     </section>
   );
 }
