@@ -7,6 +7,9 @@ Chcesz zmienić tekst maila? Edytuj `SEQUENCE` w `mailer.js`, nie tylko ten plik
 Architektura:
 - `subscribe.js` — zapis leada do `email_subscribers` + wysyłka **Dnia 1 od razu** (transakcyjnie).
 - `send-sequence.js` — cron dzienny (netlify.toml, 08:00 UTC), dosyła **Dni 2-5** wg `consent_at`.
+  Bez żadnego sekretu: Netlify wywołuje go HTTP-em (POST, body `{next_run}`), a z zewnątrz nie da się go
+  odpalić po URL. Do 25.10.2026 warunek `?key=CRON_SECRET` blokował sam cron (401) i Dni 2-5 nie wychodziły.
+  Ręczny start po deployu: Netlify → Functions → send-sequence → „Run now".
 - `unsubscribe.js` — link „wypisz się" (w każdym mailu + nagłówek List-Unsubscribe, wymóg RODO/Gmail).
 - `_shared/mailer.js` — silnik: treść, render HTML+plain, wysyłka Resend, tokeny wypisu.
 

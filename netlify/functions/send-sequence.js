@@ -18,7 +18,6 @@ const supabase = createClient(
 );
 
 const DAY_MS = 24 * 60 * 60 * 1000;
-const CRON_SECRET = process.env.CRON_SECRET || '';
 const MAX_PER_RUN = 400; // bezpiecznik na limity Resend
 
 function json(statusCode, body) {
@@ -26,14 +25,19 @@ function json(statusCode, body) {
 }
 
 exports.handler = async (event) => {
-    // Wywołanie z harmonogramu Netlify nie ma query/nagłówków użytkownika.
-    // Ręczne wywołanie po HTTP wymaga ?key=CRON_SECRET (jeśli sekret ustawiony),
-    // żeby ktoś z zewnątrz nie odpalał wysyłki.
-    const isHttp = !!(event && event.httpMethod);
-    if (isHttp && CRON_SECRET) {
-        const key = (event.queryStringParameters && event.queryStringParameters.key) || '';
-        if (key !== CRON_SECRET) return json(401, { ok: false, error: 'Unauthorized' });
+    // UWAGA (naprawa z 10.2026): wcześniej był tu warunek „jeśli event.httpMethod
+    // i CRON_SECRET, wymagaj ?key=". Netlify wywołuje funkcje z harmonogramu
+    // zwykłym eventem HTTP (POST, body = {"next_run": …}), więc cron dostawał
+    // 401 przy każdym uruchomieniu i NIKT nie dostawał Dni 2-5. Sekret nie jest
+    // tu potrzebny: funkcji z harmonogramem Netlify nie da się wywołać z zewnątrz
+    // po HTTP (zwraca 403), więc jedynym wywołującym jest sam harmonogram.
+    let nextRun = null;
+    try {
+        nextRun = JSON.parse((event && event.body) || '{}').next_run || null;
+    } catch {
+        /* body spoza harmonogramu - ignorujemy */
     }
+    console.log(`send-sequence start: method=${(event && event.httpMethod) || '-'} next_run=${nextRun || '-'}`);
 
     const now = Date.now();
 
