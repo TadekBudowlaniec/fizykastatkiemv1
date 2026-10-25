@@ -1,6 +1,7 @@
 // netlify/functions/_shared/mailer.js
 // Silnik mailingu na Resend (zastępuje Brevo). CommonJS, używany przez
-// subscribe.js (Dzień 1 od razu) i send-sequence.js (Dni 2-5 z crona).
+// subscribe.js (Dzień 1 od razu), send-sequence.js (Dni 2-5 z crona) oraz
+// send-campaign*.js (jednorazowe kampanie do całej bazy, stała CAMPAIGNS).
 //
 // Założenia deliverability (cel: skrzynka „Główne", nie „Oferty"):
 //  - wysyłka 1:1 przez Resend, bez plakietki, bez pixela śledzącego,
@@ -19,6 +20,9 @@ const EMAIL_FROM = process.env.EMAIL_FROM || 'Czarek z FizykaStatkiem <hej@fizyk
 const REPLY_TO = process.env.EMAIL_REPLY_TO || 'hej@fizykastatkiem.pl';
 const FRONTEND_URL = (process.env.FRONTEND_URL || 'https://fizykastatkiem.pl').replace(/\/$/, '');
 const UNSUB_SECRET = process.env.UNSUB_SECRET || '';
+// Data matury z fizyki (do placeholdera {{dni}}). Zgodna z MATURA w lib/kurs.ts;
+// po maturze 2027 podbić razem z nią.
+const MATURA_DATE = process.env.MATURA_DATE || '2027-05-19';
 
 // ── Treść sekwencji (źródło prawdy) ──────────────────────────────────────────
 // paragraphs → akapity; cta → jedyny link (przycisk); outro → zakończenie + podpis.
@@ -124,6 +128,37 @@ function getEmailForDay(day) {
     return SEQUENCE.find((e) => e.day === day) || null;
 }
 
+// ── Kampanie jednorazowe (do całej bazy leadów) ─────────────────────────────
+// Ten sam format co SEQUENCE, ale zamiast `day` jest `slug` (klucz w tabeli
+// email_campaign_sends, dzięki któremu nikt nie dostanie kampanii dwa razy).
+// Placeholdery {{dni}} / {{tygodnie}} podstawiane są w momencie wysyłki.
+// Wysyłka: send-campaign.js (podgląd/test) i send-campaign-background.js (baza).
+const CAMPAIGNS = [
+    {
+        slug: 'odliczanie-2027-1',
+        subject: 'Do matury z fizyki zostało {{dni}} dni. Jak Ci idzie?',
+        preheader: 'Krótki check-in od Czarka i jedna rzecz, którą warto zrobić w tym tygodniu.',
+        paragraphs: [
+            'Cześć!',
+            'Jakiś czas temu odebrałeś ode mnie planer nauki do matury z fizyki. Dziś piszę krótko, bo chcę Cię o coś zapytać.',
+            'Do matury z fizyki zostało **{{dni}} dni**. Brzmi jak dużo, ale w praktyce to {{tygodnie}} tygodni, a w nich szkoła, inne przedmioty i zwykłe życie. Na fizykę realnie zostaje kilka godzin w tygodniu.',
+            'Dobra wiadomość: przy 16 działach to wciąż wystarcza, **jeśli idziesz po kolei i wiesz, co robić dziś**. Po to jest planer. Gorsza wiadomość: każdy tydzień zwlekania zabiera z tego zapasu kawałek, którego potem nie da się odzyskać.',
+            'Więc pytanie: **na czym stoisz?** Odpisz mi jednym zdaniem, który dział sprawia Ci najwięcej problemu. Czytam każdą odpowiedź i odpisuję, czasem z krótkim materiałem, który pomaga odblokować temat.',
+            'A jeśli czujesz, że sam planer to za mało i brakuje Ci kogoś, kto wytłumaczy „dlaczego” zamiast podać wzór, to po to jest **Kurs Pełny**: wszystkie 16 działów, ponad 30 godzin wideo, zadania z rozwiązaniami krok po kroku i ten sam planer, który prowadzi Cię do egzaminu. Cena: **828 zł** jednorazowo, z **Gwarancją Dobrego Wyniku**. Jeśli kurs Ci nie pomoże, masz jasne zasady zwrotu.',
+        ],
+        cta: { label: 'Zobacz Kurs Pełny', url: `${FRONTEND_URL}/cennik` },
+        outro: [
+            'Nawet jeśli nic nie kupisz, zrób dziś jedną rzecz: otwórz planer i odhacz pierwszy krok. Na start to naprawdę wystarczy.',
+            'Trzymam kciuki,\n**Czarek**\nFizykaStatkiem',
+            'PS Odpowiedz po prostu na tego maila. Odpowiedzi trafiają prosto do mnie.',
+        ],
+    },
+];
+
+function getCampaign(slug) {
+    return CAMPAIGNS.find((c) => c.slug === slug) || null;
+}
+
 // ── Wypis (unsubscribe) ──────────────────────────────────────────────────────
 // Token = base64url(email).hmacSHA256(email, UNSUB_SECRET). Bez sekretu nie da
 // się podrobić linku wypisującego cudzy adres.
@@ -173,18 +208,45 @@ function inlineText(s) {
     return String(s).replace(/\*\*(.+?)\*\*/g, '$1');
 }
 
-function ctaWithUtm(url, day) {
+function ctaWithUtm(url, utmCampaign, utmContent) {
     const u = new URL(url);
     u.searchParams.set('utm_source', 'resend');
     u.searchParams.set('utm_medium', 'email');
-    u.searchParams.set('utm_campaign', 'welcome');
-    u.searchParams.set('utm_content', `dzien${day}`);
+    u.searchParams.set('utm_campaign', utmCampaign);
+    u.searchParams.set('utm_content', utmContent);
     return u.toString();
+}
+
+// Placeholdery w treści (podstawiane w momencie wysyłki, nie w definicji):
+//   {{dni}}      liczba dni do matury z fizyki (wg MATURA_DATE),
+//   {{tygodnie}} to samo w pełnych tygodniach.
+function daysToMatura(now = Date.now()) {
+    const target = new Date(`${MATURA_DATE}T00:00:00+02:00`).getTime();
+    return Math.max(0, Math.ceil((target - now) / (24 * 60 * 60 * 1000)));
+}
+
+function fillPlaceholders(s, vars) {
+    return String(s).replace(/\{\{(\w+)\}\}/g, (m, k) => (k in vars ? String(vars[k]) : m));
+}
+
+// Zwraca kopię definicji maila z podstawionymi placeholderami.
+function materialize(def, now = Date.now()) {
+    const dni = daysToMatura(now);
+    const vars = { dni, tygodnie: Math.floor(dni / 7) };
+    const f = (s) => fillPlaceholders(s, vars);
+    return {
+        ...def,
+        subject: f(def.subject),
+        preheader: f(def.preheader),
+        paragraphs: def.paragraphs.map(f),
+        outro: (def.outro || []).map(f),
+        cta: { ...def.cta, label: f(def.cta.label) },
+    };
 }
 
 // Lekki, „ludzki" HTML: systemowy font, czarny tekst, jeden przycisk CTA.
 function buildHtml(email, unsub) {
-    const ctaUrl = ctaWithUtm(email.cta.url, email.day);
+    const ctaUrl = ctaWithUtm(email.cta.url, email.utm.campaign, email.utm.content);
     const paras = email.paragraphs
         .map((p) => `<p style="margin:0 0 16px">${inlineHtml(p)}</p>`)
         .join('\n');
@@ -215,7 +277,7 @@ Nie chcesz więcej wiadomości? <a href="${esc(unsub)}" style="color:#9a9aa5">Wy
 }
 
 function buildText(email, unsub) {
-    const ctaUrl = ctaWithUtm(email.cta.url, email.day);
+    const ctaUrl = ctaWithUtm(email.cta.url, email.utm.campaign, email.utm.content);
     const parts = [
         ...email.paragraphs.map(inlineText),
         `${email.cta.label}: ${ctaUrl}`,
@@ -228,12 +290,41 @@ function buildText(email, unsub) {
     return parts.join('\n\n');
 }
 
+// Gotowy do renderu mail: definicja + placeholdery + UTM.
+function prepareSequenceEmail(day, now = Date.now()) {
+    const def = getEmailForDay(day);
+    if (!def) return null;
+    return { ...materialize(def, now), utm: { campaign: 'welcome', content: `dzien${day}` } };
+}
+
+function prepareCampaignEmail(slug, now = Date.now()) {
+    const def = getCampaign(slug);
+    if (!def) return null;
+    return { ...materialize(def, now), utm: { campaign: slug, content: 'broadcast' } };
+}
+
+// Podgląd (HTML + text + temat) bez wysyłki. Do test-sequence / send-campaign.
+function renderEmail(email, recipientEmail) {
+    const unsub = unsubUrl(recipientEmail);
+    return { subject: email.subject, html: buildHtml(email, unsub), text: buildText(email, unsub) };
+}
+
 // ── Wysyłka przez Resend ─────────────────────────────────────────────────────
 // Zwraca { ok, id?, status?, error? }. Nie rzuca — błąd tylko zwracany.
 async function sendSequenceEmail(recipientEmail, day) {
-    if (!RESEND_API_KEY) return { ok: false, error: 'RESEND_API_KEY missing' };
-    const email = getEmailForDay(day);
+    const email = prepareSequenceEmail(day);
     if (!email) return { ok: false, error: `no email for day ${day}` };
+    return sendEmail(recipientEmail, email);
+}
+
+async function sendCampaignEmail(recipientEmail, slug) {
+    const email = prepareCampaignEmail(slug);
+    if (!email) return { ok: false, error: `no campaign ${slug}` };
+    return sendEmail(recipientEmail, email);
+}
+
+async function sendEmail(recipientEmail, email) {
+    if (!RESEND_API_KEY) return { ok: false, error: 'RESEND_API_KEY missing' };
 
     const unsub = unsubUrl(recipientEmail);
     const body = {
@@ -269,8 +360,16 @@ async function sendSequenceEmail(recipientEmail, day) {
 module.exports = {
     SEQUENCE,
     TOTAL_DAYS,
+    CAMPAIGNS,
+    MATURA_DATE,
     getEmailForDay,
+    getCampaign,
+    daysToMatura,
+    prepareSequenceEmail,
+    prepareCampaignEmail,
+    renderEmail,
     sendSequenceEmail,
+    sendCampaignEmail,
     unsubToken,
     verifyUnsubToken,
     unsubUrl,
