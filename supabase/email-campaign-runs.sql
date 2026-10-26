@@ -16,6 +16,7 @@ create table if not exists public.email_campaign_runs (
     campaign        text        not null,                    -- slug z CAMPAIGNS (mailer.js)
     scheduled_at    timestamptz not null,                    -- kiedy ma ruszyć
     skip_unfinished boolean     not null default false,      -- pomiń leady w trakcie sekwencji
+    include_accounts boolean    not null default true,       -- także konta bez dostępu do kursu
     status          text        not null default 'scheduled'
         check (status in ('scheduled', 'queued', 'running', 'done', 'failed', 'cancelled')),
     created_at      timestamptz not null default now(),
@@ -28,6 +29,10 @@ create table if not exists public.email_campaign_runs (
     skipped         jsonb,                                   -- {total, alreadySent, buyers, unfinished}
     error           text
 );
+
+-- Dodane później (27.10.2026): odbiorcy = leady + konta bez kursu. Idempotentne.
+alter table public.email_campaign_runs
+    add column if not exists include_accounts boolean not null default true;
 
 -- Cron co 5 minut pyta o dojrzałe zlecenia.
 create index if not exists email_campaign_runs_due_idx

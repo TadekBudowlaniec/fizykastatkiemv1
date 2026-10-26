@@ -2,12 +2,22 @@
 // Wspólna logika kampanii jednorazowych: KTO ma dostać maila + uruchamianie
 // zleceń (email_campaign_runs) w funkcji w tle.
 //
-// Odbiorcy = aktywni leady ze zgodą marketingową (email_subscribers)
-//   minus ci, którzy już dostali tę kampanię (email_campaign_sends),
-//   minus kursanci z nadanym dostępem (enrollments -> auth.users.email),
-//     bo mail sprzedaje kurs, a kupującemu nie wypada go sprzedawać drugi raz,
-//   minus (opcjonalnie, skipUnfinished) leady w trakcie sekwencji powitalnej
+// Kampania sprzedaje kurs, więc idzie WYŁĄCZNIE do osób bez dostępu do
+// jakiegokolwiek kursu. Dwa źródła odbiorców:
+//   1) leady: email_subscribers ze statusem active i zgodą marketingową,
+//   2) konta: auth.users bez wiersza w enrollments (access_granted), czyli
+//      zarejestrowani, którzy nic nie kupili (opcja includeAccounts, domyślnie tak).
+//      O adresie, który jest też w email_subscribers, decyduje ta tabela
+//      (brak zgody / wypis = nie wysyłamy). Konta bez potwierdzonego e-maila
+//      i konta adminów pomijamy.
+// Minus zawsze:
+//   - kursanci z nadanym dostępem (enrollments -> auth.users.email),
+//   - ci, którzy już dostali tę kampanię (email_campaign_sends),
+//   - (opcjonalnie, skipUnfinished) leady w trakcie sekwencji powitalnej
 //     (seq_day_sent < TOTAL_DAYS), żeby nie dostali dwóch maili jednego dnia.
+//
+// resolveRecipients zwraca listę { email, source: 'lead' | 'account' } - source
+// steruje stopką maila („bo zapisałeś się po planer" / „bo masz konto").
 //
 // Używane przez send-campaign.js (podgląd/test), send-campaign-background.js,
 // admin-campaigns.js (panel) i check-campaign-schedule.js (cron).
@@ -17,6 +27,8 @@ const { TOTAL_DAYS } = require('./mailer');
 const PAGE = 1000;
 const FRONTEND_URL = (process.env.FRONTEND_URL || 'https://fizykastatkiem.pl').replace(/\/$/, '');
 const CRON_SECRET = process.env.CRON_SECRET || '';
+
+const norm = (e) => String(e || '').trim().toLowerCase();
 
 async function fetchAll(query) {
     // Supabase zwraca max 1000 wierszy na zapytanie - stronicujemy range'em.
@@ -30,56 +42,91 @@ async function fetchAll(query) {
     return rows;
 }
 
-// E-maile kursantów z dostępem. Rzuca błędem, gdy nie da się ich ustalić -
-// lepiej nie wysłać nic niż wysłać ofertę klientom.
-async function fetchBuyerEmails(supabase) {
+// Wszystkie konta: e-mail + czy ma dostęp do kursu + czy admin + czy e-mail
+// potwierdzony. Rzuca błędem, gdy czegoś nie da się odczytać - lepiej nie
+// wysłać nic niż wysłać ofertę klientom.
+async function fetchAccounts(supabase) {
     const enr = await fetchAll(() =>
         supabase.from('enrollments').select('user_id').eq('access_granted', true)
     );
-    const buyerIds = new Set(enr.map((e) => e.user_id));
-    if (buyerIds.size === 0) return new Set();
+    const withAccess = new Set(enr.map((e) => e.user_id));
+    const profiles = await fetchAll(() => supabase.from('users').select('id, is_admin'));
+    const admins = new Set(profiles.filter((p) => p.is_admin).map((p) => p.id));
 
-    const emails = new Set();
+    const accounts = [];
     for (let page = 1; page <= 1000; page++) {
         const { data, error } = await supabase.auth.admin.listUsers({ page, perPage: PAGE });
         if (error) throw new Error(`auth.listUsers: ${error.message}`);
         const users = (data && data.users) || [];
         for (const u of users) {
-            if (u.email && buyerIds.has(u.id)) emails.add(String(u.email).trim().toLowerCase());
+            const email = norm(u.email);
+            if (!email) continue;
+            accounts.push({
+                email,
+                hasAccess: withAccess.has(u.id),
+                isAdmin: admins.has(u.id),
+                confirmed: !!u.email_confirmed_at,
+            });
         }
         if (users.length < PAGE) break;
     }
-    return emails;
+    return accounts;
 }
 
 async function resolveRecipients(supabase, slug, opts = {}) {
     const skipUnfinished = !!opts.skipUnfinished;
+    const includeAccounts = opts.includeAccounts !== false;
 
+    // Cała tabela leadów (także bez zgody / wypisani): dla kont bez kursu to ona
+    // mówi, czy wolno pisać.
     const subs = await fetchAll(() =>
         supabase
             .from('email_subscribers')
-            .select('email, seq_day_sent, consent_at')
-            .eq('status', 'active')
-            .eq('consent_marketing', true)
-            .order('consent_at', { ascending: true })
+            .select('email, status, consent_marketing, seq_day_sent, consent_at')
+            .order('created_at', { ascending: true })
     );
+    const subByEmail = new Map(subs.map((s) => [norm(s.email), s]));
 
     const sentRows = await fetchAll(() =>
         supabase.from('email_campaign_sends').select('email').eq('campaign', slug)
     );
-    const alreadySent = new Set(sentRows.map((r) => r.email));
-    const buyers = await fetchBuyerEmails(supabase);
+    const alreadySent = new Set(sentRows.map((r) => norm(r.email)));
+
+    const accounts = await fetchAccounts(supabase);
+    const buyers = new Set(accounts.filter((a) => a.hasAccess).map((a) => a.email));
 
     const recipients = [];
-    const stats = { total: subs.length, alreadySent: 0, buyers: 0, unfinished: 0 };
+    const seen = new Set();
+    // leads/accounts = wielkość puli z każdego źródła, total = ich suma;
+    // reszta to powody pominięcia.
+    const stats = { total: 0, leads: 0, accounts: 0, alreadySent: 0, buyers: 0, unfinished: 0 };
+
+    // 1) Leady ze zgodą.
     for (const s of subs) {
-        const email = String(s.email || '').trim().toLowerCase();
-        if (!email) continue;
+        if (s.status !== 'active' || !s.consent_marketing) continue;
+        const email = norm(s.email);
+        if (!email || seen.has(email)) continue;
+        stats.leads++;
         if (alreadySent.has(email)) { stats.alreadySent++; continue; }
         if (buyers.has(email)) { stats.buyers++; continue; }
         if (skipUnfinished && (s.seq_day_sent || 0) < TOTAL_DAYS) { stats.unfinished++; continue; }
-        recipients.push(email);
+        seen.add(email);
+        recipients.push({ email, source: 'lead' });
     }
+
+    // 2) Konta bez dostępu do żadnego kursu (nieobecne w bazie leadów).
+    if (includeAccounts) {
+        for (const a of accounts) {
+            if (a.hasAccess || a.isAdmin || !a.confirmed) continue;
+            if (subByEmail.has(a.email) || seen.has(a.email)) continue;
+            stats.accounts++;
+            if (alreadySent.has(a.email)) { stats.alreadySent++; continue; }
+            seen.add(a.email);
+            recipients.push({ email: a.email, source: 'account' });
+        }
+    }
+
+    stats.total = stats.leads + stats.accounts;
     return { recipients, stats };
 }
 

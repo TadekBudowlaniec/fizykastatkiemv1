@@ -140,7 +140,7 @@ const CAMPAIGNS = [
         preheader: 'Krótki check-in od Czarka i jedna rzecz, którą warto zrobić w tym tygodniu.',
         paragraphs: [
             'Cześć!',
-            'Jakiś czas temu odebrałeś ode mnie planer nauki do matury z fizyki. Dziś piszę krótko, bo chcę Cię o coś zapytać.',
+            'Jakiś czas temu odebrałeś ode mnie planer nauki do matury z fizyki albo założyłeś konto na FizykaStatkiem. Dziś piszę krótko, bo chcę Cię o coś zapytać.',
             'Do matury z fizyki zostało **{{dni}} dni**. Brzmi jak dużo, ale w praktyce to {{tygodnie}} tygodni, a w nich szkoła, inne przedmioty i zwykłe życie. Na fizykę realnie zostaje kilka godzin w tygodniu.',
             'Dobra wiadomość: przy 16 działach to wciąż wystarcza, **jeśli idziesz po kolei i wiesz, co robić dziś**. Po to jest planer. Gorsza wiadomość: każdy tydzień zwlekania zabiera z tego zapasu kawałek, którego potem nie da się odzyskać.',
             'Więc pytanie: **na czym stoisz?** Odpisz mi jednym zdaniem, który dział sprawia Ci najwięcej problemu. Czytam każdą odpowiedź i odpisuję, czasem z krótkim materiałem, który pomaga odblokować temat.',
@@ -244,8 +244,16 @@ function materialize(def, now = Date.now()) {
     };
 }
 
+// Skąd mamy adres: stopka musi mówić prawdę (RODO). 'lead' = zapis po planer
+// (email_subscribers), 'account' = konto na platformie bez kupionego kursu.
+const REASON = {
+    lead: 'Dostajesz tego maila, bo zapisałeś się po planer nauki na fizykastatkiem.pl.',
+    account: 'Dostajesz tego maila, bo masz konto na fizykastatkiem.pl.',
+};
+const reasonFor = (source) => REASON[source] || REASON.lead;
+
 // Lekki, „ludzki" HTML: systemowy font, czarny tekst, jeden przycisk CTA.
-function buildHtml(email, unsub) {
+function buildHtml(email, unsub, source) {
     const ctaUrl = ctaWithUtm(email.cta.url, email.utm.campaign, email.utm.content);
     const paras = email.paragraphs
         .map((p) => `<p style="margin:0 0 16px">${inlineHtml(p)}</p>`)
@@ -270,13 +278,13 @@ ${paras}
 ${cta}
 ${outro}
 <hr style="border:none;border-top:1px solid #ececf1;margin:28px 0 14px">
-<p style="margin:0;font-size:12px;line-height:1.5;color:#9a9aa5">Dostajesz tego maila, bo zapisałeś się po planer nauki na fizykastatkiem.pl.<br>
+<p style="margin:0;font-size:12px;line-height:1.5;color:#9a9aa5">${esc(reasonFor(source))}<br>
 Nie chcesz więcej wiadomości? <a href="${esc(unsub)}" style="color:#9a9aa5">Wypisz się</a>.</p>
 </div>
 </body></html>`;
 }
 
-function buildText(email, unsub) {
+function buildText(email, unsub, source) {
     const ctaUrl = ctaWithUtm(email.cta.url, email.utm.campaign, email.utm.content);
     const parts = [
         ...email.paragraphs.map(inlineText),
@@ -284,7 +292,7 @@ function buildText(email, unsub) {
         ...(email.outro || []).map(inlineText),
         '',
         '---',
-        'Dostajesz tego maila, bo zapisałeś się po planer nauki na fizykastatkiem.pl.',
+        reasonFor(source),
         `Wypisz się: ${unsub}`,
     ];
     return parts.join('\n\n');
@@ -304,9 +312,10 @@ function prepareCampaignEmail(slug, now = Date.now()) {
 }
 
 // Podgląd (HTML + text + temat) bez wysyłki. Do test-sequence / send-campaign.
-function renderEmail(email, recipientEmail) {
+// source: 'lead' (domyślnie) | 'account' - patrz REASON.
+function renderEmail(email, recipientEmail, source = 'lead') {
     const unsub = unsubUrl(recipientEmail);
-    return { subject: email.subject, html: buildHtml(email, unsub), text: buildText(email, unsub) };
+    return { subject: email.subject, html: buildHtml(email, unsub, source), text: buildText(email, unsub, source) };
 }
 
 // ── Wysyłka przez Resend ─────────────────────────────────────────────────────
@@ -317,13 +326,13 @@ async function sendSequenceEmail(recipientEmail, day) {
     return sendEmail(recipientEmail, email);
 }
 
-async function sendCampaignEmail(recipientEmail, slug) {
+async function sendCampaignEmail(recipientEmail, slug, source = 'lead') {
     const email = prepareCampaignEmail(slug);
     if (!email) return { ok: false, error: `no campaign ${slug}` };
-    return sendEmail(recipientEmail, email);
+    return sendEmail(recipientEmail, email, source);
 }
 
-async function sendEmail(recipientEmail, email) {
+async function sendEmail(recipientEmail, email, source = 'lead') {
     if (!RESEND_API_KEY) return { ok: false, error: 'RESEND_API_KEY missing' };
 
     const unsub = unsubUrl(recipientEmail);
@@ -332,8 +341,8 @@ async function sendEmail(recipientEmail, email) {
         to: [recipientEmail],
         reply_to: REPLY_TO,
         subject: email.subject,
-        html: buildHtml(email, unsub),
-        text: buildText(email, unsub),
+        html: buildHtml(email, unsub, source),
+        text: buildText(email, unsub, source),
         headers: {
             'List-Unsubscribe': `<${unsub}>`,
             'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',

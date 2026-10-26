@@ -18,18 +18,30 @@ Pliki:
 - `supabase/email-campaigns.sql`: tabela `email_campaign_sends` (pamięć „kto już dostał").
 - `supabase/email-campaign-runs.sql`: tabela `email_campaign_runs` (zlecenia i historia).
 
-Obie migracje zostały uruchomione na żywej bazie 26.10.2026.
+Obie migracje zostały uruchomione na żywej bazie 26.10.2026; kolumna `include_accounts` 27.10.2026.
 
 ## Kto dostaje maila
 
-Aktywni leady ze zgodą (`email_subscribers.status = 'active'`, `consent_marketing = true`), minus:
-- adresy, które już dostały tę kampanię (`email_campaign_sends`),
-- kursanci z nadanym dostępem (`enrollments.access_granted` + e-mail z `auth.users`), bo mail
-  sprzedaje kurs,
-- opcjonalnie (checkbox w panelu, domyślnie włączony) leady w trakcie sekwencji powitalnej,
-  żeby nie dostali dwóch maili jednego dnia.
+Kampania sprzedaje kurs, więc idzie **wyłącznie do osób bez dostępu do żadnego kursu**. Dwa źródła:
 
-Jeśli nie da się ustalić listy kursantów, funkcja NIE wysyła nic (lepiej nic niż oferta do klienta).
+1. **Leady** z bazy mailingowej: `email_subscribers.status = 'active'` i `consent_marketing = true`.
+2. **Konta bez kursu** (checkbox „Dołącz konta bez kursu", domyślnie włączony): `auth.users` bez
+   wiersza w `enrollments` z `access_granted`, z potwierdzonym e-mailem, nie admin. Jeśli adres
+   konta jest też w `email_subscribers`, decyduje ta tabela (brak zgody albo wypis = nie wysyłamy).
+
+Minus zawsze:
+- kursanci z nadanym dostępem (`enrollments.access_granted` + e-mail z `auth.users`),
+- adresy, które już dostały tę kampanię (`email_campaign_sends`),
+- opcjonalnie (checkbox w panelu, domyślnie włączony) leady w trakcie sekwencji powitalnej,
+  żeby nie dostali dwóch maili jednego dnia (dotyczy tylko źródła 1).
+
+Stopka maila mówi, skąd mamy adres: lead „bo zapisałeś się po planer", konto „bo masz konto".
+Wypis z maila (`unsubscribe.js`) dla adresu spoza bazy leadów dopisuje wiersz do
+`email_subscribers` ze `status = 'unsubscribed'` i `source = 'konto'`, więc kolejne kampanie
+go pominą.
+
+Jeśli nie da się ustalić listy kont / kursantów, funkcja NIE wysyła nic (lepiej nic niż oferta
+do klienta).
 
 ## Jak wysłać kampanię z panelu
 
@@ -57,9 +69,11 @@ atomowe (`update … where status='scheduled'`), więc cron i panel nie wyślą 
 ```
 /.netlify/functions/send-campaign?key=…&campaign=<slug>&mode=preview
 /.netlify/functions/send-campaign?key=…&campaign=<slug>&mode=test&email=twoj@adres.pl
-/.netlify/functions/send-campaign?key=…&campaign=<slug>&mode=count[&skip_unfinished=1]
-/.netlify/functions/send-campaign-background?key=…&campaign=<slug>[&skip_unfinished=1][&limit=100]
+/.netlify/functions/send-campaign?key=…&campaign=<slug>&mode=count[&skip_unfinished=1][&accounts=0]
+/.netlify/functions/send-campaign-background?key=…&campaign=<slug>[&skip_unfinished=1][&accounts=0][&limit=100]
 ```
+
+`accounts=0` = tylko leady z bazy mailingowej, bez kont bez kursu.
 
 Wysyłka po URL nie zostawia wpisu w historii panelu (tylko w `email_campaign_sends`).
 

@@ -38,10 +38,20 @@ exports.handler = async (event) => {
     }
 
     try {
-        await supabase
+        const { data, error } = await supabase
             .from('email_subscribers')
             .update({ status: 'unsubscribed' })
-            .eq('email', email);
+            .eq('email', email)
+            .select('id');
+        if (error) throw error;
+        if (!data || data.length === 0) {
+            // Adres spoza bazy leadów (kampania do kont bez kursu): zapisujemy
+            // wypis jako wiersz bez zgody, żeby żadna kolejna kampania go nie wzięła.
+            const { error: insErr } = await supabase
+                .from('email_subscribers')
+                .insert({ email, source: 'konto', consent_marketing: false, status: 'unsubscribed' });
+            if (insErr) throw insErr;
+        }
     } catch (e) {
         console.error('unsubscribe error:', e);
         // Nie pokazujemy błędu użytkownikowi — dla niego liczy się, że kliknął.

@@ -74,7 +74,16 @@ const SOURCE_LABEL: Record<string, string> = {
   planer_squeeze: 'Planer',
   exit_intent: 'Exit-popup',
   baza_wiedzy: 'Baza wiedzy',
+  konto: 'Konto (wypis)',
 };
+
+// Filtr listy kont: wszyscy / z wykupionym kursem / leady (konto bez kursu).
+type UserKind = 'all' | 'paid' | 'lead';
+const USER_KIND: { id: UserKind; label: string }[] = [
+  { id: 'all', label: 'Wszyscy' },
+  { id: 'paid', label: 'Z kursem' },
+  { id: 'lead', label: 'Leady' },
+];
 
 // Ile wierszy list pokazujemy na start (mobile = karty, więc nie zalewamy ekranu).
 const PAGE = 30;
@@ -410,6 +419,7 @@ export default function AdminPage() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [usersData, setUsersData] = useState<UsersResponse | null>(null);
   const [q, setQ] = useState('');
+  const [userKind, setUserKind] = useState<UserKind>('all');
   const [leadQ, setLeadQ] = useState('');
   const [active, setActive] = useState('przeglad');
   const [error, setError] = useState<string | null>(null);
@@ -491,6 +501,8 @@ export default function AdminPage() {
   }, [ready, stats, usersData]);
 
   const filteredUsers = (usersData?.users ?? []).filter((u) => {
+    if (userKind === 'paid' && u.courses === 0) return false;
+    if (userKind === 'lead' && u.courses > 0) return false;
     if (!q.trim()) return true;
     const needle = q.trim().toLowerCase();
     return (
@@ -771,7 +783,8 @@ export default function AdminPage() {
                   Kursanci
                   {usersData && (
                     <span className="ml-2 text-sm font-semibold text-muted">
-                      {usersData.summary.total} kont · {usersData.summary.paying} z dostępem
+                      {usersData.summary.total} kont · {usersData.summary.paying} z kursem ·{' '}
+                      {usersData.summary.total - usersData.summary.paying} leadów
                     </span>
                   )}
                 </h2>
@@ -783,6 +796,47 @@ export default function AdminPage() {
                   }}
                   placeholder="Szukaj: e-mail lub imię"
                 />
+              </div>
+              <div
+                className="mb-4 inline-flex rounded-full border border-line bg-white p-1 shadow-soft"
+                role="tablist"
+                aria-label="Filtr kont"
+              >
+                {USER_KIND.map((k) => {
+                  const n =
+                    k.id === 'all'
+                      ? usersData?.summary.total
+                      : k.id === 'paid'
+                        ? usersData?.summary.paying
+                        : usersData
+                          ? usersData.summary.total - usersData.summary.paying
+                          : undefined;
+                  return (
+                    <button
+                      key={k.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={userKind === k.id}
+                      onClick={() => {
+                        setUserKind(k.id);
+                        setUsersShown(PAGE);
+                      }}
+                      className={cn(
+                        'rounded-full px-3.5 py-1.5 text-xs font-semibold transition',
+                        userKind === k.id
+                          ? 'bg-brand-500 text-white'
+                          : 'text-slate hover:bg-brand-50 hover:text-brand-700'
+                      )}
+                    >
+                      {k.label}
+                      {n !== undefined && (
+                        <span className={cn('ml-1.5', userKind === k.id ? 'text-white/80' : 'text-muted')}>
+                          {n}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
               </div>
 
               <SectionCard className="overflow-hidden">
@@ -871,6 +925,14 @@ export default function AdminPage() {
                             <td className="px-5 py-3">
                               <span className={u.courses > 0 ? 'font-bold text-brand-600' : 'text-muted'}>
                                 {u.courses}
+                              </span>
+                              <span
+                                className={cn(
+                                  'ml-2 rounded-full px-2 py-0.5 text-[0.7rem] font-bold',
+                                  u.courses > 0 ? 'bg-brand-50 text-brand-700' : 'bg-slate-100 text-slate-500'
+                                )}
+                              >
+                                {u.courses > 0 ? 'kurs' : 'lead'}
                               </span>
                             </td>
                             <td className="px-5 py-3 text-muted">{fmtDate(u.created_at)}</td>

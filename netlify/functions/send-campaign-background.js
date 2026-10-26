@@ -6,8 +6,9 @@
 // Dwa tryby wywołania (oba z ?key=CRON_SECRET):
 //   A) zlecenie z panelu / crona:  ?run=<uuid z email_campaign_runs>
 //      kampania i opcje czytane z wiersza; status i wynik zapisywane do niego.
-//   B) ręcznie z przeglądarki:      ?campaign=<slug>[&skip_unfinished=1][&limit=N]
-//      (awaryjnie, bez wpisu w historii panelu)
+//   B) ręcznie z przeglądarki:      ?campaign=<slug>[&skip_unfinished=1][&accounts=0][&limit=N]
+//      (awaryjnie, bez wpisu w historii panelu; accounts=0 = tylko leady z bazy
+//      mailingowej, bez kont bez kursu)
 //
 // Idempotentne: każdy wysłany adres ląduje w email_campaign_sends i przy
 // kolejnym uruchomieniu jest pomijany. Można więc wołać wiele razy, aż
@@ -41,7 +42,7 @@ exports.handler = async (event) => {
     if (runId) {
         const { data, error } = await supabase
             .from('email_campaign_runs')
-            .select('id, campaign, skip_unfinished, status')
+            .select('id, campaign, skip_unfinished, include_accounts, status')
             .eq('id', runId)
             .maybeSingle();
         if (error || !data) {
@@ -62,6 +63,7 @@ exports.handler = async (event) => {
 
     const slug = run ? run.campaign : String(qp.campaign || '');
     const skipUnfinished = run ? !!run.skip_unfinished : qp.skip_unfinished === '1';
+    const includeAccounts = run ? run.include_accounts !== false : qp.accounts !== '0';
     const limit = run ? HARD_MAX : Math.min(HARD_MAX, Math.max(1, Number(qp.limit) || HARD_MAX));
 
     const finishRun = async (patch) => {
@@ -82,7 +84,7 @@ exports.handler = async (event) => {
     let recipients;
     let stats;
     try {
-        ({ recipients, stats } = await resolveRecipients(supabase, slug, { skipUnfinished }));
+        ({ recipients, stats } = await resolveRecipients(supabase, slug, { skipUnfinished, includeAccounts }));
     } catch (e) {
         const msg = e && e.message ? e.message : String(e);
         console.error('send-campaign-background: resolveRecipients failed:', e);
@@ -102,8 +104,8 @@ exports.handler = async (event) => {
     let sent = 0;
     let failed = 0;
     let lastError = null;
-    for (const email of batch) {
-        const r = await sendCampaignEmail(email, slug);
+    for (const { email, source } of batch) {
+        const r = await sendCampaignEmail(email, slug, source);
         if (!r.ok) {
             failed++;
             lastError = r.error || null;
@@ -137,7 +139,7 @@ exports.handler = async (event) => {
     });
     await sendAdminPush({
         title: failed > 0 ? '⚠️ Kampania zakończona z błędami' : '✅ Kampania wysłana',
-        body: `${slug}: wysłano ${sent}, błędów ${failed}, zostało ${remaining + failed}. Pominięto: kursanci ${stats.buyers}, już mieli ${stats.alreadySent}, w sekwencji ${stats.unfinished}.`,
+        body: `${slug}: wysłano ${sent}, błędów ${failed}, zostało ${remaining + failed}. Pula: leady ${stats.leads}, konta bez kursu ${stats.accounts}. Pominięto: kursanci ${stats.buyers}, już mieli ${stats.alreadySent}, w sekwencji ${stats.unfinished}.`,
         url: '/admin/#kampanie',
         tag: `campaign-${slug}`,
     });

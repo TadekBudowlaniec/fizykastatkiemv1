@@ -4,10 +4,13 @@
 //
 //   overview                       lista kampanii z kodu + historia zleceń
 //   preview  { slug }              HTML maila (do podglądu w panelu)
-//   count    { slug, skipUnfinished }  ilu dostanie / ilu pominiemy i dlaczego
+//   count    { slug, skipUnfinished, includeAccounts }  ilu dostanie / ilu pominiemy i dlaczego
 //   test     { slug }              wysyła 1 mail testowy na adres zalogowanego admina
-//   schedule { slug, scheduledAt, skipUnfinished }  zlecenie na datę (ISO)
-//   sendNow  { slug, skipUnfinished }  zlecenie „teraz" + natychmiastowy start
+//   schedule { slug, scheduledAt, skipUnfinished, includeAccounts }  zlecenie na datę (ISO)
+//   sendNow  { slug, skipUnfinished, includeAccounts }  zlecenie „teraz" + natychmiastowy start
+//
+// includeAccounts (domyślnie true): oprócz leadów z bazy mailingowej także konta
+// na platformie bez dostępu do żadnego kursu. Kursanci z dostępem nigdy.
 //   cancel   { runId }             odwołuje zlecenie ze statusem scheduled
 //
 // Treść kampanii żyje w kodzie (CAMPAIGNS w _shared/mailer.js), panel tylko
@@ -33,7 +36,7 @@ async function listRuns() {
     return data || [];
 }
 
-async function createRun({ slug, scheduledAt, skipUnfinished, createdBy }) {
+async function createRun({ slug, scheduledAt, skipUnfinished, includeAccounts, createdBy }) {
     // Jedno otwarte zlecenie na kampanię - dwa naraz tylko by się myliły
     // (wysyłka i tak jest idempotentna, więc to ochrona przed bałaganem, nie dublami).
     const { data: open, error: openErr } = await supabase
@@ -59,6 +62,7 @@ async function createRun({ slug, scheduledAt, skipUnfinished, createdBy }) {
             campaign: slug,
             scheduled_at: scheduledAt,
             skip_unfinished: !!skipUnfinished,
+            include_accounts: includeAccounts !== false,
             created_by: createdBy || null,
         })
         .select('*')
@@ -118,6 +122,7 @@ exports.handler = async (event) => {
         const email = prepareCampaignEmail(slug);
         if (!email) return json(400, { error: 'Nieznana kampania.' });
         const skipUnfinished = body.skipUnfinished === true;
+        const includeAccounts = body.includeAccounts !== false;
 
         if (action === 'preview') {
             const { html, subject } = renderEmail(email, admin.email || 'podglad@example.com');
@@ -125,8 +130,16 @@ exports.handler = async (event) => {
         }
 
         if (action === 'count') {
-            const { recipients, stats } = await resolveRecipients(supabase, slug, { skipUnfinished });
-            return json(200, { willSend: recipients.length, skipped: stats, sample: recipients.slice(0, 5) });
+            const { recipients, stats } = await resolveRecipients(supabase, slug, { skipUnfinished, includeAccounts });
+            return json(200, {
+                willSend: recipients.length,
+                bySource: {
+                    lead: recipients.filter((r) => r.source === 'lead').length,
+                    account: recipients.filter((r) => r.source === 'account').length,
+                },
+                skipped: stats,
+                sample: recipients.slice(0, 5).map((r) => r.email),
+            });
         }
 
         if (action === 'test') {
@@ -140,12 +153,12 @@ exports.handler = async (event) => {
             const when = new Date(String(body.scheduledAt || ''));
             if (!Number.isFinite(when.getTime())) return json(400, { error: 'Podaj poprawną datę i godzinę.' });
             if (when.getTime() < Date.now() - 60 * 1000) return json(400, { error: 'Ta data już minęła. Użyj „Wyślij teraz" albo wybierz późniejszy termin.' });
-            const run = await createRun({ slug, scheduledAt: when.toISOString(), skipUnfinished, createdBy: admin.email });
+            const run = await createRun({ slug, scheduledAt: when.toISOString(), skipUnfinished, includeAccounts, createdBy: admin.email });
             return json(200, { ok: true, run, runs: await listRuns() });
         }
 
         if (action === 'sendNow') {
-            const run = await createRun({ slug, scheduledAt: new Date().toISOString(), skipUnfinished, createdBy: admin.email });
+            const run = await createRun({ slug, scheduledAt: new Date().toISOString(), skipUnfinished, includeAccounts, createdBy: admin.email });
             try {
                 await claimAndTriggerRun(supabase, run.id);
             } catch (e) {

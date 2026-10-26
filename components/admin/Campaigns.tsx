@@ -12,11 +12,21 @@ import { cn } from '@/lib/cn';
 
 type Campaign = { slug: string; subject: string; preheader: string; ctaLabel: string; ctaUrl: string };
 type RunStatus = 'scheduled' | 'queued' | 'running' | 'done' | 'failed' | 'cancelled';
+/** Powody pominięcia + wielkość puli. Stare zlecenia (sprzed kont) nie mają leads/accounts. */
+type Skipped = {
+  total: number;
+  leads?: number;
+  accounts?: number;
+  alreadySent: number;
+  buyers: number;
+  unfinished: number;
+};
 type Run = {
   id: string;
   campaign: string;
   scheduled_at: string;
   skip_unfinished: boolean;
+  include_accounts?: boolean;
   status: RunStatus;
   created_at: string;
   created_by: string | null;
@@ -25,7 +35,7 @@ type Run = {
   sent: number;
   failed: number;
   remaining: number;
-  skipped: { total: number; alreadySent: number; buyers: number; unfinished: number } | null;
+  skipped: Skipped | null;
   error: string | null;
 };
 type Overview = {
@@ -38,7 +48,8 @@ type Overview = {
 };
 type Count = {
   willSend: number;
-  skipped: { total: number; alreadySent: number; buyers: number; unfinished: number };
+  bySource: { lead: number; account: number };
+  skipped: Skipped;
   sample: string[];
 };
 
@@ -165,6 +176,7 @@ export function Campaigns() {
   const [error, setError] = useState<string | null>(null);
   const [slug, setSlug] = useState<string>('');
   const [skipUnfinished, setSkipUnfinished] = useState(true);
+  const [includeAccounts, setIncludeAccounts] = useState(true);
   const [count, setCount] = useState<Count | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
   const [notice, setNotice] = useState<{ tone: 'ok' | 'err'; text: string } | null>(null);
@@ -201,7 +213,7 @@ export function Campaigns() {
   useEffect(() => {
     setCount(null);
     setConfirmNow(false);
-  }, [slug, skipUnfinished]);
+  }, [slug, skipUnfinished, includeAccounts]);
 
   const campaign = data?.campaigns.find((c) => c.slug === slug) || null;
   const openRun = data?.runs.find((r) => r.campaign === slug && OPEN.includes(r.status)) || null;
@@ -230,7 +242,7 @@ export function Campaigns() {
     );
 
   const doCount = () =>
-    run('count', () => postAdmin<Count>(ENDPOINT, { action: 'count', slug, skipUnfinished }), setCount);
+    run('count', () => postAdmin<Count>(ENDPOINT, { action: 'count', slug, skipUnfinished, includeAccounts }), setCount);
 
   const doSchedule = () =>
     run(
@@ -240,6 +252,7 @@ export function Campaigns() {
           action: 'schedule',
           slug,
           skipUnfinished,
+          includeAccounts,
           scheduledAt: new Date(when).toISOString(),
         }),
       (r) => {
@@ -251,7 +264,7 @@ export function Campaigns() {
   const doSendNow = () =>
     run(
       'sendNow',
-      () => postAdmin<{ runs: Run[] }>(ENDPOINT, { action: 'sendNow', slug, skipUnfinished }),
+      () => postAdmin<{ runs: Run[] }>(ENDPOINT, { action: 'sendNow', slug, skipUnfinished, includeAccounts }),
       (r) => {
         setData((d) => (d ? { ...d, runs: r.runs } : d));
         setConfirmNow(false);
@@ -327,7 +340,27 @@ export function Campaigns() {
             wysyłki, dziś: {data.daysToMatura}.
           </p>
 
-          <label className="mt-4 flex items-start gap-2 text-sm text-ink">
+          <p className="mt-4 text-xs font-bold uppercase tracking-wider text-muted">Odbiorcy</p>
+          <p className="mt-1 text-xs text-muted">
+            Mail idzie tylko do osób bez dostępu do żadnego kursu. Kursanci z wykupionym dostępem są
+            pomijani zawsze.
+          </p>
+          <label className="mt-3 flex items-start gap-2 text-sm text-ink">
+            <input
+              type="checkbox"
+              className="mt-1 accent-brand-500"
+              checked={includeAccounts}
+              onChange={(e) => setIncludeAccounts(e.target.checked)}
+            />
+            <span>
+              Dołącz konta bez kursu
+              <span className="block text-xs text-muted">
+                Zarejestrowani na platformie, którzy nic nie kupili i nie ma ich w bazie leadów.
+                Bez tej opcji wysyłamy tylko do leadów ze zgodą (zapis po planer / exit-popup).
+              </span>
+            </span>
+          </label>
+          <label className="mt-3 flex items-start gap-2 text-sm text-ink">
             <input
               type="checkbox"
               className="mt-1 accent-brand-500"
@@ -337,7 +370,7 @@ export function Campaigns() {
             <span>
               Pomiń leady w trakcie sekwencji powitalnej
               <span className="block text-xs text-muted">
-                Żeby nikt nie dostał dwóch maili jednego dnia. Kursanci z dostępem są pomijani zawsze.
+                Żeby nikt nie dostał dwóch maili jednego dnia. Dotyczy tylko leadów z bazy mailingowej.
               </span>
             </span>
           </label>
@@ -357,10 +390,15 @@ export function Campaigns() {
           {count && (
             <div className="mt-4 rounded-xl border border-line bg-cloud/40 p-3 text-sm">
               <p className="text-ink">
-                Dostanie <strong>{count.willSend}</strong> {count.willSend === 1 ? 'osoba' : 'osób'} z{' '}
-                {count.skipped.total} aktywnych leadów ze zgodą.
+                Dostanie <strong>{count.willSend}</strong> {count.willSend === 1 ? 'osoba' : 'osób'}:{' '}
+                {count.bySource.lead} z bazy leadów
+                {includeAccounts ? ` i ${count.bySource.account} z kont bez kursu` : ''}.
               </p>
               <ul className="mt-1 text-xs text-muted">
+                <li>
+                  Pula: {count.skipped.leads ?? count.skipped.total} leadów ze zgodą
+                  {includeAccounts ? ` + ${count.skipped.accounts ?? 0} kont bez kursu` : ''}
+                </li>
                 <li>Pominięci kursanci z dostępem: {count.skipped.buyers}</li>
                 <li>Już dostali tę kampanię: {count.skipped.alreadySent}</li>
                 <li>W trakcie sekwencji powitalnej: {count.skipped.unfinished}</li>
@@ -497,6 +535,9 @@ export function Campaigns() {
                   <StatusChip status={r.status} />
                   <span className="font-semibold text-ink">{r.campaign}</span>
                   <span className="text-muted">{fmt(r.scheduled_at)}</span>
+                  {r.include_accounts === false && (
+                    <span className="text-xs text-muted">tylko leady z bazy</span>
+                  )}
                   {r.skip_unfinished && (
                     <span className="text-xs text-muted">bez leadów w sekwencji</span>
                   )}
@@ -515,6 +556,9 @@ export function Campaigns() {
                   <p className="mt-1 text-xs text-muted">
                     Wysłano {r.sent}, błędów {r.failed}
                     {r.remaining > 0 ? `, zostało ${r.remaining}` : ''}
+                    {r.skipped && r.skipped.leads !== undefined
+                      ? ` · pula: leady ${r.skipped.leads}, konta bez kursu ${r.skipped.accounts ?? 0}`
+                      : ''}
                     {r.skipped
                       ? ` · pominięto: kursanci ${r.skipped.buyers}, już mieli ${r.skipped.alreadySent}, w sekwencji ${r.skipped.unfinished}`
                       : ''}

@@ -5,8 +5,9 @@
 //
 // Wywołania (zawsze z ?key=CRON_SECRET; bez ustawionego sekretu funkcja odmawia):
 //   ?key=…&campaign=<slug>&mode=preview            -> HTML maila w przeglądarce
-//   ?key=…&campaign=<slug>&mode=count[&skip_unfinished=1]
+//   ?key=…&campaign=<slug>&mode=count[&skip_unfinished=1][&accounts=0]
 //                                                   -> ile osób dostanie, ile pominiemy i dlaczego
+//                                                      (accounts=0 = bez kont bez kursu, tylko leady)
 //   ?key=…&campaign=<slug>&mode=test&email=<adres>  -> wysyła 1 mail na podany adres, bez zapisu w bazie
 //
 // Kolejność pracy: preview -> test na siebie -> count -> start wysyłki w tle.
@@ -53,7 +54,8 @@ exports.handler = async (event) => {
         const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
         try {
             const skipUnfinished = qp.skip_unfinished === '1';
-            const { recipients, stats } = await resolveRecipients(supabase, slug, { skipUnfinished });
+            const includeAccounts = qp.accounts !== '0';
+            const { recipients, stats } = await resolveRecipients(supabase, slug, { skipUnfinished, includeAccounts });
             return json(200, {
                 ok: true,
                 campaign: slug,
@@ -61,7 +63,7 @@ exports.handler = async (event) => {
                 willSend: recipients.length,
                 skipped: stats,
                 sample: recipients.slice(0, 5),
-                next: `/.netlify/functions/send-campaign-background?key=<CRON_SECRET>&campaign=${slug}${skipUnfinished ? '&skip_unfinished=1' : ''}`,
+                next: `/.netlify/functions/send-campaign-background?key=<CRON_SECRET>&campaign=${slug}${skipUnfinished ? '&skip_unfinished=1' : ''}${includeAccounts ? '' : '&accounts=0'}`,
             });
         } catch (e) {
             return json(500, { ok: false, error: String(e && e.message ? e.message : e) });
