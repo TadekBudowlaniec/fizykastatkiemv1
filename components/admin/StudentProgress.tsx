@@ -257,11 +257,15 @@ export function StudentProgress({ userId, onClose }: { userId: string; onClose: 
       aria-modal="true"
       aria-label="Postęp kursanta"
     >
+      {/* max-h: 92vh jako fallback w klasie, 92dvh inline (telefon: vh liczy pasek
+          przeglądarki, dvh nie). Treść: min-h-0 + flex-1, inaczej w kolumnie flex
+          nie skurczy się poniżej własnej wysokości i overflow-hidden obcina dół. */}
       <div
         className="flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-t-3xl bg-white shadow-card sm:rounded-3xl"
+        style={{ maxHeight: '92dvh' }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between gap-3 border-b border-line px-4 py-4 sm:px-6">
+        <div className="flex shrink-0 items-start justify-between gap-3 border-b border-line px-4 py-4 sm:px-6">
           <div className="min-w-0">
             <p className="break-all text-base font-extrabold text-ink">{u?.email ?? 'Ładowanie…'}</p>
             {u && (
@@ -280,7 +284,7 @@ export function StudentProgress({ userId, onClose }: { userId: string; onClose: 
           </button>
         </div>
 
-        <div className="overflow-y-auto px-4 py-4 sm:px-6">
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pt-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:px-6 sm:pb-6">
           {error && (
             <p className="rounded-xl bg-red-50 p-3 text-sm text-red-600">{error}</p>
           )}

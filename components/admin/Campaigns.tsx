@@ -147,10 +147,11 @@ function PreviewModal({
       aria-label="Podgląd maila"
     >
       <div
-        className="flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-t-3xl bg-white shadow-card sm:rounded-3xl"
+        className="flex h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-t-3xl bg-white shadow-card sm:rounded-3xl"
+        style={{ height: '92dvh' }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between gap-3 border-b border-line px-4 py-4 sm:px-6">
+        <div className="flex shrink-0 items-start justify-between gap-3 border-b border-line px-4 py-4 sm:px-6">
           <div className="min-w-0">
             <p className="text-xs font-bold uppercase tracking-wider text-muted">Temat</p>
             <p className="text-base font-extrabold text-ink">{subject}</p>
@@ -164,7 +165,7 @@ function PreviewModal({
           title="Podgląd maila"
           srcDoc={html}
           sandbox=""
-          className="h-[70vh] w-full bg-white"
+          className="min-h-0 w-full flex-1 bg-white"
         />
       </div>
     </div>
