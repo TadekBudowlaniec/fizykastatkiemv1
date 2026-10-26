@@ -20,6 +20,11 @@
 [functions."send-sequence"]
   schedule = "0 8 * * *"
 
+# Cron co 5 minut: zaplanowane z panelu wysyłki kampanii (email_campaign_runs).
+# Sam nic nie wysyła - przekazuje dojrzałe zlecenia do send-campaign-background.
+[functions."check-campaign-schedule"]
+  schedule = "*/5 * * * *"
+
 # Service worker (Web Push do panelu) - bez cache, żeby aktualizacje wchodziły od razu.
 [[headers]]
   for = "/sw.js"

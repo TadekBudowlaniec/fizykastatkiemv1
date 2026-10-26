@@ -8,6 +8,7 @@ import { COURSES } from '@/lib/courses';
 import { cn } from '@/lib/cn';
 import { PushSettings, isStandaloneApp } from '@/components/admin/PushSettings';
 import { StudentProgress } from '@/components/admin/StudentProgress';
+import { Campaigns } from '@/components/admin/Campaigns';
 import { postAdmin } from '@/components/admin/adminApi';
 
 type AdminUser = {
@@ -393,6 +394,7 @@ const NAV: { id: string; label: string; short: string; icon: IconName }[] = [
   { id: 'sprzedaz', label: 'Sprzedaż', short: 'Sprzedaż', icon: 'sales' },
   { id: 'kursanci', label: 'Kursanci', short: 'Kursanci', icon: 'students' },
   { id: 'mailing', label: 'Sekwencja mailowa', short: 'Mailing', icon: 'mail' },
+  { id: 'kampanie', label: 'Kampanie', short: 'Kampanie', icon: 'send' },
   { id: 'powiadomienia', label: 'Powiadomienia', short: 'Push', icon: 'bell' },
 ];
 
@@ -1103,6 +1105,15 @@ export default function AdminPage() {
                   </Button>
                 </div>
               </div>
+            </div>
+
+            {/* Kampanie mailowe */}
+            <div id="kampanie" className={SECTION}>
+              <h2 className="text-xl font-extrabold tracking-tight text-ink">Kampanie</h2>
+              <p className="mt-1 text-sm text-muted">
+                Jednorazowe maile do całej bazy leadów: podgląd, test, wysyłka teraz albo na zaplanowaną godzinę.
+              </p>
+              <Campaigns />
             </div>
 
             {/* Powiadomienia (panel jako aplikacja na telefonie) */}
