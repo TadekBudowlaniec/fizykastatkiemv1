@@ -25,7 +25,16 @@ type UsersResponse = {
   generatedAt: string;
 };
 
-type Recent = { user_id: string; course_id: number; enrolled_at: string | null };
+// Jeden zakup: Kurs Pełny = 16 wierszy enrollments sklejonych w jedną pozycję.
+type Purchase = {
+  user_id: string;
+  email: string | null;
+  courses: number[];
+  kind: 'full' | 'single' | 'multi';
+  enrolled_at: string | null;
+  amount: number | null;
+  currency: string | null;
+};
 type LeadRow = {
   email: string;
   source: string;
@@ -51,7 +60,9 @@ type Stats = {
     last30d: number;
     last7d: number;
     byCourse: { course_id: number; count: number }[];
-    recent: Recent[];
+    purchases: { total: number; last30d: number; last7d: number };
+    recent: Purchase[];
+    recentNote: string | null;
   };
   leads: LeadsData | { error: string } | null;
   revenue:
@@ -68,6 +79,14 @@ const COURSE_NAME = new Map<number, string>([
 
 function courseName(id: number): string {
   return COURSE_NAME.get(id) ?? `Dział #${id}`;
+}
+
+function purchaseName(p: Purchase): string {
+  if (p.kind === 'full') return 'Kurs Pełny';
+  if (p.kind === 'single') return courseName(p.courses[0]);
+  return `${p.courses.length} ${plural(p.courses.length, 'dział', 'działy', 'działów')}: ${p.courses
+    .map(courseName)
+    .join(', ')}`;
 }
 
 const SOURCE_LABEL: Record<string, string> = {
@@ -716,9 +735,9 @@ export default function AdminPage() {
                 <StatTile
                   icon="check"
                   tone="sky"
-                  label="Dostępy (30 dni)"
-                  value={stats ? String(stats.enrollments.last30d) : '—'}
-                  hint={stats ? `7 dni: ${stats.enrollments.last7d}` : undefined}
+                  label="Zakupy (30 dni)"
+                  value={stats ? String(stats.enrollments.purchases.last30d) : '—'}
+                  hint={stats ? `7 dni: ${stats.enrollments.purchases.last7d}` : undefined}
                 />
                 <StatTile
                   icon="mail"
@@ -754,23 +773,55 @@ export default function AdminPage() {
                 </SectionCard>
 
                 <SectionCard className="p-4 sm:p-6">
-                  <h3 className="mb-3 text-base font-bold text-ink sm:mb-4">Ostatnie dostępy</h3>
+                  <h3 className="mb-3 text-base font-bold text-ink sm:mb-4">Ostatnie zakupy</h3>
                   {stats && stats.enrollments.recent.length > 0 ? (
                     <ul className="divide-y divide-line">
-                      {stats.enrollments.recent.map((r, i) => (
+                      {stats.enrollments.recent.map((p, i) => (
                         <li
-                          key={`${r.user_id}-${r.course_id}-${i}`}
-                          className="flex items-center justify-between gap-3 py-2.5 text-sm"
+                          key={`${p.user_id}-${p.enrolled_at}-${i}`}
+                          onClick={() => setSelectedUser(p.user_id)}
+                          className="flex cursor-pointer items-center justify-between gap-3 py-2.5 text-sm transition hover:bg-cloud/60"
+                          title="Pokaż postęp kursanta"
                         >
-                          <span className="min-w-0 truncate text-ink">{courseName(r.course_id)}</span>
-                          <span className="shrink-0 text-xs text-muted sm:text-sm">
-                            {fmtDate(r.enrolled_at)}
+                          <div className="min-w-0">
+                            <p className="flex min-w-0 items-center gap-2">
+                              <span
+                                className={cn(
+                                  'truncate',
+                                  p.kind === 'full' ? 'font-bold text-brand-700' : 'text-ink'
+                                )}
+                              >
+                                {purchaseName(p)}
+                              </span>
+                              {p.kind === 'full' && (
+                                <span className="shrink-0 rounded-full bg-brand-50 px-2 py-0.5 text-[0.65rem] font-bold text-brand-600">
+                                  16 działów
+                                </span>
+                              )}
+                            </p>
+                            <p className="truncate text-xs text-muted">
+                              {p.email ?? 'konto bez e-maila'}
+                              <span aria-hidden> · </span>
+                              {fmtDate(p.enrolled_at)}
+                            </p>
+                          </div>
+                          <span
+                            className={cn(
+                              'shrink-0 text-sm font-bold',
+                              p.amount !== null ? 'text-emerald-600' : 'text-muted'
+                            )}
+                            title={p.amount === null ? 'Brak pasującej płatności w Stripe' : undefined}
+                          >
+                            {p.amount !== null ? fmtPln(p.amount, p.currency ?? 'PLN') : '—'}
                           </span>
                         </li>
                       ))}
                     </ul>
                   ) : (
                     <p className="text-muted">Brak danych.</p>
+                  )}
+                  {stats?.enrollments.recentNote && (
+                    <p className="mt-2 text-xs text-muted">{stats.enrollments.recentNote}</p>
                   )}
                 </SectionCard>
               </div>

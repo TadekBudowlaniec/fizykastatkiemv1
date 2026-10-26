@@ -8,6 +8,7 @@
 //   - Stripe API -> przychód (jedyne wiarygodne źródło kwot; enrollments nie ma cen)
 
 const { createClient } = require('@supabase/supabase-js');
+const { groupPurchases, attachAmounts } = require('./_shared/purchases');
 
 // Preferuj klucz LIVE (prawdziwy przychód na produkcji); TEST jako fallback lokalnie.
 const stripe = require('stripe')(
@@ -25,6 +26,28 @@ const supabaseAdmin = createClient(
 );
 
 const DAY = 24 * 60 * 60 * 1000;
+const RECENT_PURCHASES = 15;
+
+// E-maile użytkowników z auth (public.users nie ma kolumny email).
+async function loadEmails(userIds) {
+    const wanted = new Set(userIds);
+    const map = new Map();
+    for (let page = 1; page <= 20 && map.size < wanted.size; page++) {
+        const { data, error } = await supabaseAdmin.auth.admin.listUsers({ page, perPage: 200 });
+        if (error) throw error;
+        const batch = (data && data.users) || [];
+        for (const u of batch) if (wanted.has(u.id) && u.email) map.set(u.id, u.email);
+        if (batch.length < 200) break;
+    }
+    return map;
+}
+
+// Opłacone sesje Checkout od podanej daty (do kwot przy ostatnich zakupach).
+async function loadStripeSessions(sinceMs) {
+    return stripe.checkout.sessions
+        .list({ created: { gte: Math.floor(sinceMs / 1000) - 48 * 60 * 60 }, limit: 100 })
+        .autoPagingToArray({ limit: 500 });
+}
 
 function json(statusCode, body) {
     return {
@@ -125,7 +148,30 @@ exports.handler = async (event) => {
             .map(([course_id, count]) => ({ course_id, count }))
             .sort((a, b) => b.count - a.count);
 
-        const recent = rows.slice(0, 15);
+        // Zakupy: 16 wierszy Kursu Pełnego = jeden zakup. Kwoty ze Stripe,
+        // e-maile z auth; żadne z nich nie może wywalić dashboardu.
+        const purchases = groupPurchases(rows);
+        const purchases30 = purchases.filter((p) => new Date(p.enrolled_at).getTime() >= since30).length;
+        const purchases7 = purchases.filter((p) => new Date(p.enrolled_at).getTime() >= since7).length;
+        const recentPurchases = purchases.slice(0, RECENT_PURCHASES);
+        let emails = new Map();
+        try {
+            emails = await loadEmails(recentPurchases.map((p) => p.user_id));
+        } catch (e) {
+            console.error('admin-stats listUsers error:', e);
+        }
+        let sessions = [];
+        let purchasesNote = null;
+        try {
+            const oldest = recentPurchases.length
+                ? new Date(recentPurchases[recentPurchases.length - 1].enrolled_at).getTime()
+                : now;
+            sessions = await loadStripeSessions(oldest);
+        } catch (e) {
+            console.error('admin-stats stripe sessions error:', e);
+            purchasesNote = 'Kwoty niedostępne (Stripe).';
+        }
+        const recent = attachAmounts(recentPurchases, sessions, (id) => emails.get(id));
 
         // 4) Leady (email_subscribers) — nie może wywalić dashboardu, gdyby
         // tabela jeszcze nie istniała na danym środowisku.
@@ -201,7 +247,10 @@ exports.handler = async (event) => {
                 last30d: last30,
                 last7d: last7,
                 byCourse,
+                // zakupy (Kurs Pełny = 1 pozycja), nie pojedyncze dostępy
+                purchases: { total: purchases.length, last30d: purchases30, last7d: purchases7 },
                 recent,
+                recentNote: purchasesNote,
             },
             leads,
             revenue,
