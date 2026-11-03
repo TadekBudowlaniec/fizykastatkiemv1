@@ -14,8 +14,9 @@ import { getTopic, seoTitle } from '@/lib/seo';
 import { SITE } from '@/lib/site';
 
 // Strona programu kursu pod frazy „kurs fizyki online” / „kurs z fizyki” /
-// „kurs fizyka program”. Frazę „kurs maturalny z fizyki” trzyma strona główna -
-// tutaj jest to, czego tam nie ma: pełny sylabus zwykłym tekstem.
+// „kurs fizyka program”. Frazę „kurs maturalny z fizyki” trzyma
+// /kurs-maturalny-z-fizyki/ - tutaj jest to, czego tam nie ma: pełny sylabus
+// zwykłym tekstem.
 
 const fullPlan = PLANS.find((p) => p.key === 'full_access')!;
 const PATH = '/kurs-fizyki-online/';
@@ -341,9 +342,9 @@ export default function KursFizykiOnlinePage() {
           <RelatedGrid>
             <RelatedCard
               kicker="Oferta"
-              title="Kurs maturalny z fizyki"
-              desc="Strona główna kursu: opinie, gwarancja i warianty."
-              href="/"
+              title="Kurs maturalny z fizyki online"
+              desc="Dla kogo, za ile, nagrania czy na żywo, kiedy zacząć."
+              href="/kurs-maturalny-z-fizyki"
             />
             <RelatedCard
               kicker="Start od zera"

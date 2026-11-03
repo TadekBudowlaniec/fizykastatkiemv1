@@ -29,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Strony marketingowe (trailing slash - zgodnie z trailingSlash: true)
   add('/', 1.0, 'weekly', marketing);
+  add('/kurs-maturalny-z-fizyki/', 0.9, 'monthly', marketing);
   add('/kurs-fizyki-online/', 0.9, 'monthly', marketing);
   add('/kurs-fizyki-od-podstaw/', 0.8, 'monthly', marketing);
   add('/cennik/', 0.9, 'monthly', marketing);

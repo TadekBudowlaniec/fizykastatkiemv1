@@ -4,7 +4,7 @@ import { SITE } from '@/lib/site';
 
 // Linki z frazą w anchorze - z każdej strony serwisu do stron sprzedażowych kursu.
 const courseLinks = [
-  { label: 'Kurs maturalny z fizyki', href: '/' },
+  { label: 'Kurs maturalny z fizyki online', href: '/kurs-maturalny-z-fizyki' },
   { label: 'Kurs fizyki online - program', href: '/kurs-fizyki-online' },
   { label: 'Kurs fizyki od podstaw', href: '/kurs-fizyki-od-podstaw' },
   { label: 'Cennik kursu', href: '/cennik' },

@@ -23,6 +23,7 @@ export function CourseFactsTable() {
 }
 
 const guides = [
+  { label: 'Kurs maturalny z fizyki online - wszystko o kursie', href: '/kurs-maturalny-z-fizyki' },
   { label: 'Szczegółowy program kursu fizyki online', href: '/kurs-fizyki-online' },
   { label: 'Kurs fizyki od podstaw - dla zaczynających od zera', href: '/kurs-fizyki-od-podstaw' },
   { label: 'Ile kosztuje kurs maturalny z fizyki', href: '/blog/ile-kosztuje-kurs-maturalny-z-fizyki' },

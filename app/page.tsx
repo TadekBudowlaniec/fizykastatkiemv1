@@ -20,7 +20,10 @@ import type { Metadata } from 'next';
 const fullPlan = PLANS.find((p) => p.key === 'full_access')!;
 const vipPlan = PLANS.find((p) => p.key === 'vip')!;
 
-const TITLE = `Kurs maturalny z fizyki online - matura ${MATURA.year} | Fizyka Statkiem`;
+// Strona główna = marka + oferta (brand-first: ruch z GSC to głównie „fizyka
+// statkiem”). Frazę „kurs maturalny z fizyki online” na pierwszym miejscu tytułu
+// ma dedykowana strona /kurs-maturalny-z-fizyki/.
+const TITLE = `Fizyka Statkiem - kurs maturalny z fizyki online do matury ${MATURA.year}`;
 const DESC = `Kurs maturalny z fizyki online do matury ${MATURA.year} (rozszerzony): 16 działów wideo, PDF-y, zadania CKE i planer. ${fullPlan.price} zł jednorazowo, 28/28 zdało maturę.`;
 
 export const metadata: Metadata = {

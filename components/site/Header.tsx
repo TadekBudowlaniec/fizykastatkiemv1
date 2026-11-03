@@ -24,10 +24,12 @@ export function Header() {
 
   useEffect(() => setOpen(false), [pathname]);
 
-  // „Kurs” dla niezalogowanych (i robotów) prowadzi na publiczny program kursu,
-  // a nie do panelu /kurs (noindex, wymaga logowania). Kursant trafia do panelu.
+  // „Kurs” dla niezalogowanych (i robotów) prowadzi na publiczną stronę kursu
+  // maturalnego (link z każdej podstrony = sygnał dla Google pod frazę „kurs
+  // maturalny z fizyki”), a nie do panelu /kurs (noindex, wymaga logowania).
+  // Kursant trafia do panelu.
   const navHref = (href: string) =>
-    href === '/kurs' && !user ? '/kurs-fizyki-online' : href;
+    href === '/kurs' && !user ? '/kurs-maturalny-z-fizyki' : href;
 
   return (
     <header
