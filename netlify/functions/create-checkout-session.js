@@ -120,8 +120,10 @@ exports.handler = async (event) => {
         const unitAmount = getPrice(course, promoStartedAt);
 
         // Tworzenie sesji Stripe
+        // Metody płatności NIE są wymuszane w kodzie - Checkout bierze te, które
+        // są włączone w Stripe Dashboard (Settings → Payment methods): karta,
+        // BLIK, Przelewy24, Klarna itd. Nowa metoda = włączyć w panelu, bez deployu.
         const sessionParams = {
-            payment_method_types: ['card', 'blik', 'klarna'],
             mode: 'payment',
             line_items: [
                 {

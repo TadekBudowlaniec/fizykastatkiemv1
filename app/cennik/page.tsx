@@ -14,7 +14,7 @@ const vipPlan = PLANS.find((p) => p.key === 'vip')!;
 export const metadata: Metadata = {
   title: 'Cennik kursu fizyki',
   description:
-    'Cennik kursu maturalnego z fizyki: Kurs Pełny (828 zł) i VIP 1:1 z indywidualnym prowadzeniem (3497 zł, tylko 6 miejsc). Płatność jednorazowa - BLIK, karta, Klarna.',
+    'Cennik kursu maturalnego z fizyki: Kurs Pełny (828 zł) i VIP 1:1 z indywidualnym prowadzeniem (3497 zł, tylko 6 miejsc). Płatność jednorazowa - BLIK, Przelewy24, karta, Klarna.',
   alternates: { canonical: '/cennik/' },
 };
 
@@ -25,7 +25,7 @@ const faq: FaqItem[] = [
   },
   {
     q: 'Jakie formy płatności obsługujecie?',
-    a: 'Płatności realizuje Stripe - obsługujemy BLIK, karty płatnicze (Visa, Mastercard) oraz Klarna.',
+    a: 'Płatności realizuje Stripe - obsługujemy BLIK, Przelewy24, karty płatnicze (Visa, Mastercard) oraz Klarna.',
   },
   {
     q: 'Czym różni się Kurs Pełny od VIP 1:1?',
@@ -121,7 +121,7 @@ export default function CennikPage() {
             <PricingTiers />
           </div>
           <p className="mt-8 text-center text-sm text-muted">
-            Płatność jednorazowa · dostęp do końca matury · BLIK, karta, Klarna.
+            Płatność jednorazowa · dostęp do końca matury · BLIK, Przelewy24, karta, Klarna.
           </p>
           <p className="mt-3 text-center text-sm text-muted">
             Chcesz wiedzieć, co dokładnie jest w kursie?{' '}

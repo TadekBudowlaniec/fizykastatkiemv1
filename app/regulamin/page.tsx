@@ -128,7 +128,7 @@ export default function RegulaminPage() {
             <p>Zamówienia można składać 24 godziny na dobę, 7 dni w tygodniu.</p>
             <p>
               Dostępną formą płatności są szybkie płatności internetowe (karta
-              płatnicza, przelewy online, BLIK) obsługiwane przez operatora
+              płatnicza, przelewy online Przelewy24, BLIK, Klarna) obsługiwane przez operatora
               Stripe.
             </p>
             <p>

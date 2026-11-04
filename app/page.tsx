@@ -72,7 +72,7 @@ const faq: FaqItem[] = [
   },
   {
     q: 'Jakie są formy płatności?',
-    a: 'Płatność jest jednorazowa i bezpieczna przez Stripe - obsługujemy BLIK, karty płatnicze oraz Klarna.',
+    a: 'Płatność jest jednorazowa i bezpieczna przez Stripe - obsługujemy BLIK, Przelewy24, karty płatnicze oraz Klarna.',
   },
 ];
 

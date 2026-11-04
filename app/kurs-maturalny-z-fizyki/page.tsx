@@ -175,7 +175,7 @@ export default function KursMaturalnyZFizykiPage() {
           </Button>
         </div>
         <p className="mt-4 text-sm text-slate-300/85">
-          28/28 absolwentów zdało maturę · Gwarancja Dobrego Wyniku · BLIK, karta, Klarna
+          28/28 absolwentów zdało maturę · Gwarancja Dobrego Wyniku · BLIK, Przelewy24, karta, Klarna
         </p>
       </PageHero>
 
@@ -407,7 +407,7 @@ export default function KursMaturalnyZFizykiPage() {
             <PricingTiers />
           </div>
           <p className="mt-8 text-center text-sm text-muted">
-            Płatność jednorazowa · dostęp do końca matury · BLIK, karta, Klarna ·{' '}
+            Płatność jednorazowa · dostęp do końca matury · BLIK, Przelewy24, karta, Klarna ·{' '}
             <Link
               href="/cennik"
               className="font-semibold text-brand-600 underline underline-offset-4 hover:text-magenta-600"

@@ -170,7 +170,7 @@ exports.handler = async (event) => {
         console.log('Processing session:', session.id, 'type:', eventData.type, 'payment_status:', session.payment_status);
 
         // KRYTYCZNE: dostęp nadajemy WYŁĄCZNIE po potwierdzonej płatności.
-        // - card/BLIK: 'checkout.session.completed' przychodzi od razu jako 'paid'
+        // - card/BLIK/Przelewy24: 'checkout.session.completed' przychodzi od razu jako 'paid'
         // - Klarna (metoda asynchroniczna): 'completed' bywa 'unpaid' - wtedy czekamy
         //   na 'checkout.session.async_payment_succeeded' (dopiero ono jest 'paid').
         // - kupon 100%: 'no_payment_required'.
