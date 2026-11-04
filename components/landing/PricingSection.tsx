@@ -38,7 +38,7 @@ export function PricingSection() {
         </div>
 
         <p className="mt-8 text-center text-sm text-muted">
-          Płatność jednorazowa · dostęp do końca matury · BLIK, Przelewy24, karta, Klarna.
+          Płatność jednorazowa · dostęp do końca matury · BLIK, Przelewy24, karta, Klarna, Revolut Pay.
         </p>
 
         <p className="mt-3 text-center text-sm text-muted">
