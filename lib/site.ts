@@ -8,6 +8,13 @@ export const SITE = {
   ogImage: '/images/logo_magenta.png',
   owner: 'Cezary Prusak',
   ownerAlias: 'Czarek',
+  // Dane działalności gospodarczej (stopka, regulamin, polityka, JSON-LD).
+  company: {
+    name: 'Cezary Prusak',
+    nip: '8252218300',
+    regon: '546083641',
+    address: 'ul. Pszenna 4, Lublin',
+  },
   telephone: '+48 665 115 132',
   addressLocality: 'Lublin',
   addressRegion: 'lubelskie',

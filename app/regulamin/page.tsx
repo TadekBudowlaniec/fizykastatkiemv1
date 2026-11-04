@@ -30,8 +30,9 @@ export default function RegulaminPage() {
             <h3>§1 Postanowienia ogólne</h3>
             <p>
               Sklep internetowy dostępny pod adresem https://fizykastatkiem.pl
-              prowadzony jest przez Cezarego Prusaka, zamieszkałego przy ul.
-              Pszennej 4, Lublin (zwanego dalej „Sprzedawcą”).
+              prowadzony jest przez Cezarego Prusaka prowadzącego działalność
+              gospodarczą pod firmą „Cezary Prusak”, ul. Pszenna 4, Lublin,
+              NIP 8252218300, REGON 546083641 (zwanego dalej „Sprzedawcą”).
             </p>
             <p>
               Kontakt ze Sprzedawcą możliwy jest za pośrednictwem adresu e-mail:
@@ -61,8 +62,9 @@ export default function RegulaminPage() {
 
             <h3>§2 Definicje</h3>
             <p>
-              <strong>Sprzedawca</strong> - Cezary Prusak, zam. ul. Pszenna
-              4, Lublin.
+              <strong>Sprzedawca</strong> - Cezary Prusak prowadzący
+              działalność gospodarczą pod firmą „Cezary Prusak”, ul. Pszenna 4,
+              Lublin, NIP 8252218300, REGON 546083641.
             </p>
             <p>
               <strong>Klient / Użytkownik</strong> - osoba fizyczna, osoba prawna
@@ -289,7 +291,11 @@ export default function RegulaminPage() {
             <p>Sprzedawca rozpatrzy reklamację w terminie 14 dni.</p>
 
             <h3>§11 Ochrona danych osobowych</h3>
-            <p>Administratorem danych osobowych jest Cezary Prusak.</p>
+            <p>
+              Administratorem danych osobowych jest Cezary Prusak prowadzący
+              działalność gospodarczą pod firmą „Cezary Prusak”, NIP 8252218300,
+              REGON 546083641.
+            </p>
             <p>
               Dane przetwarzane są w celu realizacji zamówienia, prowadzenia
               konta oraz ewentualnego rozpatrywania reklamacji.

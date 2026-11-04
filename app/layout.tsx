@@ -66,6 +66,8 @@ const graphJsonLd = {
       '@type': 'EducationalOrganization',
       '@id': `${SITE.url}/#org`,
       name: SITE.name,
+      legalName: SITE.company.name,
+      taxID: SITE.company.nip,
       url: SITE.url,
       email: SITE.email,
       telephone: SITE.telephone,

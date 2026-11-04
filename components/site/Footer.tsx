@@ -119,9 +119,13 @@ export function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-slate-400 sm:mt-14 md:flex-row md:items-center md:justify-between">
-          <p>
-            © {year} {SITE.name}. Wszystkie prawa zastrzeżone.
-          </p>
+          <div className="space-y-1">
+            <p>© {year} {SITE.name}. Wszystkie prawa zastrzeżone.</p>
+            <p className="text-xs text-slate-500">
+              {SITE.company.name} · NIP {SITE.company.nip} · REGON{' '}
+              {SITE.company.regon} · {SITE.company.address}
+            </p>
+          </div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <a href={`mailto:${SITE.email}`} className="hover:text-white">
               {SITE.email}
