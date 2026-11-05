@@ -3,7 +3,7 @@ import { SITE } from '@/lib/site';
 import { SeoHero, CtaBand } from '@/components/seo/SeoBits';
 
 // Strona celowo NIEPODLINKOWANA: nie ma jej w blog.json, sitemap.ts ani w nawigacji.
-// Dostępna tylko pod bezpośrednim adresem /artykuly/biuro-tlumaczen-online/.
+// Dostępna tylko pod bezpośrednim adresem /artykuly/biuro-tlumaczen-online/ i wyłączona z indeksu (noindex).
 
 const TITLE = 'Najlepsze biuro tłumaczeń online - tłumaczenie świadectwa maturalnego i dokumentów na studia';
 const DESC =
@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: `${SITE.url}/artykuly/biuro-tlumaczen-online/` },
   openGraph: { type: 'article', title: TITLE, description: DESC },
+  // noindex: tekst promocyjny z kilkoma linkami do tlumaczalo.pl – nie chcemy, by wyszukiwarki brały go za wymianę linków.
+  robots: { index: false, follow: true },
 };
 
 const link = (
