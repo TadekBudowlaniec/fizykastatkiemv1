@@ -49,6 +49,96 @@ async function loadStripeSessions(sinceMs) {
         .autoPagingToArray({ limit: 500 });
 }
 
+// Lejek koszyka: każda sesja Stripe Checkout = ktoś kliknął „Kup" i trafił na
+// stronę płatności. Stripe trzyma je sam (bez własnej tabeli), sesja bez
+// płatności wygasa po 24h (status 'expired') = porzucony koszyk.
+//   paid    - complete i opłacona
+//   pending - complete, ale płatność asynchroniczna jeszcze nie potwierdzona
+//   open    - jeszcze może zapłacić (nie minęło 24h) - nie liczymy do konwersji
+//   expired - porzucona
+const ABANDONED_LIST = 20;
+
+function sessionState(s) {
+    if (s.status === 'complete') return s.payment_status === 'unpaid' ? 'pending' : 'paid';
+    if (s.status === 'expired') return 'expired';
+    return 'open';
+}
+
+function sessionEmail(s) {
+    return (s.customer_details && s.customer_details.email) || s.customer_email || null;
+}
+
+function funnelCounts(list) {
+    const c = { created: list.length, paid: 0, pending: 0, open: 0, expired: 0 };
+    for (const s of list) c[sessionState(s)] += 1;
+    const decided = c.paid + c.expired; // sesje z rozstrzygniętym wynikiem
+    c.conversion = decided ? Math.round((c.paid / decided) * 1000) / 10 : null;
+    c.abandonRate = decided ? Math.round((c.expired / decided) * 1000) / 10 : null;
+    return c;
+}
+
+async function loadCheckoutFunnel() {
+    const now = Date.now();
+    const since30 = now - 30 * DAY;
+    const since7 = now - 7 * DAY;
+    const sessions = await stripe.checkout.sessions
+        .list({ created: { gte: Math.floor(since30 / 1000) }, limit: 100 })
+        .autoPagingToArray({ limit: 3000 });
+
+    const created = (s) => s.created * 1000;
+    const last7 = sessions.filter((s) => created(s) >= since7);
+
+    // Wg kursu (metadata.courseId z create-checkout-session).
+    const byCourseMap = new Map();
+    for (const s of sessions) {
+        const id = Number((s.metadata && s.metadata.courseId) || 0);
+        if (!byCourseMap.has(id)) byCourseMap.set(id, []);
+        byCourseMap.get(id).push(s);
+    }
+    const byCourse = [...byCourseMap.entries()]
+        .map(([course_id, list]) => {
+            const c = funnelCounts(list);
+            return { course_id, created: c.created, paid: c.paid, expired: c.expired, conversion: c.conversion };
+        })
+        .sort((a, b) => b.created - a.created);
+
+    // Porzucone z mailem (do ewentualnego kontaktu) + czy ta osoba i tak potem kupiła.
+    const paidEmails = new Set(
+        sessions
+            .filter((s) => sessionState(s) === 'paid')
+            .map((s) => (sessionEmail(s) || '').toLowerCase())
+            .filter(Boolean)
+    );
+    const abandoned = sessions
+        .filter((s) => sessionState(s) === 'expired')
+        .sort((a, b) => b.created - a.created);
+    const recentAbandoned = abandoned.slice(0, ABANDONED_LIST).map((s) => {
+        const email = sessionEmail(s);
+        return {
+            created_at: new Date(created(s)).toISOString(),
+            course_id: Number((s.metadata && s.metadata.courseId) || 0),
+            amount: s.amount_total != null ? s.amount_total / 100 : null,
+            currency: (s.currency || 'pln').toUpperCase(),
+            email,
+            guest: !(s.metadata && s.metadata.userId),
+            boughtLater: !!email && paidEmails.has(email.toLowerCase()),
+        };
+    });
+    const abandonedRecovered = abandoned.filter((s) => {
+        const e = sessionEmail(s);
+        return e && paidEmails.has(e.toLowerCase());
+    }).length;
+
+    return {
+        last30d: funnelCounts(sessions),
+        last7d: funnelCounts(last7),
+        abandonedWithEmail: abandoned.filter((s) => sessionEmail(s)).length,
+        abandonedRecovered,
+        byCourse,
+        recentAbandoned,
+    };
+}
+
 function json(statusCode, body) {
     return {
         statusCode,
@@ -241,7 +331,17 @@ exports.handler = async (event) => {
             revenue = { error: 'Nie udało się pobrać danych ze Stripe.' };
         }
 
+        // 6) Lejek koszyka (sesje Stripe Checkout) - też nie może wywalić dashboardu
+        let checkout = null;
+        try {
+            checkout = await loadCheckoutFunnel();
+        } catch (e) {
+            console.error('admin-stats checkout funnel error:', e);
+            checkout = { error: 'Nie udało się pobrać sesji Stripe.' };
+        }
+
         return json(200, {
+            checkout,
             enrollments: {
                 total: rows.length,
                 last30d: last30,

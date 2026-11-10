@@ -54,7 +54,34 @@ type LeadsData = {
   byStage: number[];
   list: LeadRow[];
 };
+type FunnelCounts = {
+  created: number;
+  paid: number;
+  pending: number;
+  open: number;
+  expired: number;
+  conversion: number | null;
+  abandonRate: number | null;
+};
+type AbandonedRow = {
+  created_at: string;
+  course_id: number;
+  amount: number | null;
+  currency: string;
+  email: string | null;
+  guest: boolean;
+  boughtLater: boolean;
+};
+type CheckoutData = {
+  last30d: FunnelCounts;
+  last7d: FunnelCounts;
+  abandonedWithEmail: number;
+  abandonedRecovered: number;
+  byCourse: { course_id: number; created: number; paid: number; expired: number; conversion: number | null }[];
+  recentAbandoned: AbandonedRow[];
+};
 type Stats = {
+  checkout?: CheckoutData | { error: string } | null;
   enrollments: {
     total: number;
     last30d: number;
@@ -75,7 +102,12 @@ type Stats = {
 const COURSE_NAME = new Map<number, string>([
   ...COURSES.map((c) => [c.id, c.title] as [number, string]),
   [17, 'Wszystkie materiały (pełny dostęp)'],
+  [19, 'VIP 1:1'],
 ]);
+
+function fmtPct(v: number | null): string {
+  return v === null ? '—' : `${String(v).replace('.', ',')}%`;
+}
 
 function courseName(id: number): string {
   return COURSE_NAME.get(id) ?? `Dział #${id}`;
@@ -420,6 +452,7 @@ function SourceChip({ source }: { source: string }) {
 const NAV: { id: string; label: string; short: string; icon: IconName }[] = [
   { id: 'przeglad', label: 'Przegląd', short: 'Przegląd', icon: 'overview' },
   { id: 'sprzedaz', label: 'Sprzedaż', short: 'Sprzedaż', icon: 'sales' },
+  { id: 'koszyk', label: 'Koszyk (Stripe)', short: 'Koszyk', icon: 'wallet' },
   { id: 'kursanci', label: 'Kursanci', short: 'Kursanci', icon: 'students' },
   { id: 'mailing', label: 'Sekwencja mailowa', short: 'Mailing', icon: 'mail' },
   { id: 'kampanie', label: 'Kampanie', short: 'Kampanie', icon: 'send' },
@@ -536,6 +569,8 @@ export default function AdminPage() {
   const leads = stats?.leads;
   const hasLeads = leads && !('error' in leads);
   const leadsData = hasLeads ? (leads as LeadsData) : null;
+  const checkoutRaw = stats?.checkout;
+  const checkout = checkoutRaw && !('error' in checkoutRaw) ? (checkoutRaw as CheckoutData) : null;
 
   const filteredLeads = (leadsData?.list ?? []).filter((l) => {
     if (!leadQ.trim()) return true;
@@ -825,6 +860,133 @@ export default function AdminPage() {
                   )}
                 </SectionCard>
               </div>
+            </div>
+
+            {/* Koszyk: sesje Stripe Checkout -> ile kończy się płatnością */}
+            <div id="koszyk" className={SECTION}>
+              <h2 className="text-xl font-extrabold tracking-tight text-ink">Koszyk (Stripe)</h2>
+              <p className="mt-1 text-sm text-muted">
+                Sesja = ktoś kliknął „Kup” i trafił na stronę płatności. Nieopłacona wygasa po
+                24h i liczy się jako porzucona. Konwersja liczona tylko z sesji rozstrzygniętych.
+              </p>
+              {checkoutRaw && 'error' in checkoutRaw && (
+                <p className="mt-3 text-sm text-red-600">{checkoutRaw.error}</p>
+              )}
+              <div className="mt-4 grid grid-cols-2 gap-3 sm:mt-5 sm:gap-4 xl:grid-cols-4">
+                <StatTile
+                  icon="sales"
+                  tone="slate"
+                  label="Sesje (30 dni)"
+                  value={checkout ? String(checkout.last30d.created) : '—'}
+                  hint={checkout ? `7 dni: ${checkout.last7d.created}` : undefined}
+                />
+                <StatTile
+                  icon="check"
+                  tone="green"
+                  label="Opłacone (30 dni)"
+                  value={checkout ? String(checkout.last30d.paid) : '—'}
+                  hint={
+                    checkout
+                      ? `7 dni: ${checkout.last7d.paid}` +
+                        (checkout.last30d.pending ? ` · w toku: ${checkout.last30d.pending}` : '')
+                      : undefined
+                  }
+                />
+                <StatTile
+                  icon="wallet"
+                  tone="amber"
+                  label="Porzucone (30 dni)"
+                  value={checkout ? String(checkout.last30d.expired) : '—'}
+                  hint={
+                    checkout
+                      ? `${fmtPct(checkout.last30d.abandonRate)} · otwarte: ${checkout.last30d.open}`
+                      : undefined
+                  }
+                />
+                <StatTile
+                  icon="overview"
+                  tone="brand"
+                  label="Konwersja (30 dni)"
+                  value={checkout ? fmtPct(checkout.last30d.conversion) : '—'}
+                  hint={checkout ? `7 dni: ${fmtPct(checkout.last7d.conversion)}` : undefined}
+                />
+              </div>
+
+              {checkout && (
+                <div className="mt-4 grid gap-4 sm:mt-5 sm:gap-6 lg:grid-cols-2">
+                  <SectionCard className="p-4 sm:p-6">
+                    <h3 className="mb-3 text-base font-bold text-ink sm:mb-4">
+                      Wg produktu (30 dni)
+                    </h3>
+                    {checkout.byCourse.length > 0 ? (
+                      <ul className="divide-y divide-line">
+                        {checkout.byCourse.map((b) => (
+                          <li
+                            key={b.course_id}
+                            className="flex items-center justify-between gap-3 py-2.5 text-sm"
+                          >
+                            <span className="min-w-0 truncate text-ink">
+                              {b.course_id ? courseName(b.course_id) : 'Inne / bez kursu'}
+                            </span>
+                            <span className="shrink-0 text-muted">
+                              <span className="font-bold text-emerald-600">{b.paid}</span>
+                              {' / '}
+                              {b.created}
+                              <span className="ml-2 font-bold text-brand-600">
+                                {fmtPct(b.conversion)}
+                              </span>
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="text-muted">Brak sesji w tym okresie.</p>
+                    )}
+                    <p className="mt-2 text-xs text-muted">opłacone / wszystkie sesje · konwersja</p>
+                  </SectionCard>
+
+                  <SectionCard className="p-4 sm:p-6">
+                    <h3 className="mb-1 text-base font-bold text-ink">Ostatnie porzucone</h3>
+                    <p className="mb-3 text-xs text-muted sm:mb-4">
+                      Z e-mailem: {checkout.abandonedWithEmail} z {checkout.last30d.expired} · kupiło
+                      później: {checkout.abandonedRecovered}
+                    </p>
+                    {checkout.recentAbandoned.length > 0 ? (
+                      <ul className="divide-y divide-line">
+                        {checkout.recentAbandoned.map((a, i) => (
+                          <li
+                            key={`${a.created_at}-${i}`}
+                            className="flex items-center justify-between gap-3 py-2.5 text-sm"
+                          >
+                            <div className="min-w-0">
+                              <p className="flex min-w-0 items-center gap-2">
+                                <span className="truncate text-ink">
+                                  {a.course_id ? courseName(a.course_id) : 'Inne'}
+                                </span>
+                                {a.boughtLater && (
+                                  <span className="shrink-0 rounded-full bg-emerald-50 px-2 py-0.5 text-[0.65rem] font-bold text-emerald-600">
+                                    kupił później
+                                  </span>
+                                )}
+                              </p>
+                              <p className="truncate text-xs text-muted">
+                                {a.email ?? (a.guest ? 'gość bez e-maila' : 'bez e-maila')}
+                                <span aria-hidden> · </span>
+                                {fmtDate(a.created_at)}
+                              </p>
+                            </div>
+                            <span className="shrink-0 text-sm font-bold text-muted">
+                              {a.amount !== null ? fmtPln(a.amount, a.currency) : '—'}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="text-muted">Brak porzuconych sesji.</p>
+                    )}
+                  </SectionCard>
+                </div>
+              )}
             </div>
 
             {/* Kursanci */}
