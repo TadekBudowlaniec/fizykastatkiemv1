@@ -35,7 +35,7 @@ Minus zawsze:
 - opcjonalnie (checkbox w panelu, domyślnie włączony) leady w trakcie sekwencji powitalnej,
   żeby nie dostali dwóch maili jednego dnia (dotyczy tylko źródła 1).
 
-Stopka maila mówi, skąd mamy adres: lead „bo zapisałeś się po planer", konto „bo masz konto".
+Stopka maila mówi, skąd mamy adres: lead „bo Twój adres został zapisany przy pobieraniu planera", konto „bo masz konto".
 Wypis z maila (`unsubscribe.js`) dla adresu spoza bazy leadów dopisuje wiersz do
 `email_subscribers` ze `status = 'unsubscribed'` i `source = 'konto'`, więc kolejne kampanie
 go pominą.

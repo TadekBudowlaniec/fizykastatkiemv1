@@ -17,7 +17,7 @@
 //     (seq_day_sent < TOTAL_DAYS), żeby nie dostali dwóch maili jednego dnia.
 //
 // resolveRecipients zwraca listę { email, source: 'lead' | 'account' } - source
-// steruje stopką maila („bo zapisałeś się po planer" / „bo masz konto").
+// steruje stopką maila („bo Twój adres został zapisany przy pobieraniu planera" / „bo masz konto").
 //
 // Używane przez send-campaign.js (podgląd/test), send-campaign-background.js,
 // admin-campaigns.js (panel) i check-campaign-schedule.js (cron).

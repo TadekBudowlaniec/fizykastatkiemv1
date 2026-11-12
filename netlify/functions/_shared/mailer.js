@@ -33,12 +33,12 @@ const SEQUENCE = [
         preheader: 'Zajrzyj do środka i zobacz, od czego zacząć w tym tygodniu.',
         paragraphs: [
             'Cześć!',
-            'Masz to. Twój **darmowy planer nauki do matury z fizyki** czeka w środku: spersonalizowany plan dzień po dniu, aż do egzaminu.',
-            'Zanim zaczniesz, jedna rada, która robi całą różnicę. **Nie ucz się wszystkiego naraz.** Ucz się tego, co planer pokazuje na dany dzień.',
+            'Gotowe. Twój **darmowy planer nauki do matury z fizyki** czeka w środku: spersonalizowany plan dzień po dniu, aż do egzaminu.',
+            'Zanim zaczniesz, jedna rada, która naprawdę dużo zmienia. **Nie ucz się wszystkiego naraz.** Ucz się tego, co planer pokazuje na dany dzień.',
             'Jak z niego korzystać w trzech krokach:',
             '1. Wejdź do planera i **zaznacz działy, które już ogarniasz**. Resztą zajmiemy się my.',
             '2. Otwórz sekcję **„Dziś w planie”**. To Twoje jedyne zadanie na dzisiaj. Tyle, nic więcej.',
-            '3. Odhaczaj kolejne kroki. Pasek postępu zrobi swoje, a matura z „ogromu” zamieni się w listę małych, wykonalnych rzeczy.',
+            '3. Odhaczaj kolejne kroki. Pasek postępu zrobi swoje, a matura przestanie być „ogromem” i zamieni się w listę małych, wykonalnych rzeczy.',
         ],
         cta: { label: 'Otwórz swój planer', url: `${FRONTEND_URL}/planer` },
         outro: [
@@ -65,18 +65,18 @@ const SEQUENCE = [
     },
     {
         day: 3,
-        subject: '„Byłam pewna, że oblewę”. Skończyło się inaczej.',
+        subject: '„Byłam pewna, że obleję”. Skończyło się inaczej.',
         preheader: 'Historia Nadii i to, co konkretnie zmieniła.',
         paragraphs: [
             'Cześć!',
-            'Nadia napisała do mnie w styczniu. Trzy miesiące do matury, w głowie chaos, a w dzienniku oceny, na które „lepiej nie patrzeć”.',
+            'Nadia napisała do mnie w lutym. Trzy miesiące do matury, w głowie chaos, a w dzienniku oceny, na które „lepiej nie patrzeć”.',
             'Nie była leniwa, wręcz przeciwnie: uczyła się dużo. Tylko **bez planu**. Raz kinematyka, raz elektryczność, wszystko po łebkach, nic do końca.',
             'Zmieniła dwie rzeczy.',
-            'Po pierwsze, **przestała skakać po działach**. Zaczęła brać jeden temat na raz, dokładnie tak, jak układa to planer.',
+            'Po pierwsze, **przestała skakać po działach**. Zaczęła brać tematy po kolei, jeden po drugim, dokładnie tak, jak układa to planer.',
             'Po drugie, **zaczęła od zrozumienia, a nie od zadań**. Najpierw „dlaczego”, potem liczby.',
-            'Efekt? Z „na pewno oblewę” zrobiło się spokojne wejście na maturę i wynik, którego sama się nie spodziewała. Nie dlatego, że nagle stała się geniuszem, tylko dlatego, że zaczęła uczyć się **systemem, a nie zrywami**.',
-            'Filip miał inny start, ale tę samą zasadę: **plan i zrozumienie znaczą więcej niż godziny wkuwania**.',
-            'Ty masz już plan, jest w Twoim planerze. Brakuje tylko materiału, który tłumaczy „dlaczego”. O tym jutro, dorzucę Ci wtedy kawałek za darmo.',
+            'Efekt? Z „na pewno obleję” zrobiło się spokojne wejście na maturę i wynik, którego sama się nie spodziewała. Nie dlatego, że nagle stała się geniuszem, tylko dlatego, że zaczęła uczyć się **systemem, a nie zrywami**.',
+            'Ta sama zasada działa u każdego: **plan i zrozumienie znaczą więcej niż godziny wkuwania**.',
+            'Plan już masz: czeka w Twoim planerze. Brakuje tylko materiału, który tłumaczy „dlaczego”. O tym jutro. Dorzucę Ci wtedy kawałek za darmo.',
         ],
         cta: { label: 'Wróć do planera i zrób dzisiejszy krok', url: `${FRONTEND_URL}/planer` },
         outro: ['**Czarek**\nFizykaStatkiem'],
@@ -88,8 +88,8 @@ const SEQUENCE = [
         paragraphs: [
             'Cześć!',
             'Obiecana pigułka. Bez sprzedaży, po prostu weź i korzystaj.',
-            'Kinematyka w jednym zdaniu: każde zadanie z ruchu to odpowiedź na trzy pytania. Gdzie jest ciało, jak szybko się porusza i jak ta prędkość się zmienia. Położenie, prędkość, przyspieszenie. Tyle. Reszta to warianty tej samej historii.',
-            'Mała zmiana myślenia, która oszczędza mnóstwo błędów: zanim cokolwiek wstawisz do wzoru, **narysuj sytuację i zaznacz zwroty** (co jest dodatnie, a co ujemne). Osiemdziesiąt procent pomyłek w kinematyce to nie wzór, tylko znak.',
+            'Kinematyka w jednym zdaniu? Każde zadanie z ruchu to odpowiedź na trzy pytania: gdzie jest ciało, jak szybko się porusza i jak ta prędkość się zmienia. Położenie, prędkość, przyspieszenie. Tyle. Reszta to warianty tej samej historii.',
+            'Mała zmiana myślenia, która pozwala uniknąć mnóstwa błędów: zanim cokolwiek wstawisz do wzoru, **narysuj sytuację i zaznacz zwroty** (co jest dodatnie, a co ujemne). Osiemdziesiąt procent pomyłek w kinematyce nie wynika ze złego wzoru, tylko ze złego znaku.',
             'Tak właśnie uczę w kursie: **najpierw obraz i intuicja, dopiero potem rachunki**.',
         ],
         cta: { label: 'Zobacz darmowy moduł „Tutaj zacznij”', url: `${FRONTEND_URL}/kurs/0` },
@@ -104,16 +104,16 @@ const SEQUENCE = [
         preheader: 'Kurs Pełny z Gwarancją Dobrego Wyniku, czyli nauka bez ryzyka.',
         paragraphs: [
             'Cześć!',
-            'Przez ostatnie dni dostałeś ode mnie plan i kawałek metody. To działa, ale to wciąż fragment.',
+            'W ostatnich dniach wysłałem Ci plan i kawałek metody. To działa, ale to wciąż tylko fragment.',
             '**Kurs Pełny** to cały materiał maturalny z fizyki, poukładany tak, jak układa go Twój planer: dział po dziale, od „dlaczego” aż po zadania maturalne z rozwiązaniami krok po kroku.',
             'Co dostajesz:',
             '• Wszystkie działy, od kinematyki po fizykę jądrową, w jednej spójnej metodzie.',
             '• Wideo, materiały PDF i zadania z pełnymi rozwiązaniami.',
             '• Planer, który prowadzi Cię przez to wszystko aż do matury.',
-            'Cena: **828 zł** za komplet. To mniej niż kilka godzin korepetycji, a zostaje z Tobą do samego egzaminu.',
+            'Cena: **828 zł** za komplet. To mniej niż kilka godzin korepetycji, a kurs zostaje z Tobą do samego egzaminu.',
             'Najważniejsze: **Gwarancja Dobrego Wyniku**. Uczysz się według planu, a jeśli kurs Ci nie pomoże, masz jasne zasady zwrotu. Ryzyko jest po mojej stronie, nie Twojej. Twoje jedyne zadanie to robić dzienny krok z planera.',
         ],
-        cta: { label: 'Odbierz Kurs Pełny', url: `${FRONTEND_URL}/cennik` },
+        cta: { label: 'Zobacz Kurs Pełny', url: `${FRONTEND_URL}/cennik` },
         outro: [
             'Masz plan. Masz metodę. Zostało tylko zacząć.',
             'Trzymam kciuki za Twoją maturę,\n**Czarek**\nFizykaStatkiem',
@@ -247,7 +247,7 @@ function materialize(def, now = Date.now()) {
 // Skąd mamy adres: stopka musi mówić prawdę (RODO). 'lead' = zapis po planer
 // (email_subscribers), 'account' = konto na platformie bez kupionego kursu.
 const REASON = {
-    lead: 'Dostajesz tego maila, bo zapisałeś się po planer nauki na fizykastatkiem.pl.',
+    lead: 'Dostajesz tego maila, bo Twój adres został zapisany przy pobieraniu planera nauki na fizykastatkiem.pl.',
     account: 'Dostajesz tego maila, bo masz konto na fizykastatkiem.pl.',
 };
 const reasonFor = (source) => REASON[source] || REASON.lead;

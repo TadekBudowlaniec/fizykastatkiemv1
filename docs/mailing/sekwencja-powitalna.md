@@ -82,7 +82,7 @@ Czarek
 
 ## Dzień 3, case study (Nadia / Filip)
 
-TEMAT: „Byłam pewna, że oblewę". Skończyło się inaczej.
+TEMAT: „Byłam pewna, że obleję". Skończyło się inaczej.
 PREHEADER: Historia Nadii, i co konkretnie zrobiła.
 
 TRESC MAILA:
@@ -99,7 +99,7 @@ Przestała skakać po działach. Zaczęła robić jeden temat na raz, dokładnie
 
 Zaczęła od zrozumienia, nie od zadań. Najpierw „dlaczego", potem liczby.
 
-Efekt? Z „na pewno oblewę" zrobiło się spokojne wejście na maturę i wynik, którego sama się nie spodziewała. Nie dlatego, że nagle stała się geniuszem. Dlatego, że zaczęła uczyć się systemem, a nie zrywami.
+Efekt? Z „na pewno obleję" zrobiło się spokojne wejście na maturę i wynik, którego sama się nie spodziewała. Nie dlatego, że nagle stała się geniuszem. Dlatego, że zaczęła uczyć się systemem, a nie zrywami.
 
 Filip? Podobna historia, inny start. Ta sama zasada: plan plus rozumienie biją godziny wkuwania.
 
@@ -124,7 +124,7 @@ obiecana pigułka. Bez sprzedaży. Po prostu weź i korzystaj.
 
 Kinematyka w jednym zdaniu: wszystkie zadania z ruchu to odpowiedź na trzy pytania: gdzie jest ciało, jak szybko się porusza i jak ta prędkość się zmienia. Położenie, prędkość, przyspieszenie. Tyle. Reszta to warianty tej samej historii.
 
-Mała zmiana myślenia, która oszczędza mnóstwo błędów: zanim wstawisz cokolwiek do wzoru, narysuj sytuację i zaznacz zwroty (co jest „plus", co „minus"). 80% pomyłek w kinematyce to nie wzór, to znak.
+Mała zmiana myślenia, która pozwala uniknąć mnóstwa błędów: zanim wstawisz cokolwiek do wzoru, narysuj sytuację i zaznacz zwroty (co jest „plus", co „minus"). 80% pomyłek w kinematyce nie wynika ze złego wzoru, tylko ze złego znaku.
 
 To fragment tego, jak uczę w środku kursu: najpierw obraz i intuicja, potem dopiero rachunki.
 
@@ -161,7 +161,7 @@ Cena: 828 zł za komplet, mniej niż kilka godzin korepetycji, a zostaje z Tobą
 
 A teraz najważniejsze. Gwarancja Dobrego Wyniku. Uczysz się według planu, a jeśli mimo to kurs Ci nie pomoże, masz jasne zasady zwrotu. Ryzyko jest po mojej stronie, nie Twojej. Twoim jedynym zadaniem jest robić dzienny krok z planera.
 
-Odbierz Kurs Pełny: https://fizykastatkiem.pl/cennik
+Zobacz Kurs Pełny: https://fizykastatkiem.pl/cennik
 
 Masz plan. Masz metodę. Zostało tylko zacząć.
 
