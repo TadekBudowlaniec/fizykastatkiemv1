@@ -3,7 +3,7 @@ import { Container } from '@/components/ui/Container';
 // Tylko dane prawdziwe i zweryfikowane (audyt treści 2026-09).
 // NIE dodawać liczby klientów, średniej ocen ani gwiazdek bez potwierdzenia.
 const stats = [
-  { value: '100%', label: 'zdawalności matury' },
+  { value: '100%', label: 'zadowolonych kursantów' },
   { value: '28/28', label: 'absolwentów zdało maturę' },
   { value: '16', label: 'działów pełnego zakresu' },
   { value: 'CAŁY SYSTEM', label: 'wideo • PDF-y • zadania • quizy • planer' },

@@ -10,10 +10,10 @@ export function SocialProof() {
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
             <p className="font-display text-5xl font-extrabold text-gradient sm:text-6xl">
-              100% zdawalności
+              100% zadowolonych kursantów
             </p>
             <p className="mt-3 text-lg font-semibold text-ink">
-              28/28 naszych absolwentów zdało maturę.
+              28/28 pozytywnych opinii od naszych absolwentów.
             </p>
           </div>
         </Reveal>

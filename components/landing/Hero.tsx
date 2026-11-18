@@ -5,7 +5,7 @@ import { Eyebrow } from '@/components/ui/SectionHeading';
 import { MaturaCountdown } from './MaturaCountdown';
 
 const trust = [
-  { icon: '🎓', label: '100% zdawalności' },
+  { icon: '🎓', label: '100% zadowolonych kursantów' },
   { icon: '✅', label: '28/28 absolwentów zdało maturę' },
   { icon: '🛡️', label: 'Gwarancja dobrego wyniku' },
 ];

@@ -94,7 +94,7 @@ export const COURSE_FACTS: CourseFact[] = [
   },
   {
     label: 'Wyniki',
-    value: '28 z 28 absolwentów kursu zdało maturę (100% zdawalności).',
+    value: '100% zadowolonych kursantów (28/28 pozytywnych opinii); 28 z 28 absolwentów kursu zdało maturę.',
   },
   {
     label: 'Termin matury',
