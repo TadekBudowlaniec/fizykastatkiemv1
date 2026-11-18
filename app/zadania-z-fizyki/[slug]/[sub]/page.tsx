@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { metaOverride } from '@/lib/seo-overrides';
 import { notFound } from 'next/navigation';
 import { SITE } from '@/lib/site';
 import { getTopics, getTopic, seoTitle, clipDesc, courseForTopic } from '@/lib/seo';
@@ -32,11 +33,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const t = getTopic(slug);
   const s = t?.subtopics?.find((x) => x.slug === sub);
   if (!t || !s) return {};
+  const o = metaOverride(`/zadania-z-fizyki/${t.slug}/${s.slug}/`);
   return {
     // Bez „| Dział” - nazwa działu jest w opisie i okruszkach; tytuł ma
     // zmieścić frazę „zadania z rozwiązaniami” w limicie SERP.
-    title: seoTitle(`${s.name} - zadania z rozwiązaniami`),
-    description: clipDesc(
+    title: seoTitle(o.title ?? `${s.name} - zadania z rozwiązaniami`),
+    description: o.description ?? clipDesc(
       `${s.name} (${t.name}): zadania z fizyki z pełnymi rozwiązaniami krok po kroku. ${s.intro ?? ''}`
     ),
     keywords: `${s.name.toLowerCase()}, ${s.name.toLowerCase()} zadania, zadania z fizyki`,

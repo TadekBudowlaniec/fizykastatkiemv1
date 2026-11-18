@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { metaOverride } from '@/lib/seo-overrides';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
@@ -41,9 +42,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const desc =
     t.metaTeoria ||
     `${t.name}: teoria, wzory i definicje. Wytłumaczenie krok po kroku dla licealistów i maturzystów.`;
+  const o = metaOverride(`/fizyka/${t.slug}/`);
   return {
-    title: seoTitle(`${t.name} - teoria, wzory i definicje`),
-    description: desc,
+    title: seoTitle(o.title ?? `${t.name} - wzory, teoria i zadania do matury`),
+    description: o.description ?? desc,
     keywords: `${t.name.toLowerCase()}, ${t.name.toLowerCase()} wzory, ${t.name.toLowerCase()} teoria, fizyka, matura`,
     alternates: { canonical: `${SITE.url}/fizyka/${t.slug}/` },
   };

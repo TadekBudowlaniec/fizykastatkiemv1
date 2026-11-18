@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { metaOverride } from '@/lib/seo-overrides';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
@@ -39,10 +40,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const desc =
     t.metaMatura ||
     `${t.name} na maturze z fizyki: wymagania CKE, typowe zadania i strategia. Poziom rozszerzony.`;
+  const o = metaOverride(`/matura-z-fizyki/${t.slug}/`);
   return {
     // Naturalna fraza („kinematyka na maturze”) i mieści się w limicie SERP.
-    title: seoTitle(`${t.name} na maturze z fizyki - wymagania i zadania`),
-    description: desc,
+    title: seoTitle(o.title ?? `${t.name} na maturze z fizyki - wymagania i zadania`),
+    description: o.description ?? desc,
     keywords: `matura ${t.name.toLowerCase()}, ${t.name.toLowerCase()} matura, matura z fizyki, fizyka rozszerzona`,
     alternates: { canonical: `${SITE.url}/matura-z-fizyki/${t.slug}/` },
   };

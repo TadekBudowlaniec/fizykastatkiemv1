@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { metaOverride } from '@/lib/seo-overrides';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
@@ -44,10 +45,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const p = getPost(slug);
   if (!p) return {};
-  const desc = p.metaDesc || p.excerpt;
+  const desc = metaOverride(`/blog/${p.slug}/`).description || p.metaDesc || p.excerpt;
   const published = p.date || SEO_PUBLISHED;
+  const o = metaOverride(`/blog/${p.slug}/`);
   return {
-    title: seoTitle(p.title),
+    title: seoTitle(o.title ?? p.title),
     description: desc,
     keywords: p.keywords,
     alternates: { canonical: `${SITE.url}/blog/${p.slug}/` },
