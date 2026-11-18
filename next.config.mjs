@@ -1,3 +1,15 @@
+// Dokąd prowadzą krótkie linki z bio (/tiktok, /ig, /yt, /fb).
+// Zmień tutaj, np. na '/' (strona główna). Z końcowym "/" - inaczej
+// trailingSlash dołoży drugie przekierowanie.
+const BIO_LANDING = '/planer/';
+
+const BIO_LINKS = {
+  tiktok: 'tiktok',
+  ig: 'instagram',
+  yt: 'youtube',
+  fb: 'facebook',
+};
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -24,6 +36,12 @@ const nextConfig = {
         destination: '/blog/zadania-doswiadczalne-na-maturze-z-fizyki',
         permanent: true,
       },
+      // Krótkie linki do bio w social media -> UTM (302, żeby dało się zmienić cel)
+      ...Object.entries(BIO_LINKS).map(([path, source]) => ({
+        source: `/${path}`,
+        destination: `${BIO_LANDING}?utm_source=${source}&utm_medium=social&utm_campaign=bio`,
+        statusCode: 302,
+      })),
     ];
   },
 };

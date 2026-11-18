@@ -74,6 +74,71 @@ function getExpiresAt(promoStartedAt) {
     return undefined;
 }
 
+// =============================================
+//  ATRYBUCJA - źródło sprzedaży do metadata Stripe
+// =============================================
+// fs_attr: first-touch UTM (lib/attribution.ts), _ga: client_id GA4,
+// _ga_LFRFD4WDLB: sesja GA4 (pod ewentualny Measurement Protocol w przyszłości).
+const GA_SESSION_COOKIE = '_ga_LFRFD4WDLB';
+
+function parseCookies(header) {
+    const out = {};
+    if (!header) return out;
+    for (const part of header.split(';')) {
+        const i = part.indexOf('=');
+        if (i < 0) continue;
+        const key = part.slice(0, i).trim();
+        if (key && !(key in out)) out[key] = part.slice(i + 1).trim();
+    }
+    return out;
+}
+
+// Metadata Stripe: max 500 znaków na wartość; tniemy do 100 i wyrzucamy znaki sterujące.
+function clean(value) {
+    if (typeof value !== 'string') return null;
+    const v = value.replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 100);
+    return v || null;
+}
+
+function getAttributionMetadata(cookieHeader) {
+    const cookies = parseCookies(cookieHeader);
+    const meta = {};
+
+    if (cookies.fs_attr) {
+        try {
+            const p = new URLSearchParams(decodeURIComponent(cookies.fs_attr));
+            for (const k of ['utm_source', 'utm_medium', 'utm_campaign']) {
+                const v = clean(p.get(k));
+                if (v) meta[k] = v;
+            }
+        } catch { /* uszkodzone cookie - pomijamy */ }
+    }
+
+    // _ga = "GA1.1.<losowe>.<timestamp>" -> client_id = "<losowe>.<timestamp>"
+    if (cookies._ga) {
+        const parts = cookies._ga.split('.');
+        if (parts.length >= 4) {
+            const cid = clean(parts.slice(2).join('.'));
+            if (cid) meta.ga_client_id = cid;
+        }
+    }
+
+    // _ga_<ID>: stary format "GS1.1.<session_id>.<...>", nowy "GS2.1.s<session_id>$o..$g..".
+    const gs = cookies[GA_SESSION_COOKIE];
+    if (gs) {
+        let sid = null;
+        if (gs.startsWith('GS2.')) {
+            const seg = gs.split('.').slice(2).join('.').split('$').find((s) => s.startsWith('s'));
+            sid = seg ? seg.slice(1) : null;
+        } else {
+            sid = gs.split('.')[2] || null;
+        }
+        if (sid && /^\d+$/.test(sid)) meta.ga_session_id = sid;
+    }
+
+    return meta;
+}
+
 exports.handler = async (event) => {
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, body: 'Method Not Allowed' };
@@ -150,6 +215,14 @@ exports.handler = async (event) => {
         if (userId) {
             sessionParams.metadata.userId = userId;
         }
+
+        // Źródło sprzedaży (UTM first-touch + identyfikatory GA4) - na sesji
+        // i na płatności (widać je też w Stripe → Płatności).
+        const attribution = getAttributionMetadata(event.headers.cookie || event.headers.Cookie);
+        Object.assign(sessionParams.metadata, attribution);
+        sessionParams.payment_intent_data = {
+            metadata: { courseId: String(normalizedCourseId), ...attribution },
+        };
 
         // Email: jeśli mamy - prefill, jeśli nie - Stripe zbierze sam
         if (customerEmail) {

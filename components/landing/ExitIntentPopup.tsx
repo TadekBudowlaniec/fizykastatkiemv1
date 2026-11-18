@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { getSupabaseBrowser } from '@/lib/supabase/client';
 import { SITE } from '@/lib/site';
+import { getLeadSource } from '@/lib/attribution';
 
 const SUPPRESS_KEY = 'exitIntentSeenAt';
 const SUPPRESS_MS = 7 * 24 * 60 * 60 * 1000; // 7 dni
@@ -50,11 +51,12 @@ function markSuppressed() {
 }
 
 // GA4 event (gtag ładowany w layout) — bezpieczny no-op gdy brak gtag.
-function track(event: string) {
+function track(event: string, params?: Record<string, unknown>) {
   try {
     (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag?.(
       'event',
-      event
+      event,
+      params
     );
   } catch {
     /* ignore */
@@ -145,6 +147,12 @@ export function ExitIntentPopup() {
         body: JSON.stringify({ email, consent, source: 'exit_intent' }),
       }).catch(() => {});
       track('exit_popup_submit');
+      track('generate_lead', {
+        form_name: 'exit_intent',
+        lead_source: getLeadSource(),
+        source: 'exit_intent',
+        consent,
+      });
       setStatus('sent');
     } catch {
       setStatus('error');

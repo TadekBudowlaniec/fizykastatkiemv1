@@ -6,6 +6,7 @@ import { AuthProvider } from '@/components/auth/AuthProvider';
 import { Header } from '@/components/site/Header';
 import { Footer } from '@/components/site/Footer';
 import { ExitIntentPopup } from '@/components/landing/ExitIntentPopup';
+import { AttributionCapture } from '@/components/seo/AttributionCapture';
 import 'katex/dist/katex.min.css';
 import './globals.css';
 
@@ -150,6 +151,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(graphJsonLd) }}
         />
+        <AttributionCapture />
         <AuthProvider>
           <Header />
           <main>{children}</main>

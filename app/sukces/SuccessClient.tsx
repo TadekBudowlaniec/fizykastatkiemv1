@@ -3,8 +3,99 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { useAuth } from '@/components/auth/AuthProvider';
+import { track } from '@/components/seo/SeoClient';
+
+// Ochrona przed podwójnym wysłaniem w tej samej karcie (np. StrictMode w dev);
+// między odświeżeniami chroni znacznik w localStorage.
+const purchaseHandled = new Set<string>();
+
+type SessionStatus = {
+  id: string;
+  payment_status: 'paid' | 'unpaid' | 'no_payment_required';
+  value: number;
+  currency: string;
+  items: { item_id?: string; item_name: string; price: number; quantity: number }[];
+};
+
+/** gtag ładuje się `afterInteractive` - czekamy na niego maks. ~8 s. */
+function waitForGtag(timeoutMs = 8000): Promise<boolean> {
+  return new Promise((resolve) => {
+    const start = Date.now();
+    const check = () => {
+      if (typeof (window as unknown as { gtag?: unknown }).gtag === 'function') return resolve(true);
+      if (Date.now() - start > timeoutMs) return resolve(false);
+      setTimeout(check, 200);
+    };
+    check();
+  });
+}
+
+// Klarna itp.: sesja bywa po powrocie jeszcze 'unpaid' - odpytujemy co 5 s przez 60 s.
+const POLL_INTERVAL_MS = 5000;
+const POLL_MAX_MS = 60000;
+
+const isPaid = (s: SessionStatus | null) =>
+  !!s && (s.payment_status === 'paid' || s.payment_status === 'no_payment_required');
+
+/** GA4 `purchase` - kwota pobrana ze Stripe po stronie serwera, raz na sesję płatności. */
+function usePurchaseEvent() {
+  useEffect(() => {
+    const sessionId = new URLSearchParams(window.location.search).get('session_id');
+    if (!sessionId || purchaseHandled.has(sessionId)) return;
+    purchaseHandled.add(sessionId);
+
+    const key = `ga_purchase_${sessionId}`;
+    try {
+      if (window.localStorage.getItem(key)) return;
+    } catch {
+      /* localStorage niedostępny - zostaje ochrona w pamięci */
+    }
+
+    const url = `/.netlify/functions/checkout-session-status?session_id=${encodeURIComponent(sessionId)}`;
+    const startedAt = Date.now();
+
+    const send = async (s: SessionStatus) => {
+      if (!(await waitForGtag())) {
+        purchaseHandled.delete(sessionId); // gtag zablokowany - nie stawiamy znacznika
+        return;
+      }
+      track('purchase', {
+        transaction_id: s.id,
+        value: s.value,
+        currency: 'PLN',
+        items: s.items,
+      });
+      try {
+        window.localStorage.setItem(key, String(Date.now()));
+      } catch {
+        /* jw. */
+      }
+    };
+
+    // Bez sprzątania w cleanupie: Set wyżej blokuje drugi start (StrictMode),
+    // więc anulowanie pierwszego zostawiłoby stronę bez pomiaru.
+    const check = async () => {
+      let s: SessionStatus | null = null;
+      try {
+        const r = await fetch(url);
+        s = r.ok ? ((await r.json()) as SessionStatus) : null;
+      } catch {
+        s = null; // błąd sieci - spróbujemy w kolejnym cyklu
+      }
+      if (isPaid(s)) return send(s as SessionStatus);
+      if (Date.now() - startedAt + POLL_INTERVAL_MS <= POLL_MAX_MS) {
+        setTimeout(check, POLL_INTERVAL_MS);
+      } else {
+        purchaseHandled.delete(sessionId); // odświeżenie strony spróbuje ponownie
+      }
+    };
+    void check();
+  }, []);
+}
 
 export function SuccessClient() {
+  usePurchaseEvent();
+
   const { user, refreshAccess, hasAnyAccess, sendMagicLink } = useAuth();
   const [status, setStatus] = useState<'checking' | 'active' | 'pending'>(
     'checking'

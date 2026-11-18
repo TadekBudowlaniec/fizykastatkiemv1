@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { getSupabaseBrowser } from '@/lib/supabase/client';
 import { SITE } from '@/lib/site';
 import { track } from '@/components/seo/SeoClient';
+import { getLeadSource } from '@/lib/attribution';
 
 /**
  * `source` - źródło leada w bazie (musi być na liście ALLOWED_SOURCES w subscribe.js).
@@ -50,7 +51,12 @@ export function SqueezeForm({
       });
       if (error) throw error;
       captureLead(email, consent);
-      track('generate_lead', { source: gaSource ?? source, consent });
+      track('generate_lead', {
+        form_name: source, // 'planer_squeeze' | 'baza_wiedzy'
+        lead_source: getLeadSource(), // utm_source z first touch albo 'direct'
+        source: gaSource ?? source, // dotychczasowy parametr - zostaje dla ciągłości raportów
+        consent,
+      });
       setStatus('sent');
       setMsg('Sprawdź skrzynkę - wysłaliśmy link do Twojego planera nauki.');
     } catch {
