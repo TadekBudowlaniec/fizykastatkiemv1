@@ -36,6 +36,12 @@ const nextConfig = {
         destination: '/blog/zadania-doswiadczalne-na-maturze-z-fizyki',
         permanent: true,
       },
+      // Ukryta strona reklamowa (noindex) zastąpiona prawdziwym poradnikiem na blogu (26.11.2026)
+      {
+        source: '/artykuly/biuro-tlumaczen-online',
+        destination: '/blog/studia-za-granica-po-maturze-dokumenty/',
+        permanent: true,
+      },
       // Krótkie linki do bio w social media -> UTM (302, żeby dało się zmienić cel)
       ...Object.entries(BIO_LINKS).map(([path, source]) => ({
         source: `/${path}`,
