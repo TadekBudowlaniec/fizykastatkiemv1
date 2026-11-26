@@ -56,7 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   add('/blog/', 0.8, 'weekly', marketing);
   for (const p of getPosts()) {
-    add(`/blog/${p.slug}/`, 0.7, 'monthly', new Date(p.date || SEO_PUBLISHED));
+    add(`/blog/${p.slug}/`, 0.7, 'monthly', new Date(p.updated || p.date || SEO_PUBLISHED));
   }
 
   // Strony prawne (linkowane w stopce)

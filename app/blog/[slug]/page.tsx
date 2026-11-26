@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       description: desc,
       url: `${SITE.url}/blog/${p.slug}/`,
       publishedTime: published,
-      modifiedTime: published,
+      modifiedTime: p.updated || published,
       authors: [`${SITE.url}/o-mnie/`],
       images: [
         {
@@ -112,7 +112,7 @@ export default async function ArticlePage({ params }: Params) {
     // dateModified nie może być wcześniejsze niż datePublished (wpisy mają
     // daty z 2026, a globalna data modyfikacji dotyczy bazy wiedzy).
     datePublished: p.date || SEO_PUBLISHED,
-    dateModified: p.date || SEO_PUBLISHED,
+    dateModified: p.updated || p.date || SEO_PUBLISHED,
   };
 
   return (
@@ -136,6 +136,7 @@ export default async function ArticlePage({ params }: Params) {
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
           <p className="mb-8 text-sm text-muted">
             Opublikowano: {formatPlDate(p.date || SEO_PUBLISHED)}
+            {p.updated && p.updated !== p.date ? ` · Zaktualizowano: ${formatPlDate(p.updated)}` : ''}
           </p>
           <div className="space-y-8">
             {(p.sections ?? []).map((s, i) => (

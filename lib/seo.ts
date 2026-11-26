@@ -62,6 +62,8 @@ export type Post = {
   relatedTopics?: string[];
   related?: string[];
   date?: string;
+  /** Data ostatniej merytorycznej aktualizacji (dateModified, „Zaktualizowano”, sitemap). */
+  updated?: string;
 };
 export type City = {
   slug: string;
